@@ -1,4 +1,9 @@
 {
   "name": "spryker-eco/computop",
-  "description": "Computop Module"
+  "description": "Computop Module",
+  "autoload": {
+    "psr-0": {
+      "SprykerEco": "src/"
+    }
+  }
 }
