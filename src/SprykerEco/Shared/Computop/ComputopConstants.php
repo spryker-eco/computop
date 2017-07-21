@@ -21,5 +21,6 @@ interface ComputopConstants
 
     //Config data
     const COMPUTOP_MERCHANT_ID_KEY = 'COMPUTOP_MERCHANT_ID';
+    const COMPUTOP_HASH_PASSWORD = 'COMPUTOP_MERCHANT_ID';
 
 }

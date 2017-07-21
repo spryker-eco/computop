@@ -29,15 +29,15 @@ class ComputopFactory extends AbstractFactory
      */
     public function createCreditCardFormDataProvider()
     {
-        return new CreditCardFormDataProvider();
+        return new CreditCardFormDataProvider($this->createComputopService());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
      */
-//    public function getQuoteClient()
-//    {
-//        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
-//    }
+    public function createComputopService()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+    }
 
 }

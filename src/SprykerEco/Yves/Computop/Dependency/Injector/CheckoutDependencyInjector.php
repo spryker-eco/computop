@@ -12,8 +12,6 @@ use Spryker\Shared\Kernel\Dependency\Injector\DependencyInjectorInterface;
 use Spryker\Yves\Checkout\CheckoutDependencyProvider;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
-use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Yves\Computop\Plugin\ComputopPaymentHandlerPlugin;
 use SprykerEco\Yves\Computop\Plugin\CreditCardSubFormPlugin;
 
 class CheckoutDependencyInjector implements DependencyInjectorInterface
