@@ -9,12 +9,15 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
+use Silex\Application;
+use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
+use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 {
@@ -25,11 +28,18 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected $computopService;
 
     /**
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
+     * @var \Silex\Application
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService)
+    protected $application;
+
+    /**
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
+     * @param \Silex\Application $application
+     */
+    public function __construct(ComputopToComputopServiceInterface $computopService, Application $application)
     {
         $this->computopService = $computopService;
+        $this->application = $application;
     }
 
     /**
@@ -76,7 +86,24 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
             $this->computopService->computopMacEncode($computopCreditCardPaymentTransfer)
         );
 
+        $computopCreditCardPaymentTransfer->setUrlSuccess(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SUCCESS_PATH_NAME))
+        );
+        $computopCreditCardPaymentTransfer->setUrlFailure(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
+        );
+
         return $computopCreditCardPaymentTransfer;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function getAbsoluteUrl($path)
+    {
+        return Config::get(ApplicationConstants::BASE_URL_YVES) . $path;
     }
 
 }

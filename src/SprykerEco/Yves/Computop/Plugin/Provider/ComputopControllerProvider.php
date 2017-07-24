@@ -18,7 +18,10 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
     const CALLBACK_CONTROLLER_NAME = 'Callback';
 
     const SUCCESS_PATH = '/computop/success';
+    const SUCCESS_PATH_NAME = 'computop-success';
+
     const FAILURE_PATH = '/computop/failure';
+    const FAILURE_PATH_NAME = 'computop-failure';
 
     /**
      * @param \Silex\Application $app
@@ -29,7 +32,7 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
     {
         $this->createController(
             self::SUCCESS_PATH,
-            'computop-success',
+            self::SUCCESS_PATH_NAME,
             self::BUNDLE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'success'
@@ -37,7 +40,7 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
 
         $this->createController(
             self::FAILURE_PATH,
-            'computop-failure',
+            self::FAILURE_PATH_NAME,
             self::BUNDLE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'failure'

@@ -29,7 +29,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createCreditCardFormDataProvider()
     {
-        return new CreditCardFormDataProvider($this->createComputopService());
+        return new CreditCardFormDataProvider($this->createComputopService(), $this->createApplication());
     }
 
     /**
@@ -38,6 +38,14 @@ class ComputopFactory extends AbstractFactory
     public function createComputopService()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+    }
+
+    /**
+     * @return \Silex\Application
+     */
+    public function createApplication()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::PLUGIN_APPLICATION);
     }
 
 }

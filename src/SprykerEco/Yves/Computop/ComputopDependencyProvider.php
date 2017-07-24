@@ -9,12 +9,14 @@ namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
+use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
 
     const COMPUTOP_SERVICE = 'computop_service';
+    const PLUGIN_APPLICATION = 'application plugin';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -25,6 +27,12 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container[self::COMPUTOP_SERVICE] = function () use ($container) {
             return new ComputopToComputopServiceBridge($container->getLocator()->computop()->service());
+        };
+
+        $container[self::PLUGIN_APPLICATION] = function () {
+            $pimplePlugin = new Pimple();
+
+            return $pimplePlugin->getApplication();
         };
 
         return $container;
