@@ -42,7 +42,7 @@ class Blowfish
      *
      * @return void
      */
-    public function bf_set_key($key)
+    public function bfSetKey($key)
     {
         if (strlen($key) <= 0) $key = ' ';
         while (strlen($key) < 72)
@@ -61,12 +61,12 @@ class Blowfish
                 4
             ));
         for ($i = 0; $i < 18; $i += 2) {
-            list($l, $r) = $this->bf_encrypt($l, $r);
+            list($l, $r) = $this->bfEncrypt($l, $r);
             $this->pk[$i] = $l;
             $this->pk[$i + 1] = $r;
         }
         for ($i = 0; $i < 1024; $i += 2) {
-            list($l, $r) = $this->bf_encrypt($l, $r);
+            list($l, $r) = $this->bfEncrypt($l, $r);
             $this->sk[$i] = $l;
             $this->sk[$i + 1] = $r;
         }
@@ -84,7 +84,7 @@ class Blowfish
         for ($i = 0; $i < $len; $i += 8) {
             $l = $this->asc2int(substr($text, $i, 4));
             $r = $this->asc2int(substr($text, $i + 4, 4));
-            list($l, $r) = $this->bf_encrypt($l, $r);
+            list($l, $r) = $this->bfEncrypt($l, $r);
             $plain .= $this->int2asc($l) . $this->int2asc($r);
         }
         return $plain;
@@ -102,7 +102,7 @@ class Blowfish
         for ($i = 0; $i < $len; $i += 8) {
             $a = $this->asc2int(substr($text, $i, 4));
             $b = $this->asc2int(substr($text, $i + 4, 4));
-            list($a, $b) = $this->bf_decrypt($a, $b);
+            list($a, $b) = $this->bfDecrypt($a, $b);
             $plain .= $this->int2asc($a) . $this->int2asc($b);
         }
         return $plain;
@@ -125,12 +125,12 @@ class Blowfish
      *
      * @return array
      */
-    protected function bf_encrypt($l, $r)
+    protected function bfEncrypt($l, $r)
     {
         $l ^= $this->pk[0];
         for ($i = 1; $i < 17; $i += 2) {
-            $r = $this->bf_enc($r, $l, $i);
-            $l = $this->bf_enc($l, $r, $i + 1);
+            $r = $this->bfEnc($r, $l, $i);
+            $l = $this->bfEnc($l, $r, $i + 1);
         }
         $r ^= $this->pk[17];
         return [$r, $l];
@@ -143,7 +143,7 @@ class Blowfish
      *
      * @return int
      */
-    protected function bf_enc($ll, $r, $n)
+    protected function bfEnc($ll, $r, $n)
     {
         $ll ^= $this->pk[$n];
 
@@ -152,7 +152,7 @@ class Blowfish
         $b3 = $this->sk[512 + (($r >> 8) & 0xff)];
         $b4 = $this->sk[768 + ($r & 0xff)];
 
-        return $ll ^ $this->sec_add(($this->sec_add($b1, $b2)
+        return $ll ^ $this->secAdd(($this->secAdd($b1, $b2)
                 ^ $b3), $b4);
     }
 
@@ -162,7 +162,7 @@ class Blowfish
      *
      * @return int
      */
-    protected function sec_add($a, $b)
+    protected function secAdd($a, $b)
     {
         $higha = ($a >> 16) & 0xffff;
         $lowa = $a & 0xffff;
@@ -196,12 +196,12 @@ class Blowfish
      *
      * @return array
      */
-    protected function bf_decrypt($l, $r)
+    protected function bfDecrypt($l, $r)
     {
         $l ^= $this->pk[17];
         for ($i = 16; $i > 0; $i -= 2) {
-            $r = $this->bf_enc($r, $l, $i);
-            $l = $this->bf_enc($l, $r, $i - 1);
+            $r = $this->bfEnc($r, $l, $i);
+            $l = $this->bfEnc($l, $r, $i - 1);
         }
         $r ^= $this->pk[0];
         return [$r, $l];
