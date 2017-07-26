@@ -4,6 +4,7 @@
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="ComputopCreditCardPayment">
+        <property name="payId" type="string" />
         <property name="merchantId" type="string" />
         <property name="transId" type="string" />
         <property name="amount" type="int" />
@@ -20,6 +21,12 @@
         <property name="custom" type="string" />
         <property name="expirationTime" type="string" />
         <property name="customField" type="array" />
+
+        <property name="data" type="string" />
+        <property name="len" type="int" />
+        <property name="response" type="string" />
+        <property name="url" type="string" />
+
     </transfer>
 
     <transfer name="Payment">
