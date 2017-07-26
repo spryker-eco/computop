@@ -14,4 +14,31 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
  */
 class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQueryContainerInterface
 {
+
+    /**
+     * @api
+     *
+     * @param int $idPayment
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
+     */
+    public function queryPaymentById($idPayment)
+    {
+        return $this
+            ->queryPayments()
+            ->filterByIdPaymentComputop($idPayment);
+    }
+
+    /**
+     * @api
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
+     */
+    protected function queryPayments()
+    {
+        return $this
+            ->getFactory()
+            ->createPaymentComputopQuery();
+    }
+
 }
