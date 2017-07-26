@@ -17,7 +17,7 @@ interface ComputopToComputopServiceInterface
      *
      * @return string
      */
-    public function computopMacEncode(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
      * @param string $plaintext
@@ -25,6 +25,6 @@ interface ComputopToComputopServiceInterface
      *
      * @return string
      */
-    public function computopBlowfishEncode($plaintext, $password);
+    public function blowfishEncryptedValue($plaintext, $password);
 
 }
