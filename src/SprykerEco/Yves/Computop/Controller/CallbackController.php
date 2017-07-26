@@ -32,8 +32,16 @@ class CallbackController extends AbstractController
      */
     public function failureAction()
     {
+        $responcseArray = $this->getApplication()['request']->query->all();
+
+        $errorMessageText = self::ERROR_MESSAGE;
+
         //Add error message + redirect
-        $this->addErrorMessage(self::ERROR_MESSAGE);
+        if ($responcseArray['Description'] && $responcseArray['Code']) {
+            $errorMessageText = $responcseArray['Description'] . ' (Code - ' . $responcseArray['Code'] . ')';
+        }
+
+        $this->addErrorMessage($errorMessageText);
 
         return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_PAYMENT);
     }
