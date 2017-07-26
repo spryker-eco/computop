@@ -21,9 +21,9 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 {
 
-//    const RESPONSE = 'encrypt';
+    const RESPONSE = 'encrypt';
     //TODO: use only for test
-    const RESPONSE = 'decrypt';
+//    const RESPONSE = 'decrypt';
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -81,7 +81,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     {
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
-        $computopCreditCardPaymentTransfer->setTransId($this->getTransId());
+        $computopCreditCardPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
         $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
         $computopCreditCardPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
@@ -102,7 +102,6 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $computopCreditCardPaymentTransfer->setData($data);
         $computopCreditCardPaymentTransfer->setLen($len);
         $computopCreditCardPaymentTransfer->setResponse(self::RESPONSE);
-        $computopCreditCardPaymentTransfer->setTransId($this->getTransId());
 
         $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $len));
 
@@ -110,12 +109,14 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return int
      */
-    protected function getTransId()
+    protected function getTransId(AbstractTransfer $quoteTransfer)
     {
-        //TODO:add real trans
-        return 1;
+        //TODO: check this trans Id
+        return time() . '-' . $quoteTransfer->getCustomer()->getCustomerReference();
     }
 
     /**
@@ -201,13 +202,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function blowfishEncrypt($plaintext, $len, $password)
     {
-        if (mb_strlen($password) <= 0) $password = ' ';
-        if (mb_strlen($plaintext) != $len) {
-            echo 'Length mismatch. The parameter len differs from actual length.';
-            return false;
-        }
-
-        return $this->computopService->blowfishEncryptedValue($plaintext, $password);
+        return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
     }
 
 }
