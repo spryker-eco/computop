@@ -52,7 +52,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getData(AbstractTransfer $quoteTransfer)
     {
-        if ($quoteTransfer->getPayment()->getComputopCreditCard() === null) {
+        if ($quoteTransfer->getPayment() === null || $quoteTransfer->getPayment()->getComputopCreditCard() === null) {
             $paymentTransfer = new PaymentTransfer();
             $computop = $this->createComputopCreditCardPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopCreditCard($computop);
@@ -164,7 +164,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $pURLFailure = "URLFailure=" . $computopCreditCardPaymentTransfer->getUrlFailure();
         $pCapture = "Capture=" . $computopCreditCardPaymentTransfer->getCapture();
         $pResponse = "Response=" . self::RESPONSE;
-        $pMAC = "MAC=" . $this->computopService->computopMacHashHmacValue($computopCreditCardPaymentTransfer);
+        $pMAC = "MAC=" . $computopCreditCardPaymentTransfer->getMac();
 
         $query = [$pTransID, $pAmount, $pCurrency, $pURLSuccess, $pURLFailure, $pCapture, $pResponse, $pMAC];
 
