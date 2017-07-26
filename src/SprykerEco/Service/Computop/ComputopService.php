@@ -21,9 +21,19 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function computopMacEncode(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->getFactory()->createHash()->getMacValue($cardPaymentTransfer);
+        return $this->hashHmacValue($this->getFactory()->createComputop()->getMacValue($cardPaymentTransfer));
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function hashHmacValue($value)
+    {
+        return $this->getFactory()->createHashHmac()->hashHmacValue($value);
     }
 
     /**
@@ -32,9 +42,9 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function computopBlowfishEncode($plaintext, $password)
+    public function blowfishEncryptedValue($plaintext, $password)
     {
-        return $this->getFactory()->createBlowfish()->fullBlowfishEncode($plaintext, $password);
+        return $this->getFactory()->createBlowfish()->blowfishEncryptedValue($plaintext, $password);
     }
 
 }

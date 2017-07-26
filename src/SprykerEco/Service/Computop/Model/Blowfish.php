@@ -12,7 +12,7 @@ namespace SprykerEco\Service\Computop\Model;
  *
  * This class provides the Blowfish encryption for PHP environment.
  */
-class Blowfish
+class Blowfish implements BlowfishInterface
 {
 
     /**
@@ -35,14 +35,13 @@ class Blowfish
      */
     protected $sModifiedKeys;
 
-
     /**
      * @param string $plaintext
      * @param string $password
      *
      * @return string
      */
-    public function fullBlowfishEncode($plaintext, $password)
+    public function blowfishEncryptedValue($plaintext, $password)
     {
         $plaintext = $this->expand($plaintext);
         $this->bfSetKey($password);

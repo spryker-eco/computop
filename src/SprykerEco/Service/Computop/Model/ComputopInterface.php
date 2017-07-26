@@ -9,7 +9,7 @@ namespace SprykerEco\Service\Computop\Model;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 
-interface HashInterface
+interface ComputopInterface
 {
 
     /**

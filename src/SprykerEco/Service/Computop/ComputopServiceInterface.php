@@ -17,14 +17,21 @@ interface ComputopServiceInterface
      *
      * @return string
      */
-    public function computopMacEncode(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
-     * @param $plaintext
-     * @param $password
+     * @param string $value
      *
      * @return string
      */
-    public function computopBlowfishEncode($plaintext, $password);
+    public function hashHmacValue($value);
+
+    /**
+     * @param string $plaintext
+     * @param string $password
+     *
+     * @return string
+     */
+    public function blowfishEncryptedValue($plaintext, $password);
 
 }
