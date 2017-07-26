@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Silex\Application;
-use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -21,6 +20,10 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 {
+
+//    const RESPONSE = 'encrypt';
+    //TODO: use only for test
+    const RESPONSE = 'decrypt';
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -77,15 +80,15 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected function createComputopCreditCardPaymentTransfer(AbstractTransfer $quoteTransfer)
     {
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
+
+        $computopCreditCardPaymentTransfer->setTransId($this->getTransId());
         $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
         $computopCreditCardPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-
         $computopCreditCardPaymentTransfer->setMac(
-            $this->computopService->computopMacEncode($computopCreditCardPaymentTransfer)
+            $this->computopService->computopMacHashHmacValue($computopCreditCardPaymentTransfer)
         );
-
         $computopCreditCardPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SUCCESS_PATH_NAME))
         );
@@ -93,7 +96,88 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
 
+        $len = $this->getLen($computopCreditCardPaymentTransfer);
+        $data = $this->getDataAttribute($computopCreditCardPaymentTransfer);
+
+        $computopCreditCardPaymentTransfer->setData($data);
+        $computopCreditCardPaymentTransfer->setLen($len);
+        $computopCreditCardPaymentTransfer->setResponse(self::RESPONSE);
+        $computopCreditCardPaymentTransfer->setTransId($this->getTransId());
+
+        $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $len));
+
         return $computopCreditCardPaymentTransfer;
+    }
+
+    /**
+     * @return int
+     */
+    protected function getTransId()
+    {
+        //TODO:add real trans
+        return 1;
+    }
+
+    /**
+     * TODO:remove after test if need
+     *
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
+     * @param string $data
+     * @param int $len
+     *
+     * @return string
+     */
+    protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $len)
+    {
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ACTION) . '?' . http_build_query([
+                'MerchantID' => $computopCreditCardPaymentTransfer->getMerchantId(),
+                'Data' => $data,
+                'Len' => $len,
+            ]);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
+     *
+     * @return bool|string
+     */
+    protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
+    {
+        $plaintext = $this->getDataAttributeEncrypted($computopCreditCardPaymentTransfer);
+        $len = $this->getLen($computopCreditCardPaymentTransfer);
+
+        return $this->blowfishEncrypt($plaintext, $len, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD));
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
+     *
+     * @return string
+     */
+    protected function getDataAttributeEncrypted(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
+    {
+        $pTransID = "TransID=" . $computopCreditCardPaymentTransfer->getTransId();
+        $pAmount = "Amount=" . $computopCreditCardPaymentTransfer->getAmount();
+        $pCurrency = "Currency=" . $computopCreditCardPaymentTransfer->getCurrency();
+        $pURLSuccess = "URLSuccess=" . $computopCreditCardPaymentTransfer->getUrlSuccess();
+        $pURLFailure = "URLFailure=" . $computopCreditCardPaymentTransfer->getUrlFailure();
+        $pCapture = "Capture=" . $computopCreditCardPaymentTransfer->getCapture();
+        $pResponse = "Response=" . self::RESPONSE;
+        $pMAC = "MAC=" . $this->computopService->computopMacHashHmacValue($computopCreditCardPaymentTransfer);
+
+        $query = [$pTransID, $pAmount, $pCurrency, $pURLSuccess, $pURLFailure, $pCapture, $pResponse, $pMAC];
+
+        return implode("&", $query);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
+     *
+     * @return int
+     */
+    protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
+    {
+        return strlen($this->getDataAttributeEncrypted($computopCreditCardPaymentTransfer));
     }
 
     /**
@@ -104,6 +188,26 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected function getAbsoluteUrl($path)
     {
         return Config::get(ApplicationConstants::BASE_URL_YVES) . $path;
+    }
+
+    /**
+     * Encrypt the passed text (any encoding) with Blowfish.
+     *
+     * @param string $plaintext
+     * @param integer $len
+     * @param string $password
+     *
+     * @return bool|string
+     */
+    protected function blowfishEncrypt($plaintext, $len, $password)
+    {
+        if (mb_strlen($password) <= 0) $password = ' ';
+        if (mb_strlen($plaintext) != $len) {
+            echo 'Length mismatch. The parameter len differs from actual length.';
+            return false;
+        }
+
+        return $this->computopService->blowfishEncryptedValue($plaintext, $password);
     }
 
 }

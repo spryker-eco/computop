@@ -1,53 +1,5 @@
-<div class="small-12 medium-9 large-6">
-    <div class="small-12 columns">
-        <label>
-            {{ 'ComputopCreditCard.MerchantID' | trans }}*
-            {{ form_widget(form.ComputopCreditCard.MerchantID) }}
-        </label>
-    </div>
+{{ form_widget(form.ComputopCreditCard.MerchantID, {'full_name': 'MerchantID'}) }}
+{{ form_widget(form.ComputopCreditCard.Data, {'full_name': 'Data'}) }}
+{{ form_widget(form.ComputopCreditCard.Len, {'full_name': 'Len'}) }}
 
-    <div class="small-12 columns">
-        <label>
-            {{ 'ComputopCreditCard.TransID' | trans }}*
-            {{ form_widget(form.ComputopCreditCard.TransID) }}
-        </label>
-    </div>
-    <div class="small-12 columns">
-        <label>
-            {{ 'ComputopCreditCard.Amount' | trans }}*
-            {{ form_widget(form.ComputopCreditCard.Amount) }}
-        </label>
-    </div>
-    <div class="small-12 columns">
-        <label>
-            {{ 'ComputopCreditCard.Currency' | trans }}*
-            {{ form_widget(form.ComputopCreditCard.Currency) }}
-        </label>
-    </div>
-    <div class="small-12 columns">
-        <label>
-            {{ 'ComputopCreditCard.MAC' | trans }}*
-            {{ form_widget(form.ComputopCreditCard.MAC) }}
-        </label>
-    </div>
-    <div class="small-12 columns">
-        <label>
-            {{ form_widget(form.ComputopCreditCard.URLSuccess) }}
-            {{ form_widget(form.ComputopCreditCard.URLFailure) }}
-            {{ form_widget(form.ComputopCreditCard.URLNotify) }}
-        </label>
-    </div>
-    <div class="small-12 columns">
-        <label>
-            {{ form_widget(form.ComputopCreditCard.Response) }}
-            {{ form_widget(form.ComputopCreditCard.UserData) }}
-            {{ form_widget(form.ComputopCreditCard.Capture) }}
-            {#{{ form_widget(form.ComputopCreditCard.ReqID) }}#}
-            {#{{ form_widget(form.ComputopCreditCard.Plain) }}#}
-            {#{{ form_widget(form.ComputopCreditCard.Custom) }}#}
-            {#{{ form_widget(form.ComputopCreditCard.Custom) }}#}
-            {#{{ form_widget(form.ComputopCreditCard.expirationTime) }}#}
-            {#{{ form_widget(form.ComputopCreditCard.CustomField) }}#}
-        </label>
-    </div>
-</div>
+<input type="submit">

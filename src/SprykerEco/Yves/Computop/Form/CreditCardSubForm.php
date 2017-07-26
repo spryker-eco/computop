@@ -51,16 +51,11 @@ class CreditCardSubForm extends AbstractSubForm
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->addMerchantId($builder, $options);
-        $this->addTransId($builder, $options);
-        $this->addAmount($builder, $options);
-        $this->addCurrency($builder, $options);
-        $this->addMAC($builder, $options);
-        $this->addUrlSuccess($builder, $options);
-        $this->addUrlFailure($builder, $options);
-        $this->addUrlNotify($builder, $options);
-        $this->addResponse($builder, $options);
-        $this->addUserData($builder, $options);
-        $this->addCapture($builder, $options);
+        $this->addData($builder, $options);
+        $this->addLen($builder, $options);
+
+        //TODO: test data - need to remove after test
+        $this->addLink($builder, $options);
     }
 
     /**
