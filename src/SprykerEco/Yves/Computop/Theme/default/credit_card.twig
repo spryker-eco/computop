@@ -2,4 +2,6 @@
 {{ form_widget(form.ComputopCreditCard.Data, {'full_name': 'Data'}) }}
 {{ form_widget(form.ComputopCreditCard.Len, {'full_name': 'Len'}) }}
 
-<input type="submit">
+<a href="{{ form.ComputopCreditCard.vars.value.url }}">
+    {{ 'Pay with Computop' | trans }}
+</a>
