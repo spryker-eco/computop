@@ -19,4 +19,12 @@ interface ComputopServiceInterface
      */
     public function computopMacEncode(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
+    /**
+     * @param $plaintext
+     * @param $password
+     *
+     * @return string
+     */
+    public function computopBlowfishEncode($plaintext, $password);
+
 }

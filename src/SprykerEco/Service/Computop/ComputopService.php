@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Service\Kernel\AbstractService;
 
 /**
- * @method \SprykerEco\Computop\Service\ComputopServiceFactory getFactory()
+ * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()
  */
 class ComputopService extends AbstractService implements ComputopServiceInterface
 {
@@ -24,6 +24,17 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     public function computopMacEncode(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         return $this->getFactory()->createHash()->getMacValue($cardPaymentTransfer);
+    }
+
+    /**
+     * @param string $plaintext
+     * @param string $password
+     *
+     * @return string
+     */
+    public function computopBlowfishEncode($plaintext, $password)
+    {
+        return $this->getFactory()->createBlowfish()->fullBlowfishEncode($plaintext, $password);
     }
 
 }

@@ -36,4 +36,15 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
         return $this->computopService->computopMacEncode($cardPaymentTransfer);
     }
 
+    /**
+     * @param string $plaintext
+     * @param string $password
+     *
+     * @return string
+     */
+    public function computopBlowfishEncode($plaintext, $password)
+    {
+        return $this->computopService->computopBlowfishEncode($plaintext, $password);
+    }
+
 }

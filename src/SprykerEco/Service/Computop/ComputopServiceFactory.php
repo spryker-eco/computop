@@ -8,6 +8,7 @@
 namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractServiceFactory;
+use SprykerEco\Service\Computop\Model\Blowfish;
 use SprykerEco\Service\Computop\Model\Hash;
 
 class ComputopServiceFactory extends AbstractServiceFactory
@@ -19,6 +20,14 @@ class ComputopServiceFactory extends AbstractServiceFactory
     public function createHash()
     {
         return new Hash();
+    }
+
+    /**
+     * @return \SprykerEco\Service\Computop\Model\Blowfish
+     */
+    public function createBlowfish()
+    {
+        return new Blowfish();
     }
 
 }

@@ -35,12 +35,27 @@ class Blowfish
      */
     protected $sModifiedKeys;
 
+
+    /**
+     * @param string $plaintext
+     * @param string $password
+     *
+     * @return string
+     */
+    public function fullBlowfishEncode($plaintext, $password)
+    {
+        $plaintext = $this->expand($plaintext);
+        $this->bfSetKey($password);
+
+        return bin2hex($this->encrypt($plaintext));
+    }
+
     /**
      * @param string $text
      *
      * @return string
      */
-    public function expand($text)
+    protected function expand($text)
     {
         while (strlen($text) % 8 != 0)
             $text .= chr(0);
@@ -52,7 +67,7 @@ class Blowfish
      *
      * @return void
      */
-    public function bfSetKey($key)
+    protected function bfSetKey($key)
     {
         if (strlen($key) <= 0) $key = ' ';
         while (strlen($key) < 72)
@@ -87,7 +102,7 @@ class Blowfish
      *
      * @return string
      */
-    public function encrypt($text)
+    protected function encrypt($text)
     {
         $len = strlen($text);
         $plain = '';
