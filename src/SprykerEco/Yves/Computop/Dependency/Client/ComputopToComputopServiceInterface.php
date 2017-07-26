@@ -21,10 +21,20 @@ interface ComputopToComputopServiceInterface
 
     /**
      * @param string $plaintext
+     * @param int $len
      * @param string $password
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $password);
+    public function blowfishEncryptedValue($plaintext, $len, $password);
+
+    /**
+     * @param string $cipher
+     * @param int $len
+     * @param string $password
+     *
+     * @return string
+     */
+    public function blowfishDecryptedValue($cipher, $len, $password);
 
 }

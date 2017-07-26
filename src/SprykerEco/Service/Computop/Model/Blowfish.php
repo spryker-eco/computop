@@ -37,16 +37,43 @@ class Blowfish implements BlowfishInterface
 
     /**
      * @param string $plaintext
+     * @param int $len
      * @param string $password
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $password)
+    public function blowfishEncryptedValue($plaintext, $len, $password)
     {
+        if (mb_strlen($password) <= 0) $password = ' ';
+        if (mb_strlen($plaintext) != $len) {
+            echo 'Length mismatch. The parameter len differs from actual length.';
+            return false;
+        }
+
         $plaintext = $this->expand($plaintext);
         $this->bfSetKey($password);
 
         return bin2hex($this->encrypt($plaintext));
+    }
+
+    /**
+     * @param string $cipher
+     * @param int $len
+     * @param string $password
+     *
+     * @return string
+     */
+    public function blowfishDecryptedValue($cipher, $len, $password)
+    {
+        if (mb_strlen($password) <= 0) $password = ' ';
+        # converts hex to bin
+        $cipher = pack('H' . strlen($cipher), $cipher);
+        if ($len > strlen($cipher)) {
+            echo 'Length mismatch. The parameter len is too large.';
+            return false;
+        }
+        $this->bfSetKey($password);
+        return mb_substr($this->decrypt($cipher), 0, $len);
     }
 
     /**

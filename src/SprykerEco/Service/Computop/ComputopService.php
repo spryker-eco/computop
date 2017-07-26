@@ -38,13 +38,26 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
 
     /**
      * @param string $plaintext
+     * @param int $len
      * @param string $password
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $password)
+    public function blowfishEncryptedValue($plaintext, $len, $password)
     {
-        return $this->getFactory()->createBlowfish()->blowfishEncryptedValue($plaintext, $password);
+        return $this->getFactory()->createBlowfish()->blowfishEncryptedValue($plaintext, $len, $password);
+    }
+
+    /**
+     * @param string $cipher
+     * @param int $len
+     * @param string $password
+     *
+     * @return string
+     */
+    public function blowfishDecryptedValue($cipher, $len, $password)
+    {
+        return $this->getFactory()->createBlowfish()->blowfishDecryptedValue($cipher, $len, $password);
     }
 
 }
