@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Silex\Application;
+use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -22,8 +23,6 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 {
 
     const RESPONSE = 'encrypt';
-    //TODO: use only for test
-//    const RESPONSE = 'decrypt';
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -188,7 +187,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getAbsoluteUrl($path)
     {
-        return Config::get(ApplicationConstants::BASE_URL_YVES) . $path;
+        return Config::get(ApplicationConstants::BASE_URL_SSL_YVES) . $path;
     }
 
     /**
