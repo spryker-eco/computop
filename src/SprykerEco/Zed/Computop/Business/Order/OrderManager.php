@@ -55,6 +55,7 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->setTransId($paymentTransfer->getComputopCreditCard()->getTransId());
         $paymentEntity->setXid($paymentTransfer->getComputopCreditCard()->getCreditCardResponse()->getXid());
         $paymentEntity->setPayId($paymentTransfer->getComputopCreditCard()->getCreditCardResponse()->getPayId());
+        $paymentEntity->setPcnr($paymentTransfer->getComputopCreditCard()->getCreditCardResponse()->getPcnr());
 
         $paymentEntity->save();
 

@@ -44,7 +44,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
      * @param \Silex\Application $application
-     * @param \Spryker\Client\Quote\QuoteClientInterface $quoteClient
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge $quoteClient
      */
     public function __construct(ComputopToComputopServiceInterface $computopService, Application $application, ComputopToQuoteBridge $quoteClient)
     {
