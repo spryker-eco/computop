@@ -25,6 +25,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="response" type="string" />
+        <property name="txType" type="string" />
         <property name="url" type="string" />
 
     </transfer>

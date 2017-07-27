@@ -23,6 +23,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 {
 
     const RESPONSE = 'encrypt';
+    const TX_TYPE = 'Order';
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -78,21 +79,10 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function createComputopCreditCardPaymentTransfer(AbstractTransfer $quoteTransfer)
     {
-        $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
+        $computopCreditCardPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
-        $computopCreditCardPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
-        $computopCreditCardPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
         $computopCreditCardPaymentTransfer->setMac(
             $this->computopService->computopMacHashHmacValue($computopCreditCardPaymentTransfer)
-        );
-        $computopCreditCardPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SUCCESS_PATH_NAME))
-        );
-        $computopCreditCardPaymentTransfer->setUrlFailure(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
 
         $len = $this->getLen($computopCreditCardPaymentTransfer);
@@ -100,9 +90,34 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 
         $computopCreditCardPaymentTransfer->setData($data);
         $computopCreditCardPaymentTransfer->setLen($len);
-        $computopCreditCardPaymentTransfer->setResponse(self::RESPONSE);
 
         $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $len));
+
+        return $computopCreditCardPaymentTransfer;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     */
+    protected function createTransferWithUnencryptedValues(AbstractTransfer $quoteTransfer)
+    {
+        $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
+
+        $computopCreditCardPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
+        $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
+        $computopCreditCardPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+        $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
+        $computopCreditCardPaymentTransfer->setResponse(self::RESPONSE);
+        $computopCreditCardPaymentTransfer->setTxType(self::TX_TYPE);
+        $computopCreditCardPaymentTransfer->setUrlSuccess(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SUCCESS_PATH_NAME))
+        );
+        $computopCreditCardPaymentTransfer->setUrlFailure(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
+        );
 
         return $computopCreditCardPaymentTransfer;
     }
@@ -164,10 +179,11 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $pURLSuccess = "URLSuccess=" . $computopCreditCardPaymentTransfer->getUrlSuccess();
         $pURLFailure = "URLFailure=" . $computopCreditCardPaymentTransfer->getUrlFailure();
         $pCapture = "Capture=" . $computopCreditCardPaymentTransfer->getCapture();
-        $pResponse = "Response=" . self::RESPONSE;
+        $pResponse = "Response=" . $computopCreditCardPaymentTransfer->getResponse();
         $pMAC = "MAC=" . $computopCreditCardPaymentTransfer->getMac();
+        $pTxType = "TxType=" . $computopCreditCardPaymentTransfer->getTxType();
 
-        $query = [$pTransID, $pAmount, $pCurrency, $pURLSuccess, $pURLFailure, $pCapture, $pResponse, $pMAC];
+        $query = [$pTransID, $pAmount, $pCurrency, $pURLSuccess, $pURLFailure, $pCapture, $pResponse, $pMAC, $pTxType];
 
         return implode("&", $query);
     }
