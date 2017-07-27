@@ -29,7 +29,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createCreditCardFormDataProvider()
     {
-        return new CreditCardFormDataProvider($this->createComputopService(), $this->createApplication());
+        return new CreditCardFormDataProvider($this->createComputopService(), $this->createApplication(), $this->createQuoteClient());
     }
 
     /**
@@ -46,6 +46,14 @@ class ComputopFactory extends AbstractFactory
     public function createApplication()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::PLUGIN_APPLICATION);
+    }
+
+    /**
+     * @return \Spryker\Client\Quote\QuoteClientInterface
+     */
+    public function createQuoteClient()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
     }
 
 }

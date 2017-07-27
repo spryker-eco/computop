@@ -17,6 +17,7 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
@@ -36,13 +37,20 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected $application;
 
     /**
+     * @var \Spryker\Client\Quote\QuoteClientInterface
+     */
+    protected $quoteClient;
+
+    /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
      * @param \Silex\Application $application
+     * @param \Spryker\Client\Quote\QuoteClientInterface $quoteClient
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService, Application $application)
+    public function __construct(ComputopToComputopServiceInterface $computopService, Application $application, ComputopToQuoteBridge $quoteClient)
     {
         $this->computopService = $computopService;
         $this->application = $application;
+        $this->quoteClient = $quoteClient;
     }
 
     /**
@@ -57,6 +65,9 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
             $computop = $this->createComputopCreditCardPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopCreditCard($computop);
             $quoteTransfer->setPayment($paymentTransfer);
+
+            //TODO: check save Quote to session
+            $this->quoteClient->setQuote($quoteTransfer);
         }
 
         return $quoteTransfer;
@@ -118,6 +129,8 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $computopCreditCardPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
+
+        $computopCreditCardPaymentTransfer->setClientIp($this->application['request']->getClientIp());
 
         return $computopCreditCardPaymentTransfer;
     }
