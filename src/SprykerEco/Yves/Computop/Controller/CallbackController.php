@@ -79,12 +79,13 @@ class CallbackController extends AbstractController
 
         $responseTransfer->setMid($responseArray['mid']);
         $responseTransfer->setPayId($responseArray['PayID']);
-        $responseTransfer->setXid($responseArray['XID']);
+
         $responseTransfer->setTransId($responseArray['TransID']);
-        $responseTransfer->setType($responseArray['Type']);
+        $responseTransfer->setType(isset($responseArray['Type']) ? $responseArray['Type'] : '');
         $responseTransfer->setStatus($responseArray['Status']);
         $responseTransfer->setCode($responseArray['Code']);
         $responseTransfer->setMac($responseArray['MAC']);
+        $responseTransfer->setXid(isset($responseArray['XID']) ? $responseArray['XID'] : '');
         $responseTransfer->setPcnr(isset($responseArray['PCNr']) ? $responseArray['PCNr'] : '');
         $responseTransfer->setCCExpiry(isset($responseArray['CCExpiry']) ? $responseArray['CCExpiry'] : '');
         $responseTransfer->setCCBrand(isset($responseArray['CCBrand']) ? $responseArray['CCBrand'] : '');
