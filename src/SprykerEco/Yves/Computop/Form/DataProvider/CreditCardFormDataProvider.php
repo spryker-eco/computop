@@ -173,8 +173,9 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     {
         $plaintext = $this->getDataAttributeEncrypted($computopCreditCardPaymentTransfer);
         $len = $this->getLen($computopCreditCardPaymentTransfer);
+        $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
 
-        return $this->blowfishEncrypt($plaintext, $len, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD));
+        return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
     }
 
     /**
@@ -219,20 +220,6 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected function getAbsoluteUrl($path)
     {
         return Config::get(ApplicationConstants::BASE_URL_SSL_YVES) . $path;
-    }
-
-    /**
-     * Encrypt the passed text (any encoding) with Blowfish.
-     *
-     * @param string $plaintext
-     * @param integer $len
-     * @param string $password
-     *
-     * @return bool|string
-     */
-    protected function blowfishEncrypt($plaintext, $len, $password)
-    {
-        return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
     }
 
 }
