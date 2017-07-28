@@ -17,6 +17,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     const FIELD_MERCHANT_ID = 'MerchantID';
     const FIELD_DATA = 'Data';
     const FIELD_LEN = 'Len';
+    const FIELD_URL = 'url';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -74,8 +75,8 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     protected function addLink(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'url',
-            'text'
+            self::FIELD_URL,
+            'hidden'
         );
 
         return $this;
