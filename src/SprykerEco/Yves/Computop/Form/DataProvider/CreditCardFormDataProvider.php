@@ -101,7 +101,6 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 
         $computopCreditCardPaymentTransfer->setData($data);
         $computopCreditCardPaymentTransfer->setLen($len);
-
         $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $len));
 
         return $computopCreditCardPaymentTransfer;
@@ -138,12 +137,18 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return int
+     * @return string
      */
     protected function getTransId(AbstractTransfer $quoteTransfer)
     {
         //TODO: check this trans Id
-        return time() . '-' . $quoteTransfer->getCustomer()->getCustomerReference();
+        $parameters = [
+            time(),
+            rand(100, 1000),
+            $quoteTransfer->getCustomer()->getCustomerReference(),
+            ];
+
+        return implode('-', $parameters);
     }
 
     /**
