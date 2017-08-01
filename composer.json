@@ -1,6 +1,9 @@
 {
   "name": "spryker-eco/computop",
   "description": "Computop Module",
+  "require": {
+    "spryker/guzzle": "^2.1.0"
+  },
   "autoload": {
     "psr-0": {
       "SprykerEco": "src/"

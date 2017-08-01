@@ -55,4 +55,8 @@
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
     </transfer>
 
+    <transfer name="Order">
+        <property name="computopCreditCard" type="ComputopCreditCardPayment" />
+    </transfer>
+
 </transfers>
