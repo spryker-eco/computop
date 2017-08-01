@@ -173,35 +173,11 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        $plaintext = $this->getDataAttributeEncrypted($computopCreditCardPaymentTransfer);
+        $plaintext = $this->computopService->computopDataEncryptedValue($computopCreditCardPaymentTransfer);
         $len = $this->getLen($computopCreditCardPaymentTransfer);
         $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
 
         return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
-    }
-
-    /**
-     * TODO: check and relocate if need
-     *
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
-     *
-     * @return string
-     */
-    protected function getDataAttributeEncrypted(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
-    {
-        $pTransID = "TransID=" . $computopCreditCardPaymentTransfer->getTransId();
-        $pAmount = "Amount=" . $computopCreditCardPaymentTransfer->getAmount();
-        $pCurrency = "Currency=" . $computopCreditCardPaymentTransfer->getCurrency();
-        $pURLSuccess = "URLSuccess=" . $computopCreditCardPaymentTransfer->getUrlSuccess();
-        $pURLFailure = "URLFailure=" . $computopCreditCardPaymentTransfer->getUrlFailure();
-        $pCapture = "Capture=" . $computopCreditCardPaymentTransfer->getCapture();
-        $pResponse = "Response=" . $computopCreditCardPaymentTransfer->getResponse();
-        $pMAC = "MAC=" . $computopCreditCardPaymentTransfer->getMac();
-        $pTxType = "TxType=" . $computopCreditCardPaymentTransfer->getTxType();
-
-        $query = [$pTransID, $pAmount, $pCurrency, $pURLSuccess, $pURLFailure, $pCapture, $pResponse, $pMAC, $pTxType];
-
-        return implode("&", $query);
     }
 
     /**
@@ -211,7 +187,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        return strlen($this->getDataAttributeEncrypted($computopCreditCardPaymentTransfer));
+        return strlen($this->computopService->computopDataEncryptedValue($computopCreditCardPaymentTransfer));
     }
 
     /**

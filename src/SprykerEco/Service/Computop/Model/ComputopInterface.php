@@ -17,6 +17,12 @@ interface ComputopInterface
      *
      * @return string
      */
-    public function getMacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
+    /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
+     */
+    public function getDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 }

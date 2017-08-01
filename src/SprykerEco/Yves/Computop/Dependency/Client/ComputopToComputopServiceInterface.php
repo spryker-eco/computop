@@ -20,6 +20,13 @@ interface ComputopToComputopServiceInterface
     public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
+     */
+    public function computopDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+
+    /**
      * @param string $plaintext
      * @param int $len
      * @param string $password

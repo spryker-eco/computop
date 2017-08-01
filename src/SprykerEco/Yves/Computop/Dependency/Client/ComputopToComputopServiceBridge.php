@@ -37,6 +37,16 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
+     */
+    public function computopDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    {
+        return $this->computopService->computopDataEncryptedValue($cardPaymentTransfer);
+    }
+
+    /**
      * @param string $plaintext
      * @param int $len
      * @param string $password
