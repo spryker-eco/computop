@@ -23,9 +23,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 {
 
-    const RESPONSE = 'encrypt';
-    const TX_TYPE = 'Order';
-
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
      */
@@ -120,8 +117,8 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $computopCreditCardPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-        $computopCreditCardPaymentTransfer->setResponse(self::RESPONSE);
-        $computopCreditCardPaymentTransfer->setTxType(self::TX_TYPE);
+        $computopCreditCardPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
+        $computopCreditCardPaymentTransfer->setTxType(ComputopConstants::TX_TYPE);
         $computopCreditCardPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SUCCESS_PATH_NAME))
         );
@@ -162,7 +159,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $len)
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ACTION) . '?' . http_build_query([
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION) . '?' . http_build_query([
                 'MerchantID' => $computopCreditCardPaymentTransfer->getMerchantId(),
                 'Data' => $data,
                 'Len' => $len,
