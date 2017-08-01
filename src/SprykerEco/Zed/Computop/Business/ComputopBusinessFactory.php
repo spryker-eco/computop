@@ -10,7 +10,9 @@ namespace SprykerEco\Zed\Computop\Business;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
+use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
@@ -34,21 +36,42 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createAuthorizationPaymentRequest($paymentMethod)
     {
-        return new AuthorizationRequest(
-            $this->createPreauthorizeAdapter($paymentMethod)
+        $authorizationPaymentRequest = new AuthorizationRequest(
+            $this->createAuthorizeAdapter(),
+            $paymentMethod
         );
+
+        $authorizationPaymentRequest->registerMapper(
+            $this->createCreditCardMapper()
+        );
+
+        return $authorizationPaymentRequest;
     }
 
     /**
-     * @param string $paymentMethod
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
-    protected function createPreauthorizeAdapter($paymentMethod)
+    protected function createAuthorizeAdapter()
     {
         return new AuthorizeApiAdapter(
             $this->getConfig()
         );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapper
+     */
+    protected function createCreditCardMapper()
+    {
+        return new CreditCardMapper($this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     */
+    protected function getComputopService()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
     }
 
 }

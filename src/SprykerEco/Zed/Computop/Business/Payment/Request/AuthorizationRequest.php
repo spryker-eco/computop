@@ -19,8 +19,11 @@ class AuthorizationRequest extends AbstractPaymentRequest
      */
     public function request(OrderTransfer $orderTransfer)
     {
-        //TODO: reformat data
-        $this->sendRequest($orderTransfer->toArray());
+        $requestData = $this
+            ->getMethodMapper($this->paymentMethod)
+            ->buildRequest($orderTransfer);
+
+        $this->sendRequest($requestData);
     }
 
 }

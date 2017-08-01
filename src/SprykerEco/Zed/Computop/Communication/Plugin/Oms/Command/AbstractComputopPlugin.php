@@ -52,21 +52,14 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
 
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
+        $computopCreditCardPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
+
         $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
         $computopCreditCardPaymentTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
         $computopCreditCardPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
-        $computopCreditCardPaymentTransfer->setTxType(ComputopConstants::TX_TYPE);
-        $computopCreditCardPaymentTransfer->setUrlSuccess(
-            'http://zed.de.project_computop.local/'
-        );
-        $computopCreditCardPaymentTransfer->setUrlFailure(
-            'http://zed.de.project_computop.local/'
-        );
-
-        $computopCreditCardPaymentTransfer->setTransId($savedSpyPaymentComputop->getTransId());
-        $computopCreditCardPaymentTransfer->setPayId($savedSpyPaymentComputop->getPayId());
+        $computopCreditCardPaymentTransfer->setOrderDesc(ComputopConstants::ORDER_DESC_SUCCESS);
 
         return $computopCreditCardPaymentTransfer;
     }

@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory getFactory()
@@ -43,13 +42,10 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return TODO add transfer
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer)
     {
-        $paymentMethod = ComputopConstants::PAYMENT_METHOD_CREDIT_CARD;
-//        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
 
         $computopResponseTransfer = $this
             ->getFactory()
