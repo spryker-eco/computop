@@ -127,6 +127,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         );
 
         $computopCreditCardPaymentTransfer->setClientIp($this->application['request']->getClientIp());
+        $computopCreditCardPaymentTransfer->setOrderDesc(ComputopConstants::ORDER_DESC_SUCCESS);
 
         return $computopCreditCardPaymentTransfer;
     }
