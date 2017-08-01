@@ -33,7 +33,6 @@ class Computop implements ComputopInterface
         return implode(self::MAC_SEPARATOR, $macDataArray);
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
@@ -50,8 +49,30 @@ class Computop implements ComputopInterface
         $response = "Response=" . $cardPaymentTransfer->getResponse();
         $mac = "MAC=" . $cardPaymentTransfer->getMac();
         $txType = "TxType=" . $cardPaymentTransfer->getTxType();
+        $orderDesc = "OrderDesc=" . $cardPaymentTransfer->getOrderDesc();
 
-        $query = [$transID, $amount, $currency, $urlSuccess, $urlFailure, $capture, $response, $mac, $txType];
+        $query = [$transID, $amount, $currency, $urlSuccess, $urlFailure, $capture, $response, $mac, $txType, $orderDesc];
+
+        return implode(self::DATA_SEPARATOR, $query);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
+     */
+    public function getAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    {
+        $payId = "PayID=" . $cardPaymentTransfer->getPayId();
+        $transID = "TransID=" . $cardPaymentTransfer->getTransId();
+        $amount = "Amount=" . $cardPaymentTransfer->getAmount();
+        $currency = "Currency=" . $cardPaymentTransfer->getCurrency();
+        $capture = "Capture=" . $cardPaymentTransfer->getCapture();
+        $response = "Response=" . $cardPaymentTransfer->getResponse();
+        $mac = "MAC=" . $cardPaymentTransfer->getMac();
+        $orderDesc = "OrderDesc=" . $cardPaymentTransfer->getOrderDesc();
+
+        $query = [$payId, $transID, $amount, $currency, $capture, $response, $mac, $orderDesc];
 
         return implode(self::DATA_SEPARATOR, $query);
     }

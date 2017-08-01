@@ -37,6 +37,16 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
+     */
+    public function computopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    {
+        return $this->getFactory()->createComputop()->getAuthorizationDataEncryptedValue($cardPaymentTransfer);
+    }
+
+    /**
      * @param string $value
      *
      * @return string
