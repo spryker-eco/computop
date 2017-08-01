@@ -10,6 +10,11 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 interface AdapterInterface
 {
 
+    /**
+     * @param array $data
+     *
+     * @return string
+     */
     public function sendRequest(array $data);
 
 }

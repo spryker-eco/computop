@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -30,27 +29,59 @@ abstract class AbstractApiAdapter implements AdapterInterface
     }
 
     /**
-     * @param array|string $data
+     * @param array $data
      *
      * @return string
      */
     public function sendRequest(array $data)
     {
-        $request = $this->buildRequest();
-        $options = [];
+        $options = $this->prepareData($data);
+        $request = $this->buildRequest($options);
 
         return $this->send($request, $options);
     }
 
     /**
+     * @param array $data
+     *
      * @return \Psr\Http\Message\RequestInterface
      */
-    protected function buildRequest()
+    protected function buildRequest(array $data)
     {
-        return new Request(
-            'POST',
-            Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION)
-        );
+//        return new Request(
+//            'POST',
+//            Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION),
+//            [
+//                'curl' => [
+//                    CURLOPT_URL => Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION),
+//                    CURLOPT_HTTP_VERSION => 1.0,
+//                    CURLOPT_POST => 1,
+//                    CURLOPT_POSTFIELDS => $data,
+//                    CURLOPT_HEADER => 0,
+//                    CURLOPT_RETURNTRANSFER => 1,
+//                    CURLOPT_SSL_VERIFYPEER => 0,
+//                    CURLOPT_TIMEOUT => 120,
+//                    CURLOPT_FAILONERROR => 1,
+//                ]
+//            ]
+//        );
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION));
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, 1.0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+        curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+
+        return $result;
     }
 
     /**
@@ -72,6 +103,11 @@ abstract class AbstractApiAdapter implements AdapterInterface
         return $response->getBody();
     }
 
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
     abstract protected function prepareData(array $data);
 
 }

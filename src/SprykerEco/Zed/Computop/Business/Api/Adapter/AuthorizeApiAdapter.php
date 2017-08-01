@@ -7,24 +7,16 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 
-use SprykerEco\Zed\Computop\ComputopConfig;
-
 class AuthorizeApiAdapter extends AbstractApiAdapter
 {
-
-    public function __construct(ComputopConfig $config)
-    {
-        parent::__construct($config);
-    }
 
     /**
      * @param array $data
      *
-     * @return void
+     * @return array
      */
     protected function prepareData(array $data)
     {
-        //TODO: implement
         return $data;
     }
 
