@@ -32,6 +32,20 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     /**
      * @api
      *
+     * @param int $idOrder
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
+     */
+    public function queryPaymentByOrderId($idOrder)
+    {
+        return $this
+            ->queryPayments()
+            ->filterByFkSalesOrder($idOrder);
+    }
+
+    /**
+     * @api
+     *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
     protected function queryPayments()
