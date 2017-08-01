@@ -22,6 +22,9 @@ interface ComputopConstants
     const RESPONSE_TYPE = 'encrypt';
     const TX_TYPE = 'Order';
 
+    const ORDER_DESC_SUCCESS = 'Test:0000';
+    const ORDER_DESC_ERROR = 'Test:0305';
+
     //Config data
     const COMPUTOP_MERCHANT_ID_KEY = 'COMPUTOP_MERCHANT_ID';
     const COMPUTOP_BLOWFISH_PASSWORD = 'COMPUTOP_BLOWFISH_PASSWORD';

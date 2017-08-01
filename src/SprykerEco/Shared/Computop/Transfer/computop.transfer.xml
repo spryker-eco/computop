@@ -20,7 +20,9 @@
         <property name="plain" type="string" />
         <property name="custom" type="string" />
         <property name="expirationTime" type="string" />
+        <property name="orderDesc" type="string" />
         <property name="customField" type="array" />
+        <property name="paymentMethod" type="string" />
 
         <property name="data" type="string" />
         <property name="len" type="int" />
