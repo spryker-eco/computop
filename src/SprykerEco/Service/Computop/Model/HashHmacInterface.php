@@ -15,6 +15,6 @@ interface HashHmacInterface
      *
      * @return string
      */
-    public function hashHmacValue($value);
+    public function getHashHmacValue($value);
 
 }

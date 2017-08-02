@@ -20,7 +20,7 @@ class HashHmac implements HashHmacInterface
      *
      * @return string
      */
-    public function hashHmacValue($value)
+    public function getHashHmacValue($value)
     {
         return hash_hmac(self::SHA256, $value, Config::get(ComputopConstants::COMPUTOP_HMAC_PASSWORD));
     }

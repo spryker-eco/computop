@@ -23,9 +23,9 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->hashHmacValue($this->getFactory()->createComputopMapper()->getMacEncryptedValue($cardPaymentTransfer));
+        return $this->getHashHmacValue($this->getFactory()->createComputopMapper()->getMacEncryptedValue($cardPaymentTransfer));
     }
 
     /**
@@ -33,7 +33,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function computopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getComputopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         return $this->getFactory()->createComputopMapper()->getOrderDataEncryptedValue($cardPaymentTransfer);
     }
@@ -43,7 +43,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function computopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getComputopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         return $this->getFactory()->createComputopMapper()->getAuthorizationDataEncryptedValue($cardPaymentTransfer);
     }
@@ -55,7 +55,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function getComputopResponseTransfer($computopResponseArray)
     {
-        $responseEncryptedString = $this->getFactory()->createBlowfish()->blowfishDecryptedValue(
+        $responseEncryptedString = $this->getFactory()->createBlowfish()->getBlowfishDecryptedValue(
             $computopResponseArray['Data'],
             $computopResponseArray['Len'],
             Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
@@ -69,9 +69,9 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function hashHmacValue($value)
+    public function getHashHmacValue($value)
     {
-        return $this->getFactory()->createHashHmac()->hashHmacValue($value);
+        return $this->getFactory()->createHashHmac()->getHashHmacValue($value);
     }
 
     /**
@@ -81,9 +81,9 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $len, $password)
+    public function getBlowfishEncryptedValue($plaintext, $len, $password)
     {
-        return $this->getFactory()->createBlowfish()->blowfishEncryptedValue($plaintext, $len, $password);
+        return $this->getFactory()->createBlowfish()->getBlowfishEncryptedValue($plaintext, $len, $password);
     }
 
     /**
@@ -93,9 +93,9 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function blowfishDecryptedValue($cipher, $len, $password)
+    public function getBlowfishDecryptedValue($cipher, $len, $password)
     {
-        return $this->getFactory()->createBlowfish()->blowfishDecryptedValue($cipher, $len, $password);
+        return $this->getFactory()->createBlowfish()->getBlowfishDecryptedValue($cipher, $len, $password);
     }
 
 }

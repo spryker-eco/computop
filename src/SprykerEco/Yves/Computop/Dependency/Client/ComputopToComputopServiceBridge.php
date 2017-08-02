@@ -31,9 +31,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
-    public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->computopService->computopMacHashHmacValue($cardPaymentTransfer);
+        return $this->computopService->getComputopMacHashHmacValue($cardPaymentTransfer);
     }
 
     /**
@@ -41,9 +41,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
-    public function computopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getComputopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->computopService->computopOrderDataEncryptedValue($cardPaymentTransfer);
+        return $this->computopService->getComputopOrderDataEncryptedValue($cardPaymentTransfer);
     }
 
     /**
@@ -63,9 +63,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $len, $password)
+    public function getBlowfishEncryptedValue($plaintext, $len, $password)
     {
-        return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
+        return $this->computopService->getBlowfishEncryptedValue($plaintext, $len, $password);
     }
 
     /**
@@ -75,9 +75,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
-    public function blowfishDecryptedValue($cipher, $len, $password)
+    public function getBlowfishDecryptedValue($cipher, $len, $password)
     {
-        return $this->computopService->blowfishDecryptedValue($cipher, $len, $password);
+        return $this->computopService->getBlowfishDecryptedValue($cipher, $len, $password);
     }
 
 }

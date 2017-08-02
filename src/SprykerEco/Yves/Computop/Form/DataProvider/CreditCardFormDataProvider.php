@@ -90,7 +90,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $computopCreditCardPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
         $computopCreditCardPaymentTransfer->setMac(
-            $this->computopService->computopMacHashHmacValue($computopCreditCardPaymentTransfer)
+            $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
         );
 
         $len = $this->getLen($computopCreditCardPaymentTransfer);
@@ -174,11 +174,11 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        $plaintext = $this->computopService->computopOrderDataEncryptedValue($computopCreditCardPaymentTransfer);
+        $plaintext = $this->computopService->getComputopOrderDataEncryptedValue($computopCreditCardPaymentTransfer);
         $len = $this->getLen($computopCreditCardPaymentTransfer);
         $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
 
-        return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
+        return $this->computopService->getBlowfishEncryptedValue($plaintext, $len, $password);
     }
 
     /**
@@ -188,7 +188,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        return strlen($this->computopService->computopOrderDataEncryptedValue($computopCreditCardPaymentTransfer));
+        return strlen($this->computopService->getComputopOrderDataEncryptedValue($computopCreditCardPaymentTransfer));
     }
 
     /**

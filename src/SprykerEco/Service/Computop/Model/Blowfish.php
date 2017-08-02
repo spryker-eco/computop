@@ -42,7 +42,7 @@ class Blowfish implements BlowfishInterface
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $len, $password)
+    public function getBlowfishEncryptedValue($plaintext, $len, $password)
     {
         if (mb_strlen($password) <= 0) $password = ' ';
         if (mb_strlen($plaintext) != $len) {
@@ -63,7 +63,7 @@ class Blowfish implements BlowfishInterface
      *
      * @return string
      */
-    public function blowfishDecryptedValue($cipher, $len, $password)
+    public function getBlowfishDecryptedValue($cipher, $len, $password)
     {
         if (mb_strlen($password) <= 0) $password = ' ';
         # converts hex to bin

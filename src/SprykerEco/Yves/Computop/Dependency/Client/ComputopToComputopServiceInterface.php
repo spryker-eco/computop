@@ -17,14 +17,14 @@ interface ComputopToComputopServiceInterface
      *
      * @return string
      */
-    public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
      * @return string
      */
-    public function computopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getComputopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
      * @param array $computopResponseArray
@@ -40,7 +40,7 @@ interface ComputopToComputopServiceInterface
      *
      * @return string
      */
-    public function blowfishEncryptedValue($plaintext, $len, $password);
+    public function getBlowfishEncryptedValue($plaintext, $len, $password);
 
     /**
      * @param string $cipher
@@ -49,6 +49,6 @@ interface ComputopToComputopServiceInterface
      *
      * @return string
      */
-    public function blowfishDecryptedValue($cipher, $len, $password);
+    public function getBlowfishDecryptedValue($cipher, $len, $password);
 
 }

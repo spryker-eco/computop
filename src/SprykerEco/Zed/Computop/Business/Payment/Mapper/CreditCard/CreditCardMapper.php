@@ -50,7 +50,7 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
         $computopCreditCardPaymentTransfer = $orderTransfer->getComputopCreditCard();
 
         $computopCreditCardPaymentTransfer->setMac(
-            $this->computopService->computopMacHashHmacValue($computopCreditCardPaymentTransfer)
+            $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
         );
 
         $data = $this->getDataAttribute($computopCreditCardPaymentTransfer);
@@ -72,11 +72,11 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
      */
     protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        $plaintext = $this->computopService->computopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer);
+        $plaintext = $this->computopService->getComputopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer);
         $len = $this->getLen($computopCreditCardPaymentTransfer);
         $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
 
-        return $this->computopService->blowfishEncryptedValue($plaintext, $len, $password);
+        return $this->computopService->getBlowfishEncryptedValue($plaintext, $len, $password);
     }
 
     /**
@@ -86,7 +86,7 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
      */
     protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        return strlen($this->computopService->computopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer));
+        return strlen($this->computopService->getComputopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer));
     }
 
 }
