@@ -47,7 +47,7 @@ abstract class AbstractApiAdapter implements AdapterInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopHttpRequestException
      *
-     * @return string
+     * @return \GuzzleHttp\Psr7\Stream
      */
     protected function send(array $options = [])
     {
