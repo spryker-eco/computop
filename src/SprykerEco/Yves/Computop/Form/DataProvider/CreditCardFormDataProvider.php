@@ -174,7 +174,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        $plaintext = $this->computopService->computopDataEncryptedValue($computopCreditCardPaymentTransfer);
+        $plaintext = $this->computopService->computopOrderDataEncryptedValue($computopCreditCardPaymentTransfer);
         $len = $this->getLen($computopCreditCardPaymentTransfer);
         $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
 
@@ -188,7 +188,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        return strlen($this->computopService->computopDataEncryptedValue($computopCreditCardPaymentTransfer));
+        return strlen($this->computopService->computopOrderDataEncryptedValue($computopCreditCardPaymentTransfer));
     }
 
     /**
