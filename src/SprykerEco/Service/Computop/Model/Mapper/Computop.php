@@ -12,6 +12,7 @@ use SprykerEco\Service\Computop\Model\AbstractComputop;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {
+
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *

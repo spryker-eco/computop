@@ -10,8 +10,8 @@ namespace SprykerEco\Service\Computop;
 use Spryker\Service\Kernel\AbstractServiceFactory;
 use SprykerEco\Service\Computop\Model\Blowfish;
 use SprykerEco\Service\Computop\Model\Converter\Computop as ComputopConverter;
-use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
 use SprykerEco\Service\Computop\Model\HashHmac;
+use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
 
 class ComputopServiceFactory extends AbstractServiceFactory
 {

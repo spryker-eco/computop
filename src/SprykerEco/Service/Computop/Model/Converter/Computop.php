@@ -10,9 +10,9 @@ namespace SprykerEco\Service\Computop\Model\Converter;
 use Generated\Shared\Transfer\ComputopCreditCardResponseTransfer;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 
-
 class Computop extends AbstractComputop implements ComputopInterface
 {
+
     /**
      * @param string $responseEncryptedString
      *
@@ -78,4 +78,5 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         return isset($decryptedDataArray[$name]) ? $decryptedDataArray[$name] : null;
     }
+
 }

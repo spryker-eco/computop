@@ -9,6 +9,7 @@ namespace SprykerEco\Service\Computop\Model\Converter;
 
 interface ComputopInterface
 {
+
     /**
      * @param array $computopResponseArray
      *

@@ -52,10 +52,10 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->createAuthorizationPaymentRequest($paymentMethod)
             ->request($orderTransfer);
 
-//        $this
-//            ->getFactory()
-//            ->createAuthorizeResponseHandler()
-//            ->handle($compiutopResponseTransfer);
+        $this
+            ->getFactory()
+            ->createAuthorizeResponseHandler()
+            ->handle($computopResponseTransfer);
 
         return $computopResponseTransfer;
     }
