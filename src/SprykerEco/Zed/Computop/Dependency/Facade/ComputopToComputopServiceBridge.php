@@ -57,6 +57,16 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
+     * @param array $computopResponseArray
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     */
+    public function getComputopResponseTransfer($computopResponseArray)
+    {
+        return $this->computopService->getComputopResponseTransfer($computopResponseArray);
+    }
+
+    /**
      * @param string $plaintext
      * @param int $len
      * @param string $password

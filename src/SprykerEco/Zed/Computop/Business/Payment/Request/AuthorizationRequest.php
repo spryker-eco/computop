@@ -15,7 +15,7 @@ class AuthorizationRequest extends AbstractPaymentRequest
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
      */
     public function request(OrderTransfer $orderTransfer)
     {
@@ -23,7 +23,7 @@ class AuthorizationRequest extends AbstractPaymentRequest
             ->getMethodMapper($this->paymentMethod)
             ->buildRequest($orderTransfer);
 
-        $this->sendRequest($requestData);
+        return $this->sendRequest($requestData);
     }
 
 }

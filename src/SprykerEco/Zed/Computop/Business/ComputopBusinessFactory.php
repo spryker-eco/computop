@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
@@ -38,6 +39,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $authorizationPaymentRequest = new AuthorizationRequest(
             $this->createAuthorizeAdapter(),
+            $this->createAuthorizeConverter(),
             $paymentMethod
         );
 
@@ -56,6 +58,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new AuthorizeApiAdapter(
             $this->getConfig()
         );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     */
+    protected function createAuthorizeConverter()
+    {
+        return new AuthorizeConverter($this->getComputopService());
     }
 
     /**

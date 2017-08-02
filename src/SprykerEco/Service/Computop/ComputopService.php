@@ -9,6 +9,8 @@ namespace SprykerEco\Service\Computop;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Service\Kernel\AbstractService;
+use Spryker\Shared\Config\Config;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()
@@ -44,6 +46,22 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     public function computopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         return $this->getFactory()->createComputop()->getAuthorizationDataEncryptedValue($cardPaymentTransfer);
+    }
+
+    /**
+     * @param array $computopResponseArray
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     */
+    public function getComputopResponseTransfer($computopResponseArray)
+    {
+        $responseEncryptedString = $this->getFactory()->createBlowfish()->blowfishDecryptedValue(
+            $computopResponseArray['Data'],
+            $computopResponseArray['Len'],
+            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+        );
+
+        return $this->getFactory()->createComputop()->getComputopResponseTransfer($responseEncryptedString);
     }
 
     /**

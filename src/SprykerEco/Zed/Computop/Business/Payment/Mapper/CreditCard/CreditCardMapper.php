@@ -89,25 +89,4 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
         return strlen($this->computopService->computopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer));
     }
 
-    /**
-     * @param array $responseArray
-     *
-     * @return array
-     */
-    protected function getDecryptedArray($responseArray)
-    {
-        $responseDecryptedString = $this->computopService->blowfishDecryptedValue(
-            $responseArray['Data'],
-            $responseArray['Len'],
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
-        );
-        $responseDecrypted = explode('&', $responseDecryptedString);
-        foreach ($responseDecrypted as $value) {
-            $data = explode('=', $value);
-            $responseArray[array_shift($data)] = array_shift($data);
-        }
-
-        return $responseArray;
-    }
-
 }

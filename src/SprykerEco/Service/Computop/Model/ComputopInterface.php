@@ -33,4 +33,11 @@ interface ComputopInterface
      */
     public function getAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
+    /**
+     * @param array $computopResponseArray
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     */
+    public function getComputopResponseTransfer($computopResponseArray);
+
 }
