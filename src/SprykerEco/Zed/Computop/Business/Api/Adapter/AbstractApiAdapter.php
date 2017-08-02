@@ -9,8 +9,10 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\RequestOptions;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\Exception\ComputopHttpRequestException;
 
 abstract class AbstractApiAdapter implements AdapterInterface
 {
@@ -24,7 +26,7 @@ abstract class AbstractApiAdapter implements AdapterInterface
     public function __construct()
     {
         $this->client = new Client([
-            'timeout' => self::DEFAULT_TIMEOUT,
+            RequestOptions::TIMEOUT => self::DEFAULT_TIMEOUT,
         ]);
     }
 
@@ -35,69 +37,27 @@ abstract class AbstractApiAdapter implements AdapterInterface
      */
     public function sendRequest(array $data)
     {
-        $options = $this->prepareData($data);
-        $request = $this->buildRequest($options);
+        $options[RequestOptions::FORM_PARAMS] = $this->prepareData($data);
 
-        return $this->send($request, $options);
+        return $this->send($options);
     }
 
     /**
-     * @param array $data
-     *
-     * @return \Psr\Http\Message\RequestInterface
-     */
-    protected function buildRequest(array $data)
-    {
-//        return new Request(
-//            'POST',
-//            Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION),
-//            [
-//                'curl' => [
-//                    CURLOPT_URL => Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION),
-//                    CURLOPT_HTTP_VERSION => 1.0,
-//                    CURLOPT_POST => 1,
-//                    CURLOPT_POSTFIELDS => $data,
-//                    CURLOPT_HEADER => 0,
-//                    CURLOPT_RETURNTRANSFER => 1,
-//                    CURLOPT_SSL_VERIFYPEER => 0,
-//                    CURLOPT_TIMEOUT => 120,
-//                    CURLOPT_FAILONERROR => 1,
-//                ]
-//            ]
-//        );
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION));
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, 1.0);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
-        curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-        $result = curl_exec($ch);
-
-        curl_close($ch);
-
-        return $result;
-    }
-
-    /**
-     * @param \Psr\Http\Message\RequestInterface $request
      * @param array $options
      *
-     * @throws \Spryker\Zed\Payolution\Business\Exception\ApiHttpRequestException
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopHttpRequestException
      *
      * @return string
      */
-    protected function send($request, array $options = [])
+    protected function send(array $options = [])
     {
         try {
-            $response = $this->client->send($request, $options);
+            $response = $this->client->post(
+                Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION),
+                $options
+            );
         } catch (RequestException $requestException) {
-            throw new ApiHttpRequestException($requestException->getMessage());
+            throw new ComputopHttpRequestException($requestException->getMessage());
         }
 
         return $response->getBody();
