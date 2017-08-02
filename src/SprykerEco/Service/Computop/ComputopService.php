@@ -25,7 +25,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function computopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->hashHmacValue($this->getFactory()->createComputop()->getMacEncryptedValue($cardPaymentTransfer));
+        return $this->hashHmacValue($this->getFactory()->createComputopMapper()->getMacEncryptedValue($cardPaymentTransfer));
     }
 
     /**
@@ -35,7 +35,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function computopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->getFactory()->createComputop()->getOrderDataEncryptedValue($cardPaymentTransfer);
+        return $this->getFactory()->createComputopMapper()->getOrderDataEncryptedValue($cardPaymentTransfer);
     }
 
     /**
@@ -45,7 +45,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function computopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->getFactory()->createComputop()->getAuthorizationDataEncryptedValue($cardPaymentTransfer);
+        return $this->getFactory()->createComputopMapper()->getAuthorizationDataEncryptedValue($cardPaymentTransfer);
     }
 
     /**
@@ -61,7 +61,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
             Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
         );
 
-        return $this->getFactory()->createComputop()->getComputopResponseTransfer($responseEncryptedString);
+        return $this->getFactory()->createComputopConverter()->getComputopResponseTransfer($responseEncryptedString);
     }
 
     /**

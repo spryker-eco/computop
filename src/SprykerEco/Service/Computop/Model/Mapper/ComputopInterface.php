@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Service\Computop\Model;
+namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 
@@ -32,12 +32,5 @@ interface ComputopInterface
      * @return string
      */
     public function getAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
-
-    /**
-     * @param array $computopResponseArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
-     */
-    public function getComputopResponseTransfer($computopResponseArray);
 
 }

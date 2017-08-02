@@ -9,7 +9,8 @@ namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractServiceFactory;
 use SprykerEco\Service\Computop\Model\Blowfish;
-use SprykerEco\Service\Computop\Model\Computop;
+use SprykerEco\Service\Computop\Model\Converter\Computop as ComputopConverter;
+use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
 use SprykerEco\Service\Computop\Model\HashHmac;
 
 class ComputopServiceFactory extends AbstractServiceFactory
@@ -24,11 +25,19 @@ class ComputopServiceFactory extends AbstractServiceFactory
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Computop
+     * @return \SprykerEco\Service\Computop\Model\Converter\Computop
      */
-    public function createComputop()
+    public function createComputopConverter()
     {
-        return new Computop();
+        return new ComputopConverter();
+    }
+
+    /**
+     * @return \SprykerEco\Service\Computop\Model\Mapper\Computop
+     */
+    public function createComputopMapper()
+    {
+        return new ComputopMapper();
     }
 
     /**
