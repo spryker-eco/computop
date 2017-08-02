@@ -24,7 +24,7 @@ interface ComputopServiceInterface
      *
      * @return string
      */
-    public function computopDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function computopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer

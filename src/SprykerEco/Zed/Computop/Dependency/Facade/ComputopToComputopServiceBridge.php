@@ -41,9 +41,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
-    public function computopDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function computopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->computopService->computopDataEncryptedValue($cardPaymentTransfer);
+        return $this->computopService->computopOrderDataEncryptedValue($cardPaymentTransfer);
     }
 
     /**

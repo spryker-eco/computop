@@ -40,7 +40,7 @@ class Computop implements ComputopInterface
      *
      * @return string
      */
-    public function getDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         $transID = "TransID" . self::DATA_SUB_SEPARATOR . $cardPaymentTransfer->getTransId();
         $amount = "Amount" . self::DATA_SUB_SEPARATOR . $cardPaymentTransfer->getAmount();
