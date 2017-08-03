@@ -20,17 +20,10 @@ interface ComputopInterface
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param array $dataSubArray
      *
      * @return string
      */
-    public function getOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
-     *
-     * @return string
-     */
-    public function getAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getDataPlaintext($dataSubArray);
 
 }

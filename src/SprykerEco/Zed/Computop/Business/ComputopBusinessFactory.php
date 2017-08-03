@@ -62,7 +62,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverterInterface
      */
     protected function createAuthorizeConverter()
     {

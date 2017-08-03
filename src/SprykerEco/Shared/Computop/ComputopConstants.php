@@ -33,4 +33,28 @@ interface ComputopConstants
     const COMPUTOP_CREDIT_CARD_ORDER_ACTION = 'COMPUTOP_CREDIT_CARD_ORDER_ACTION';
     const COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION = 'COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION';
 
+    //Field names
+    const TRANS_ID_F_N = 'TransID';
+    const AMOUNT_F_N = 'Amount';
+    const CURRENCY_F_N = 'Currency';
+    const URL_SUCCESS_F_N = 'URLSuccess';
+    const URL_FAILURE_F_N = 'URLFailure';
+    const CAPTURE_F_N = 'Capture';
+    const RESPONSE_F_N = 'Response';
+    const MAC_F_N = 'MAC';
+    const TX_TYPE_F_N = 'TxType';
+    const ORDER_DESC_F_N = 'OrderDesc';
+    const PAY_ID_F_N = 'PayID';
+
+    const MID_F_N = 'mid';
+    const STATUS_F_N = 'Status';
+    const DESCRIPTION_F_N = 'Description';
+    const CODE_F_N = 'Code';
+    const XID_F_N = 'XID';
+    const TYPE_F_N = 'Type';
+    const PCN_R_F_N = 'PCNr';
+    const CC_EXPIRY_F_N = 'CCExpiry';
+    const CC_BRAND_F_N = 'CCBrand';
+    const REF_NR_F_N = 'refNr';
+
 }

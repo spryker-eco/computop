@@ -9,13 +9,13 @@ namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use GuzzleHttp\Psr7\Stream;
 
-interface ConverterInterface
+interface AuthorizeConverterInterface
 {
 
     /**
      * @param \GuzzleHttp\Psr7\Stream $response
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
      */
     public function toTransactionResponseTransfer(Stream $response);
 

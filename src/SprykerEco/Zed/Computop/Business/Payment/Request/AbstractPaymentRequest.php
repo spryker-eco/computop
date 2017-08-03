@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Request;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
+use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverterInterface;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface;
 
@@ -29,7 +29,7 @@ abstract class AbstractPaymentRequest
     protected $adapter;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     * @var \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverterInterface
      */
     protected $converter;
 
@@ -47,12 +47,12 @@ abstract class AbstractPaymentRequest
      * AbstractPaymentRequest constructor.
      *
      * @param \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface $adapter
-     * @param \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface $converter
+     * @param \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverterInterface $converter
      * @param string $paymentMethod
      */
     public function __construct(
         AdapterInterface $adapter,
-        ConverterInterface $converter,
+        AuthorizeConverterInterface $converter,
         $paymentMethod
     ) {
         $this->adapter = $adapter;

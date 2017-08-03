@@ -7,23 +7,34 @@
 
 namespace SprykerEco\Service\Computop\Model\Converter;
 
-use Generated\Shared\Transfer\ComputopCreditCardResponseTransfer;
+use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {
 
-    /**
-     * @param string $responseEncryptedString
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
-     */
-    public function getComputopResponseTransfer($responseEncryptedString)
-    {
-        $decryptedDataArray = $this->getResponseDecryptedArray($responseEncryptedString);
-        $computopCreditCardResponseTransfer = $this->createComputopCreditCardResponseTransfer($decryptedDataArray);
+    const SUCCESS_STATUS = 'OK';
 
-        return $computopCreditCardResponseTransfer;
+    /**
+     * @param array $decryptedArray
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     */
+    public function extractHeader($decryptedArray)
+    {
+        $header = new ComputopResponseHeaderTransfer();
+
+        $header->setStatus($decryptedArray[ComputopConstants::STATUS_F_N]);
+        $header->setDescription($decryptedArray[ComputopConstants::DESCRIPTION_F_N]);
+        $header->setCode($decryptedArray[ComputopConstants::CODE_F_N]);
+        $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
+        $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
+        $header->setXid($decryptedArray[ComputopConstants::XID_F_N]);
+
+        $header->setIsSuccess($header->getStatus() == self::SUCCESS_STATUS);
+
+        return $header;
     }
 
     /**
@@ -31,7 +42,7 @@ class Computop extends AbstractComputop implements ComputopInterface
      *
      * @return array
      */
-    protected function getResponseDecryptedArray($decryptedString)
+    public function getResponseDecryptedArray($decryptedString)
     {
         $decryptedDataArray = [];
         $decryptedDataSubArray = explode(self::DATA_SEPARATOR, $decryptedString);
@@ -41,42 +52,6 @@ class Computop extends AbstractComputop implements ComputopInterface
         }
 
         return $decryptedDataArray;
-    }
-
-    /**
-     * @param array $decryptedDataArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
-     */
-    protected function createComputopCreditCardResponseTransfer($decryptedDataArray)
-    {
-        $computopCreditCardResponseTransfer = new ComputopCreditCardResponseTransfer();
-
-        $computopCreditCardResponseTransfer->setMid($this->getParamOrNull($decryptedDataArray, self::MID));
-        $computopCreditCardResponseTransfer->setPayId($this->getParamOrNull($decryptedDataArray, self::PAY_ID));
-        $computopCreditCardResponseTransfer->setStatus($this->getParamOrNull($decryptedDataArray, self::STATUS));
-        $computopCreditCardResponseTransfer->setDescription($this->getParamOrNull($decryptedDataArray, self::DESCRIPTION));
-        $computopCreditCardResponseTransfer->setCode($this->getParamOrNull($decryptedDataArray, self::CODE));
-        $computopCreditCardResponseTransfer->setXid($this->getParamOrNull($decryptedDataArray, self::XID));
-        $computopCreditCardResponseTransfer->setTransId($this->getParamOrNull($decryptedDataArray, self::TRANS_ID));
-        $computopCreditCardResponseTransfer->setType($this->getParamOrNull($decryptedDataArray, self::TYPE));
-        $computopCreditCardResponseTransfer->setMac($this->getParamOrNull($decryptedDataArray, self::MAC));
-        $computopCreditCardResponseTransfer->setPcnr($this->getParamOrNull($decryptedDataArray, self::PCN_R));
-        $computopCreditCardResponseTransfer->setCCExpiry($this->getParamOrNull($decryptedDataArray, self::CC_EXPIRY));
-        $computopCreditCardResponseTransfer->setCCBrand($this->getParamOrNull($decryptedDataArray, self::CC_BRAND));
-
-        return $computopCreditCardResponseTransfer;
-    }
-
-    /**
-     * @param array $decryptedDataArray
-     * @param string $name
-     *
-     * @return string|null
-     */
-    protected function getParamOrNull($decryptedDataArray, $name)
-    {
-        return isset($decryptedDataArray[$name]) ? $decryptedDataArray[$name] : null;
     }
 
 }

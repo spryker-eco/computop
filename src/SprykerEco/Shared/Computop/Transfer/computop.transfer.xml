@@ -31,26 +31,56 @@
         <property name="url" type="string" />
         <property name="clientIp" type="string" />
 
-        <property name="creditCardResponse" type="ComputopCreditCardResponse"/>
+        <property name="creditCardOrderResponse" type="ComputopCreditCardOrderResponse"/>
 
     </transfer>
 
-    <transfer name="ComputopCreditCardResponse">
+    <transfer name="ComputopResponseHeader">
+        <property name="status" type="string" />
+        <property name="code" type="string" />
+        <property name="isSuccess" type="bool" />
+        <property name="description" type="string" />
+        <property name="transId" type="string" />
+        <property name="payId" type="string" />
+        <property name="xid" type="string" />
+    </transfer>
+
+    <transfer name="ComputopCreditCardAuthorizeResponse">
+        <property name="header" type="ComputopResponseHeader"/>
         <property name="len" type="string" />
         <property name="data" type="string" />
         <property name="mid" type="string" />
         <property name="payId" type="string" />
         <property name="xid" type="string" />
         <property name="transId" type="string" />
-        <property name="type" type="string" />
+        <property name="status" type="string" />
+        <property name="description" type="string" />
+        <property name="code" type="string" />
+        <property name="refNr" type="string" />
+    </transfer>
+
+    <transfer name="ComputopCreditCardOrderResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="len" type="string" />
+        <property name="data" type="string" />
+        <property name="mid" type="string" />
+        <property name="payId" type="string" />
+        <property name="xid" type="string" />
+        <property name="transId" type="string" />
+        <property name="status" type="string" />
+        <property name="description" type="string" />
+        <property name="code" type="string" />
+        <property name="mac" type="string" />
+        <property name="userData" type="string" />
         <property name="pcnr" type="string" />
         <property name="cCExpiry" type="string" />
         <property name="cCBrand" type="string" />
-        <property name="status" type="string" />
-        <property name="code" type="string" />
-        <property name="mac" type="string" />
-
-        <property name="description" type="string" />
+        <property name="maskedPan" type="string" />
+        <property name="cavv" type="string" />
+        <property name="eci" type="string" />
+        <property name="type" type="string" />
+        <property name="plain" type="string" />
+        <property name="custom" type="string" />
     </transfer>
 
     <transfer name="Payment">

@@ -53,8 +53,13 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
             $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
         );
 
-        $data = $this->getDataAttribute($computopCreditCardPaymentTransfer);
-        $len = $this->getLen($computopCreditCardPaymentTransfer);
+        $decryptedValues = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopCreditCardPaymentTransfer),
+            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+        );
+
+        $len = $decryptedValues['Len'];
+        $data = $decryptedValues['Data'];
 
         $requestData = [
                 'MerchantID' => $orderTransfer->getComputopCreditCard()->getMerchantId(),
@@ -66,27 +71,22 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
-     * @return bool|string
+     * @return array
      */
-    protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
+    public function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        $plaintext = $this->computopService->getComputopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer);
-        $len = $this->getLen($computopCreditCardPaymentTransfer);
-        $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
+        $dataSubArray[ComputopConstants::PAY_ID_F_N] = $cardPaymentTransfer->getPayId();
+        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopConstants::CAPTURE_F_N] = $cardPaymentTransfer->getCapture();
+        $dataSubArray[ComputopConstants::RESPONSE_F_N] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
 
-        return $this->computopService->getBlowfishEncryptedValue($plaintext, $len, $password);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
-     *
-     * @return int
-     */
-    protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
-    {
-        return strlen($this->computopService->getComputopAuthorizationDataEncryptedValue($computopCreditCardPaymentTransfer));
+        return $dataSubArray;
     }
 
 }

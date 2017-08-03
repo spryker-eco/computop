@@ -9,8 +9,6 @@ namespace SprykerEco\Service\Computop;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Service\Kernel\AbstractService;
-use Spryker\Shared\Config\Config;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()
@@ -29,39 +27,57 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param array $decryptedArray
      *
-     * @return string
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function getComputopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function extractHeader($decryptedArray)
     {
-        return $this->getFactory()->createComputopMapper()->getOrderDataEncryptedValue($cardPaymentTransfer);
+        return $this->getFactory()->createComputopConverter()->extractHeader($decryptedArray);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param array $responseArray
+     * @param string $password
      *
-     * @return string
+     * @return array
      */
-    public function getComputopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getDecryptedArray($responseArray, $password)
     {
-        return $this->getFactory()->createComputopMapper()->getAuthorizationDataEncryptedValue($cardPaymentTransfer);
-    }
-
-    /**
-     * @param array $computopResponseArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
-     */
-    public function getComputopResponseTransfer($computopResponseArray)
-    {
-        $responseEncryptedString = $this->getFactory()->createBlowfish()->getBlowfishDecryptedValue(
-            $computopResponseArray['Data'],
-            $computopResponseArray['Len'],
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+        $responseDecryptedString = $this->getBlowfishDecryptedValue(
+            $responseArray['Data'],
+            $responseArray['Len'],
+            $password
         );
 
-        return $this->getFactory()->createComputopConverter()->getComputopResponseTransfer($responseEncryptedString);
+        $responseDecryptedArray = $this
+            ->getFactory()
+            ->createComputopConverter()
+            ->getResponseDecryptedArray($responseDecryptedString);
+
+        return $responseDecryptedArray;
+    }
+
+    /**
+     * @param array $dataSubArray
+     * @param string $password
+     *
+     * @return array
+     */
+    public function getEncryptedArray($dataSubArray, $password)
+    {
+        $plaintext = $this->getFactory()->createComputopMapper()->getDataPlaintext($dataSubArray);
+        $len = strlen($plaintext);
+
+        $encryptedArray['Data'] = $this->getBlowfishEncryptedValue(
+            $plaintext,
+            $len,
+            $password
+        );
+
+        $encryptedArray['Len'] = $len;
+
+        return $encryptedArray;
     }
 
     /**

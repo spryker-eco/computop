@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
-abstract class AbstractConverter implements ConverterInterface
+abstract class AbstractConverter
 {
 
     /**

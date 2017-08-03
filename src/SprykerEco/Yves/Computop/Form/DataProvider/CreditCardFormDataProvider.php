@@ -93,8 +93,13 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
             $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
         );
 
-        $len = $this->getLen($computopCreditCardPaymentTransfer);
-        $data = $this->getDataAttribute($computopCreditCardPaymentTransfer);
+        $decryptedValues = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopCreditCardPaymentTransfer),
+            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+        );
+
+        $len = $decryptedValues['Len'];
+        $data = $decryptedValues['Data'];
 
         $computopCreditCardPaymentTransfer->setData($data);
         $computopCreditCardPaymentTransfer->setLen($len);
@@ -168,30 +173,6 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
-     *
-     * @return bool|string
-     */
-    protected function getDataAttribute(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
-    {
-        $plaintext = $this->computopService->getComputopOrderDataEncryptedValue($computopCreditCardPaymentTransfer);
-        $len = $this->getLen($computopCreditCardPaymentTransfer);
-        $password = Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
-
-        return $this->computopService->getBlowfishEncryptedValue($plaintext, $len, $password);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
-     *
-     * @return int
-     */
-    protected function getLen(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
-    {
-        return strlen($this->computopService->getComputopOrderDataEncryptedValue($computopCreditCardPaymentTransfer));
-    }
-
-    /**
      * @param string $path
      *
      * @return string
@@ -199,6 +180,27 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected function getAbsoluteUrl($path)
     {
         return Config::get(ApplicationConstants::BASE_URL_SSL_YVES) . $path;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return array
+     */
+    public function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    {
+        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopConstants::URL_SUCCESS_F_N] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopConstants::URL_FAILURE_F_N] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopConstants::CAPTURE_F_N] = $cardPaymentTransfer->getCapture();
+        $dataSubArray[ComputopConstants::RESPONSE_F_N] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopConstants::TX_TYPE_F_N] = $cardPaymentTransfer->getTxType();
+        $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
+
+        return $dataSubArray;
     }
 
 }

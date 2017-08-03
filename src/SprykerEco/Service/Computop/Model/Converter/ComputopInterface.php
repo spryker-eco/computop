@@ -11,10 +11,17 @@ interface ComputopInterface
 {
 
     /**
-     * @param array $computopResponseArray
+     * @param array $decryptedArray
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function getComputopResponseTransfer($computopResponseArray);
+    public function extractHeader($decryptedArray);
+
+    /**
+     * @param string $decryptedString
+     *
+     * @return array
+     */
+    public function getResponseDecryptedArray($decryptedString);
 
 }

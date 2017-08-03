@@ -20,25 +20,27 @@ interface ComputopServiceInterface
     public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param array $decryptedArray
      *
-     * @return string
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function getComputopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function extractHeader($decryptedArray);
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param array $responseArray
+     * @param string $password
      *
-     * @return string
+     * @return array
      */
-    public function getComputopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getDecryptedArray($responseArray, $password);
 
     /**
-     * @param array $computopResponseArray
+     * @param array $dataSubArray
+     * @param string $password
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     * @return array
      */
-    public function getComputopResponseTransfer($computopResponseArray);
+    public function getEncryptedArray($dataSubArray, $password);
 
     /**
      * @param string $value

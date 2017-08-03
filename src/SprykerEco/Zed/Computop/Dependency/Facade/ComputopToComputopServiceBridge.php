@@ -37,57 +37,35 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param array $decryptedArray
      *
-     * @return string
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function getComputopOrderDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function extractHeader($decryptedArray)
     {
-        return $this->computopService->getComputopOrderDataEncryptedValue($cardPaymentTransfer);
+        return $this->computopService->extractHeader($decryptedArray);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
-     *
-     * @return string
-     */
-    public function getComputopAuthorizationDataEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
-    {
-        return $this->computopService->getComputopAuthorizationDataEncryptedValue($cardPaymentTransfer);
-    }
-
-    /**
-     * @param array $computopResponseArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
-     */
-    public function getComputopResponseTransfer($computopResponseArray)
-    {
-        return $this->computopService->getComputopResponseTransfer($computopResponseArray);
-    }
-
-    /**
-     * @param string $plaintext
-     * @param int $len
+     * @param array $responseArray
      * @param string $password
      *
-     * @return string
+     * @return array
      */
-    public function getBlowfishEncryptedValue($plaintext, $len, $password)
+    public function getDecryptedArray($responseArray, $password)
     {
-        return $this->computopService->getBlowfishEncryptedValue($plaintext, $len, $password);
+        return $this->computopService->getDecryptedArray($responseArray, $password);
     }
 
     /**
-     * @param string $cipher
-     * @param int $len
+     * @param array $dataSubArray
      * @param string $password
      *
-     * @return string
+     * @return array
      */
-    public function getBlowfishDecryptedValue($cipher, $len, $password)
+    public function getEncryptedArray($dataSubArray, $password)
     {
-        return $this->computopService->getBlowfishDecryptedValue($cipher, $len, $password);
+        return $this->computopService->getEncryptedArray($dataSubArray, $password);
     }
 
 }
