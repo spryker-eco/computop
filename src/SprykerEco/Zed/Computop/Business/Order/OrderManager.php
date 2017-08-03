@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -30,9 +31,15 @@ class OrderManager implements OrderManagerInterface
     {
         if ($quoteTransfer->getPayment()->getPaymentProvider() === ComputopConstants::PROVIDER_NAME) {
             $this->handleDatabaseTransaction(function () use ($quoteTransfer, $checkoutResponseTransfer) {
-                $this->savePaymentForOrder(
+
+                $paymentEntity = $this->savePaymentForOrder(
                     $quoteTransfer->getPayment(),
                     $checkoutResponseTransfer->getSaveOrder()
+                );
+
+                $this->savePaymentForOrderItems(
+                    $checkoutResponseTransfer->getSaveOrder()->getOrderItems(),
+                    $paymentEntity->getIdPaymentComputop()
                 );
             });
         }
@@ -60,6 +67,26 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->save();
 
         return $paymentEntity;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
+     * @param int $idPayment
+     *
+     * @return void
+     */
+    protected function savePaymentForOrderItems($orderItemTransfers, $idPayment)
+    {
+        foreach ($orderItemTransfers as $orderItemTransfer) {
+            $paymentOrderItemEntity = new SpyPaymentComputopOrderItem();
+
+            $paymentOrderItemEntity
+                ->setFkPaymentComputop($idPayment)
+                ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
+            $paymentOrderItemEntity->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_NEW);
+
+            $paymentOrderItemEntity->save();
+        }
     }
 
 }

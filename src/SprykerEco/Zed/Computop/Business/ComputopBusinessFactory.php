@@ -91,7 +91,18 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createAuthorizeResponseHandler()
     {
-        return new AuthorizeResponseHandler(new ComputopResponseLogger());
+        return new AuthorizeResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger
+     */
+    public function createComputopResponseLogger()
+    {
+        return new ComputopResponseLogger();
     }
 
 }

@@ -8,7 +8,9 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
 use Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class AuthorizeResponseHandler extends AbstractResponseHandler
 {
@@ -19,26 +21,47 @@ class AuthorizeResponseHandler extends AbstractResponseHandler
 
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
     public function handle(
-        ComputopCreditCardAuthorizeResponseTransfer $responseTransfer
+        ComputopCreditCardAuthorizeResponseTransfer $responseTransfer,
+        OrderTransfer $orderTransfer
     ) {
-        $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopOrderDetails($responseTransfer);
+        $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {
+            $this->saveComputopOrderDetails($responseTransfer, $orderTransfer);
         });
     }
 
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails($responseTransfer)
+    protected function saveComputopOrderDetails(ComputopCreditCardAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
-        // TODO: implement saving
+
+        if (!$responseTransfer->getHeader()->getIsSuccess()) {
+            return;
+        }
+
+        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
+        $paymentEntity = $this
+            ->queryContainer
+            ->queryPaymentByPayId($orderTransfer->getComputopCreditCard()->getPayId())
+            ->findOne();
+
+        foreach ($orderTransfer->getItems() as $selectedItem) {
+            foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
+                if ($item->getFkSalesOrderItem() === $selectedItem->getIdSalesOrderItem()) {
+                    $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_AUTHORIZED);
+                    $item->save();
+                }
+            }
+        }
     }
 
 }

@@ -17,7 +17,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
 {
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Blowfish
+     * @return \SprykerEco\Service\Computop\Model\BlowfishInterface
      */
     public function createBlowfish()
     {
@@ -25,7 +25,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Converter\Computop
+     * @return \SprykerEco\Service\Computop\Model\Converter\ComputopInterface
      */
     public function createComputopConverter()
     {
@@ -33,7 +33,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Mapper\Computop
+     * @return \SprykerEco\Service\Computop\Model\Mapper\ComputopInterface
      */
     public function createComputopMapper()
     {
@@ -41,7 +41,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\HashHmac
+     * @return \SprykerEco\Service\Computop\Model\HashHmacInterface
      */
     public function createHashHmac()
     {

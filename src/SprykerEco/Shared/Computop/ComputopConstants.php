@@ -14,6 +14,10 @@ interface ComputopConstants
 
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
 
+    //Statuses
+    const COMPUTOP_OMS_STATUS_NEW = 'new';
+    const COMPUTOP_OMS_STATUS_AUTHORIZED = 'authorized';
+
     //Computop provider constants
     const CAPTURE_AUTO_TYPE = 'AUTO';
     const CAPTURE_MANUAL_TYPE = 'MANUAL';
@@ -56,5 +60,8 @@ interface ComputopConstants
     const CC_EXPIRY_F_N = 'CCExpiry';
     const CC_BRAND_F_N = 'CCBrand';
     const REF_NR_F_N = 'refNr';
+
+    const DATA_F_N = 'Data';
+    const LEN_F_N = 'Len';
 
 }

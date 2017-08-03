@@ -9,6 +9,7 @@ namespace SprykerEco\Service\Computop;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Service\Kernel\AbstractService;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()
@@ -17,9 +18,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
 {
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
@@ -27,9 +26,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @param array $decryptedArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @inheritdoc
      */
     public function extractHeader($decryptedArray)
     {
@@ -37,16 +34,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @param array $responseArray
-     * @param string $password
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getDecryptedArray($responseArray, $password)
     {
         $responseDecryptedString = $this->getBlowfishDecryptedValue(
-            $responseArray['Data'],
-            $responseArray['Len'],
+            $responseArray[ComputopConstants::DATA_F_N],
+            $responseArray[ComputopConstants::LEN_F_N],
             $password
         );
 
@@ -59,31 +53,26 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @param array $dataSubArray
-     * @param string $password
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getEncryptedArray($dataSubArray, $password)
     {
         $plaintext = $this->getFactory()->createComputopMapper()->getDataPlaintext($dataSubArray);
         $len = strlen($plaintext);
 
-        $encryptedArray['Data'] = $this->getBlowfishEncryptedValue(
+        $encryptedArray[ComputopConstants::DATA_F_N] = $this->getBlowfishEncryptedValue(
             $plaintext,
             $len,
             $password
         );
 
-        $encryptedArray['Len'] = $len;
+        $encryptedArray[ComputopConstants::LEN_F_N] = $len;
 
         return $encryptedArray;
     }
 
     /**
-     * @param string $value
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getHashHmacValue($value)
     {
@@ -91,11 +80,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @param string $plaintext
-     * @param int $len
-     * @param string $password
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getBlowfishEncryptedValue($plaintext, $len, $password)
     {
@@ -103,11 +88,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @param string $cipher
-     * @param int $len
-     * @param string $password
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getBlowfishDecryptedValue($cipher, $len, $password)
     {

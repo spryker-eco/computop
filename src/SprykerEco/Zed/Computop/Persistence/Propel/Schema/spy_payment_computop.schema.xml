@@ -52,4 +52,21 @@
         <id-method-parameter value="spy_payment_computop_api_log_pk_seq"/>
     </table>
 
+
+    <table name="spy_payment_computop_order_item">
+        <column name="fk_payment_computop" type="INTEGER" primaryKey="true"/>
+        <column name="fk_sales_order_item" type="INTEGER" primaryKey="true"/>
+        <column name="status" required="true" type="VARCHAR"/>
+
+        <behavior name="timestampable"/>
+
+        <foreign-key name="spy_computop_order_item-fk_computop" foreignTable="spy_payment_computop">
+            <reference foreign="id_payment_computop" local="fk_payment_computop"/>
+        </foreign-key>
+
+        <foreign-key name="spy_payment_computop_order_item-fk_sales_order_item" foreignTable="spy_sales_order_item">
+            <reference foreign="id_sales_order_item" local="fk_sales_order_item"/>
+        </foreign-key>
+    </table>
+
 </database>
