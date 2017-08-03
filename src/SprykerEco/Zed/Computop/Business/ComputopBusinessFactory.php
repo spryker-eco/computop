@@ -12,6 +12,7 @@ use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
@@ -90,7 +91,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createAuthorizeResponseHandler()
     {
-        return new AuthorizeResponseHandler();
+        return new AuthorizeResponseHandler(new ComputopResponseLogger());
     }
 
 }

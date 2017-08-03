@@ -33,4 +33,23 @@
         <id-method-parameter value="spy_payment_computop_pk_seq"/>
     </table>
 
+    <table name="spy_payment_computop_api_log">
+        <column name="id_payment_compitop_api_log" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="method" required="false" type="VARCHAR" />
+        <column name="status" required="false" type="VARCHAR"/>
+        <column name="code" required="true" type="INTEGER" />
+        <column name="description" required="false" type="VARCHAR"/>
+        <column name="trans_id" required="false" type="VARCHAR"/>
+        <column name="pay_id" required="false" type="VARCHAR"/>
+        <column name="xid" required="false" type="VARCHAR"/>
+
+        <behavior name="timestampable"/>
+
+        <index name="spy_payment_computop_api_log-index-xid">
+            <index-column name="xid" />
+        </index>
+
+        <id-method-parameter value="spy_payment_computop_api_log_pk_seq"/>
+    </table>
+
 </database>
