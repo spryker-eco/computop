@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -58,6 +59,17 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->handle($computopResponseTransfer, $orderTransfer);
 
         return $computopResponseTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cancelComputopItem(SpySalesOrderItem $orderItem)
+    {
+        $this
+            ->getFactory()
+            ->createCancelItemManager()
+            ->changeComputopItemStatus($orderItem);
     }
 
 }

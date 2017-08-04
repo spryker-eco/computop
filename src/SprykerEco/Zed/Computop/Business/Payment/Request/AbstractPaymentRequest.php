@@ -63,7 +63,7 @@ abstract class AbstractPaymentRequest
     /**
      * @param array $requestData
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     * @return mixed
      */
     protected function sendRequest(array $requestData)
     {

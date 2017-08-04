@@ -15,7 +15,7 @@ class AuthorizationRequest extends AbstractPaymentRequest
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardResponseTransfer
+     * @return mixed
      */
     public function request(OrderTransfer $orderTransfer)
     {

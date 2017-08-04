@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
+use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
@@ -103,6 +104,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createComputopResponseLogger()
     {
         return new ComputopResponseLogger();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManagerInterface
+     */
+    public function createCancelItemManager()
+    {
+        return new CancelItemManager();
     }
 
 }

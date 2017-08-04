@@ -17,6 +17,7 @@ interface ComputopConstants
     //Statuses
     const COMPUTOP_OMS_STATUS_NEW = 'new';
     const COMPUTOP_OMS_STATUS_AUTHORIZED = 'authorized';
+    const COMPUTOP_OMS_STATUS_ITEM_CANCELLED = 'item cancelled';
 
     //Computop provider constants
     const CAPTURE_AUTO_TYPE = 'AUTO';
