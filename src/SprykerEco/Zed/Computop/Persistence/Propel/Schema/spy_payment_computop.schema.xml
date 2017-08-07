@@ -42,6 +42,7 @@
         <column name="trans_id" required="false" type="VARCHAR"/>
         <column name="pay_id" required="false" type="VARCHAR"/>
         <column name="xid" required="false" type="VARCHAR"/>
+        <column name="mid" required="false" type="VARCHAR"/>
 
         <behavior name="timestampable"/>
 

@@ -25,6 +25,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         $header = new ComputopResponseHeaderTransfer();
 
+        $header->setMid($decryptedArray[ComputopConstants::MID_F_N]);
         $header->setStatus($decryptedArray[ComputopConstants::STATUS_F_N]);
         $header->setDescription($decryptedArray[ComputopConstants::DESCRIPTION_F_N]);
         $header->setCode($decryptedArray[ComputopConstants::CODE_F_N]);

@@ -23,6 +23,7 @@
         <property name="orderDesc" type="string" />
         <property name="customField" type="array" />
         <property name="paymentMethod" type="string" />
+        <property name="items" type="Item[]" singular="item" />
 
         <property name="data" type="string" />
         <property name="len" type="int" />
@@ -43,6 +44,7 @@
         <property name="transId" type="string" />
         <property name="payId" type="string" />
         <property name="xid" type="string" />
+        <property name="mid" type="string" />
     </transfer>
 
     <transfer name="ComputopCreditCardAuthorizeResponse">
