@@ -31,9 +31,13 @@ class Computop extends AbstractComputop implements ComputopInterface
         $header->setCode($decryptedArray[ComputopConstants::CODE_F_N]);
         $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
         $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
-        $header->setXid($decryptedArray[ComputopConstants::XID_F_N]);
-
         $header->setIsSuccess($header->getStatus() == self::SUCCESS_STATUS);
+
+        //set up for "Order" type
+        $header->setMac(isset($decryptedArray[ComputopConstants::MAC_F_N]) ? $decryptedArray[ComputopConstants::MAC_F_N] : null);
+
+        //set up for authorization and capture (success)
+        $header->setXid(isset($decryptedArray[ComputopConstants::XID_F_N]) ? $decryptedArray[ComputopConstants::XID_F_N] : null);
 
         return $header;
     }

@@ -45,6 +45,7 @@
         <property name="payId" type="string" />
         <property name="xid" type="string" />
         <property name="mid" type="string" />
+        <property name="mac" type="string" />
     </transfer>
 
     <transfer name="ComputopCreditCardAuthorizeResponse">
@@ -53,6 +54,7 @@
         <property name="data" type="string" />
         <property name="mid" type="string" />
         <property name="payId" type="string" />
+        <property name="mac" type="string" />
         <property name="xid" type="string" />
         <property name="transId" type="string" />
         <property name="status" type="string" />

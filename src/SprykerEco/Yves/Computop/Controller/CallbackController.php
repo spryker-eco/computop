@@ -11,8 +11,12 @@ use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Pyz\Yves\Checkout\Plugin\Provider\CheckoutControllerProvider;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
+use SprykerEco\Service\Computop\Model\Converter\Computop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
+/**
+ * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
+ */
 class CallbackController extends AbstractController
 {
 
@@ -89,16 +93,19 @@ class CallbackController extends AbstractController
 
         $computopCreditCardResponseTransfer->setMid($decryptedArray[ComputopConstants::MID_F_N]);
         $computopCreditCardResponseTransfer->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
+        $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
+        $computopCreditCardResponseTransfer->setCode($decryptedArray[ComputopConstants::CODE_F_N]);
         $computopCreditCardResponseTransfer->setStatus($decryptedArray[ComputopConstants::STATUS_F_N]);
         $computopCreditCardResponseTransfer->setDescription($decryptedArray[ComputopConstants::DESCRIPTION_F_N]);
-        $computopCreditCardResponseTransfer->setCode($decryptedArray[ComputopConstants::CODE_F_N]);
-        $computopCreditCardResponseTransfer->setXid($decryptedArray[ComputopConstants::XID_F_N]);
-        $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-        $computopCreditCardResponseTransfer->setType($decryptedArray[ComputopConstants::TYPE_F_N]);
         $computopCreditCardResponseTransfer->setMac($decryptedArray[ComputopConstants::MAC_F_N]);
-        $computopCreditCardResponseTransfer->setPcnr(isset($decryptedArray[ComputopConstants::PCN_R_F_N]) ? $decryptedArray[ComputopConstants::PCN_R_F_N] : null);
-        $computopCreditCardResponseTransfer->setCCExpiry(isset($decryptedArray[ComputopConstants::CC_EXPIRY_F_N]) ? $decryptedArray[ComputopConstants::CC_EXPIRY_F_N] : null);
-        $computopCreditCardResponseTransfer->setCCBrand(isset($decryptedArray[ComputopConstants::CC_BRAND_F_N]) ? $decryptedArray[ComputopConstants::CC_BRAND_F_N] : null);
+
+        if ($decryptedArray[ComputopConstants::STATUS_F_N] === Computop::SUCCESS_STATUS) {
+            $computopCreditCardResponseTransfer->setXid($decryptedArray[ComputopConstants::XID_F_N]);
+            $computopCreditCardResponseTransfer->setType($decryptedArray[ComputopConstants::TYPE_F_N]);
+            $computopCreditCardResponseTransfer->setPcnr(isset($decryptedArray[ComputopConstants::PCN_R_F_N]) ? $decryptedArray[ComputopConstants::PCN_R_F_N] : null);
+            $computopCreditCardResponseTransfer->setCCExpiry(isset($decryptedArray[ComputopConstants::CC_EXPIRY_F_N]) ? $decryptedArray[ComputopConstants::CC_EXPIRY_F_N] : null);
+            $computopCreditCardResponseTransfer->setCCBrand(isset($decryptedArray[ComputopConstants::CC_BRAND_F_N]) ? $decryptedArray[ComputopConstants::CC_BRAND_F_N] : null);
+        }
 
         $computopCreditCardResponseTransfer->setHeader(
             $this->getFactory()->createComputopService()->extractHeader($decryptedArray)
