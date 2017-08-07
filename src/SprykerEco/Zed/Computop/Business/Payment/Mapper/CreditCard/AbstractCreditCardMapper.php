@@ -14,7 +14,7 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
-class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterface
+abstract class AbstractCreditCardMapper extends AbstractMapper implements CreditCardMapperInterface
 {
 
     /**
@@ -75,18 +75,6 @@ class CreditCardMapper extends AbstractMapper implements CreditCardMapperInterfa
      *
      * @return array
      */
-    public function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
-    {
-        $dataSubArray[ComputopConstants::PAY_ID_F_N] = $cardPaymentTransfer->getPayId();
-        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopConstants::CAPTURE_F_N] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopConstants::RESPONSE_F_N] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
-
-        return $dataSubArray;
-    }
+    abstract public function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
 }
