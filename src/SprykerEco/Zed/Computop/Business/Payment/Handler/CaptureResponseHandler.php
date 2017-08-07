@@ -12,12 +12,12 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class AuthorizeResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
+class CaptureResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
 {
 
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'AUTHORIZE';
+    const METHOD = 'CAPTURE';
 
     /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer
@@ -57,7 +57,7 @@ class AuthorizeResponseHandler extends AbstractResponseHandler implements Respon
         foreach ($orderTransfer->getItems() as $selectedItem) {
             foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
                 if ($item->getFkSalesOrderItem() === $selectedItem->getIdSalesOrderItem()) {
-                    $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_AUTHORIZED);
+                    $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CAPTURED);
                     $item->save();
                 }
             }
