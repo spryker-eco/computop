@@ -17,6 +17,7 @@ interface ComputopConstants
     //Statuses
     const COMPUTOP_OMS_STATUS_NEW = 'new';
     const COMPUTOP_OMS_STATUS_AUTHORIZED = 'authorized';
+    const COMPUTOP_OMS_STATUS_CAPTURED = 'captured';
     const COMPUTOP_OMS_STATUS_ITEM_CANCELLED = 'item cancelled';
 
     //Computop provider constants
@@ -37,6 +38,7 @@ interface ComputopConstants
 
     const COMPUTOP_CREDIT_CARD_ORDER_ACTION = 'COMPUTOP_CREDIT_CARD_ORDER_ACTION';
     const COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION = 'COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION';
+    const COMPUTOP_CREDIT_CARD_CAPTURE_ACTION = 'COMPUTOP_CREDIT_CARD_CAPTURE_ACTION';
 
     //Field names
     const TRANS_ID_F_N = 'TransID';

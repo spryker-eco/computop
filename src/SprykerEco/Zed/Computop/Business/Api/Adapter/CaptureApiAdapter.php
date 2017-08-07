@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class AuthorizeApiAdapter extends AbstractApiAdapter
+class CaptureApiAdapter extends AbstractApiAdapter
 {
 
     /**
@@ -28,7 +28,7 @@ class AuthorizeApiAdapter extends AbstractApiAdapter
      */
     protected function getUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION);
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION);
     }
 
 }

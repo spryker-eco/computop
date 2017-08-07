@@ -10,8 +10,6 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
-use Spryker\Shared\Config\Config;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopHttpRequestException;
 
 abstract class AbstractApiAdapter implements AdapterInterface
@@ -53,7 +51,7 @@ abstract class AbstractApiAdapter implements AdapterInterface
     {
         try {
             $response = $this->client->post(
-                Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION),
+                $this->getUrl(),
                 $options
             );
         } catch (RequestException $requestException) {
@@ -69,5 +67,10 @@ abstract class AbstractApiAdapter implements AdapterInterface
      * @return array
      */
     abstract protected function prepareData(array $data);
+
+    /**
+     * @return string
+     */
+    abstract protected function getUrl();
 
 }
