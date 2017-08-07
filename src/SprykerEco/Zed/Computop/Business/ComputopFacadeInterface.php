@@ -40,6 +40,15 @@ interface ComputopFacadeInterface
      *
      * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager
      */
-    public function cancelComputopItem(SpySalesOrderItem $orderItem);
+    public function cancelPaymentItem(SpySalesOrderItem $orderItem);
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     */
+    public function capturePaymentRequest(OrderTransfer $orderTransfer);
 
 }

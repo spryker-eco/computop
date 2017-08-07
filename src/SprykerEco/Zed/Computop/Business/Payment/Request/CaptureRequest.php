@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Request;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-class AuthorizationRequest extends AbstractPaymentRequest implements CreditCartRequestInterface
+class CaptureRequest extends AbstractPaymentRequest implements CreditCartRequestInterface
 {
 
     /**

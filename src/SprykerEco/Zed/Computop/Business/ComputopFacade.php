@@ -64,12 +64,36 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      */
-    public function cancelComputopItem(SpySalesOrderItem $orderItem)
+    public function cancelPaymentItem(SpySalesOrderItem $orderItem)
     {
         $this
             ->getFactory()
             ->createCancelItemManager()
             ->changeComputopItemStatus($orderItem);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     */
+    public function capturePaymentRequest(OrderTransfer $orderTransfer)
+    {
+        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+
+        $computopResponseTransfer = $this
+            ->getFactory()
+            ->createCapturePaymentRequest($paymentMethod)
+            ->request($orderTransfer);
+
+        $this
+            ->getFactory()
+            ->createCaptureResponseHandler()
+            ->handle($computopResponseTransfer, $orderTransfer);
+
+        return $computopResponseTransfer;
     }
 
 }

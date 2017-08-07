@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Request;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-class AuthorizationRequest extends AbstractPaymentRequest implements CreditCartRequestInterface
+interface CreditCartRequestInterface
 {
 
     /**
@@ -17,13 +17,6 @@ class AuthorizationRequest extends AbstractPaymentRequest implements CreditCartR
      *
      * @return mixed
      */
-    public function request(OrderTransfer $orderTransfer)
-    {
-        $requestData = $this
-            ->getMethodMapper($this->paymentMethod)
-            ->buildRequest($orderTransfer);
-
-        return $this->sendRequest($requestData);
-    }
+    public function request(OrderTransfer $orderTransfer);
 
 }

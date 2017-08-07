@@ -22,7 +22,7 @@ class CancelItemPlugin extends AbstractComputopPlugin implements CommandByItemIn
      */
     public function run(SpySalesOrderItem $orderItem, ReadOnlyArrayObject $data)
     {
-        $this->getFacade()->cancelComputopItem($orderItem);
+        $this->getFacade()->cancelPaymentItem($orderItem);
 
         return [];
     }
