@@ -37,4 +37,14 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
         return $this->getQueryContainer()->queryPaymentByOrderId($orderId)->findOne();
     }
 
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationInterface
+     */
+    public function getCalculationFacade()
+    {
+        return $this->getProvidedDependency(
+            ComputopDependencyProvider::FACADE_CALCULATION
+        );
+    }
+
 }

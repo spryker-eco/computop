@@ -17,6 +17,7 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
 abstract class AbstractComputopPlugin extends AbstractPlugin
 {
@@ -35,6 +36,12 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
             ->getOrderByIdSalesOrder(
                 $orderEntity->getIdSalesOrder()
             );
+
+        $orderTransfer = $this
+            ->getFactory()
+            ->getCalculationFacade()
+            ->recalculateOrder($orderTransfer);
+
         $computopCreditCardPaymentTransfer = $this->createComputopCreditCardPaymentTransfer($orderTransfer);
         $orderTransfer->setComputopCreditCard($computopCreditCardPaymentTransfer);
 

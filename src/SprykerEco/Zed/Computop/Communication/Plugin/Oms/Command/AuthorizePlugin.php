@@ -31,7 +31,7 @@ class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderIn
      */
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
-        $orderEntity = $this->getOrderTransfer($orderEntity);
+        $orderEntity = $this->getOrderTransfer($orderEntity, $orderItems);
         $this->getFacade()->authorizationPaymentRequest($orderEntity);
 
         return [];
