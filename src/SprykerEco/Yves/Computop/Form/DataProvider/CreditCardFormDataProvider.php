@@ -98,8 +98,8 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
             Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY)
         );
 
-        $len = $decryptedValues['Len'];
-        $data = $decryptedValues['Data'];
+        $len = $decryptedValues[ComputopConstants::LEN_F_N];
+        $data = $decryptedValues[ComputopConstants::DATA_F_N];
 
         $computopCreditCardPaymentTransfer->setData($data);
         $computopCreditCardPaymentTransfer->setLen($len);
@@ -166,9 +166,9 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $len)
     {
         return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION_KEY) . '?' . http_build_query([
-                'MerchantID' => $computopCreditCardPaymentTransfer->getMerchantId(),
-                'Data' => $data,
-                'Len' => $len,
+                ComputopConstants::MERCHANT_ID_F_N => $computopCreditCardPaymentTransfer->getMerchantId(),
+                ComputopConstants::DATA_F_N => $data,
+                ComputopConstants::LEN_F_N => $len,
             ]);
     }
 
@@ -199,6 +199,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
         $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopConstants::TX_TYPE_F_N] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopConstants::ETI_ID_F_N] = ComputopConstants::ETI_ID;
 
         return $dataSubArray;
     }

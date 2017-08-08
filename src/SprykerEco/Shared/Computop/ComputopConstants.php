@@ -31,6 +31,8 @@ interface ComputopConstants
     const ORDER_DESC_SUCCESS = 'Test:0000';
     const ORDER_DESC_ERROR = 'Test:0305';
 
+    const ETI_ID = '0.0.1';
+
     //Config data
     const COMPUTOP_MERCHANT_ID_KEY = 'COMPUTOP_MERCHANT_ID';
     const COMPUTOP_BLOWFISH_PASSWORD_KEY = 'COMPUTOP_BLOWFISH_PASSWORD';
@@ -41,6 +43,7 @@ interface ComputopConstants
     const COMPUTOP_CREDIT_CARD_CAPTURE_ACTION_KEY = 'COMPUTOP_CREDIT_CARD_CAPTURE_ACTION';
 
     //Field names
+    const MERCHANT_ID_F_N = 'MerchantID';
     const TRANS_ID_F_N = 'TransID';
     const AMOUNT_F_N = 'Amount';
     const CURRENCY_F_N = 'Currency';
