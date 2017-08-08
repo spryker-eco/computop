@@ -33,6 +33,36 @@
         <id-method-parameter value="spy_payment_computop_pk_seq"/>
     </table>
 
+
+    <table name="spy_payment_computop_detail" phpName="SpyPaymentComputopDetail">
+        <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true"/>
+
+        <column name="m_id" required="false" type="VARCHAR"/>
+        <column name="description" required="false" type="VARCHAR"/>
+        <column name="mac" required="false" type="VARCHAR"/>
+        <column name="c_c_brand" required="false" type="VARCHAR"/>
+        <column name="c_c_expiry" required="false" type="VARCHAR"/>
+        <column name="masked_pan" required="false" type="VARCHAR"/>
+        <column name="cavv" required="false" type="VARCHAR"/>
+        <column name="eci" required="false" type="VARCHAR"/>
+        <column name="type" required="false" type="VARCHAR"/>
+        <column name="plain" required="false" type="VARCHAR"/>
+
+        <column name="ref_nr" required="false" type="VARCHAR"/>
+        <column name="a_id" required="false" type="VARCHAR" comment="Only in the case of Card Complete"/>
+        <column name="amount" required="false" type="VARCHAR" comment="Only with Clearhaus: Amount in the smallest currency unit (e.g. EUR Cent)
+If the actual amount differs from the requested amount this will be returned."/>
+        <column name="code_ext" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
+        <column name="error_text" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
+        <column name="transaction_id" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
+
+
+        <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
+            <reference foreign="id_payment_computop" local="id_payment_computop"/>
+        </foreign-key>
+    </table>
+
+
     <table name="spy_payment_computop_api_log">
         <column name="id_payment_compitop_api_log" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
         <column name="method" required="false" type="VARCHAR" />

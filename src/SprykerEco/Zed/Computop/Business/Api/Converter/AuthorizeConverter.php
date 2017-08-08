@@ -45,6 +45,7 @@ class AuthorizeConverter extends AbstractConverter implements ConverterInterface
         //different naming style
         $computopCreditCardResponseTransfer->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $computopCreditCardResponseTransfer->setXId($decryptedArray[ComputopConstants::XID_F_N]);
+        $computopCreditCardResponseTransfer->setMId($decryptedArray[ComputopConstants::MID_F_N]);
         $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
 
         $computopCreditCardResponseTransfer->setHeader(

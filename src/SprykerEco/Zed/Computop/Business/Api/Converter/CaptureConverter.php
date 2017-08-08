@@ -46,10 +46,19 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
         $computopCreditCardResponseTransfer->setMId($decryptedArray[ComputopConstants::MID_F_N]);
         $computopCreditCardResponseTransfer->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
+        $computopCreditCardResponseTransfer->setAId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
 
         //only if success
         $computopCreditCardResponseTransfer->setXId(
             isset($decryptedDataArray[ComputopConstants::XID_F_N]) ? $decryptedDataArray[ComputopConstants::XID_F_N] : null
+        );
+
+        //optional fields
+        $computopCreditCardResponseTransfer->setAId(
+            isset($decryptedDataArray[ComputopConstants::A_ID_F_N]) ? $decryptedDataArray[ComputopConstants::A_ID_F_N] : null
+        );
+        $computopCreditCardResponseTransfer->setTransactionId(
+            isset($decryptedDataArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedDataArray[ComputopConstants::TRANSACTION_ID_F_N] : null
         );
 
         $computopCreditCardResponseTransfer->setHeader(

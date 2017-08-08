@@ -62,6 +62,18 @@ class CaptureResponseHandler extends AbstractResponseHandler implements Response
                 }
             }
         }
+
+        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
+
+        $paymentEntityDetails->setMid($responseTransfer->getMId());
+        $paymentEntityDetails->setDescription($responseTransfer->getDescription());
+        $paymentEntityDetails->setAId($responseTransfer->getAId());
+        $paymentEntityDetails->setAmount($responseTransfer->getAmount());
+        $paymentEntityDetails->setCodeExt($responseTransfer->getCodeExt());
+        $paymentEntityDetails->setErrorText($responseTransfer->getErrorText());
+        $paymentEntityDetails->setTransactionId($responseTransfer->getTransactionId());
+
+        $paymentEntityDetails->save();
     }
 
 }

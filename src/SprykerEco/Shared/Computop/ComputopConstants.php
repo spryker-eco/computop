@@ -67,6 +67,11 @@ interface ComputopConstants
     const CC_BRAND_F_N = 'CCBrand';
     const REF_NR_F_N = 'refNr';
 
+    const A_ID_F_N = 'AID';
+    const CODE_EXT_F_N = 'CodeExt';
+    const ERROR_TEXT_F_N = 'ErrorText';
+    const TRANSACTION_ID_F_N = 'TransactionID';
+
     const DATA_F_N = 'Data';
     const LEN_F_N = 'Len';
 

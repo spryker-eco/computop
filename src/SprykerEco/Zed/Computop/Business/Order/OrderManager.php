@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -35,6 +36,11 @@ class OrderManager implements OrderManagerInterface
                 $paymentEntity = $this->savePaymentForOrder(
                     $quoteTransfer->getPayment(),
                     $checkoutResponseTransfer->getSaveOrder()
+                );
+
+                $this->savePaymentDetailForOrder(
+                    $quoteTransfer->getPayment(),
+                    $paymentEntity
                 );
 
                 $this->savePaymentForOrderItems(
@@ -67,6 +73,23 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->save();
 
         return $paymentEntity;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail
+     */
+    protected function savePaymentDetailForOrder(PaymentTransfer $paymentTransfer, SpyPaymentComputop $paymentEntity)
+    {
+        $paymentDetailEntity = new SpyPaymentComputopDetail();
+
+        $paymentDetailEntity->fromArray($paymentTransfer->getComputopCreditCard()->toArray());
+        $paymentDetailEntity->setIdPaymentComputop($paymentEntity->getIdPaymentComputop());
+        $paymentDetailEntity->save();
+
+        return $paymentDetailEntity;
     }
 
     /**
