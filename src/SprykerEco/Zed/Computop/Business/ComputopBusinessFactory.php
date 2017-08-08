@@ -99,7 +99,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverterInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     protected function createAuthorizeConverter()
     {
@@ -107,7 +107,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverterInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     protected function createCaptureConverter()
     {
@@ -161,7 +161,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
      */
     public function createComputopResponseLogger()
     {

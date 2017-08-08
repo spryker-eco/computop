@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use GuzzleHttp\Psr7\Stream;
 
-interface AuthorizeConverterInterface
+interface ConverterInterface
 {
 
     /**

@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7\Stream;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class AuthorizeConverter extends AbstractConverter implements AuthorizeConverterInterface
+class AuthorizeConverter extends AbstractConverter implements ConverterInterface
 {
 
     /**
