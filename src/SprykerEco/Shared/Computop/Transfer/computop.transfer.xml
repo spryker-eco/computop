@@ -43,8 +43,8 @@
         <property name="description" type="string" />
         <property name="transId" type="string" />
         <property name="payId" type="string" />
-        <property name="xid" type="string" />
-        <property name="mid" type="string" />
+        <property name="xId" type="string" />
+        <property name="mId" type="string" />
         <property name="mac" type="string" />
     </transfer>
 
@@ -52,10 +52,10 @@
         <property name="header" type="ComputopResponseHeader"/>
         <property name="len" type="string" />
         <property name="data" type="string" />
-        <property name="mid" type="string" />
+        <property name="mId" type="string" />
         <property name="payId" type="string" />
         <property name="mac" type="string" />
-        <property name="xid" type="string" />
+        <property name="xId" type="string" />
         <property name="transId" type="string" />
         <property name="status" type="string" />
         <property name="description" type="string" />
@@ -67,16 +67,16 @@
         <property name="header" type="ComputopResponseHeader"/>
         <property name="len" type="string" />
         <property name="data" type="string" />
-        <property name="mid" type="string" />
+        <property name="mId" type="string" />
         <property name="payId" type="string" />
-        <property name="xid" type="string" />
+        <property name="xId" type="string" />
         <property name="transId" type="string" />
         <property name="status" type="string" />
         <property name="description" type="string" />
         <property name="code" type="string" />
         <property name="mac" type="string" />
         <property name="userData" type="string" />
-        <property name="pcnr" type="string" />
+        <property name="pCNr" type="string" />
         <property name="cCExpiry" type="string" />
         <property name="cCBrand" type="string" />
         <property name="maskedPan" type="string" />

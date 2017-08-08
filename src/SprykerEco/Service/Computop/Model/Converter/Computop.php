@@ -25,10 +25,10 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         $header = new ComputopResponseHeaderTransfer();
 
-        $header->setMid($decryptedArray[ComputopConstants::MID_F_N]);
-        $header->setStatus($decryptedArray[ComputopConstants::STATUS_F_N]);
-        $header->setDescription($decryptedArray[ComputopConstants::DESCRIPTION_F_N]);
-        $header->setCode($decryptedArray[ComputopConstants::CODE_F_N]);
+        $header->fromArray($decryptedArray, true);
+
+        //different naming style
+        $header->setMId($decryptedArray[ComputopConstants::MID_F_N]);
         $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
         $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $header->setIsSuccess($header->getStatus() == self::SUCCESS_STATUS);
@@ -37,7 +37,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         $header->setMac(isset($decryptedArray[ComputopConstants::MAC_F_N]) ? $decryptedArray[ComputopConstants::MAC_F_N] : null);
 
         //set up for authorization and capture (success)
-        $header->setXid(isset($decryptedArray[ComputopConstants::XID_F_N]) ? $decryptedArray[ComputopConstants::XID_F_N] : null);
+        $header->setXId(isset($decryptedArray[ComputopConstants::XID_F_N]) ? $decryptedArray[ComputopConstants::XID_F_N] : null);
 
         return $header;
     }

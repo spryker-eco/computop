@@ -91,20 +91,16 @@ class CallbackController extends AbstractController
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardOrderResponseTransfer();
 
-        $computopCreditCardResponseTransfer->setMid($decryptedArray[ComputopConstants::MID_F_N]);
+        $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
+
+        //different naming style
+        $computopCreditCardResponseTransfer->setMId($decryptedArray[ComputopConstants::MID_F_N]);
         $computopCreditCardResponseTransfer->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-        $computopCreditCardResponseTransfer->setCode($decryptedArray[ComputopConstants::CODE_F_N]);
-        $computopCreditCardResponseTransfer->setStatus($decryptedArray[ComputopConstants::STATUS_F_N]);
-        $computopCreditCardResponseTransfer->setDescription($decryptedArray[ComputopConstants::DESCRIPTION_F_N]);
         $computopCreditCardResponseTransfer->setMac($decryptedArray[ComputopConstants::MAC_F_N]);
 
         if ($decryptedArray[ComputopConstants::STATUS_F_N] === Computop::SUCCESS_STATUS) {
-            $computopCreditCardResponseTransfer->setXid($decryptedArray[ComputopConstants::XID_F_N]);
-            $computopCreditCardResponseTransfer->setType($decryptedArray[ComputopConstants::TYPE_F_N]);
-            $computopCreditCardResponseTransfer->setPcnr(isset($decryptedArray[ComputopConstants::PCN_R_F_N]) ? $decryptedArray[ComputopConstants::PCN_R_F_N] : null);
-            $computopCreditCardResponseTransfer->setCCExpiry(isset($decryptedArray[ComputopConstants::CC_EXPIRY_F_N]) ? $decryptedArray[ComputopConstants::CC_EXPIRY_F_N] : null);
-            $computopCreditCardResponseTransfer->setCCBrand(isset($decryptedArray[ComputopConstants::CC_BRAND_F_N]) ? $decryptedArray[ComputopConstants::CC_BRAND_F_N] : null);
+            $computopCreditCardResponseTransfer->setXId($decryptedArray[ComputopConstants::XID_F_N]);
         }
 
         $computopCreditCardResponseTransfer->setHeader(
