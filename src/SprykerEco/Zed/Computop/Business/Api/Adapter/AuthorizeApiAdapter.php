@@ -28,7 +28,7 @@ class AuthorizeApiAdapter extends AbstractApiAdapter
      */
     protected function getUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION);
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION_KEY);
     }
 
 }

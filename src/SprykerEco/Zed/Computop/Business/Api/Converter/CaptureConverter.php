@@ -26,7 +26,7 @@ class CaptureConverter extends AbstractConverter implements AuthorizeConverterIn
 
         $decryptedArray = $this
             ->computopService
-            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD));
+            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY));
 
         return $this->getResponseTransfer($decryptedArray);
     }

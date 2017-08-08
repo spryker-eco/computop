@@ -95,7 +95,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopCreditCardPaymentTransfer),
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY)
         );
 
         $len = $decryptedValues['Len'];
@@ -165,7 +165,7 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $len)
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION) . '?' . http_build_query([
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION_KEY) . '?' . http_build_query([
                 'MerchantID' => $computopCreditCardPaymentTransfer->getMerchantId(),
                 'Data' => $data,
                 'Len' => $len,

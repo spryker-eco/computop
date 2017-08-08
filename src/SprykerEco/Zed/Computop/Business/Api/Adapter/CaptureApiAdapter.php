@@ -28,7 +28,7 @@ class CaptureApiAdapter extends AbstractApiAdapter
      */
     protected function getUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION);
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION_KEY);
     }
 
 }
