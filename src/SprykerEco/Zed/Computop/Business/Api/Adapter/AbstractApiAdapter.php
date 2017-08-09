@@ -16,6 +16,7 @@ abstract class AbstractApiAdapter implements AdapterInterface
 {
 
     const DEFAULT_TIMEOUT = 45;
+
     /**
      * @var \GuzzleHttp\Client
      */
