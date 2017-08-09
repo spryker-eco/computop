@@ -26,7 +26,7 @@ class AuthorizeResponseHandler extends AbstractResponseHandler implements Respon
      * @return void
      */
     public function handle(
-        ComputopCreditCardAuthorizeResponseTransfer $responseTransfer,
+        $responseTransfer,
         OrderTransfer $orderTransfer
     ) {
         $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {

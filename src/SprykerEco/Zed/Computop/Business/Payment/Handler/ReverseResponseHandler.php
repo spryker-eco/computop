@@ -7,19 +7,20 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
+use Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class CaptureResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
+class ReverseResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
 {
 
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'CAPTURE';
+    const METHOD = 'REVERSE';
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
@@ -34,12 +35,12 @@ class CaptureResponseHandler extends AbstractResponseHandler implements Response
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails($responseTransfer, OrderTransfer $orderTransfer)
+    protected function saveComputopOrderDetails(ComputopCreditCardReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 
@@ -56,23 +57,11 @@ class CaptureResponseHandler extends AbstractResponseHandler implements Response
         foreach ($orderTransfer->getItems() as $selectedItem) {
             foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
                 if ($item->getFkSalesOrderItem() === $selectedItem->getIdSalesOrderItem()) {
-                    $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CAPTURED);
+                    $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CANCELLED);
                     $item->save();
                 }
             }
         }
-
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
-
-        $paymentEntityDetails->setMid($responseTransfer->getMId());
-        $paymentEntityDetails->setDescription($responseTransfer->getDescription());
-        $paymentEntityDetails->setAId($responseTransfer->getAId());
-        $paymentEntityDetails->setAmount($responseTransfer->getAmount());
-        $paymentEntityDetails->setCodeExt($responseTransfer->getCodeExt());
-        $paymentEntityDetails->setErrorText($responseTransfer->getErrorText());
-        $paymentEntityDetails->setTransactionId($responseTransfer->getTransactionId());
-
-        $paymentEntityDetails->save();
     }
 
 }

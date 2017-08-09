@@ -7,20 +7,19 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
-use Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
 interface ResponseHandlerInterface
 {
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer
+     * @param mixed $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
     public function handle(
-        ComputopCreditCardAuthorizeResponseTransfer $responseTransfer,
+        $responseTransfer,
         OrderTransfer $orderTransfer
     );
 
