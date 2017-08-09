@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Pyz\Yves\Checkout\Plugin\Provider\CheckoutControllerProvider;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
-use SprykerEco\Service\Computop\Model\Converter\Computop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
