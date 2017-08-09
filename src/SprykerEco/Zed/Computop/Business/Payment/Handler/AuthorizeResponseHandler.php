@@ -62,6 +62,10 @@ class AuthorizeResponseHandler extends AbstractResponseHandler implements Respon
                 }
             }
         }
+
+        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
+        $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
+        $paymentEntityDetails->save();
     }
 
 }

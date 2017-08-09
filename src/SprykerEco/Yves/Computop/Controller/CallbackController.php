@@ -93,16 +93,6 @@ class CallbackController extends AbstractController
 
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
 
-        //different naming style
-        $computopCreditCardResponseTransfer->setMId($decryptedArray[ComputopConstants::MID_F_N]);
-        $computopCreditCardResponseTransfer->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
-        $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-        $computopCreditCardResponseTransfer->setMac($decryptedArray[ComputopConstants::MAC_F_N]);
-
-        if ($decryptedArray[ComputopConstants::STATUS_F_N] === Computop::SUCCESS_STATUS) {
-            $computopCreditCardResponseTransfer->setXId($decryptedArray[ComputopConstants::XID_F_N]);
-        }
-
         $computopCreditCardResponseTransfer->setHeader(
             $this->getFactory()->createComputopService()->extractHeader($decryptedArray)
         );

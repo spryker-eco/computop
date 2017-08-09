@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer;
 use GuzzleHttp\Psr7\Stream;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -18,7 +19,7 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
     /**
      * @param \GuzzleHttp\Psr7\Stream $response
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
      */
     public function toTransactionResponseTransfer(Stream $response)
     {
@@ -34,24 +35,13 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
     /**
      * @param array $decryptedArray
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
      */
     protected function getResponseTransfer($decryptedArray)
     {
-        $computopCreditCardResponseTransfer = new ComputopCreditCardAuthorizeResponseTransfer();
+        $computopCreditCardResponseTransfer = new ComputopCreditCardCaptureResponseTransfer();
 
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
-
-        //different naming style
-        $computopCreditCardResponseTransfer->setMId($decryptedArray[ComputopConstants::MID_F_N]);
-        $computopCreditCardResponseTransfer->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
-        $computopCreditCardResponseTransfer->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-        $computopCreditCardResponseTransfer->setAId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-
-        //only if success
-        $computopCreditCardResponseTransfer->setXId(
-            isset($decryptedDataArray[ComputopConstants::XID_F_N]) ? $decryptedDataArray[ComputopConstants::XID_F_N] : null
-        );
 
         //optional fields
         $computopCreditCardResponseTransfer->setAId(
@@ -59,6 +49,18 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
         );
         $computopCreditCardResponseTransfer->setTransactionId(
             isset($decryptedDataArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedDataArray[ComputopConstants::TRANSACTION_ID_F_N] : null
+        );
+        $computopCreditCardResponseTransfer->setAmount(
+            isset($decryptedDataArray[ComputopConstants::AMOUNT_F_N]) ? $decryptedDataArray[ComputopConstants::AMOUNT_F_N] : null
+        );
+        $computopCreditCardResponseTransfer->setCodeExt(
+            isset($decryptedDataArray[ComputopConstants::CODE_EXT_F_N]) ? $decryptedDataArray[ComputopConstants::CODE_EXT_F_N] : null
+        );
+        $computopCreditCardResponseTransfer->setErrorText(
+            isset($decryptedDataArray[ComputopConstants::ERROR_TEXT_F_N]) ? $decryptedDataArray[ComputopConstants::ERROR_TEXT_F_N] : null
+        );
+        $computopCreditCardResponseTransfer->setRefNr(
+            isset($decryptedDataArray[ComputopConstants::REF_NR_F_N]) ? $decryptedDataArray[ComputopConstants::REF_NR_F_N] : null
         );
 
         $computopCreditCardResponseTransfer->setHeader(
