@@ -69,6 +69,14 @@
         <property name="transactionId" type="string" />
     </transfer>
 
+    <transfer name="ComputopCreditCardReverseResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+    </transfer>
+
+    <transfer name="ComputopCreditCardCaptureResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+    </transfer>
+
     <transfer name="ComputopCreditCardOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="len" type="string" />

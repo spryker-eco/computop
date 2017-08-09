@@ -25,7 +25,6 @@ class AuthorizeCreditCardMapper extends AbstractCreditCardMapper implements Cred
         $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopConstants::CAPTURE_F_N] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopConstants::RESPONSE_F_N] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
 
