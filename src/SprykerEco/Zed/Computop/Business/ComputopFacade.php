@@ -22,8 +22,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
@@ -40,9 +38,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -63,6 +61,34 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
+    public function reversePaymentRequest(OrderTransfer $orderTransfer)
+    {
+        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+
+        $computopResponseTransfer = $this
+            ->getFactory()
+            ->createReversePaymentRequest($paymentMethod)
+            ->request($orderTransfer);
+
+        $this
+            ->getFactory()
+            ->createReverseResponseHandler()
+            ->handle($computopResponseTransfer, $orderTransfer);
+
+        return $computopResponseTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
+     *
+     * @return void
      */
     public function cancelPaymentItem(SpySalesOrderItem $orderItem)
     {
@@ -75,9 +101,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer)
     {

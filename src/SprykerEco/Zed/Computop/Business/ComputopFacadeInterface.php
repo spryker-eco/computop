@@ -19,8 +19,6 @@ interface ComputopFacadeInterface
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
@@ -31,7 +29,7 @@ interface ComputopFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return void
+     * @return mixed
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer);
 
@@ -43,11 +41,9 @@ interface ComputopFacadeInterface
     public function cancelPaymentItem(SpySalesOrderItem $orderItem);
 
     /**
-     * {@inheritdoc}
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer);
 
