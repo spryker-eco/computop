@@ -30,6 +30,8 @@ interface ComputopServiceInterface
      * @param array $responseArray
      * @param string $password
      *
+     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
      * @return array
      */
     public function getDecryptedArray($responseArray, $password);

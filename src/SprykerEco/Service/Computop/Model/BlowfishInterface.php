@@ -15,6 +15,8 @@ interface BlowfishInterface
      * @param int $len
      * @param string $password
      *
+     * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
+     *
      * @return string
      */
     public function getBlowfishEncryptedValue($plaintext, $len, $password);
@@ -23,6 +25,8 @@ interface BlowfishInterface
      * @param string $cipher
      * @param int $len
      * @param string $password
+     *
+     * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
      *
      * @return string
      */

@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
+use SprykerEco\Service\Computop\Exception\BlowfishException;
+
 /**
  * Class Blowfish
  *
@@ -40,14 +42,15 @@ class Blowfish implements BlowfishInterface
      * @param int $len
      * @param string $password
      *
+     * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
+     *
      * @return string
      */
     public function getBlowfishEncryptedValue($plaintext, $len, $password)
     {
         if (mb_strlen($password) <= 0) $password = ' ';
         if (mb_strlen($plaintext) != $len) {
-            echo 'Length mismatch. The parameter len differs from actual length.';
-            return false;
+            throw new BlowfishException('Length mismatch. The parameter len differs from actual length.');
         }
 
         $plaintext = $this->expand($plaintext);
@@ -61,6 +64,8 @@ class Blowfish implements BlowfishInterface
      * @param int $len
      * @param string $password
      *
+     * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
+     *
      * @return string
      */
     public function getBlowfishDecryptedValue($cipher, $len, $password)
@@ -69,8 +74,7 @@ class Blowfish implements BlowfishInterface
         # converts hex to bin
         $cipher = pack('H' . strlen($cipher), $cipher);
         if ($len > strlen($cipher)) {
-            echo 'Length mismatch. The parameter len is too large.';
-            return false;
+            throw new BlowfishException('Length mismatch. The parameter len is too large.');
         }
         $this->bfSetKey($password);
         return mb_substr($this->decrypt($cipher), 0, $len);

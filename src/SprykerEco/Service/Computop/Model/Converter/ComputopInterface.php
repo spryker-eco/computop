@@ -24,4 +24,13 @@ interface ComputopInterface
      */
     public function getResponseDecryptedArray($decryptedString);
 
+    /**
+     * @param array $responseArray
+     *
+     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
+     * @return void
+     */
+    public function checkEncryptedResponse($responseArray);
+
 }

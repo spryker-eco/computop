@@ -8,6 +8,7 @@
 namespace SprykerEco\Service\Computop\Model\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -23,6 +24,8 @@ class Computop extends AbstractComputop implements ComputopInterface
      */
     public function extractHeader($decryptedArray)
     {
+        $this->checkDecryptedResponse($decryptedArray);
+
         $header = new ComputopResponseHeaderTransfer();
 
         $header->fromArray($decryptedArray, true);
@@ -57,6 +60,62 @@ class Computop extends AbstractComputop implements ComputopInterface
         }
 
         return $decryptedDataArray;
+    }
+
+    /**
+     * @param array $responseArray
+     *
+     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
+     * @return void
+     */
+    public function checkEncryptedResponse($responseArray)
+    {
+        $keys = [
+            ComputopConstants::DATA_F_N,
+            ComputopConstants::LEN_F_N,
+        ];
+
+        if (!$this->checkArrayKeysExists($keys, $responseArray)) {
+            throw  new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
+        }
+    }
+
+    /**
+     * @param array $decryptedArray
+     *
+     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
+     * @return void
+     */
+    protected function checkDecryptedResponse($decryptedArray)
+    {
+        $keys = [
+            ComputopConstants::MID_F_N,
+            ComputopConstants::TRANS_ID_F_N,
+            ComputopConstants::PAY_ID_F_N,
+        ];
+
+        if (!$this->checkArrayKeysExists($keys, $decryptedArray)) {
+            throw  new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
+        }
+    }
+
+    /**
+     * @param array $keys
+     * @param array $arraySearch
+     *
+     * @return bool
+     */
+    protected function checkArrayKeysExists($keys, $arraySearch)
+    {
+        foreach ($keys as $key) {
+            if (!array_key_exists($key, $arraySearch)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Service\Computop;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Service\Kernel\AbstractService;
-use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
@@ -36,15 +35,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
 
     /**
      * @inheritdoc
-     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      */
     public function getDecryptedArray($responseArray, $password)
     {
-        if (!array_key_exists(ComputopConstants::DATA_F_N, $responseArray) ||
-            !array_key_exists(ComputopConstants::LEN_F_N, $responseArray)) {
-            //TODO: check is it correct place.
-            throw  new ComputopConverterException();
-        }
+        $this
+            ->getFactory()
+            ->createComputopConverter()
+            ->checkEncryptedResponse($responseArray);
 
         $responseDecryptedString = $this->getBlowfishDecryptedValue(
             $responseArray[ComputopConstants::DATA_F_N],
