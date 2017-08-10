@@ -66,6 +66,30 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return mixed
      */
+    public function inquirePaymentRequest(OrderTransfer $orderTransfer)
+    {
+        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+
+        $computopResponseTransfer = $this
+            ->getFactory()
+            ->createInquirePaymentRequest($paymentMethod)
+            ->request($orderTransfer);
+
+        $this
+            ->getFactory()
+            ->createInquireResponseHandler()
+            ->handle($computopResponseTransfer, $orderTransfer);
+
+        return $computopResponseTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
     public function reversePaymentRequest(OrderTransfer $orderTransfer)
     {
         $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();

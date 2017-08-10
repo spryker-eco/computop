@@ -56,6 +56,9 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="error_text" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
         <column name="transaction_id" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
 
+        <column name="amount_auth" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
+        <column name="amount_cap" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
+        <column name="amount_cred" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
 
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>

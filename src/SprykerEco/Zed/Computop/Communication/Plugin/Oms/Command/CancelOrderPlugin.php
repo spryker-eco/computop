@@ -32,7 +32,14 @@ class CancelOrderPlugin extends AbstractComputopPlugin implements CommandByOrder
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
         $orderEntity = $this->getOrderTransfer($orderEntity, $orderItems);
-        $this->getFacade()->reversePaymentRequest($orderEntity);
+
+        $responseTransfer = $this->getFacade()->inquirePaymentRequest($orderEntity);
+
+        if ($responseTransfer->getIsAuthLast()) {
+            $this->getFacade()->reversePaymentRequest($orderEntity);
+        }
+
+        //TODO: add message if need
 
         return [];
     }

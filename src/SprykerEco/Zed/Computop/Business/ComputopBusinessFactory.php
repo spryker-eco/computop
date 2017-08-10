@@ -10,21 +10,26 @@ namespace SprykerEco\Zed\Computop\Business;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureResponseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\AuthorizeCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CaptureCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\InquireCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\ReverseCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\CaptureRequest;
+use SprykerEco\Zed\Computop\Business\Payment\Request\InquireRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\ReverseRequest;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
@@ -58,6 +63,26 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
 
         $paymentRequest->registerMapper(
             $this->createAuthorizeCreditCardMapper()
+        );
+
+        return $paymentRequest;
+    }
+
+    /**
+     * @param string $paymentMethod
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\CreditCartRequestInterface
+     */
+    public function createInquirePaymentRequest($paymentMethod)
+    {
+        $paymentRequest = new InquireRequest(
+            $this->createInquireAdapter(),
+            $this->createInquireConverter(),
+            $paymentMethod
+        );
+
+        $paymentRequest->registerMapper(
+            $this->createInquireCreditCardMapper()
         );
 
         return $paymentRequest;
@@ -126,6 +151,16 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
+    protected function createInquireAdapter()
+    {
+        return new InquireApiAdapter(
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
     protected function createCaptureAdapter()
     {
         return new CaptureApiAdapter(
@@ -152,6 +187,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
+    protected function createInquireConverter()
+    {
+        return new InquireConverter($this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     */
     protected function createCaptureConverter()
     {
         return new CaptureConverter($this->getComputopService());
@@ -171,6 +214,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createReverseCreditCardMapper()
     {
         return new ReverseCreditCardMapper($this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     */
+    protected function createInquireCreditCardMapper()
+    {
+        return new InquireCreditCardMapper($this->getComputopService());
     }
 
     /**
@@ -206,6 +257,17 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createReverseResponseHandler()
     {
         return new ReverseResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     */
+    public function createInquireResponseHandler()
+    {
+        return new InquireResponseHandler(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger()
         );
