@@ -59,6 +59,17 @@
         <property name="header" type="ComputopResponseHeader"/>
     </transfer>
 
+    <transfer name="ComputopCreditCardInquireResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="amountAuth" type="string" />
+        <property name="amountCap" type="string" />
+        <property name="amountCred" type="string" />
+        <property name="lastStatus" type="string" />
+        <property name="isAuthLast" type="bool" />
+        <property name="isCapLast" type="bool" />
+        <property name="isCredLast" type="bool" />
+    </transfer>
+
     <transfer name="ComputopCreditCardCaptureResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />

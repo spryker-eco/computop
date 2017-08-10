@@ -12,3 +12,5 @@ $config[ComputopConstants::COMPUTOP_HMAC_PASSWORD_KEY] = 'COMPUTOP_HMAC_PASSWORD
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION_KEY] = 'https://www.computop-paygate.com/payssl.aspx';
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION_KEY] = 'https://www.computop-paygate.com/authorize.aspx';
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION_KEY] = 'https://www.computop-paygate.com/capture.aspx';
+$config[ComputopConstants::COMPUTOP_CREDIT_CARD_REVERSE_ACTION_KEY] = 'https://www.computop-paygate.com/reverse.aspx';
+$config[ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION_KEY] = 'https://www.computop-paygate.com/inquire.aspx';
