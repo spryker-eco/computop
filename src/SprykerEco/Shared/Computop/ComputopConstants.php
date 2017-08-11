@@ -11,7 +11,6 @@ interface ComputopConstants
 {
 
     const PROVIDER_NAME = 'computop';
-
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
 
     //Statuses
@@ -32,7 +31,8 @@ interface ComputopConstants
     const ORDER_DESC_SUCCESS = 'Test:0000';
     const ORDER_DESC_ERROR = 'Test:0305';
 
-    const ETI_ID = '0.0.1';
+    const ETI_ID = '0.0.1'; //Parameter is requested by Computop
+    const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
 
     //Config data
     const COMPUTOP_MERCHANT_ID_KEY = 'COMPUTOP_MERCHANT_ID';
@@ -58,7 +58,6 @@ interface ComputopConstants
     const TX_TYPE_F_N = 'TxType';
     const ORDER_DESC_F_N = 'OrderDesc';
     const PAY_ID_F_N = 'PayID';
-
     const MID_F_N = 'mid';
     const STATUS_F_N = 'Status';
     const DESCRIPTION_F_N = 'Description';
@@ -69,15 +68,13 @@ interface ComputopConstants
     const CC_EXPIRY_F_N = 'CCExpiry';
     const CC_BRAND_F_N = 'CCBrand';
     const REF_NR_F_N = 'refNr';
-
     const A_ID_F_N = 'AID';
     const CODE_EXT_F_N = 'CodeExt';
     const ERROR_TEXT_F_N = 'ErrorText';
     const TRANSACTION_ID_F_N = 'TransactionID';
-
+    const FINISH_AUTH_F_N = 'FinishAuth';
+    const ETI_ID_F_N = 'EtiId';
     const DATA_F_N = 'Data';
     const LEN_F_N = 'Len';
-
-    const ETI_ID_F_N = 'EtiId';
 
 }

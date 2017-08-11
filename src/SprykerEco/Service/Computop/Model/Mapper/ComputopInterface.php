@@ -24,6 +24,6 @@ interface ComputopInterface
      *
      * @return string
      */
-    public function getDataPlaintext($dataSubArray);
+    public function getDataPlaintext(array $dataSubArray);
 
 }

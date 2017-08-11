@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Controller;
 
-use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Pyz\Yves\Checkout\Plugin\Provider\CheckoutControllerProvider;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
@@ -20,7 +19,6 @@ class CallbackController extends AbstractController
 {
 
     const ERROR_MESSAGE = 'Error message';
-    const ORDER_METHOD = 'ORDER';
 
     /**
      * @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
@@ -41,19 +39,13 @@ class CallbackController extends AbstractController
      */
     public function successAction()
     {
-        $quote = $this->getFactory()->createQuoteClient()->getQuote();
+        $quoteTransfer = $this->getFactory()->createQuoteClient()->getQuote();
+        $quoteTransfer = $this->getFactory()->createPaymentHandler()->addPaymentToQuote(
+            $quoteTransfer,
+            $this->creditCardOrderResponseTransfer
+        );
 
-        if ($quote->getPayment() !== null) {
-            $quote->getPayment()->getComputopCreditCard()->setCreditCardOrderResponse(
-                $this->creditCardOrderResponseTransfer
-            );
-
-            $quote->getPayment()->setPaymentProvider(ComputopConstants::PROVIDER_NAME);
-            $quote->getPayment()->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-            $quote->getPayment()->setPaymentSelection(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-
-            $this->getFactory()->createQuoteClient()->setQuote($quote);
-        }
+        $this->getFactory()->createQuoteClient()->setQuote($quoteTransfer);
 
         return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUMMARY);
     }
@@ -92,22 +84,8 @@ class CallbackController extends AbstractController
             ->createComputopService()
             ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY));
 
-         return $this->createComputopCreditCardOrderResponseTransfer($decryptedArray);
-    }
-
-    /**
-     * @param array $decryptedArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
-     */
-    protected function createComputopCreditCardOrderResponseTransfer($decryptedArray)
-    {
-        $computopCreditCardResponseTransfer = new ComputopCreditCardOrderResponseTransfer();
-
-        $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
         $header = $this->getFactory()->createComputopService()->extractHeader($decryptedArray);
-        $header->setMethod(self::ORDER_METHOD);
-        $computopCreditCardResponseTransfer->setHeader($header);
+        $computopCreditCardResponseTransfer = $this->getFactory()->createOrderCreditCardConverter()->createResponseTransfer($decryptedArray, $header);
 
         return $computopCreditCardResponseTransfer;
     }

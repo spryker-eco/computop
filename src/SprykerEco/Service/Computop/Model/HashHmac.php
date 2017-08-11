@@ -16,9 +16,7 @@ class HashHmac implements HashHmacInterface
     const SHA256 = 'sha256';
 
     /**
-     * @param string $value
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getHashHmacValue($value)
     {

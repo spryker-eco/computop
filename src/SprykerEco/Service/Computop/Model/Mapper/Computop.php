@@ -14,9 +14,7 @@ class Computop extends AbstractComputop implements ComputopInterface
 {
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
@@ -32,11 +30,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @param array $dataSubArray
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function getDataPlaintext($dataSubArray)
+    public function getDataPlaintext(array $dataSubArray)
     {
         $dataArray = [];
         foreach ($dataSubArray as $key => $value) {

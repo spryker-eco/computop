@@ -24,7 +24,7 @@ interface ComputopToComputopServiceInterface
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function extractHeader($decryptedArray);
+    public function extractHeader(array $decryptedArray);
 
     /**
      * @param array $responseArray
@@ -32,7 +32,7 @@ interface ComputopToComputopServiceInterface
      *
      * @return array
      */
-    public function getDecryptedArray($responseArray, $password);
+    public function getDecryptedArray(array $responseArray, $password);
 
     /**
      * @param array $dataSubArray
@@ -40,6 +40,6 @@ interface ComputopToComputopServiceInterface
      *
      * @return array
      */
-    public function getEncryptedArray($dataSubArray, $password);
+    public function getEncryptedArray(array $dataSubArray, $password);
 
 }

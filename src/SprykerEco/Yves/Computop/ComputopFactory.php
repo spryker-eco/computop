@@ -8,8 +8,10 @@
 namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use SprykerEco\Yves\Computop\Converter\OrderCreditCardConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
+use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
 
 class ComputopFactory extends AbstractFactory
 {
@@ -60,6 +62,22 @@ class ComputopFactory extends AbstractFactory
     public function createQuoteClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler
+     */
+    public function createPaymentHandler()
+    {
+        return new ComputopPaymentHandler();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    public function createOrderCreditCardConverter()
+    {
+        return new OrderCreditCardConverter();
     }
 
 }

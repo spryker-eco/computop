@@ -27,9 +27,7 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
@@ -37,33 +35,25 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @param array $decryptedArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @inheritdoc
      */
-    public function extractHeader($decryptedArray)
+    public function extractHeader(array $decryptedArray)
     {
         return $this->computopService->extractHeader($decryptedArray);
     }
 
     /**
-     * @param array $responseArray
-     * @param string $password
-     *
-     * @return array
+     * @inheritdoc
      */
-    public function getDecryptedArray($responseArray, $password)
+    public function getDecryptedArray(array $responseArray, $password)
     {
         return $this->computopService->getDecryptedArray($responseArray, $password);
     }
 
     /**
-     * @param array $dataSubArray
-     * @param string $password
-     *
-     * @return array
+     * @inheritdoc
      */
-    public function getEncryptedArray($dataSubArray, $password)
+    public function getEncryptedArray(array $dataSubArray, $password)
     {
         return $this->computopService->getEncryptedArray($dataSubArray, $password);
     }

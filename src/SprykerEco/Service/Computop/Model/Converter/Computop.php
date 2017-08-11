@@ -18,9 +18,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     const SUCCESS_STATUS = 'OK';
 
     /**
-     * @param array $decryptedArray
-     *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @inheritdoc
      */
     public function extractHeader($decryptedArray)
     {
@@ -36,19 +34,15 @@ class Computop extends AbstractComputop implements ComputopInterface
         $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $header->setIsSuccess($header->getStatus() == self::SUCCESS_STATUS);
 
-        //set up for "Order" type
+        //optional
         $header->setMac(isset($decryptedArray[ComputopConstants::MAC_F_N]) ? $decryptedArray[ComputopConstants::MAC_F_N] : null);
-
-        //set up for authorization and capture (success)
         $header->setXId(isset($decryptedArray[ComputopConstants::XID_F_N]) ? $decryptedArray[ComputopConstants::XID_F_N] : null);
 
         return $header;
     }
 
     /**
-     * @param string $decryptedString
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getResponseDecryptedArray($decryptedString)
     {
@@ -63,11 +57,8 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @param array $responseArray
-     *
+     * @inheritdoc
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
-     *
-     * @return void
      */
     public function checkEncryptedResponse($responseArray)
     {

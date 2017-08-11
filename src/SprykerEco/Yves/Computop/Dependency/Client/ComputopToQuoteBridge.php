@@ -27,7 +27,7 @@ class ComputopToQuoteBridge implements ComputopToQuoteInterface
     }
 
     /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @inheritdoc
      */
     public function getQuote()
     {
@@ -35,9 +35,7 @@ class ComputopToQuoteBridge implements ComputopToQuoteInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
+     * @inheritdoc
      */
     public function setQuote(QuoteTransfer $quoteTransfer)
     {
