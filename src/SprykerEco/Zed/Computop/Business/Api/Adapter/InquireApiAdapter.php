@@ -7,9 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 
-use Spryker\Shared\Config\Config;
-use SprykerEco\Shared\Computop\ComputopConstants;
-
 class InquireApiAdapter extends AbstractApiAdapter
 {
 
@@ -18,7 +15,7 @@ class InquireApiAdapter extends AbstractApiAdapter
      */
     protected function getUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION_KEY);
+        return $this->config->getInquireAction();
     }
 
 }

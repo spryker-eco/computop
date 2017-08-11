@@ -9,9 +9,9 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 abstract class AbstractCreditCardMapper extends AbstractMapper implements CreditCardMapperInterface
@@ -23,13 +23,20 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
     protected $computopService;
 
     /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
      * CreditCardMapper constructor.
      *
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService)
+    public function __construct(ComputopToComputopServiceInterface $computopService, ComputopConfig $config)
     {
         $this->computopService = $computopService;
+        $this->config = $config;
     }
 
     /**
@@ -55,7 +62,7 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopCreditCardPaymentTransfer),
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY)
+            $this->config->getBlowfishPass()
         );
 
         $len = $decryptedValues[ComputopConstants::LEN_F_N];

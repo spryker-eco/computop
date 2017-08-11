@@ -133,7 +133,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createAuthorizeAdapter()
     {
-        return new AuthorizeApiAdapter();
+        return new AuthorizeApiAdapter($this->getConfig());
     }
 
     /**
@@ -141,7 +141,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createReverseAdapter()
     {
-        return new ReverseApiAdapter();
+        return new ReverseApiAdapter($this->getConfig());
     }
 
     /**
@@ -149,7 +149,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createInquireAdapter()
     {
-        return new InquireApiAdapter();
+        return new InquireApiAdapter($this->getConfig());
     }
 
     /**
@@ -157,7 +157,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createCaptureAdapter()
     {
-        return new CaptureApiAdapter();
+        return new CaptureApiAdapter($this->getConfig());
     }
 
     /**
@@ -197,7 +197,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createAuthorizeCreditCardMapper()
     {
-        return new AuthorizeCreditCardMapper($this->getComputopService());
+        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -205,7 +205,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createReverseCreditCardMapper()
     {
-        return new ReverseCreditCardMapper($this->getComputopService());
+        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -213,7 +213,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createInquireCreditCardMapper()
     {
-        return new InquireCreditCardMapper($this->getComputopService());
+        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -221,7 +221,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createCaptureCreditCardMapper()
     {
-        return new CaptureCreditCardMapper($this->getComputopService());
+        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig());
     }
 
     /**

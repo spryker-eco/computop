@@ -10,13 +10,13 @@ namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
 abstract class AbstractComputopPlugin extends AbstractPlugin
@@ -61,7 +61,7 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
 
         $computopCreditCardPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
 
-        $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
+        $computopCreditCardPaymentTransfer->setMerchantId($this->getConfig()->getMerchantId());
         $computopCreditCardPaymentTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
