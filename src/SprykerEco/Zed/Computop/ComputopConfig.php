@@ -8,11 +8,33 @@
 namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
 
-    const PROVIDER_NAME = 'Computop';
-    const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
+    /**
+     * @return string
+     */
+    public function getMerchantId()
+    {
+        return $this->get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlowfishPass()
+    {
+        return $this->get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY);
+    }
+
+    /**
+     * @return string
+     */
+    public function getHmacPass()
+    {
+        return $this->get(ComputopConstants::COMPUTOP_HMAC_PASSWORD_KEY);
+    }
 
 }

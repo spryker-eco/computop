@@ -133,9 +133,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createAuthorizeAdapter()
     {
-        return new AuthorizeApiAdapter(
-            $this->getConfig()
-        );
+        return new AuthorizeApiAdapter();
     }
 
     /**
@@ -143,9 +141,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createReverseAdapter()
     {
-        return new ReverseApiAdapter(
-            $this->getConfig()
-        );
+        return new ReverseApiAdapter();
     }
 
     /**
@@ -153,9 +149,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createInquireAdapter()
     {
-        return new InquireApiAdapter(
-            $this->getConfig()
-        );
+        return new InquireApiAdapter();
     }
 
     /**
@@ -163,9 +157,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createCaptureAdapter()
     {
-        return new CaptureApiAdapter(
-            $this->getConfig()
-        );
+        return new CaptureApiAdapter();
     }
 
     /**
@@ -173,7 +165,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createAuthorizeConverter()
     {
-        return new AuthorizeConverter($this->getComputopService());
+        return new AuthorizeConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -181,7 +173,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createReverseConverter()
     {
-        return new ReverseConverter($this->getComputopService());
+        return new ReverseConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -189,7 +181,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createInquireConverter()
     {
-        return new InquireConverter($this->getComputopService());
+        return new InquireConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -197,7 +189,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createCaptureConverter()
     {
-        return new CaptureConverter($this->getComputopService());
+        return new CaptureConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**

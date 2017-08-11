@@ -14,16 +14,6 @@ class ReverseApiAdapter extends AbstractApiAdapter
 {
 
     /**
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function prepareData(array $data)
-    {
-        return $data;
-    }
-
-    /**
      * @return string
      */
     protected function getUrl()

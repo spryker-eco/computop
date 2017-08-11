@@ -36,7 +36,7 @@ abstract class AbstractApiAdapter implements AdapterInterface
      */
     public function sendRequest(array $data)
     {
-        $options[RequestOptions::FORM_PARAMS] = $this->prepareData($data);
+        $options[RequestOptions::FORM_PARAMS] = $data;
 
         return $this->send($options);
     }
@@ -61,13 +61,6 @@ abstract class AbstractApiAdapter implements AdapterInterface
 
         return $response->getBody();
     }
-
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    abstract protected function prepareData(array $data);
 
     /**
      * @return string

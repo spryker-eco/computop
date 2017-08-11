@@ -8,8 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use GuzzleHttp\Psr7\Stream;
-use Spryker\Shared\Config\Config;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 abstract class AbstractConverter
@@ -21,13 +20,20 @@ abstract class AbstractConverter
     protected $computopService;
 
     /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
      * CreditCardMapper constructor.
      *
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService)
+    public function __construct(ComputopToComputopServiceInterface $computopService, ComputopConfig $config)
     {
         $this->computopService = $computopService;
+        $this->config = $config;
     }
 
     /**
@@ -41,7 +47,7 @@ abstract class AbstractConverter
 
         $decryptedArray = $this
             ->computopService
-            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY));
+            ->getDecryptedArray($responseArray, $this->config->getBlowfishPass());
 
         return $this->getResponseTransfer($decryptedArray);
     }

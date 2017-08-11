@@ -10,7 +10,7 @@ namespace SprykerEco\Shared\Computop;
 interface ComputopConstants
 {
 
-    const PROVIDER_NAME = 'computop';
+    const PROVIDER_NAME = 'Computop';
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
 
     //Statuses
