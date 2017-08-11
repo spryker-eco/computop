@@ -12,6 +12,7 @@ use SprykerEco\Yves\Computop\Converter\OrderCreditCardConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
+use SprykerEco\Yves\Computop\Mapper\CreditCard\OrderCreditCardMapper;
 
 class ComputopFactory extends AbstractFactory
 {
@@ -29,7 +30,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createCreditCardFormDataProvider()
     {
-        return new CreditCardFormDataProvider($this->createComputopService(), $this->createApplication(), $this->createQuoteClient());
+        return new CreditCardFormDataProvider($this->createQuoteClient(), $this->createOrderCreditCardMapper());
     }
 
     /**
@@ -78,6 +79,14 @@ class ComputopFactory extends AbstractFactory
     public function createOrderCreditCardConverter()
     {
         return new OrderCreditCardConverter();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\CreditCard\CreditCardMapperInterface
+     */
+    public function createOrderCreditCardMapper()
+    {
+        return new OrderCreditCardMapper($this->createComputopService(), $this->createApplication());
     }
 
 }
