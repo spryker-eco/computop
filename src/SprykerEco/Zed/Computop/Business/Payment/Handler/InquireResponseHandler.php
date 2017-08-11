@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
-class InquireResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
+class InquireResponseHandler extends AbstractResponseHandler
 {
 
     use DatabaseTransactionHandlerTrait;

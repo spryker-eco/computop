@@ -17,13 +17,6 @@ abstract class AbstractPaymentRequest
 {
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
-     */
-    abstract public function request(OrderTransfer $orderTransfer);
-
-    /**
      * @var \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
     protected $adapter;
@@ -39,7 +32,7 @@ abstract class AbstractPaymentRequest
     protected $paymentMethod;
 
     /**
-     * @var array|\SprykerEco\Zed\Computop\Business\Payment\Manager\AbstractManagerInterface[]
+     * @var array|\SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface[]
      */
     protected $methodMappers = [];
 
@@ -78,6 +71,20 @@ abstract class AbstractPaymentRequest
             );
 
         return $responseTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
+    public function request(OrderTransfer $orderTransfer)
+    {
+        $requestData = $this
+            ->getMethodMapper($this->paymentMethod)
+            ->buildRequest($orderTransfer);
+
+        return $this->sendRequest($requestData);
     }
 
     /**

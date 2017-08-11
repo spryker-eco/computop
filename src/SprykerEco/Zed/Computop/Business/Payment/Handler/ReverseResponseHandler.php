@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class ReverseResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
+class ReverseResponseHandler extends AbstractResponseHandler
 {
 
     use DatabaseTransactionHandlerTrait;

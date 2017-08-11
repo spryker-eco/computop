@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
-abstract class AbstractResponseHandler
+abstract class AbstractResponseHandler implements ResponseHandlerInterface
 {
 
     /**

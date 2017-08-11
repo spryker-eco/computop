@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class InquireCreditCardMapper extends AbstractCreditCardMapper implements CreditCardMapperInterface
+class InquireCreditCardMapper extends AbstractCreditCardMapper
 {
 
     /**

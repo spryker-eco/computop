@@ -56,4 +56,18 @@ interface ComputopFacadeInterface
      */
     public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method);
 
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
+    public function inquirePaymentRequest(OrderTransfer $orderTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
+    public function reversePaymentRequest(OrderTransfer $orderTransfer);
+
 }

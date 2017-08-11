@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class CaptureResponseHandler extends AbstractResponseHandler implements ResponseHandlerInterface
+class CaptureResponseHandler extends AbstractResponseHandler
 {
 
     use DatabaseTransactionHandlerTrait;
