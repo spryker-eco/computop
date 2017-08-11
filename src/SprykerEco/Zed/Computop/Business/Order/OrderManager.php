@@ -85,7 +85,7 @@ class OrderManager implements OrderManagerInterface
     {
         $paymentDetailEntity = new SpyPaymentComputopDetail();
 
-        $paymentDetailEntity->fromArray($paymentTransfer->getComputopCreditCard()->toArray());
+        $paymentDetailEntity->fromArray($paymentTransfer->getComputopCreditCard()->getCreditCardOrderResponse()->toArray());
         $paymentDetailEntity->setIdPaymentComputop($paymentEntity->getIdPaymentComputop());
         $paymentDetailEntity->save();
 

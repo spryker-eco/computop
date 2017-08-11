@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
@@ -46,5 +47,13 @@ interface ComputopFacadeInterface
      * @return mixed
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param string $method
+     *
+     * @return void
+     */
+    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method);
 
 }

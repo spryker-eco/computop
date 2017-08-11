@@ -17,7 +17,7 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
@@ -41,9 +41,9 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
      * @param \Silex\Application $application
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge $quoteClient
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface $quoteClient
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService, Application $application, ComputopToQuoteBridge $quoteClient)
+    public function __construct(ComputopToComputopServiceInterface $computopService, Application $application, ComputopToQuoteInterface $quoteClient)
     {
         $this->computopService = $computopService;
         $this->application = $application;

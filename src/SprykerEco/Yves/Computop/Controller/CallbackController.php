@@ -20,7 +20,21 @@ class CallbackController extends AbstractController
 {
 
     const ERROR_MESSAGE = 'Error message';
-    const SUCCESS_MESSAGE = 'Success message';
+    const ORDER_METHOD = 'ORDER';
+
+    /**
+     * @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
+     */
+    protected $creditCardOrderResponseTransfer;
+
+    /**
+     * @return void
+     */
+    public function initialize()
+    {
+        $this->creditCardOrderResponseTransfer = $this->getComputopCreditCardOrderResponseTransfer();
+        $this->getFactory()->createComputopClient()->logResponse($this->creditCardOrderResponseTransfer->getHeader());
+    }
 
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -31,7 +45,7 @@ class CallbackController extends AbstractController
 
         if ($quote->getPayment() !== null) {
             $quote->getPayment()->getComputopCreditCard()->setCreditCardOrderResponse(
-                $this->getComputopCreditCardOrderResponseTransfer()
+                $this->creditCardOrderResponseTransfer
             );
 
             $quote->getPayment()->setPaymentProvider(ComputopConstants::PROVIDER_NAME);
@@ -59,7 +73,7 @@ class CallbackController extends AbstractController
      */
     protected function getErrorMessageText()
     {
-        $responseTransfer = $this->getComputopCreditCardOrderResponseTransfer();
+        $responseTransfer = $this->creditCardOrderResponseTransfer;
 
         $errorMessageText = self::ERROR_MESSAGE;
         $errorMessageText .= ' (' . $responseTransfer->getDescription() . ' | ' . $responseTransfer->getCode() . ')';
@@ -91,10 +105,9 @@ class CallbackController extends AbstractController
         $computopCreditCardResponseTransfer = new ComputopCreditCardOrderResponseTransfer();
 
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
-
-        $computopCreditCardResponseTransfer->setHeader(
-            $this->getFactory()->createComputopService()->extractHeader($decryptedArray)
-        );
+        $header = $this->getFactory()->createComputopService()->extractHeader($decryptedArray);
+        $header->setMethod(self::ORDER_METHOD);
+        $computopCreditCardResponseTransfer->setHeader($header);
 
         return $computopCreditCardResponseTransfer;
     }

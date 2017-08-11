@@ -37,14 +37,13 @@
     <table name="spy_payment_computop_detail" phpName="SpyPaymentComputopDetail">
         <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true"/>
 
-        <column name="m_id" required="false" type="VARCHAR"/>
-        <column name="description" required="false" type="VARCHAR"/>
-        <column name="mac" required="false" type="VARCHAR"/>
         <column name="c_c_brand" required="false" type="VARCHAR"/>
         <column name="c_c_expiry" required="false" type="VARCHAR"/>
         <column name="masked_pan" required="false" type="VARCHAR"/>
         <column name="cavv" required="false" type="VARCHAR"/>
         <column name="eci" required="false" type="VARCHAR"/>
+        <column name="ddd" required="false" type="VARCHAR"/>
+        <column name="acsxid" required="false" type="VARCHAR"/>
         <column name="type" required="false" type="VARCHAR"/>
         <column name="plain" required="false" type="VARCHAR"/>
 

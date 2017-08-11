@@ -11,8 +11,6 @@ use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 
-/**
- */
 class ComputopFactory extends AbstractFactory
 {
 
@@ -33,6 +31,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Client\Computop\ComputopClient
+     */
+    public function createComputopClient()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_CLIENT);
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
      */
     public function createComputopService()
@@ -49,7 +55,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Quote\QuoteClientInterface
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
      */
     public function createQuoteClient()
     {

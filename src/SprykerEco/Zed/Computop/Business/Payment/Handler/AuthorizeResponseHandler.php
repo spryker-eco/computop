@@ -64,8 +64,6 @@ class AuthorizeResponseHandler extends AbstractResponseHandler implements Respon
         }
 
         $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->setMid($responseTransfer->getHeader()->getMId());
-        $paymentEntityDetails->setDescription($responseTransfer->getHeader()->getDescription());
         $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
         $paymentEntityDetails->save();
     }

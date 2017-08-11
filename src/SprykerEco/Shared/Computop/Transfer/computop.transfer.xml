@@ -46,6 +46,7 @@
         <property name="xId" type="string" />
         <property name="mId" type="string" />
         <property name="mac" type="string" />
+        <property name="method" type="string" />
     </transfer>
 
     <transfer name="ComputopCreditCardAuthorizeResponse">
@@ -82,8 +83,6 @@
 
     <transfer name="ComputopCreditCardOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
-        <property name="len" type="string" />
-        <property name="data" type="string" />
         <property name="userData" type="string" />
         <property name="pCNr" type="string" />
         <property name="cCExpiry" type="string" />
@@ -91,6 +90,8 @@
         <property name="maskedPan" type="string" />
         <property name="cavv" type="string" />
         <property name="eci" type="string" />
+        <property name="ddd" type="string" />
+        <property name="acsxid" type="string" />
         <property name="type" type="string" />
         <property name="plain" type="string" />
         <property name="custom" type="string" />

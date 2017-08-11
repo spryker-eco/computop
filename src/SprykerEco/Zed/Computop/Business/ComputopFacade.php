@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
@@ -144,6 +145,19 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->handle($computopResponseTransfer, $orderTransfer);
 
         return $computopResponseTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param string $method
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     */
+    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method)
+    {
+        $this->getFactory()->createComputopResponseLogger()->log($header, $method);
+
+        return $header;
     }
 
 }
