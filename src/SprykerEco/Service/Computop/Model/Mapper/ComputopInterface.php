@@ -8,6 +8,7 @@
 namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 
 interface ComputopInterface
 {
@@ -18,6 +19,14 @@ interface ComputopInterface
      * @return string
      */
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     *
+     * @return string
+     */
+    public function getMacResponseEncryptedValue(ComputopResponseHeaderTransfer $header);
 
     /**
      * @param array $dataSubArray

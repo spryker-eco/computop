@@ -31,7 +31,14 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function extractHeader(array $decryptedArray)
     {
-        return $this->getFactory()->createComputopConverter()->extractHeader($decryptedArray);
+        $header = $this->getFactory()->createComputopConverter()->extractHeader($decryptedArray);
+        $neededMac = $this->getHashHmacValue($this->getFactory()->createComputopMapper()->getMacResponseEncryptedValue($header));
+        $this
+            ->getFactory()
+            ->createComputopConverter()
+            ->checkMacResponse($header->getMac(), $neededMac);
+
+        return $header;
     }
 
     /**

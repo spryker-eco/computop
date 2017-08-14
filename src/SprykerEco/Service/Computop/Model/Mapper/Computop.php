@@ -8,6 +8,7 @@
 namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 
 class Computop extends AbstractComputop implements ComputopInterface
@@ -24,6 +25,22 @@ class Computop extends AbstractComputop implements ComputopInterface
             $cardPaymentTransfer->getMerchantId(),
             $cardPaymentTransfer->getAmount(),
             $cardPaymentTransfer->getCurrency(),
+        ];
+
+        return implode(self::MAC_SEPARATOR, $macDataArray);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getMacResponseEncryptedValue(ComputopResponseHeaderTransfer $header)
+    {
+        $macDataArray = [
+            $header->getPayId(),
+            $header->getTransId(),
+            $header->getMId(),
+            $header->getStatus(),
+            $header->getCode(),
         ];
 
         return implode(self::MAC_SEPARATOR, $macDataArray);

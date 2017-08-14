@@ -73,6 +73,17 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function checkMacResponse($responseMac, $neededMac)
+    {
+        //TODO: check by response type (MAC is empty for authorization)
+        if (!empty($responseMac) && $responseMac !== $neededMac) {
+            throw  new ComputopConverterException('MAC is incorrect');
+        }
+    }
+
+    /**
      * @param array $decryptedArray
      *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
