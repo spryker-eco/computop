@@ -48,6 +48,14 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @return string
      */
+    public function getRefundAction()
+    {
+        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REFUND_ACTION_KEY);
+    }
+
+    /**
+     * @return string
+     */
     public function getInquireAction()
     {
         return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION_KEY);

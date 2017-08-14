@@ -20,7 +20,6 @@ class ReverseConverter extends AbstractConverter implements ConverterInterface
     protected function getResponseTransfer($decryptedArray)
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardReverseResponseTransfer();
-
         $computopCreditCardResponseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray)
         );

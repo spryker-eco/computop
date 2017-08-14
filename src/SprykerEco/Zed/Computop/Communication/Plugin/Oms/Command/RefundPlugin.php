@@ -11,7 +11,10 @@ use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
-class RefundPlugin implements CommandByOrderInterface
+/**
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ */
+class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
 
     /**
@@ -28,7 +31,12 @@ class RefundPlugin implements CommandByOrderInterface
      */
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
-        //Todo:implement
+        $orderEntity->getItems()->setData($orderItems);
+
+        $orderEntity = $this->getOrderTransfer($orderEntity, $orderItems);
+        $this->getFacade()->refundPaymentRequest($orderEntity);
+
+        return [];
     }
 
 }

@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class CaptureCreditCardMapper extends AbstractCreditCardMapper
+class RefundCreditCardMapper extends AbstractCreditCardMapper
 {
 
     /**
@@ -25,7 +25,6 @@ class CaptureCreditCardMapper extends AbstractCreditCardMapper
         $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopConstants::FINISH_AUTH_F_N] = ComputopConstants::FINISH_AUTH;
 
         return $dataSubArray;
     }
