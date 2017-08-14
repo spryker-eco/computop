@@ -37,6 +37,22 @@
 
     </transfer>
 
+    <transfer name="ComputopCreditCardOrderResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="userData" type="string" />
+        <property name="pCNr" type="string" />
+        <property name="cCExpiry" type="string" />
+        <property name="cCBrand" type="string" />
+        <property name="maskedPan" type="string" />
+        <property name="cavv" type="string" />
+        <property name="eci" type="string" />
+        <property name="ddd" type="string" />
+        <property name="acsxid" type="string" />
+        <property name="type" type="string" />
+        <property name="plain" type="string" />
+        <property name="custom" type="string" />
+    </transfer>
+
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
         <property name="code" type="string" />
@@ -55,10 +71,6 @@
         <property name="len" type="string" />
         <property name="data" type="string" />
         <property name="refNr" type="string" />
-    </transfer>
-
-    <transfer name="ComputopCreditCardReverseResponse">
-        <property name="header" type="ComputopResponseHeader"/>
     </transfer>
 
     <transfer name="ComputopCreditCardInquireResponse">
@@ -82,20 +94,14 @@
         <property name="transactionId" type="string" />
     </transfer>
 
-    <transfer name="ComputopCreditCardOrderResponse">
+    <transfer name="ComputopCreditCardRefundResponse">
         <property name="header" type="ComputopResponseHeader"/>
-        <property name="userData" type="string" />
-        <property name="pCNr" type="string" />
-        <property name="cCExpiry" type="string" />
-        <property name="cCBrand" type="string" />
-        <property name="maskedPan" type="string" />
-        <property name="cavv" type="string" />
-        <property name="eci" type="string" />
-        <property name="ddd" type="string" />
-        <property name="acsxid" type="string" />
-        <property name="type" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
+        <property name="refNr" type="string" />
+        <property name="aId" type="string" />
+        <property name="amount" type="string" />
+        <property name="codeExt" type="string" />
+        <property name="errorText" type="string" />
+        <property name="transactionId" type="string" />
     </transfer>
 
     <transfer name="Payment">

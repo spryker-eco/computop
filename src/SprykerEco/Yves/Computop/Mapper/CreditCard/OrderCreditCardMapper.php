@@ -72,14 +72,13 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
      */
     protected function getTransId(AbstractTransfer $quoteTransfer)
     {
-        //TODO: check this trans Id
         $parameters = [
             time(),
             rand(100, 1000),
             $quoteTransfer->getCustomer()->getCustomerReference(),
         ];
 
-        return implode('-', $parameters);
+        return md5(implode('-', $parameters));
     }
 
     /**
