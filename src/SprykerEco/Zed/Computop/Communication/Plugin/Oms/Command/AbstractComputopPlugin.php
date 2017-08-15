@@ -60,17 +60,24 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
         $computopCreditCardPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
-
         $computopCreditCardPaymentTransfer->setMerchantId($this->getConfig()->getMerchantId());
-
-        $computopCreditCardPaymentTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
-
+        $computopCreditCardPaymentTransfer->setAmount($this->getAmount($orderTransfer));
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
         $computopCreditCardPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
         $computopCreditCardPaymentTransfer->setOrderDesc(ComputopConstants::ORDER_DESC_SUCCESS);
 
         return $computopCreditCardPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return integer
+     */
+    protected function getAmount(OrderTransfer $orderTransfer)
+    {
+        return $orderTransfer->getTotals()->getGrandTotal();
     }
 
 }

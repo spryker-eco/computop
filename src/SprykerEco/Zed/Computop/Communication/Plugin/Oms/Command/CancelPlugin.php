@@ -70,8 +70,7 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
         $responseTransfer = $this->getFacade()->inquirePaymentRequest($orderTransfer);
 
         if ($responseTransfer->getIsAuthLast()) {
-            $this->reverseOrderAuthorizationRequest($orderTransfer);
-            return [];
+            return $this->reverseOrderAuthorizationRequest($orderTransfer);
         }
 
         return $this->cancelOrderItems($orderItems);
@@ -80,16 +79,18 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return void
+     * @return array
      */
     protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer)
     {
         $computopResponseTransfer = $this->getFacade()->reversePaymentRequest($orderTransfer);
+        if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
+            $this->setInfoMessage('Authorization was reverted');
+            return [];
+        }
 
-        $messageValue = $computopResponseTransfer->getHeader()->getIsSuccess() ?
-            'Authorization was reverted' :
-            'Authorization was not reverted. Please check logs';
-        $this->setInfoMessage($messageValue);
+        $this->setErrorMessage('Authorization was not reverted. Please check logs');
+        return [];
     }
 
     /**
@@ -115,14 +116,38 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      */
     protected function setInfoMessage($messageValue)
     {
-        $message = $this
-            ->getFactory()
-            ->createMessage()
-            ->setValue($messageValue);
+        $message = $this->getMessage($messageValue);
 
         $this->getFactory()
             ->getFlashMessengerFacade()
             ->addInfoMessage($message);
+    }
+
+    /**
+     * @param string $messageValue
+     *
+     * @return void
+     */
+    protected function setErrorMessage($messageValue)
+    {
+        $message = $this->getMessage($messageValue);
+
+        $this->getFactory()
+            ->getFlashMessengerFacade()
+            ->addErrorMessage($message);
+    }
+
+    /**
+     * @param string $messageValue
+     *
+     * @return \Generated\Shared\Transfer\MessageTransfer
+     */
+    protected function getMessage($messageValue)
+    {
+        return $this
+            ->getFactory()
+            ->createMessage()
+            ->setValue($messageValue);
     }
 
     /**

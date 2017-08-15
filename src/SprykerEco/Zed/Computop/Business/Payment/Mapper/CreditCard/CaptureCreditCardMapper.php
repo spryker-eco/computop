@@ -25,7 +25,6 @@ class CaptureCreditCardMapper extends AbstractCreditCardMapper
         $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopConstants::FINISH_AUTH_F_N] = ComputopConstants::FINISH_AUTH;
 
         return $dataSubArray;
     }
