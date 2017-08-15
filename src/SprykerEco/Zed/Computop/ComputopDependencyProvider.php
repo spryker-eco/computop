@@ -11,6 +11,7 @@ use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -19,6 +20,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     const COMPUTOP_SERVICE = 'computop_service';
     const FACADE_SALES = 'sales facade';
     const FACADE_CALCULATION = 'calculation facade';
+    const FACADE_FLASH_MESSENGER = 'flash messenger facade';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -35,6 +37,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::FACADE_CALCULATION] = function (Container $container) {
             return new ComputopToCalculationBridge($container->getLocator()->calculation()->facade());
+        };
+
+        $container[self::FACADE_FLASH_MESSENGER] = function (Container $container) {
+            return new ComputopToMessengerBridge($container->getLocator()->messenger()->facade());
         };
 
         return $container;

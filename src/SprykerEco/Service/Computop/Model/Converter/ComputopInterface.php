@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Service\Computop\Model\Converter;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-
 interface ComputopInterface
 {
 
@@ -36,8 +34,8 @@ interface ComputopInterface
     public function checkEncryptedResponse($responseArray);
 
     /**
-     * @param $responseMac
-     * @param $neededMac
+     * @param string $responseMac
+     * @param string $neededMac
      *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      *

@@ -74,6 +74,7 @@ class Computop extends AbstractComputop implements ComputopInterface
 
     /**
      * @inheritdoc
+     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      */
     public function checkMacResponse($responseMac, $neededMac)
     {

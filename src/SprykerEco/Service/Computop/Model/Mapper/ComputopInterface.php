@@ -20,7 +20,6 @@ interface ComputopInterface
      */
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
-
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *

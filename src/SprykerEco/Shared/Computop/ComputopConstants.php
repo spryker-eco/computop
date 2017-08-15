@@ -17,7 +17,6 @@ interface ComputopConstants
     const COMPUTOP_OMS_STATUS_NEW = 'new';
     const COMPUTOP_OMS_STATUS_AUTHORIZED = 'authorized';
     const COMPUTOP_OMS_STATUS_CAPTURED = 'captured';
-    const COMPUTOP_OMS_STATUS_ITEM_CANCELLED = 'item cancelled';
     const COMPUTOP_OMS_STATUS_CANCELLED = 'cancelled';
     const COMPUTOP_OMS_STATUS_REFUNDED = 'refunded';
 

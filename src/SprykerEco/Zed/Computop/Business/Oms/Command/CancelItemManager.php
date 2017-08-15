@@ -39,7 +39,7 @@ class CancelItemManager implements CancelItemManagerInterface
             ->filterByFkSalesOrderItem($orderItem->getIdSalesOrderItem())
             ->findOne();
 
-        $computopOrderItem->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_ITEM_CANCELLED);
+        $computopOrderItem->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CANCELLED);
         $computopOrderItem->save();
     }
 

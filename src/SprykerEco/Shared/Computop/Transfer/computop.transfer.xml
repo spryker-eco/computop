@@ -84,6 +84,10 @@
         <property name="isCredLast" type="bool" />
     </transfer>
 
+    <transfer name="ComputopCreditCardReverseResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+    </transfer>
+
     <transfer name="ComputopCreditCardCaptureResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
