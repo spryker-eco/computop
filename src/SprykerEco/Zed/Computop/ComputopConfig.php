@@ -69,4 +69,12 @@ class ComputopConfig extends AbstractBundleConfig
         return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REVERSE_ACTION_KEY);
     }
 
+    /**
+     * @return bool
+     */
+    public function isRefundShipmentPriceEnabled()
+    {
+        return $this->get(ComputopConstants::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED_KEY);
+    }
+
 }
