@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
@@ -58,14 +57,10 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
         $savedSpyPaymentComputop = $this->getFactory()->getComputopPaymentByOrderId($orderTransfer->getIdSalesOrder());
 
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
-
         $computopCreditCardPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
         $computopCreditCardPaymentTransfer->setMerchantId($this->getConfig()->getMerchantId());
         $computopCreditCardPaymentTransfer->setAmount($this->getAmount($orderTransfer));
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-        $computopCreditCardPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
-        $computopCreditCardPaymentTransfer->setOrderDesc(ComputopConstants::ORDER_DESC_SUCCESS);
 
         return $computopCreditCardPaymentTransfer;
     }

@@ -43,6 +43,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return new ComputopToMessengerBridge($container->getLocator()->messenger()->facade());
         };
 
+        $container[self::COMPUTOP_SERVICE] = function () use ($container) {
+            return new ComputopToComputopServiceBridge($container->getLocator()->computop()->service());
+        };
+
         return $container;
     }
 

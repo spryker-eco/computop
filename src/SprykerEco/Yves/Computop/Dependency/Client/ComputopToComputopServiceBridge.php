@@ -29,6 +29,14 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     /**
      * @inheritdoc
      */
+    public function getDescriptionValue(array $items)
+    {
+        return $this->computopService->getDescriptionValue($items);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         return $this->computopService->getComputopMacHashHmacValue($cardPaymentTransfer);

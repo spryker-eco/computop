@@ -66,4 +66,12 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
         return new MessageTransfer();
     }
 
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     */
+    public function getComputopService()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+    }
+
 }

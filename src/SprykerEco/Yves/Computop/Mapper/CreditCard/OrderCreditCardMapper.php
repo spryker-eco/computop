@@ -18,6 +18,8 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 class OrderCreditCardMapper extends AbstractCreditCardMapper
 {
 
+    const TRANS_ID_SEPARATOR = '-';
+
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -42,7 +44,9 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
         );
 
         $computopCreditCardPaymentTransfer->setClientIp($this->getClientIp());
-        $computopCreditCardPaymentTransfer->setOrderDesc(ComputopConstants::ORDER_DESC_SUCCESS);
+        $computopCreditCardPaymentTransfer->setOrderDesc(
+            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+        );
 
         return $computopCreditCardPaymentTransfer;
     }
@@ -78,7 +82,7 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
             $quoteTransfer->getCustomer()->getCustomerReference(),
         ];
 
-        return md5(implode('-', $parameters));
+        return md5(implode(self::TRANS_ID_SEPARATOR, $parameters));
     }
 
     /**

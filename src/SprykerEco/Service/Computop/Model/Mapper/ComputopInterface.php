@@ -34,4 +34,11 @@ interface ComputopInterface
      */
     public function getDataPlaintext(array $dataSubArray);
 
+    /**
+     * @param array $items
+     *
+     * @return string
+     */
+    public function getDescriptionValue(array $items);
+
 }

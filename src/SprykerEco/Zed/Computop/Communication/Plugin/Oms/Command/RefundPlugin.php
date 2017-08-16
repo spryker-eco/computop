@@ -57,7 +57,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     protected function getAmount(OrderTransfer $orderTransfer)
     {
         if ($this->getConfig()->isRefundShipmentPriceEnabled() && $this->isFirstRefund($this->getOrderEntity())) {
-            return $orderTransfer->getTotals()->getGrandTotal();
+            return $orderTransfer->getTotals()->getRefundTotal();
         }
 
         return $orderTransfer->getTotals()->getSubtotal();

@@ -13,6 +13,13 @@ interface ComputopServiceInterface
 {
 
     /**
+     * @param array $items
+     *
+     * @return string
+     */
+    public function getDescriptionValue(array $items);
+
+    /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
      * @return string

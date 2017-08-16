@@ -27,6 +27,14 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getDescriptionValue(array $items)
+    {
+        return $this->computopService->getDescriptionValue($items);
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
      * @return string
