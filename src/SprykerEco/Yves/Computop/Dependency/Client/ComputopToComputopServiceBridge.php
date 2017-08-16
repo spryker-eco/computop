@@ -45,9 +45,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     /**
      * @inheritdoc
      */
-    public function extractHeader(array $decryptedArray)
+    public function extractHeader(array $decryptedArray, $method)
     {
-        return $this->computopService->extractHeader($decryptedArray);
+        return $this->computopService->extractHeader($decryptedArray, $method);
     }
 
     /**

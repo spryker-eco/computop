@@ -45,7 +45,7 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
         );
 
         $computopCreditCardResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray)
+            $this->computopService->extractHeader($decryptedArray, ComputopConstants::CAPTURE_METHOD)
         );
 
         return $computopCreditCardResponseTransfer;

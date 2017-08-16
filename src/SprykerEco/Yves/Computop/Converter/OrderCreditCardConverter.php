@@ -13,8 +13,6 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 class OrderCreditCardConverter implements ConverterInterface
 {
 
-    const ORDER_METHOD = 'ORDER';
-
     /**
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -24,9 +22,7 @@ class OrderCreditCardConverter implements ConverterInterface
     public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardOrderResponseTransfer();
-
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
-        $header->setMethod(self::ORDER_METHOD);
         $computopCreditCardResponseTransfer->setHeader($header);
 
         return $computopCreditCardResponseTransfer;

@@ -12,10 +12,11 @@ interface ComputopInterface
 
     /**
      * @param array $decryptedArray
+     * @param string $method
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function extractHeader($decryptedArray);
+    public function extractHeader($decryptedArray, $method);
 
     /**
      * @param string $decryptedString
@@ -36,11 +37,12 @@ interface ComputopInterface
     /**
      * @param string $responseMac
      * @param string $neededMac
+     * @param string $method
      *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      *
      * @return void
      */
-    public function checkMacResponse($responseMac, $neededMac);
+    public function checkMacResponse($responseMac, $neededMac, $method);
 
 }

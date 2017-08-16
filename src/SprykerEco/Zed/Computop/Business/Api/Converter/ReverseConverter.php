@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ReverseConverter extends AbstractConverter implements ConverterInterface
 {
@@ -21,7 +22,7 @@ class ReverseConverter extends AbstractConverter implements ConverterInterface
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardReverseResponseTransfer();
         $computopCreditCardResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray)
+            $this->computopService->extractHeader($decryptedArray, ComputopConstants::REVERSE_METHOD)
         );
 
         return $computopCreditCardResponseTransfer;

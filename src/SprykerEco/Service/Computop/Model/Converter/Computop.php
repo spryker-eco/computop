@@ -8,6 +8,7 @@
 namespace SprykerEco\Service\Computop\Model\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Spryker\Shared\Config\Config;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -20,7 +21,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     /**
      * @inheritdoc
      */
-    public function extractHeader($decryptedArray)
+    public function extractHeader($decryptedArray, $method)
     {
         $this->checkDecryptedResponse($decryptedArray);
 
@@ -33,6 +34,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
         $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $header->setIsSuccess($header->getStatus() == self::SUCCESS_STATUS);
+        $header->setMethod($method);
 
         //optional
         $header->setMac(isset($decryptedArray[ComputopConstants::MAC_F_N]) ? $decryptedArray[ComputopConstants::MAC_F_N] : null);
@@ -76,12 +78,21 @@ class Computop extends AbstractComputop implements ComputopInterface
      * @inheritdoc
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      */
-    public function checkMacResponse($responseMac, $neededMac)
+    public function checkMacResponse($responseMac, $neededMac, $method)
     {
-        //TODO: check by response type (MAC is empty for authorization)
-        if (!empty($responseMac) && $responseMac !== $neededMac) {
+        if ($this->isMacRequired($method) && $responseMac !== $neededMac) {
             throw  new ComputopConverterException('MAC is incorrect');
         }
+    }
+
+    /**
+     * @param string $method
+     *
+     * @return bool
+     */
+    protected function isMacRequired($method)
+    {
+        return array_key_exists($method, Config::get(ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED_KEY));
     }
 
     /**

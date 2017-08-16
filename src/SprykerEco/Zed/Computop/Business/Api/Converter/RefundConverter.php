@@ -43,7 +43,7 @@ class RefundConverter extends AbstractConverter implements ConverterInterface
             isset($decryptedDataArray[ComputopConstants::REF_NR_F_N]) ? $decryptedDataArray[ComputopConstants::REF_NR_F_N] : null
         );
         $computopCreditCardResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray)
+            $this->computopService->extractHeader($decryptedArray, ComputopConstants::REFUND_METHOD)
         );
 
         return $computopCreditCardResponseTransfer;

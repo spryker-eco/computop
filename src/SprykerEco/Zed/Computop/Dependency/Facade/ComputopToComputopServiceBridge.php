@@ -46,12 +46,13 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
 
     /**
      * @param array $decryptedArray
+     * @param string $method
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function extractHeader($decryptedArray)
+    public function extractHeader($decryptedArray, $method)
     {
-        return $this->computopService->extractHeader($decryptedArray);
+        return $this->computopService->extractHeader($decryptedArray, $method);
     }
 
     /**

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class InquireConverter extends AbstractConverter implements ConverterInterface
 {
@@ -25,7 +26,7 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
 
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
         $computopCreditCardResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray)
+            $this->computopService->extractHeader($decryptedArray, ComputopConstants::INQUIRE_METHOD)
         );
 
         $computopCreditCardResponseTransfer->setIsAuthLast($this->isAuthLast($computopCreditCardResponseTransfer));

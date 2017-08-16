@@ -28,10 +28,11 @@ interface ComputopToComputopServiceInterface
 
     /**
      * @param array $decryptedArray
+     * @param string $method
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function extractHeader($decryptedArray);
+    public function extractHeader($decryptedArray, $method);
 
     /**
      * @param array $responseArray

@@ -29,7 +29,7 @@ class AuthorizeConverter extends AbstractConverter implements ConverterInterface
         );
 
         $computopCreditCardResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray)
+            $this->computopService->extractHeader($decryptedArray, ComputopConstants::AUTHORIZE_METHOD)
         );
 
         return $computopCreditCardResponseTransfer;
