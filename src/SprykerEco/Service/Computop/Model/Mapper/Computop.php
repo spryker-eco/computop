@@ -17,7 +17,7 @@ class Computop extends AbstractComputop implements ComputopInterface
 {
 
     const ITEMS_SEPARATOR = '|';
-    const ATTRIBUTES_SEPARATOR = ':';
+    const ATTRIBUTES_SEPARATOR = '-';
 
     /**
      * @inheritdoc
