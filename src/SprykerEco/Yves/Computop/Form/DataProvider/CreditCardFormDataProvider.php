@@ -43,17 +43,13 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getData(AbstractTransfer $quoteTransfer)
     {
-        if ($quoteTransfer->getPayment() === null || $quoteTransfer->getPayment()->getComputopCreditCard() === null) {
-            $paymentTransfer = new PaymentTransfer();
+        $paymentTransfer = new PaymentTransfer();
+        $computop = $this->cardMapper->createComputopCreditCardPaymentTransfer($quoteTransfer);
+        $paymentTransfer->setComputopCreditCard($computop);
+        $quoteTransfer->setPayment($paymentTransfer);
 
-            $computop = $this->cardMapper->createComputopCreditCardPaymentTransfer($quoteTransfer);
-
-            $paymentTransfer->setComputopCreditCard($computop);
-            $quoteTransfer->setPayment($paymentTransfer);
-
-            //TODO: check save Quote to session
-            $this->quoteClient->setQuote($quoteTransfer);
-        }
+        //TODO: check save Quote to session
+        $this->quoteClient->setQuote($quoteTransfer);
 
         return $quoteTransfer;
     }

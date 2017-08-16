@@ -45,6 +45,10 @@ class CallbackController extends AbstractController
             $this->creditCardOrderResponseTransfer
         );
 
+        if (!$quoteTransfer->getCustomer()) {
+            $this->addErrorMessage('Please login and try again');
+        }
+
         $this->getFactory()->createQuoteClient()->setQuote($quoteTransfer);
 
         return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUMMARY);
@@ -66,9 +70,8 @@ class CallbackController extends AbstractController
     protected function getErrorMessageText()
     {
         $responseTransfer = $this->creditCardOrderResponseTransfer;
-
         $errorMessageText = self::ERROR_MESSAGE;
-        $errorMessageText .= ' (' . $responseTransfer->getDescription() . ' | ' . $responseTransfer->getCode() . ')';
+        $errorMessageText .= ' (' . $responseTransfer->getHeader()->getDescription() . ' | ' . $responseTransfer->getHeader()->getCode() . ')';
 
         return $errorMessageText;
     }

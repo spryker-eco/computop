@@ -5,9 +5,9 @@
 
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-$config[ComputopConstants::COMPUTOP_MERCHANT_ID_KEY] = 'COMPUTOP_MERCHANT_ID';
-$config[ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY] = 'COMPUTOP_BLOWFISH_PASSWORD';
-$config[ComputopConstants::COMPUTOP_HMAC_PASSWORD_KEY] = 'COMPUTOP_HMAC_PASSWORD';
+$config[ComputopConstants::COMPUTOP_MERCHANT_ID_KEY] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
+$config[ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
+$config[ComputopConstants::COMPUTOP_HMAC_PASSWORD_KEY] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
 
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION_KEY] = 'https://www.computop-paygate.com/payssl.aspx';
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION_KEY] = 'https://www.computop-paygate.com/authorize.aspx';
@@ -25,4 +25,4 @@ $config[ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED_KEY] = [
     ComputopConstants::REVERSE_METHOD,
     ComputopConstants::INQUIRE_METHOD,
     ComputopConstants::REFUND_METHOD,
-];
+]; //MAC is required for methods (to check MAC)
