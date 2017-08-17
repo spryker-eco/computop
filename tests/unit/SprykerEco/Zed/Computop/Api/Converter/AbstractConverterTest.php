@@ -17,6 +17,14 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 abstract class AbstractConverterTest extends Test
 {
 
+    const REF_NR_VALUE = 'RefNr';
+    const A_ID_VALUE = 'AID';
+    const TRANSACTION_ID_VALUE = 'TransactionID';
+    const AMOUNT_VALUE_ZERO = '0';
+    const AMOUNT_VALUE_NOT_ZERO = '1';
+    const CODE_EXT_VALUE = 'CodeExt';
+    const ERROR_TEXT_VALUE = 'ErrorText';
+
     /**
      * @return \GuzzleHttp\Psr7\Stream
      */

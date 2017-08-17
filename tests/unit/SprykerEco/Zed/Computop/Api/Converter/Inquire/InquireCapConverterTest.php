@@ -5,11 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
+namespace Unit\SprykerEco\Zed\Computop\Api\Converter\Inquire;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 
 /**
  * @group Unit
@@ -18,9 +17,9 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
  * @group Computop
  * @group Api
  * @group Converter
- * @group AuthorizeConverterTest
+ * @group InquireConverterTest
  */
-class AuthorizeConverterTest extends AbstractConverterTest
+class InquireCapConverterTest extends AbstractInquireConverterTest
 {
 
     /**
@@ -31,24 +30,11 @@ class AuthorizeConverterTest extends AbstractConverterTest
         $response = $this->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-        $this->assertEquals(self::REF_NR_VALUE, $responseTransfer->getRefNr());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter
-     */
-    protected function createConverter()
-    {
-        $computopServiceMock = $this->createComputopServiceMock();
-        $configMock = $this->createComputopConfigMock();
-
-        $converter = new AuthorizeConverter($computopServiceMock, $configMock);
-
-        return $converter;
+        $this->assertTrue($responseTransfer->getIsCapLast());
     }
 
     /**
@@ -58,7 +44,9 @@ class AuthorizeConverterTest extends AbstractConverterTest
     {
         $decryptedArray = $this->getMainDecryptedArray();
 
-        $decryptedArray[ComputopConstants::REF_NR_F_N] = self::REF_NR_VALUE;
+        $decryptedArray[ComputopConstants::AMOUNT_AUTH_F_N] = self::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopConstants::AMOUNT_CAP_F_N] = self::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopConstants::AMOUNT_CRED_F_N] = self::AMOUNT_VALUE_ZERO;
 
         return $decryptedArray;
     }

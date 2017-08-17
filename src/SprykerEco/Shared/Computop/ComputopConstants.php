@@ -64,6 +64,9 @@ interface ComputopConstants
     const MERCHANT_ID_F_N = 'MerchantID';
     const TRANS_ID_F_N = 'TransID';
     const AMOUNT_F_N = 'Amount';
+    const AMOUNT_AUTH_F_N = 'AmountAuth';
+    const AMOUNT_CAP_F_N = 'AmountCap';
+    const AMOUNT_CRED_F_N = 'AmountCred';
     const CURRENCY_F_N = 'Currency';
     const URL_SUCCESS_F_N = 'URLSuccess';
     const URL_FAILURE_F_N = 'URLFailure';

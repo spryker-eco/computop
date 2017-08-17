@@ -23,13 +23,6 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
 class CaptureConverterTest extends AbstractConverterTest
 {
 
-    const REF_NR_VALUE = 'RefNr';
-    const A_ID_VALUE = 'AID';
-    const TRANSACTION_ID_VALUE = 'TransactionID';
-    const AMOUNT_VALUE = '1';
-    const CODE_EXT_VALUE = 'CodeExt';
-    const ERROR_TEXT_VALUE = 'ErrorText';
-
     /**
      * @return void
      */
@@ -44,14 +37,14 @@ class CaptureConverterTest extends AbstractConverterTest
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
         $this->assertEquals(self::A_ID_VALUE, $responseTransfer->getAId());
         $this->assertEquals(self::TRANSACTION_ID_VALUE, $responseTransfer->getTransactionId());
-        $this->assertEquals(self::AMOUNT_VALUE, $responseTransfer->getAmount());
+        $this->assertEquals(self::AMOUNT_VALUE_NOT_ZERO, $responseTransfer->getAmount());
         $this->assertEquals(self::CODE_EXT_VALUE, $responseTransfer->getCodeExt());
         $this->assertEquals(self::ERROR_TEXT_VALUE, $responseTransfer->getErrorText());
         $this->assertEquals(self::REF_NR_VALUE, $responseTransfer->getRefNr());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter
      */
     protected function createConverter()
     {
@@ -72,7 +65,7 @@ class CaptureConverterTest extends AbstractConverterTest
 
         $decryptedArray[ComputopConstants::A_ID_F_N] = self::A_ID_VALUE;
         $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] = self::TRANSACTION_ID_VALUE;
-        $decryptedArray[ComputopConstants::AMOUNT_F_N] = self::AMOUNT_VALUE;
+        $decryptedArray[ComputopConstants::AMOUNT_F_N] = self::AMOUNT_VALUE_NOT_ZERO;
         $decryptedArray[ComputopConstants::CODE_EXT_F_N] = self::CODE_EXT_VALUE;
         $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] = self::ERROR_TEXT_VALUE;
         $decryptedArray[ComputopConstants::REF_NR_F_N] = self::REF_NR_VALUE;
