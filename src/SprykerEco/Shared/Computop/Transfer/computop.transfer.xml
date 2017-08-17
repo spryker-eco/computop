@@ -83,6 +83,11 @@
 
     <transfer name="ComputopCreditCardReverseResponse">
         <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="aId" type="string" />
+        <property name="codeExt" type="string" />
+        <property name="errorText" type="string" />
+        <property name="transactionId" type="string" />
     </transfer>
 
     <transfer name="ComputopCreditCardCaptureResponse">
