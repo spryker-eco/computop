@@ -54,25 +54,72 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
      */
     public function buildRequest(OrderTransfer $orderTransfer)
     {
+        $encryptedArray = $this->getEncryptedArray($orderTransfer);
+
+        $len = $encryptedArray[ComputopConstants::LEN_F_N];
+        $data = $encryptedArray[ComputopConstants::DATA_F_N];
+        $merchantId = $this->getMerchantId($orderTransfer);
+
+        return $this->buildRequestData($data, $len, $merchantId);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return array
+     */
+    protected function getEncryptedArray(OrderTransfer $orderTransfer)
+    {
+        $computopCreditCardPaymentTransfer = $this->getComputopPaymentTransfer($orderTransfer);
+
+        $encryptedArray = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopCreditCardPaymentTransfer),
+            $this->config->getBlowfishPass()
+        );
+
+        return $encryptedArray;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     */
+    protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer)
+    {
         $computopCreditCardPaymentTransfer = $orderTransfer->getComputopCreditCard();
 
         $computopCreditCardPaymentTransfer->setMac(
             $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
         );
 
-        $decryptedValues = $this->computopService->getEncryptedArray(
-            $this->getDataSubArray($computopCreditCardPaymentTransfer),
-            $this->config->getBlowfishPass()
-        );
+        return $computopCreditCardPaymentTransfer;
+    }
 
-        $len = $decryptedValues[ComputopConstants::LEN_F_N];
-        $data = $decryptedValues[ComputopConstants::DATA_F_N];
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return string
+     */
+    protected function getMerchantId(OrderTransfer $orderTransfer)
+    {
+        return $orderTransfer->getComputopCreditCard()->getMerchantId();
+    }
 
+    /**
+     * @param string $data
+     * @param string $len
+     * @param string $merchantId
+     *
+     * @return array
+     */
+    protected function buildRequestData($data, $len, $merchantId)
+    {
         $requestData = [
-                ComputopConstants::MERCHANT_ID_F_N => $orderTransfer->getComputopCreditCard()->getMerchantId(),
-                ComputopConstants::DATA_F_N => $data,
-                ComputopConstants::LEN_F_N => $len,
-            ];
+            ComputopConstants::MERCHANT_ID_F_N => $merchantId,
+            ComputopConstants::DATA_F_N => $data,
+            ComputopConstants::LEN_F_N => $len,
+        ];
 
         return $requestData;
     }
