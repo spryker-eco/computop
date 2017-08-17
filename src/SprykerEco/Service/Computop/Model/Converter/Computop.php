@@ -16,8 +16,6 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 class Computop extends AbstractComputop implements ComputopInterface
 {
 
-    const SUCCESS_STATUS = 'OK';
-
     /**
      * @inheritdoc
      */
@@ -33,7 +31,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         $header->setMId($decryptedArray[ComputopConstants::MID_F_N]);
         $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
         $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
-        $header->setIsSuccess($header->getStatus() == self::SUCCESS_STATUS);
+        $header->setIsSuccess($header->getStatus() == ComputopConstants::SUCCESS_STATUS);
         $header->setMethod($method);
 
         //optional

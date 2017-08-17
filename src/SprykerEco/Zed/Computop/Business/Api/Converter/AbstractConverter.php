@@ -43,13 +43,25 @@ abstract class AbstractConverter
      */
     public function toTransactionResponseTransfer(Stream $response)
     {
+        $decryptedArray = $this->getDecryptedArray($response);
+
+        return $this->getResponseTransfer($decryptedArray);
+    }
+
+    /**
+     * @param \GuzzleHttp\Psr7\Stream $response
+     *
+     * @return array
+     */
+    protected function getDecryptedArray(Stream $response)
+    {
         parse_str($response->getContents(), $responseArray);
 
         $decryptedArray = $this
             ->computopService
             ->getDecryptedArray($responseArray, $this->config->getBlowfishPass());
 
-        return $this->getResponseTransfer($decryptedArray);
+        return $decryptedArray;
     }
 
     /**

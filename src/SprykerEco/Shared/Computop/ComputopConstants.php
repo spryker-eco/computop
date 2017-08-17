@@ -34,6 +34,8 @@ interface ComputopConstants
     const ETI_ID = '0.0.1'; //Parameter is requested by Computop
     const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
 
+    const SUCCESS_STATUS = 'OK';
+
     //Config data
     const COMPUTOP_MERCHANT_ID_KEY = 'COMPUTOP_MERCHANT_ID';
     const COMPUTOP_BLOWFISH_PASSWORD_KEY = 'COMPUTOP_BLOWFISH_PASSWORD';
@@ -80,7 +82,7 @@ interface ComputopConstants
     const PCN_R_F_N = 'PCNr';
     const CC_EXPIRY_F_N = 'CCExpiry';
     const CC_BRAND_F_N = 'CCBrand';
-    const REF_NR_F_N = 'refNr';
+    const REF_NR_F_N = 'RefNr';
     const A_ID_F_N = 'AID';
     const CODE_EXT_F_N = 'CodeExt';
     const ERROR_TEXT_F_N = 'ErrorText';

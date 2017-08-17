@@ -36,6 +36,19 @@
 
     </transfer>
 
+    <transfer name="ComputopResponseHeader">
+        <property name="status" type="string" />
+        <property name="code" type="string" />
+        <property name="isSuccess" type="bool" />
+        <property name="description" type="string" />
+        <property name="transId" type="string" />
+        <property name="payId" type="string" />
+        <property name="xId" type="string" />
+        <property name="mId" type="string" />
+        <property name="mac" type="string" />
+        <property name="method" type="string" />
+    </transfer>
+
     <transfer name="ComputopCreditCardOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="userData" type="string" />
@@ -52,23 +65,8 @@
         <property name="custom" type="string" />
     </transfer>
 
-    <transfer name="ComputopResponseHeader">
-        <property name="status" type="string" />
-        <property name="code" type="string" />
-        <property name="isSuccess" type="bool" />
-        <property name="description" type="string" />
-        <property name="transId" type="string" />
-        <property name="payId" type="string" />
-        <property name="xId" type="string" />
-        <property name="mId" type="string" />
-        <property name="mac" type="string" />
-        <property name="method" type="string" />
-    </transfer>
-
     <transfer name="ComputopCreditCardAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
-        <property name="len" type="string" />
-        <property name="data" type="string" />
         <property name="refNr" type="string" />
     </transfer>
 

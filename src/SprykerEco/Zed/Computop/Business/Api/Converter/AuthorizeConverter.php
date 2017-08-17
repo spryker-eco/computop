@@ -25,7 +25,7 @@ class AuthorizeConverter extends AbstractConverter implements ConverterInterface
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
 
         $computopCreditCardResponseTransfer->setRefNr(
-            isset($decryptedDataArray[ComputopConstants::REF_NR_F_N]) ? $decryptedDataArray[ComputopConstants::REF_NR_F_N] : null
+            isset($decryptedArray[ComputopConstants::REF_NR_F_N]) ? $decryptedArray[ComputopConstants::REF_NR_F_N] : null
         );
 
         $computopCreditCardResponseTransfer->setHeader(
