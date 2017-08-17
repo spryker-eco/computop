@@ -26,22 +26,22 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
 
         //optional fields
         $computopCreditCardResponseTransfer->setAId(
-            isset($decryptedDataArray[ComputopConstants::A_ID_F_N]) ? $decryptedDataArray[ComputopConstants::A_ID_F_N] : null
+            isset($decryptedArray[ComputopConstants::A_ID_F_N]) ? $decryptedArray[ComputopConstants::A_ID_F_N] : null
         );
         $computopCreditCardResponseTransfer->setTransactionId(
-            isset($decryptedDataArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedDataArray[ComputopConstants::TRANSACTION_ID_F_N] : null
+            isset($decryptedArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] : null
         );
         $computopCreditCardResponseTransfer->setAmount(
-            isset($decryptedDataArray[ComputopConstants::AMOUNT_F_N]) ? $decryptedDataArray[ComputopConstants::AMOUNT_F_N] : null
+            isset($decryptedArray[ComputopConstants::AMOUNT_F_N]) ? $decryptedArray[ComputopConstants::AMOUNT_F_N] : null
         );
         $computopCreditCardResponseTransfer->setCodeExt(
-            isset($decryptedDataArray[ComputopConstants::CODE_EXT_F_N]) ? $decryptedDataArray[ComputopConstants::CODE_EXT_F_N] : null
+            isset($decryptedArray[ComputopConstants::CODE_EXT_F_N]) ? $decryptedArray[ComputopConstants::CODE_EXT_F_N] : null
         );
         $computopCreditCardResponseTransfer->setErrorText(
-            isset($decryptedDataArray[ComputopConstants::ERROR_TEXT_F_N]) ? $decryptedDataArray[ComputopConstants::ERROR_TEXT_F_N] : null
+            isset($decryptedArray[ComputopConstants::ERROR_TEXT_F_N]) ? $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] : null
         );
         $computopCreditCardResponseTransfer->setRefNr(
-            isset($decryptedDataArray[ComputopConstants::REF_NR_F_N]) ? $decryptedDataArray[ComputopConstants::REF_NR_F_N] : null
+            isset($decryptedArray[ComputopConstants::REF_NR_F_N]) ? $decryptedArray[ComputopConstants::REF_NR_F_N] : null
         );
 
         $computopCreditCardResponseTransfer->setHeader(

@@ -39,7 +39,7 @@ abstract class AbstractConverter
     /**
      * @param \GuzzleHttp\Psr7\Stream $response
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
+     * @return mixed
      */
     public function toTransactionResponseTransfer(Stream $response)
     {

@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
 
 /**
  * @group Unit
@@ -18,12 +18,17 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
  * @group Computop
  * @group Api
  * @group Converter
- * @group AuthorizeConverterTest
+ * @group CaptureConverterTest
  */
-class AuthorizeConverterTest extends AbstractConverterTest
+class CaptureConverterTest extends AbstractConverterTest
 {
 
     const REF_NR_VALUE = 'RefNr';
+    const A_ID_VALUE = 'AID';
+    const TRANSACTION_ID_VALUE = 'TransactionID';
+    const AMOUNT_VALUE = '1';
+    const CODE_EXT_VALUE = 'CodeExt';
+    const ERROR_TEXT_VALUE = 'ErrorText';
 
     /**
      * @return void
@@ -33,10 +38,15 @@ class AuthorizeConverterTest extends AbstractConverterTest
         $response = $this->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
+        $this->assertEquals(self::A_ID_VALUE, $responseTransfer->getAId());
+        $this->assertEquals(self::TRANSACTION_ID_VALUE, $responseTransfer->getTransactionId());
+        $this->assertEquals(self::AMOUNT_VALUE, $responseTransfer->getAmount());
+        $this->assertEquals(self::CODE_EXT_VALUE, $responseTransfer->getCodeExt());
+        $this->assertEquals(self::ERROR_TEXT_VALUE, $responseTransfer->getErrorText());
         $this->assertEquals(self::REF_NR_VALUE, $responseTransfer->getRefNr());
     }
 
@@ -48,7 +58,7 @@ class AuthorizeConverterTest extends AbstractConverterTest
         $computopServiceMock = $this->createComputopServiceMock();
         $configMock = $this->createComputopConfigMock();
 
-        $converter = new AuthorizeConverter($computopServiceMock, $configMock);
+        $converter = new CaptureConverter($computopServiceMock, $configMock);
 
         return $converter;
     }
@@ -60,6 +70,11 @@ class AuthorizeConverterTest extends AbstractConverterTest
     {
         $decryptedArray = $this->getMainDecryptedArray();
 
+        $decryptedArray[ComputopConstants::A_ID_F_N] = self::A_ID_VALUE;
+        $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] = self::TRANSACTION_ID_VALUE;
+        $decryptedArray[ComputopConstants::AMOUNT_F_N] = self::AMOUNT_VALUE;
+        $decryptedArray[ComputopConstants::CODE_EXT_F_N] = self::CODE_EXT_VALUE;
+        $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] = self::ERROR_TEXT_VALUE;
         $decryptedArray[ComputopConstants::REF_NR_F_N] = self::REF_NR_VALUE;
 
         return $decryptedArray;
