@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -28,6 +29,9 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
     const DATA_INQUIRE_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C6938916FD8E29AB866F1A20FC03A17576AFCA8C5B645E5D191F781B4240908B5312427DBF4B95A90E6622991FD3247ADD1E6814FAC6B202DBF6B1AD8C1A64D8CF39D0C511883F14B9FDFE0B5F4DFBE6FECC1C36306121044872989FF3F065FE3FCF9A82F950BE564E97B0DD3E834F33D28ADD81D7485794BAFA4067217FCD5FBBE532F86D88BFCCF78B75C2C2C8876C11749CA85AFB166C2A3A06B38551659693F99591F5BB556954A5D1CC745E54980F7';
     const LEN_INQUIRE_VALUE = 189;
+
+    const DATA_CAPTURE_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C69D64A63583A9918823EE25F984198B24416307CC9F716E339447048AAFA6DAEAF1FE56931868EC6658FEC353615B935F22C66BC6A762E02F1D9D1692A94044C37B12C35E04B693BF8FC482FC0DB76A8EEF64BBDA30D301B0E20EBAD824394932159A025D5FAD81F3059E75755A9D2DF460D45A61E2D011772F07857CD3937652E8610531FC7A8D301559CEED3BC0FA14971922F5D33B6964034477F769880CD30EF3E6BC7B3D2F199DB124B974F304C742DF697E4A3F784EBB63EFF9FA71CC905703A4AA73E1C751D1B4EB02D449C8AFA';
+    const LEN_CAPTURE_VALUE = 223;
 
     /**
      * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
@@ -47,6 +51,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getComputopService',
                 'createAuthorizeAdapter',
                 'createInquireAdapter',
+                'createCaptureAdapter',
                 'getQueryContainer',
             ]
         );
@@ -64,6 +69,9 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         $stub->method('createInquireAdapter')
             ->willReturn($this->getInquireApiAdapter());
+
+        $stub->method('createCaptureAdapter')
+            ->willReturn($this->getCaptureApiAdapter());
 
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
@@ -101,6 +109,19 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         $mock->method('sendRequest')
             ->willReturn($this->getStream(self::DATA_INQUIRE_VALUE, self::LEN_INQUIRE_VALUE));
+
+        return $mock;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getCaptureApiAdapter()
+    {
+        $mock = $this->createPartialMock(CaptureApiAdapter::class, ['sendRequest']);
+
+        $mock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_CAPTURE_VALUE, self::LEN_CAPTURE_VALUE));
 
         return $mock;
     }
