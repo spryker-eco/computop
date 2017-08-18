@@ -10,3 +10,6 @@ modules:
     enabled:
         # add a framework module here
         - \Helper\Functional
+        - \Propel\Module\PropelInstall
+        - \Propel\Module\Database
+        - \Module\FunctionalModule
