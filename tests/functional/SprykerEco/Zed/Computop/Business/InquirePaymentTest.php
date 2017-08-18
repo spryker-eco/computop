@@ -7,7 +7,7 @@
 
 namespace Functional\SprykerEco\Zed\Computop\Business;
 
-use Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -22,20 +22,20 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
  * @group Zed
  * @group Computop
  * @group Business
- * @group AuthorizePaymentTest
+ * @group InquirePaymentTest
  */
-class AuthorizePaymentTest extends AbstractPaymentTest
+class InquirePaymentTest extends AbstractPaymentTest
 {
 
-    const PAY_ID_VALUE = 'b5e798a99d5440e88ba487960f3f0cdc';
-    const X_ID_VALUE = '09b0bf76bb4145d8bbe1bb752a736d6d';
-    const TRANS_ID_VALUE = '0e1f2ee1a171fecdfa59833c2a0c0685';
+    const PAY_ID_VALUE = '43a10d3593cf473ea59f1f852f151227';
+    const TRANS_ID_VALUE = 'afa4e781d22f1aa09ccea5935edb6a4c';
     const STATUS_VALUE = 'OK';
     const CODE_VALUE = '00000000';
-
-    const X_ID_ERROR_VALUE = '41810fbfb4e74e7cb05d06eb7fb7436c';
-    const STATUS_ERROR_VALUE = 'FAILED';
-    const CODE_ERROR_VALUE = '21000068';
+    const DESCRIPTION_VALUE = 'OK';
+    const AMOUNT_AUTH_VALUE = '171';
+    const AMOUNT_CAP_VALUE = '0';
+    const AMOUNT_CRED_VALUE = '0';
+    const LAST_STATUS_VALUE = 'OK';
 
     /**
      * @return void
@@ -45,17 +45,21 @@ class AuthorizePaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $response */
-        $response = $service->authorizationPaymentRequest($this->createOrderTransfer());
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $response */
+        $response = $service->inquirePaymentRequest($this->createOrderTransfer());
 
-        $this->assertInstanceOf(ComputopCreditCardAuthorizeResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopCreditCardInquireResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertEquals(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
-        $this->assertEquals(self::X_ID_VALUE, $response->getHeader()->getXId());
         $this->assertEquals(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
         $this->assertEquals(self::STATUS_VALUE, $response->getHeader()->getStatus());
         $this->assertEquals(self::CODE_VALUE, $response->getHeader()->getCode());
+        $this->assertEquals(self::DESCRIPTION_VALUE, $response->getHeader()->getDescription());
+        $this->assertEquals(self::AMOUNT_AUTH_VALUE, $response->getAmountAuth());
+        $this->assertEquals(self::AMOUNT_CAP_VALUE, $response->getAmountCap());
+        $this->assertEquals(self::AMOUNT_CRED_VALUE, $response->getAmountCred());
+        $this->assertEquals(self::LAST_STATUS_VALUE, $response->getLastStatus());
 
         $this->assertTrue($response->getHeader()->getIsSuccess());
     }
