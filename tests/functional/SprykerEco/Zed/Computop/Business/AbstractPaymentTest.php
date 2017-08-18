@@ -14,6 +14,8 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
@@ -32,6 +34,12 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
     const DATA_CAPTURE_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C69D64A63583A9918823EE25F984198B24416307CC9F716E339447048AAFA6DAEAF1FE56931868EC6658FEC353615B935F22C66BC6A762E02F1D9D1692A94044C37B12C35E04B693BF8FC482FC0DB76A8EEF64BBDA30D301B0E20EBAD824394932159A025D5FAD81F3059E75755A9D2DF460D45A61E2D011772F07857CD3937652E8610531FC7A8D301559CEED3BC0FA14971922F5D33B6964034477F769880CD30EF3E6BC7B3D2F199DB124B974F304C742DF697E4A3F784EBB63EFF9FA71CC905703A4AA73E1C751D1B4EB02D449C8AFA';
     const LEN_CAPTURE_VALUE = 223;
+
+    const DATA_REVERSE_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C69079995CF003AAE802B1F6ED88960C444DA38BF186609D77937F48C789D95C374240BD049073027CAD356AF0EDD2D2D1EC5BFE71E5D72BF0C6896F77DDB488245DCDC858B4A88BB77F7E15FA3471C7A616BC07B6B5EEC3121AE739182FEA6B87DE18DA776D8C306BC7CC1110200055E956C7A8664D870F3ABF07857CD3937652E8610531FC7A8D301559CEED3BC0FA14971922F5D33B6964034477F769880CD30EF3E6BC7B3D2F199DB124B974F304C742DF697E4A3F784EBB63EFF9FA71CC905703A4AA73E1C751D1B4EB02D449C8AFA';
+    const LEN_REVERSE_VALUE = 223;
+
+    const DATA_REFUND_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C69BA9E56B96CDF8D7E1D11289D7BBB9EA91C89BCEE9A870EF5E79EDC8EB013A02B04F268FFE54CAF2AEC985BF06992E8FBCFF6DB02BE9227731AD59EF6B3D24C1BB6285960A37E7FFA69ED6D8D2D4972BC03BA1611F8C8797832EFA0E00DCE63BA84275716D47B5431B25F09A5BA1C42A8EAFE2D3B67FD5C7BF07857CD3937652E8610531FC7A8D301559CEED3BC0FA14971922F5D33B6964034477F769880CD30EF3E6BC7B3D2F199DB124B974F304C742DF697E4A3F784EBB63EFF9FA71CC905703A4AA73E1C751D1B4EB02D449C8AFA';
+    const LEN_REFUND_VALUE = 223;
 
     /**
      * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
@@ -52,6 +60,8 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'createAuthorizeAdapter',
                 'createInquireAdapter',
                 'createCaptureAdapter',
+                'createRefundAdapter',
+                'createReverseAdapter',
                 'getQueryContainer',
             ]
         );
@@ -72,6 +82,12 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         $stub->method('createCaptureAdapter')
             ->willReturn($this->getCaptureApiAdapter());
+
+        $stub->method('createRefundAdapter')
+            ->willReturn($this->getRefundApiAdapter());
+
+        $stub->method('createReverseAdapter')
+            ->willReturn($this->getReverseApiAdapter());
 
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
@@ -122,6 +138,32 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         $mock->method('sendRequest')
             ->willReturn($this->getStream(self::DATA_CAPTURE_VALUE, self::LEN_CAPTURE_VALUE));
+
+        return $mock;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getRefundApiAdapter()
+    {
+        $mock = $this->createPartialMock(RefundApiAdapter::class, ['sendRequest']);
+
+        $mock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_REFUND_VALUE, self::LEN_REFUND_VALUE));
+
+        return $mock;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getReverseApiAdapter()
+    {
+        $mock = $this->createPartialMock(ReverseApiAdapter::class, ['sendRequest']);
+
+        $mock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_REVERSE_VALUE, self::LEN_REVERSE_VALUE));
 
         return $mock;
     }
