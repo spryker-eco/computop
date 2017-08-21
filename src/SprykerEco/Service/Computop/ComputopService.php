@@ -97,7 +97,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function getHashHmacValue($value)
     {
-        return $this->getFactory()->createHashHmac()->getHashHmacValue($value);
+        return $this->getFactory()->createHmacHasher()->getEncryptedValue($value);
     }
 
     /**
@@ -105,7 +105,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function getBlowfishEncryptedValue($plaintext, $length, $password)
     {
-        return $this->getFactory()->createBlowfish()->getBlowfishEncryptedValue($plaintext, $length, $password);
+        return $this->getFactory()->createBlowfishHasher()->getBlowfishEncryptedValue($plaintext, $length, $password);
     }
 
     /**
@@ -113,7 +113,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function getBlowfishDecryptedValue($cipher, $length, $password)
     {
-        return $this->getFactory()->createBlowfish()->getBlowfishDecryptedValue($cipher, $length, $password);
+        return $this->getFactory()->createBlowfishHasher()->getBlowfishDecryptedValue($cipher, $length, $password);
     }
 
 }

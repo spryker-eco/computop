@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
-interface BlowfishInterface
+interface BlowfishHasherInterface
 {
 
     /**

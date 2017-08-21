@@ -8,20 +8,20 @@
 namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractServiceFactory;
-use SprykerEco\Service\Computop\Model\Blowfish;
+use SprykerEco\Service\Computop\Model\BlowfishHasher;
 use SprykerEco\Service\Computop\Model\Converter\Computop as ComputopConverter;
-use SprykerEco\Service\Computop\Model\HashHmac;
+use SprykerEco\Service\Computop\Model\HmacHasher;
 use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
 
 class ComputopServiceFactory extends AbstractServiceFactory
 {
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\BlowfishInterface
+     * @return \SprykerEco\Service\Computop\Model\BlowfishHasherInterface
      */
-    public function createBlowfish()
+    public function createBlowfishHasher()
     {
-        return new Blowfish();
+        return new BlowfishHasher();
     }
 
     /**
@@ -41,11 +41,11 @@ class ComputopServiceFactory extends AbstractServiceFactory
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\HashHmacInterface
+     * @return \SprykerEco\Service\Computop\Model\HmacHasherInterface
      */
-    public function createHashHmac()
+    public function createHmacHasher()
     {
-        return new HashHmac();
+        return new HmacHasher();
     }
 
 }

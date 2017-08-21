@@ -10,11 +10,11 @@ namespace SprykerEco\Service\Computop\Model;
 use SprykerEco\Service\Computop\Exception\BlowfishException;
 
 /**
- * Class Blowfish
+ * Class BlowfishHasher
  *
  * This class provides the Blowfish encryption for PHP environment.
  */
-class Blowfish implements BlowfishInterface
+class BlowfishHasher implements BlowfishHasherInterface
 {
 
     /**

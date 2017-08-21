@@ -8,7 +8,7 @@
 namespace Unit\SprykerEco\Service\Computop;
 
 use Codeception\TestCase\Test;
-use SprykerEco\Service\Computop\Model\HashHmac;
+use SprykerEco\Service\Computop\Model\HmacHasher;
 
 /**
  * @group Unit
@@ -30,17 +30,17 @@ class ComputopHashTest extends Test
     public function testHashCrypt()
     {
         $service = $this->createService();
-        $encryptedValue = $service->getHashHmacValue(self::VALUE);
+        $encryptedValue = $service->getEncryptedValue(self::VALUE);
 
         $this->assertSame(self::EXPECTED_VALUE, $encryptedValue);
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\HashHmac
+     * @return \SprykerEco\Service\Computop\Model\HmacHasherInterface
      */
     public function createService()
     {
-        return new HashHmac();
+        return new HmacHasher();
     }
 
 }

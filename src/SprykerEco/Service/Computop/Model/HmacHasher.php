@@ -10,7 +10,7 @@ namespace SprykerEco\Service\Computop\Model;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class HashHmac implements HashHmacInterface
+class HmacHasher implements HmacHasherInterface
 {
 
     const SHA256 = 'sha256';
@@ -18,7 +18,7 @@ class HashHmac implements HashHmacInterface
     /**
      * @inheritdoc
      */
-    public function getHashHmacValue($value)
+    public function getEncryptedValue($value)
     {
         return strtoupper(
             hash_hmac(self::SHA256, $value, Config::get(ComputopConstants::COMPUTOP_HMAC_PASSWORD_KEY))

@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Service\Computop;
 
 use Codeception\TestCase\Test;
 use SprykerEco\Service\Computop\Exception\BlowfishException;
-use SprykerEco\Service\Computop\Model\Blowfish;
+use SprykerEco\Service\Computop\Model\BlowfishHasher;
 
 /**
  * @group Unit
@@ -90,11 +90,11 @@ class ComputopBlowfishTest extends Test
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Blowfish
+     * @return \SprykerEco\Service\Computop\Model\BlowfishHasherInterface
      */
     public function createService()
     {
-        return new Blowfish();
+        return new BlowfishHasher();
     }
 
 }

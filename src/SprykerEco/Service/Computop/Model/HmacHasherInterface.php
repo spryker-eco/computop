@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
-interface HashHmacInterface
+interface HmacHasherInterface
 {
 
     /**
@@ -15,6 +15,6 @@ interface HashHmacInterface
      *
      * @return string
      */
-    public function getHashHmacValue($value);
+    public function getEncryptedValue($value);
 
 }
