@@ -93,6 +93,6 @@ interface ComputopConstants
     const FINISH_AUTH_F_N = 'FinishAuth';
     const ETI_ID_F_N = 'EtiId';
     const DATA_F_N = 'Data';
-    const LEN_F_N = 'Len';
+    const LENGTH_F_N = 'Len';
 
 }

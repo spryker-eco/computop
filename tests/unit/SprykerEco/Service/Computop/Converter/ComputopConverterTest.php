@@ -85,7 +85,7 @@ class ComputopConverterTest extends AbstractConverterTest
 
         $responseArray = [
             ComputopConstants::DATA_F_N => 'data',
-            ComputopConstants::LEN_F_N => 4,
+            ComputopConstants::LENGTH_F_N => 4,
         ];
 
         $converter->checkEncryptedResponse($responseArray);

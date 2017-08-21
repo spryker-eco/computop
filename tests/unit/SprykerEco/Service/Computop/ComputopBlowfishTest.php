@@ -23,11 +23,11 @@ class ComputopBlowfishTest extends Test
 {
 
     const PLAINTEXT_VALUE = 'plaintext';
-    const LEN_VALUE = 9;
+    const LENGTH_VALUE = 9;
     const PASSWORD_VALUE = 'password';
 
     const CIPHER_VALUE = '14ec7a6da0fbb3e50a84b47302443328';
-    const CIPHER_LEN_VALUE = 16;
+    const CIPHER_LENGTH_VALUE = 16;
 
     /**
      * @return void
@@ -37,7 +37,7 @@ class ComputopBlowfishTest extends Test
         $service = $this->createService();
         $encryptedValue = $service->getBlowfishEncryptedValue(
             self::PLAINTEXT_VALUE,
-            self::LEN_VALUE,
+            self::LENGTH_VALUE,
             self::PASSWORD_VALUE
         );
 
@@ -54,7 +54,7 @@ class ComputopBlowfishTest extends Test
         $service = $this->createService();
         $service->getBlowfishEncryptedValue(
             self::PLAINTEXT_VALUE,
-            (self::LEN_VALUE - 1),
+            (self::LENGTH_VALUE - 1),
             self::PASSWORD_VALUE
         );
     }
@@ -67,7 +67,7 @@ class ComputopBlowfishTest extends Test
         $service = $this->createService();
         $decryptedValue = $service->getBlowfishDecryptedValue(
             self::CIPHER_VALUE,
-            self::CIPHER_LEN_VALUE,
+            self::CIPHER_LENGTH_VALUE,
             self::PASSWORD_VALUE
         );
 
@@ -84,7 +84,7 @@ class ComputopBlowfishTest extends Test
         $service = $this->createService();
         $service->getBlowfishDecryptedValue(
             self::CIPHER_VALUE,
-            self::CIPHER_LEN_VALUE + 1,
+            self::CIPHER_LENGTH_VALUE + 1,
             self::PASSWORD_VALUE
         );
     }

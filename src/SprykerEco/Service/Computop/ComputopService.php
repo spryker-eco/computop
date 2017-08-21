@@ -61,7 +61,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
 
         $responseDecryptedString = $this->getBlowfishDecryptedValue(
             $responseArray[ComputopConstants::DATA_F_N],
-            $responseArray[ComputopConstants::LEN_F_N],
+            $responseArray[ComputopConstants::LENGTH_F_N],
             $password
         );
 
@@ -79,15 +79,15 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     public function getEncryptedArray(array $dataSubArray, $password)
     {
         $plaintext = $this->getFactory()->createComputopMapper()->getDataPlaintext($dataSubArray);
-        $len = strlen($plaintext);
+        $length = strlen($plaintext);
 
         $encryptedArray[ComputopConstants::DATA_F_N] = $this->getBlowfishEncryptedValue(
             $plaintext,
-            $len,
+            $length,
             $password
         );
 
-        $encryptedArray[ComputopConstants::LEN_F_N] = $len;
+        $encryptedArray[ComputopConstants::LENGTH_F_N] = $length;
 
         return $encryptedArray;
     }
@@ -103,17 +103,17 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     /**
      * @inheritdoc
      */
-    public function getBlowfishEncryptedValue($plaintext, $len, $password)
+    public function getBlowfishEncryptedValue($plaintext, $length, $password)
     {
-        return $this->getFactory()->createBlowfish()->getBlowfishEncryptedValue($plaintext, $len, $password);
+        return $this->getFactory()->createBlowfish()->getBlowfishEncryptedValue($plaintext, $length, $password);
     }
 
     /**
      * @inheritdoc
      */
-    public function getBlowfishDecryptedValue($cipher, $len, $password)
+    public function getBlowfishDecryptedValue($cipher, $length, $password)
     {
-        return $this->getFactory()->createBlowfish()->getBlowfishDecryptedValue($cipher, $len, $password);
+        return $this->getFactory()->createBlowfish()->getBlowfishDecryptedValue($cipher, $length, $password);
     }
 
 }

@@ -39,17 +39,17 @@ class Blowfish implements BlowfishInterface
 
     /**
      * @param string $plaintext
-     * @param int $len
+     * @param int $length
      * @param string $password
      *
      * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plaintext, $len, $password)
+    public function getBlowfishEncryptedValue($plaintext, $length, $password)
     {
         if (mb_strlen($password) <= 0) $password = ' ';
-        if (mb_strlen($plaintext) != $len) {
+        if (mb_strlen($plaintext) != $length) {
             throw new BlowfishException('Length mismatch. The parameter len differs from actual length.');
         }
 
@@ -61,23 +61,23 @@ class Blowfish implements BlowfishInterface
 
     /**
      * @param string $cipher
-     * @param int $len
+     * @param int $length
      * @param string $password
      *
      * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
      *
      * @return string
      */
-    public function getBlowfishDecryptedValue($cipher, $len, $password)
+    public function getBlowfishDecryptedValue($cipher, $length, $password)
     {
         if (mb_strlen($password) <= 0) $password = ' ';
         # converts hex to bin
         $cipher = pack('H' . strlen($cipher), $cipher);
-        if ($len > strlen($cipher)) {
+        if ($length > strlen($cipher)) {
             throw new BlowfishException('Length mismatch. The parameter len is too large.');
         }
         $this->bfSetKey($password);
-        return mb_substr($this->decrypt($cipher), 0, $len);
+        return mb_substr($this->decrypt($cipher), 0, $length);
     }
 
     /**
@@ -134,9 +134,9 @@ class Blowfish implements BlowfishInterface
      */
     protected function encrypt($text)
     {
-        $len = strlen($text);
+        $length = strlen($text);
         $plain = '';
-        for ($iteration = 0; $iteration < $len; $iteration += 8) {
+        for ($iteration = 0; $iteration < $length; $iteration += 8) {
             $lBlock = $this->asc2int(substr($text, $iteration, 4));
             $rBlock = $this->asc2int(substr($text, $iteration + 4, 4));
             list($lBlock, $rBlock) = $this->bfEncrypt($lBlock, $rBlock);
@@ -152,9 +152,9 @@ class Blowfish implements BlowfishInterface
      */
     public function decrypt($text)
     {
-        $len = strlen($text);
+        $length = strlen($text);
         $plain = '';
-        for ($iteration = 0; $iteration < $len; $iteration += 8) {
+        for ($iteration = 0; $iteration < $length; $iteration += 8) {
             $aBlock = $this->asc2int(substr($text, $iteration, 4));
             $bBlock = $this->asc2int(substr($text, $iteration + 4, 4));
             list($aBlock, $bBlock) = $this->bfDecrypt($aBlock, $bBlock);

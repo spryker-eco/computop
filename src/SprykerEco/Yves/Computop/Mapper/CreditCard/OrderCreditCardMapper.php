@@ -90,16 +90,16 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
      *
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
      * @param string $data
-     * @param int $len
+     * @param int $length
      *
      * @return string
      */
-    protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $len)
+    protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $length)
     {
         return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION_KEY) . '?' . http_build_query([
                 ComputopConstants::MERCHANT_ID_F_N => $computopCreditCardPaymentTransfer->getMerchantId(),
                 ComputopConstants::DATA_F_N => $data,
-                ComputopConstants::LEN_F_N => $len,
+                ComputopConstants::LENGTH_F_N => $length,
             ]);
     }
 

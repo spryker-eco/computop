@@ -18,7 +18,7 @@ abstract class AbstractCreditCardMapperTest extends Test
 {
 
     const DATA_VALUE = 'Data';
-    const LEN_VALUE = 'LEN';
+    const LENGTH_VALUE = 10;
     const MERCHANT_ID_VALUE = 'MerchantId';
 
     /**
@@ -39,7 +39,7 @@ abstract class AbstractCreditCardMapperTest extends Test
         $mappedData = $service->buildRequest($orderTransferMock);
 
         $this->assertEquals(self::DATA_VALUE, $mappedData[ComputopConstants::DATA_F_N]);
-        $this->assertEquals(self::LEN_VALUE, $mappedData[ComputopConstants::LEN_F_N]);
+        $this->assertEquals(self::LENGTH_VALUE, $mappedData[ComputopConstants::LENGTH_F_N]);
         $this->assertEquals(self::MERCHANT_ID_VALUE, $mappedData[ComputopConstants::MERCHANT_ID_F_N]);
     }
 
@@ -86,7 +86,7 @@ abstract class AbstractCreditCardMapperTest extends Test
     protected function createComputopServiceMock()
     {
         $encryptedArray = [
-            ComputopConstants::LEN_F_N => self::LEN_VALUE,
+            ComputopConstants::LENGTH_F_N => self::LENGTH_VALUE,
             ComputopConstants::DATA_F_N => self::DATA_VALUE,
         ];
 

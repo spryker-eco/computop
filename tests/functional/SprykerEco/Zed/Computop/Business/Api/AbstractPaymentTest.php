@@ -119,15 +119,15 @@ abstract class AbstractPaymentTest extends AbstractFactoryPaymentTest
 
     /**
      * @param string $data
-     * @param string $len
+     * @param int $length
      *
      * @return Psr7\Stream
      */
-    protected function getStream($data, $len)
+    protected function getStream($data, $length)
     {
         $expectedResponse = http_build_query([
             ComputopConstants::DATA_F_N => $data,
-            ComputopConstants::LEN_F_N => $len,
+            ComputopConstants::LENGTH_F_N => $length,
         ]);
         $stream = Psr7\stream_for($expectedResponse);
 

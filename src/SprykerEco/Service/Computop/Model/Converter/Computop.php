@@ -64,7 +64,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         $keys = [
             ComputopConstants::DATA_F_N,
-            ComputopConstants::LEN_F_N,
+            ComputopConstants::LENGTH_F_N,
         ];
 
         if (!$this->checkArrayKeysExists($keys, $responseArray)) {

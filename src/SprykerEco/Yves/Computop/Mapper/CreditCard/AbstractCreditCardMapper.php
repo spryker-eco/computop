@@ -57,12 +57,12 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
             Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY)
         );
 
-        $len = $decryptedValues[ComputopConstants::LEN_F_N];
+        $length = $decryptedValues[ComputopConstants::LENGTH_F_N];
         $data = $decryptedValues[ComputopConstants::DATA_F_N];
 
         $computopCreditCardPaymentTransfer->setData($data);
-        $computopCreditCardPaymentTransfer->setLen($len);
-        $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $len));
+        $computopCreditCardPaymentTransfer->setLen($length);
+        $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $length));
 
         return $computopCreditCardPaymentTransfer;
     }

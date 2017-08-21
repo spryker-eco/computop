@@ -56,11 +56,11 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
     {
         $encryptedArray = $this->getEncryptedArray($orderTransfer);
 
-        $len = $encryptedArray[ComputopConstants::LEN_F_N];
+        $length = $encryptedArray[ComputopConstants::LENGTH_F_N];
         $data = $encryptedArray[ComputopConstants::DATA_F_N];
         $merchantId = $this->getMerchantId($orderTransfer);
 
-        return $this->buildRequestData($data, $len, $merchantId);
+        return $this->buildRequestData($data, $length, $merchantId);
     }
 
     /**
@@ -108,17 +108,17 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
 
     /**
      * @param string $data
-     * @param string $len
+     * @param string $length
      * @param string $merchantId
      *
      * @return array
      */
-    protected function buildRequestData($data, $len, $merchantId)
+    protected function buildRequestData($data, $length, $merchantId)
     {
         $requestData = [
             ComputopConstants::MERCHANT_ID_F_N => $merchantId,
             ComputopConstants::DATA_F_N => $data,
-            ComputopConstants::LEN_F_N => $len,
+            ComputopConstants::LENGTH_F_N => $length,
         ];
 
         return $requestData;

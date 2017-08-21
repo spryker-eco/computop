@@ -12,24 +12,24 @@ interface BlowfishInterface
 
     /**
      * @param string $plaintext
-     * @param int $len
+     * @param int $length
      * @param string $password
      *
      * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plaintext, $len, $password);
+    public function getBlowfishEncryptedValue($plaintext, $length, $password);
 
     /**
      * @param string $cipher
-     * @param int $len
+     * @param int $length
      * @param string $password
      *
      * @throws \SprykerEco\Service\Computop\Exception\BlowfishException
      *
      * @return string
      */
-    public function getBlowfishDecryptedValue($cipher, $len, $password);
+    public function getBlowfishDecryptedValue($cipher, $length, $password);
 
 }
