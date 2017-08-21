@@ -21,8 +21,8 @@ $config[ComputopConstants::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED_KEY] = true; /
 
 $config[ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED_KEY] = [
     ComputopConstants::ORDER_METHOD,
-    ComputopConstants::CAPTURE_METHOD,
+//    ComputopConstants::CAPTURE_METHOD, // Todo: waiting for response from Computop
     ComputopConstants::REVERSE_METHOD,
     ComputopConstants::INQUIRE_METHOD,
-    ComputopConstants::REFUND_METHOD,
+//    ComputopConstants::REFUND_METHOD,// Todo: waiting for response from Computop
 ]; //MAC is required for methods (to check MAC)

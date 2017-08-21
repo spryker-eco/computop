@@ -50,7 +50,7 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function extractHeader($decryptedArray, $method)
+    public function extractHeader(array $decryptedArray, $method)
     {
         return $this->computopService->extractHeader($decryptedArray, $method);
     }
@@ -61,7 +61,7 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return array
      */
-    public function getDecryptedArray($responseArray, $password)
+    public function getDecryptedArray(array $responseArray, $password)
     {
         return $this->computopService->getDecryptedArray($responseArray, $password);
     }
@@ -72,7 +72,7 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return array
      */
-    public function getEncryptedArray($dataSubArray, $password)
+    public function getEncryptedArray(array $dataSubArray, $password)
     {
         return $this->computopService->getEncryptedArray($dataSubArray, $password);
     }

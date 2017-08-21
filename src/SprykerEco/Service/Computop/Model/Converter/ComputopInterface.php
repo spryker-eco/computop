@@ -16,7 +16,7 @@ interface ComputopInterface
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    public function extractHeader($decryptedArray, $method);
+    public function extractHeader(array $decryptedArray, $method);
 
     /**
      * @param string $decryptedString
@@ -32,7 +32,7 @@ interface ComputopInterface
      *
      * @return void
      */
-    public function checkEncryptedResponse($responseArray);
+    public function checkEncryptedResponse(array $responseArray);
 
     /**
      * @param string $responseMac

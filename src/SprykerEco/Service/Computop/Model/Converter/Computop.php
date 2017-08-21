@@ -18,7 +18,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     /**
      * @inheritdoc
      */
-    public function extractHeader($decryptedArray, $method)
+    public function extractHeader(array $decryptedArray, $method)
     {
         $this->checkDecryptedResponse($decryptedArray);
 
@@ -59,7 +59,7 @@ class Computop extends AbstractComputop implements ComputopInterface
      * @inheritdoc
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      */
-    public function checkEncryptedResponse($responseArray)
+    public function checkEncryptedResponse(array $responseArray)
     {
         $keys = [
             ComputopConstants::DATA_F_N,
@@ -108,7 +108,7 @@ class Computop extends AbstractComputop implements ComputopInterface
      *
      * @return bool
      */
-    protected function checkArrayKeysExists($keys, $arraySearch)
+    protected function checkArrayKeysExists(array $keys, array $arraySearch)
     {
         foreach ($keys as $key) {
             if (!array_key_exists($key, $arraySearch)) {
