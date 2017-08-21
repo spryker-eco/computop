@@ -33,7 +33,7 @@ class SaveOrderPaymentTest extends AbstractOrderPaymentTest
 
         $computopSavedData = $this->getComputopSavedData();
 
-        $this->assertEquals(self::CLIENT_IP, $computopSavedData->getClientIp());
+        $this->assertEquals(self::CLIENT_IP_VALUE, $computopSavedData->getClientIp());
         $this->assertEquals(self::PAY_ID_VALUE, $computopSavedData->getPayId());
         $this->assertEquals(self::TRANS_ID_VALUE, $computopSavedData->getTransId());
         $this->assertEquals(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD, $computopSavedData->getPaymentMethod());

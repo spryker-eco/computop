@@ -24,7 +24,7 @@ abstract class AbstractFactoryOrderPaymentTest extends AbstractSetUpTest
 
     const PAY_ID_VALUE = 'e1ebdc5bd6054263a52ef33ecae1ccda';
     const TRANS_ID_VALUE = '585e330ea1fe696ffb0bad71db503504';
-    const CLIENT_IP = '0.0.0.0';
+    const CLIENT_IP_VALUE = '0.0.0.0';
 
     /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
@@ -73,7 +73,7 @@ abstract class AbstractFactoryOrderPaymentTest extends AbstractSetUpTest
         $computopPayment = new ComputopCreditCardPaymentTransfer();
         $computopPayment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
         $computopPayment->setPayId(self::PAY_ID_VALUE);
-        $computopPayment->setClientIp(self::CLIENT_IP);
+        $computopPayment->setClientIp(self::CLIENT_IP_VALUE);
         $computopPayment->setTransId(self::TRANS_ID_VALUE);
         $computopPayment->setCreditCardOrderResponse($this->createComputopOrderResponseTransfer());
 
