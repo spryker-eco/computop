@@ -32,7 +32,6 @@ class ComputopConverterTest extends AbstractConverterTest
     const CODE_VALUE = '000000';
     const STATUS_ERROR_VALUE = 'ERROR';
 
-
     /**
      * @return void
      */
@@ -41,7 +40,7 @@ class ComputopConverterTest extends AbstractConverterTest
         $converter = $this->createConverter();
         $decryptedArray = $this->getDecryptedArray(ComputopConstants::SUCCESS_STATUS);
 
-        /** @var  \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
+        /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
         $header = $converter->extractHeader($decryptedArray, self::METHOD);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $header);
@@ -55,7 +54,6 @@ class ComputopConverterTest extends AbstractConverterTest
         $this->assertSame(self::X_ID_VALUE, $header->getXId());
     }
 
-
     /**
      * @return void
      */
@@ -64,7 +62,7 @@ class ComputopConverterTest extends AbstractConverterTest
         $converter = $this->createConverter();
         $decryptedArray = $this->getDecryptedArray(self::STATUS_ERROR_VALUE);
 
-        /** @var  \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
+        /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
         $header = $converter->extractHeader($decryptedArray, self::METHOD);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $header);

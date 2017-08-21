@@ -12,6 +12,7 @@ use SprykerEco\Service\Computop\Model\Converter\Computop;
 
 abstract class AbstractConverterTest extends Test
 {
+
     /**
      * @return \SprykerEco\Service\Computop\Model\Converter\Computop
      */
@@ -19,4 +20,5 @@ abstract class AbstractConverterTest extends Test
     {
         return new Computop();
     }
+
 }
