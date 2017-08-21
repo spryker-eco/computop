@@ -43,13 +43,13 @@ class SaveLogTest extends AbstractLoggerTest
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog $logSavedData */
         $logSavedData = $this->getLogSavedData();
 
-        $this->assertEquals(self::TRANS_ID_VALUE, $logSavedData->getTransId());
-        $this->assertEquals(self::PAY_ID_VALUE, $logSavedData->getPayId());
-        $this->assertEquals(self::M_ID_VALUE, $logSavedData->getMId());
-        $this->assertEquals(self::X_ID_VALUE, $logSavedData->getXId());
+        $this->assertSame(self::TRANS_ID_VALUE, $logSavedData->getTransId());
+        $this->assertSame(self::PAY_ID_VALUE, $logSavedData->getPayId());
+        $this->assertSame(self::M_ID_VALUE, $logSavedData->getMId());
+        $this->assertSame(self::X_ID_VALUE, $logSavedData->getXId());
         $this->assertEquals(self::CODE_VALUE, $logSavedData->getCode());
-        $this->assertEquals(self::DESCRIPTION_VALUE, $logSavedData->getDescription());
-        $this->assertEquals(self::STATUS_VALUE, $logSavedData->getStatus());
+        $this->assertSame(self::DESCRIPTION_VALUE, $logSavedData->getDescription());
+        $this->assertSame(self::STATUS_VALUE, $logSavedData->getStatus());
     }
 
     /**

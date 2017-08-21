@@ -46,11 +46,11 @@ class ReversePaymentTest extends AbstractPaymentTest
         $this->assertInstanceOf(ComputopCreditCardReverseResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
 
-        $this->assertEquals(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
-        $this->assertEquals(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
-        $this->assertEquals(self::STATUS_VALUE, $response->getHeader()->getStatus());
-        $this->assertEquals(self::CODE_VALUE, $response->getHeader()->getCode());
-        $this->assertEquals(self::X_ID_VALUE, $response->getHeader()->getXId());
+        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
+        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
+        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
+        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
 
         $this->assertTrue($response->getHeader()->getIsSuccess());
     }

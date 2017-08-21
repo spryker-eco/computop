@@ -33,12 +33,12 @@ class SaveOrderPaymentTest extends AbstractOrderPaymentTest
 
         $computopSavedData = $this->getComputopSavedData();
 
-        $this->assertEquals(self::CLIENT_IP_VALUE, $computopSavedData->getClientIp());
-        $this->assertEquals(self::PAY_ID_VALUE, $computopSavedData->getPayId());
-        $this->assertEquals(self::TRANS_ID_VALUE, $computopSavedData->getTransId());
-        $this->assertEquals(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD, $computopSavedData->getPaymentMethod());
-        $this->assertEquals($this->orderEntity->getIdSalesOrder(), $computopSavedData->getFkSalesOrder());
-        $this->assertEquals($this->orderEntity->getOrderReference(), $computopSavedData->getReference());
+        $this->assertSame(self::CLIENT_IP_VALUE, $computopSavedData->getClientIp());
+        $this->assertSame(self::PAY_ID_VALUE, $computopSavedData->getPayId());
+        $this->assertSame(self::TRANS_ID_VALUE, $computopSavedData->getTransId());
+        $this->assertSame(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD, $computopSavedData->getPaymentMethod());
+        $this->assertSame($this->orderEntity->getIdSalesOrder(), $computopSavedData->getFkSalesOrder());
+        $this->assertSame($this->orderEntity->getOrderReference(), $computopSavedData->getReference());
     }
 
     /**

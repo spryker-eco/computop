@@ -50,15 +50,15 @@ class InquirePaymentTest extends AbstractPaymentTest
         $this->assertInstanceOf(ComputopCreditCardInquireResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
 
-        $this->assertEquals(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
-        $this->assertEquals(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
-        $this->assertEquals(self::STATUS_VALUE, $response->getHeader()->getStatus());
-        $this->assertEquals(self::CODE_VALUE, $response->getHeader()->getCode());
-        $this->assertEquals(self::DESCRIPTION_VALUE, $response->getHeader()->getDescription());
-        $this->assertEquals(self::AMOUNT_AUTH_VALUE, $response->getAmountAuth());
-        $this->assertEquals(self::AMOUNT_CAP_VALUE, $response->getAmountCap());
-        $this->assertEquals(self::AMOUNT_CRED_VALUE, $response->getAmountCred());
-        $this->assertEquals(self::LAST_STATUS_VALUE, $response->getLastStatus());
+        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
+        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
+        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
+        $this->assertSame(self::DESCRIPTION_VALUE, $response->getHeader()->getDescription());
+        $this->assertSame(self::AMOUNT_AUTH_VALUE, $response->getAmountAuth());
+        $this->assertSame(self::AMOUNT_CAP_VALUE, $response->getAmountCap());
+        $this->assertSame(self::AMOUNT_CRED_VALUE, $response->getAmountCred());
+        $this->assertSame(self::LAST_STATUS_VALUE, $response->getLastStatus());
 
         $this->assertTrue($response->getHeader()->getIsSuccess());
     }
