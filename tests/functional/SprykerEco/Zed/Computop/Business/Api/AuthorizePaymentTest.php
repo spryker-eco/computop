@@ -5,15 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Functional\SprykerEco\Zed\Computop\Business;
+namespace Functional\SprykerEco\Zed\Computop\Business\Api;
 
 use Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer;
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -26,6 +22,9 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
  */
 class AuthorizePaymentTest extends AbstractPaymentTest
 {
+
+    const DATA_AUTHORIZE_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C698893913332CB67E1A807FD59E1F69EB838219E36BBA905CA9085CECB6F9719E1CDA2CE46F17120C106A58D32E2130F61199DE0A73DA1DD7BFD571C4C5DE099825FB9F264DBFA52BF863B3941BC327A15A99FF527422CE878508ACC02E13D9851024D23B99285545222833BCB861E6471E5712BDA3A493433F07857CD3937652E8610531FC7A8D301559CEED3BC0FA14971922F5D33B6964034477F769880CD30EF3E6BC7B3D2F199DB124B974F304C742DF697E4A3F784EBB63EFF9FA71CC905703A4AA73E1C751D1B4EB02D449C8AFA';
+    const LEN_AUTHORIZE_VALUE = 223;
 
     const PAY_ID_VALUE = 'b5e798a99d5440e88ba487960f3f0cdc';
     const X_ID_VALUE = '09b0bf76bb4145d8bbe1bb752a736d6d';
@@ -46,7 +45,7 @@ class AuthorizePaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $response */
-        $response = $service->authorizationPaymentRequest($this->createOrderTransfer());
+        $response = $service->authorizationPaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardAuthorizeResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
@@ -61,35 +60,32 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \Generated\Shared\Transfer\OrderTransfer
-     */
-    protected function createOrderTransfer()
-    {
-        $orderTransfer = new OrderTransfer();
-        $orderTransfer->setComputopCreditCard($this->createComputopPaymentTransfer());
-        $orderTransfer->setTotals(new TotalsTransfer());
-        $orderTransfer->setCustomer(new CustomerTransfer());
-        return $orderTransfer;
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
-     */
-    protected function createComputopPaymentTransfer()
-    {
-        $payment = new ComputopCreditCardPaymentTransfer();
-        $payment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-        $payment->setPayId($this->getPayIdValue());
-
-        return $payment;
-    }
-
-    /**
      * @return string
      */
     protected function getPayIdValue()
     {
         return self::PAY_ID_VALUE;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getApiAdapter()
+    {
+        $mock = $this->createPartialMock(AuthorizeApiAdapter::class, ['sendRequest']);
+
+        $mock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_AUTHORIZE_VALUE, self::LEN_AUTHORIZE_VALUE));
+
+        return $mock;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getApiAdapterFunctionName()
+    {
+        return 'createAuthorizeAdapter';
     }
 
 }

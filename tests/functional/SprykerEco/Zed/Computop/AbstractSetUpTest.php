@@ -9,9 +9,6 @@ namespace Functional\SprykerEco\Zed\Computop;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\AddressTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Country\Persistence\SpyCountryQuery;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
@@ -20,7 +17,6 @@ use Orm\Zed\Oms\Persistence\SpyOmsOrderProcess;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 abstract class AbstractSetUpTest extends Test
 {
@@ -29,11 +25,6 @@ abstract class AbstractSetUpTest extends Test
      * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
      */
     protected $orderEntity;
-
-    /**
-     * @return string
-     */
-    abstract protected function getPayIdValue();
 
     /**
      * Set up DB data
@@ -94,8 +85,6 @@ abstract class AbstractSetUpTest extends Test
             ->setGrossPrice(1000)
             ->setQuantity(1);
         $orderItemEntity->save();
-
-        $this->createComputopPaymentEntity();
     }
 
     /**
@@ -143,35 +132,6 @@ abstract class AbstractSetUpTest extends Test
         $processEntity->save();
 
         return $processEntity;
-    }
-
-    /**
-     * @return void
-     */
-    protected function createComputopPaymentEntity()
-    {
-        $computopPaymentEntity = (new SpyPaymentComputop())
-            ->setClientIp('0.0.0.0')
-            ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD)
-            ->setReference($this->orderEntity->getOrderReference())
-            ->setFkSalesOrder($this->orderEntity->getIdSalesOrder())
-            ->setPayId($this->getPayIdValue());
-        $computopPaymentEntity->save();
-
-        $paymentDetailEntity = new SpyPaymentComputopDetail();
-        $paymentDetailEntity->setIdPaymentComputop($computopPaymentEntity->getIdPaymentComputop());
-        $paymentDetailEntity->save();
-
-        $orderItemTransfers = $this->orderEntity->getItems();
-
-        foreach ($orderItemTransfers as $orderItemTransfer) {
-            $paymentOrderItemEntity = new SpyPaymentComputopOrderItem();
-            $paymentOrderItemEntity
-                ->setFkPaymentComputop($computopPaymentEntity->getIdPaymentComputop())
-                ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
-            $paymentOrderItemEntity->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_NEW);
-            $paymentOrderItemEntity->save();
-        }
     }
 
 }

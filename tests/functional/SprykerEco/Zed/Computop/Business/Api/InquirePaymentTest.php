@@ -5,15 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Functional\SprykerEco\Zed\Computop\Business;
+namespace Functional\SprykerEco\Zed\Computop\Business\Api;
 
 use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -26,6 +22,9 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
  */
 class InquirePaymentTest extends AbstractPaymentTest
 {
+
+    const DATA_INQUIRE_VALUE = 'A23501461AA31D2A7DE3ABDBAB085C6938916FD8E29AB866F1A20FC03A17576AFCA8C5B645E5D191F781B4240908B5312427DBF4B95A90E6622991FD3247ADD1E6814FAC6B202DBF6B1AD8C1A64D8CF39D0C511883F14B9FDFE0B5F4DFBE6FECC1C36306121044872989FF3F065FE3FCF9A82F950BE564E97B0DD3E834F33D28ADD81D7485794BAFA4067217FCD5FBBE532F86D88BFCCF78B75C2C2C8876C11749CA85AFB166C2A3A06B38551659693F99591F5BB556954A5D1CC745E54980F7';
+    const LEN_INQUIRE_VALUE = 189;
 
     const PAY_ID_VALUE = '43a10d3593cf473ea59f1f852f151227';
     const TRANS_ID_VALUE = 'afa4e781d22f1aa09ccea5935edb6a4c';
@@ -46,7 +45,7 @@ class InquirePaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $response */
-        $response = $service->inquirePaymentRequest($this->createOrderTransfer());
+        $response = $service->inquirePaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardInquireResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
@@ -65,35 +64,32 @@ class InquirePaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \Generated\Shared\Transfer\OrderTransfer
-     */
-    protected function createOrderTransfer()
-    {
-        $orderTransfer = new OrderTransfer();
-        $orderTransfer->setComputopCreditCard($this->createComputopPaymentTransfer());
-        $orderTransfer->setTotals(new TotalsTransfer());
-        $orderTransfer->setCustomer(new CustomerTransfer());
-        return $orderTransfer;
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
-     */
-    protected function createComputopPaymentTransfer()
-    {
-        $payment = new ComputopCreditCardPaymentTransfer();
-        $payment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-        $payment->setPayId($this->getPayIdValue());
-
-        return $payment;
-    }
-
-    /**
      * @return string
      */
     protected function getPayIdValue()
     {
         return self::PAY_ID_VALUE;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getApiAdapter()
+    {
+        $mock = $this->createPartialMock(InquireApiAdapter::class, ['sendRequest']);
+
+        $mock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_INQUIRE_VALUE, self::LEN_INQUIRE_VALUE));
+
+        return $mock;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getApiAdapterFunctionName()
+    {
+        return 'createInquireAdapter';
     }
 
 }
