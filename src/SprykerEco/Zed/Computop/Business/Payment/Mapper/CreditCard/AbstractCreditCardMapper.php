@@ -90,7 +90,7 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
         $computopCreditCardPaymentTransfer = $orderTransfer->getComputopCreditCard();
 
         $computopCreditCardPaymentTransfer->setMac(
-            $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
+            $this->computopService->getMacEncryptedValue($computopCreditCardPaymentTransfer)
         );
 
         return $computopCreditCardPaymentTransfer;

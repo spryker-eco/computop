@@ -24,7 +24,7 @@ interface ComputopServiceInterface
      *
      * @return string
      */
-    public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
      * @param array $decryptedArray

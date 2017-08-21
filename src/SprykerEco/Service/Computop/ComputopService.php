@@ -28,7 +28,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     /**
      * @inheritdoc
      */
-    public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         $value = $this->getFactory()->createComputopMapper()->getMacEncryptedValue($cardPaymentTransfer);
         return $this->getHashHmacValue($value);

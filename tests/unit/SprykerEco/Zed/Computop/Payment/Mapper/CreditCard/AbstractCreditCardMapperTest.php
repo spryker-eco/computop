@@ -92,7 +92,7 @@ abstract class AbstractCreditCardMapperTest extends Test
 
         $computopServiceMock = $this->createPartialMock(
             ComputopToComputopServiceBridge::class,
-            ['getComputopMacHashHmacValue', 'getEncryptedArray']
+            ['getMacEncryptedValue', 'getEncryptedArray']
         );
         $computopServiceMock->method('getEncryptedArray')
             ->willReturn($encryptedArray);

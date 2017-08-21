@@ -39,9 +39,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
-    public function getComputopMacHashHmacValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        return $this->computopService->getComputopMacHashHmacValue($cardPaymentTransfer);
+        return $this->computopService->getMacEncryptedValue($cardPaymentTransfer);
     }
 
     /**

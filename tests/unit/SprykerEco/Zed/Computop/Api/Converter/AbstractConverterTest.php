@@ -82,7 +82,7 @@ abstract class AbstractConverterTest extends Test
         $header->setMId($decryptedArray[ComputopConstants::MID_F_N]);
         $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
         $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
-        $header->setIsSuccess($header->getStatus() == ComputopConstants::SUCCESS_STATUS);
+        $header->setIsSuccess($header->getStatus() === ComputopConstants::SUCCESS_STATUS);
         $header->setMethod($method);
         $header->setXId($decryptedArray[ComputopConstants::XID_F_N]);
 

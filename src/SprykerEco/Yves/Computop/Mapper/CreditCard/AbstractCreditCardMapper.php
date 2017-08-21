@@ -49,7 +49,7 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
         $computopCreditCardPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
         $computopCreditCardPaymentTransfer->setMac(
-            $this->computopService->getComputopMacHashHmacValue($computopCreditCardPaymentTransfer)
+            $this->computopService->getMacEncryptedValue($computopCreditCardPaymentTransfer)
         );
 
         $decryptedValues = $this->computopService->getEncryptedArray(
