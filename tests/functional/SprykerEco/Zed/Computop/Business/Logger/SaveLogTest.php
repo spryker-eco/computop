@@ -29,7 +29,7 @@ class SaveLogTest extends AbstractLoggerTest
     const TRANS_ID_VALUE = 'TRANS_ID_VALUE';
     const STATUS_VALUE = 'OK';
     const CODE_VALUE = '00000000';
-    const DESCRIPTION_VALUE = '00000000';
+    const DESCRIPTION_VALUE = 'DESCRIPTION_VALUE';
 
     /**
      * @return void
