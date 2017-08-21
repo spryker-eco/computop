@@ -8,7 +8,6 @@
 namespace SprykerEco\Service\Computop\Model\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Spryker\Shared\Config\Config;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -78,19 +77,9 @@ class Computop extends AbstractComputop implements ComputopInterface
      */
     public function checkMacResponse($responseMac, $neededMac, $method)
     {
-        if ($this->isMacRequired($method) && $responseMac !== $neededMac) {
+        if ($this->config->isMacRequired($method) && $responseMac !== $neededMac) {
             throw  new ComputopConverterException('MAC is incorrect');
         }
-    }
-
-    /**
-     * @param string $method
-     *
-     * @return bool
-     */
-    protected function isMacRequired($method)
-    {
-        return array_key_exists($method, Config::get(ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED_KEY));
     }
 
     /**

@@ -9,7 +9,6 @@ namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Spryker\Shared\Config\Config;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -71,7 +70,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         $description = '';
 
-        if (Config::get(ComputopConstants::COMPUTOP_TEST_ENABLED_KEY)) {
+        if ($this->config->isTestMode()) {
             $description = ComputopConstants::ORDER_DESC_SUCCESS;
         }
 

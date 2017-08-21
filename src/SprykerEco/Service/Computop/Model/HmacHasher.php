@@ -7,8 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
-use Spryker\Shared\Config\Config;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Service\Computop\ComputopConfig;
 
 class HmacHasher implements HmacHasherInterface
 {
@@ -16,12 +15,27 @@ class HmacHasher implements HmacHasherInterface
     const SHA256 = 'sha256';
 
     /**
+     * @var \SprykerEco\Service\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
+     * Computop constructor.
+     *
+     * @param \SprykerEco\Service\Computop\ComputopConfig $config
+     */
+    public function __construct(ComputopConfig $config)
+    {
+        $this->config = $config;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getEncryptedValue($value)
     {
         return strtoupper(
-            hash_hmac(self::SHA256, $value, Config::get(ComputopConstants::COMPUTOP_HMAC_PASSWORD_KEY))
+            hash_hmac(self::SHA256, $value, $this->config->getHmacPassword())
         );
     }
 

@@ -29,7 +29,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
      */
     public function createComputopConverter()
     {
-        return new ComputopConverter();
+        return new ComputopConverter(new ComputopConfig());
     }
 
     /**
@@ -37,7 +37,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
      */
     public function createComputopMapper()
     {
-        return new ComputopMapper();
+        return new ComputopMapper(new ComputopConfig());
     }
 
     /**
@@ -45,7 +45,7 @@ class ComputopServiceFactory extends AbstractServiceFactory
      */
     public function createHmacHasher()
     {
-        return new HmacHasher();
+        return new HmacHasher(new ComputopConfig());
     }
 
 }
