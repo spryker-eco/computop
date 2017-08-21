@@ -67,7 +67,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         ];
 
         if (!$this->checkArrayKeysExists($keys, $responseArray)) {
-            throw  new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
+            throw new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
         }
     }
 
@@ -78,7 +78,7 @@ class Computop extends AbstractComputop implements ComputopInterface
     public function checkMacResponse($responseMac, $neededMac, $method)
     {
         if ($this->config->isMacRequired($method) && $responseMac !== $neededMac) {
-            throw  new ComputopConverterException('MAC is incorrect');
+            throw new ComputopConverterException('MAC is incorrect');
         }
     }
 
@@ -98,7 +98,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         ];
 
         if (!$this->checkArrayKeysExists($keys, $decryptedArray)) {
-            throw  new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
+            throw new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
         }
     }
 
