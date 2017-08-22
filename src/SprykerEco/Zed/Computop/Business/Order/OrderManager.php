@@ -30,25 +30,27 @@ class OrderManager implements OrderManagerInterface
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        if ($quoteTransfer->getPayment()->getPaymentProvider() === ComputopConstants::PROVIDER_NAME) {
-            $this->handleDatabaseTransaction(function () use ($quoteTransfer, $checkoutResponseTransfer) {
-
-                $paymentEntity = $this->savePaymentForOrder(
-                    $quoteTransfer->getPayment(),
-                    $checkoutResponseTransfer->getSaveOrder()
-                );
-
-                $this->savePaymentDetailForOrder(
-                    $quoteTransfer->getPayment(),
-                    $paymentEntity
-                );
-
-                $this->savePaymentForOrderItems(
-                    $checkoutResponseTransfer->getSaveOrder()->getOrderItems(),
-                    $paymentEntity->getIdPaymentComputop()
-                );
-            });
+        if ($quoteTransfer->getPayment()->getPaymentProvider() !== ComputopConstants::PROVIDER_NAME) {
+            return;
         }
+
+        $this->handleDatabaseTransaction(function () use ($quoteTransfer, $checkoutResponseTransfer) {
+
+            $paymentEntity = $this->savePaymentForOrder(
+                $quoteTransfer->getPayment(),
+                $checkoutResponseTransfer->getSaveOrder()
+            );
+
+            $this->savePaymentDetailForOrder(
+                $quoteTransfer->getPayment(),
+                $paymentEntity
+            );
+
+            $this->savePaymentForOrderItems(
+                $checkoutResponseTransfer->getSaveOrder()->getOrderItems(),
+                $paymentEntity->getIdPaymentComputop()
+            );
+        });
     }
 
     /**
