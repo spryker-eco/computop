@@ -100,7 +100,7 @@ abstract class AbstractPaymentRequest
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractManagerInterface|\SprykerEco\Zed\Computop\Business\Payment\Manager\Invoice\InvoiceManagerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function getMethodMapper($methodName)
     {

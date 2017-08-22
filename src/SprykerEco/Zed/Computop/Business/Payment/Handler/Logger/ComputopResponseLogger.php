@@ -15,6 +15,11 @@ class ComputopResponseLogger implements ComputopResponseLoggerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param string $method
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
     public function log(ComputopResponseHeaderTransfer $header, $method)
     {
