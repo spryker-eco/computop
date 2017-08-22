@@ -14,7 +14,7 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
 {
 
     const NAME = 'computop';
-    const BUNDLE_NAME = 'Computop';
+    const MODULE_NAME = 'Computop';
     const CALLBACK_CONTROLLER_NAME = 'Callback';
 
     const SUCCESS_PATH = '/computop/success';
@@ -33,7 +33,7 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
         $this->createController(
             self::SUCCESS_PATH,
             self::SUCCESS_PATH_NAME,
-            self::BUNDLE_NAME,
+            self::MODULE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'success'
         );
@@ -41,7 +41,7 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
         $this->createController(
             self::FAILURE_PATH,
             self::FAILURE_PATH_NAME,
-            self::BUNDLE_NAME,
+            self::MODULE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'failure'
         );
