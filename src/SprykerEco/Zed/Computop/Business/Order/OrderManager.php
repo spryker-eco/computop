@@ -18,7 +18,6 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-
 class OrderManager implements OrderManagerInterface
 {
 
@@ -97,7 +96,7 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
+     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
      * @param int $idPayment
      *
      * @return void

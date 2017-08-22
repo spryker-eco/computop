@@ -32,7 +32,7 @@ abstract class AbstractPaymentRequest
     protected $paymentMethod;
 
     /**
-     * @var array|\SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface[]
+     * @var \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface[]
      */
     protected $methodMappers = [];
 

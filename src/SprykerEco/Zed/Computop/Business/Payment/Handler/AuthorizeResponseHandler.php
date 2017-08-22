@@ -56,10 +56,11 @@ class AuthorizeResponseHandler extends AbstractResponseHandler
 
         foreach ($orderTransfer->getItems() as $selectedItem) {
             foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
-                if ($item->getFkSalesOrderItem() === $selectedItem->getIdSalesOrderItem()) {
-                    $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_AUTHORIZED);
-                    $item->save();
+                if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
+                    continue;
                 }
+                $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_AUTHORIZED);
+                $item->save();
             }
         }
 
