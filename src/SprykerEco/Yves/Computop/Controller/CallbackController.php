@@ -83,7 +83,7 @@ class CallbackController extends AbstractController
         $decryptedArray = $this
             ->getFactory()
             ->getComputopService()
-            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY));
+            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD));
 
         $header = $this->getFactory()->getComputopService()->extractHeader($decryptedArray, ComputopConstants::ORDER_METHOD);
         $computopCreditCardResponseTransfer = $this->getFactory()->createOrderCreditCardConverter()->createResponseTransfer($decryptedArray, $header);

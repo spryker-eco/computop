@@ -52,7 +52,7 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopCreditCardPaymentTransfer),
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY)
+            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
         );
 
         $length = $decryptedValues[ComputopConstants::LENGTH_F_N];

@@ -18,7 +18,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getMerchantId()
     {
-        return $this->get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_MERCHANT_ID);
     }
 
     /**
@@ -26,7 +26,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getBlowfishPass()
     {
-        return $this->get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
     }
 
     /**
@@ -34,7 +34,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getAuthorizeAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION);
     }
 
     /**
@@ -42,7 +42,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getCaptureAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION);
     }
 
     /**
@@ -50,7 +50,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getRefundAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REFUND_ACTION_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REFUND_ACTION);
     }
 
     /**
@@ -58,7 +58,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getInquireAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION);
     }
 
     /**
@@ -66,7 +66,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getReverseAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REVERSE_ACTION_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REVERSE_ACTION);
     }
 
     /**
@@ -74,7 +74,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function isRefundShipmentPriceEnabled()
     {
-        return $this->get(ComputopConstants::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED_KEY);
+        return $this->get(ComputopConstants::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED);
     }
 
 }

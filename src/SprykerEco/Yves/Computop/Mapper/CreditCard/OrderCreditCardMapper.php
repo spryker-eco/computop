@@ -30,7 +30,7 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
         $computopCreditCardPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID_KEY));
+        $computopCreditCardPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
         $computopCreditCardPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopCreditCardPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
@@ -96,7 +96,7 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
      */
     protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $length)
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION_KEY) . '?' . http_build_query([
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION) . '?' . http_build_query([
                 ComputopConstants::MERCHANT_ID_F_N => $computopCreditCardPaymentTransfer->getMerchantId(),
                 ComputopConstants::DATA_F_N => $data,
                 ComputopConstants::LENGTH_F_N => $length,
