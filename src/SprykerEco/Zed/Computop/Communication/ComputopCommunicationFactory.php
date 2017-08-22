@@ -31,11 +31,11 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @param int $orderId
      *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
     public function getComputopPaymentByOrderId($orderId)
     {
-        return $this->getQueryContainer()->queryPaymentByOrderId($orderId)->findOne();
+        return $this->getQueryContainer()->queryPaymentByOrderId($orderId);
     }
 
     /**

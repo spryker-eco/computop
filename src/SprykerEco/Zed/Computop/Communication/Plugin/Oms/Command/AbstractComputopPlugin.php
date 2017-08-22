@@ -54,7 +54,10 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
      */
     protected function createComputopCreditCardPaymentTransfer(OrderTransfer $orderTransfer)
     {
-        $savedSpyPaymentComputop = $this->getFactory()->getComputopPaymentByOrderId($orderTransfer->getIdSalesOrder());
+        $savedSpyPaymentComputop = $this
+            ->getFactory()
+            ->getComputopPaymentByOrderId($orderTransfer->getIdSalesOrder())
+            ->findOne();
 
         $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
         $computopCreditCardPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
