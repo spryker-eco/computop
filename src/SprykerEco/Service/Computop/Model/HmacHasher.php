@@ -12,7 +12,7 @@ use SprykerEco\Service\Computop\ComputopConfig;
 class HmacHasher implements HmacHasherInterface
 {
 
-    const SHA256 = 'sha256';
+    const HASH_TYPE = 'sha256';
 
     /**
      * @var \SprykerEco\Service\Computop\ComputopConfig
@@ -35,7 +35,7 @@ class HmacHasher implements HmacHasherInterface
     public function getEncryptedValue($value)
     {
         return strtoupper(
-            hash_hmac(self::SHA256, $value, $this->config->getHmacPassword())
+            hash_hmac(self::HASH_TYPE, $value, $this->config->getHmacPassword())
         );
     }
 
