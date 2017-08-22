@@ -31,7 +31,7 @@ class CallbackController extends AbstractController
     public function initialize()
     {
         $this->creditCardOrderResponseTransfer = $this->getComputopCreditCardOrderResponseTransfer();
-        $this->getFactory()->createComputopClient()->logResponse($this->creditCardOrderResponseTransfer->getHeader());
+        $this->getFactory()->getComputopClient()->logResponse($this->creditCardOrderResponseTransfer->getHeader());
     }
 
     /**
@@ -39,7 +39,7 @@ class CallbackController extends AbstractController
      */
     public function successAction()
     {
-        $quoteTransfer = $this->getFactory()->createQuoteClient()->getQuote();
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $quoteTransfer = $this->getFactory()->createPaymentHandler()->addPaymentToQuote(
             $quoteTransfer,
             $this->creditCardOrderResponseTransfer
@@ -49,7 +49,7 @@ class CallbackController extends AbstractController
             $this->addErrorMessage('Please login and try again');
         }
 
-        $this->getFactory()->createQuoteClient()->setQuote($quoteTransfer);
+        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
 
         return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUMMARY);
     }
@@ -84,10 +84,10 @@ class CallbackController extends AbstractController
         $responseArray = $this->getApplication()['request']->query->all();
         $decryptedArray = $this
             ->getFactory()
-            ->createComputopService()
+            ->getComputopService()
             ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD_KEY));
 
-        $header = $this->getFactory()->createComputopService()->extractHeader($decryptedArray, ComputopConstants::ORDER_METHOD);
+        $header = $this->getFactory()->getComputopService()->extractHeader($decryptedArray, ComputopConstants::ORDER_METHOD);
         $computopCreditCardResponseTransfer = $this->getFactory()->createOrderCreditCardConverter()->createResponseTransfer($decryptedArray, $header);
 
         return $computopCreditCardResponseTransfer;

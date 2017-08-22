@@ -30,13 +30,13 @@ class ComputopFactory extends AbstractFactory
      */
     public function createCreditCardFormDataProvider()
     {
-        return new CreditCardFormDataProvider($this->createQuoteClient(), $this->createOrderCreditCardMapper());
+        return new CreditCardFormDataProvider($this->getQuoteClient(), $this->createOrderCreditCardMapper());
     }
 
     /**
      * @return \SprykerEco\Client\Computop\ComputopClient
      */
-    public function createComputopClient()
+    public function getComputopClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_CLIENT);
     }
@@ -44,7 +44,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
      */
-    public function createComputopService()
+    public function getComputopService()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
     }
@@ -52,7 +52,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Silex\Application
      */
-    public function createApplication()
+    public function getApplication()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::PLUGIN_APPLICATION);
     }
@@ -60,7 +60,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
      */
-    public function createQuoteClient()
+    public function getQuoteClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
     }
@@ -86,7 +86,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderCreditCardMapper()
     {
-        return new OrderCreditCardMapper($this->createComputopService(), $this->createApplication());
+        return new OrderCreditCardMapper($this->getComputopService(), $this->getApplication());
     }
 
 }
