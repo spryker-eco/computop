@@ -18,8 +18,6 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 class CallbackController extends AbstractController
 {
 
-    const ERROR_MESSAGE = 'Error message';
-
     /**
      * @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
      */
@@ -70,7 +68,7 @@ class CallbackController extends AbstractController
     protected function getErrorMessageText()
     {
         $responseTransfer = $this->creditCardOrderResponseTransfer;
-        $errorMessageText = self::ERROR_MESSAGE;
+        $errorMessageText = 'Error:';
         $errorMessageText .= ' (' . $responseTransfer->getHeader()->getDescription() . ' | ' . $responseTransfer->getHeader()->getCode() . ')';
 
         return $errorMessageText;
