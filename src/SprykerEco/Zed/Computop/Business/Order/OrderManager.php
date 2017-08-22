@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order;
 
+use ArrayObject;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -16,6 +17,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
+
 
 class OrderManager implements OrderManagerInterface
 {
@@ -95,12 +97,12 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
+     * @param ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
      * @param int $idPayment
      *
      * @return void
      */
-    protected function savePaymentForOrderItems($orderItemTransfers, $idPayment)
+    protected function savePaymentForOrderItems(ArrayObject $orderItemTransfers, $idPayment)
     {
         foreach ($orderItemTransfers as $orderItemTransfer) {
             $paymentOrderItemEntity = new SpyPaymentComputopOrderItem();
