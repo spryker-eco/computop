@@ -59,7 +59,7 @@ trait FunctionalTesterActions
      * @param string $table
      * @param array $data
      *
-     * @return integer $id
+     * @return int $id
      * @see \Codeception\Module\Db::haveInDatabase()
      */
     public function haveInDatabase($table, $data) {

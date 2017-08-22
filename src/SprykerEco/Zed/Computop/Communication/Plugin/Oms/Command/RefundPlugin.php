@@ -52,7 +52,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return integer
+     * @return int
      */
     protected function getAmount(OrderTransfer $orderTransfer)
     {

@@ -52,7 +52,7 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return integer
+     * @return int
      */
     protected function getAmount(OrderTransfer $orderTransfer)
     {
