@@ -9,15 +9,13 @@ namespace SprykerEco\Yves\Computop\Form;
 
 use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use SprykerEco\Shared\Computop\ComputopConstants;
 use Symfony\Component\Form\FormBuilderInterface;
 
 abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface
 {
-
-    const FIELD_MERCHANT_ID = 'MerchantID';
-    const FIELD_DATA = 'Data';
-    const FIELD_LEN = 'Len';
     const FIELD_URL = 'url';
+    const FIELD_LENGTH = 'Length';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -28,7 +26,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     protected function addMerchantId(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_MERCHANT_ID,
+            ComputopConstants::MERCHANT_ID_F_N,
             'hidden'
         );
         return $this;
@@ -43,7 +41,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     protected function addData(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_DATA,
+            ComputopConstants::DATA_F_N,
             'hidden'
         );
 
@@ -59,7 +57,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     protected function addLen(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_LEN,
+            self::FIELD_LENGTH,
             'hidden'
         );
 
