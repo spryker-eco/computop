@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
@@ -116,7 +117,7 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      */
     protected function setInfoMessage($messageValue)
     {
-        $message = $this->getMessage($messageValue);
+        $message = $this->getMessageTransfer($messageValue);
 
         $this->getFactory()
             ->getFlashMessengerFacade()
@@ -130,11 +131,11 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      */
     protected function setErrorMessage($messageValue)
     {
-        $message = $this->getMessage($messageValue);
+        $messageTransfer = $this->getMessageTransfer($messageValue);
 
         $this->getFactory()
             ->getFlashMessengerFacade()
-            ->addErrorMessage($message);
+            ->addErrorMessage($messageTransfer);
     }
 
     /**
@@ -142,12 +143,12 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      *
      * @return \Generated\Shared\Transfer\MessageTransfer
      */
-    protected function getMessage($messageValue)
+    protected function getMessageTransfer($messageValue)
     {
-        return $this
-            ->getFactory()
-            ->createMessage()
-            ->setValue($messageValue);
+        $messageTransfer = new MessageTransfer();
+        $messageTransfer->setValue($messageValue);
+
+        return $messageTransfer;
     }
 
     /**

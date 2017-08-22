@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Communication;
 
-use Generated\Shared\Transfer\MessageTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
@@ -46,14 +45,6 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(
             ComputopDependencyProvider::FACADE_FLASH_MESSENGER
         );
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
-    public function createMessage()
-    {
-        return new MessageTransfer();
     }
 
     /**
