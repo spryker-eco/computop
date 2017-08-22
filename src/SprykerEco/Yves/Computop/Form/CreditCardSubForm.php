@@ -69,17 +69,4 @@ class CreditCardSubForm extends AbstractSubForm
             'data_class' => ComputopCreditCardPaymentTransfer::class,
         ])->setRequired(self::OPTIONS_FIELD_NAME);
     }
-
-    /**
-     * @deprecated Use `configureOptions()` instead.
-     *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     *
-     * @return void
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
 }
