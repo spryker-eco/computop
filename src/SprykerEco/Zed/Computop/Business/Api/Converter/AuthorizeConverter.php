@@ -18,7 +18,7 @@ class AuthorizeConverter extends AbstractConverter implements ConverterInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
      */
-    protected function getResponseTransfer($decryptedArray)
+    protected function getResponseTransfer(array $decryptedArray)
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardAuthorizeResponseTransfer();
 

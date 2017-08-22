@@ -18,7 +18,7 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
      */
-    protected function getResponseTransfer($decryptedArray)
+    protected function getResponseTransfer(array $decryptedArray)
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardCaptureResponseTransfer();
 

@@ -20,7 +20,7 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer
      */
-    protected function getResponseTransfer($decryptedArray)
+    protected function getResponseTransfer(array $decryptedArray)
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardInquireResponseTransfer();
 

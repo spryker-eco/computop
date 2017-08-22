@@ -18,7 +18,7 @@ class RefundConverter extends AbstractConverter implements ConverterInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardRefundResponseTransfer
      */
-    protected function getResponseTransfer($decryptedArray)
+    protected function getResponseTransfer(array $decryptedArray)
     {
         $computopCreditCardResponseTransfer = new ComputopCreditCardRefundResponseTransfer();
         $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);

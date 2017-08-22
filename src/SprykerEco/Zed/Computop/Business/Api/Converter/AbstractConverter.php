@@ -67,6 +67,6 @@ abstract class AbstractConverter
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    abstract protected function getResponseTransfer($decryptedArray);
+    abstract protected function getResponseTransfer(array $decryptedArray);
 
 }
