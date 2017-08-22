@@ -16,6 +16,7 @@ class CancelItemManager implements CancelItemManagerInterface
 {
 
     use DatabaseTransactionHandlerTrait;
+
     /**
      * @inheritdoc
      */
