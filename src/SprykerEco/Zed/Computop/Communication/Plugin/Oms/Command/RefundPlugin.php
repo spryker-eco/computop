@@ -28,7 +28,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 
     /**
      *
-     * Inherit
+     * {@inheritdoc}
      *
      * @api
      *

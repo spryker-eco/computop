@@ -24,7 +24,7 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 
     /**
      *
-     * Inherit
+     * {@inheritdoc}
      *
      * @api
      *

@@ -28,7 +28,7 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
 
     /**
      *
-     * Inherit
+     * {@inheritdoc}
      *
      * @api
      *

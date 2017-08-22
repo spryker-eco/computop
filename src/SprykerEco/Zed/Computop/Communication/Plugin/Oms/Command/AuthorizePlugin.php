@@ -21,7 +21,7 @@ class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderIn
 
     /**
      *
-     * Inherit
+     * {@inheritdoc}
      *
      * @api
      *
