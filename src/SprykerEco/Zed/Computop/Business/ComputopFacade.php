@@ -41,7 +41,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -65,7 +65,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function inquirePaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -89,7 +89,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function reversePaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -128,7 +128,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -152,7 +152,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardRefundResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function refundPaymentRequest(OrderTransfer $orderTransfer)
     {

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -19,13 +20,13 @@ class RefundResponseHandler extends AbstractResponseHandler
     const METHOD = 'REFUND';
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
     public function handle(
-        $responseTransfer,
+        TransferInterface $responseTransfer,
         OrderTransfer $orderTransfer
     ) {
         $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {

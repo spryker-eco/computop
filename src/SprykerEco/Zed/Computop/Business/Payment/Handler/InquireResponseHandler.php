@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
 use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class InquireResponseHandler extends AbstractResponseHandler
@@ -19,13 +20,13 @@ class InquireResponseHandler extends AbstractResponseHandler
     const METHOD = 'INQUIRE';
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
     public function handle(
-        $responseTransfer,
+        TransferInterface $responseTransfer,
         OrderTransfer $orderTransfer
     ) {
         $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {
