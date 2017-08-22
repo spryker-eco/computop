@@ -67,7 +67,11 @@ abstract class AbstractApiAdapter implements AdapterInterface
                 $options
             );
         } catch (RequestException $requestException) {
-            throw new ComputopHttpRequestException($requestException->getMessage());
+            throw new ComputopHttpRequestException(
+                $requestException->getMessage(),
+                $requestException->getCode(),
+                $requestException
+            );
         }
 
         return $response->getBody();
