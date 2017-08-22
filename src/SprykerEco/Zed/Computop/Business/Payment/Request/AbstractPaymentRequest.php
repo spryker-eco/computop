@@ -54,7 +54,7 @@ abstract class AbstractPaymentRequest
     /**
      * @param array $requestData
      *
-     * @return mixed
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     protected function sendRequest(array $requestData)
     {
@@ -74,7 +74,7 @@ abstract class AbstractPaymentRequest
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return mixed
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     public function request(OrderTransfer $orderTransfer)
     {

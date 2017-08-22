@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CreditCardSubForm extends AbstractSubForm
 {
@@ -69,4 +68,5 @@ class CreditCardSubForm extends AbstractSubForm
             'data_class' => ComputopCreditCardPaymentTransfer::class,
         ])->setRequired(self::OPTIONS_FIELD_NAME);
     }
+
 }

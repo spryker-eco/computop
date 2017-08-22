@@ -31,7 +31,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @param int $orderId
      *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop mixed
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
     public function getComputopPaymentByOrderId($orderId)
     {

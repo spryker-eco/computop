@@ -22,11 +22,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
-     *
-     * @return void
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
@@ -38,10 +33,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -62,10 +53,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
      */
     public function inquirePaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -86,10 +73,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
      */
     public function reversePaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -110,10 +93,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
-     *
-     * @return void
      */
     public function cancelPaymentItem(SpySalesOrderItem $orderItem)
     {
@@ -124,11 +103,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
+     * {@inheritdoc
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -149,10 +124,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
      */
     public function refundPaymentRequest(OrderTransfer $orderTransfer)
     {
@@ -172,10 +143,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
-     * @param string $method
-     *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * {@inheritdoc}
      */
     public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method)
     {

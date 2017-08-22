@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface
 {
+
     const FIELD_URL = 'url';
     const FIELD_LENGTH = 'Length';
 

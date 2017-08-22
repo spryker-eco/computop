@@ -15,7 +15,7 @@ interface CreditCartRequestInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return mixed
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     public function request(OrderTransfer $orderTransfer);
 

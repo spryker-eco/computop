@@ -24,7 +24,7 @@ abstract class AbstractCreditCardMapperTest extends Test
     /**
      * Return needed mapper
      *
-     * @return mixed
+     * @return \SprykerEco\Yves\Computop\Mapper\CreditCard\CreditCardMapperInterface
      */
     abstract protected function createMapper();
 

@@ -30,9 +30,23 @@ interface ComputopFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return mixed
+     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer
+     */
+    public function inquirePaymentRequest(OrderTransfer $orderTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer
+     */
+    public function reversePaymentRequest(OrderTransfer $orderTransfer);
 
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
@@ -44,30 +58,23 @@ interface ComputopFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return mixed
+     * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardRefundResponseTransfer
+     */
+    public function refundPaymentRequest(OrderTransfer $orderTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      * @param string $method
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
     public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method);
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
-     */
-    public function inquirePaymentRequest(OrderTransfer $orderTransfer);
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return mixed
-     */
-    public function reversePaymentRequest(OrderTransfer $orderTransfer);
 
 }

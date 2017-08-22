@@ -13,7 +13,7 @@ interface ResponseHandlerInterface
 {
 
     /**
-     * @param mixed $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void

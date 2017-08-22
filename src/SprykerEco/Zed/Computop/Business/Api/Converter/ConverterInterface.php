@@ -15,7 +15,7 @@ interface ConverterInterface
     /**
      * @param \GuzzleHttp\Psr7\Stream $response
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     public function toTransactionResponseTransfer(Stream $response);
 
