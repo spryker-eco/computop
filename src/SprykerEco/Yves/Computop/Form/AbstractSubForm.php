@@ -16,7 +16,6 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
 {
 
     const FIELD_URL = 'url';
-    const FIELD_LENGTH = 'Length';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -58,7 +57,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     protected function addLen(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_LENGTH,
+            ComputopConstants::LENGTH_F_N,
             'hidden'
         );
 

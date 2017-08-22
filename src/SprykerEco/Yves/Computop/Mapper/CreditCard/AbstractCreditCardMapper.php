@@ -59,7 +59,7 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
         $data = $decryptedValues[ComputopConstants::DATA_F_N];
 
         $computopCreditCardPaymentTransfer->setData($data);
-        $computopCreditCardPaymentTransfer->setLength($length);
+        $computopCreditCardPaymentTransfer->setLen($length);
         $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $length));
 
         return $computopCreditCardPaymentTransfer;
