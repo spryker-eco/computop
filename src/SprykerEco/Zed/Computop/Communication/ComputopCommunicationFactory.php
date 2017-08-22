@@ -29,16 +29,6 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param int $orderId
-     *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
-     */
-    public function getComputopPaymentByOrderId($orderId)
-    {
-        return $this->getQueryContainer()->queryPaymentByOrderId($orderId);
-    }
-
-    /**
      * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationInterface
      */
     public function getCalculationFacade()
