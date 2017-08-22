@@ -22,8 +22,6 @@ abstract class AbstractComputop
     protected $config;
 
     /**
-     * Computop constructor.
-     *
      * @param \SprykerEco\Service\Computop\ComputopConfig $config
      */
     public function __construct(ComputopConfig $config)

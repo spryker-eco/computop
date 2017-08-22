@@ -19,8 +19,6 @@ class ComputopToComputopClientBridge implements ComputopToComputopClientInterfac
     protected $computopClient;
 
     /**
-     * ComputopToComputopClientBridge constructor.
-     *
      * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
      */
     public function __construct(ComputopClientInterface $computopClient)

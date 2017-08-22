@@ -28,8 +28,6 @@ abstract class AbstractCreditCardMapper extends AbstractMapper implements Credit
     protected $config;
 
     /**
-     * CreditCardMapper constructor.
-     *
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */

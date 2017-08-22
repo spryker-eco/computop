@@ -28,8 +28,6 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
     protected $application;
 
     /**
-     * CreditCardMapper constructor.
-     *
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
      * @param \Silex\Application $application
      */

@@ -37,8 +37,6 @@ abstract class AbstractPaymentRequest
     protected $methodMappers = [];
 
     /**
-     * AbstractPaymentRequest constructor.
-     *
      * @param \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface $adapter
      * @param \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface $converter
      * @param string $paymentMethod

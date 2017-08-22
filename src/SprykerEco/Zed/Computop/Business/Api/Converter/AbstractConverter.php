@@ -25,8 +25,6 @@ abstract class AbstractConverter
     protected $config;
 
     /**
-     * CreditCardMapper constructor.
-     *
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
