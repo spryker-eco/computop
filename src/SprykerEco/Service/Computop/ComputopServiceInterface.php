@@ -57,7 +57,7 @@ interface ComputopServiceInterface
      *
      * @return string
      */
-    public function getHashHmacValue($value);
+    public function getHashValue($value);
 
     /**
      * @param string $plaintext

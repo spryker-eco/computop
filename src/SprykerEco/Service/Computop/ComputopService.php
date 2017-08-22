@@ -31,7 +31,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
         $value = $this->getFactory()->createComputopMapper()->getMacEncryptedValue($cardPaymentTransfer);
-        return $this->getHashHmacValue($value);
+        return $this->getHashValue($value);
     }
 
     /**
@@ -42,7 +42,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
         /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
         $header = $this->getFactory()->createComputopConverter()->extractHeader($decryptedArray, $method);
 
-        $neededMac = $this->getHashHmacValue($this->getFactory()->createComputopMapper()->getMacResponseEncryptedValue($header));
+        $neededMac = $this->getHashValue($this->getFactory()->createComputopMapper()->getMacResponseEncryptedValue($header));
         $this
             ->getFactory()
             ->createComputopConverter()
@@ -97,7 +97,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     /**
      * @inheritdoc
      */
-    public function getHashHmacValue($value)
+    public function getHashValue($value)
     {
         return $this->getFactory()->createHmacHasher()->getEncryptedValue($value);
     }
