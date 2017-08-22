@@ -349,7 +349,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createCancelItemManager()
     {
-        return new CancelItemManager();
+        return new CancelItemManager($this->getQueryContainer());
     }
 
 }

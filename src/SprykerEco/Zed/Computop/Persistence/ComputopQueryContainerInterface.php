@@ -19,4 +19,29 @@ interface ComputopQueryContainerInterface
      */
     public function queryPaymentById($idPayment);
 
+    /**
+     * @api
+     *
+     * @param int $idOrder
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
+     */
+    public function queryPaymentByOrderId($idOrder);
+
+    /**
+     * @api
+     *
+     * @param string $idPay
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
+     */
+    public function queryPaymentByPayId($idPay);
+
+    /**
+     * @param int $orderItemId
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
+     */
+    public function queryPaymentItemByOrderItemId($orderItemId);
+
 }

@@ -58,6 +58,18 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * @param int $orderItemId
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
+     */
+    public function queryPaymentItemByOrderItemId($orderItemId)
+    {
+        return $this
+            ->queryPaymentOrderItems()
+            ->filterByFkSalesOrderItem($orderItemId);
+    }
+
+    /**
      * @api
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
@@ -67,6 +79,16 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
         return $this
             ->getFactory()
             ->createPaymentComputopQuery();
+    }
+
+    /**
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
+     */
+    protected function queryPaymentOrderItems()
+    {
+        return $this
+            ->getFactory()
+            ->createPaymentComputopOrderItemQuery();
     }
 
 }
