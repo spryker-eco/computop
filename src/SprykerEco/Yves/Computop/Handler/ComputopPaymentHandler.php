@@ -27,7 +27,7 @@ class ComputopPaymentHandler
                 $creditCardOrderResponseTransfer
             );
 
-            $this->setPaymentProviderMethodSelection($quoteTransfer);
+            $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer);
         }
 
         return $quoteTransfer;
@@ -36,7 +36,7 @@ class ComputopPaymentHandler
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer)
     {
@@ -45,6 +45,8 @@ class ComputopPaymentHandler
             ->setPaymentProvider(ComputopConstants::PROVIDER_NAME)
             ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD)
             ->setPaymentSelection(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
+
+        return $quoteTransfer;
     }
 
 }
