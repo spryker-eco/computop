@@ -1,6 +1,7 @@
 {
   "name": "spryker-eco/computop",
   "description": "Computop Module",
+  "license": "MIT",
   "require": {
     "spryker/guzzle": "^2.1.0"
   },
@@ -10,9 +11,28 @@
     }
   },
   "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "process-timeout": 600
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://code.spryker.com/repo/private"
+    }
+  ],
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     }
+  },
+  "require-dev": {
+    "spryker/code-sniffer": "dev-master"
+  },
+  "scripts": {
+    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v --ignore=/vendor/ ./",
+    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v --ignore=/vendor/ ./"
   }
 }
