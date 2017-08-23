@@ -7,7 +7,6 @@
 
 namespace Unit\SprykerEco\Service\Computop;
 
-use Codeception\TestCase\Test;
 use SprykerEco\Service\Computop\Model\HmacHasher;
 
 /**
@@ -18,11 +17,11 @@ use SprykerEco\Service\Computop\Model\HmacHasher;
  * @group Api
  * @group ComputopHashTest
  */
-class ComputopHashTest extends Test
+class ComputopHashTest extends AbstractComputopTest
 {
 
     const VALUE = 'value';
-    const EXPECTED_VALUE = '4BA185559569C2D0660D1D06782893D5436F4F98AD64A3CE8BAA8E7919DD919E';
+    const EXPECTED_VALUE = '18B40402BBF3FEED824E9F762B412F1108C4D678B2A067425B99963CD68B1D6A';
 
     /**
      * @return void
@@ -40,7 +39,7 @@ class ComputopHashTest extends Test
      */
     public function createService()
     {
-        return new HmacHasher();
+        return new HmacHasher($this->createComputopConfigMock());
     }
 
 }

@@ -7,12 +7,12 @@
 
 namespace Unit\SprykerEco\Service\Computop\Mapper;
 
-use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Model\Mapper\Computop;
+use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
 
-abstract class AbstractMapperTest extends Test
+abstract class AbstractMapperTest extends AbstractComputopTest
 {
 
     const PAY_ID_VALUE = 'PAY_ID_VALUE';
@@ -33,7 +33,7 @@ abstract class AbstractMapperTest extends Test
      */
     protected function createMapper()
     {
-        return new Computop();
+        return new Computop($this->createComputopConfigMock());
     }
 
     /**

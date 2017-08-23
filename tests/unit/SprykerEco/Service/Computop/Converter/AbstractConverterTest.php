@@ -7,10 +7,10 @@
 
 namespace Unit\SprykerEco\Service\Computop\Converter;
 
-use Codeception\TestCase\Test;
 use SprykerEco\Service\Computop\Model\Converter\Computop;
+use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
 
-abstract class AbstractConverterTest extends Test
+abstract class AbstractConverterTest extends AbstractComputopTest
 {
 
     /**
@@ -18,7 +18,7 @@ abstract class AbstractConverterTest extends Test
      */
     protected function createConverter()
     {
-        return new Computop();
+        return new Computop($this->createComputopConfigMock());
     }
 
 }
