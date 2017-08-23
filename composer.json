@@ -6,7 +6,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SprykerEco\\": "src/"
+      "SprykerEco\\": "src/SprykerEco/"
     }
   },
   "minimum-stability": "dev",
