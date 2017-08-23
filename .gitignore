@@ -8,3 +8,7 @@
 *.AppleDouble
 *.AppleDB
 *.AppleDesktop
+/vendor/
+composer.lock
+composer.phar
+phpunit.phar
