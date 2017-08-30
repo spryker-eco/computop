@@ -1,3 +1,4 @@
+namespace: Computop
 actor: Tester
 paths:
     tests: tests
