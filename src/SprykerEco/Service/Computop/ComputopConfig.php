@@ -14,6 +14,12 @@ class ComputopConfig extends AbstractBundleConfig
 {
 
     /**
+     * Test mode enabled
+     * It changes description for API calls
+     */
+    const COMPUTOP_TEST_MODE_ENABLED = false;
+
+    /**
      * @param string $method
      *
      * @return bool
@@ -36,7 +42,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function isTestMode()
     {
-        return $this->get(ComputopConstants::COMPUTOP_TEST_ENABLED);
+        return self::COMPUTOP_TEST_MODE_ENABLED;
     }
 
 }

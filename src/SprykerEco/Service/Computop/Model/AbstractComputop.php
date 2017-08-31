@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
-use SprykerEco\Service\Computop\ComputopConfig;
+use Spryker\Service\Kernel\AbstractBundleConfig;
 
 abstract class AbstractComputop
 {
@@ -17,14 +17,14 @@ abstract class AbstractComputop
     const DATA_SUB_SEPARATOR = '=';
 
     /**
-     * @var \SprykerEco\Service\Computop\ComputopConfig
+     * @var \Spryker\Service\Kernel\AbstractBundleConfig
      */
     protected $config;
 
     /**
-     * @param \SprykerEco\Service\Computop\ComputopConfig $config
+     * @param \Spryker\Service\Kernel\AbstractBundleConfig $config
      */
-    public function __construct(ComputopConfig $config)
+    public function __construct(AbstractBundleConfig $config)
     {
         $this->config = $config;
     }

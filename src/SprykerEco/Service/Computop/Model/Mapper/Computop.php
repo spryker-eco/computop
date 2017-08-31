@@ -72,10 +72,10 @@ class Computop extends AbstractComputop implements ComputopInterface
 
         if ($this->config->isTestMode()) {
             $description = ComputopConstants::ORDER_DESC_SUCCESS;
+            $description .= self::ITEMS_SEPARATOR;
         }
 
         foreach ($items as $item) {
-            $description .= self::ITEMS_SEPARATOR;
             $description .= 'Name:' . $item->getName();
             $description .= self::ATTRIBUTES_SEPARATOR . 'Sku:' . $item->getSku();
             $description .= self::ATTRIBUTES_SEPARATOR . 'Quantity:' . $item->getQuantity();

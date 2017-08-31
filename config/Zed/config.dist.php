@@ -16,9 +16,6 @@ $config[ComputopConstants::COMPUTOP_CREDIT_CARD_REVERSE_ACTION] = 'https://www.c
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION] = 'https://www.computop-paygate.com/inquire.aspx';
 $config[ComputopConstants::COMPUTOP_CREDIT_CARD_REFUND_ACTION] = 'https://www.computop-paygate.com/credit.aspx';
 
-$config[ComputopConstants::COMPUTOP_TEST_ENABLED] = true; //Test mode enabled
-$config[ComputopConstants::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED] = true; //Refund with shipment price
-
 $config[ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED] = [
     ComputopConstants::ORDER_METHOD,
 //    ComputopConstants::CAPTURE_METHOD, // Todo: uncomment in case of Paygate form connection

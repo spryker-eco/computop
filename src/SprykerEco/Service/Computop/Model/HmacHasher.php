@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
-use SprykerEco\Service\Computop\ComputopConfig;
+use Spryker\Service\Kernel\AbstractBundleConfig;
 
 class HmacHasher implements HmacHasherInterface
 {
@@ -15,14 +15,14 @@ class HmacHasher implements HmacHasherInterface
     const HASH_TYPE = 'sha256';
 
     /**
-     * @var \SprykerEco\Service\Computop\ComputopConfig
+     * @var \Spryker\Service\Kernel\AbstractBundleConfig
      */
     protected $config;
 
     /**
-     * @param \SprykerEco\Service\Computop\ComputopConfig $config
+     * @param \Spryker\Service\Kernel\AbstractBundleConfig $config
      */
-    public function __construct(ComputopConfig $config)
+    public function __construct(AbstractBundleConfig $config)
     {
         $this->config = $config;
     }
