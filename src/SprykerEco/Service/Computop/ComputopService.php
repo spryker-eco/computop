@@ -18,7 +18,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
 {
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param array $items
+     *
+     * @return string
      */
     public function getDescriptionValue(array $items)
     {
@@ -26,7 +32,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
      */
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
@@ -35,7 +47,14 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param array $decryptedArray
+     * @param string $method
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
     public function extractHeader(array $decryptedArray, $method)
     {
@@ -52,7 +71,16 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param array $responseArray
+     * @param string $password
+     *
+     * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
+     * @return array
      */
     public function getDecryptedArray(array $responseArray, $password)
     {
@@ -76,7 +104,14 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param array $dataSubArray
+     * @param string $password
+     *
+     * @return array
      */
     public function getEncryptedArray(array $dataSubArray, $password)
     {
@@ -95,7 +130,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param string $value
+     *
+     * @return string
      */
     public function getHashValue($value)
     {
@@ -103,7 +144,15 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param string $plaintext
+     * @param int $length
+     * @param string $password
+     *
+     * @return string
      */
     public function getBlowfishEncryptedValue($plaintext, $length, $password)
     {
@@ -111,7 +160,15 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param string $cipher
+     * @param int $length
+     * @param string $password
+     *
+     * @return string
      */
     public function getBlowfishDecryptedValue($cipher, $length, $password)
     {

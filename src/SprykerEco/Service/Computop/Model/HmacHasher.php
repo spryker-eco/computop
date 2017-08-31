@@ -28,7 +28,9 @@ class HmacHasher implements HmacHasherInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $value
+     *
+     * @return string
      */
     public function getEncryptedValue($value)
     {

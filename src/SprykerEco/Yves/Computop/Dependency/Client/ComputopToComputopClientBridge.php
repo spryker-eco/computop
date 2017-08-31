@@ -27,7 +27,9 @@ class ComputopToComputopClientBridge implements ComputopToComputopClientInterfac
     }
 
     /**
-     * @inheritdoc
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $cardPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
     public function logResponse(ComputopResponseHeaderTransfer $cardPaymentTransfer)
     {

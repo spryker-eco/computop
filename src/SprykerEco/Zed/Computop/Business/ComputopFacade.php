@@ -113,7 +113,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
-     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager
+     * @return void
      */
     public function cancelPaymentItem(SpySalesOrderItem $orderItem)
     {

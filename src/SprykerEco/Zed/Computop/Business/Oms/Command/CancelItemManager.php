@@ -31,7 +31,9 @@ class CancelItemManager implements CancelItemManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
+     *
+     * @return void
      */
     public function changeComputopItemStatus(SpySalesOrderItem $orderItem)
     {

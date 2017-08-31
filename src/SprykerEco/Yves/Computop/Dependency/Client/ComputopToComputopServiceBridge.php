@@ -27,7 +27,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @inheritdoc
+     * @param array $items
+     *
+     * @return string
      */
     public function getDescriptionValue(array $items)
     {
@@ -35,7 +37,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @inheritdoc
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
      */
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
@@ -43,7 +47,10 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @inheritdoc
+     * @param array $decryptedArray
+     * @param string $method
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
     public function extractHeader(array $decryptedArray, $method)
     {
@@ -51,7 +58,10 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @inheritdoc
+     * @param array $responseArray
+     * @param string $password
+     *
+     * @return array
      */
     public function getDecryptedArray(array $responseArray, $password)
     {
@@ -59,7 +69,10 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @inheritdoc
+     * @param array $dataSubArray
+     * @param string $password
+     *
+     * @return array
      */
     public function getEncryptedArray(array $dataSubArray, $password)
     {

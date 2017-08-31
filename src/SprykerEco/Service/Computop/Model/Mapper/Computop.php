@@ -19,7 +19,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     const ATTRIBUTES_SEPARATOR = '-';
 
     /**
-     * @inheritdoc
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     *
+     * @return string
      */
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
@@ -35,7 +37,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @inheritdoc
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     *
+     * @return string
      */
     public function getMacResponseEncryptedValue(ComputopResponseHeaderTransfer $header)
     {
@@ -51,7 +55,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @inheritdoc
+     * @param array $dataSubArray
+     *
+     * @return string
      */
     public function getDataPlaintext(array $dataSubArray)
     {
@@ -64,7 +70,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @inheritdoc
+     * @param array $items
+     *
+     * @return string
      */
     public function getDescriptionValue(array $items)
     {

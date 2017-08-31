@@ -13,6 +13,11 @@ interface ComputopServiceInterface
 {
 
     /**
+     * Specification:
+     * - Generate description based on items
+     *
+     * @api
+     *
      * @param array $items
      *
      * @return string
@@ -20,6 +25,11 @@ interface ComputopServiceInterface
     public function getDescriptionValue(array $items);
 
     /**
+     * Specification:
+     * - Generate encrypted "Mac" value
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
      * @return string
@@ -27,6 +37,11 @@ interface ComputopServiceInterface
     public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
 
     /**
+     * Specification:
+     * - Generate header transfer by response array
+     *
+     * @api
+     *
      * @param array $decryptedArray
      * @param string $method
      *
@@ -35,6 +50,11 @@ interface ComputopServiceInterface
     public function extractHeader(array $decryptedArray, $method);
 
     /**
+     * Specification:
+     * - Generate decrypted response array
+     *
+     * @api
+     *
      * @param array $responseArray
      * @param string $password
      *
@@ -45,6 +65,11 @@ interface ComputopServiceInterface
     public function getDecryptedArray(array $responseArray, $password);
 
     /**
+     * Specification:
+     * - Generate encrypted array for response
+     *
+     * @api
+     *
      * @param array $dataSubArray
      * @param string $password
      *
@@ -53,6 +78,11 @@ interface ComputopServiceInterface
     public function getEncryptedArray(array $dataSubArray, $password);
 
     /**
+     * Specification:
+     * - Generate hash value
+     *
+     * @api
+     *
      * @param string $value
      *
      * @return string
@@ -60,6 +90,11 @@ interface ComputopServiceInterface
     public function getHashValue($value);
 
     /**
+     * Specification:
+     * - Generate blowfish encrypted value
+     *
+     * @api
+     *
      * @param string $plaintext
      * @param int $length
      * @param string $password
@@ -69,6 +104,11 @@ interface ComputopServiceInterface
     public function getBlowfishEncryptedValue($plaintext, $length, $password);
 
     /**
+     * Specification:
+     * - Generate blowfish decrypted value
+     *
+     * @api
+     *
      * @param string $cipher
      * @param int $length
      * @param string $password

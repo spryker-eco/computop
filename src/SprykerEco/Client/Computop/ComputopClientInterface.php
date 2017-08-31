@@ -16,6 +16,9 @@ interface ComputopClientInterface
 {
 
     /**
+     * Specification:
+     * - Save response log to DB
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer

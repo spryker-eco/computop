@@ -16,7 +16,10 @@ class Computop extends AbstractComputop implements ComputopInterface
 {
 
     /**
-     * @inheritdoc
+     * @param array $decryptedArray
+     * @param string $method
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
     public function extractHeader(array $decryptedArray, $method)
     {
@@ -41,7 +44,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $decryptedString
+     *
+     * @return array
      */
     public function getResponseDecryptedArray($decryptedString)
     {
@@ -56,8 +61,11 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @inheritdoc
+     * @param array $responseArray
+     *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
+     * @return void
      */
     public function checkEncryptedResponse(array $responseArray)
     {
@@ -72,8 +80,13 @@ class Computop extends AbstractComputop implements ComputopInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $responseMac
+     * @param string $neededMac
+     * @param string $method
+     *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
+     *
+     * @return void
      */
     public function checkMacResponse($responseMac, $neededMac, $method)
     {

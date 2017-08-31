@@ -27,7 +27,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @inheritdoc
+     * @param array $items
+     *
+     * @return string
      */
     public function getDescriptionValue(array $items)
     {
