@@ -14,6 +14,11 @@ class ComputopConfig extends AbstractBundleConfig
 {
 
     /**
+     * Refund with shipment price
+     */
+    const COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED = true;
+
+    /**
      * @return string
      */
     public function getMerchantId()
@@ -74,7 +79,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function isRefundShipmentPriceEnabled()
     {
-        return $this->get(ComputopConstants::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED);
+        return self::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED;
     }
 
 }
