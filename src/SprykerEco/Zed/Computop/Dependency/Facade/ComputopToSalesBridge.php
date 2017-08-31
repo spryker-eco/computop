@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-use Spryker\Zed\Sales\Business\SalesFacadeInterface;
-
 class ComputopToSalesBridge implements ComputopToSalesInterface
 {
 
@@ -20,7 +18,7 @@ class ComputopToSalesBridge implements ComputopToSalesInterface
     /**
      * @param \Spryker\Zed\Sales\Business\SalesFacadeInterface $salesFacade
      */
-    public function __construct(SalesFacadeInterface $salesFacade)
+    public function __construct($salesFacade)
     {
         $this->salesFacade = $salesFacade;
     }
