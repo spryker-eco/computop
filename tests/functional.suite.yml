@@ -9,7 +9,7 @@ actor: FunctionalTester
 modules:
     enabled:
         # add a framework module here
-        - \SprykerTest\Shared\Testify\Helper\Environment
+        - \Computop\Module\EnvironmentModule
         - \Computop\Helper\Functional
         - \Propel\Module\PropelInstall
         - \Propel\Module\Database

@@ -5,6 +5,6 @@
 actor: UnitTester
 modules:
     enabled:
-        - \SprykerTest\Shared\Testify\Helper\Environment
+        - \Computop\Module\EnvironmentModule
         - Asserts
         - \Computop\Helper\Unit
