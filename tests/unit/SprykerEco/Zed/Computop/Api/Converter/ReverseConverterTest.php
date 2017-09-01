@@ -7,6 +7,7 @@
 
 namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
 
+use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
@@ -28,18 +29,18 @@ class ReverseConverterTest extends AbstractConverterTest
      */
     public function testToTransactionResponseTransfer()
     {
-        $response = $this->prepareResponse();
+        $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-        $this->assertEquals(self::A_ID_VALUE, $responseTransfer->getAId());
-        $this->assertEquals(self::TRANSACTION_ID_VALUE, $responseTransfer->getTransactionId());
-        $this->assertEquals(self::CODE_EXT_VALUE, $responseTransfer->getCodeExt());
-        $this->assertEquals(self::ERROR_TEXT_VALUE, $responseTransfer->getErrorText());
-        $this->assertEquals(self::REF_NR_VALUE, $responseTransfer->getRefNr());
+        $this->assertEquals(ConverterTestConstants::A_ID_VALUE, $responseTransfer->getAId());
+        $this->assertEquals(ConverterTestConstants::TRANSACTION_ID_VALUE, $responseTransfer->getTransactionId());
+        $this->assertEquals(ConverterTestConstants::CODE_EXT_VALUE, $responseTransfer->getCodeExt());
+        $this->assertEquals(ConverterTestConstants::ERROR_TEXT_VALUE, $responseTransfer->getErrorText());
+        $this->assertEquals(ConverterTestConstants::REF_NR_VALUE, $responseTransfer->getRefNr());
     }
 
     /**
@@ -47,8 +48,8 @@ class ReverseConverterTest extends AbstractConverterTest
      */
     protected function createConverter()
     {
-        $computopServiceMock = $this->createComputopServiceMock();
-        $configMock = $this->createComputopConfigMock();
+        $computopServiceMock = $this->helper->createComputopServiceMock($this->getDecryptedArray());
+        $configMock = $this->helper->createComputopConfigMock();
 
         $converter = new RefundConverter($computopServiceMock, $configMock);
 
@@ -60,13 +61,13 @@ class ReverseConverterTest extends AbstractConverterTest
      */
     protected function getDecryptedArray()
     {
-        $decryptedArray = $this->getMainDecryptedArray();
+        $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopConstants::A_ID_F_N] = self::A_ID_VALUE;
-        $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] = self::TRANSACTION_ID_VALUE;
-        $decryptedArray[ComputopConstants::CODE_EXT_F_N] = self::CODE_EXT_VALUE;
-        $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] = self::ERROR_TEXT_VALUE;
-        $decryptedArray[ComputopConstants::REF_NR_F_N] = self::REF_NR_VALUE;
+        $decryptedArray[ComputopConstants::A_ID_F_N] = ConverterTestConstants::A_ID_VALUE;
+        $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] = ConverterTestConstants::TRANSACTION_ID_VALUE;
+        $decryptedArray[ComputopConstants::CODE_EXT_F_N] = ConverterTestConstants::CODE_EXT_VALUE;
+        $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] = ConverterTestConstants::ERROR_TEXT_VALUE;
+        $decryptedArray[ComputopConstants::REF_NR_F_N] = ConverterTestConstants::REF_NR_VALUE;
 
         return $decryptedArray;
     }

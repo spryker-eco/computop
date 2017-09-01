@@ -7,6 +7,7 @@
 
 namespace Unit\SprykerEco\Zed\Computop\Api\Converter\Inquire;
 
+use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -27,7 +28,7 @@ class InquireCredConverterTest extends AbstractInquireConverterTest
      */
     public function testToTransactionResponseTransfer()
     {
-        $response = $this->prepareResponse();
+        $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $responseTransfer */
@@ -42,11 +43,11 @@ class InquireCredConverterTest extends AbstractInquireConverterTest
      */
     protected function getDecryptedArray()
     {
-        $decryptedArray = $this->getMainDecryptedArray();
+        $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopConstants::AMOUNT_AUTH_F_N] = self::AMOUNT_VALUE_NOT_ZERO;
-        $decryptedArray[ComputopConstants::AMOUNT_CAP_F_N] = self::AMOUNT_VALUE_NOT_ZERO;
-        $decryptedArray[ComputopConstants::AMOUNT_CRED_F_N] = self::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopConstants::AMOUNT_AUTH_F_N] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopConstants::AMOUNT_CAP_F_N] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopConstants::AMOUNT_CRED_F_N] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
 
         return $decryptedArray;
     }

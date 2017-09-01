@@ -7,6 +7,7 @@
 
 namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
 
+use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
@@ -28,14 +29,14 @@ class AuthorizeConverterTest extends AbstractConverterTest
      */
     public function testToTransactionResponseTransfer()
     {
-        $response = $this->prepareResponse();
+        $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-        $this->assertEquals(self::REF_NR_VALUE, $responseTransfer->getRefNr());
+        $this->assertEquals(ConverterTestConstants::REF_NR_VALUE, $responseTransfer->getRefNr());
     }
 
     /**
@@ -43,8 +44,8 @@ class AuthorizeConverterTest extends AbstractConverterTest
      */
     protected function createConverter()
     {
-        $computopServiceMock = $this->createComputopServiceMock();
-        $configMock = $this->createComputopConfigMock();
+        $computopServiceMock = $this->helper->createComputopServiceMock($this->getDecryptedArray());
+        $configMock = $this->helper->createComputopConfigMock();
 
         $converter = new AuthorizeConverter($computopServiceMock, $configMock);
 
@@ -56,9 +57,9 @@ class AuthorizeConverterTest extends AbstractConverterTest
      */
     protected function getDecryptedArray()
     {
-        $decryptedArray = $this->getMainDecryptedArray();
+        $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopConstants::REF_NR_F_N] = self::REF_NR_VALUE;
+        $decryptedArray[ComputopConstants::REF_NR_F_N] = ConverterTestConstants::REF_NR_VALUE;
 
         return $decryptedArray;
     }
