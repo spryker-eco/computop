@@ -41,7 +41,7 @@ class RefundPaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardRefundResponseTransfer $response */
-        $response = $service->refundPaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
+        $response = $service->refundPaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardRefundResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

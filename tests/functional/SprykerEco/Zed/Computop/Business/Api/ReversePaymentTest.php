@@ -41,7 +41,7 @@ class ReversePaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer $response */
-        $response = $service->reversePaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
+        $response = $service->reversePaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardReverseResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

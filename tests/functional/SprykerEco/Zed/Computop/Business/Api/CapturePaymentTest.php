@@ -41,7 +41,7 @@ class CapturePaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer $response */
-        $response = $service->capturePaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
+        $response = $service->capturePaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardCaptureResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

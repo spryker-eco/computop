@@ -45,7 +45,7 @@ class AuthorizePaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $response */
-        $response = $service->authorizationPaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
+        $response = $service->authorizationPaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardAuthorizeResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

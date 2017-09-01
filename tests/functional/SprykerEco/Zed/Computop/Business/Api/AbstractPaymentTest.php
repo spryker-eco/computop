@@ -7,6 +7,7 @@
 
 namespace Functional\SprykerEco\Zed\Computop\Business\Api;
 
+use Functional\SprykerEco\Zed\Computop\AbstractSetUpTest;
 use GuzzleHttp\Psr7;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
@@ -17,7 +18,7 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
-abstract class AbstractPaymentTest extends AbstractFactoryPaymentTest
+abstract class AbstractPaymentTest extends AbstractSetUpTest
 {
 
     /**
@@ -103,7 +104,7 @@ abstract class AbstractPaymentTest extends AbstractFactoryPaymentTest
         $stub = $builder->getMock();
 
         $stub->method('getConfig')
-            ->willReturn($this->createConfig());
+            ->willReturn($this->apiHelper->createConfig());
 
         $stub->method('getComputopService')
             ->willReturn(new ComputopToComputopServiceBridge(new ComputopService()));

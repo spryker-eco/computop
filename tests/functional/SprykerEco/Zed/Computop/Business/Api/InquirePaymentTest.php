@@ -45,7 +45,7 @@ class InquirePaymentTest extends AbstractPaymentTest
         $service->setFactory($this->createFactory());
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $response */
-        $response = $service->inquirePaymentRequest($this->createOrderTransfer($this->getPayIdValue()));
+        $response = $service->inquirePaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
 
         $this->assertInstanceOf(ComputopCreditCardInquireResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
