@@ -8,7 +8,8 @@
 namespace Unit\SprykerEco\Zed\Computop\Payment\Mapper\CreditCard;
 
 use Codeception\TestCase\Test;
-use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperHelper;
+use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestConstants;
+use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestHelper;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 abstract class AbstractCreditCardMapperTest extends Test
@@ -22,16 +23,16 @@ abstract class AbstractCreditCardMapperTest extends Test
     abstract protected function createMapper();
 
     /**
-     * @var \Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperHelper
+     * @var \Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestHelper
      */
     protected $helper;
 
     /**
-     * @param \Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperHelper $helper
+     * @param \Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestHelper $helper
      *
      * @return void
      */
-    protected function _inject(CreditCardMapperHelper $helper)
+    protected function _inject(CreditCardMapperTestHelper $helper)
     {
         $this->helper = $helper;
     }
@@ -46,9 +47,9 @@ abstract class AbstractCreditCardMapperTest extends Test
         $service = $this->createMapper();
         $mappedData = $service->buildRequest($orderTransferMock);
 
-        $this->assertEquals($this->helper->getDataValue(), $mappedData[ComputopConstants::DATA_F_N]);
-        $this->assertEquals($this->helper->getLengthValue(), $mappedData[ComputopConstants::LENGTH_F_N]);
-        $this->assertEquals($this->helper->getMerchantIdValue(), $mappedData[ComputopConstants::MERCHANT_ID_F_N]);
+        $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopConstants::DATA_F_N]);
+        $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopConstants::LENGTH_F_N]);
+        $this->assertEquals(CreditCardMapperTestConstants::MERCHANT_ID_VALUE, $mappedData[ComputopConstants::MERCHANT_ID_F_N]);
     }
 
 }

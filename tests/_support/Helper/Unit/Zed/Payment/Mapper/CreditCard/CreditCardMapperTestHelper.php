@@ -14,12 +14,8 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
-class CreditCardMapperHelper extends Test
+class CreditCardMapperTestHelper extends Test
 {
-
-    const DATA_VALUE = 'Data';
-    const LENGTH_VALUE = 10;
-    const MERCHANT_ID_VALUE = 'MerchantId';
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
@@ -32,7 +28,7 @@ class CreditCardMapperHelper extends Test
         );
 
         $computopPaymentTransferMock->method('getMerchantId')
-            ->willReturn($this->getMerchantIdValue());
+            ->willReturn(CreditCardMapperTestConstants::MERCHANT_ID_VALUE);
 
         $orderTransferMock = $this->createPartialMock(
             OrderTransfer::class,
@@ -64,8 +60,8 @@ class CreditCardMapperHelper extends Test
     public function createComputopServiceMock()
     {
         $encryptedArray = [
-            ComputopConstants::LENGTH_F_N => $this->getLengthValue(),
-            ComputopConstants::DATA_F_N => $this->getDataValue(),
+            ComputopConstants::LENGTH_F_N => CreditCardMapperTestConstants::LENGTH_VALUE,
+            ComputopConstants::DATA_F_N => CreditCardMapperTestConstants::DATA_VALUE,
         ];
 
         $computopServiceMock = $this->createPartialMock(
@@ -76,30 +72,6 @@ class CreditCardMapperHelper extends Test
             ->willReturn($encryptedArray);
 
         return $computopServiceMock;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDataValue()
-    {
-        return self::DATA_VALUE;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getLengthValue()
-    {
-        return self::LENGTH_VALUE;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMerchantIdValue()
-    {
-        return self::MERCHANT_ID_VALUE;
     }
 
 }
