@@ -7,9 +7,12 @@
 
 namespace Functional\SprykerEco\Zed\Computop\Business\Logger;
 
+use Functional\SprykerEco\Zed\Computop\AbstractSetUpTest;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLogQuery;
+use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 /**
  * @group Functional
@@ -19,7 +22,7 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
  * @group Business
  * @group SaveLogTest
  */
-class SaveLogTest extends AbstractLoggerTest
+class SaveLogTest extends AbstractSetUpTest
 {
 
     const METHOD_VALUE = 'METHOD';
@@ -78,6 +81,25 @@ class SaveLogTest extends AbstractLoggerTest
         $query = new SpyPaymentComputopApiLogQuery();
 
         return $query->find()->getFirst();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
+     */
+    protected function createFactory()
+    {
+        $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
+        $builder->setMethods(
+            [
+                'getQueryContainer',
+            ]
+        );
+
+        $stub = $builder->getMock();
+        $stub->method('getQueryContainer')
+            ->willReturn(new ComputopQueryContainer());
+
+        return $stub;
     }
 
 }

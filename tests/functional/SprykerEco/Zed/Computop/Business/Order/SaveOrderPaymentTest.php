@@ -7,6 +7,10 @@
 
 namespace Functional\SprykerEco\Zed\Computop\Business;
 
+use Computop\Helper\Functional\Order\OrderPaymentTestConstants;
+use Functional\SprykerEco\Zed\Computop\AbstractSetUpTest;
+use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
@@ -19,7 +23,7 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
  * @group Business
  * @group SaveOrderPaymentTest
  */
-class SaveOrderPaymentTest extends AbstractOrderPaymentTest
+class SaveOrderPaymentTest extends AbstractSetUpTest
 {
 
     /**
@@ -28,17 +32,20 @@ class SaveOrderPaymentTest extends AbstractOrderPaymentTest
     public function testSaveOrderPaymentSuccess()
     {
         $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->saveOrderPayment($this->createQuoteTransfer(), $this->createCheckoutResponse());
+        $service->setFactory($this->orderHelper->createFactory());
+        $service->saveOrderPayment(
+            $this->orderHelper->createQuoteTransfer(),
+            $this->createCheckoutResponse()
+        );
 
         $computopSavedData = $this->getComputopSavedData();
 
-        $this->assertSame(self::CLIENT_IP_VALUE, $computopSavedData->getClientIp());
-        $this->assertSame(self::PAY_ID_VALUE, $computopSavedData->getPayId());
-        $this->assertSame(self::TRANS_ID_VALUE, $computopSavedData->getTransId());
+        $this->assertSame(OrderPaymentTestConstants::CLIENT_IP_VALUE, $computopSavedData->getClientIp());
+        $this->assertSame(OrderPaymentTestConstants::PAY_ID_VALUE, $computopSavedData->getPayId());
+        $this->assertSame(OrderPaymentTestConstants::TRANS_ID_VALUE, $computopSavedData->getTransId());
         $this->assertSame(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD, $computopSavedData->getPaymentMethod());
-        $this->assertSame($this->orderEntity->getIdSalesOrder(), $computopSavedData->getFkSalesOrder());
-        $this->assertSame($this->orderEntity->getOrderReference(), $computopSavedData->getReference());
+        $this->assertSame($this->helper->orderEntity->getIdSalesOrder(), $computopSavedData->getFkSalesOrder());
+        $this->assertSame($this->helper->orderEntity->getOrderReference(), $computopSavedData->getReference());
     }
 
     /**
@@ -49,6 +56,29 @@ class SaveOrderPaymentTest extends AbstractOrderPaymentTest
         $query = new SpyPaymentComputopQuery();
 
         return $query->find()->getFirst();
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    protected function createCheckoutResponse()
+    {
+        $checkoutResponceTransfer = new CheckoutResponseTransfer();
+        $checkoutResponceTransfer->setSaveOrder($this->createSaveOrderTransfer());
+
+        return $checkoutResponceTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\SaveOrderTransfer
+     */
+    protected function createSaveOrderTransfer()
+    {
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($this->helper->orderEntity->getIdSalesOrder());
+        $saveOrderTransfer->setOrderReference($this->helper->orderEntity->getOrderReference());
+
+        return $saveOrderTransfer;
     }
 
 }

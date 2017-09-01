@@ -5,54 +5,46 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Functional\SprykerEco\Zed\Computop\Business;
+namespace Computop\Helper\Functional\Order;
 
-use Functional\SprykerEco\Zed\Computop\AbstractSetUpTest;
-use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Shared\Transfer\SaveOrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
+use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
-abstract class AbstractFactoryOrderPaymentTest extends AbstractSetUpTest
+class OrderPaymentTestHelper extends Test
 {
 
-    const PAY_ID_VALUE = 'e1ebdc5bd6054263a52ef33ecae1ccda';
-    const TRANS_ID_VALUE = '585e330ea1fe696ffb0bad71db503504';
-    const CLIENT_IP_VALUE = '0.0.0.0';
-
     /**
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
      */
-    protected function createCheckoutResponse()
+    public function createFactory()
     {
-        $checkoutResponceTransfer = new CheckoutResponseTransfer();
-        $checkoutResponceTransfer->setSaveOrder($this->createSaveOrderTransfer());
+        $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
+        $builder->setMethods(
+            [
+                'getQueryContainer',
+            ]
+        );
 
-        return $checkoutResponceTransfer;
-    }
+        $stub = $builder->getMock();
+        $stub->method('getQueryContainer')
+            ->willReturn(new ComputopQueryContainer());
 
-    /**
-     * @return \Generated\Shared\Transfer\SaveOrderTransfer
-     */
-    protected function createSaveOrderTransfer()
-    {
-        $saveOrderTransfer = new SaveOrderTransfer();
-        $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
-        $saveOrderTransfer->setOrderReference($this->orderEntity->getOrderReference());
-
-        return $saveOrderTransfer;
+        return $stub;
     }
 
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function createQuoteTransfer()
+    public function createQuoteTransfer()
     {
         $quoteTransfer = new QuoteTransfer();
         $paymentTransfer = new PaymentTransfer();
@@ -68,13 +60,13 @@ abstract class AbstractFactoryOrderPaymentTest extends AbstractSetUpTest
     /**
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function createComputopPaymentTransfer()
+    public function createComputopPaymentTransfer()
     {
         $computopPayment = new ComputopCreditCardPaymentTransfer();
         $computopPayment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-        $computopPayment->setPayId(self::PAY_ID_VALUE);
-        $computopPayment->setClientIp(self::CLIENT_IP_VALUE);
-        $computopPayment->setTransId(self::TRANS_ID_VALUE);
+        $computopPayment->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
+        $computopPayment->setClientIp(OrderPaymentTestConstants::CLIENT_IP_VALUE);
+        $computopPayment->setTransId(OrderPaymentTestConstants::TRANS_ID_VALUE);
         $computopPayment->setCreditCardOrderResponse($this->createComputopOrderResponseTransfer());
 
         return $computopPayment;
@@ -83,7 +75,7 @@ abstract class AbstractFactoryOrderPaymentTest extends AbstractSetUpTest
     /**
      * @return \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
      */
-    protected function createComputopOrderResponseTransfer()
+    public function createComputopOrderResponseTransfer()
     {
         $computopResponse = new ComputopCreditCardOrderResponseTransfer();
         $computopResponse->setHeader($this->createComputopResponseHeaderTransfer());
@@ -94,10 +86,10 @@ abstract class AbstractFactoryOrderPaymentTest extends AbstractSetUpTest
     /**
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
-    protected function createComputopResponseHeaderTransfer()
+    public function createComputopResponseHeaderTransfer()
     {
         $computopHeaderResponse = new ComputopResponseHeaderTransfer();
-        $computopHeaderResponse->setPayId(self::PAY_ID_VALUE);
+        $computopHeaderResponse->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
 
         return $computopHeaderResponse;
     }

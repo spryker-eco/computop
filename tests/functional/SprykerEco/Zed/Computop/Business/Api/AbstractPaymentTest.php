@@ -63,8 +63,8 @@ abstract class AbstractPaymentTest extends AbstractFactoryPaymentTest
         $computopPaymentEntity = (new SpyPaymentComputop())
             ->setClientIp('0.0.0.0')
             ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD)
-            ->setReference($this->orderEntity->getOrderReference())
-            ->setFkSalesOrder($this->orderEntity->getIdSalesOrder())
+            ->setReference($this->helper->orderEntity->getOrderReference())
+            ->setFkSalesOrder($this->helper->orderEntity->getIdSalesOrder())
             ->setPayId($this->getPayIdValue());
         $computopPaymentEntity->save();
 
@@ -72,7 +72,7 @@ abstract class AbstractPaymentTest extends AbstractFactoryPaymentTest
         $paymentDetailEntity->setIdPaymentComputop($computopPaymentEntity->getIdPaymentComputop());
         $paymentDetailEntity->save();
 
-        $orderItemTransfers = $this->orderEntity->getItems();
+        $orderItemTransfers = $this->helper->orderEntity->getItems();
 
         foreach ($orderItemTransfers as $orderItemTransfer) {
             $paymentOrderItemEntity = new SpyPaymentComputopOrderItem();
