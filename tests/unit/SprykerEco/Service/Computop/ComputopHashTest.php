@@ -39,7 +39,7 @@ class ComputopHashTest extends AbstractComputopTest
      */
     public function createService()
     {
-        return new HmacHasher($this->createComputopConfigMock());
+        return new HmacHasher($this->helper->createComputopConfigMock());
     }
 
 }

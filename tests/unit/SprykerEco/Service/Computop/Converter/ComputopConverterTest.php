@@ -10,6 +10,7 @@ namespace Unit\SprykerEco\Service\Computop\Converter;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
 
 /**
  * @group Unit
@@ -20,7 +21,7 @@ use SprykerEco\Shared\Computop\ComputopConstants;
  * @group Converter
  * @group ComputopConverterTest
  */
-class ComputopConverterTest extends AbstractConverterTest
+class ComputopConverterTest extends AbstractComputopTest
 {
 
     const METHOD = 'AUTHORIZE';
@@ -37,7 +38,7 @@ class ComputopConverterTest extends AbstractConverterTest
      */
     public function testExtractIsSuccessHeader()
     {
-        $converter = $this->createConverter();
+        $converter = $this->helper->createConverter();
         $decryptedArray = $this->getDecryptedArray(ComputopConstants::SUCCESS_STATUS);
 
         /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
@@ -59,7 +60,7 @@ class ComputopConverterTest extends AbstractConverterTest
      */
     public function testExtractIsErrorHeader()
     {
-        $converter = $this->createConverter();
+        $converter = $this->helper->createConverter();
         $decryptedArray = $this->getDecryptedArray(self::STATUS_ERROR_VALUE);
 
         /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
@@ -81,7 +82,7 @@ class ComputopConverterTest extends AbstractConverterTest
      */
     public function testCheckEncryptedResponse()
     {
-        $converter = $this->createConverter();
+        $converter = $this->helper->createConverter();
 
         $responseArray = [
             ComputopConstants::DATA_F_N => 'data',
@@ -98,7 +99,7 @@ class ComputopConverterTest extends AbstractConverterTest
     {
         $this->expectException(ComputopConverterException::class);
 
-        $converter = $this->createConverter();
+        $converter = $this->helper->createConverter();
         $converter->checkEncryptedResponse([]);
     }
 

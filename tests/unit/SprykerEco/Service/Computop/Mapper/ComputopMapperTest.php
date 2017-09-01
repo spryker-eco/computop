@@ -7,6 +7,9 @@
 
 namespace Unit\SprykerEco\Service\Computop\Mapper;
 
+use Computop\Helper\Unit\Service\Mapper\ComputopMapperTestConstants;
+use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
+
 /**
  * @group Unit
  * @group SprykerEco
@@ -16,7 +19,7 @@ namespace Unit\SprykerEco\Service\Computop\Mapper;
  * @group Mapper
  * @group ComputopMapperTest
  */
-class ComputopMapperTest extends AbstractMapperTest
+class ComputopMapperTest extends AbstractComputopTest
 {
 
     /**
@@ -24,11 +27,11 @@ class ComputopMapperTest extends AbstractMapperTest
      */
     public function testMacValueMapper()
     {
-        $mapper = $this->createMapper();
-        $cardPaymentTransfer = $this->createComputopPaymentTransfer();
+        $mapper = $this->helper->createMapper();
+        $cardPaymentTransfer = $this->mapperHelper->createComputopPaymentTransfer();
         $macValue = $mapper->getMacEncryptedValue($cardPaymentTransfer);
 
-        $this->assertSame(self::EXPECTED_MAC, $macValue);
+        $this->assertSame(ComputopMapperTestConstants::EXPECTED_MAC, $macValue);
     }
 
     /**
@@ -36,11 +39,11 @@ class ComputopMapperTest extends AbstractMapperTest
      */
     public function testMacResponseValueMapper()
     {
-        $mapper = $this->createMapper();
-        $cardPaymentResponseTransfer = $this->createComputopResponseHeaderTransfer();
+        $mapper = $this->helper->createMapper();
+        $cardPaymentResponseTransfer = $this->mapperHelper->createComputopResponseHeaderTransfer();
         $macValue = $mapper->getMacResponseEncryptedValue($cardPaymentResponseTransfer);
 
-        $this->assertSame(self::EXPECTED_MAC_RESPONSE, $macValue);
+        $this->assertSame(ComputopMapperTestConstants::EXPECTED_MAC_RESPONSE, $macValue);
     }
 
     /**
@@ -48,11 +51,11 @@ class ComputopMapperTest extends AbstractMapperTest
      */
     public function testPlaintextMapper()
     {
-        $mapper = $this->createMapper();
+        $mapper = $this->helper->createMapper();
         $arrayForPlaintext = ['test_key' => 'test_value'];
         $plaintext = $mapper->getDataPlaintext($arrayForPlaintext);
 
-        $this->assertSame(self::EXPECTED_PLAINTEXT, $plaintext);
+        $this->assertSame(ComputopMapperTestConstants::EXPECTED_PLAINTEXT, $plaintext);
     }
 
 }

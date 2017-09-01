@@ -8,27 +8,32 @@
 namespace Unit\SprykerEco\Service\Computop;
 
 use Codeception\TestCase\Test;
-use SprykerEco\Service\Computop\ComputopConfig;
+use Computop\Helper\Unit\Service\ComputopServiceTestHelper;
+use Computop\Helper\Unit\Service\Mapper\ComputopMapperTestHelper;
 
 abstract class AbstractComputopTest extends Test
 {
 
-    const PASSWORD = 'password';
+    /**
+     * @var \Computop\Helper\Unit\Service\ComputopServiceTestHelper
+     */
+    protected $helper;
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @var \Computop\Helper\Unit\Service\Mapper\ComputopMapperTestHelper
      */
-    protected function createComputopConfigMock()
+    protected $mapperHelper;
+
+    /**
+     * @param \Computop\Helper\Unit\Service\ComputopServiceTestHelper $helper
+     * @param \Computop\Helper\Unit\Service\Mapper\ComputopMapperTestHelper $mapperHelper
+     *
+     * @return void
+     */
+    protected function _inject(ComputopServiceTestHelper $helper, ComputopMapperTestHelper $mapperHelper)
     {
-        $configMock = $this->createPartialMock(
-            ComputopConfig::class,
-            ['getHmacPassword']
-        );
-
-        $configMock->method('getHmacPassword')
-            ->willReturn(self::PASSWORD);
-
-        return $configMock;
+        $this->helper = $helper;
+        $this->mapperHelper = $mapperHelper;
     }
 
 }

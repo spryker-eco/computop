@@ -7,7 +7,6 @@
 
 namespace Unit\SprykerEco\Service\Computop;
 
-use Codeception\TestCase\Test;
 use SprykerEco\Service\Computop\Exception\BlowfishException;
 use SprykerEco\Service\Computop\Model\BlowfishHasher;
 
@@ -19,7 +18,7 @@ use SprykerEco\Service\Computop\Model\BlowfishHasher;
  * @group Api
  * @group ComputopBlowfishTest
  */
-class ComputopBlowfishTest extends Test
+class ComputopBlowfishTest extends AbstractComputopTest
 {
 
     const PLAINTEXT_VALUE = 'plaintext';
