@@ -26,7 +26,10 @@ class InquireCreditCardMapperTest extends AbstractCreditCardMapperTest
      */
     protected function createMapper()
     {
-        return new InquireCreditCardMapper($this->createComputopServiceMock(), $this->createComputopConfigMock());
+        return new InquireCreditCardMapper(
+            $this->helper->createComputopServiceMock(),
+            $this->helper->createComputopConfigMock()
+        );
     }
 
 }
