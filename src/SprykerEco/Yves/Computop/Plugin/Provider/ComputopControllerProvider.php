@@ -17,8 +17,11 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
     const MODULE_NAME = 'Computop';
     const CALLBACK_CONTROLLER_NAME = 'Callback';
 
-    const SUCCESS_PATH = '/computop/success';
-    const SUCCESS_PATH_NAME = 'computop-success';
+    const CREDIT_CARD_SUCCESS_PATH = '/computop/credit-card-success';
+    const CREDIT_CARD_SUCCESS_PATH_NAME = 'computop-credit-card-success';
+
+    const PAY_PAL_SUCCESS_PATH = '/computop/pay-pal-success';
+    const PAY_PAL_SUCCESS_PATH_NAME = 'computop-pay-pal-success';
 
     const FAILURE_PATH = '/computop/failure';
     const FAILURE_PATH_NAME = 'computop-failure';
@@ -31,11 +34,19 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
     protected function defineControllers(Application $app)
     {
         $this->createController(
-            self::SUCCESS_PATH,
-            self::SUCCESS_PATH_NAME,
+            self::CREDIT_CARD_SUCCESS_PATH,
+            self::CREDIT_CARD_SUCCESS_PATH_NAME,
             self::MODULE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
-            'success'
+            'successCreditCard'
+        );
+
+        $this->createController(
+            self::PAY_PAL_SUCCESS_PATH,
+            self::PAY_PAL_SUCCESS_PATH_NAME,
+            self::MODULE_NAME,
+            self::CALLBACK_CONTROLLER_NAME,
+            'successPayPal'
         );
 
         $this->createController(
