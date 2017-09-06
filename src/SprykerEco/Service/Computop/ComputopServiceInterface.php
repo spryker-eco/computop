@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 interface ComputopServiceInterface
 {
@@ -30,11 +30,11 @@ interface ComputopServiceInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer);
 
     /**
      * Specification:

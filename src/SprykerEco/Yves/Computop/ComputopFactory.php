@@ -9,10 +9,14 @@ namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerEco\Yves\Computop\Converter\OrderCreditCardConverter;
+use SprykerEco\Yves\Computop\Converter\OrderPayPalConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
+use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
-use SprykerEco\Yves\Computop\Mapper\CreditCard\OrderCreditCardMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\CreditCardMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\PayPalMapper;
 
 class ComputopFactory extends AbstractFactory
 {
@@ -26,11 +30,27 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Form\PayPalSubForm
+     */
+    public function createPayPalForm()
+    {
+        return new PayPalSubForm();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider
      */
     public function createCreditCardFormDataProvider()
     {
         return new CreditCardFormDataProvider($this->getQuoteClient(), $this->createOrderCreditCardMapper());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider
+     */
+    public function createPayPalFormDataProvider()
+    {
+        return new PayPalFormDataProvider($this->getQuoteClient(), $this->createOrderPayPalMapper());
     }
 
     /**
@@ -82,11 +102,27 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    public function createOrderPayPalConverter()
+    {
+        return new OrderPayPalConverter();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
      */
     public function createOrderCreditCardMapper()
     {
-        return new OrderCreditCardMapper($this->getComputopService(), $this->getApplication());
+        return new CreditCardMapper($this->getComputopService(), $this->getApplication());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     */
+    public function createOrderPayPalMapper()
+    {
+        return new PayPalMapper($this->getComputopService(), $this->getApplication());
     }
 
 }

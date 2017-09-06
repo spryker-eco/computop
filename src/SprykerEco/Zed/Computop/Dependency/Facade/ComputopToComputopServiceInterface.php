@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 interface ComputopToComputopServiceInterface
 {
@@ -20,11 +20,11 @@ interface ComputopToComputopServiceInterface
     public function getDescriptionValue(array $items);
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer);
 
     /**
      * @param array $decryptedArray

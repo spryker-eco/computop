@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\CreditCard;
+namespace SprykerEco\Yves\Computop\Mapper\Order;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Shared\Application\ApplicationConstants;
@@ -15,7 +15,7 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class OrderCreditCardMapper extends AbstractCreditCardMapper
+class CreditCardMapper extends AbstractMapper
 {
 
     const TRANS_ID_SEPARATOR = '-';
@@ -37,7 +37,7 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
         $computopCreditCardPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
         $computopCreditCardPaymentTransfer->setTxType(ComputopConstants::TX_TYPE);
         $computopCreditCardPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SUCCESS_PATH_NAME))
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS_PATH_NAME))
         );
         $computopCreditCardPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
@@ -88,27 +88,27 @@ class OrderCreditCardMapper extends AbstractCreditCardMapper
     /**
      * TODO:remove after test if need
      *
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
+     * @param string $merchantId
      * @param string $data
      * @param int $length
      *
      * @return string
      */
-    protected function getUrlToComputop(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer, $data, $length)
+    protected function getUrlToComputop($merchantId, $data, $length)
     {
         return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION) . '?' . http_build_query([
-                ComputopConstants::MERCHANT_ID_F_N => $computopCreditCardPaymentTransfer->getMerchantId(),
+                ComputopConstants::MERCHANT_ID_F_N => $merchantId,
                 ComputopConstants::DATA_F_N => $data,
                 ComputopConstants::LENGTH_F_N => $length,
             ]);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    protected function getDataSubArray(AbstractTransfer $cardPaymentTransfer)
     {
         $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();

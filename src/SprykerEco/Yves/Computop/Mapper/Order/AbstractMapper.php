@@ -5,16 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\CreditCard;
+namespace SprykerEco\Yves\Computop\Mapper\Order;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Silex\Application;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
 
-abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
+abstract class AbstractMapper implements MapperInterface
 {
 
     /**
@@ -40,37 +39,37 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function createComputopCreditCardPaymentTransfer(AbstractTransfer $quoteTransfer)
+    public function createComputopPaymentTransfer(AbstractTransfer $quoteTransfer)
     {
-        $computopCreditCardPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
+        $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
-        $computopCreditCardPaymentTransfer->setMac(
-            $this->computopService->getMacEncryptedValue($computopCreditCardPaymentTransfer)
+        $computopPaymentTransfer->setMac(
+            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
         $decryptedValues = $this->computopService->getEncryptedArray(
-            $this->getDataSubArray($computopCreditCardPaymentTransfer),
+            $this->getDataSubArray($computopPaymentTransfer),
             Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
         );
 
         $length = $decryptedValues[ComputopConstants::LENGTH_F_N];
         $data = $decryptedValues[ComputopConstants::DATA_F_N];
 
-        $computopCreditCardPaymentTransfer->setData($data);
-        $computopCreditCardPaymentTransfer->setLen($length);
-        $computopCreditCardPaymentTransfer->setUrl($this->getUrlToComputop($computopCreditCardPaymentTransfer, $data, $length));
+        $computopPaymentTransfer->setData($data);
+        $computopPaymentTransfer->setLen($length);
+        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
 
-        return $computopCreditCardPaymentTransfer;
+        return $computopPaymentTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
      *
      * @return array
      */
-    abstract protected function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer);
+    abstract protected function getDataSubArray(AbstractTransfer $cardPaymentTransfer);
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -78,5 +77,16 @@ abstract class AbstractCreditCardMapper implements CreditCardMapperInterface
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
     abstract protected function createTransferWithUnencryptedValues(AbstractTransfer $quoteTransfer);
+
+    /**
+     * TODO:remove after test if need
+     *
+     * @param string $merchantId
+     * @param string $data
+     * @param int $length
+     *
+     * @return string
+     */
+    abstract protected function getUrlToComputop($merchantId, $data, $length);
 
 }

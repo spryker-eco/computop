@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Service\Computop\Model\Mapper;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -19,11 +19,11 @@ class Computop extends AbstractComputop implements ComputopInterface
     const ATTRIBUTES_SEPARATOR = '-';
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer)
     {
         $macDataArray = [
             $cardPaymentTransfer->getPayId(),

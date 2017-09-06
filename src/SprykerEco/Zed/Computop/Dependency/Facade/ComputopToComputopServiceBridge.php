@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 
 class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterface
@@ -37,11 +37,11 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer)
     {
         return $this->computopService->getMacEncryptedValue($cardPaymentTransfer);
     }

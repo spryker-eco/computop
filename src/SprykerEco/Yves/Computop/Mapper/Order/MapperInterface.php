@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\CreditCard;
+namespace SprykerEco\Yves\Computop\Mapper\Order;
 
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
-interface CreditCardMapperInterface
+interface MapperInterface
 {
 
     /**
@@ -17,6 +17,6 @@ interface CreditCardMapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    public function createComputopCreditCardPaymentTransfer(AbstractTransfer $quoteTransfer);
+    public function createComputopPaymentTransfer(AbstractTransfer $quoteTransfer);
 
 }
