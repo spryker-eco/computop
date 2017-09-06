@@ -122,6 +122,50 @@
         <property name="custom" type="string" />
     </transfer>
 
+    <transfer name="ComputopPayPalOrderResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+
+        <property name="refNr" type="string" />
+        <property name="userData" type="string" />
+        <property name="name" type="string" />
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="email" type="string" />
+        <property name="addrStreet" type="string" />
+        <property name="addrStreet2" type="string" />
+        <property name="addrCity" type="strinsuccessActiong" />
+        <property name="addrState" type="string" />
+        <property name="addrZip" type="string" />
+        <property name="addrCountryCode" type="string" />
+        <property name="phone" type="string" />
+
+        <property name="billingAgreementId" type="string" />
+        <property name="billingName" type="string" />
+        <property name="billingAddrStreet" type="string" />
+        <property name="billingAddrStreet2" type="string" />
+        <property name="billingAddrCity" type="string" />
+        <property name="billingAddrState" type="string" />
+        <property name="billingAddrZip" type="string" />
+        <property name="billingAddrCountryCode" type="string" />
+
+        <property name="transactionId" type="string" />
+        <property name="infoText" type="string" />
+        <property name="payerId" type="string" />
+        <property name="isFinancing" type="bool" />
+        <property name="financingFeeAmount" type="string" />
+        <property name="financingMonthlyPayment" type="string" />
+        <property name="financingTerm" type="string" />
+        <property name="financingTotalCost" type="string" />
+        <property name="grossAmount" type="string" />
+        <property name="feeAmount" type="string" />
+        <property name="settleAmount" type="string" />
+        <property name="taxAmount" type="string" />
+        <property name="exchangeRate" type="string" />
+        <property name="mcFee" type="string" />
+        <property name="mcGross" type="string" />
+    </transfer>
+
+
     <transfer name="ComputopCreditCardAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
