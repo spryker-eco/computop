@@ -14,7 +14,8 @@ use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
-use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\ComputopCreditCardPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Order\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PayPalMapper;
 
@@ -86,11 +87,19 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopCreditCardPaymentHandler
      */
-    public function createPaymentHandler()
+    public function createCreditCardPaymentHandler()
     {
-        return new ComputopPaymentHandler();
+        return new ComputopCreditCardPaymentHandler();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPayPalPaymentHandler
+     */
+    public function createPayPalPaymentHandler()
+    {
+        return new ComputopPayPalPaymentHandler();
     }
 
     /**
