@@ -89,7 +89,7 @@
         <property name="len" type="int" />
         <property name="url" type="string" />
 
-        <property name="creditCardOrderResponse" type="ComputopCreditCardOrderResponse"/>
+        <property name="payPalOrderResponse" type="ComputopPayPalOrderResponse"/>
     </transfer>
 
 
