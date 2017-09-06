@@ -7,24 +7,24 @@
 
 namespace SprykerEco\Yves\Computop\Handler;
 
-use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class ComputopPaymentHandler
+class ComputopPayPalPaymentHandler implements ComputopPaymentHandlerInterface
 {
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer $creditCardOrderResponseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer; $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(QuoteTransfer $quoteTransfer, ComputopCreditCardOrderResponseTransfer $creditCardOrderResponseTransfer)
+    public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() !== null) {
-            $quoteTransfer->getPayment()->getComputopCreditCard()->setCreditCardOrderResponse(
-                $creditCardOrderResponseTransfer
+            $quoteTransfer->getPayment()->getComputopPayPal()->setPayPalOrderResponse(
+                $responseTransfer
             );
 
             $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer);
@@ -43,8 +43,8 @@ class ComputopPaymentHandler
         $quoteTransfer
             ->getPayment()
             ->setPaymentProvider(ComputopConstants::PROVIDER_NAME)
-            ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD)
-            ->setPaymentSelection(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
+            ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_PAY_PAL)
+            ->setPaymentSelection(ComputopConstants::PAYMENT_METHOD_PAY_PAL);
 
         return $quoteTransfer;
     }

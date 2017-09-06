@@ -12,6 +12,7 @@ use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
+use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
@@ -62,7 +63,7 @@ class CallbackController extends AbstractController
             $this->getFactory()->createOrderCreditCardConverter()
         );
 
-        return $this->successAction();
+        return $this->successAction($this->getFactory()->createCreditCardPaymentHandler());
     }
 
     /**
@@ -74,7 +75,7 @@ class CallbackController extends AbstractController
             $this->getFactory()->createOrderPayPalConverter()
         );
 
-        return $this->successAction();
+        return $this->successAction($this->getFactory()->createPayPalPaymentHandler());
     }
 
     /**
@@ -88,12 +89,14 @@ class CallbackController extends AbstractController
     }
 
     /**
+     * @param \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface $handler
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function successAction()
+    protected function successAction(ComputopPaymentHandlerInterface $handler)
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer = $this->getFactory()->createPaymentHandler()->addPaymentToQuote(
+        $quoteTransfer = $handler->addPaymentToQuote(
             $quoteTransfer,
             $this->orderResponseTransfer
         );
