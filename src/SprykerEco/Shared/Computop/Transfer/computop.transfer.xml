@@ -36,6 +36,63 @@
 
     </transfer>
 
+    <transfer name="ComputopPayPalPayment">
+        <property name="payId" type="string" />
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="capture" type="string" />
+        <property name="txType" type="string" />
+
+        <property name="payPalMethod" type="string" />
+        <property name="rTF" type="string" />
+        <property name="orderDesc" type="string" />
+
+        <property name="orderDescriptions" type="array" />
+        <property name="taxTotal" type="int" />
+        <property name="itemTotal" type="int" />
+        <property name="shAmount" type="int" />
+        <property name="mac" type="string" />
+        <property name="urlSuccess" type="string" />
+        <property name="urlFailure" type="string" />
+        <property name="response" type="string" />
+        <property name="urlNotify" type="string" />
+        <property name="reqId" type="string" />
+        <property name="account" type="string" />
+
+        <property name="brandName" type="string" />
+        <property name="bgColor" type="string" />
+        <property name="bgImage" type="string" />
+        <property name="headerLogo" type="string" />
+        <property name="landingPage" type="string" />
+        <property name="pageStyle" type="string" />
+        <property name="fundingSource" type="string" />
+        <property name="language" type="string" />
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="addrStreet" type="string" />
+        <property name="addrStreet2" type="string" />
+        <property name="addrCity" type="string" />
+        <property name="addrState" type="string" />
+        <property name="addrZip" type="string" />
+        <property name="addrCountryCode" type="string" />
+        <property name="phone" type="string" />
+        <property name="noShipping" type="string" />
+        <property name="allowNote" type="string" />
+        <property name="uI" type="string" />
+        <property name="buyerEmail" type="string" />
+
+        <property name="clientIp" type="string" />
+
+        <property name="data" type="string" />
+        <property name="len" type="int" />
+        <property name="url" type="string" />
+
+        <property name="creditCardOrderResponse" type="ComputopCreditCardOrderResponse"/>
+    </transfer>
+
+
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
         <property name="code" type="string" />
@@ -112,6 +169,7 @@
 
     <transfer name="Payment">
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
+        <property name="computopPayPal" type="ComputopPayPalPayment" />
     </transfer>
 
     <transfer name="Order">
