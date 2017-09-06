@@ -13,7 +13,7 @@ use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface;
 use SprykerEco\Yves\Computop\Mapper\Order\MapperInterface;
 
-class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
+class PayPalFormDataProvider implements StepEngineFormDataProviderInterface
 {
 
     /**
@@ -48,10 +48,10 @@ class CreditCardFormDataProvider implements StepEngineFormDataProviderInterface
             $quoteTransfer->setPayment($paymentTransfer);
         }
         //TODO: check price
-        if ($quoteTransfer->getPayment()->getComputopCreditCard() === null) {
+        if ($quoteTransfer->getPayment()->getComputopPayPal() === null) {
             $paymentTransfer = $quoteTransfer->getPayment();
             $computopTransfer = $this->cardMapper->createComputopPaymentTransfer($quoteTransfer);
-            $paymentTransfer->setComputopCreditCard($computopTransfer);
+            $paymentTransfer->setComputopPayPal($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
 
             //TODO: check save Quote to session
