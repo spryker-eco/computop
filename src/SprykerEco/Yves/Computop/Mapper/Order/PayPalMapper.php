@@ -7,24 +7,25 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Order;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class CreditCardMapper extends AbstractMapper
+// TODO: update after check PayPal
+class PayPalMapper extends AbstractMapper
 {
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
     protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
     {
-        $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
+        $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
         $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
@@ -34,7 +35,7 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
         $computopPaymentTransfer->setTxType(ComputopConstants::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS_PATH_NAME))
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS_PATH_NAME))
         );
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
@@ -55,7 +56,7 @@ class CreditCardMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
@@ -82,7 +83,7 @@ class CreditCardMapper extends AbstractMapper
      */
     protected function getUrlToComputop($merchantId, $data, $length)
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION) . '?' . http_build_query([
+        return Config::get(ComputopConstants::COMPUTOP_PAY_PAL_ORDER_ACTION) . '?' . http_build_query([
                 ComputopConstants::MERCHANT_ID_F_N => $merchantId,
                 ComputopConstants::DATA_F_N => $data,
                 ComputopConstants::LENGTH_F_N => $length,
