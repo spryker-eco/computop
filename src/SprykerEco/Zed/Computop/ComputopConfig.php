@@ -39,7 +39,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getAuthorizeAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_AUTHORIZE_ACTION);
+        return $this->get(ComputopConstants::COMPUTOP_AUTHORIZE_ACTION);
     }
 
     /**
@@ -47,7 +47,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getCaptureAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_CAPTURE_ACTION);
+        return $this->get(ComputopConstants::COMPUTOP_CAPTURE_ACTION);
     }
 
     /**
@@ -55,7 +55,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getRefundAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REFUND_ACTION);
+        return $this->get(ComputopConstants::COMPUTOP_REFUND_ACTION);
     }
 
     /**
@@ -63,7 +63,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getInquireAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_INQUIRE_ACTION);
+        return $this->get(ComputopConstants::COMPUTOP_INQUIRE_ACTION);
     }
 
     /**
@@ -71,7 +71,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getReverseAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CREDIT_CARD_REVERSE_ACTION);
+        return $this->get(ComputopConstants::COMPUTOP_REVERSE_ACTION);
     }
 
     /**
