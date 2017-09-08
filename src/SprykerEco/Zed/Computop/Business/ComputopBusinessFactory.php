@@ -19,6 +19,8 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\CreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PayPalMapper;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureResponseHandler;
@@ -31,6 +33,11 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CaptureCreditCard
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\InquireCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\RefundCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\ReverseCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\AuthorizePayPalMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\CapturePayPalMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\InquirePayPalMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\RefundPayPalMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\ReversePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\CaptureRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\InquireRequest;
@@ -54,9 +61,25 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderManagerCreditCardMapper()
+    {
+        return new CreditCardMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderManagerPayPalMapper()
+    {
+        return new PayPalMapper();
+    }
+
+    /**
      * @param string $paymentMethod
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\CreditCartRequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
     public function createAuthorizationPaymentRequest($paymentMethod)
     {
@@ -66,9 +89,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper(
-            $this->createAuthorizeCreditCardMapper()
-        );
+        $paymentRequest->registerMapper($this->createAuthorizeCreditCardMapper());
+        $paymentRequest->registerMapper($this->createAuthorizePayPalMapper());
 
         return $paymentRequest;
     }
@@ -76,7 +98,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @param string $paymentMethod
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\CreditCartRequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
     public function createInquirePaymentRequest($paymentMethod)
     {
@@ -86,9 +108,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper(
-            $this->createInquireCreditCardMapper()
-        );
+        $paymentRequest->registerMapper($this->createInquireCreditCardMapper());
+        $paymentRequest->registerMapper($this->createInquirePayPalMapper());
 
         return $paymentRequest;
     }
@@ -96,7 +117,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @param string $paymentMethod
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\CreditCartRequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
     public function createReversePaymentRequest($paymentMethod)
     {
@@ -106,9 +127,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper(
-            $this->createReverseCreditCardMapper()
-        );
+        $paymentRequest->registerMapper($this->createReverseCreditCardMapper());
+        $paymentRequest->registerMapper($this->createReversePayPalMapper());
 
         return $paymentRequest;
     }
@@ -116,7 +136,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @param string $paymentMethod
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\CreditCartRequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
     public function createCapturePaymentRequest($paymentMethod)
     {
@@ -126,9 +146,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper(
-            $this->createCaptureCreditCardMapper()
-        );
+        $paymentRequest->registerMapper($this->createCaptureCreditCardMapper());
+        $paymentRequest->registerMapper($this->createCapturePayPalMapper());
 
         return $paymentRequest;
     }
@@ -136,7 +155,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @param string $paymentMethod
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\CreditCartRequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
     public function createRefundPaymentRequest($paymentMethod)
     {
@@ -146,9 +165,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper(
-            $this->createRefundCreditCardMapper()
-        );
+        $paymentRequest->registerMapper($this->createRefundCreditCardMapper());
+        $paymentRequest->registerMapper($this->createRefundPayPalMapper());
 
         return $paymentRequest;
     }
@@ -234,43 +252,83 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function createAuthorizeCreditCardMapper()
     {
-        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function createReverseCreditCardMapper()
     {
-        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function createInquireCreditCardMapper()
     {
-        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function createCaptureCreditCardMapper()
     {
-        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function createRefundCreditCardMapper()
     {
-        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createAuthorizePayPalMapper()
+    {
+        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createReversePayPalMapper()
+    {
+        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createInquirePayPalMapper()
+    {
+        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createCapturePayPalMapper()
+    {
+        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createRefundPayPalMapper()
+    {
+        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
     }
 
     /**

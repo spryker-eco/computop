@@ -17,11 +17,59 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
 class OrderManager implements OrderManagerInterface
 {
 
     use DatabaseTransactionHandlerTrait;
+
+    /**
+     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     */
+    protected $mappers;
+
+    /**
+     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     */
+    protected $activeMapper;
+
+    /**
+     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    protected $computopTransfer;
+
+    /**
+     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    protected $computopResponseTransfer;
+
+    /**
+     * @param \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface $mapper
+     *
+     * @return void
+     */
+    public function registerMapper(MapperInterface $mapper)
+    {
+        $this->mappers[$mapper->getMethodName()] = $mapper;
+    }
+
+    /**
+     * @param string $methodName
+     *
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    protected function getMethodMapper($methodName)
+    {
+        if (isset($this->mappers[$methodName]) === false) {
+            throw new ComputopMethodMapperException('The method mapper is not registered.');
+        }
+
+        return $this->mappers[$methodName];
+    }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -34,6 +82,10 @@ class OrderManager implements OrderManagerInterface
         if ($quoteTransfer->getPayment()->getPaymentProvider() !== ComputopConstants::PROVIDER_NAME) {
             return;
         }
+
+        $this->activeMapper = $this->getMethodMapper($quoteTransfer->getPayment()->getPaymentMethod());
+        $this->computopTransfer = $this->activeMapper->getComputopTransfer($quoteTransfer->getPayment());
+        $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($quoteTransfer->getPayment());
 
         $this->handleDatabaseTransaction(function () use ($quoteTransfer, $checkoutResponseTransfer) {
 
@@ -64,14 +116,14 @@ class OrderManager implements OrderManagerInterface
     {
         $paymentEntity = new SpyPaymentComputop();
 
-        $paymentEntity->setClientIp($paymentTransfer->getComputopCreditCard()->getClientIp());
+        $paymentEntity->setClientIp($this->computopTransfer->getClientIp());
         $paymentEntity->setPaymentMethod($paymentTransfer->getPaymentMethod());
         $paymentEntity->setReference($saveOrderTransfer->getOrderReference());
         $paymentEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
-        $paymentEntity->setTransId($paymentTransfer->getComputopCreditCard()->getTransId());
-        $paymentEntity->setXId($paymentTransfer->getComputopCreditCard()->getCreditCardOrderResponse()->getHeader()->getXId());
-        $paymentEntity->setPayId($paymentTransfer->getComputopCreditCard()->getCreditCardOrderResponse()->getHeader()->getPayId());
-        $paymentEntity->setPcnr($paymentTransfer->getComputopCreditCard()->getCreditCardOrderResponse()->getPCNr());
+        $paymentEntity->setTransId($this->computopTransfer->getTransId());
+        $paymentEntity->setXId($this->computopResponseTransfer->getHeader()->getXId());
+        $paymentEntity->setPayId($this->computopResponseTransfer->getHeader()->getPayId());
+        $paymentEntity->setPcnr($this->computopResponseTransfer->getPCNr());
 
         $paymentEntity->save();
 
@@ -88,8 +140,9 @@ class OrderManager implements OrderManagerInterface
     {
         $paymentDetailEntity = new SpyPaymentComputopDetail();
 
-        $paymentDetailEntity->fromArray($paymentTransfer->getComputopCreditCard()->getCreditCardOrderResponse()->toArray());
+        $paymentDetailEntity->fromArray($this->activeMapper->getPaymentDetailForOrderArray($paymentTransfer));
         $paymentDetailEntity->setIdPaymentComputop($paymentEntity->getIdPaymentComputop());
+
         $paymentDetailEntity->save();
 
         return $paymentDetailEntity;

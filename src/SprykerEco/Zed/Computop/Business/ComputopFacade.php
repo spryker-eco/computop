@@ -30,10 +30,10 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $this
-            ->getFactory()
-            ->createOrderSaver()
-            ->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
+        $orderSaver = $this->getFactory()->createOrderSaver();
+        $orderSaver->registerMapper($this->getFactory()->createOrderManagerCreditCardMapper());
+        $orderSaver->registerMapper($this->getFactory()->createOrderManagerPayPalMapper());
+        $orderSaver->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
     }
 
     /**
@@ -45,7 +45,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer)
     {
-        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+        $paymentMethod = $this->getPaymentMethod($orderTransfer);
 
         $computopResponseTransfer = $this
             ->getFactory()
@@ -69,7 +69,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function inquirePaymentRequest(OrderTransfer $orderTransfer)
     {
-        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+        $paymentMethod = $this->getPaymentMethod($orderTransfer);
 
         $computopResponseTransfer = $this
             ->getFactory()
@@ -93,7 +93,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function reversePaymentRequest(OrderTransfer $orderTransfer)
     {
-        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+        $paymentMethod = $this->getPaymentMethod($orderTransfer);
 
         $computopResponseTransfer = $this
             ->getFactory()
@@ -132,7 +132,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer)
     {
-        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+        $paymentMethod = $this->getPaymentMethod($orderTransfer);
 
         $computopResponseTransfer = $this
             ->getFactory()
@@ -156,7 +156,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function refundPaymentRequest(OrderTransfer $orderTransfer)
     {
-        $paymentMethod = $orderTransfer->getComputopCreditCard()->getPaymentMethod();
+        $paymentMethod = $this->getPaymentMethod($orderTransfer);
 
         $computopResponseTransfer = $this
             ->getFactory()
@@ -184,6 +184,18 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
         $this->getFactory()->createComputopResponseLogger()->log($header, $method);
 
         return $header;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
+    protected function getPaymentMethod(OrderTransfer $orderTransfer)
+    {
+        $paymentsArray = $orderTransfer->getPayments()->getArrayCopy();
+
+        return array_shift($paymentsArray)->getPaymentMethod();
     }
 
 }

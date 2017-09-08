@@ -30,21 +30,21 @@ interface ComputopFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopInquireResponseTransfer
      */
     public function inquirePaymentRequest(OrderTransfer $orderTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopReverseResponseTransfer
      */
     public function reversePaymentRequest(OrderTransfer $orderTransfer);
 
@@ -58,14 +58,14 @@ interface ComputopFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCaptureResponseTransfer
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardRefundResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopRefundResponseTransfer
      */
     public function refundPaymentRequest(OrderTransfer $orderTransfer);
 
