@@ -7,6 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Request;
 
-class AuthorizationRequest extends AbstractPaymentRequest implements CreditCartRequestInterface
+class AuthorizationRequest extends AbstractPaymentRequest implements RequestInterface
 {
 }

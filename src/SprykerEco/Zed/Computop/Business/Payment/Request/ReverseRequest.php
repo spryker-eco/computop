@@ -7,6 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Request;
 
-class ReverseRequest extends AbstractPaymentRequest implements CreditCartRequestInterface
+class ReverseRequest extends AbstractPaymentRequest implements RequestInterface
 {
 }

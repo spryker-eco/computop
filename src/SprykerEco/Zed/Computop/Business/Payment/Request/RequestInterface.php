@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Request;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-interface CreditCartRequestInterface
+interface RequestInterface
 {
 
     /**
