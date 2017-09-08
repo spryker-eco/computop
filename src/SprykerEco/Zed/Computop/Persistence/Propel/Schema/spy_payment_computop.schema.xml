@@ -59,6 +59,41 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="amount_cap" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
         <column name="amount_cred" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
 
+        <column name="user_data" required="false" type="VARCHAR"/>
+        <column name="name" required="false" type="VARCHAR"/>
+        <column name="first_name" required="false" type="VARCHAR"/>
+        <column name="last_name" required="false" type="VARCHAR"/>
+        <column name="email" required="false" type="VARCHAR"/>
+        <column name="addr_street" required="false" type="VARCHAR"/>
+        <column name="addr_street2" required="false" type="VARCHAR"/>
+        <column name="addr_city" required="false" type="VARCHAR"/>
+        <column name="addr_state" required="false" type="VARCHAR"/>
+        <column name="addr_zip" required="false" type="VARCHAR"/>
+        <column name="addr_country_code" required="false" type="VARCHAR"/>
+        <column name="phone" required="false" type="VARCHAR"/>
+        <column name="billing_agreement_id" required="false" type="VARCHAR"/>
+        <column name="billing_name" required="false" type="VARCHAR"/>
+        <column name="billing_addr_street" required="false" type="VARCHAR"/>
+        <column name="billing_addr_street2" required="false" type="VARCHAR"/>
+        <column name="billing_addr_city" required="false" type="VARCHAR"/>
+        <column name="billing_addr_state" required="false" type="VARCHAR"/>
+        <column name="billing_addr_zip" required="false" type="VARCHAR"/>
+        <column name="billing_addr_country_code" required="false" type="VARCHAR"/>
+        <column name="info_text" required="false" type="VARCHAR"/>
+        <column name="payer_id" required="false" type="VARCHAR"/>
+        <column name="is_financing" required="false" type="VARCHAR"/>
+        <column name="financing_fee_amount" required="false" type="VARCHAR"/>
+        <column name="financing_monthly_payment" required="false" type="VARCHAR"/>
+        <column name="financing_term" required="false" type="VARCHAR"/>
+        <column name="financing_total_cost" required="false" type="VARCHAR"/>
+        <column name="gross_amount" required="false" type="VARCHAR"/>
+        <column name="fee_amount" required="false" type="VARCHAR"/>
+        <column name="settle_amount" required="false" type="VARCHAR"/>
+        <column name="tax_amount" required="false" type="VARCHAR"/>
+        <column name="exchange_rate" required="false" type="VARCHAR"/>
+        <column name="mc_fee" required="false" type="VARCHAR"/>
+        <column name="mc_gross" required="false" type="VARCHAR"/>
+
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>
         </foreign-key>
