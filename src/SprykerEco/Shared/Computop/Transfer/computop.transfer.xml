@@ -166,12 +166,12 @@
     </transfer>
 
 
-    <transfer name="ComputopCreditCardAuthorizeResponse">
+    <transfer name="ComputopAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
     </transfer>
 
-    <transfer name="ComputopCreditCardInquireResponse">
+    <transfer name="ComputopInquireResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="amountAuth" type="string" />
         <property name="amountCap" type="string" />
@@ -182,7 +182,7 @@
         <property name="isCredLast" type="bool" />
     </transfer>
 
-    <transfer name="ComputopCreditCardReverseResponse">
+    <transfer name="ComputopReverseResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="aId" type="string" />
@@ -191,7 +191,7 @@
         <property name="transactionId" type="string" />
     </transfer>
 
-    <transfer name="ComputopCreditCardCaptureResponse">
+    <transfer name="ComputopCaptureResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="aId" type="string" />
@@ -201,7 +201,7 @@
         <property name="transactionId" type="string" />
     </transfer>
 
-    <transfer name="ComputopCreditCardRefundResponse">
+    <transfer name="ComputopRefundResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="aId" type="string" />
@@ -218,6 +218,7 @@
 
     <transfer name="Order">
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
+        <property name="computopPayPal" type="ComputopPayPalPayment" />
     </transfer>
 
 </transfers>
