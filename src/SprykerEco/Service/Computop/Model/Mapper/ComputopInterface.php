@@ -8,17 +8,17 @@
 namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopInterface
 {
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer);
+    public function getMacEncryptedValue(TransferInterface $cardPaymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header

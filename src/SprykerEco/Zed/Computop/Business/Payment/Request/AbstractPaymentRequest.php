@@ -22,7 +22,7 @@ abstract class AbstractPaymentRequest
     protected $adapter;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     * @var \SprykerEco\Zed\Computop\Business\Api\Converter\AbstractConverterInterface
      */
     protected $converter;
 
@@ -54,7 +54,7 @@ abstract class AbstractPaymentRequest
     /**
      * @param array $requestData
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected function sendRequest(array $requestData)
     {
@@ -74,7 +74,7 @@ abstract class AbstractPaymentRequest
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function request(OrderTransfer $orderTransfer)
     {

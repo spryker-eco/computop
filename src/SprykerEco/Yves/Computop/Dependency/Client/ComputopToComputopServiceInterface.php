@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Dependency\Client;
 
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopToComputopServiceInterface
 {
@@ -20,11 +20,11 @@ interface ComputopToComputopServiceInterface
     public function getDescriptionValue(array $items);
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer);
+    public function getMacEncryptedValue(TransferInterface $cardPaymentTransfer);
 
     /**
      * @param array $decryptedArray

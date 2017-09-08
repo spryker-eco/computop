@@ -37,7 +37,7 @@ abstract class AbstractConverter
     /**
      * @param \GuzzleHttp\Psr7\Stream $response
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function toTransactionResponseTransfer(Stream $response)
     {
@@ -65,7 +65,7 @@ abstract class AbstractConverter
     /**
      * @param array $decryptedArray
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     abstract protected function getResponseTransfer(array $decryptedArray);
 

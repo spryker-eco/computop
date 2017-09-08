@@ -16,7 +16,7 @@ class ComputopPayPalPaymentHandler implements ComputopPaymentHandlerInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer; $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

@@ -8,7 +8,7 @@
 namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractService;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
@@ -36,11 +36,11 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @api
      *
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
      * @return string
      */
-    public function getMacEncryptedValue(AbstractTransfer $cardPaymentTransfer)
+    public function getMacEncryptedValue(TransferInterface $cardPaymentTransfer)
     {
         $value = $this->getFactory()->createComputopMapper()->getMacEncryptedValue($cardPaymentTransfer);
         return $this->getHashValue($value);
