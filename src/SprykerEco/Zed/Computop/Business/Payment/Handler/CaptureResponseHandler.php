@@ -35,7 +35,7 @@ class CaptureResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
@@ -51,7 +51,7 @@ class CaptureResponseHandler extends AbstractResponseHandler
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($orderTransfer->getComputopCreditCard()->getPayId())
+            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {

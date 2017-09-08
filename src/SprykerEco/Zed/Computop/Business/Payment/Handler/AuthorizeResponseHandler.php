@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
-use Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
@@ -36,12 +36,12 @@ class AuthorizeResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopCreditCardAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
+    protected function saveComputopOrderDetails(ComputopAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 
@@ -52,7 +52,7 @@ class AuthorizeResponseHandler extends AbstractResponseHandler
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($orderTransfer->getComputopCreditCard()->getPayId())
+            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {
