@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper;
 
+use Generated\Shared\Transfer\OrderTransfer;
+
 interface AbstractMapperInterface
 {
 
@@ -14,5 +16,12 @@ interface AbstractMapperInterface
      * @return string
      */
     public function getMethodName();
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return array
+     */
+    public function buildRequest(OrderTransfer $orderTransfer);
 
 }

@@ -7,10 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
@@ -41,41 +38,7 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
             ->getCalculationFacade()
             ->recalculateOrder($orderTransfer);
 
-        $computopCreditCardPaymentTransfer = $this->createComputopCreditCardPaymentTransfer($orderTransfer);
-        $orderTransfer->setComputopCreditCard($computopCreditCardPaymentTransfer);
-
         return $orderTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
-     */
-    protected function createComputopCreditCardPaymentTransfer(OrderTransfer $orderTransfer)
-    {
-        $savedSpyPaymentComputop = $this
-            ->getQueryContainer()
-            ->queryPaymentByOrderId($orderTransfer->getIdSalesOrder())
-            ->findOne();
-
-        $computopCreditCardPaymentTransfer = new ComputopCreditCardPaymentTransfer();
-        $computopCreditCardPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
-        $computopCreditCardPaymentTransfer->setMerchantId($this->getConfig()->getMerchantId());
-        $computopCreditCardPaymentTransfer->setAmount($this->getAmount($orderTransfer));
-        $computopCreditCardPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-
-        return $computopCreditCardPaymentTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return int
-     */
-    protected function getAmount(OrderTransfer $orderTransfer)
-    {
-        return $orderTransfer->getTotals()->getGrandTotal();
     }
 
 }

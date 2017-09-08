@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<statemachine
+        xmlns="http://static.spryker.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://static.spryker.com http://static.spryker.com/oms-01.xsd">
+
+    <process name="ComputopPayPal01" main="true">
+        <states>
+            <state name="new" reserved="true" />
+            <state name="authorized" reserved="true" />
+            <state name="authorization failed" reserved="false" />
+            <state name="cancelled" reserved="false" />
+            <state name="captured" reserved="true" />
+            <state name="capturing failed" reserved="false" />
+            <state name="shipped" reserved="true" />
+            <state name="refunded" reserved="false" />
+            <state name="refunding failed" reserved="false" />
+            <state name="closed" reserved="false"/>
+        </states>
+
+        <events>
+            <event name="authorize" onEnter="true" command="Computop/AuthorizePayPal"/>
+            <event name="cancel" manual="true" command="Computop/CancelPayPal" timeout="14days" />
+            <event name="capture" manual="true" command="Computop/CapturePayPal"/>
+            <event name="ship" manual="true" />
+            <event name="refund" manual="true" command="Computop/RefundPayPal"/>
+            <event name="close" manual="true" />
+        </events>
+
+        <transitions>
+
+            <transition condition="Computop/IsAuthorized" happy="true">
+                <source>new</source>
+                <target>authorized</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition>
+                <source>new</source>
+                <target>authorization failed</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition condition="Computop/IsCancelled">
+                <source>authorized</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition condition="Computop/IsCaptured" happy="true">
+                <source>authorized</source>
+                <target>captured</target>
+                <event>capture</event>
+            </transition>
+
+            <transition>
+                <source>authorized</source>
+                <target>capturing failed</target>
+                <event>capture</event>
+            </transition>
+
+            <transition condition="Computop/IsRefunded">
+                <source>captured</source>
+                <target>refunded</target>
+                <event>refund</event>
+            </transition>
+
+            <transition>
+                <source>captured</source>
+                <target>refunding failed</target>
+                <event>refund</event>
+            </transition>
+
+            <transition happy="true">
+                <source>captured</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>close</event>
+            </transition>
+
+        </transitions>
+
+    </process>
+</statemachine>

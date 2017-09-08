@@ -7,24 +7,26 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 class CaptureCreditCardMapper extends AbstractCreditCardMapper
 {
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
      * @return array
      */
-    public function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
-        $dataSubArray[ComputopConstants::PAY_ID_F_N] = $cardPaymentTransfer->getPayId();
-        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
+
+        $dataSubArray[ComputopConstants::PAY_ID_F_N] = $computopPaymentTransfer->getPayId();
+        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $computopPaymentTransfer->getTransId();
+        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $computopPaymentTransfer->getAmount();
+        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $computopPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopConstants::MAC_F_N] = $computopPaymentTransfer->getMac();
 
         return $dataSubArray;
     }

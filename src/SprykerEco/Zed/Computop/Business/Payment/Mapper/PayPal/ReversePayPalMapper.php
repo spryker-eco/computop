@@ -5,12 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
+namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class RefundCreditCardMapper extends AbstractCreditCardMapper
+class ReversePayPalMapper extends AbstractPayPalMapper
 {
 
     /**
@@ -20,7 +20,7 @@ class RefundCreditCardMapper extends AbstractCreditCardMapper
      */
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer */
 
         $dataSubArray[ComputopConstants::PAY_ID_F_N] = $computopPaymentTransfer->getPayId();
         $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $computopPaymentTransfer->getTransId();
