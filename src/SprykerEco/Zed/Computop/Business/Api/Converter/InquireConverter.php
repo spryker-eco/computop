@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
-use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
+use Generated\Shared\Transfer\ComputopInquireResponseTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 class InquireConverter extends AbstractConverter implements ConverterInterface
@@ -18,58 +18,58 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
     /**
      * @param array $decryptedArray
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopInquireResponseTransfer
      */
     protected function getResponseTransfer(array $decryptedArray)
     {
-        $computopCreditCardResponseTransfer = new ComputopCreditCardInquireResponseTransfer();
+        $computopResponseTransfer = new ComputopInquireResponseTransfer();
 
-        $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
-        $computopCreditCardResponseTransfer->setHeader(
+        $computopResponseTransfer->fromArray($decryptedArray, true);
+        $computopResponseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray, ComputopConstants::INQUIRE_METHOD)
         );
 
-        $computopCreditCardResponseTransfer->setIsAuthLast($this->isAuthLast($computopCreditCardResponseTransfer));
-        $computopCreditCardResponseTransfer->setIsCapLast($this->isCapLast($computopCreditCardResponseTransfer));
-        $computopCreditCardResponseTransfer->setIsCredLast($this->isCredLast($computopCreditCardResponseTransfer));
+        $computopResponseTransfer->setIsAuthLast($this->isAuthLast($computopResponseTransfer));
+        $computopResponseTransfer->setIsCapLast($this->isCapLast($computopResponseTransfer));
+        $computopResponseTransfer->setIsCredLast($this->isCredLast($computopResponseTransfer));
 
-        return $computopCreditCardResponseTransfer;
+        return $computopResponseTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $computopCreditCardResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $computopResponseTransfer
      *
      * @return bool
      */
-    protected function isAuthLast($computopCreditCardResponseTransfer)
+    protected function isAuthLast($computopResponseTransfer)
     {
-        return $computopCreditCardResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
-            $computopCreditCardResponseTransfer->getAmountCap() === self::EMPTY_AMOUNT &&
-            $computopCreditCardResponseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
+        return $computopResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
+            $computopResponseTransfer->getAmountCap() === self::EMPTY_AMOUNT &&
+            $computopResponseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $computopCreditCardResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $computopResponseTransfer
      *
      * @return bool
      */
-    protected function isCapLast($computopCreditCardResponseTransfer)
+    protected function isCapLast($computopResponseTransfer)
     {
-        return $computopCreditCardResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
-            $computopCreditCardResponseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
-            $computopCreditCardResponseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
+        return $computopResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
+            $computopResponseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
+            $computopResponseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $computopCreditCardResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $computopResponseTransfer
      *
      * @return bool
      */
-    protected function isCredLast($computopCreditCardResponseTransfer)
+    protected function isCredLast($computopResponseTransfer)
     {
-        return $computopCreditCardResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
-            $computopCreditCardResponseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
-            $computopCreditCardResponseTransfer->getAmountCred() !== self::EMPTY_AMOUNT;
+        return $computopResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
+            $computopResponseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
+            $computopResponseTransfer->getAmountCred() !== self::EMPTY_AMOUNT;
     }
 
 }

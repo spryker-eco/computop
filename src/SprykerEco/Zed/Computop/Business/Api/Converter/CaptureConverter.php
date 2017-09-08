@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
-use Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer;
+use Generated\Shared\Transfer\ComputopCaptureResponseTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
 class CaptureConverter extends AbstractConverter implements ConverterInterface
@@ -16,39 +16,39 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
     /**
      * @param array $decryptedArray
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardCaptureResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCaptureResponseTransfer
      */
     protected function getResponseTransfer(array $decryptedArray)
     {
-        $computopCreditCardResponseTransfer = new ComputopCreditCardCaptureResponseTransfer();
+        $computopResponseTransfer = new ComputopCaptureResponseTransfer();
 
-        $computopCreditCardResponseTransfer->fromArray($decryptedArray, true);
+        $computopResponseTransfer->fromArray($decryptedArray, true);
 
         //optional fields
-        $computopCreditCardResponseTransfer->setAId(
+        $computopResponseTransfer->setAId(
             isset($decryptedArray[ComputopConstants::A_ID_F_N]) ? $decryptedArray[ComputopConstants::A_ID_F_N] : null
         );
-        $computopCreditCardResponseTransfer->setTransactionId(
+        $computopResponseTransfer->setTransactionId(
             isset($decryptedArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] : null
         );
-        $computopCreditCardResponseTransfer->setAmount(
+        $computopResponseTransfer->setAmount(
             isset($decryptedArray[ComputopConstants::AMOUNT_F_N]) ? $decryptedArray[ComputopConstants::AMOUNT_F_N] : null
         );
-        $computopCreditCardResponseTransfer->setCodeExt(
+        $computopResponseTransfer->setCodeExt(
             isset($decryptedArray[ComputopConstants::CODE_EXT_F_N]) ? $decryptedArray[ComputopConstants::CODE_EXT_F_N] : null
         );
-        $computopCreditCardResponseTransfer->setErrorText(
+        $computopResponseTransfer->setErrorText(
             isset($decryptedArray[ComputopConstants::ERROR_TEXT_F_N]) ? $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] : null
         );
-        $computopCreditCardResponseTransfer->setRefNr(
+        $computopResponseTransfer->setRefNr(
             isset($decryptedArray[ComputopConstants::REF_NR_F_N]) ? $decryptedArray[ComputopConstants::REF_NR_F_N] : null
         );
 
-        $computopCreditCardResponseTransfer->setHeader(
+        $computopResponseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray, ComputopConstants::CAPTURE_METHOD)
         );
 
-        return $computopCreditCardResponseTransfer;
+        return $computopResponseTransfer;
     }
 
 }
