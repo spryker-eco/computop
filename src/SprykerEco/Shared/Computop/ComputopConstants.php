@@ -13,6 +13,7 @@ interface ComputopConstants
     const PROVIDER_NAME = 'Computop';
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
     const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
+    const PAYMENT_METHOD_DIRECT_DEBIT = 'ComputopDirectDebit';
 
     //Statuses
     const COMPUTOP_OMS_STATUS_NEW = 'new';
@@ -50,6 +51,7 @@ interface ComputopConstants
     const COMPUTOP_REFUND_ACTION = 'COMPUTOP_REFUND_ACTION';
 
     const COMPUTOP_PAY_PAL_ORDER_ACTION = 'COMPUTOP_PAY_PAL_ORDER_ACTION';
+    const COMPUTOP_DIRECT_DEBIT_ORDER_ACTION = 'COMPUTOP_DIRECT_DEBIT_ORDER_ACTION';
 
     const COMPUTOP_RESPONSE_MAC_REQUIRED = 'COMPUTOP_RESPONSE_MAC_REQUIRED';
 
@@ -94,5 +96,11 @@ interface ComputopConstants
     const ETI_ID_F_N = 'EtiId';
     const DATA_F_N = 'Data';
     const LENGTH_F_N = 'Len';
+
+    const MANDATE_ID_F_N = 'mandateid';
+    const DATE_OF_SIGNATURE_ID_F_N = 'dtofsgntr';
+    const I_B_A_N_F_N = 'IBAN';
+    const ACCOUNT_OWNER_F_N = 'accOwner';
+    const MDT_SEQ_TYPE_F_N = 'mdtseqtype';
 
 }

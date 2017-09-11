@@ -17,6 +17,7 @@ $config[ComputopConstants::COMPUTOP_INQUIRE_ACTION] = 'https://www.computop-payg
 $config[ComputopConstants::COMPUTOP_REFUND_ACTION] = 'https://www.computop-paygate.com/credit.aspx';
 
 $config[ComputopConstants::COMPUTOP_PAY_PAL_ORDER_ACTION] = 'https://www.computop-paygate.com/paypal.aspx';
+$config[ComputopConstants::COMPUTOP_DIRECT_DEBIT_ORDER_ACTION] = 'https://www.computop-paygate.com/paysdd.aspx';
 
 $config[ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED] = [
     ComputopConstants::ORDER_METHOD,
