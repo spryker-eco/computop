@@ -81,6 +81,18 @@ class CallbackController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successDirectDebitAction()
+    {
+        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+            $this->getFactory()->createOrderDirectDebitConverter()
+        );
+
+        return $this->successAction($this->getFactory()->createDirectDebitPaymentHandler());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function failureAction()
     {
         $this->addErrorMessage($this->getErrorMessageText());

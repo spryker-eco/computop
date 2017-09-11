@@ -23,6 +23,9 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
     const PAY_PAL_SUCCESS_PATH = '/computop/pay-pal-success';
     const PAY_PAL_SUCCESS_PATH_NAME = 'computop-pay-pal-success';
 
+    const DIRECT_DEBIT_SUCCESS_PATH = '/computop/direct-debit-success';
+    const DIRECT_DEBIT_SUCCESS_PATH_NAME = 'computop-direct-debit-success';
+
     const FAILURE_PATH = '/computop/failure';
     const FAILURE_PATH_NAME = 'computop-failure';
 
@@ -47,6 +50,14 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
             self::MODULE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'successPayPal'
+        );
+
+        $this->createController(
+            self::DIRECT_DEBIT_SUCCESS_PATH,
+            self::DIRECT_DEBIT_SUCCESS_PATH_NAME,
+            self::MODULE_NAME,
+            self::CALLBACK_CONTROLLER_NAME,
+            'successDirectDebit'
         );
 
         $this->createController(
