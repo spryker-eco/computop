@@ -12,6 +12,7 @@ use Spryker\Shared\Kernel\Dependency\Injector\DependencyInjectorInterface;
 use Spryker\Yves\Checkout\CheckoutDependencyProvider;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 use SprykerEco\Yves\Computop\Plugin\CreditCardSubFormPlugin;
+use SprykerEco\Yves\Computop\Plugin\DirectDebitSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\PayPalSubFormPlugin;
 
 class CheckoutDependencyInjector implements DependencyInjectorInterface
@@ -39,6 +40,7 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
         $container->extend(CheckoutDependencyProvider::PAYMENT_SUB_FORMS, function (SubFormPluginCollection $paymentSubForms) {
             $paymentSubForms->add(new CreditCardSubFormPlugin());
             $paymentSubForms->add(new PayPalSubFormPlugin());
+            $paymentSubForms->add(new DirectDebitSubFormPlugin());
 
             return $paymentSubForms;
         });

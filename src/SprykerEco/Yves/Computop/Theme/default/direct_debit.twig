@@ -1,0 +1,8 @@
+{{ form_widget(form.ComputopDirectDebit.MerchantID, {'full_name': 'MerchantID'}) }}
+{{ form_widget(form.ComputopDirectDebit.Data, {'full_name': 'Data'}) }}
+{{ form_widget(form.ComputopDirectDebit.Len, {'full_name': 'Len'}) }}
+{{ form_widget(form.ComputopDirectDebit.url) }}
+
+<a href="{{ form.ComputopDirectDebit.vars.value.url }}">
+    {{ 'Pay with Computop Direct Debit' | trans }}
+</a>

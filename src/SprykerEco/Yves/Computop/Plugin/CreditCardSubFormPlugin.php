@@ -17,7 +17,7 @@ class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
 {
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\CreditCardSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createSubForm()
     {
@@ -27,7 +27,7 @@ class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()
     {

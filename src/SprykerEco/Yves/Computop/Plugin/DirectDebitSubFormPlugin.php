@@ -13,7 +13,7 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 /**
  * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
  */
-class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
+class DirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
 
     /**
@@ -23,7 +23,7 @@ class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
     {
         return $this
             ->getFactory()
-            ->createPayPalForm();
+            ->createDirectDebitForm();
     }
 
     /**
@@ -33,7 +33,7 @@ class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
     {
         return $this
             ->getFactory()
-            ->createPayPalFormDataProvider();
+            ->createDirectDebitFormDataProvider();
     }
 
 }
