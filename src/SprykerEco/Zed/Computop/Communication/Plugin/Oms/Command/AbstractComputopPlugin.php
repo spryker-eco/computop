@@ -41,4 +41,16 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
         return $orderTransfer;
     }
 
+    /**
+     * @param integer $idSalesOrder
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    protected function getSavedComputopEntity($idSalesOrder)
+    {
+        return $this
+            ->getFactory()
+            ->getSavedComputopEntity($idSalesOrder);
+    }
+
 }

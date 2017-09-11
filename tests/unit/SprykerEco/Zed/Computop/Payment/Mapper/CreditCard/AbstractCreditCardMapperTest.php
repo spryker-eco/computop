@@ -18,7 +18,7 @@ abstract class AbstractCreditCardMapperTest extends Test
     /**
      * Return needed mapper
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CreditCardMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     abstract protected function createMapper();
 
@@ -49,7 +49,6 @@ abstract class AbstractCreditCardMapperTest extends Test
 
         $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopConstants::DATA_F_N]);
         $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopConstants::LENGTH_F_N]);
-        $this->assertEquals(CreditCardMapperTestConstants::MERCHANT_ID_VALUE, $mappedData[ComputopConstants::MERCHANT_ID_F_N]);
     }
 
 }

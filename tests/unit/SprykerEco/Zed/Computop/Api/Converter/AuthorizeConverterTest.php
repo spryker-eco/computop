@@ -32,7 +32,7 @@ class AuthorizeConverterTest extends AbstractConverterTest
         $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardAuthorizeResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());

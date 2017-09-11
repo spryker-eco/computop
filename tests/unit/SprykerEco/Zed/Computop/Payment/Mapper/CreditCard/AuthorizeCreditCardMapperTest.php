@@ -22,13 +22,14 @@ class AuthorizeCreditCardMapperTest extends AbstractCreditCardMapperTest
 {
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\AuthorizeCreditCardMapper
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
     protected function createMapper()
     {
         return new AuthorizeCreditCardMapper(
             $this->helper->createComputopServiceMock(),
-            $this->helper->createComputopConfigMock()
+            $this->helper->createComputopConfigMock(),
+            $this->helper->createComputopEntity()
         );
     }
 

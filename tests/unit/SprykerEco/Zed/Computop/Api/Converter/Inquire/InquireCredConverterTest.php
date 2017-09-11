@@ -31,7 +31,7 @@ class InquireCredConverterTest extends AbstractInquireConverterTest
         $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopInquireResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());

@@ -22,7 +22,7 @@ abstract class AbstractPaymentRequest
     protected $adapter;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Converter\AbstractConverterInterface
+     * @var \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     protected $converter;
 

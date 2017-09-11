@@ -7,7 +7,7 @@
 
 namespace Functional\SprykerEco\Zed\Computop\Business\Api;
 
-use Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer;
+use Generated\Shared\Transfer\ComputopInquireResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
@@ -43,11 +43,13 @@ class InquirePaymentTest extends AbstractPaymentTest
     {
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
+        $orderTransfer = $this->apiHelper->createOrderTransfer();
+        $computopPayment = $this->apiHelper->createComputopPayment($this->getPayIdValue());
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardInquireResponseTransfer $response */
-        $response = $service->inquirePaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
+        /** @var \Generated\Shared\Transfer\ComputopInquireResponseTransfer $response */
+        $response = $service->inquirePaymentRequest($orderTransfer, $computopPayment);
 
-        $this->assertInstanceOf(ComputopCreditCardInquireResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopInquireResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());

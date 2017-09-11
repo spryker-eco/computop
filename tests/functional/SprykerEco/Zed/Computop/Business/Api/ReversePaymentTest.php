@@ -7,8 +7,8 @@
 
 namespace Functional\SprykerEco\Zed\Computop\Business\Api;
 
-use Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
@@ -39,11 +39,13 @@ class ReversePaymentTest extends AbstractPaymentTest
     {
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
+        $orderTransfer = $this->apiHelper->createOrderTransfer();
+        $computopPayment = $this->apiHelper->createComputopPayment($this->getPayIdValue());
 
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardReverseResponseTransfer $response */
-        $response = $service->reversePaymentRequest($this->apiHelper->createOrderTransfer($this->getPayIdValue()));
+        /** @var \Generated\Shared\Transfer\ComputopReverseResponseTransfer $response */
+        $response = $service->reversePaymentRequest($orderTransfer, $computopPayment);
 
-        $this->assertInstanceOf(ComputopCreditCardReverseResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopReverseResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());

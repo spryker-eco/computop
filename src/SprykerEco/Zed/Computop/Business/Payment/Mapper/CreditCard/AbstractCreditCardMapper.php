@@ -47,13 +47,8 @@ abstract class AbstractCreditCardMapper extends AbstractMapper
      */
     protected function createCardPaymentTransfer(OrderTransfer $orderTransfer)
     {
-        $savedSpyPaymentComputop = $this
-            ->computopQueryContainer
-            ->queryPaymentByOrderId($orderTransfer->getIdSalesOrder())
-            ->findOne();
-
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
-        $computopPaymentTransfer->fromArray($savedSpyPaymentComputop->toArray(), true);
+        $computopPaymentTransfer->fromArray($this->savedComputopEntity->toArray(), true);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($this->getAmount($orderTransfer));
         $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());

@@ -8,11 +8,11 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
-use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {
@@ -28,20 +28,24 @@ abstract class AbstractMapper implements AbstractMapperInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
+     * @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
-    protected $computopQueryContainer;
+    protected $savedComputopEntity;
 
     /**
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
-     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $computopQueryContainer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService, ComputopConfig $config, ComputopQueryContainerInterface $computopQueryContainer)
-    {
+    public function __construct(
+        ComputopToComputopServiceInterface $computopService,
+        ComputopConfig $config,
+        SpyPaymentComputop $savedComputopEntity
+    ) {
+
         $this->computopService = $computopService;
         $this->config = $config;
-        $this->computopQueryContainer = $computopQueryContainer;
+        $this->savedComputopEntity = $savedComputopEntity;
     }
 
     /**

@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business;
 
+use Generated\Shared\Transfer\OrderTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
@@ -78,10 +80,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
 
     /**
      * @param string $paymentMethod
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createAuthorizationPaymentRequest($paymentMethod)
+    public function createAuthorizationPaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
     {
         $paymentRequest = new AuthorizationRequest(
             $this->createAuthorizeAdapter(),
@@ -89,18 +92,19 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createAuthorizeCreditCardMapper());
-        $paymentRequest->registerMapper($this->createAuthorizePayPalMapper());
+        $paymentRequest->registerMapper($this->createAuthorizeCreditCardMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createAuthorizePayPalMapper($savedComputopEntity));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createInquirePaymentRequest($paymentMethod)
+    public function createInquirePaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
     {
         $paymentRequest = new InquireRequest(
             $this->createInquireAdapter(),
@@ -108,18 +112,19 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createInquireCreditCardMapper());
-        $paymentRequest->registerMapper($this->createInquirePayPalMapper());
+        $paymentRequest->registerMapper($this->createInquireCreditCardMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createInquirePayPalMapper($savedComputopEntity));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createReversePaymentRequest($paymentMethod)
+    public function createReversePaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
     {
         $paymentRequest = new ReverseRequest(
             $this->createReverseAdapter(),
@@ -127,18 +132,19 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createReverseCreditCardMapper());
-        $paymentRequest->registerMapper($this->createReversePayPalMapper());
+        $paymentRequest->registerMapper($this->createReverseCreditCardMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createReversePayPalMapper($savedComputopEntity));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createCapturePaymentRequest($paymentMethod)
+    public function createCapturePaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
     {
         $paymentRequest = new CaptureRequest(
             $this->createCaptureAdapter(),
@@ -146,18 +152,19 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createCaptureCreditCardMapper());
-        $paymentRequest->registerMapper($this->createCapturePayPalMapper());
+        $paymentRequest->registerMapper($this->createCaptureCreditCardMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createCapturePayPalMapper($savedComputopEntity));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createRefundPaymentRequest($paymentMethod)
+    public function createRefundPaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
     {
         $paymentRequest = new RefundRequest(
             $this->createRefundAdapter(),
@@ -165,10 +172,93 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createRefundCreditCardMapper());
-        $paymentRequest->registerMapper($this->createRefundPayPalMapper());
+        $paymentRequest->registerMapper($this->createRefundCreditCardMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createRefundPayPalMapper($savedComputopEntity));
 
         return $paymentRequest;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     */
+    public function createAuthorizeResponseHandler()
+    {
+        return new AuthorizeResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     */
+    public function createReverseResponseHandler()
+    {
+        return new ReverseResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     */
+    public function createInquireResponseHandler()
+    {
+        return new InquireResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     */
+    public function createCaptureResponseHandler()
+    {
+        return new CaptureResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     */
+    public function createRefundResponseHandler()
+    {
+        return new RefundResponseHandler(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
+     */
+    public function createComputopResponseLogger()
+    {
+        return new ComputopResponseLogger();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManagerInterface
+     */
+    public function createCancelItemManager()
+    {
+        return new CancelItemManager($this->getQueryContainer());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return mixed
+     */
+    public function getPaymentMethod(OrderTransfer $orderTransfer)
+    {
+        $paymentsArray = $orderTransfer->getPayments()->getArrayCopy();
+
+        return array_shift($paymentsArray)->getPaymentMethod();
     }
 
     /**
@@ -252,83 +342,103 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createAuthorizeCreditCardMapper()
+    protected function createAuthorizeCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createReverseCreditCardMapper()
+    protected function createReverseCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createInquireCreditCardMapper()
+    protected function createInquireCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createCaptureCreditCardMapper()
+    protected function createCaptureCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createRefundCreditCardMapper()
+    protected function createRefundCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createAuthorizePayPalMapper()
+    protected function createAuthorizePayPalMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createReversePayPalMapper()
+    protected function createReversePayPalMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createInquirePayPalMapper()
+    protected function createInquirePayPalMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createCapturePayPalMapper()
+    protected function createCapturePayPalMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createRefundPayPalMapper()
+    protected function createRefundPayPalMapper(SpyPaymentComputop $savedComputopEntity)
     {
-        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $this->getQueryContainer());
+        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
     }
 
     /**
@@ -337,77 +447,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getComputopService()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
-     */
-    public function createAuthorizeResponseHandler()
-    {
-        return new AuthorizeResponseHandler(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
-     */
-    public function createReverseResponseHandler()
-    {
-        return new ReverseResponseHandler(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
-     */
-    public function createInquireResponseHandler()
-    {
-        return new InquireResponseHandler(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
-     */
-    public function createCaptureResponseHandler()
-    {
-        return new CaptureResponseHandler(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
-     */
-    public function createRefundResponseHandler()
-    {
-        return new RefundResponseHandler(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
-     */
-    public function createComputopResponseLogger()
-    {
-        return new ComputopResponseLogger();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManagerInterface
-     */
-    public function createCancelItemManager()
-    {
-        return new CancelItemManager($this->getQueryContainer());
     }
 
 }

@@ -55,4 +55,17 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
     }
 
+    /**
+     * @param integer $idSalesOrder
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    public function getSavedComputopEntity($idSalesOrder)
+    {
+        return $this
+            ->getQueryContainer()
+            ->queryPaymentByOrderId($idSalesOrder)
+            ->findOne();
+    }
+
 }

@@ -12,6 +12,5 @@ interface CreditCardMapperTestConstants
 
     const DATA_VALUE = 'Data';
     const LENGTH_VALUE = 10;
-    const MERCHANT_ID_VALUE = 'MerchantId';
 
 }

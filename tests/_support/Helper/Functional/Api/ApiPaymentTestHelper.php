@@ -9,10 +9,10 @@ namespace Computop\Helper\Functional\Api;
 
 use Codeception\TestCase\Test;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
@@ -28,14 +28,11 @@ class ApiPaymentTestHelper extends Test
     }
 
     /**
-     * @param string $payId
-     *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function createOrderTransfer($payId)
+    public function createOrderTransfer()
     {
         $orderTransfer = new OrderTransfer();
-        $orderTransfer->setComputopCreditCard($this->createComputopPaymentTransfer($payId));
         $orderTransfer->setTotals(new TotalsTransfer());
         $orderTransfer->setCustomer(new CustomerTransfer());
         return $orderTransfer;
@@ -44,15 +41,15 @@ class ApiPaymentTestHelper extends Test
     /**
      * @param string $payId
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
-    protected function createComputopPaymentTransfer($payId)
+    public function createComputopPayment($payId)
     {
-        $payment = new ComputopCreditCardPaymentTransfer();
-        $payment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-        $payment->setPayId($payId);
+        $computopPayment = new SpyPaymentComputop();
+        $computopPayment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
+        $computopPayment->setPayId($payId);
 
-        return $payment;
+        return $computopPayment;
     }
 
 }

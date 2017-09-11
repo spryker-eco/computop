@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -37,9 +38,10 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
         $orderTransfer = $this->getOrderTransfer($orderEntity, $orderItems);
+        $savedComputopEntity = $this->getSavedComputopEntity($orderEntity->getIdSalesOrder());
 
         if ($this->isAllOrderCancellation($orderItems, $orderEntity)) {
-            return $this->cancelOrderAuthorization($orderItems, $orderTransfer);
+            return $this->cancelOrderAuthorization($orderItems, $orderTransfer, $savedComputopEntity);
         }
 
         return $this->cancelOrderItems($orderItems);
@@ -63,15 +65,16 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return array
      */
-    protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer)
+    protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
     {
-        $responseTransfer = $this->getFacade()->inquirePaymentRequest($orderTransfer);
+        $responseTransfer = $this->getFacade()->inquirePaymentRequest($orderTransfer, $savedComputopEntity);
 
         if ($responseTransfer->getIsAuthLast()) {
-            return $this->reverseOrderAuthorizationRequest($orderTransfer);
+            return $this->reverseOrderAuthorizationRequest($orderTransfer, $savedComputopEntity);
         }
 
         return $this->cancelOrderItems($orderItems);
@@ -79,12 +82,13 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
      *
      * @return array
      */
-    protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer)
+    protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
     {
-        $computopResponseTransfer = $this->getFacade()->reversePaymentRequest($orderTransfer);
+        $computopResponseTransfer = $this->getFacade()->reversePaymentRequest($orderTransfer, $savedComputopEntity);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
             $this->setInfoMessage('Authorization was reverted');
             return [];

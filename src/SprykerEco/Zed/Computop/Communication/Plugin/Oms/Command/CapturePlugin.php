@@ -44,7 +44,9 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
 
         $orderEntity->getItems()->setData($orderItems);
         $orderEntity = $this->getOrderTransfer($orderEntity, $orderItems);
-        $this->getFacade()->capturePaymentRequest($orderEntity);
+        $savedComputopEntity = $this->getSavedComputopEntity($orderEntity->getIdSalesOrder());
+
+        $this->getFacade()->capturePaymentRequest($orderEntity, $savedComputopEntity);
 
         return [];
     }
