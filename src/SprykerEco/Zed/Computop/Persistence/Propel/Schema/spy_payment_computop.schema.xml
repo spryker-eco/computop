@@ -94,15 +94,15 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="mc_fee" required="false" type="VARCHAR"/>
         <column name="mc_gross" required="false" type="VARCHAR"/>
 
-        <column name="iban" required="false" type="VARCHAR"/>
-        <column name="bic" required="false" type="VARCHAR"/>
-        <column name="acc_owner" required="false" type="VARCHAR"/>
-        <column name="acc_bank" required="false" type="VARCHAR"/>
+        <column name="bank_account_iban" required="false" type="VARCHAR"/>
+        <column name="bank_account_bic" required="false" type="VARCHAR"/>
+        <column name="account_owner" required="false" type="VARCHAR"/>
+        <column name="account_bank" required="false" type="VARCHAR"/>
         <column name="custom" required="false" type="VARCHAR"/>
         <column name="mandate_id" required="false" type="VARCHAR"/>
-        <column name="dt_of_sgntr" required="false" type="VARCHAR"/>
+        <column name="date_of_signature" required="false" type="VARCHAR"/>
         <column name="mdt_seq_type" required="false" type="VARCHAR"/>
-        <column name="pban" required="false" type="VARCHAR"/>
+        <column name="bank_account_pban" required="false" type="VARCHAR"/>
 
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>

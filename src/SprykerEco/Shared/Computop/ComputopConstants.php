@@ -101,7 +101,9 @@ interface ComputopConstants
     const DATE_OF_SIGNATURE_ID_F_N = 'dtofsgntr';
     const I_B_A_N_F_N = 'IBAN';
     const P_B_A_N_F_N = 'pban';
-    const ACCOUNT_OWNER_F_N = 'accOwner';
+    const B_I_C_F_N = 'bic';
+    const ACCOUNT_OWNER_F_N = 'AccOwner';
+    const ACCOUNT_BANK_F_N = 'AccBank';
     const MDT_SEQ_TYPE_F_N = 'mdtseqtype';
 
 }

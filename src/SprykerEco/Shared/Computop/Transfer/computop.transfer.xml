@@ -192,16 +192,16 @@
     <transfer name="ComputopDirectDebitOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="type" type="string" />
-        <property name="iban" type="string" />
-        <property name="bic" type="string" />
-        <property name="accOwner" type="string" />
-        <property name="accBank" type="string" />
+        <property name="bankAccountIban" type="string" />
+        <property name="bankAccountBic" type="string" />
+        <property name="accountOwner" type="string" />
+        <property name="accountBank" type="string" />
         <property name="plain" type="string" />
         <property name="custom" type="string" />
         <property name="mandateId" type="string" />
-        <property name="dtOfSgntr" type="string" />
+        <property name="dateOfSignature" type="string" />
         <property name="mdtSeqType" type="string" />
-        <property name="pban" type="string" />
+        <property name="bankAccountPban" type="string" />
     </transfer>
 
     <transfer name="ComputopAuthorizeResponse">
