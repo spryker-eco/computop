@@ -100,6 +100,7 @@ interface ComputopConstants
     const MANDATE_ID_F_N = 'mandateid';
     const DATE_OF_SIGNATURE_ID_F_N = 'dtofsgntr';
     const I_B_A_N_F_N = 'IBAN';
+    const P_B_A_N_F_N = 'pban';
     const ACCOUNT_OWNER_F_N = 'accOwner';
     const MDT_SEQ_TYPE_F_N = 'mdtseqtype';
 

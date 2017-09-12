@@ -193,7 +193,11 @@
         <property name="header" type="ComputopResponseHeader"/>
         <property name="type" type="string" />
         <property name="iban" type="string" />
+        <property name="bic" type="string" />
         <property name="accOwner" type="string" />
+        <property name="accBank" type="string" />
+        <property name="plain" type="string" />
+        <property name="custom" type="string" />
         <property name="mandateId" type="string" />
         <property name="dtOfSgntr" type="string" />
         <property name="mdtSeqType" type="string" />
