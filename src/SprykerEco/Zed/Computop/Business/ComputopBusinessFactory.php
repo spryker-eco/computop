@@ -22,6 +22,7 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\CreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\DirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PayPalMapper;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
@@ -65,7 +66,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderManagerCreditCardMapper()
+    public function createOrderCreditCardMapper()
     {
         return new CreditCardMapper();
     }
@@ -73,9 +74,17 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderManagerPayPalMapper()
+    public function createOrderPayPalMapper()
     {
         return new PayPalMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderDirectDebitMapper()
+    {
+        return new DirectDebitMapper();
     }
 
     /**

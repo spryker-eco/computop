@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class CreditCardMapper implements MapperInterface
+class DirectDebitMapper implements MapperInterface
 {
 
     /**
@@ -18,7 +18,7 @@ class CreditCardMapper implements MapperInterface
      */
     public function getMethodName()
     {
-        return ComputopConstants::PAYMENT_METHOD_CREDIT_CARD;
+        return ComputopConstants::PAYMENT_METHOD_DIRECT_DEBIT;
     }
 
     /**
@@ -28,7 +28,7 @@ class CreditCardMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopCreditCard();
+        return $paymentTransfer->getComputopDirectDebit();
     }
 
     /**
@@ -38,7 +38,7 @@ class CreditCardMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getCreditCardOrderResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getDirectDebitOrderResponse();
     }
 
     /**
@@ -48,10 +48,9 @@ class CreditCardMapper implements MapperInterface
      */
     public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer $computopResponse */
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer $computopResponse */
         $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);
         $result = $computopResponse->toArray();
-        $result[ComputopConstants::PCN_R_F_N] = $computopResponse->getPCNr();
 
         return $result;
     }

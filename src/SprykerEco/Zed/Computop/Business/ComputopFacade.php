@@ -32,8 +32,11 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
         $orderSaver = $this->getFactory()->createOrderSaver();
-        $orderSaver->registerMapper($this->getFactory()->createOrderManagerCreditCardMapper());
-        $orderSaver->registerMapper($this->getFactory()->createOrderManagerPayPalMapper());
+
+        $orderSaver->registerMapper($this->getFactory()->createOrderCreditCardMapper());
+        $orderSaver->registerMapper($this->getFactory()->createOrderPayPalMapper());
+        $orderSaver->registerMapper($this->getFactory()->createOrderDirectDebitMapper());
+
         $orderSaver->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
     }
 

@@ -123,7 +123,6 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->setTransId($this->computopTransfer->getTransId());
         $paymentEntity->setXId($this->computopResponseTransfer->getHeader()->getXId());
         $paymentEntity->setPayId($this->computopResponseTransfer->getHeader()->getPayId());
-        $paymentEntity->setPcnr($this->computopResponseTransfer->getPCNr());
 
         $paymentEntity->save();
 
