@@ -3,6 +3,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
+    <transfer name="ComputopHeaderPayment">
+        <property name="payId" type="string" />
+        <property name="amount" type="int" />
+        <property name="transId" type="string" />
+    </transfer>
+
     <transfer name="ComputopCreditCardPayment">
         <property name="payId" type="string" />
         <property name="merchantId" type="string" />

@@ -44,8 +44,8 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 
         $orderEntity->getItems()->setData($orderItems);
         $orderEntity = $this->getOrderTransfer($orderEntity, $orderItems);
-        $savedComputopEntity = $this->getSavedComputopEntity($orderEntity->getIdSalesOrder());
-        $this->getFacade()->refundPaymentRequest($orderEntity, $savedComputopEntity);
+        $computopHeaderPayment = $this->createComputopHeaderPayment($orderEntity);
+        $this->getFacade()->refundPaymentRequest($orderEntity, $computopHeaderPayment);
 
         return [];
     }

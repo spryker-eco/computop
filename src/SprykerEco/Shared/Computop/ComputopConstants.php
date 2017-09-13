@@ -94,6 +94,7 @@ interface ComputopConstants
     const TRANSACTION_ID_F_N = 'TransactionID';
     const FINISH_AUTH_F_N = 'FinishAuth';
     const ETI_ID_F_N = 'EtiId';
+    const REQ_ID_F_N = 'ReqID';
     const DATA_F_N = 'Data';
     const LENGTH_F_N = 'Len';
 

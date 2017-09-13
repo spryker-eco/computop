@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
@@ -36,6 +36,11 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CaptureCreditCard
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\InquireCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\RefundCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\ReverseCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\AuthorizeDirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\CaptureDirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\InquireDirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\RefundDirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\ReverseDirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\AuthorizePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\CapturePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\InquirePayPalMapper;
@@ -89,11 +94,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
 
     /**
      * @param string $paymentMethod
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createAuthorizationPaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
+    public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new AuthorizationRequest(
             $this->createAuthorizeAdapter(),
@@ -101,19 +106,20 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createAuthorizeCreditCardMapper($savedComputopEntity));
-        $paymentRequest->registerMapper($this->createAuthorizePayPalMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createAuthorizeCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createAuthorizePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createAuthorizeDirectDebit($computopHeaderPayment));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createInquirePaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
+    public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new InquireRequest(
             $this->createInquireAdapter(),
@@ -121,19 +127,20 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createInquireCreditCardMapper($savedComputopEntity));
-        $paymentRequest->registerMapper($this->createInquirePayPalMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createInquireCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createInquirePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createInquireDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createReversePaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
+    public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new ReverseRequest(
             $this->createReverseAdapter(),
@@ -141,19 +148,20 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createReverseCreditCardMapper($savedComputopEntity));
-        $paymentRequest->registerMapper($this->createReversePayPalMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createReverseCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createReversePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createReverseDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createCapturePaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
+    public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new CaptureRequest(
             $this->createCaptureAdapter(),
@@ -161,19 +169,20 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createCaptureCreditCardMapper($savedComputopEntity));
-        $paymentRequest->registerMapper($this->createCapturePayPalMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createCaptureCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createCapturePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createCaptureDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
 
     /**
      * @param string $paymentMethod
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
      */
-    public function createRefundPaymentRequest($paymentMethod, SpyPaymentComputop $savedComputopEntity)
+    public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new RefundRequest(
             $this->createRefundAdapter(),
@@ -181,8 +190,9 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createRefundCreditCardMapper($savedComputopEntity));
-        $paymentRequest->registerMapper($this->createRefundPayPalMapper($savedComputopEntity));
+        $paymentRequest->registerMapper($this->createRefundCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createRefundPayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createRefundDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -351,103 +361,153 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createAuthorizeCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createAuthorizeCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createReverseCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createReverseCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createInquireCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createInquireCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createCaptureCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createCaptureCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createRefundCreditCardMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createRefundCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createAuthorizePayPalMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createAuthorizePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createReversePayPalMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createReversePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createInquirePayPalMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createInquirePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createCapturePayPalMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createCapturePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
-    protected function createRefundPayPalMapper(SpyPaymentComputop $savedComputopEntity)
+    protected function createRefundPayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $savedComputopEntity);
+        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createAuthorizeDirectDebit(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new AuthorizeDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createReverseDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new ReverseDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createInquireDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new InquireDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createCaptureDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new CaptureDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createRefundDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new RefundDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**

@@ -31,7 +31,7 @@ abstract class AbstractCreditCardMapper extends AbstractMapper
      */
     protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer)
     {
-        $computopPaymentTransfer = $this->createCardPaymentTransfer($orderTransfer);
+        $computopPaymentTransfer = $this->createPaymentTransfer($orderTransfer);
 
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
@@ -45,12 +45,11 @@ abstract class AbstractCreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function createCardPaymentTransfer(OrderTransfer $orderTransfer)
+    protected function createPaymentTransfer(OrderTransfer $orderTransfer)
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
-        $computopPaymentTransfer->fromArray($this->savedComputopEntity->toArray(), true);
+        $computopPaymentTransfer->fromArray($this->computopHeaderPayment->toArray(), true);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setAmount($this->getAmount($orderTransfer));
         $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
 
         return $computopPaymentTransfer;

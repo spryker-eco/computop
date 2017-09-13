@@ -8,10 +8,10 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -44,17 +44,17 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * {@inheritdoc}
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function authorizationPaymentRequest(OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
+    public function authorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
 
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createAuthorizationPaymentRequest($paymentMethod, $savedComputopEntity)
+            ->createAuthorizationPaymentRequest($paymentMethod, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -69,18 +69,18 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * {@inheritdoc}
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function inquirePaymentRequest(OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
+    public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
         ;
 
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createInquirePaymentRequest($paymentMethod, $savedComputopEntity)
+            ->createInquirePaymentRequest($paymentMethod, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -95,18 +95,18 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * {@inheritdoc}
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function reversePaymentRequest(OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
+    public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
         ;
 
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createReversePaymentRequest($paymentMethod, $savedComputopEntity)
+            ->createReversePaymentRequest($paymentMethod, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -136,18 +136,17 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * {@inheritdoc
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function capturePaymentRequest(OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
+    public function capturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-        ;
 
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createCapturePaymentRequest($paymentMethod, $savedComputopEntity)
+            ->createCapturePaymentRequest($paymentMethod, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -162,18 +161,17 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * {@inheritdoc}
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function refundPaymentRequest(OrderTransfer $orderTransfer, SpyPaymentComputop $savedComputopEntity)
+    public function refundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-        ;
 
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createRefundPaymentRequest($paymentMethod, $savedComputopEntity)
+            ->createRefundPaymentRequest($paymentMethod, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this

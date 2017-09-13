@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -28,24 +28,24 @@ abstract class AbstractMapper implements AbstractMapperInterface
     protected $config;
 
     /**
-     * @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @var \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      */
-    protected $savedComputopEntity;
+    protected $computopHeaderPayment;
 
     /**
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      */
     public function __construct(
         ComputopToComputopServiceInterface $computopService,
         ComputopConfig $config,
-        SpyPaymentComputop $savedComputopEntity
+        ComputopHeaderPaymentTransfer $computopHeaderPayment
     ) {
 
         $this->computopService = $computopService;
         $this->config = $config;
-        $this->savedComputopEntity = $savedComputopEntity;
+        $this->computopHeaderPayment = $computopHeaderPayment;
     }
 
     /**
@@ -111,16 +111,6 @@ abstract class AbstractMapper implements AbstractMapperInterface
         ];
 
         return $requestData;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return int
-     */
-    protected function getAmount(OrderTransfer $orderTransfer)
-    {
-        return $orderTransfer->getTotals()->getGrandTotal();
     }
 
 }

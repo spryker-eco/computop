@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -42,6 +44,21 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
     }
 
     /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer
+     */
+    protected function createComputopHeaderPayment(OrderTransfer $orderTransfer)
+    {
+        $headerPayment = new ComputopHeaderPaymentTransfer();
+        $savedComputopEntity = $this->getSavedComputopEntity($orderTransfer->getIdSalesOrder());
+        $headerPayment->fromArray($savedComputopEntity->toArray(), true);
+        $headerPayment->setAmount($this->getAmount($orderTransfer));
+
+        return $headerPayment;
+    }
+
+    /**
      * @param integer $idSalesOrder
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
@@ -51,6 +68,16 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
         return $this
             ->getFactory()
             ->getSavedComputopEntity($idSalesOrder);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return int
+     */
+    protected function getAmount(OrderTransfer $orderTransfer)
+    {
+        return $orderTransfer->getTotals()->getGrandTotal();
     }
 
 }

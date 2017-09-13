@@ -38,10 +38,10 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
         $orderTransfer = $this->getOrderTransfer($orderEntity, $orderItems);
-        $savedComputopEntity = $this->getSavedComputopEntity($orderEntity->getIdSalesOrder());
+        $computopHeaderPayment = $this->createComputopHeaderPayment($orderEntity);
 
         if ($this->isAllOrderCancellation($orderItems, $orderEntity)) {
-            return $this->cancelOrderAuthorization($orderItems, $orderTransfer, $savedComputopEntity);
+            return $this->cancelOrderAuthorization($orderItems, $orderTransfer, $computopHeaderPayment);
         }
 
         return $this->cancelOrderItems($orderItems);
