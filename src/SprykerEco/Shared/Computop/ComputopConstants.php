@@ -94,5 +94,9 @@ interface ComputopConstants
     const ETI_ID_F_N = 'EtiId';
     const DATA_F_N = 'Data';
     const LENGTH_F_N = 'Len';
+    const NO_SHIPPING_F_N = 'NoShipping';
+    const EMAIL_F_N = 'e-mail';
+    const FIRST_NAME_F_N = 'firstname';
+    const LAST_NAME_F_N = 'lastname';
 
 }
