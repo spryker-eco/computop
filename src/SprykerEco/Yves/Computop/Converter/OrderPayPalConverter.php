@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class OrderPayPalConverter implements ConverterInterface
 {
@@ -24,6 +25,9 @@ class OrderPayPalConverter implements ConverterInterface
         $computopResponseTransfer = new ComputopPayPalOrderResponseTransfer();
         $computopResponseTransfer->fromArray($decryptedArray, true);
         $computopResponseTransfer->setHeader($header);
+        $computopResponseTransfer->setEmail($decryptedArray[ComputopConstants::EMAIL_F_N]);
+        $computopResponseTransfer->setFirstName($decryptedArray[ComputopConstants::FIRST_NAME_F_N]);
+        $computopResponseTransfer->setLastName($decryptedArray[ComputopConstants::LAST_NAME_F_N]);
 
         return $computopResponseTransfer;
     }
