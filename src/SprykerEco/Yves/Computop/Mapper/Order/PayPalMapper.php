@@ -18,6 +18,8 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 class PayPalMapper extends AbstractMapper
 {
 
+    const NO_SHIPPING = 1;
+
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -68,6 +70,7 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopConstants::TX_TYPE_F_N] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopConstants::ETI_ID_F_N] = ComputopConstants::ETI_ID;
+        $dataSubArray[ComputopConstants::NO_SHIPPING_F_N] = self::NO_SHIPPING;
 
         return $dataSubArray;
     }

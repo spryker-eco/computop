@@ -74,7 +74,7 @@ class Computop extends AbstractComputop implements ComputopInterface
      *
      * @return string
      */
-    public function getDescriptionValue(array $items)
+    public function getTestModeDescriptionValue(array $items)
     {
         $description = '';
 
@@ -82,6 +82,20 @@ class Computop extends AbstractComputop implements ComputopInterface
             $description = ComputopConstants::ORDER_DESC_SUCCESS;
             $description .= self::ITEMS_SEPARATOR;
         }
+
+        $description .= $this->getDescriptionValue($items);
+
+        return $description;
+    }
+
+    /**
+     * @param array $items
+     *
+     * @return string
+     */
+    public function getDescriptionValue(array $items)
+    {
+        $description = '';
 
         foreach ($items as $item) {
             $description .= 'Name:' . $item->getName();
