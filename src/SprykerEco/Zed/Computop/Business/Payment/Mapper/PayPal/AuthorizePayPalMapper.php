@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal;
 
+use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
@@ -31,6 +32,32 @@ class AuthorizePayPalMapper extends AbstractPayPalMapper
         $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $computopPaymentTransfer->getOrderDesc();
 
         return $dataSubArray;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     */
+    protected function createPaymentTransfer(OrderTransfer $orderTransfer)
+    {
+        $computopPaymentTransfer = parent::createPaymentTransfer($orderTransfer);
+        $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setOrderDesc($this->getOrderDesc($orderTransfer));
+
+        return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return string
+     */
+    protected function getOrderDesc(OrderTransfer $orderTransfer)
+    {
+        return $this->computopService->getDescriptionValue(
+            $orderTransfer->getItems()->getArrayCopy()
+        );
     }
 
 }
