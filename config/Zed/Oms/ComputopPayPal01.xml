@@ -19,11 +19,11 @@
         </states>
 
         <events>
-            <event name="authorize" onEnter="true" command="Computop/AuthorizePayPal"/>
-            <event name="cancel" manual="true" command="Computop/CancelPayPal" timeout="14days" />
-            <event name="capture" manual="true" command="Computop/CapturePayPal"/>
+            <event name="authorize" onEnter="true" command="Computop/Authorize"/>
+            <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days" />
+            <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true" />
-            <event name="refund" manual="true" command="Computop/RefundPayPal"/>
+            <event name="refund" manual="true" command="Computop/Refund"/>
             <event name="close" manual="true" />
         </events>
 
