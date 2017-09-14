@@ -31,6 +31,16 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      *
      * @return string
      */
+    public function getTestModeDescriptionValue(array $items)
+    {
+        return $this->computopService->getTestModeDescriptionValue($items);
+    }
+
+    /**
+     * @param array $items
+     *
+     * @return string
+     */
     public function getDescriptionValue(array $items)
     {
         return $this->computopService->getDescriptionValue($items);

@@ -55,7 +55,7 @@ class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
      */
     protected function getOrderDesc(OrderTransfer $orderTransfer)
     {
-        return $this->computopService->getDescriptionValue(
+        return $this->computopService->getTestModeDescriptionValue(
             $orderTransfer->getItems()->getArrayCopy()
         );
     }

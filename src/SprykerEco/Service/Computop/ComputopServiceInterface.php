@@ -14,6 +14,18 @@ interface ComputopServiceInterface
 
     /**
      * Specification:
+     * - Generate description based on items and enabled test mode
+     *
+     * @api
+     *
+     * @param array $items
+     *
+     * @return string
+     */
+    public function getTestModeDescriptionValue(array $items);
+
+    /**
+     * Specification:
      * - Generate description based on items
      *
      * @api

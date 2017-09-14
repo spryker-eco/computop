@@ -42,7 +42,7 @@ class CreditCardMapper extends AbstractMapper
 
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

@@ -17,6 +17,13 @@ interface ComputopToComputopServiceInterface
      *
      * @return string
      */
+    public function getTestModeDescriptionValue(array $items);
+
+    /**
+     * @param array $items
+     *
+     * @return string
+     */
     public function getDescriptionValue(array $items);
 
     /**
