@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Order;
 use DateTime;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Spryker\Shared\Config\Config;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -30,23 +29,10 @@ class DirectDebitMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-        $computopPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
-        $computopPaymentTransfer->setTxType(ComputopConstants::TX_TYPE_ORDER);
-
         $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
-
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::DIRECT_DEBIT_SUCCESS_PATH_NAME))
         );
-        $computopPaymentTransfer->setUrlFailure(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
-        );
-
-        $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setOrderDesc(
             $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
@@ -70,7 +56,6 @@ class DirectDebitMapper extends AbstractMapper
         $dataSubArray[ComputopConstants::CAPTURE_F_N] = $cardPaymentTransfer->getCapture();
         $dataSubArray[ComputopConstants::RESPONSE_F_N] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopConstants::TX_TYPE_F_N] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopConstants::ETI_ID_F_N] = ComputopConstants::ETI_ID;
         $dataSubArray[ComputopConstants::MANDATE_ID_F_N] = $cardPaymentTransfer->getMandateId();
@@ -90,21 +75,11 @@ class DirectDebitMapper extends AbstractMapper
     }
 
     /**
-     * TODO:remove after test if need
-     *
-     * @param string $merchantId
-     * @param string $data
-     * @param int $length
-     *
      * @return string
      */
-    protected function getUrlToComputop($merchantId, $data, $length)
+    protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_DIRECT_DEBIT_ORDER_ACTION) . '?' . http_build_query([
-                ComputopConstants::MERCHANT_ID_F_N => $merchantId,
-                ComputopConstants::DATA_F_N => $data,
-                ComputopConstants::LENGTH_F_N => $length,
-            ]);
+        return Config::get(ComputopConstants::COMPUTOP_DIRECT_DEBIT_ORDER_ACTION);
     }
 
 }

@@ -13,6 +13,8 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
+use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use Spryker\Shared\Kernel\Store;
 
 abstract class AbstractMapper implements MapperInterface
 {
@@ -32,6 +34,11 @@ abstract class AbstractMapper implements MapperInterface
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer|\Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
     abstract protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer);
+
+    /**
+     * @return string
+     */
+     abstract protected function getActionUrl();
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -62,6 +69,15 @@ abstract class AbstractMapper implements MapperInterface
     {
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
+        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
+        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
+        $computopPaymentTransfer->setClientIp($this->getClientIp());
+        $computopPaymentTransfer->setUrlFailure(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
+        );
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
@@ -115,4 +131,19 @@ abstract class AbstractMapper implements MapperInterface
         return $this->application['request']->getClientIp();
     }
 
+    /**
+     * @param string $merchantId
+     * @param string $data
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function getUrlToComputop($merchantId, $data, $length)
+    {
+        return $this->getActionUrl() . '?' . http_build_query([
+                ComputopConstants::MERCHANT_ID_F_N => $merchantId,
+                ComputopConstants::DATA_F_N => $data,
+                ComputopConstants::LENGTH_F_N => $length,
+            ]);
+    }
 }

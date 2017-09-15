@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Order;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Shared\Config\Config;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -27,20 +26,10 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-        $computopPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
         $computopPaymentTransfer->setTxType(ComputopConstants::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS_PATH_NAME))
         );
-        $computopPaymentTransfer->setUrlFailure(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
-        );
-
-        $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setOrderDesc(
             $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
@@ -72,21 +61,11 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * TODO:remove after test if need
-     *
-     * @param string $merchantId
-     * @param string $data
-     * @param int $length
-     *
      * @return string
      */
-    protected function getUrlToComputop($merchantId, $data, $length)
+    protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION) . '?' . http_build_query([
-                ComputopConstants::MERCHANT_ID_F_N => $merchantId,
-                ComputopConstants::DATA_F_N => $data,
-                ComputopConstants::LENGTH_F_N => $length,
-            ]);
+        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION);
     }
 
 }
