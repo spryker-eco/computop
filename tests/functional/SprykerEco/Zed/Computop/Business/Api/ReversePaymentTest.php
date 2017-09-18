@@ -40,10 +40,10 @@ class ReversePaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $orderTransfer = $this->apiHelper->createOrderTransfer();
-        $computopPayment = $this->apiHelper->createComputopPayment($this->getPayIdValue());
+        $computopHeaderPaymentTransfer = $this->apiHelper->createComputopHeaderPaymentTransfer($this->getPayIdValue(), self::TRANS_ID_VALUE);
 
         /** @var \Generated\Shared\Transfer\ComputopReverseResponseTransfer $response */
-        $response = $service->reversePaymentRequest($orderTransfer, $computopPayment);
+        $response = $service->reversePaymentRequest($orderTransfer, $computopHeaderPaymentTransfer);
 
         $this->assertInstanceOf(ComputopReverseResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

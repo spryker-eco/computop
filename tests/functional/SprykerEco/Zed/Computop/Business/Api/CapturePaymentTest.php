@@ -40,10 +40,10 @@ class CapturePaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $orderTransfer = $this->apiHelper->createOrderTransfer();
-        $computopPayment = $this->apiHelper->createComputopPayment($this->getPayIdValue());
+        $computopHeaderPaymentTransfer = $this->apiHelper->createComputopHeaderPaymentTransfer($this->getPayIdValue(), self::TRANS_ID_VALUE);
 
         /** @var \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $response */
-        $response = $service->capturePaymentRequest($orderTransfer, $computopPayment);
+        $response = $service->capturePaymentRequest($orderTransfer, $computopHeaderPaymentTransfer);
 
         $this->assertInstanceOf(ComputopCaptureResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

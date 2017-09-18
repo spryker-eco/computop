@@ -44,10 +44,10 @@ class AuthorizePaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $orderTransfer = $this->apiHelper->createOrderTransfer();
-        $computopPayment = $this->apiHelper->createComputopPayment($this->getPayIdValue());
+        $computopHeaderPaymentTransfer = $this->apiHelper->createComputopHeaderPaymentTransfer($this->getPayIdValue(), self::TRANS_ID_VALUE);
 
         /** @var \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $response */
-        $response = $service->authorizationPaymentRequest($orderTransfer, $computopPayment);
+        $response = $service->authorizationPaymentRequest($orderTransfer, $computopHeaderPaymentTransfer);
 
         $this->assertInstanceOf(ComputopAuthorizeResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

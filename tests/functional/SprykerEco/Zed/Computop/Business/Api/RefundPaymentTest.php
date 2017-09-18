@@ -40,10 +40,10 @@ class RefundPaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $orderTransfer = $this->apiHelper->createOrderTransfer();
-        $computopPayment = $this->apiHelper->createComputopPayment($this->getPayIdValue());
+        $computopHeaderPaymentTransfer = $this->apiHelper->createComputopHeaderPaymentTransfer($this->getPayIdValue(), self::TRANS_ID_VALUE);
 
         /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $response */
-        $response = $service->refundPaymentRequest($orderTransfer, $computopPayment);
+        $response = $service->refundPaymentRequest($orderTransfer, $computopHeaderPaymentTransfer);
 
         $this->assertInstanceOf(ComputopRefundResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());

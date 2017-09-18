@@ -29,7 +29,7 @@ class RefundCreditCardMapperTest extends AbstractCreditCardMapperTest
         return new RefundCreditCardMapper(
             $this->helper->createComputopServiceMock(),
             $this->helper->createComputopConfigMock(),
-            $this->helper->createComputopEntity()
+            $this->helper->createComputopHeaderPaymentTransfer()
         );
     }
 

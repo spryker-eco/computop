@@ -8,10 +8,10 @@
 namespace Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard;
 
 use Codeception\TestCase\Test;
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
@@ -79,7 +79,7 @@ class CreditCardMapperTestHelper extends Test
 
         $computopServiceMock = $this->createPartialMock(
             ComputopToComputopServiceBridge::class,
-            ['getMacEncryptedValue', 'getEncryptedArray', 'getDescriptionValue']
+            ['getMacEncryptedValue', 'getEncryptedArray', 'getDescriptionValue', 'getTestModeDescriptionValue']
         );
 
         $computopServiceMock->method('getEncryptedArray')
@@ -88,17 +88,26 @@ class CreditCardMapperTestHelper extends Test
         $computopServiceMock->method('getDescriptionValue')
             ->willReturn('');
 
+        $computopServiceMock->method('getTestModeDescriptionValue')
+            ->willReturn('');
+
         return $computopServiceMock;
     }
 
     /**
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @param string $payId
+     * @param string $transId
+     *
+     * @return \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer
      */
-    public function createComputopEntity()
+    public function createComputopHeaderPaymentTransfer($payId = '', $transId = '')
     {
-        $computopEntity = new SpyPaymentComputop();
+        $headerPayment = new ComputopHeaderPaymentTransfer();
+        $headerPayment->setAmount(100);
+        $headerPayment->setPayId($payId);
+        $headerPayment->setTransId($transId);
 
-        return $computopEntity;
+        return $headerPayment;
     }
 
 }
