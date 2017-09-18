@@ -21,6 +21,7 @@ class CaptureDirectDebitMapper extends AbstractDirectDebitMapper
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
+
         $dataSubArray[ComputopConstants::PAY_ID_F_N] = $computopPaymentTransfer->getPayId();
         $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $computopPaymentTransfer->getTransId();
         $dataSubArray[ComputopConstants::AMOUNT_F_N] = $computopPaymentTransfer->getAmount();

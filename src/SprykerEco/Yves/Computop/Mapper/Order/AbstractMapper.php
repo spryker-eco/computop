@@ -10,11 +10,11 @@ namespace SprykerEco\Yves\Computop\Mapper\Order;
 use Silex\Application;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
-use Spryker\Shared\Kernel\Store;
 
 abstract class AbstractMapper implements MapperInterface
 {
@@ -38,7 +38,7 @@ abstract class AbstractMapper implements MapperInterface
     /**
      * @return string
      */
-     abstract protected function getActionUrl();
+    abstract protected function getActionUrl();
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -146,4 +146,5 @@ abstract class AbstractMapper implements MapperInterface
                 ComputopConstants::LENGTH_F_N => $length,
             ]);
     }
+
 }

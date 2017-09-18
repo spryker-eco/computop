@@ -13,6 +13,7 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
+use Spryker\Shared\Kernel\Store;
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {
@@ -60,7 +61,7 @@ abstract class AbstractMapper implements AbstractMapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    abstract protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer);
+    abstract protected function createPaymentTransfer(OrderTransfer $orderTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -111,6 +112,25 @@ abstract class AbstractMapper implements AbstractMapperInterface
         ];
 
         return $requestData;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     */
+    protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer)
+    {
+        $computopPaymentTransfer = $this->createPaymentTransfer($orderTransfer);
+        $computopPaymentTransfer->fromArray($this->computopHeaderPayment->toArray(), true);
+        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
+        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+
+        $computopPaymentTransfer->setMac(
+            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
+        );
+
+        return $computopPaymentTransfer;
     }
 
 }

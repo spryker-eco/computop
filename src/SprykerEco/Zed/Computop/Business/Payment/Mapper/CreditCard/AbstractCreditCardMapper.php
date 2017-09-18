@@ -29,28 +29,9 @@ abstract class AbstractCreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer)
-    {
-        $computopPaymentTransfer = $this->createPaymentTransfer($orderTransfer);
-
-        $computopPaymentTransfer->setMac(
-            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
-        );
-
-        return $computopPaymentTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
-     */
     protected function createPaymentTransfer(OrderTransfer $orderTransfer)
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
-        $computopPaymentTransfer->fromArray($this->computopHeaderPayment->toArray(), true);
-        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
 
         return $computopPaymentTransfer;
     }
