@@ -8,31 +8,13 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\AuthorizeMapperTrait;
 
 class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
 {
 
-    /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
-     *
-     * @return array
-     */
-    public function getDataSubArray(TransferInterface $computopPaymentTransfer)
-    {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
-
-        $dataSubArray[ComputopConstants::PAY_ID_F_N] = $computopPaymentTransfer->getPayId();
-        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $computopPaymentTransfer->getTransId();
-        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $computopPaymentTransfer->getAmount();
-        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $computopPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopConstants::CAPTURE_F_N] = $computopPaymentTransfer->getCapture();
-        $dataSubArray[ComputopConstants::MAC_F_N] = $computopPaymentTransfer->getMac();
-        $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $computopPaymentTransfer->getOrderDesc();
-
-        return $dataSubArray;
-    }
+    use AuthorizeMapperTrait;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -43,21 +25,9 @@ class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
     {
         $computopPaymentTransfer = parent::createPaymentTransfer($orderTransfer);
         $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-        $computopPaymentTransfer->setOrderDesc($this->getOrderDesc($orderTransfer));
+        $computopPaymentTransfer->setOrderDesc($this->getOrderDesc($this->computopService, $orderTransfer));
 
         return $computopPaymentTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return string
-     */
-    protected function getOrderDesc(OrderTransfer $orderTransfer)
-    {
-        return $this->computopService->getTestModeDescriptionValue(
-            $orderTransfer->getItems()->getArrayCopy()
-        );
     }
 
 }

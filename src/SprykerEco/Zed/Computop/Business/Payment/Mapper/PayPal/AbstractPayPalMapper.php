@@ -30,9 +30,7 @@ abstract class AbstractPayPalMapper extends AbstractMapper
      */
     protected function createPaymentTransfer(OrderTransfer $orderTransfer)
     {
-        $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
-
-        return $computopPaymentTransfer;
+        return new ComputopPayPalPaymentTransfer();
     }
 
 }

@@ -9,11 +9,11 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper;
 
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
-use Spryker\Shared\Kernel\Store;
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {

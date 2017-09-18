@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit;
 
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 
@@ -31,9 +30,7 @@ abstract class AbstractDirectDebitMapper extends AbstractMapper
      */
     protected function createPaymentTransfer(OrderTransfer $orderTransfer)
     {
-        $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
-
-        return $computopPaymentTransfer;
+        return new ComputopDirectDebitPaymentTransfer();
     }
 
 }

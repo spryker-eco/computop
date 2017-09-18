@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 
@@ -31,9 +30,7 @@ abstract class AbstractCreditCardMapper extends AbstractMapper
      */
     protected function createPaymentTransfer(OrderTransfer $orderTransfer)
     {
-        $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
-
-        return $computopPaymentTransfer;
+        return new ComputopCreditCardPaymentTransfer();
     }
 
 }
