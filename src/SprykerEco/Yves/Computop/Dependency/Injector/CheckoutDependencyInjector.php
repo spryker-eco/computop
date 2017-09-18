@@ -39,7 +39,7 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
     {
         $container->extend(CheckoutDependencyProvider::PAYMENT_SUB_FORMS, function (SubFormPluginCollection $paymentSubForms) {
             $paymentSubForms->add(new CreditCardSubFormPlugin());
-            $paymentSubForms->add(new PayPalSubFormPlugin());
+//            $paymentSubForms->add(new PayPalSubFormPlugin());
             $paymentSubForms->add(new DirectDebitSubFormPlugin());
 
             return $paymentSubForms;
