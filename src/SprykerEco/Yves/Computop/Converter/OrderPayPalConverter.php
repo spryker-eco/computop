@@ -29,6 +29,10 @@ class OrderPayPalConverter implements ConverterInterface
         $computopResponseTransfer->setFirstName($decryptedArray[ComputopConstants::FIRST_NAME_F_N]);
         $computopResponseTransfer->setLastName($decryptedArray[ComputopConstants::LAST_NAME_F_N]);
 
+        $computopResponseTransfer->setTransactionId(
+            isset($decryptedArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] : null
+        );
+
         return $computopResponseTransfer;
     }
 
