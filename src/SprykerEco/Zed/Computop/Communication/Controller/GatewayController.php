@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Communication\Controller;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
@@ -24,6 +25,16 @@ class GatewayController extends AbstractGatewayController
     public function logResponseAction(ComputopResponseHeaderTransfer $headerTransfer)
     {
         return $this->getFacade()->logResponseHeader($headerTransfer, $headerTransfer->getMethod());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveSofortResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->saveSofortResponse($quoteTransfer);
     }
 
 }

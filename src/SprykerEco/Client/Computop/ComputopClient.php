@@ -8,6 +8,7 @@
 namespace SprykerEco\Client\Computop;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -28,6 +29,20 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     public function logResponse(ComputopResponseHeaderTransfer $responseTransfer)
     {
          $this->getFactory()->createZedStub()->logResponse($responseTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveSofortResponse(QuoteTransfer $quoteTransfer)
+    {
+         $this->getFactory()->createZedStub()->saveSofortResponse($quoteTransfer);
     }
 
 }

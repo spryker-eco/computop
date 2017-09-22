@@ -20,15 +20,18 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
+use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\DirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PayPalMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\SofortMapper;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\AuthorizeCreditCardMapper;
@@ -64,7 +67,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createOrderSaver()
     {
-        return new OrderManager();
+        return new OrderManager($this->getConfig());
     }
 
     /**
@@ -89,6 +92,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createOrderDirectDebitMapper()
     {
         return new DirectDebitMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderSofortMapper()
+    {
+        return new SofortMapper();
     }
 
     /**
@@ -251,6 +262,16 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * TODO: Check
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler
+     */
+    public function createSofortResponseHandler()
+    {
+        return new SofortResponseHandler($this->getQueryContainer(), $this->getOmsFacade());
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
      */
     public function createComputopResponseLogger()
@@ -276,6 +297,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $paymentsArray = $orderTransfer->getPayments()->getArrayCopy();
 
         return array_shift($paymentsArray)->getPaymentMethod();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook
+     */
+    public function createPostSaveHook()
+    {
+        return new ComputopPostSaveHook($this->getConfig());
     }
 
     /**
@@ -504,6 +533,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getComputopService()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface
+     */
+    protected function getOmsFacade()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_OMS);
     }
 
 }

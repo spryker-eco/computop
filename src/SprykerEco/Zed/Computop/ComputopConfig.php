@@ -82,4 +82,14 @@ class ComputopConfig extends AbstractBundleConfig
         return self::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED;
     }
 
+    /**
+     * @param string $method
+     *
+     * @return bool
+     */
+    public function isNeededRedirectAfterPlaceOrder($method)
+    {
+        return in_array($method, $this->get(ComputopConstants::COMPUTOP_PAYMENT_METHODS_WITHOUT_ORDER_CALL));
+    }
+
 }

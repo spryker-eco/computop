@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Dependency\Client;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Client\Computop\ComputopClientInterface;
 
 class ComputopToComputopClientBridge implements ComputopToComputopClientInterface
@@ -34,6 +35,16 @@ class ComputopToComputopClientBridge implements ComputopToComputopClientInterfac
     public function logResponse(ComputopResponseHeaderTransfer $cardPaymentTransfer)
     {
         return $this->computopClient->logResponse($cardPaymentTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveSofortResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->computopClient->saveSofortResponse($quoteTransfer);
     }
 
 }

@@ -19,6 +19,7 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
+use SprykerEco\Zed\Computop\ComputopConfig;
 
 class OrderManager implements OrderManagerInterface
 {
@@ -44,6 +45,19 @@ class OrderManager implements OrderManagerInterface
      * @var \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected $computopResponseTransfer;
+
+    /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
+     */
+    public function __construct(ComputopConfig $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * @param \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface $mapper
@@ -121,8 +135,11 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->setReference($saveOrderTransfer->getOrderReference());
         $paymentEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
         $paymentEntity->setTransId($this->computopTransfer->getTransId());
-        $paymentEntity->setXId($this->computopResponseTransfer->getHeader()->getXId());
-        $paymentEntity->setPayId($this->computopResponseTransfer->getHeader()->getPayId());
+
+        if (!$this->config->isNeededRedirectAfterPlaceOrder($paymentTransfer->getPaymentSelection())) {
+            $paymentEntity->setXId($this->computopResponseTransfer->getHeader()->getXId());
+            $paymentEntity->setPayId($this->computopResponseTransfer->getHeader()->getPayId());
+        }
 
         $paymentEntity->save();
 

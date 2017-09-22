@@ -36,6 +36,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
         $orderSaver->registerMapper($this->getFactory()->createOrderCreditCardMapper());
         $orderSaver->registerMapper($this->getFactory()->createOrderPayPalMapper());
         $orderSaver->registerMapper($this->getFactory()->createOrderDirectDebitMapper());
+        $orderSaver->registerMapper($this->getFactory()->createOrderSofortMapper());
 
         $orderSaver->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
     }
@@ -195,6 +196,37 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
         $this->getFactory()->createComputopResponseLogger()->log($header, $method);
 
         return $header;
+    }
+
+    /**
+     * TODO: add test
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveSofortResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createSofortResponseHandler()->handle(
+            $quoteTransfer
+        );
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * TODO: add test
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    {
+        $checkoutResponse = $this->getFactory()->createPostSaveHook()->execute($quoteTransfer, $checkoutResponse);
+
+        return $checkoutResponse;
     }
 
 }
