@@ -102,6 +102,7 @@ class CallbackController extends AbstractController
         $handler = $this->getFactory()->createSofortPaymentHandler();
 
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+
         $quoteTransfer = $handler->addPaymentToQuote(
             $quoteTransfer,
             $this->orderResponseTransfer
@@ -110,8 +111,8 @@ class CallbackController extends AbstractController
         $this->getFactory()->getComputopClient()->saveSofortResponse($quoteTransfer);
 
         if (!$quoteTransfer->getCustomer()) {
-            //todo: add order Id to Computop to save it by ID
-            $this->addErrorMessage('Error while saving. Please contact us.');
+            //Todo: add translation
+            $this->addSuccessMessage('Your order has been placed successfully! Thank you for shopping with us!');
         }
 
         return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUCCESS);
