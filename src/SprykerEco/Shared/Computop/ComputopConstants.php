@@ -14,6 +14,7 @@ interface ComputopConstants
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
     const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
     const PAYMENT_METHOD_DIRECT_DEBIT = 'ComputopDirectDebit';
+    const PAYMENT_METHOD_SOFORT = 'ComputopSofort';
 
     //Statuses
     const COMPUTOP_OMS_STATUS_NEW = 'new';
@@ -21,6 +22,9 @@ interface ComputopConstants
     const COMPUTOP_OMS_STATUS_CAPTURED = 'captured';
     const COMPUTOP_OMS_STATUS_CANCELLED = 'cancelled';
     const COMPUTOP_OMS_STATUS_REFUNDED = 'refunded';
+
+    //Events
+    const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
 
     //Computop provider constants
     const CAPTURE_AUTO_TYPE = 'AUTO';
@@ -52,8 +56,11 @@ interface ComputopConstants
 
     const COMPUTOP_PAY_PAL_ORDER_ACTION = 'COMPUTOP_PAY_PAL_ORDER_ACTION';
     const COMPUTOP_DIRECT_DEBIT_ORDER_ACTION = 'COMPUTOP_DIRECT_DEBIT_ORDER_ACTION';
+    const COMPUTOP_SOFORT_ORDER_ACTION = 'COMPUTOP_SOFORT_ORDER_ACTION';
 
     const COMPUTOP_RESPONSE_MAC_REQUIRED = 'COMPUTOP_RESPONSE_MAC_REQUIRED';
+
+    const COMPUTOP_PAYMENT_METHODS_WITHOUT_ORDER_CALL = 'COMPUTOP_PAYMENT_METHODS_WITHOUT_ORDER_CALL';
 
     const ORDER_METHOD = 'ORDER';
     const AUTHORIZE_METHOD = 'AUTHORIZE';

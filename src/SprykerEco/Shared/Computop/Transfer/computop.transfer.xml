@@ -29,7 +29,6 @@
         <property name="orderDesc" type="string" />
         <property name="customField" type="array" />
         <property name="paymentMethod" type="string" />
-
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="response" type="string" />
@@ -37,9 +36,7 @@
         <property name="url" type="string" />
         <property name="clientIp" type="string" />
         <property name="finishAuth" type="string" />
-
         <property name="creditCardOrderResponse" type="ComputopCreditCardOrderResponse"/>
-
     </transfer>
 
     <transfer name="ComputopDirectDebitPayment">
@@ -52,19 +49,15 @@
         <property name="txType" type="string" />
         <property name="orderDesc" type="string" />
         <property name="clientIp" type="string" />
-
         <property name="urlSuccess" type="string" />
         <property name="urlFailure" type="string" />
         <property name="response" type="string" />
         <property name="urlNotify" type="string" />
-
         <property name="mandateId" type="string" />
-
         <property name="mac" type="string" />
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-
         <property name="directDebitOrderResponse" type="ComputopDirectDebitOrderResponse"/>
     </transfer>
 
@@ -76,11 +69,9 @@
         <property name="currency" type="string" />
         <property name="capture" type="string" />
         <property name="txType" type="string" />
-
         <property name="payPalMethod" type="string" />
         <property name="rTF" type="string" />
         <property name="orderDesc" type="string" />
-
         <property name="orderDescriptions" type="array" />
         <property name="taxTotal" type="int" />
         <property name="itemTotal" type="int" />
@@ -92,7 +83,6 @@
         <property name="urlNotify" type="string" />
         <property name="reqId" type="string" />
         <property name="account" type="string" />
-
         <property name="brandName" type="string" />
         <property name="bgColor" type="string" />
         <property name="bgImage" type="string" />
@@ -114,16 +104,33 @@
         <property name="allowNote" type="string" />
         <property name="uI" type="string" />
         <property name="buyerEmail" type="string" />
-
         <property name="clientIp" type="string" />
-
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-
         <property name="payPalOrderResponse" type="ComputopPayPalOrderResponse"/>
     </transfer>
 
+    <transfer name="ComputopSofortPayment">
+        <property name="payId" type="string" />
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="capture" type="string" />
+        <property name="txType" type="string" />
+        <property name="response" type="string" />
+        <property name="orderDesc" type="string" />
+        <property name="clientIp" type="string" />
+        <property name="urlSuccess" type="string" />
+        <property name="urlFailure" type="string" />
+        <property name="urlNotify" type="string" />
+        <property name="mac" type="string" />
+        <property name="data" type="string" />
+        <property name="len" type="int" />
+        <property name="url" type="string" />
+        <property name="sofortOrderResponse" type="ComputopSofortOrderResponse"/>
+    </transfer>
 
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
@@ -171,7 +178,6 @@
 
     <transfer name="ComputopPayPalOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
-
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
         <property name="name" type="string" />
@@ -185,7 +191,6 @@
         <property name="addrZip" type="string" />
         <property name="addrCountryCode" type="string" />
         <property name="phone" type="string" />
-
         <property name="billingAgreementId" type="string" />
         <property name="billingName" type="string" />
         <property name="billingAddrStreet" type="string" />
@@ -194,7 +199,6 @@
         <property name="billingAddrState" type="string" />
         <property name="billingAddrZip" type="string" />
         <property name="billingAddrCountryCode" type="string" />
-
         <property name="transactionId" type="string" />
         <property name="infoText" type="string" />
         <property name="payerId" type="string" />
@@ -212,6 +216,13 @@
         <property name="mcGross" type="string" />
     </transfer>
 
+    <transfer name="ComputopSofortOrderResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="accountOwner" type="string"/>
+        <property name="accountBank" type="string"/>
+        <property name="bankAccountBic" type="string"/>
+        <property name="bankAccountIban" type="string"/>
+    </transfer>
 
     <transfer name="ComputopAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
@@ -262,12 +273,14 @@
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
         <property name="computopPayPal" type="ComputopPayPalPayment" />
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
+        <property name="computopSofort" type="ComputopSofortPayment" />
     </transfer>
 
     <transfer name="Order">
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
         <property name="computopPayPal" type="ComputopPayPalPayment" />
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
+        <property name="computopSofort" type="ComputopSofortPayment" />
     </transfer>
 
 </transfers>
