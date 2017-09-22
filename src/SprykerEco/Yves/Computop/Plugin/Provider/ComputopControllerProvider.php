@@ -26,6 +26,9 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
     const DIRECT_DEBIT_SUCCESS_PATH = '/computop/direct-debit-success';
     const DIRECT_DEBIT_SUCCESS_PATH_NAME = 'computop-direct-debit-success';
 
+    const SOFORT_SUCCESS_PATH = '/computop/sofort-success';
+    const SOFORT_SUCCESS_PATH_NAME = 'computop-sofort-success';
+
     const FAILURE_PATH = '/computop/failure';
     const FAILURE_PATH_NAME = 'computop-failure';
 
@@ -58,6 +61,14 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
             self::MODULE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'successDirectDebit'
+        );
+
+        $this->createController(
+            self::SOFORT_SUCCESS_PATH,
+            self::SOFORT_SUCCESS_PATH_NAME,
+            self::MODULE_NAME,
+            self::CALLBACK_CONTROLLER_NAME,
+            'successSofort'
         );
 
         $this->createController(

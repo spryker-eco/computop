@@ -11,24 +11,30 @@ use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerEco\Yves\Computop\Converter\OrderCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\OrderDirectDebitConverter;
 use SprykerEco\Yves\Computop\Converter\OrderPayPalConverter;
+use SprykerEco\Yves\Computop\Converter\OrderSofortConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
+use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopDirectDebitPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopPayPalPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Order\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PayPalMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\SofortMapper;
 
 class ComputopFactory extends AbstractFactory
 {
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\CreditCardSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createCreditCardForm()
     {
@@ -36,7 +42,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\PayPalSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createPayPalForm()
     {
@@ -44,7 +50,15 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\DirectDebitSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createSofortForm()
+    {
+        return new SofortSubForm();
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createDirectDebitForm()
     {
@@ -52,7 +66,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createCreditCardFormDataProvider()
     {
@@ -60,7 +74,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createPayPalFormDataProvider()
     {
@@ -68,7 +82,15 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    public function createSofortFormDataProvider()
+    {
+        return new SofortFormDataProvider($this->getQuoteClient(), $this->createOrderSofortMapper());
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createDirectDebitFormDataProvider()
     {
@@ -132,6 +154,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
+     */
+    public function createSofortPaymentHandler()
+    {
+        return new ComputopSofortPaymentHandler();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
     public function createOrderCreditCardConverter()
@@ -156,6 +186,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    public function createOrderSofortConverter()
+    {
+        return new OrderSofortConverter();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
      */
     public function createOrderCreditCardMapper()
@@ -177,6 +215,22 @@ class ComputopFactory extends AbstractFactory
     public function createOrderDirectDebitMapper()
     {
         return new DirectDebitMapper($this->getComputopService(), $this->getApplication());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     */
+    public function createOrderSofortMapper()
+    {
+        return new SofortMapper($this->getComputopService(), $this->getApplication());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler
+     */
+    public function createComputopPaymentHandler()
+    {
+        return new ComputopPaymentHandler();
     }
 
 }

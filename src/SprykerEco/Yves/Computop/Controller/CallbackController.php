@@ -93,6 +93,33 @@ class CallbackController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successSofortAction()
+    {
+        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+            $this->getFactory()->createOrderSofortConverter()
+        );
+
+        $handler = $this->getFactory()->createSofortPaymentHandler();
+
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $quoteTransfer = $handler->addPaymentToQuote(
+            $quoteTransfer,
+            $this->orderResponseTransfer
+        );
+
+        $this->getFactory()->getComputopClient()->saveSofortResponse($quoteTransfer);
+
+        if (!$quoteTransfer->getCustomer()) {
+            //todo: add order Id to Computop to save it by ID
+            $this->addErrorMessage('Error while saving. Please contact us.');
+        }
+
+        return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUCCESS);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function failureAction()
     {
         $this->addErrorMessage($this->getErrorMessageText());
