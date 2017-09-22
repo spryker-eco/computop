@@ -11,9 +11,13 @@ use Spryker\Shared\Kernel\ContainerInterface;
 use Spryker\Shared\Kernel\Dependency\Injector\DependencyInjectorInterface;
 use Spryker\Yves\Checkout\CheckoutDependencyProvider;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
+use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Yves\Computop\Plugin\ComputopPaymentHandlerPlugin;
 use SprykerEco\Yves\Computop\Plugin\CreditCardSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\DirectDebitSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\PayPalSubFormPlugin;
+use SprykerEco\Yves\Computop\Plugin\SofortSubFormPlugin;
 
 class CheckoutDependencyInjector implements DependencyInjectorInterface
 {
@@ -26,6 +30,7 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
     public function inject(ContainerInterface $container)
     {
         $container = $this->injectPaymentSubForms($container);
+        $container = $this->injectPaymentMethodHandler($container);
 
         return $container;
     }
@@ -41,8 +46,26 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
             $paymentSubForms->add(new CreditCardSubFormPlugin());
             $paymentSubForms->add(new PayPalSubFormPlugin());
             $paymentSubForms->add(new DirectDebitSubFormPlugin());
+            $paymentSubForms->add(new SofortSubFormPlugin());
 
             return $paymentSubForms;
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\ContainerInterface $container
+     *
+     * @return \Spryker\Shared\Kernel\ContainerInterface
+     */
+    protected function injectPaymentMethodHandler(ContainerInterface $container)
+    {
+        $container->extend(CheckoutDependencyProvider::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
+            $paymentHandlerPlugin = new ComputopPaymentHandlerPlugin();
+            $paymentMethodHandler->add($paymentHandlerPlugin, ComputopConstants::PAYMENT_METHOD_SOFORT);
+
+            return $paymentMethodHandler;
         });
 
         return $container;
