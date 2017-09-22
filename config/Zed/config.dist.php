@@ -18,6 +18,7 @@ $config[ComputopConstants::COMPUTOP_REFUND_ACTION] = 'https://www.computop-payga
 
 $config[ComputopConstants::COMPUTOP_PAY_PAL_ORDER_ACTION] = 'https://www.computop-paygate.com/paypal.aspx';
 $config[ComputopConstants::COMPUTOP_DIRECT_DEBIT_ORDER_ACTION] = 'https://www.computop-paygate.com/paysdd.aspx';
+$config[ComputopConstants::COMPUTOP_SOFORT_ORDER_ACTION] = 'https://www.computop-paygate.com/sofort.aspx';
 
 $config[ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED] = [
     ComputopConstants::ORDER_METHOD,
@@ -26,3 +27,7 @@ $config[ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED] = [
 //    ComputopConstants::INQUIRE_METHOD,
 //    ComputopConstants::REFUND_METHOD,
 ]; //MAC is required for methods (to check MAC)
+
+$config[ComputopConstants::COMPUTOP_PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
+    ComputopConstants::PAYMENT_METHOD_SOFORT,
+];
