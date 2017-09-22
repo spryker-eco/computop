@@ -48,6 +48,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\CapturePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\InquirePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\RefundPayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\ReversePayPalMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\Sofort\RefundSofortMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\CaptureRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\InquireRequest;
@@ -202,6 +203,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $paymentRequest->registerMapper($this->createRefundCreditCardMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createRefundPayPalMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createRefundDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createRefundSofortMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -525,6 +527,16 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createRefundDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         return new RefundDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    protected function createRefundSofortMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new RefundSofortMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 
     /**
