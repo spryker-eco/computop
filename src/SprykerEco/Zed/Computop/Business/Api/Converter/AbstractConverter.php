@@ -15,6 +15,13 @@ abstract class AbstractConverter
 {
 
     /**
+     * @param array $decryptedArray
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    abstract protected function getResponseTransfer(array $decryptedArray);
+
+    /**
      * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
      */
     protected $computopService;
@@ -61,12 +68,5 @@ abstract class AbstractConverter
 
         return $decryptedArray;
     }
-
-    /**
-     * @param array $decryptedArray
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    abstract protected function getResponseTransfer(array $decryptedArray);
 
 }
