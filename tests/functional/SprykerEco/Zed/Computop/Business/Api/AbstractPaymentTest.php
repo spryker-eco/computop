@@ -91,14 +91,13 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     protected function createFactory()
     {
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
-
         $builder->setMethods(
             [
                 'getConfig',
                 'getComputopService',
-                $this->getApiAdapterFunctionName(),
                 'getQueryContainer',
                 'getPaymentMethod',
+                $this->getApiAdapterFunctionName(),
             ]
         );
 
@@ -110,14 +109,14 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $stub->method('getComputopService')
             ->willReturn(new ComputopToComputopServiceBridge(new ComputopService()));
 
-        $stub->method($this->getApiAdapterFunctionName())
-            ->willReturn($this->getApiAdapter());
-
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
 
         $stub->method('getPaymentMethod')
             ->willReturn(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
+
+        $stub->method($this->getApiAdapterFunctionName())
+            ->willReturn($this->getApiAdapter());
 
         return $stub;
     }

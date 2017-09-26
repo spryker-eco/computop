@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 class OrderPaymentTestHelper extends Test
@@ -30,11 +31,16 @@ class OrderPaymentTestHelper extends Test
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(
             [
+                'getConfig',
                 'getQueryContainer',
             ]
         );
 
         $stub = $builder->getMock();
+
+        $stub->method('getConfig')
+            ->willReturn($this->createConfig());
+
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
 
@@ -92,6 +98,14 @@ class OrderPaymentTestHelper extends Test
         $computopHeaderResponse->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
 
         return $computopHeaderResponse;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected function createConfig()
+    {
+        return new ComputopConfig();
     }
 
 }
