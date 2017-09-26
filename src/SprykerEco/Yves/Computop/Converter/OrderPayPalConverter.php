@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class OrderPayPalConverter implements ConverterInterface
+class OrderPayPalConverter extends AbstractOrderConverter implements ConverterInterface
 {
 
     /**
@@ -20,20 +20,18 @@ class OrderPayPalConverter implements ConverterInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer
      */
-    public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
+    public function createFormattedResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
-        $computopResponseTransfer = new ComputopPayPalOrderResponseTransfer();
-        $computopResponseTransfer->fromArray($decryptedArray, true);
-        $computopResponseTransfer->setHeader($header);
-        $computopResponseTransfer->setEmail($decryptedArray[ComputopConstants::EMAIL_F_N]);
-        $computopResponseTransfer->setFirstName($decryptedArray[ComputopConstants::FIRST_NAME_F_N]);
-        $computopResponseTransfer->setLastName($decryptedArray[ComputopConstants::LAST_NAME_F_N]);
+        $responseTransfer = new ComputopPayPalOrderResponseTransfer();
+        $responseTransfer->fromArray($decryptedArray, true);
+        $responseTransfer->setHeader($header);
+        $responseTransfer->setEmail($this->getValue($decryptedArray, ComputopConstants::EMAIL_F_N));
+        $responseTransfer->setFirstName($this->getValue($decryptedArray, ComputopConstants::FIRST_NAME_F_N));
+        $responseTransfer->setLastName($this->getValue($decryptedArray, ComputopConstants::LAST_NAME_F_N));
+        //optional fields
+        $responseTransfer->setTransactionId($this->getValue($decryptedArray, ComputopConstants::TRANSACTION_ID_F_N));
 
-        $computopResponseTransfer->setTransactionId(
-            isset($decryptedArray[ComputopConstants::TRANSACTION_ID_F_N]) ? $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] : null
-        );
-
-        return $computopResponseTransfer;
+        return $responseTransfer;
     }
 
 }

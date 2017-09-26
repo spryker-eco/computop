@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 
-class OrderCreditCardConverter implements ConverterInterface
+class OrderCreditCardConverter extends AbstractOrderConverter implements ConverterInterface
 {
 
     /**
@@ -19,13 +19,13 @@ class OrderCreditCardConverter implements ConverterInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
      */
-    public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
+    public function createFormattedResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
-        $computopResponseTransfer = new ComputopCreditCardOrderResponseTransfer();
-        $computopResponseTransfer->fromArray($decryptedArray, true);
-        $computopResponseTransfer->setHeader($header);
+        $responseTransfer = new ComputopCreditCardOrderResponseTransfer();
+        $responseTransfer->fromArray($decryptedArray, true);
+        $responseTransfer->setHeader($header);
 
-        return $computopResponseTransfer;
+        return $responseTransfer;
     }
 
 }
