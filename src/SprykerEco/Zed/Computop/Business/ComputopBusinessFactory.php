@@ -10,22 +10,10 @@ namespace SprykerEco\Zed\Computop\Business;
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
-use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
-use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
-use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
-use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
+use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\CreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\DirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PayPalMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\SofortMapper;
+use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureResponseHandler;
@@ -34,21 +22,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogg
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\AuthorizeCreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CaptureCreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\InquireCreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\RefundCreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\ReverseCreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\CaptureDirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\InquireDirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\RefundDirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\ReverseDirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\AuthorizePayPalMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\CapturePayPalMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\InquirePayPalMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\RefundPayPalMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\ReversePayPalMapper;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\Sofort\RefundSofortMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory;
 use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\CaptureRequest;
 use SprykerEco\Zed\Computop\Business\Payment\Request\InquireRequest;
@@ -64,43 +38,69 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
 {
 
     /**
+     * @var null|\SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory
+     */
+    protected $mapperFactory = null;
+
+    /**
+     * @var null|\SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory
+     */
+    protected $apiFactory = null;
+
+    /**
+     * @var null|\SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory
+     */
+    protected $orderFactory = null;
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory
+     */
+    public function getMapperFactory()
+    {
+        if ($this->mapperFactory === null) {
+            $this->mapperFactory = new ComputopBusinessMapperFactory();
+        }
+
+        return $this->mapperFactory;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory
+     */
+    public function getApiFactory()
+    {
+        if ($this->apiFactory === null) {
+            $this->apiFactory = new ComputopBusinessApiFactory();
+        }
+
+        return $this->apiFactory;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory
+     */
+    public function getOrderFactory()
+    {
+        if ($this->orderFactory === null) {
+            $this->orderFactory = new ComputopBusinessOrderFactory();
+        }
+
+        return $this->orderFactory;
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
      */
     public function createOrderSaver()
     {
-        return new OrderManager($this->getConfig());
-    }
+        $orderSaver = new OrderManager($this->getConfig());
 
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
-     */
-    public function createOrderCreditCardMapper()
-    {
-        return new CreditCardMapper();
-    }
+        $orderSaver->registerMapper($this->getOrderFactory()->createOrderCreditCardMapper());
+        $orderSaver->registerMapper($this->getOrderFactory()->createOrderPayPalMapper());
+        $orderSaver->registerMapper($this->getOrderFactory()->createOrderDirectDebitMapper());
+        $orderSaver->registerMapper($this->getOrderFactory()->createOrderSofortMapper());
 
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
-     */
-    public function createOrderPayPalMapper()
-    {
-        return new PayPalMapper();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
-     */
-    public function createOrderDirectDebitMapper()
-    {
-        return new DirectDebitMapper();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
-     */
-    public function createOrderSofortMapper()
-    {
-        return new SofortMapper();
+        return $orderSaver;
     }
 
     /**
@@ -113,12 +113,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $paymentRequest = new AuthorizationRequest(
             $this->createAuthorizeAdapter(),
-            $this->createAuthorizeConverter(),
+            $this->getApiFactory()->createAuthorizeConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createAuthorizeCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createAuthorizePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createAuthorizeCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createAuthorizePayPalMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -133,13 +133,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $paymentRequest = new InquireRequest(
             $this->createInquireAdapter(),
-            $this->createInquireConverter(),
+            $this->getApiFactory()->createInquireConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createInquireCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createInquirePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createInquireDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createInquireCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createInquirePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createInquireDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -154,13 +154,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $paymentRequest = new ReverseRequest(
             $this->createReverseAdapter(),
-            $this->createReverseConverter(),
+            $this->getApiFactory()->createReverseConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createReverseCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createReversePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createReverseDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createReverseCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createReversePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createReverseDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -175,13 +175,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $paymentRequest = new CaptureRequest(
             $this->createCaptureAdapter(),
-            $this->createCaptureConverter(),
+            $this->getApiFactory()->createCaptureConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createCaptureCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createCapturePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createCaptureDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createCaptureCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createCapturePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createCaptureDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -196,14 +196,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $paymentRequest = new RefundRequest(
             $this->createRefundAdapter(),
-            $this->createRefundConverter(),
+            $this->getApiFactory()->createRefundConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->createRefundCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createRefundPayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createRefundDirectDebitMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createRefundSofortMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundPayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundSofortMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -310,236 +310,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function createAuthorizeAdapter()
-    {
-        return new AuthorizeApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function createReverseAdapter()
-    {
-        return new ReverseApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function createInquireAdapter()
-    {
-        return new InquireApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function createCaptureAdapter()
-    {
-        return new CaptureApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function createRefundAdapter()
-    {
-        return new RefundApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
-     */
-    protected function createAuthorizeConverter()
-    {
-        return new AuthorizeConverter($this->getComputopService(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
-     */
-    protected function createReverseConverter()
-    {
-        return new ReverseConverter($this->getComputopService(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
-     */
-    protected function createInquireConverter()
-    {
-        return new InquireConverter($this->getComputopService(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
-     */
-    protected function createCaptureConverter()
-    {
-        return new CaptureConverter($this->getComputopService(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
-     */
-    protected function createRefundConverter()
-    {
-        return new RefundConverter($this->getComputopService(), $this->getConfig());
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createAuthorizeCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createReverseCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createInquireCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createCaptureCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createRefundCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createAuthorizePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createReversePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createInquirePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createCapturePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createRefundPayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createReverseDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new ReverseDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createInquireDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new InquireDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createCaptureDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new CaptureDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createRefundDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new RefundDirectDebitMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
-     */
-    protected function createRefundSofortMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return new RefundSofortMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
-    }
-
-    /**
      * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
      */
     protected function getComputopService()
@@ -553,6 +323,46 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getOmsFacade()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_OMS);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createAuthorizeAdapter()
+    {
+        return $this->getApiFactory()->createAuthorizeAdapter();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createInquireAdapter()
+    {
+        return $this->getApiFactory()->createInquireAdapter();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createReverseAdapter()
+    {
+        return $this->getApiFactory()->createReverseAdapter();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createCaptureAdapter()
+    {
+        return $this->getApiFactory()->createCaptureAdapter();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createRefundAdapter()
+    {
+        return $this->getApiFactory()->createRefundAdapter();
     }
 
 }

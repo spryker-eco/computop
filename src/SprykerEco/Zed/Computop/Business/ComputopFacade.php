@@ -33,11 +33,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         $orderSaver = $this->getFactory()->createOrderSaver();
 
-        $orderSaver->registerMapper($this->getFactory()->createOrderCreditCardMapper());
-        $orderSaver->registerMapper($this->getFactory()->createOrderPayPalMapper());
-        $orderSaver->registerMapper($this->getFactory()->createOrderDirectDebitMapper());
-        $orderSaver->registerMapper($this->getFactory()->createOrderSofortMapper());
-
         $orderSaver->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
     }
 
@@ -77,7 +72,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-        ;
 
         $computopResponseTransfer = $this
             ->getFactory()
@@ -103,7 +97,6 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-        ;
 
         $computopResponseTransfer = $this
             ->getFactory()
