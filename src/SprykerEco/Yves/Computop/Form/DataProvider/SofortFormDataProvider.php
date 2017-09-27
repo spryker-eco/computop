@@ -9,11 +9,10 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface;
 use SprykerEco\Yves\Computop\Mapper\Order\MapperInterface;
 
-class SofortFormDataProvider implements StepEngineFormDataProviderInterface
+class SofortFormDataProvider extends AbstractFormDataProvider
 {
 
     /**
@@ -47,8 +46,8 @@ class SofortFormDataProvider implements StepEngineFormDataProviderInterface
             $paymentTransfer = new PaymentTransfer();
             $quoteTransfer->setPayment($paymentTransfer);
         }
-        //TODO: check price
-        if ($quoteTransfer->getPayment()->getComputopSofort() === null) {
+
+        if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
             $computopTransfer = $this->cardMapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopSofort($computopTransfer);
@@ -69,6 +68,16 @@ class SofortFormDataProvider implements StepEngineFormDataProviderInterface
     public function getOptions(AbstractTransfer $quoteTransfer)
     {
         return [];
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    protected function getComputopPayment(AbstractTransfer $quoteTransfer)
+    {
+        return $quoteTransfer->getPayment()->getComputopSofort();
     }
 
 }
