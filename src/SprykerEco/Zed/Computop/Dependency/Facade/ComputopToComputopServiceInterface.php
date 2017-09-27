@@ -27,6 +27,14 @@ interface ComputopToComputopServiceInterface
     public function getDescriptionValue(array $items);
 
     /**
+     * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key);
+
+    /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
      * @return string

@@ -19,6 +19,14 @@ interface ComputopInterface
     public function extractHeader(array $decryptedArray, $method);
 
     /**
+     * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key);
+
+    /**
      * @param string $decryptedString
      *
      * @return array

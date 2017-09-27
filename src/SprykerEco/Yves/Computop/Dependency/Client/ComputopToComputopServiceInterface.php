@@ -43,6 +43,14 @@ interface ComputopToComputopServiceInterface
 
     /**
      * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key);
+
+    /**
+     * @param array $responseArray
      * @param string $password
      *
      * @return array

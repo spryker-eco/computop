@@ -158,7 +158,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createSofortPaymentHandler()
     {
-        return new ComputopSofortPaymentHandler();
+        return new ComputopSofortPaymentHandler($this->getComputopService());
     }
 
     /**
@@ -166,7 +166,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderCreditCardConverter()
     {
-        return new OrderCreditCardConverter();
+        return new OrderCreditCardConverter($this->getComputopService());
     }
 
     /**
@@ -174,7 +174,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderPayPalConverter()
     {
-        return new OrderPayPalConverter();
+        return new OrderPayPalConverter($this->getComputopService());
     }
 
     /**
@@ -182,7 +182,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderDirectDebitConverter()
     {
-        return new OrderDirectDebitConverter();
+        return new OrderDirectDebitConverter($this->getComputopService());
     }
 
     /**
@@ -190,7 +190,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderSofortConverter()
     {
-        return new OrderSofortConverter();
+        return new OrderSofortConverter($this->getComputopService());
     }
 
     /**

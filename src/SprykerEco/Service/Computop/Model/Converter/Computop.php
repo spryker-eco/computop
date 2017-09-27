@@ -26,21 +26,33 @@ class Computop extends AbstractComputop implements ComputopInterface
         $this->checkDecryptedResponse($decryptedArray);
 
         $header = new ComputopResponseHeaderTransfer();
-
         $header->fromArray($decryptedArray, true);
+        $header->setMId($this->getResponseValue($decryptedArray, ComputopConstants::MID_F_N));
+        $header->setTransId($this->getResponseValue($decryptedArray, ComputopConstants::TRANS_ID_F_N));
+        $header->setPayId($this->getResponseValue($decryptedArray, ComputopConstants::PAY_ID_F_N));
+        //optional
+        $header->setMac($this->getResponseValue($decryptedArray, ComputopConstants::MAC_F_N));
+        $header->setXId($this->getResponseValue($decryptedArray, ComputopConstants::XID_F_N));
 
-        //different naming style
-        $header->setMId($decryptedArray[ComputopConstants::MID_F_N]);
-        $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-        $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
         $header->setIsSuccess($header->getStatus() === ComputopConstants::SUCCESS_STATUS);
         $header->setMethod($method);
-
-        //optional
-        $header->setMac(isset($decryptedArray[ComputopConstants::MAC_F_N]) ? $decryptedArray[ComputopConstants::MAC_F_N] : null);
-        $header->setXId(isset($decryptedArray[ComputopConstants::XID_F_N]) ? $decryptedArray[ComputopConstants::XID_F_N] : null);
-
+        
         return $header;
+    }
+
+    /**
+     * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key)
+    {
+        if (isset($responseArray[$this->formatKey($key)])) {
+            return $responseArray[$this->formatKey($key)];
+        }
+
+        return null;
     }
 
     /**
@@ -50,14 +62,14 @@ class Computop extends AbstractComputop implements ComputopInterface
      */
     public function getResponseDecryptedArray($decryptedString)
     {
-        $decryptedDataArray = [];
-        $decryptedDataSubArray = explode(self::DATA_SEPARATOR, $decryptedString);
-        foreach ($decryptedDataSubArray as $value) {
+        $decryptedArray = [];
+        $decryptedSubArray = explode(self::DATA_SEPARATOR, $decryptedString);
+        foreach ($decryptedSubArray as $value) {
             $data = explode(self::DATA_SUB_SEPARATOR, $value);
-            $decryptedDataArray[array_shift($data)] = array_shift($data);
+            $decryptedArray[array_shift($data)] = array_shift($data);
         }
 
-        return $decryptedDataArray;
+        return $this->formatResponseArray($decryptedArray);
     }
 
     /**
@@ -123,13 +135,44 @@ class Computop extends AbstractComputop implements ComputopInterface
      */
     protected function checkArrayKeysExists(array $keys, array $arraySearch)
     {
+        $arraySearch = $this->formatResponseArray($arraySearch);
+
         foreach ($keys as $key) {
-            if (!array_key_exists($key, $arraySearch)) {
+            if (!array_key_exists($this->formatKey($key), $arraySearch)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * Computop returns keys in different formats. F.e. "BIC", "bic".
+     * Function returns keys in one unique format.
+     *
+     * @param array $decryptedArray
+     *
+     * @return array
+     */
+    protected function formatResponseArray(array $decryptedArray)
+    {
+        $formattedArray = [];
+
+        foreach ($decryptedArray as $key => $value) {
+            $formattedArray[$this->formatKey($key)] = $value;
+        }
+
+        return $formattedArray;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    protected function formatKey($key)
+    {
+        return strtolower($key);
     }
 
 }

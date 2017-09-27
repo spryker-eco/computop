@@ -22,54 +22,57 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
      */
     protected function getResponseTransfer(array $decryptedArray)
     {
-        $computopResponseTransfer = new ComputopInquireResponseTransfer();
-
-        $computopResponseTransfer->fromArray($decryptedArray, true);
-        $computopResponseTransfer->setHeader(
+        $responseTransfer = new ComputopInquireResponseTransfer();
+        $responseTransfer->fromArray($decryptedArray, true);
+        $responseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray, ComputopConstants::INQUIRE_METHOD)
         );
+        $responseTransfer->setAmountAuth($this->computopService->getResponseValue($decryptedArray, ComputopConstants::AMOUNT_AUTH_F_N));
+        $responseTransfer->setAmountCap($this->computopService->getResponseValue($decryptedArray, ComputopConstants::AMOUNT_CAP_F_N));
+        $responseTransfer->setAmountCred($this->computopService->getResponseValue($decryptedArray, ComputopConstants::AMOUNT_CRED_F_N));
+        $responseTransfer->setLastStatus($this->computopService->getResponseValue($decryptedArray, ComputopConstants::LAST_STATUS_F_N));
+        //set custom options
+        $responseTransfer->setIsAuthLast($this->isAuthLast($responseTransfer));
+        $responseTransfer->setIsCapLast($this->isCapLast($responseTransfer));
+        $responseTransfer->setIsCredLast($this->isCredLast($responseTransfer));
 
-        $computopResponseTransfer->setIsAuthLast($this->isAuthLast($computopResponseTransfer));
-        $computopResponseTransfer->setIsCapLast($this->isCapLast($computopResponseTransfer));
-        $computopResponseTransfer->setIsCredLast($this->isCredLast($computopResponseTransfer));
-
-        return $computopResponseTransfer;
+        return $responseTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $computopResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $responseTransfer
      *
      * @return bool
      */
-    protected function isAuthLast($computopResponseTransfer)
+    protected function isAuthLast($responseTransfer)
     {
-        return $computopResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
-            $computopResponseTransfer->getAmountCap() === self::EMPTY_AMOUNT &&
-            $computopResponseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
+        return $responseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
+            $responseTransfer->getAmountCap() === self::EMPTY_AMOUNT &&
+            $responseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $computopResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $responseTransfer
      *
      * @return bool
      */
-    protected function isCapLast($computopResponseTransfer)
+    protected function isCapLast($responseTransfer)
     {
-        return $computopResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
-            $computopResponseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
-            $computopResponseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
+        return $responseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
+            $responseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
+            $responseTransfer->getAmountCred() === self::EMPTY_AMOUNT;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $computopResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopInquireResponseTransfer $responseTransfer
      *
      * @return bool
      */
-    protected function isCredLast($computopResponseTransfer)
+    protected function isCredLast($responseTransfer)
     {
-        return $computopResponseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
-            $computopResponseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
-            $computopResponseTransfer->getAmountCred() !== self::EMPTY_AMOUNT;
+        return $responseTransfer->getAmountAuth() !== self::EMPTY_AMOUNT &&
+            $responseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
+            $responseTransfer->getAmountCred() !== self::EMPTY_AMOUNT;
     }
 
 }

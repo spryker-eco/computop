@@ -47,6 +47,17 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     }
 
     /**
+     * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key)
+    {
+        return $this->computopService->getResponseValue($responseArray, $key);
+    }
+
+    /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
      * @return string

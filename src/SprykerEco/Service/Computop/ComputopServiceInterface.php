@@ -63,6 +63,17 @@ interface ComputopServiceInterface
 
     /**
      * Specification:
+     * - Gets value from response array by key (discarding formatting)
+     *
+     * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key);
+
+    /**
+     * Specification:
      * - Generate decrypted response array
      *
      * @api

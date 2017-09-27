@@ -21,16 +21,12 @@ class AuthorizeConverter extends AbstractConverter implements ConverterInterface
     protected function getResponseTransfer(array $decryptedArray)
     {
         $computopResponseTransfer = new ComputopAuthorizeResponseTransfer();
-
         $computopResponseTransfer->fromArray($decryptedArray, true);
-
-        $computopResponseTransfer->setRefNr(
-            isset($decryptedArray[ComputopConstants::REF_NR_F_N]) ? $decryptedArray[ComputopConstants::REF_NR_F_N] : null
-        );
-
         $computopResponseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray, ComputopConstants::AUTHORIZE_METHOD)
         );
+        //optional field
+        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopConstants::REF_NR_F_N));
 
         return $computopResponseTransfer;
     }

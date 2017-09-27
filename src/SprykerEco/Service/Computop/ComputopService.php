@@ -87,6 +87,19 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     /**
      * {@inheritdoc}
      *
+     * @param array $responseArray
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getResponseValue(array $responseArray, $key)
+    {
+        return $this->getFactory()->createComputopConverter()->getResponseValue($responseArray, $key);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
      * @api
      *
      * @param array $responseArray
