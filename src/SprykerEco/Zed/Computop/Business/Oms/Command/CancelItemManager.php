@@ -31,14 +31,16 @@ class CancelItemManager implements CancelItemManagerInterface
     }
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
+     * @param array $orderItems
      *
-     * @return void
+     * @return array
      */
-    public function changeComputopItemStatus(SpySalesOrderItem $orderItem)
+    public function changeComputopItemsStatus(array $orderItems)
     {
-        $this->handleDatabaseTransaction(function () use ($orderItem) {
-            $this->changeStatus($orderItem);
+        $this->handleDatabaseTransaction(function () use ($orderItems) {
+            foreach ($orderItems as $orderItem) {
+                $this->changeStatus($orderItem);
+            }
         });
 
         return [];

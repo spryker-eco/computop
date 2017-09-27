@@ -55,7 +55,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory
      */
-    public function getMapperFactory()
+    public function createMapperFactory()
     {
         if ($this->mapperFactory === null) {
             $this->mapperFactory = new ComputopBusinessMapperFactory();
@@ -67,7 +67,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory
      */
-    public function getApiFactory()
+    public function createApiFactory()
     {
         if ($this->apiFactory === null) {
             $this->apiFactory = new ComputopBusinessApiFactory();
@@ -79,7 +79,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory
      */
-    public function getOrderFactory()
+    public function createOrderFactory()
     {
         if ($this->orderFactory === null) {
             $this->orderFactory = new ComputopBusinessOrderFactory();
@@ -95,10 +95,10 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $orderSaver = new OrderManager($this->getConfig());
 
-        $orderSaver->registerMapper($this->getOrderFactory()->createOrderCreditCardMapper());
-        $orderSaver->registerMapper($this->getOrderFactory()->createOrderPayPalMapper());
-        $orderSaver->registerMapper($this->getOrderFactory()->createOrderDirectDebitMapper());
-        $orderSaver->registerMapper($this->getOrderFactory()->createOrderSofortMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createOrderCreditCardMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createOrderPayPalMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createOrderDirectDebitMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createOrderSofortMapper());
 
         return $orderSaver;
     }
@@ -112,13 +112,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new AuthorizationRequest(
-            $this->createAuthorizeAdapter(),
-            $this->getApiFactory()->createAuthorizeConverter(),
+            $this->getAuthorizeAdapter(),
+            $this->createApiFactory()->createAuthorizeConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->getMapperFactory()->createAuthorizeCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createAuthorizePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayPalMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -132,14 +132,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new InquireRequest(
-            $this->createInquireAdapter(),
-            $this->getApiFactory()->createInquireConverter(),
+            $this->getInquireAdapter(),
+            $this->createApiFactory()->createInquireConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->getMapperFactory()->createInquireCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createInquirePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createInquireDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquireCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquireDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -153,14 +153,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new ReverseRequest(
-            $this->createReverseAdapter(),
-            $this->getApiFactory()->createReverseConverter(),
+            $this->getReverseAdapter(),
+            $this->createApiFactory()->createReverseConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->getMapperFactory()->createReverseCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createReversePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createReverseDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReverseCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReverseDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -174,14 +174,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new CaptureRequest(
-            $this->createCaptureAdapter(),
-            $this->getApiFactory()->createCaptureConverter(),
+            $this->getCaptureAdapter(),
+            $this->createApiFactory()->createCaptureConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->getMapperFactory()->createCaptureCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createCapturePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createCaptureDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureDirectDebitMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -195,15 +195,15 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new RefundRequest(
-            $this->createRefundAdapter(),
-            $this->getApiFactory()->createRefundConverter(),
+            $this->getRefundAdapter(),
+            $this->createApiFactory()->createRefundConverter(),
             $paymentMethod
         );
 
-        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundPayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundDirectDebitMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->getMapperFactory()->createRefundSofortMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundCreditCardMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundSofortMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -328,41 +328,41 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
-    protected function createAuthorizeAdapter()
+    protected function getAuthorizeAdapter()
     {
-        return $this->getApiFactory()->createAuthorizeAdapter();
+        return $this->createApiFactory()->createAuthorizeAdapter();
     }
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
-    protected function createInquireAdapter()
+    protected function getInquireAdapter()
     {
-        return $this->getApiFactory()->createInquireAdapter();
+        return $this->createApiFactory()->createInquireAdapter();
     }
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
-    protected function createReverseAdapter()
+    protected function getReverseAdapter()
     {
-        return $this->getApiFactory()->createReverseAdapter();
+        return $this->createApiFactory()->createReverseAdapter();
     }
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
-    protected function createCaptureAdapter()
+    protected function getCaptureAdapter()
     {
-        return $this->getApiFactory()->createCaptureAdapter();
+        return $this->createApiFactory()->createCaptureAdapter();
     }
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
-    protected function createRefundAdapter()
+    protected function getRefundAdapter()
     {
-        return $this->getApiFactory()->createRefundAdapter();
+        return $this->createApiFactory()->createRefundAdapter();
     }
 
 }

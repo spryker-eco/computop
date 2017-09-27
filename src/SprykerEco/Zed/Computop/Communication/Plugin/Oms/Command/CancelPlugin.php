@@ -105,9 +105,7 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      */
     protected function cancelOrderItems(array $orderItems)
     {
-        foreach ($orderItems as $orderItem) {
-            $this->getFacade()->cancelPaymentItem($orderItem);
-        }
+        $this->getFacade()->cancelPaymentItems($orderItems);
 
         $this->setInfoMessage('Item(s) was(were) changed');
 

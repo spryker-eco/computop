@@ -7,16 +7,14 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
-use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
-
 interface CancelItemManagerInterface
 {
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
+     * @param array $orderItems
      *
-     * @return void
+     * @return array
      */
-    public function changeComputopItemStatus(SpySalesOrderItem $orderItem);
+    public function changeComputopItemsStatus(array $orderItems);
 
 }

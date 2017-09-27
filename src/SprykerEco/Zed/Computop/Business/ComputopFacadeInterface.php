@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 
 interface ComputopFacadeInterface
 {
@@ -53,11 +52,11 @@ interface ComputopFacadeInterface
     public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
+     * @param array $orderItems
      *
      * @return void
      */
-    public function cancelPaymentItem(SpySalesOrderItem $orderItem);
+    public function cancelPaymentItems(array $orderItems);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

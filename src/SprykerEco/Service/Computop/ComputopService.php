@@ -87,6 +87,8 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param array $responseArray
      * @param string $key
      *

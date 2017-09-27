@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -114,16 +113,16 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
+     * @param array $orderItems
      *
      * @return void
      */
-    public function cancelPaymentItem(SpySalesOrderItem $orderItem)
+    public function cancelPaymentItems(array $orderItems)
     {
         $this
             ->getFactory()
             ->createCancelItemManager()
-            ->changeComputopItemStatus($orderItem);
+            ->changeComputopItemsStatus($orderItems);
     }
 
     /**
