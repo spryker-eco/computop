@@ -64,21 +64,21 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="first_name" required="false" type="VARCHAR"/>
         <column name="last_name" required="false" type="VARCHAR"/>
         <column name="email" required="false" type="VARCHAR"/>
-        <column name="addr_street" required="false" type="VARCHAR"/>
-        <column name="addr_street2" required="false" type="VARCHAR"/>
-        <column name="addr_city" required="false" type="VARCHAR"/>
-        <column name="addr_state" required="false" type="VARCHAR"/>
-        <column name="addr_zip" required="false" type="VARCHAR"/>
-        <column name="addr_country_code" required="false" type="VARCHAR"/>
+        <column name="address_street" required="false" type="VARCHAR"/>
+        <column name="address_street2" required="false" type="VARCHAR"/>
+        <column name="address_city" required="false" type="VARCHAR"/>
+        <column name="address_state" required="false" type="VARCHAR"/>
+        <column name="address_zip" required="false" type="VARCHAR"/>
+        <column name="address_country_code" required="false" type="VARCHAR"/>
         <column name="phone" required="false" type="VARCHAR"/>
         <column name="billing_agreement_id" required="false" type="VARCHAR"/>
         <column name="billing_name" required="false" type="VARCHAR"/>
-        <column name="billing_addr_street" required="false" type="VARCHAR"/>
-        <column name="billing_addr_street2" required="false" type="VARCHAR"/>
-        <column name="billing_addr_city" required="false" type="VARCHAR"/>
-        <column name="billing_addr_state" required="false" type="VARCHAR"/>
-        <column name="billing_addr_zip" required="false" type="VARCHAR"/>
-        <column name="billing_addr_country_code" required="false" type="VARCHAR"/>
+        <column name="billing_address_street" required="false" type="VARCHAR"/>
+        <column name="billing_address_street2" required="false" type="VARCHAR"/>
+        <column name="billing_address_city" required="false" type="VARCHAR"/>
+        <column name="billing_address_state" required="false" type="VARCHAR"/>
+        <column name="billing_address_zip" required="false" type="VARCHAR"/>
+        <column name="billing_address_country_code" required="false" type="VARCHAR"/>
         <column name="info_text" required="false" type="VARCHAR"/>
         <column name="payer_id" required="false" type="VARCHAR"/>
         <column name="is_financing" required="false" type="VARCHAR"/>
@@ -103,6 +103,8 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="date_of_signature" required="false" type="VARCHAR"/>
         <column name="mdt_seq_type" required="false" type="VARCHAR"/>
         <column name="bank_account_pban" required="false" type="VARCHAR"/>
+        <column name="birthday" required="false" type="VARCHAR"/>
+        <column name="age" required="false" type="INTEGER"/>
 
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>

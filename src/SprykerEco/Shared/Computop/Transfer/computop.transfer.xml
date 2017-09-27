@@ -93,12 +93,12 @@
         <property name="language" type="string" />
         <property name="firstName" type="string" />
         <property name="lastName" type="string" />
-        <property name="addrStreet" type="string" />
-        <property name="addrStreet2" type="string" />
-        <property name="addrCity" type="string" />
-        <property name="addrState" type="string" />
-        <property name="addrZip" type="string" />
-        <property name="addrCountryCode" type="string" />
+        <property name="addressStreet" type="string" />
+        <property name="addressStreet2" type="string" />
+        <property name="addressCity" type="string" />
+        <property name="addressState" type="string" />
+        <property name="addressZip" type="string" />
+        <property name="addressCountryCode" type="string" />
         <property name="phone" type="string" />
         <property name="noShipping" type="string" />
         <property name="allowNote" type="string" />
@@ -184,21 +184,21 @@
         <property name="firstName" type="string" />
         <property name="lastName" type="string" />
         <property name="email" type="string" />
-        <property name="addrStreet" type="string" />
-        <property name="addrStreet2" type="string" />
-        <property name="addrCity" type="string" />
-        <property name="addrState" type="string" />
-        <property name="addrZip" type="string" />
-        <property name="addrCountryCode" type="string" />
+        <property name="addressStreet" type="string" />
+        <property name="addressStreet2" type="string" />
+        <property name="addressCity" type="string" />
+        <property name="addressState" type="string" />
+        <property name="addressZip" type="string" />
+        <property name="addressCountryCode" type="string" />
         <property name="phone" type="string" />
         <property name="billingAgreementId" type="string" />
         <property name="billingName" type="string" />
-        <property name="billingAddrStreet" type="string" />
-        <property name="billingAddrStreet2" type="string" />
-        <property name="billingAddrCity" type="string" />
-        <property name="billingAddrState" type="string" />
-        <property name="billingAddrZip" type="string" />
-        <property name="billingAddrCountryCode" type="string" />
+        <property name="billingAddressStreet" type="string" />
+        <property name="billingAddressStreet2" type="string" />
+        <property name="billingAddressCity" type="string" />
+        <property name="billingAddressState" type="string" />
+        <property name="billingAddressZip" type="string" />
+        <property name="billingAddressCountryCode" type="string" />
         <property name="transactionId" type="string" />
         <property name="infoText" type="string" />
         <property name="payerId" type="string" />
@@ -222,6 +222,13 @@
         <property name="accountBank" type="string"/>
         <property name="bankAccountBic" type="string"/>
         <property name="bankAccountIban" type="string"/>
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="addressStreet" type="string" />
+        <property name="addressCity" type="string" />
+        <property name="addressZip" type="string" />
+        <property name="birthday" type="string" />
+        <property name="age" type="string" />
     </transfer>
 
     <transfer name="ComputopAuthorizeResponse">
