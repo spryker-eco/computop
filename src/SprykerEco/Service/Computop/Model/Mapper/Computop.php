@@ -27,10 +27,10 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         $macDataArray = [
             $cardPaymentTransfer->getPayId(),
-            $cardPaymentTransfer->getTransId(),
-            $cardPaymentTransfer->getMerchantId(),
-            $cardPaymentTransfer->getAmount(),
-            $cardPaymentTransfer->getCurrency(),
+            $cardPaymentTransfer->requireTransId()->getTransId(),
+            $cardPaymentTransfer->requireMerchantId()->getMerchantId(),
+            $cardPaymentTransfer->requireAmount()->getAmount(),
+            $cardPaymentTransfer->requireCurrency()->getCurrency(),
         ];
 
         return implode(self::MAC_SEPARATOR, $macDataArray);
@@ -44,11 +44,11 @@ class Computop extends AbstractComputop implements ComputopInterface
     public function getMacResponseEncryptedValue(ComputopResponseHeaderTransfer $header)
     {
         $macDataArray = [
-            $header->getPayId(),
-            $header->getTransId(),
-            $header->getMId(),
-            $header->getStatus(),
-            $header->getCode(),
+            $header->requirePayId()->getPayId(),
+            $header->requireTransId()->getTransId(),
+            $header->requireMId()->getMId(),
+            $header->requireStatus()->getStatus(),
+            $header->requireCode()->getCode(),
         ];
 
         return implode(self::MAC_SEPARATOR, $macDataArray);
