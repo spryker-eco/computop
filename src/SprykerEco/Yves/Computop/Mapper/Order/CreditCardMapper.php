@@ -12,6 +12,7 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class CreditCardMapper extends AbstractMapper
@@ -27,7 +28,7 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopPaymentTransfer->setTxType(ComputopConstants::TX_TYPE_ORDER);
+        $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS_PATH_NAME))
         );
@@ -56,7 +57,7 @@ class CreditCardMapper extends AbstractMapper
         $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopFieldNameConstants::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConstants::ETI_ID;
+        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConfig::ETI_ID;
 
         return $dataSubArray;
     }

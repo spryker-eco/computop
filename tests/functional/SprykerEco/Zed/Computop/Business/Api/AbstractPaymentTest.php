@@ -131,7 +131,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     protected function getStream($data, $length)
     {
         $expectedResponse = http_build_query([
-            ComputopFieldNameConstants ::DATA => $data,
+            ComputopFieldNameConstants::DATA => $data,
             ComputopFieldNameConstants::LENGTH => $length,
         ]);
         $stream = Psr7\stream_for($expectedResponse);

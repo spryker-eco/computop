@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -133,7 +132,7 @@ class SofortResponseHandler
             ->find();
 
         $this->omsFacade->triggerEvent(
-            ComputopConstants::COMPUTOP_OMS_EVENT_CAPTURE,
+            $this->config->getOmsCaptureEventName(),
             $orderItems,
             []
         );

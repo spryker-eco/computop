@@ -13,6 +13,7 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class DirectDebitMapper extends AbstractMapper
@@ -58,7 +59,7 @@ class DirectDebitMapper extends AbstractMapper
         $dataSubArray[ComputopFieldNameConstants::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConstants::ETI_ID;
+        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConfig::ETI_ID;
         $dataSubArray[ComputopFieldNameConstants::MANDATE_ID] = $cardPaymentTransfer->getMandateId();
         $dataSubArray[ComputopFieldNameConstants::DATE_OF_SIGNATURE_ID] = $this->getDateOfSignature();
 

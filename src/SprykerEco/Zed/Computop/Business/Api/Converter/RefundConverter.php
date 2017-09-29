@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopRefundResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class RefundConverter extends AbstractConverter implements ConverterInterface
@@ -24,7 +23,7 @@ class RefundConverter extends AbstractConverter implements ConverterInterface
         $computopResponseTransfer = new ComputopRefundResponseTransfer();
         $computopResponseTransfer->fromArray($decryptedArray, true);
         $computopResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray, ComputopConstants::REFUND_METHOD)
+            $this->computopService->extractHeader($decryptedArray, $this->config->getRefundMethodName())
         );
         //optional fields
         $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::A_ID));

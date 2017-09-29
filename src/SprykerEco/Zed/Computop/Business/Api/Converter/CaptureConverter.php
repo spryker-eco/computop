@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopCaptureResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class CaptureConverter extends AbstractConverter implements ConverterInterface
@@ -24,7 +23,7 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
         $computopResponseTransfer = new ComputopCaptureResponseTransfer();
         $computopResponseTransfer->fromArray($decryptedArray, true);
         $computopResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray, ComputopConstants::CAPTURE_METHOD)
+            $this->computopService->extractHeader($decryptedArray, $this->config->getCaptureMethodName())
         );
         //optional fields
         $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::A_ID));

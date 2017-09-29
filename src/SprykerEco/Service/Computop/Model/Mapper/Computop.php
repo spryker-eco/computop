@@ -10,13 +10,15 @@ namespace SprykerEco\Service\Computop\Model\Mapper;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {
 
     const ITEMS_SEPARATOR = '|';
     const ATTRIBUTES_SEPARATOR = '-';
+
+    const ORDER_DESC_SUCCESS = 'Test:0000';
+    const ORDER_DESC_ERROR = 'Test:0305';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
@@ -79,7 +81,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         $description = '';
 
         if ($this->config->isTestMode()) {
-            $description = ComputopConstants::ORDER_DESC_SUCCESS;
+            $description = self::ORDER_DESC_SUCCESS;
             $description .= self::ITEMS_SEPARATOR;
         }
 

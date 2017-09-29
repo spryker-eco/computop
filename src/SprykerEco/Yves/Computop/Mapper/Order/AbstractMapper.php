@@ -14,6 +14,7 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
@@ -74,7 +75,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
-        $computopPaymentTransfer->setResponse(ComputopConstants::RESPONSE_TYPE);
+        $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))

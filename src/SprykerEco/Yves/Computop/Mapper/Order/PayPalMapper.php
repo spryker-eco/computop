@@ -12,9 +12,9 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-// TODO: update after check PayPal
 class PayPalMapper extends AbstractMapper
 {
 
@@ -30,7 +30,7 @@ class PayPalMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopPaymentTransfer->setTxType(ComputopConstants::TX_TYPE_ORDER);
+        $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS_PATH_NAME))
         );
@@ -59,7 +59,7 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopFieldNameConstants::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConstants::ETI_ID;
+        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConfig::ETI_ID;
         $dataSubArray[ComputopFieldNameConstants::NO_SHIPPING] = self::NO_SHIPPING;
 
         return $dataSubArray;

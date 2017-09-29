@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopInquireResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class InquireConverter extends AbstractConverter implements ConverterInterface
@@ -26,7 +25,7 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
         $responseTransfer = new ComputopInquireResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray, ComputopConstants::INQUIRE_METHOD)
+            $this->computopService->extractHeader($decryptedArray, $this->config->getInquireMethodName())
         );
         $responseTransfer->setAmountAuth($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::AMOUNT_AUTH));
         $responseTransfer->setAmountCap($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::AMOUNT_CAP));

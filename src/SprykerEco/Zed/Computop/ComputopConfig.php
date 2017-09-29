@@ -19,6 +19,15 @@ class ComputopConfig extends AbstractBundleConfig
     const OMS_STATUS_CANCELLED = 'cancelled';
     const OMS_STATUS_REFUNDED = 'refunded';
 
+    const AUTHORIZE_METHOD = 'AUTHORIZE';
+    const CAPTURE_METHOD = 'CAPTURE';
+    const REVERSE_METHOD = 'REVERSE';
+    const INQUIRE_METHOD = 'INQUIRE';
+    const REFUND_METHOD = 'REFUND';
+
+    //Events
+    const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
+
     /**
      * Refund with shipment price
      */
@@ -136,6 +145,54 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsStatusRefunded()
     {
         return self::OMS_STATUS_REFUNDED;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorizeMethodName()
+    {
+        return self::AUTHORIZE_METHOD;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCaptureMethodName()
+    {
+        return self::CAPTURE_METHOD;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefundMethodName()
+    {
+        return self::REFUND_METHOD;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReverseMethodName()
+    {
+        return self::REVERSE_METHOD;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInquireMethodName()
+    {
+        return self::INQUIRE_METHOD;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsCaptureEventName()
+    {
+        return self::COMPUTOP_OMS_EVENT_CAPTURE;
     }
 
 }

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class ReverseConverter extends AbstractConverter implements ConverterInterface
@@ -23,7 +22,7 @@ class ReverseConverter extends AbstractConverter implements ConverterInterface
     {
         $computopResponseTransfer = new ComputopReverseResponseTransfer();
         $computopResponseTransfer->setHeader(
-            $this->computopService->extractHeader($decryptedArray, ComputopConstants::REVERSE_METHOD)
+            $this->computopService->extractHeader($decryptedArray, $this->config->getReverseMethodName())
         );
         //optional fields
         $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::A_ID));

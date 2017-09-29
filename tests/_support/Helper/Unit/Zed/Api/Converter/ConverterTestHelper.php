@@ -18,6 +18,8 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 class ConverterTestHelper extends Test
 {
 
+    const AUTHORIZE_METHOD = 'AUTHORIZE';
+
     /**
      * @return \GuzzleHttp\Psr7\Stream
      */
@@ -90,7 +92,7 @@ class ConverterTestHelper extends Test
      */
     protected function getHeaderResponseTransfer(array $decryptedArray)
     {
-        $method = ComputopConstants::AUTHORIZE_METHOD;
+        $method = self::AUTHORIZE_METHOD;
 
         $header = new ComputopResponseHeaderTransfer();
         $header->fromArray($decryptedArray, true);
