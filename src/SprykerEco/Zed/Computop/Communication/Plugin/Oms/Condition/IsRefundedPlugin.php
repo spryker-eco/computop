@@ -8,10 +8,15 @@
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Condition;
 
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
+use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
-class IsRefundedPlugin implements ConditionInterface
+/**
+ * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
+ */
+class IsRefundedPlugin extends AbstractPlugin implements ConditionInterface
 {
 
     /**
@@ -26,7 +31,7 @@ class IsRefundedPlugin implements ConditionInterface
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
 
-        return $computopOrderItem->getStatus() === ComputopConstants::COMPUTOP_OMS_STATUS_REFUNDED;
+        return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusRefunded();
     }
 
 }

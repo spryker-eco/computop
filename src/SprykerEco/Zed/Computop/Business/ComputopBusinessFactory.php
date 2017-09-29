@@ -215,7 +215,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new AuthorizeResponseHandler(
             $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
         );
     }
 
@@ -226,7 +227,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new ReverseResponseHandler(
             $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
         );
     }
 
@@ -237,7 +239,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new InquireResponseHandler(
             $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
         );
     }
 
@@ -248,7 +251,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new CaptureResponseHandler(
             $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
         );
     }
 
@@ -259,7 +263,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new RefundResponseHandler(
             $this->getQueryContainer(),
-            $this->createComputopResponseLogger()
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
         );
     }
 
@@ -270,7 +275,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createSofortResponseHandler()
     {
-        return new SofortResponseHandler($this->getQueryContainer(), $this->getOmsFacade());
+        return new SofortResponseHandler($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**
@@ -286,7 +291,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createCancelItemManager()
     {
-        return new CancelItemManager($this->getQueryContainer());
+        return new CancelItemManager($this->getQueryContainer(), $this->getConfig());
     }
 
     /**

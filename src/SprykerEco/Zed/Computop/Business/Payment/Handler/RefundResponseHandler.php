@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 class RefundResponseHandler extends AbstractResponseHandler
 {
@@ -59,7 +58,7 @@ class RefundResponseHandler extends AbstractResponseHandler
                 if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
                     continue;
                 }
-                $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_REFUNDED);
+                $item->setStatus($this->config->getOmsStatusRefunded());
                 $item->save();
             }
         }

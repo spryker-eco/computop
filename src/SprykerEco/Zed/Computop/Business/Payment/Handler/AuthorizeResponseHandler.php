@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 class AuthorizeResponseHandler extends AbstractResponseHandler
 {
@@ -60,7 +59,7 @@ class AuthorizeResponseHandler extends AbstractResponseHandler
                 if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
                     continue;
                 }
-                $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_AUTHORIZED);
+                $item->setStatus($this->config->getOmsStatusAuthorized());
                 $item->save();
             }
         }

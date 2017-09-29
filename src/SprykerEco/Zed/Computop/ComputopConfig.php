@@ -13,6 +13,12 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 class ComputopConfig extends AbstractBundleConfig
 {
 
+    const OMS_STATUS_NEW = 'new';
+    const OMS_STATUS_AUTHORIZED = 'authorized';
+    const OMS_STATUS_CAPTURED = 'captured';
+    const OMS_STATUS_CANCELLED = 'cancelled';
+    const OMS_STATUS_REFUNDED = 'refunded';
+
     /**
      * Refund with shipment price
      */
@@ -90,6 +96,46 @@ class ComputopConfig extends AbstractBundleConfig
     public function isNeededRedirectAfterPlaceOrder($method)
     {
         return in_array($method, $this->get(ComputopConstants::COMPUTOP_PAYMENT_METHODS_WITHOUT_ORDER_CALL));
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsStatusNew()
+    {
+        return self::OMS_STATUS_NEW;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsStatusAuthorized()
+    {
+        return self::OMS_STATUS_AUTHORIZED;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsStatusCaptured()
+    {
+        return self::OMS_STATUS_CAPTURED;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsStatusCancelled()
+    {
+        return self::OMS_STATUS_CANCELLED;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsStatusRefunded()
+    {
+        return self::OMS_STATUS_REFUNDED;
     }
 
 }

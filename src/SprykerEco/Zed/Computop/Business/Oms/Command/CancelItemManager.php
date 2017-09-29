@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 class CancelItemManager implements CancelItemManagerInterface
@@ -20,14 +20,21 @@ class CancelItemManager implements CancelItemManagerInterface
     /**
      * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
      */
-    private $queryContainer;
+    protected $queryContainer;
+
+    /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
 
     /**
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopQueryContainerInterface $queryContainer)
+    public function __construct(ComputopQueryContainerInterface $queryContainer, ComputopConfig $config)
     {
         $this->queryContainer = $queryContainer;
+        $this->config = $config;
     }
 
     /**
@@ -58,7 +65,7 @@ class CancelItemManager implements CancelItemManagerInterface
             ->queryPaymentItemByOrderItemId($orderItem->getIdSalesOrderItem())
             ->findOne();
 
-        $computopOrderItem->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CANCELLED);
+        $computopOrderItem->setStatus($this->config->getOmsStatusCancelled());
         $computopOrderItem->save();
     }
 

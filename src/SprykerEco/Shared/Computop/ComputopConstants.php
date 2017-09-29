@@ -16,13 +16,6 @@ interface ComputopConstants
     const PAYMENT_METHOD_DIRECT_DEBIT = 'ComputopDirectDebit';
     const PAYMENT_METHOD_SOFORT = 'ComputopSofort';
 
-    //Statuses
-    const COMPUTOP_OMS_STATUS_NEW = 'new';
-    const COMPUTOP_OMS_STATUS_AUTHORIZED = 'authorized';
-    const COMPUTOP_OMS_STATUS_CAPTURED = 'captured';
-    const COMPUTOP_OMS_STATUS_CANCELLED = 'cancelled';
-    const COMPUTOP_OMS_STATUS_REFUNDED = 'refunded';
-
     //Events
     const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
 
@@ -115,7 +108,6 @@ interface ComputopConstants
     const FIRST_NAME_F_N = 'firstname';
     const LAST_NAME_F_N = 'lastname';
     const CUSTOM_F_N = 'Custom';
-
     const PHONE_F_N = 'Phone';
     const BILLING_AGREEMENT_ID_F_N = 'BillingAgreementID';
     const BILLING_NAME_F_N = 'BillingName';
@@ -125,33 +117,27 @@ interface ComputopConstants
     const BILLING_ADDRESS_STATE_F_N = 'BillingAddrState';
     const BILLING_ADDRESS_ZIP_F_N = 'BillingAddrZIP';
     const BILLING_ADDRESS_COUNTRY_CODE_F_N = 'BillingAddrCountryCode';
-
     const ADDRESS_STREET_F_N = 'AddrStreet';
     const ADDRESS_STREET2_F_N = 'AddrStreet2';
     const ADDRESS_CITY_F_N = 'AddrCity';
     const ADDRESS_STATE_F_N = 'AddrState';
     const ADDRESS_ZIP_F_N = 'AddrZIP';
     const ADDRESS_COUNTRY_CODE_F_N = 'AddrCountryCode';
-
     const BIRTHDAY_F_N = 'Birthday';
     const AGE_F_N = 'Age';
-
     const PAYER_ID_F_N = 'PayerID';
     const IS_FINANCING_F_N = 'IsFinancing';
     const FINANCING_FEE_AMOUNT_F_N = 'FinancingFeeAmount';
     const FINANCING_MONTHLY_PAYMENT_F_N = 'FinancingMonthlyPayment';
     const FINANCING_TERM_F_N = 'FinancingTerm';
     const FINANCING_TOTAL_COST_F_N = 'FinancingTotalCost';
-
     const GROSS_AMOUNT_F_N = 'GrossAmount';
     const FEE_AMOUNT_F_N = 'FeeAmount';
     const SETTLE_AMOUNT_F_N = 'SettleAmount';
     const TAX_AMOUNT_F_N = 'TaxAmount';
-
     const EXCHANGE_RATE_F_N = 'ExchangeRate';
     const MC_FEE_F_N = 'mc_fee';
     const MC_GROSS_F_N = 'mc_gross';
-
     const MANDATE_ID_F_N = 'mandateid';
     const DATE_OF_SIGNATURE_ID_F_N = 'dtofsgntr';
     const I_B_A_N_F_N = 'IBAN';

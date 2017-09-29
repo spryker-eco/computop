@@ -178,7 +178,7 @@ class OrderManager implements OrderManagerInterface
             $paymentOrderItemEntity
                 ->setFkPaymentComputop($idPayment)
                 ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
-            $paymentOrderItemEntity->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_NEW);
+            $paymentOrderItemEntity->setStatus($this->config->getOmsStatusNew());
 
             $paymentOrderItemEntity->save();
         }

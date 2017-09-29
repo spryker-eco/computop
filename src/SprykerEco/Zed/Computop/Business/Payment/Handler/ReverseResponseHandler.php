@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ReverseResponseHandler extends AbstractResponseHandler
 {
@@ -60,7 +59,7 @@ class ReverseResponseHandler extends AbstractResponseHandler
                 if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
                     continue;
                 }
-                $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CANCELLED);
+                $item->setStatus($this->config->getOmsStatusCancelled());
                 $item->save();
             }
         }

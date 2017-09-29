@@ -15,7 +15,6 @@ use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
@@ -164,7 +163,7 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
             ->filterByFkSalesOrder($orderEntity->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName(
-                ComputopConstants::COMPUTOP_OMS_STATUS_CANCELLED,
+                $this->getConfig()->getOmsStatusCancelled(),
                 Criteria::EQUAL
             )
             ->endUse()

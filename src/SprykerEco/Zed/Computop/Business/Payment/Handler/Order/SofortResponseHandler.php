@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
@@ -19,8 +20,6 @@ class SofortResponseHandler
 {
 
     use DatabaseTransactionHandlerTrait;
-
-    const METHOD = 'SOFORT-SALE';
 
     /**
      * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
@@ -38,15 +37,23 @@ class SofortResponseHandler
     protected $paymentEntity;
 
     /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface $omsFacade
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
     public function __construct(
         ComputopQueryContainerInterface $queryContainer,
-        ComputopToOmsInterface $omsFacade
+        ComputopToOmsInterface $omsFacade,
+        ComputopConfig $config
     ) {
         $this->queryContainer = $queryContainer;
         $this->omsFacade = $omsFacade;
+        $this->config = $config;
     }
 
     /**
@@ -84,7 +91,8 @@ class SofortResponseHandler
         $paymentEntity->save();
 
         foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
-            $item->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_CAPTURED);
+            //Sofort sets captured status on first call
+            $item->setStatus($this->config->getOmsStatusCaptured());
             $item->save();
         }
 

@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 abstract class AbstractResponseHandler implements ResponseHandlerInterface
@@ -25,15 +26,23 @@ abstract class AbstractResponseHandler implements ResponseHandlerInterface
     protected $queryContainer;
 
     /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface $logger
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
     public function __construct(
         ComputopQueryContainerInterface $queryContainer,
-        ComputopResponseLoggerInterface $logger
+        ComputopResponseLoggerInterface $logger,
+        ComputopConfig $config
     ) {
         $this->queryContainer = $queryContainer;
         $this->logger = $logger;
+        $this->config = $config;
     }
 
     /**
