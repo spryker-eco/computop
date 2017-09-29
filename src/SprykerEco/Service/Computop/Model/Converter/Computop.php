@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {
@@ -27,16 +28,16 @@ class Computop extends AbstractComputop implements ComputopInterface
 
         $header = new ComputopResponseHeaderTransfer();
         $header->fromArray($decryptedArray, true);
-        $header->setMId($this->getResponseValue($decryptedArray, ComputopConstants::MID_F_N));
-        $header->setTransId($this->getResponseValue($decryptedArray, ComputopConstants::TRANS_ID_F_N));
-        $header->setPayId($this->getResponseValue($decryptedArray, ComputopConstants::PAY_ID_F_N));
+        $header->setMId($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::MID));
+        $header->setTransId($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::TRANS_ID));
+        $header->setPayId($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::PAY_ID));
         //optional
-        $header->setMac($this->getResponseValue($decryptedArray, ComputopConstants::MAC_F_N));
-        $header->setXId($this->getResponseValue($decryptedArray, ComputopConstants::XID_F_N));
+        $header->setMac($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::MAC));
+        $header->setXId($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::XID));
 
         $header->setIsSuccess($header->getStatus() === ComputopConstants::SUCCESS_STATUS);
         $header->setMethod($method);
-        
+
         return $header;
     }
 
@@ -82,8 +83,8 @@ class Computop extends AbstractComputop implements ComputopInterface
     public function checkEncryptedResponse(array $responseArray)
     {
         $keys = [
-            ComputopConstants::DATA_F_N,
-            ComputopConstants::LENGTH_F_N,
+            ComputopFieldNameConstants::DATA,
+            ComputopFieldNameConstants::LENGTH,
         ];
 
         if (!$this->checkArrayKeysExists($keys, $responseArray)) {
@@ -117,9 +118,9 @@ class Computop extends AbstractComputop implements ComputopInterface
     protected function checkDecryptedResponse($decryptedArray)
     {
         $keys = [
-            ComputopConstants::MID_F_N,
-            ComputopConstants::TRANS_ID_F_N,
-            ComputopConstants::PAY_ID_F_N,
+            ComputopFieldNameConstants::MID,
+            ComputopFieldNameConstants::TRANS_ID,
+            ComputopFieldNameConstants::PAY_ID,
         ];
 
         if (!$this->checkArrayKeysExists($keys, $decryptedArray)) {

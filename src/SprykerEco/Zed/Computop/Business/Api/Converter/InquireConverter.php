@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopInquireResponseTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class InquireConverter extends AbstractConverter implements ConverterInterface
 {
@@ -27,10 +28,10 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
         $responseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray, ComputopConstants::INQUIRE_METHOD)
         );
-        $responseTransfer->setAmountAuth($this->computopService->getResponseValue($decryptedArray, ComputopConstants::AMOUNT_AUTH_F_N));
-        $responseTransfer->setAmountCap($this->computopService->getResponseValue($decryptedArray, ComputopConstants::AMOUNT_CAP_F_N));
-        $responseTransfer->setAmountCred($this->computopService->getResponseValue($decryptedArray, ComputopConstants::AMOUNT_CRED_F_N));
-        $responseTransfer->setLastStatus($this->computopService->getResponseValue($decryptedArray, ComputopConstants::LAST_STATUS_F_N));
+        $responseTransfer->setAmountAuth($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::AMOUNT_AUTH));
+        $responseTransfer->setAmountCap($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::AMOUNT_CAP));
+        $responseTransfer->setAmountCred($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::AMOUNT_CRED));
+        $responseTransfer->setLastStatus($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::LAST_STATUS));
         //set custom options
         $responseTransfer->setIsAuthLast($this->isAuthLast($responseTransfer));
         $responseTransfer->setIsCapLast($this->isCapLast($responseTransfer));

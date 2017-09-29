@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class OrderDirectDebitConverter extends AbstractOrderConverter
 {
@@ -26,14 +26,14 @@ class OrderDirectDebitConverter extends AbstractOrderConverter
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields
-        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopConstants::I_B_A_N_F_N));
-        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopConstants::B_I_C_F_N));
-        $responseTransfer->setAccountOwner($this->computopService->getResponseValue($decryptedArray, ComputopConstants::ACCOUNT_OWNER_F_N));
-        $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopConstants::ACCOUNT_BANK_F_N));
-        $responseTransfer->setMandateId($this->computopService->getResponseValue($decryptedArray, ComputopConstants::MANDATE_ID_F_N));
-        $responseTransfer->setDateOfSignature($this->computopService->getResponseValue($decryptedArray, ComputopConstants::DATE_OF_SIGNATURE_ID_F_N));
-        $responseTransfer->setBankAccountPban($this->computopService->getResponseValue($decryptedArray, ComputopConstants::P_B_A_N_F_N));
-        $responseTransfer->setMdtSeqType($this->computopService->getResponseValue($decryptedArray, ComputopConstants::MDT_SEQ_TYPE_F_N));
+        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::I_B_A_N));
+        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::B_I_C));
+        $responseTransfer->setAccountOwner($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::ACCOUNT_OWNER));
+        $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::ACCOUNT_BANK));
+        $responseTransfer->setMandateId($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::MANDATE_ID));
+        $responseTransfer->setDateOfSignature($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::DATE_OF_SIGNATURE_ID));
+        $responseTransfer->setBankAccountPban($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::P_B_A_N));
+        $responseTransfer->setMdtSeqType($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::MDT_SEQ_TYPE));
 
         return $responseTransfer;
     }

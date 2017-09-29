@@ -9,7 +9,7 @@ namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractService;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 /**
  * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()
@@ -119,8 +119,8 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
             ->checkEncryptedResponse($responseArray);
 
         $responseDecryptedString = $this->getBlowfishDecryptedValue(
-            $responseArray[ComputopConstants::DATA_F_N],
-            $responseArray[ComputopConstants::LENGTH_F_N],
+            $responseArray[ComputopFieldNameConstants::DATA],
+            $responseArray[ComputopFieldNameConstants::LENGTH],
             $password
         );
 
@@ -147,13 +147,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
         $plaintext = $this->getFactory()->createComputopMapper()->getDataPlaintext($dataSubArray);
         $length = strlen($plaintext);
 
-        $encryptedArray[ComputopConstants::DATA_F_N] = $this->getBlowfishEncryptedValue(
+        $encryptedArray[ComputopFieldNameConstants::DATA] = $this->getBlowfishEncryptedValue(
             $plaintext,
             $length,
             $password
         );
 
-        $encryptedArray[ComputopConstants::LENGTH_F_N] = $length;
+        $encryptedArray[ComputopFieldNameConstants::LENGTH] = $length;
 
         return $encryptedArray;
     }

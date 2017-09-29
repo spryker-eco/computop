@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
@@ -72,8 +72,8 @@ abstract class AbstractMapper implements AbstractMapperInterface
     {
         $encryptedArray = $this->getEncryptedArray($orderTransfer);
 
-        $length = $encryptedArray[ComputopConstants::LENGTH_F_N];
-        $data = $encryptedArray[ComputopConstants::DATA_F_N];
+        $length = $encryptedArray[ComputopFieldNameConstants::LENGTH];
+        $data = $encryptedArray[ComputopFieldNameConstants::DATA];
         $merchantId = $this->config->getMerchantId();
 
         return $this->buildRequestData($data, $length, $merchantId);
@@ -106,9 +106,9 @@ abstract class AbstractMapper implements AbstractMapperInterface
     protected function buildRequestData($data, $length, $merchantId)
     {
         $requestData = [
-            ComputopConstants::MERCHANT_ID_F_N => $merchantId,
-            ComputopConstants::DATA_F_N => $data,
-            ComputopConstants::LENGTH_F_N => $length,
+            ComputopFieldNameConstants::MERCHANT_ID => $merchantId,
+            ComputopFieldNameConstants::DATA => $data,
+            ComputopFieldNameConstants::LENGTH => $length,
         ];
 
         return $requestData;

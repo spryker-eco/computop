@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class DirectDebitMapper extends AbstractMapper
@@ -48,18 +49,18 @@ class DirectDebitMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopConstants::TRANS_ID_F_N] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopConstants::AMOUNT_F_N] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopConstants::CURRENCY_F_N] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopConstants::URL_SUCCESS_F_N] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopConstants::URL_FAILURE_F_N] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopConstants::CAPTURE_F_N] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopConstants::RESPONSE_F_N] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopConstants::MAC_F_N] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopConstants::ORDER_DESC_F_N] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopConstants::ETI_ID_F_N] = ComputopConstants::ETI_ID;
-        $dataSubArray[ComputopConstants::MANDATE_ID_F_N] = $cardPaymentTransfer->getMandateId();
-        $dataSubArray[ComputopConstants::DATE_OF_SIGNATURE_ID_F_N] = $this->getDateOfSignature();
+        $dataSubArray[ComputopFieldNameConstants::TRANS_ID] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopFieldNameConstants::AMOUNT] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopFieldNameConstants::CURRENCY] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopFieldNameConstants::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopFieldNameConstants::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopFieldNameConstants::CAPTURE] = $cardPaymentTransfer->getCapture();
+        $dataSubArray[ComputopFieldNameConstants::RESPONSE] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConstants::ETI_ID;
+        $dataSubArray[ComputopFieldNameConstants::MANDATE_ID] = $cardPaymentTransfer->getMandateId();
+        $dataSubArray[ComputopFieldNameConstants::DATE_OF_SIGNATURE_ID] = $this->getDateOfSignature();
 
         return $dataSubArray;
     }

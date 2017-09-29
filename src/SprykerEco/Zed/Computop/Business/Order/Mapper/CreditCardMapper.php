@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class CreditCardMapper implements MapperInterface
 {
@@ -51,7 +52,7 @@ class CreditCardMapper implements MapperInterface
         /** @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer $computopResponse */
         $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);
         $result = $computopResponse->toArray();
-        $result[ComputopConstants::PCN_R_F_N] = $computopResponse->getPCNr();
+        $result[ComputopFieldNameConstants::PCN_R] = $computopResponse->getPCNr();
 
         return $result;
     }

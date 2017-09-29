@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class ReverseConverter extends AbstractConverter implements ConverterInterface
 {
@@ -25,11 +26,11 @@ class ReverseConverter extends AbstractConverter implements ConverterInterface
             $this->computopService->extractHeader($decryptedArray, ComputopConstants::REVERSE_METHOD)
         );
         //optional fields
-        $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopConstants::A_ID_F_N));
-        $computopResponseTransfer->setTransactionId($this->computopService->getResponseValue($decryptedArray, ComputopConstants::TRANSACTION_ID_F_N));
-        $computopResponseTransfer->setCodeExt($this->computopService->getResponseValue($decryptedArray, ComputopConstants::CODE_EXT_F_N));
-        $computopResponseTransfer->setErrorText($this->computopService->getResponseValue($decryptedArray, ComputopConstants::ERROR_TEXT_F_N));
-        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopConstants::REF_NR_F_N));
+        $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::A_ID));
+        $computopResponseTransfer->setTransactionId($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::TRANSACTION_ID));
+        $computopResponseTransfer->setCodeExt($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::CODE_EXT));
+        $computopResponseTransfer->setErrorText($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::ERROR_TEXT));
+        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::REF_NR));
 
         return $computopResponseTransfer;
     }
