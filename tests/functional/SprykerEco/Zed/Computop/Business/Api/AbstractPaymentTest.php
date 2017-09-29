@@ -14,6 +14,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
@@ -130,8 +131,8 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     protected function getStream($data, $length)
     {
         $expectedResponse = http_build_query([
-            ComputopConstants::DATA_F_N => $data,
-            ComputopConstants::LENGTH_F_N => $length,
+            ComputopFieldNameConstants ::DATA => $data,
+            ComputopFieldNameConstants::LENGTH => $length,
         ]);
         $stream = Psr7\stream_for($expectedResponse);
 

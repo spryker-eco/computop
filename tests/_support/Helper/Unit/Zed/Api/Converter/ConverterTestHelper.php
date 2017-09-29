@@ -11,6 +11,7 @@ use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use GuzzleHttp\Psr7;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
@@ -47,13 +48,13 @@ class ConverterTestHelper extends Test
     public function getMainDecryptedArray()
     {
         $decryptedArray = [
-            ComputopConstants::MID_F_N => 'mid',
-            ComputopConstants::PAY_ID_F_N => 'PayID',
-            ComputopConstants::XID_F_N => 'XID',
-            ComputopConstants::TRANS_ID_F_N => 'TransID',
-            ComputopConstants::STATUS_F_N => 'OK',
-            ComputopConstants::CODE_F_N => '00000000',
-            ComputopConstants::DESCRIPTION_F_N => 'Description',
+            ComputopFieldNameConstants::MID => 'mid',
+            ComputopFieldNameConstants::PAY_ID => 'PayID',
+            ComputopFieldNameConstants::XID => 'XID',
+            ComputopFieldNameConstants::TRANS_ID => 'TransID',
+            ComputopFieldNameConstants::STATUS => 'OK',
+            ComputopFieldNameConstants::CODE => '00000000',
+            ComputopFieldNameConstants::DESCRIPTION => 'Description',
         ];
 
         return $decryptedArray;
@@ -68,13 +69,16 @@ class ConverterTestHelper extends Test
     {
         $computopServiceMock = $this->createPartialMock(
             ComputopToComputopServiceBridge::class,
-            ['getDecryptedArray', 'extractHeader']
+            ['getDecryptedArray', 'extractHeader', 'getResponseValue']
         );
         $computopServiceMock->method('getDecryptedArray')
             ->willReturn($decryptedArray);
 
         $computopServiceMock->method('extractHeader')
             ->willReturn($this->getHeaderResponseTransfer($decryptedArray));
+
+        $computopServiceMock->method('getResponseValue')
+            ->willReturn('testValue');
 
         return $computopServiceMock;
     }
@@ -92,12 +96,12 @@ class ConverterTestHelper extends Test
         $header->fromArray($decryptedArray, true);
 
         //different naming style
-        $header->setMId($decryptedArray[ComputopConstants::MID_F_N]);
-        $header->setTransId($decryptedArray[ComputopConstants::TRANS_ID_F_N]);
-        $header->setPayId($decryptedArray[ComputopConstants::PAY_ID_F_N]);
+        $header->setMId($decryptedArray[ComputopFieldNameConstants::MID]);
+        $header->setTransId($decryptedArray[ComputopFieldNameConstants::TRANS_ID]);
+        $header->setPayId($decryptedArray[ComputopFieldNameConstants::PAY_ID]);
         $header->setIsSuccess($header->getStatus() === ComputopConstants::SUCCESS_STATUS);
         $header->setMethod($method);
-        $header->setXId($decryptedArray[ComputopConstants::XID_F_N]);
+        $header->setXId($decryptedArray[ComputopFieldNameConstants::XID]);
 
         return $header;
     }

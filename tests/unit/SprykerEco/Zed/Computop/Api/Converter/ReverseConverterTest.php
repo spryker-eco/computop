@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
 
 use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 
 /**
@@ -63,11 +63,11 @@ class ReverseConverterTest extends AbstractConverterTest
     {
         $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopConstants::A_ID_F_N] = ConverterTestConstants::A_ID_VALUE;
-        $decryptedArray[ComputopConstants::TRANSACTION_ID_F_N] = ConverterTestConstants::TRANSACTION_ID_VALUE;
-        $decryptedArray[ComputopConstants::CODE_EXT_F_N] = ConverterTestConstants::CODE_EXT_VALUE;
-        $decryptedArray[ComputopConstants::ERROR_TEXT_F_N] = ConverterTestConstants::ERROR_TEXT_VALUE;
-        $decryptedArray[ComputopConstants::REF_NR_F_N] = ConverterTestConstants::REF_NR_VALUE;
+        $decryptedArray[ComputopFieldNameConstants::A_ID] = ConverterTestConstants::A_ID_VALUE;
+        $decryptedArray[ComputopFieldNameConstants::TRANSACTION_ID] = ConverterTestConstants::TRANSACTION_ID_VALUE;
+        $decryptedArray[ComputopFieldNameConstants::CODE_EXT] = ConverterTestConstants::CODE_EXT_VALUE;
+        $decryptedArray[ComputopFieldNameConstants::ERROR_TEXT] = ConverterTestConstants::ERROR_TEXT_VALUE;
+        $decryptedArray[ComputopFieldNameConstants::REF_NR] = ConverterTestConstants::REF_NR_VALUE;
 
         return $decryptedArray;
     }

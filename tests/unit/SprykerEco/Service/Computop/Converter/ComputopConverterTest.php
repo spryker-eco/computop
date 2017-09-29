@@ -10,6 +10,7 @@ namespace Unit\SprykerEco\Service\Computop\Converter;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
 
 /**
@@ -30,8 +31,8 @@ class ComputopConverterTest extends AbstractComputopTest
     const TRANS_ID_VALUE = 'TRANS_ID_VALUE';
     const MERCHANT_ID_VALUE = 'MERCHANT_ID_VALUE';
     const X_ID_VALUE = 'X_ID_VALUE';
-    const CODE_VALUE = '000000';
-    const STATUS_ERROR_VALUE = 'ERROR';
+    const CODE_VALUE = 'CODE_VALUE';
+    const STATUS_ERROR_VALUE = 'STATUS_ERROR_VALUE';
 
     /**
      * @return void
@@ -47,12 +48,13 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $header);
         $this->assertTrue($header->getIsSuccess());
 
-        $this->assertSame(self::MERCHANT_ID_VALUE, $header->getMId());
-        $this->assertSame(self::TRANS_ID_VALUE, $header->getTransId());
-        $this->assertSame(self::PAY_ID_VALUE, $header->getPayId());
+        //todo:update test
+        $this->assertSame(ComputopFieldNameConstants::MID, $header->getMId());
+        $this->assertSame(ComputopFieldNameConstants::TRANS_ID, $header->getTransId());
+        $this->assertSame(ComputopFieldNameConstants::PAY_ID, $header->getPayId());
         $this->assertSame(ComputopConstants::SUCCESS_STATUS, $header->getStatus());
-        $this->assertSame(self::CODE_VALUE, $header->getCode());
-        $this->assertSame(self::X_ID_VALUE, $header->getXId());
+        $this->assertSame(ComputopFieldNameConstants::CODE, $header->getCode());
+        $this->assertSame(ComputopFieldNameConstants::XID, $header->getXId());
     }
 
     /**
@@ -69,12 +71,12 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $header);
         $this->assertFalse($header->getIsSuccess());
 
-        $this->assertSame(self::MERCHANT_ID_VALUE, $header->getMId());
-        $this->assertSame(self::TRANS_ID_VALUE, $header->getTransId());
-        $this->assertSame(self::PAY_ID_VALUE, $header->getPayId());
+        $this->assertSame(ComputopFieldNameConstants::MID, $header->getMId());
+        $this->assertSame(ComputopFieldNameConstants::TRANS_ID_VALUE, $header->getTransId());
+        $this->assertSame(ComputopFieldNameConstants::PAY_ID_VALUE, $header->getPayId());
         $this->assertSame(self::STATUS_ERROR_VALUE, $header->getStatus());
-        $this->assertSame(self::CODE_VALUE, $header->getCode());
-        $this->assertSame(self::X_ID_VALUE, $header->getXId());
+        $this->assertSame(ComputopFieldNameConstants::CODE, $header->getCode());
+        $this->assertSame(ComputopFieldNameConstants::X_ID_VALUE, $header->getXId());
     }
 
     /**
@@ -85,8 +87,8 @@ class ComputopConverterTest extends AbstractComputopTest
         $converter = $this->helper->createConverter();
 
         $responseArray = [
-            ComputopConstants::DATA_F_N => 'data',
-            ComputopConstants::LENGTH_F_N => 4,
+            ComputopFieldNameConstants::DATA => 'data',
+            ComputopFieldNameConstants::LENGTH => 4,
         ];
 
         $converter->checkEncryptedResponse($responseArray);
@@ -111,12 +113,12 @@ class ComputopConverterTest extends AbstractComputopTest
     protected function getDecryptedArray($status)
     {
         $decryptedArray = [
-            ComputopConstants::MID_F_N => self::MERCHANT_ID_VALUE,
-            ComputopConstants::TRANS_ID_F_N => self::TRANS_ID_VALUE,
-            ComputopConstants::PAY_ID_F_N => self::PAY_ID_VALUE,
-            ComputopConstants::STATUS_F_N => $status,
-            ComputopConstants::CODE_F_N => self::CODE_VALUE,
-            ComputopConstants::XID_F_N => self::X_ID_VALUE,
+            ComputopFieldNameConstants::MID => ComputopFieldNameConstants::MID,
+            ComputopFieldNameConstants::TRANS_ID => ComputopFieldNameConstants::TRANS_ID,
+            ComputopFieldNameConstants::PAY_ID => ComputopFieldNameConstants::PAY_ID,
+            ComputopFieldNameConstants::STATUS => $status,
+            ComputopFieldNameConstants::CODE => ComputopFieldNameConstants::CODE,
+            ComputopFieldNameConstants::XID => ComputopFieldNameConstants::XID,
         ];
 
         return $decryptedArray;

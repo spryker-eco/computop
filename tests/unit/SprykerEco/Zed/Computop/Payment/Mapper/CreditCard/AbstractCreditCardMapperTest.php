@@ -10,7 +10,7 @@ namespace Unit\SprykerEco\Zed\Computop\Payment\Mapper\CreditCard;
 use Codeception\TestCase\Test;
 use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestConstants;
 use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestHelper;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 abstract class AbstractCreditCardMapperTest extends Test
 {
@@ -47,8 +47,8 @@ abstract class AbstractCreditCardMapperTest extends Test
         $service = $this->createMapper();
         $mappedData = $service->buildRequest($orderTransferMock);
 
-        $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopConstants::DATA_F_N]);
-        $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopConstants::LENGTH_F_N]);
+        $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopFieldNameConstants::DATA]);
+        $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopFieldNameConstants::LENGTH]);
     }
 
 }
