@@ -1,8 +1,12 @@
-{{ form_widget(form.ComputopCreditCard.MerchantID, {'full_name': 'MerchantID'}) }}
-{{ form_widget(form.ComputopCreditCard.Data, {'full_name': 'Data'}) }}
-{{ form_widget(form.ComputopCreditCard.Len, {'full_name': 'Len'}) }}
-{{ form_widget(form.ComputopCreditCard.url) }}
+<div class="small-12 medium-9 large-6">
+    <div class="small-12 columns">
+        {{ form_widget(form.ComputopCreditCard.MerchantID, {'full_name': 'MerchantID'}) }}
+        {{ form_widget(form.ComputopCreditCard.Data, {'full_name': 'Data'}) }}
+        {{ form_widget(form.ComputopCreditCard.Len, {'full_name': 'Len'}) }}
+        {{ form_widget(form.ComputopCreditCard.url) }}
 
-<a href="{{ form.ComputopCreditCard.vars.value.url }}">
-    {{ 'Pay with Computop Credit Card' | trans }}
-</a>
+        <a href="{{ form.ComputopCreditCard.vars.value.url }}">
+            {{ 'Pay with Computop Credit Card' | trans }}
+        </a>
+    </div>
+</div>

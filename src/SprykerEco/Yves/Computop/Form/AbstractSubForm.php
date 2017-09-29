@@ -9,13 +9,22 @@ namespace SprykerEco\Yves\Computop\Form;
 
 use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use Symfony\Component\Form\FormBuilderInterface;
 
-abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface
+abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
 
     const FIELD_URL = 'url';
+
+    /**
+     * @return string
+     */
+    public function getProviderName()
+    {
+        return ComputopConstants::PROVIDER_NAME;
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
