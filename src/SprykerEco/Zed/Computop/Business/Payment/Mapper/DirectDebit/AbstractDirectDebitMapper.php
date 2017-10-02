@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit;
 
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 
 abstract class AbstractDirectDebitMapper extends AbstractMapper
@@ -20,7 +20,7 @@ abstract class AbstractDirectDebitMapper extends AbstractMapper
      */
     public function getMethodName()
     {
-        return ComputopConstants::PAYMENT_METHOD_DIRECT_DEBIT;
+        return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
     }
 
     /**

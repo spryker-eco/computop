@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Dependency\Client;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Service\Computop\ComputopServiceInterface;
 
 class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterface
 {
@@ -18,10 +17,7 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      */
     protected $computopService;
 
-    /**
-     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
-     */
-    public function __construct(ComputopServiceInterface $computopService)
+    public function __construct($computopService)
     {
         $this->computopService = $computopService;
     }

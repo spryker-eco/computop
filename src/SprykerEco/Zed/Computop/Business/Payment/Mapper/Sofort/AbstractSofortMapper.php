@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\Sofort;
 
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 
 abstract class AbstractSofortMapper extends AbstractMapper
@@ -20,7 +20,7 @@ abstract class AbstractSofortMapper extends AbstractMapper
      */
     public function getMethodName()
     {
-        return ComputopConstants::PAYMENT_METHOD_SOFORT;
+        return ComputopConfig::PAYMENT_METHOD_SOFORT;
     }
 
     /**

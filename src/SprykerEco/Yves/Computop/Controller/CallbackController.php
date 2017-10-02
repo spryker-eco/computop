@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Controller;
 use Pyz\Yves\Checkout\Plugin\Provider\CheckoutControllerProvider;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
@@ -48,7 +49,7 @@ class CallbackController extends AbstractController
 
         $this->orderResponseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
             $this->decryptedArray,
-            ComputopConstants::ORDER_METHOD
+            ComputopConfig::ORDER_METHOD
         );
 
         $this->getFactory()->getComputopClient()->logResponse($this->orderResponseHeaderTransfer);

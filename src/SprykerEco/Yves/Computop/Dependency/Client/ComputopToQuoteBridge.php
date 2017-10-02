@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Dependency\Client;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Client\Quote\QuoteClientInterface;
 
 class ComputopToQuoteBridge implements ComputopToQuoteInterface
 {
@@ -18,10 +17,7 @@ class ComputopToQuoteBridge implements ComputopToQuoteInterface
      */
     protected $quoteClient;
 
-    /**
-     * @param \Spryker\Client\Quote\QuoteClientInterface $quoteClient
-     */
-    public function __construct(QuoteClientInterface $quoteClient)
+    public function __construct($quoteClient)
     {
         $this->quoteClient = $quoteClient;
     }

@@ -12,7 +12,7 @@ use Functional\SprykerEco\Zed\Computop\AbstractSetUpTest;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -43,7 +43,7 @@ class SaveOrderPaymentTest extends AbstractSetUpTest
         $this->assertSame(OrderPaymentTestConstants::CLIENT_IP_VALUE, $computopSavedData->getClientIp());
         $this->assertSame(OrderPaymentTestConstants::PAY_ID_VALUE, $computopSavedData->getPayId());
         $this->assertSame(OrderPaymentTestConstants::TRANS_ID_VALUE, $computopSavedData->getTransId());
-        $this->assertSame(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD, $computopSavedData->getPaymentMethod());
+        $this->assertSame(ComputopConfig::PAYMENT_METHOD_CREDIT_CARD, $computopSavedData->getPaymentMethod());
         $this->assertSame($this->helper->orderEntity->getIdSalesOrder(), $computopSavedData->getFkSalesOrder());
         $this->assertSame($this->helper->orderEntity->getOrderReference(), $computopSavedData->getReference());
     }

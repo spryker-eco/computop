@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Handler;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 
 class ComputopPayPalPaymentHandler implements ComputopPaymentHandlerInterface
 {
@@ -42,9 +42,9 @@ class ComputopPayPalPaymentHandler implements ComputopPaymentHandlerInterface
     {
         $quoteTransfer
             ->getPayment()
-            ->setPaymentProvider(ComputopConstants::PROVIDER_NAME)
-            ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_PAY_PAL)
-            ->setPaymentSelection(ComputopConstants::PAYMENT_METHOD_PAY_PAL);
+            ->setPaymentProvider(ComputopSharedConfig::PROVIDER_NAME)
+            ->setPaymentMethod(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL)
+            ->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL);
 
         return $quoteTransfer;
     }

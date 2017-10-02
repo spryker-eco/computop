@@ -10,19 +10,6 @@ namespace SprykerEco\Shared\Computop;
 interface ComputopConstants
 {
 
-    const PROVIDER_NAME = 'Computop';
-    const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
-    const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
-    const PAYMENT_METHOD_DIRECT_DEBIT = 'ComputopDirectDebit';
-    const PAYMENT_METHOD_SOFORT = 'ComputopSofort';
-
-    //Computop provider constants
-    const CAPTURE_MANUAL_TYPE = 'MANUAL';
-    const SUCCESS_STATUS = 'OK';
-
-    const ORDER_METHOD = 'ORDER';
-
-    //Config data
     const COMPUTOP_MERCHANT_ID = 'COMPUTOP_MERCHANT_ID';
     const COMPUTOP_BLOWFISH_PASSWORD = 'COMPUTOP_BLOWFISH_PASSWORD';
     const COMPUTOP_HMAC_PASSWORD = 'COMPUTOP_HMAC_PASSWORD';

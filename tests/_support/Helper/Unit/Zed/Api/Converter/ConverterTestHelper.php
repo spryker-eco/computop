@@ -10,7 +10,7 @@ namespace Computop\Helper\Unit\Zed\Api\Converter;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use GuzzleHttp\Psr7;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
@@ -101,7 +101,7 @@ class ConverterTestHelper extends Test
         $header->setMId($decryptedArray[ComputopFieldNameConstants::MID]);
         $header->setTransId($decryptedArray[ComputopFieldNameConstants::TRANS_ID]);
         $header->setPayId($decryptedArray[ComputopFieldNameConstants::PAY_ID]);
-        $header->setIsSuccess($header->getStatus() === ComputopConstants::SUCCESS_STATUS);
+        $header->setIsSuccess($header->getStatus() === ComputopSharedConfig::SUCCESS_STATUS);
         $header->setMethod($method);
         $header->setXId($decryptedArray[ComputopFieldNameConstants::XID]);
 

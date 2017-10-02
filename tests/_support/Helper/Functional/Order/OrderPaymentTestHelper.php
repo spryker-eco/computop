@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
@@ -55,8 +55,8 @@ class OrderPaymentTestHelper extends Test
         $quoteTransfer = new QuoteTransfer();
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopCreditCard($this->createComputopPaymentTransfer());
-        $paymentTransfer->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
-        $paymentTransfer->setPaymentProvider(ComputopConstants::PROVIDER_NAME);
+        $paymentTransfer->setPaymentMethod(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD);
+        $paymentTransfer->setPaymentProvider(ComputopSharedConfig::PROVIDER_NAME);
         $quoteTransfer->setPayment($paymentTransfer);
         $quoteTransfer->setTotals(new TotalsTransfer());
         $quoteTransfer->setCustomer(new CustomerTransfer());
@@ -69,7 +69,7 @@ class OrderPaymentTestHelper extends Test
     public function createComputopPaymentTransfer()
     {
         $computopPayment = new ComputopCreditCardPaymentTransfer();
-        $computopPayment->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
+        $computopPayment->setPaymentMethod(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD);
         $computopPayment->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
         $computopPayment->setClientIp(OrderPaymentTestConstants::CLIENT_IP_VALUE);
         $computopPayment->setTransId(OrderPaymentTestConstants::TRANS_ID_VALUE);

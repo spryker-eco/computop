@@ -12,7 +12,7 @@ use Spryker\Shared\Kernel\Dependency\Injector\DependencyInjectorInterface;
 use Spryker\Yves\Checkout\CheckoutDependencyProvider;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\ComputopPaymentHandlerPlugin;
 use SprykerEco\Yves\Computop\Plugin\CreditCardSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\DirectDebitSubFormPlugin;
@@ -63,7 +63,7 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
     {
         $container->extend(CheckoutDependencyProvider::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
             $paymentHandlerPlugin = new ComputopPaymentHandlerPlugin();
-            $paymentMethodHandler->add($paymentHandlerPlugin, ComputopConstants::PAYMENT_METHOD_SOFORT);
+            $paymentMethodHandler->add($paymentHandlerPlugin, ComputopConfig::PAYMENT_METHOD_SOFORT);
 
             return $paymentMethodHandler;
         });

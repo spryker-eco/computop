@@ -8,7 +8,7 @@
 namespace SprykerEco\Yves\Computop\Form;
 
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +22,7 @@ class DirectDebitSubForm extends AbstractSubForm
      */
     public function getName()
     {
-        return ComputopConstants::PAYMENT_METHOD_DIRECT_DEBIT;
+        return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
     }
 
     /**
@@ -30,7 +30,7 @@ class DirectDebitSubForm extends AbstractSubForm
      */
     public function getPropertyPath()
     {
-        return ComputopConstants::PAYMENT_METHOD_DIRECT_DEBIT;
+        return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
     }
 
     /**
@@ -38,7 +38,7 @@ class DirectDebitSubForm extends AbstractSubForm
      */
     public function getTemplatePath()
     {
-        return ComputopConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return ComputopConfig::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
     }
 
     /**

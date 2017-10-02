@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Form;
 use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -24,7 +24,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
      */
     public function getProviderName()
     {
-        return ComputopConstants::PROVIDER_NAME;
+        return ComputopConfig::PROVIDER_NAME;
     }
 
     /**

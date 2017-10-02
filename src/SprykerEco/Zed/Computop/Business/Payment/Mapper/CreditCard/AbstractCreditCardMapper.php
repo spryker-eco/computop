@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 
 abstract class AbstractCreditCardMapper extends AbstractMapper
@@ -20,7 +20,7 @@ abstract class AbstractCreditCardMapper extends AbstractMapper
      */
     public function getMethodName()
     {
-        return ComputopConstants::PAYMENT_METHOD_CREDIT_CARD;
+        return ComputopConfig::PAYMENT_METHOD_CREDIT_CARD;
     }
 
     /**

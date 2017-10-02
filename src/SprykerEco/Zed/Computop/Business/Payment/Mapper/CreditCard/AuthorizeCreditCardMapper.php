@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\AuthorizeMapperTrait;
 
 class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
@@ -24,7 +24,7 @@ class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
     protected function createPaymentTransfer(OrderTransfer $orderTransfer)
     {
         $computopPaymentTransfer = parent::createPaymentTransfer($orderTransfer);
-        $computopPaymentTransfer->setCapture(ComputopConstants::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(ComputopConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setOrderDesc($this->getOrderDesc($this->computopService, $orderTransfer));
 
         return $computopPaymentTransfer;

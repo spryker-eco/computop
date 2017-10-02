@@ -10,7 +10,7 @@ namespace SprykerEco\Service\Computop\Model\Converter;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class Computop extends AbstractComputop implements ComputopInterface
@@ -35,7 +35,7 @@ class Computop extends AbstractComputop implements ComputopInterface
         $header->setMac($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::MAC));
         $header->setXId($this->getResponseValue($decryptedArray, ComputopFieldNameConstants::XID));
 
-        $header->setIsSuccess($header->getStatus() === ComputopConstants::SUCCESS_STATUS);
+        $header->setIsSuccess($header->getStatus() === ComputopConfig::SUCCESS_STATUS);
         $header->setMethod($method);
 
         return $header;

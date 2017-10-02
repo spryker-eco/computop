@@ -26,7 +26,7 @@ class OrderCreditCardConverter extends AbstractOrderConverter
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields
-        $responseTransfer->setPCNr($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::PCN_R));
+        $responseTransfer->setPcnr($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::PCN_R));
         $responseTransfer->setCCBrand($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::CC_BRAND));
         $responseTransfer->setCCExpiry($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::CC_EXPIRY));
         $responseTransfer->setMaskedPan($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::MASKED_PAN));

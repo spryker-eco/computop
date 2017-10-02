@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Dependency\Client;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Client\Computop\ComputopClientInterface;
 
 class ComputopToComputopClientBridge implements ComputopToComputopClientInterface
 {
@@ -19,10 +18,7 @@ class ComputopToComputopClientBridge implements ComputopToComputopClientInterfac
      */
     protected $computopClient;
 
-    /**
-     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
-     */
-    public function __construct(ComputopClientInterface $computopClient)
+    public function __construct($computopClient)
     {
         $this->computopClient = $computopClient;
     }

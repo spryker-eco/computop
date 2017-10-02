@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
 
 use Generated\Shared\Transfer\PaymentTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 
 class DirectDebitMapper implements MapperInterface
 {
@@ -18,7 +18,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getMethodName()
     {
-        return ComputopConstants::PAYMENT_METHOD_DIRECT_DEBIT;
+        return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
     }
 
     /**

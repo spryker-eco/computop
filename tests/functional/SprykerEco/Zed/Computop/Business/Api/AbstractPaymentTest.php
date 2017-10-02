@@ -13,6 +13,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Service\Computop\ComputopService;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
@@ -64,7 +65,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     {
         $computopPaymentEntity = (new SpyPaymentComputop())
             ->setClientIp('0.0.0.0')
-            ->setPaymentMethod(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD)
+            ->setPaymentMethod(ComputopConfig::PAYMENT_METHOD_CREDIT_CARD)
             ->setReference($this->helper->orderEntity->getOrderReference())
             ->setFkSalesOrder($this->helper->orderEntity->getIdSalesOrder())
             ->setPayId($this->getPayIdValue());
@@ -114,7 +115,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
             ->willReturn(new ComputopQueryContainer());
 
         $stub->method('getPaymentMethod')
-            ->willReturn(ComputopConstants::PAYMENT_METHOD_CREDIT_CARD);
+            ->willReturn(ComputopConfig::PAYMENT_METHOD_CREDIT_CARD);
 
         $stub->method($this->getApiAdapterFunctionName())
             ->willReturn($this->getApiAdapter());

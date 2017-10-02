@@ -148,7 +148,7 @@
     <transfer name="ComputopCreditCardOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="userData" type="string" />
-        <property name="pCNr" type="string" />
+        <property name="pcnr" type="string" />
         <property name="cCExpiry" type="string" />
         <property name="cCBrand" type="string" />
         <property name="maskedPan" type="string" />

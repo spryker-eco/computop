@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Service\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
 
@@ -40,7 +40,7 @@ class ComputopConverterTest extends AbstractComputopTest
     public function testExtractIsSuccessHeader()
     {
         $converter = $this->helper->createConverter();
-        $decryptedArray = $this->getDecryptedArray(ComputopConstants::SUCCESS_STATUS);
+        $decryptedArray = $this->getDecryptedArray(ComputopConfig::SUCCESS_STATUS);
 
         /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
         $header = $converter->extractHeader($decryptedArray, self::METHOD);
@@ -52,7 +52,7 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertSame(ComputopFieldNameConstants::MID, $header->getMId());
         $this->assertSame(ComputopFieldNameConstants::TRANS_ID, $header->getTransId());
         $this->assertSame(ComputopFieldNameConstants::PAY_ID, $header->getPayId());
-        $this->assertSame(ComputopConstants::SUCCESS_STATUS, $header->getStatus());
+        $this->assertSame(ComputopConfig::SUCCESS_STATUS, $header->getStatus());
         $this->assertSame(ComputopFieldNameConstants::CODE, $header->getCode());
         $this->assertSame(ComputopFieldNameConstants::XID, $header->getXId());
     }

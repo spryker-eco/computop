@@ -8,7 +8,7 @@
 namespace SprykerEco\Yves\Computop\Handler;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException;
 
 class ComputopPaymentHandler
@@ -18,7 +18,7 @@ class ComputopPaymentHandler
      * @var array
      */
     protected static $paymentMethods = [
-        ComputopConstants::PAYMENT_METHOD_SOFORT => ComputopConstants::PAYMENT_METHOD_SOFORT,
+        ComputopConfig::PAYMENT_METHOD_SOFORT => ComputopConfig::PAYMENT_METHOD_SOFORT,
     ];
 
     /**
@@ -46,7 +46,7 @@ class ComputopPaymentHandler
     {
         $quoteTransfer
             ->getPayment()
-            ->setPaymentProvider(ComputopConstants::PROVIDER_NAME)
+            ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
             ->setPaymentMethod(self::$paymentMethods[$paymentSelection])
             ->setPaymentSelection(self::$paymentMethods[$paymentSelection]);
     }
