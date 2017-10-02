@@ -10,14 +10,8 @@ namespace SprykerEco\Yves\Computop\Mapper\Order;
 use Silex\Application;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
-use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractMapper implements MapperInterface
 {
@@ -25,23 +19,11 @@ abstract class AbstractMapper implements MapperInterface
     const TRANS_ID_SEPARATOR = '-';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
-     *
-     * @return array
-     */
-    abstract protected function getDataSubArray(TransferInterface $cardPaymentTransfer);
-
-    /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer|\Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
     abstract protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer);
-
-    /**
-     * @return string
-     */
-    abstract protected function getActionUrl();
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
@@ -61,43 +43,6 @@ abstract class AbstractMapper implements MapperInterface
     {
         $this->computopService = $computopService;
         $this->application = $application;
-    }
-
-    /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
-    {
-        $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
-
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
-        $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
-        $computopPaymentTransfer->setClientIp($this->getClientIp());
-        $computopPaymentTransfer->setUrlFailure(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
-        );
-        $computopPaymentTransfer->setMac(
-            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
-        );
-
-        $decryptedValues = $this->computopService->getEncryptedArray(
-            $this->getDataSubArray($computopPaymentTransfer),
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
-        );
-
-        $length = $decryptedValues[ComputopFieldNameConstants::LENGTH];
-        $data = $decryptedValues[ComputopFieldNameConstants::DATA];
-
-        $computopPaymentTransfer->setData($data);
-        $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
-
-        return $computopPaymentTransfer;
     }
 
     /**
@@ -132,22 +77,6 @@ abstract class AbstractMapper implements MapperInterface
     protected function getClientIp()
     {
         return $this->application['request']->getClientIp();
-    }
-
-    /**
-     * @param string $merchantId
-     * @param string $data
-     * @param int $length
-     *
-     * @return string
-     */
-    protected function getUrlToComputop($merchantId, $data, $length)
-    {
-        return $this->getActionUrl() . '?' . http_build_query([
-                ComputopFieldNameConstants::MERCHANT_ID => $merchantId,
-                ComputopFieldNameConstants::DATA => $data,
-                ComputopFieldNameConstants::LENGTH => $length,
-            ]);
     }
 
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class CreditCardMapper implements MapperInterface
 {

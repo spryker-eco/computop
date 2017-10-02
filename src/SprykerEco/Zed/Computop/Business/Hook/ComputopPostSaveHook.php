@@ -10,6 +10,8 @@ namespace SprykerEco\Zed\Computop\Business\Hook;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException;
+use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ComputopPostSaveHook
@@ -21,11 +23,26 @@ class ComputopPostSaveHook
     protected $config;
 
     /**
+     * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface[]
+     */
+    protected $methodMappers = [];
+
+    /**
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
     public function __construct(ComputopConfig $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface $paymentMethod
+     *
+     * @return void
+     */
+    public function registerMapper(AbstractMapperInterface $paymentMethod)
+    {
+        $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
 
     /**
@@ -47,11 +64,41 @@ class ComputopPostSaveHook
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
-     * @throws \SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException
-     *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     public function setRedirect(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    {
+        $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
+
+        $checkoutResponseTransfer
+            ->setIsExternalRedirect(true)
+            ->setRedirectUrl($computopPaymentTransfer->getUrl());
+    }
+
+    /**
+     * @param string $methodName
+     *
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
+     */
+    protected function getMethodMapper($methodName)
+    {
+        if (isset($this->methodMappers[$methodName]) === false) {
+            throw new ComputopMethodMapperException('The method mapper is not registered.');
+        }
+
+        return $this->methodMappers[$methodName];
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @throws \SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
@@ -62,11 +109,11 @@ class ComputopPostSaveHook
         if (!method_exists($paymentTransfer, $method) || ($quoteTransfer->getPayment()->$method() === null)) {
             throw new PaymentMethodNotFoundException(sprintf('Selected payment method "%s" not found in PaymentTransfer', $paymentMethod));
         }
-        $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
 
-        $checkoutResponseTransfer
-            ->setIsExternalRedirect(true)
-            ->setRedirectUrl($computopPaymentTransfer->getUrl());
+        $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
+        $computopPaymentTransfer = $this->getMethodMapper($paymentSelection)->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+
+        return $computopPaymentTransfer;
     }
 
 }

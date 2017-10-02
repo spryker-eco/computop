@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Handler;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException;
 
@@ -94,7 +95,7 @@ class ComputopPaymentHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function setComputopPaymentToQuote($quoteTransfer, $paymentSelection, $computopPaymentTransfer)
+    protected function setComputopPaymentToQuote(QuoteTransfer $quoteTransfer, $paymentSelection, AbstractTransfer $computopPaymentTransfer)
     {
         $paymentMethod = ucfirst($paymentSelection);
         $method = 'set' . $paymentMethod;

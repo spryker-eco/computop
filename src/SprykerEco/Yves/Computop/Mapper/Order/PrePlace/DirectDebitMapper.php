@@ -5,9 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Order;
+namespace SprykerEco\Yves\Computop\Mapper\Order\PrePlace;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use DateTime;
+use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -15,22 +16,24 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class CreditCardMapper extends AbstractMapper
+class DirectDebitMapper extends AbstractPrePlaceMapper
 {
+
+    const DATE_FORMAT = 'd.m.Y';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
      */
     protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
     {
-        $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
+        $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
+        $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS_PATH_NAME))
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::DIRECT_DEBIT_SUCCESS_PATH_NAME))
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
@@ -46,7 +49,7 @@ class CreditCardMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopFieldNameConstants::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopFieldNameConstants::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopFieldNameConstants::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -55,9 +58,10 @@ class CreditCardMapper extends AbstractMapper
         $dataSubArray[ComputopFieldNameConstants::CAPTURE] = $cardPaymentTransfer->getCapture();
         $dataSubArray[ComputopFieldNameConstants::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopFieldNameConstants::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConfig::ETI_ID;
+        $dataSubArray[ComputopFieldNameConstants::MANDATE_ID] = $cardPaymentTransfer->getMandateId();
+        $dataSubArray[ComputopFieldNameConstants::DATE_OF_SIGNATURE_ID] = $this->getDateOfSignature();
 
         return $dataSubArray;
     }
@@ -65,9 +69,19 @@ class CreditCardMapper extends AbstractMapper
     /**
      * @return string
      */
+    protected function getDateOfSignature()
+    {
+        $now = new DateTime();
+
+        return $now->format(self::DATE_FORMAT);
+    }
+
+    /**
+     * @return string
+     */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION);
+        return Config::get(ComputopConstants::COMPUTOP_DIRECT_DEBIT_ORDER_ACTION);
     }
 
 }

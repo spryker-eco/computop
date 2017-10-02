@@ -25,10 +25,10 @@ use SprykerEco\Yves\Computop\Handler\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopSofortPaymentHandler;
-use SprykerEco\Yves\Computop\Mapper\Order\CreditCardMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\DirectDebitMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PayPalMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\SofortMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\SofortMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\CreditCardMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\DirectDebitMapper;
+use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\PayPalMapper;
 
 class ComputopFactory extends AbstractFactory
 {

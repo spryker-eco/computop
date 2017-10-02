@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\SofortMapper;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
@@ -311,7 +312,18 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createPostSaveHook()
     {
-        return new ComputopPostSaveHook($this->getConfig());
+        $postSaveHook = new ComputopPostSaveHook($this->getConfig());
+        $postSaveHook->registerMapper($this->createPostSaveSofortMapper());
+
+        return $postSaveHook;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
+     */
+    protected function createPostSaveSofortMapper()
+    {
+        return new SofortMapper($this->getConfig(), $this->getComputopService());
     }
 
     /**
