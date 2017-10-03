@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
@@ -56,7 +55,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      */
     protected function getAmount(OrderTransfer $orderTransfer)
     {
-        if ($this->getConfig()->isRefundShipmentPriceEnabled() && $this->isFirstRefund($this->getOrderEntity())) {
+        if ($this->getConfig()->isRefundShipmentPriceEnabled() && $this->isShipmentRefundNeeded($this->getOrderEntity())) {
             return $orderTransfer->getTotals()->getRefundTotal();
         }
 
@@ -64,13 +63,19 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     }
 
     /**
+     * Check is last refund
+     *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      *
      * @return bool
      */
-    protected function isFirstRefund(SpySalesOrder $orderEntity)
+    protected function isShipmentRefundNeeded(SpySalesOrder $orderEntity)
     {
-        return count($this->getRefundedItems($orderEntity)) === 0;
+        $itemsBeforeRefundState = count($this->getItemsBeforeRefundState($orderEntity));
+
+        $itemsToRefundCount = count($orderEntity->getItems());
+
+        return ($itemsBeforeRefundState - $itemsToRefundCount) === 0;
     }
 
     /**
@@ -78,14 +83,17 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
      *
      * @return array
      */
-    protected function getRefundedItems(SpySalesOrder $orderEntity)
+    protected function getItemsBeforeRefundState(SpySalesOrder $orderEntity)
     {
         return SpySalesOrderItemQuery::create()
             ->filterByFkSalesOrder($orderEntity->getIdSalesOrder())
             ->useStateQuery()
-            ->filterByName(
-                $this->getConfig()->getOmsStatusRefunded(),
-                Criteria::EQUAL
+            ->filterByName_In(
+                [
+                    $this->getConfig()->getOmsStatusNew(),
+                    $this->getConfig()->getOmsStatusAuthorized(),
+                    $this->getConfig()->getOmsStatusCaptured(),
+                ]
             )
             ->endUse()
             ->find();

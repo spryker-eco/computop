@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
@@ -70,7 +69,10 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
      */
     protected function isFirstCapture(SpySalesOrder $orderEntity)
     {
-        return count($this->getCapturedItems($orderEntity)) === 0;
+        $itemsBeforeCaptureStateCount = count($this->getItemsBeforeCaptureState($orderEntity));
+        $allItemsCount = count($this->getAllItems($orderEntity));
+
+        return $itemsBeforeCaptureStateCount === $allItemsCount;
     }
 
     /**
@@ -78,15 +80,33 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
      *
      * @return array
      */
-    protected function getCapturedItems(SpySalesOrder $orderEntity)
+    protected function getItemsBeforeCaptureState(SpySalesOrder $orderEntity)
     {
         return SpySalesOrderItemQuery::create()
             ->filterByFkSalesOrder($orderEntity->getIdSalesOrder())
             ->useStateQuery()
-            ->filterByName(
-                $this->getConfig()->getOmsStatusCaptured(),
-                Criteria::EQUAL
+            ->filterByName_In(
+                [
+                    $this->getConfig()->getOmsStatusNew(),
+                    $this->getConfig()->getOmsStatusAuthorized(),
+                    $this->getConfig()->getOmsStatusAuthorizationFailed(),
+                    $this->getConfig()->getOmsStatusCancelled(),
+                ]
             )
+            ->endUse()
+            ->find();
+    }
+
+    /**
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
+     *
+     * @return array
+     */
+    protected function getAllItems(SpySalesOrder $orderEntity)
+    {
+        return SpySalesOrderItemQuery::create()
+            ->filterByFkSalesOrder($orderEntity->getIdSalesOrder())
+            ->useStateQuery()
             ->endUse()
             ->find();
     }
