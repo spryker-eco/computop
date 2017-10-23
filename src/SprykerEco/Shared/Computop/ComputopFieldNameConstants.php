@@ -93,5 +93,8 @@ interface ComputopFieldNameConstants
     const ACCOUNT_OWNER = 'AccOwner';
     const ACCOUNT_BANK = 'AccBank';
     const MDT_SEQ_TYPE = 'mdtseqtype';
+    const SHOP_API_KEY = 'shopApiKey';
+    const SHIPPING_AMOUNT = 'shAmount';
+    const SHOPPING_BASKET_AMOUNT = 'ShoppingBasketAmount';
 
 }

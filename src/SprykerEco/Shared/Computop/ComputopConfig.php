@@ -17,6 +17,7 @@ class ComputopConfig extends AbstractBundleConfig
     const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
     const PAYMENT_METHOD_DIRECT_DEBIT = 'ComputopDirectDebit';
     const PAYMENT_METHOD_SOFORT = 'ComputopSofort';
+    const PAYMENT_METHOD_PAYDIREKT = 'ComputopPaydirekt';
 
     //Computop provider constants
     const CAPTURE_MANUAL_TYPE = 'MANUAL';
