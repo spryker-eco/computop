@@ -13,14 +13,13 @@ use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
-use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
+use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
  */
 class CallbackController extends AbstractController
 {
-
     /**
      * @var \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
@@ -94,6 +93,18 @@ class CallbackController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successPaydirektAction()
+    {
+        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+            $this->getFactory()->createOrderPaydirektConverter()
+        );
+
+        return $this->successAction($this->getFactory()->createPaydirektPaymentHandler());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function successSofortAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
@@ -130,7 +141,7 @@ class CallbackController extends AbstractController
     }
 
     /**
-     * @param \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface $handler
+     * @param \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface $handler
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -176,5 +187,4 @@ class CallbackController extends AbstractController
 
         return $orderResponseTransfer;
     }
-
 }
