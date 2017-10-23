@@ -132,6 +132,36 @@
         <property name="sofortOrderResponse" type="ComputopSofortOrderResponse"/>
     </transfer>
 
+    <transfer name="ComputopPaydirektPayment">
+        <property name="payId" type="string" />
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="orderDesc" type="string" />
+        <property name="mac" type="string" />
+        <property name="userData" type="string" />
+        <property name="urlSuccess" type="string" />
+        <property name="urlFailure" type="string" />
+        <property name="urlNotify" type="string" />
+        <property name="response" type="string" />
+        <property name="reqId" type="string" />
+        <property name="capture" type="string" />
+        <property name="shopApiKey" type="string" />
+        <property name="shippingAmount" type="string" />
+        <property name="shoppingBasketAmount" type="string" />
+        <property name="articleList" type="string" />
+        <property name="email" type="string" />
+        <property name="minAge" type="string" />
+        <property name="shoppingBasketCategory" type="string" />
+        <property name="note" type="string" />
+        <property name="clientIp" type="string" />
+        <property name="data" type="string" />
+        <property name="len" type="int" />
+        <property name="url" type="string" />
+        <property name="paydirektOrderResponse" type="ComputopPaydirektOrderResponse"/>
+    </transfer>
+
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
         <property name="code" type="string" />
@@ -231,6 +261,16 @@
         <property name="age" type="string" />
     </transfer>
 
+    <transfer name="ComputopPaydirektOrderResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="userData" type="string" />
+        <property name="tId" type="string" />
+        <property name="reference" type="string" />
+        <property name="transactionId" type="string" />
+        <property name="shoppingBasketCategory" type="string" />
+    </transfer>
+
     <transfer name="ComputopAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
@@ -281,6 +321,7 @@
         <property name="computopPayPal" type="ComputopPayPalPayment" />
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
         <property name="computopSofort" type="ComputopSofortPayment" />
+        <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
     </transfer>
 
     <transfer name="Order">
@@ -288,6 +329,7 @@
         <property name="computopPayPal" type="ComputopPayPalPayment" />
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
         <property name="computopSofort" type="ComputopSofortPayment" />
+        <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
     </transfer>
 
 </transfers>
