@@ -5,15 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Handler;
+namespace SprykerEco\Yves\Computop\Handler\PrePlace;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 
-class ComputopDirectDebitPaymentHandler implements ComputopPaymentHandlerInterface
+class ComputopPayPalPaymentHandler implements ComputopPaymentHandlerInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
@@ -23,7 +22,7 @@ class ComputopDirectDebitPaymentHandler implements ComputopPaymentHandlerInterfa
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() !== null) {
-            $quoteTransfer->getPayment()->getComputopDirectDebit()->setDirectDebitOrderResponse(
+            $quoteTransfer->getPayment()->getComputopPayPal()->setPayPalOrderResponse(
                 $responseTransfer
             );
 
@@ -42,11 +41,10 @@ class ComputopDirectDebitPaymentHandler implements ComputopPaymentHandlerInterfa
     {
         $quoteTransfer
             ->getPayment()
-            ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
-            ->setPaymentMethod(ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT)
-            ->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT);
+            ->setPaymentProvider(ComputopSharedConfig::PROVIDER_NAME)
+            ->setPaymentMethod(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL)
+            ->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL);
 
         return $quoteTransfer;
     }
-
 }

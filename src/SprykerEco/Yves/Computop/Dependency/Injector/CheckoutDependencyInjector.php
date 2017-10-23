@@ -16,12 +16,12 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\ComputopPaymentHandlerPlugin;
 use SprykerEco\Yves\Computop\Plugin\CreditCardSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\DirectDebitSubFormPlugin;
+use SprykerEco\Yves\Computop\Plugin\PaydirektSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\PayPalSubFormPlugin;
 use SprykerEco\Yves\Computop\Plugin\SofortSubFormPlugin;
 
 class CheckoutDependencyInjector implements DependencyInjectorInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\ContainerInterface|\Spryker\Yves\Kernel\Container $container
      *
@@ -47,6 +47,7 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
             $paymentSubForms->add(new PayPalSubFormPlugin());
             $paymentSubForms->add(new DirectDebitSubFormPlugin());
             $paymentSubForms->add(new SofortSubFormPlugin());
+            $paymentSubForms->add(new PaydirektSubFormPlugin());
 
             return $paymentSubForms;
         });
@@ -70,5 +71,4 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
 
         return $container;
     }
-
 }

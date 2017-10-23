@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Handler;
+namespace SprykerEco\Yves\Computop\Handler\PrePlace;
 
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -14,7 +14,6 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class ComputopSofortPaymentHandler implements ComputopPaymentHandlerInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
@@ -39,5 +38,4 @@ class ComputopSofortPaymentHandler implements ComputopPaymentHandlerInterface
 
         return $quoteTransfer;
     }
-
 }
