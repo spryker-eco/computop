@@ -11,7 +11,5 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\CaptureMapperTrait;
 
 class CaptureCreditCardMapper extends AbstractCreditCardMapper
 {
-
     use CaptureMapperTrait;
-
 }

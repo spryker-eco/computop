@@ -11,7 +11,6 @@ use Spryker\Shared\Kernel\AbstractBundleConfig;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-
     const PROVIDER_NAME = 'Computop';
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
     const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
@@ -24,5 +23,4 @@ class ComputopConfig extends AbstractBundleConfig
     const SUCCESS_STATUS = 'OK';
 
     const ORDER_METHOD = 'ORDER';
-
 }

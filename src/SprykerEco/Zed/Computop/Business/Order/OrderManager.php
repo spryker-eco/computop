@@ -23,7 +23,6 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 
 class OrderManager implements OrderManagerInterface
 {
-
     use DatabaseTransactionHandlerTrait;
 
     /**
@@ -183,5 +182,4 @@ class OrderManager implements OrderManagerInterface
             $paymentOrderItemEntity->save();
         }
     }
-
 }

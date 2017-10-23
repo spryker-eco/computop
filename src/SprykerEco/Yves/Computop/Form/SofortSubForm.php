@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SofortSubForm extends AbstractSubForm
 {
-
     const PAYMENT_METHOD = 'sofort';
 
     /**
@@ -68,5 +67,4 @@ class SofortSubForm extends AbstractSubForm
             'data_class' => ComputopSofortPaymentTransfer::class,
         ])->setRequired(self::OPTIONS_FIELD_NAME);
     }
-
 }

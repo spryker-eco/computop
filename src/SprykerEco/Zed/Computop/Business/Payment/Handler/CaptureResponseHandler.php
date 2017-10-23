@@ -13,7 +13,6 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class CaptureResponseHandler extends AbstractResponseHandler
 {
-
     use DatabaseTransactionHandlerTrait;
 
     const METHOD = 'CAPTURE';
@@ -72,5 +71,4 @@ class CaptureResponseHandler extends AbstractResponseHandler
         $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
         $paymentEntityDetails->save();
     }
-
 }

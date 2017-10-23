@@ -13,7 +13,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
@@ -49,5 +48,4 @@ abstract class AbstractMapper implements AbstractMapperInterface
                 ComputopFieldNameConstants::LENGTH => $length,
             ]);
     }
-
 }

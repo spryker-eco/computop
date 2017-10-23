@@ -22,7 +22,6 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 abstract class AbstractPaymentTest extends AbstractSetUpTest
 {
-
     /**
      * @return string
      */
@@ -139,5 +138,4 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         return $stream;
     }
-
 }

@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class InquireConverter extends AbstractConverter implements ConverterInterface
 {
-
     const EMPTY_AMOUNT = '0';
 
     /**
@@ -74,5 +73,4 @@ class InquireConverter extends AbstractConverter implements ConverterInterface
             $responseTransfer->getAmountCap() !== self::EMPTY_AMOUNT &&
             $responseTransfer->getAmountCred() !== self::EMPTY_AMOUNT;
     }
-
 }

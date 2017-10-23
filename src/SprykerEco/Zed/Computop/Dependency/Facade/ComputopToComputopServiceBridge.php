@@ -11,7 +11,6 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterface
 {
-
     /**
      * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
@@ -95,5 +94,4 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
     {
         return $this->computopService->getEncryptedArray($dataSubArray, $password);
     }
-
 }

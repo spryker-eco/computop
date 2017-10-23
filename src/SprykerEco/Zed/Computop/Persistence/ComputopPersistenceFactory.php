@@ -17,7 +17,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class ComputopPersistenceFactory extends AbstractPersistenceFactory
 {
-
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
@@ -33,5 +32,4 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     {
         return SpyPaymentComputopOrderItemQuery::create();
     }
-
 }

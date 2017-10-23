@@ -12,7 +12,6 @@ use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestHelper;
 
 abstract class AbstractConverterTest extends Test
 {
-
     /**
      * @var \Computop\Helper\Unit\Zed\Api\Converter\ConverterTestHelper
      */
@@ -27,5 +26,4 @@ abstract class AbstractConverterTest extends Test
     {
         $this->helper = $helper;
     }
-
 }

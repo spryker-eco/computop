@@ -14,7 +14,6 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class ReverseResponseHandler extends AbstractResponseHandler
 {
-
     use DatabaseTransactionHandlerTrait;
 
     const METHOD = 'REVERSE';
@@ -64,5 +63,4 @@ class ReverseResponseHandler extends AbstractResponseHandler
             }
         }
     }
-
 }

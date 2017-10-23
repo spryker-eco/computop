@@ -19,7 +19,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractPrePlaceMapper extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -84,5 +83,4 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
                 ComputopFieldNameConstants::LENGTH => $length,
             ]);
     }
-
 }

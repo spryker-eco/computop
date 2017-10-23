@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 
 class SofortMapper implements MapperInterface
 {
-
     /**
      * @return string
      */
@@ -50,5 +49,4 @@ class SofortMapper implements MapperInterface
     {
         return [];
     }
-
 }

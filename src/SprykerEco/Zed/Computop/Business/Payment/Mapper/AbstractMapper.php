@@ -17,7 +17,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
@@ -132,5 +131,4 @@ abstract class AbstractMapper implements AbstractMapperInterface
 
         return $computopPaymentTransfer;
     }
-
 }

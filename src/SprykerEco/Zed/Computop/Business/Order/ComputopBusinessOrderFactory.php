@@ -19,7 +19,6 @@ use SprykerEco\Zed\Computop\Business\Order\Mapper\SofortMapper;
  */
 class ComputopBusinessOrderFactory extends ComputopBusinessFactory
 {
-
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
@@ -51,5 +50,4 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory
     {
         return new SofortMapper();
     }
-
 }

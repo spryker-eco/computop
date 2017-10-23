@@ -16,7 +16,6 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ComputopPostSaveHook
 {
-
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
@@ -115,5 +114,4 @@ class ComputopPostSaveHook
 
         return $computopPaymentTransfer;
     }
-
 }

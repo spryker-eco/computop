@@ -12,7 +12,6 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
@@ -49,5 +48,4 @@ interface ComputopInterface
      * @return string
      */
     public function getDescriptionValue(array $items);
-
 }

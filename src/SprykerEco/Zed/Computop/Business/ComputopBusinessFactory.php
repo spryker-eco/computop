@@ -37,7 +37,6 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
  */
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {
-
     /**
      * @var null|\SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory
      */
@@ -381,5 +380,4 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return $this->createApiFactory()->createRefundAdapter();
     }
-
 }

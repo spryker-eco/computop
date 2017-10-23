@@ -18,7 +18,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
 class CreditCardMapperTestHelper extends Test
 {
-
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
@@ -109,5 +108,4 @@ class CreditCardMapperTestHelper extends Test
 
         return $headerPayment;
     }
-
 }

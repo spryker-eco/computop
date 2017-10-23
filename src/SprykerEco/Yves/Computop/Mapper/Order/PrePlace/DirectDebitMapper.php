@@ -18,7 +18,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class DirectDebitMapper extends AbstractPrePlaceMapper
 {
-
     const DATE_FORMAT = 'd.m.Y';
 
     /**
@@ -83,5 +82,4 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
     {
         return Config::get(ComputopConstants::COMPUTOP_DIRECT_DEBIT_ORDER_ACTION);
     }
-
 }

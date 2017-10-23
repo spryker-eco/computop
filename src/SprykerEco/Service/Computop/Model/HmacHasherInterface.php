@@ -9,12 +9,10 @@ namespace SprykerEco\Service\Computop\Model;
 
 interface HmacHasherInterface
 {
-
     /**
      * @param string $value
      *
      * @return string
      */
     public function getEncryptedValue($value);
-
 }

@@ -11,7 +11,5 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\CaptureMapperTrait;
 
 class CapturePayPalMapper extends AbstractPayPalMapper
 {
-
     use CaptureMapperTrait;
-
 }

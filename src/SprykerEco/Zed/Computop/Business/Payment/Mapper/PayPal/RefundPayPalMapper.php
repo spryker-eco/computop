@@ -11,7 +11,5 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\RefundMapperTrait;
 
 class RefundPayPalMapper extends AbstractPayPalMapper
 {
-
     use RefundMapperTrait;
-
 }

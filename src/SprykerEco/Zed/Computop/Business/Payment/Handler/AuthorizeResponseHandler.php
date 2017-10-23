@@ -14,7 +14,6 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class AuthorizeResponseHandler extends AbstractResponseHandler
 {
-
     use DatabaseTransactionHandlerTrait;
 
     const METHOD = 'AUTHORIZE';
@@ -68,5 +67,4 @@ class AuthorizeResponseHandler extends AbstractResponseHandler
         $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
         $paymentEntityDetails->save();
     }
-
 }

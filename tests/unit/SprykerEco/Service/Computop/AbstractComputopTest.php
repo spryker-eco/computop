@@ -13,7 +13,6 @@ use Computop\Helper\Unit\Service\Mapper\ComputopMapperTestHelper;
 
 abstract class AbstractComputopTest extends Test
 {
-
     /**
      * @var \Computop\Helper\Unit\Service\ComputopServiceTestHelper
      */
@@ -35,5 +34,4 @@ abstract class AbstractComputopTest extends Test
         $this->helper = $helper;
         $this->mapperHelper = $mapperHelper;
     }
-
 }

@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 trait InquireMapperTrait
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
@@ -26,5 +25,4 @@ trait InquireMapperTrait
 
         return $dataSubArray;
     }
-
 }

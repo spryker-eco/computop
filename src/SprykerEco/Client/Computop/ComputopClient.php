@@ -16,7 +16,6 @@ use Spryker\Client\Kernel\AbstractClient;
  */
 class ComputopClient extends AbstractClient implements ComputopClientInterface
 {
-
     /**
      * {@inheritdoc}
      *
@@ -44,5 +43,4 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     {
          $this->getFactory()->createZedStub()->saveSofortResponse($quoteTransfer);
     }
-
 }

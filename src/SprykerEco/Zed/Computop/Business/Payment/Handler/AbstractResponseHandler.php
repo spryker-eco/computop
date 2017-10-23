@@ -14,7 +14,6 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 abstract class AbstractResponseHandler implements ResponseHandlerInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
      */
@@ -55,5 +54,4 @@ abstract class AbstractResponseHandler implements ResponseHandlerInterface
     {
         return $this->logger->log($headerTransfer, $method);
     }
-
 }

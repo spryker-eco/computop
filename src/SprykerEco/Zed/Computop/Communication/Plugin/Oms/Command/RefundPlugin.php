@@ -18,7 +18,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
  */
 class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
-
     /**
      * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
      */
@@ -106,5 +105,4 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
     {
         return $this->orderEntity;
     }
-
 }

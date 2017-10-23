@@ -20,7 +20,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\CaptureCreditCard
  */
 class CaptureCreditCardMapperTest extends AbstractCreditCardMapperTest
 {
-
     /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
      */
@@ -32,5 +31,4 @@ class CaptureCreditCardMapperTest extends AbstractCreditCardMapperTest
             $this->helper->createComputopHeaderPaymentTransfer()
         );
     }
-
 }

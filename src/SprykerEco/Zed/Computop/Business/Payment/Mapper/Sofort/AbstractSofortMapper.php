@@ -14,7 +14,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapper;
 
 abstract class AbstractSofortMapper extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -32,5 +31,4 @@ abstract class AbstractSofortMapper extends AbstractMapper
     {
         return new ComputopSofortPaymentTransfer();
     }
-
 }

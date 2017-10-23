@@ -17,7 +17,6 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ApiPaymentTestHelper extends Test
 {
-
     /**
      * @return \SprykerEco\Zed\Computop\ComputopConfig
      */
@@ -52,5 +51,4 @@ class ApiPaymentTestHelper extends Test
 
         return $headerPayment;
     }
-
 }

@@ -17,7 +17,6 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 class SofortResponseHandler
 {
-
     use DatabaseTransactionHandlerTrait;
 
     /**
@@ -137,5 +136,4 @@ class SofortResponseHandler
             []
         );
     }
-
 }

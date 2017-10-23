@@ -14,7 +14,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
  */
 class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQueryContainerInterface
 {
-
     /**
      * @api
      *
@@ -104,5 +103,4 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
             ->getFactory()
             ->createPaymentComputopOrderItemQuery();
     }
-
 }

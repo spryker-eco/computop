@@ -12,7 +12,6 @@ use Silex\Application;
 
 class ComputopControllerProvider extends AbstractYvesControllerProvider
 {
-
     const NAME = 'computop';
     const MODULE_NAME = 'Computop';
     const CALLBACK_CONTROLLER_NAME = 'Callback';
@@ -79,5 +78,4 @@ class ComputopControllerProvider extends AbstractYvesControllerProvider
             'failure'
         );
     }
-
 }

@@ -21,7 +21,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
  */
 class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
-
     /**
      *
      * {@inheritdoc}
@@ -169,5 +168,4 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
             ->endUse()
             ->find();
     }
-
 }

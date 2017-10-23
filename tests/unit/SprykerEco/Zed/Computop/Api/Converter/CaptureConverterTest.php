@@ -23,7 +23,6 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
  */
 class CaptureConverterTest extends AbstractConverterTest
 {
-
     /**
      * @return void
      */
@@ -73,5 +72,4 @@ class CaptureConverterTest extends AbstractConverterTest
 
         return $decryptedArray;
     }
-
 }

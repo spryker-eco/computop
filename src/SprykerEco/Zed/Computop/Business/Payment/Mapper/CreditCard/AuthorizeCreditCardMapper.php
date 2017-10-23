@@ -13,7 +13,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\AuthorizeMapperTrait;
 
 class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
 {
-
     use AuthorizeMapperTrait;
 
     /**
@@ -29,5 +28,4 @@ class AuthorizeCreditCardMapper extends AbstractCreditCardMapper
 
         return $computopPaymentTransfer;
     }
-
 }

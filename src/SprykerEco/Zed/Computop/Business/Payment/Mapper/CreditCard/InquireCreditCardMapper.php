@@ -11,7 +11,5 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\InquireMapperTrait;
 
 class InquireCreditCardMapper extends AbstractCreditCardMapper
 {
-
     use InquireMapperTrait;
-
 }

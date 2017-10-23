@@ -9,7 +9,6 @@ namespace SprykerEco\Shared\Computop;
 
 interface ComputopFieldNameConstants
 {
-
     const MERCHANT_ID = 'MerchantID';
     const TRANS_ID = 'TransID';
     const AMOUNT = 'Amount';
@@ -96,5 +95,4 @@ interface ComputopFieldNameConstants
     const SHOP_API_KEY = 'shopApiKey';
     const SHIPPING_AMOUNT = 'shAmount';
     const SHOPPING_BASKET_AMOUNT = 'ShoppingBasketAmount';
-
 }

@@ -11,7 +11,6 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopServiceInterface
 {
-
     /**
      * Specification:
      * - Generate description based on items and enabled test mode
@@ -139,5 +138,4 @@ interface ComputopServiceInterface
      * @return string
      */
     public function getBlowfishDecryptedValue($cipher, $length, $password);
-
 }

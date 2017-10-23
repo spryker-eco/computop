@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Persistence;
 
 interface ComputopQueryContainerInterface
 {
-
     /**
      * @api
      *
@@ -52,5 +51,4 @@ interface ComputopQueryContainerInterface
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
     public function queryPaymentItemByOrderItemId($orderItemId);
-
 }

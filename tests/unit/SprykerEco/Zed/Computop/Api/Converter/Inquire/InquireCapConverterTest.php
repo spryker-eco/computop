@@ -22,7 +22,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
  */
 class InquireCapConverterTest extends AbstractInquireConverterTest
 {
-
     /**
      * @return void
      */
@@ -51,5 +50,4 @@ class InquireCapConverterTest extends AbstractInquireConverterTest
 
         return $decryptedArray;
     }
-
 }

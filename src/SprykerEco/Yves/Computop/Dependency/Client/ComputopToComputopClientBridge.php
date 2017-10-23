@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class ComputopToComputopClientBridge implements ComputopToComputopClientInterface
 {
-
     /**
      * @var \SprykerEco\Client\Computop\ComputopClientInterface
      */
@@ -42,5 +41,4 @@ class ComputopToComputopClientBridge implements ComputopToComputopClientInterfac
     {
         return $this->computopClient->saveSofortResponse($quoteTransfer);
     }
-
 }

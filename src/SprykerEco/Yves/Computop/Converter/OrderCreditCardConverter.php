@@ -13,7 +13,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class OrderCreditCardConverter extends AbstractOrderConverter
 {
-
     /**
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -38,5 +37,4 @@ class OrderCreditCardConverter extends AbstractOrderConverter
 
         return $responseTransfer;
     }
-
 }

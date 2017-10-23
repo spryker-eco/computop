@@ -9,12 +9,10 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 interface ComputopToSalesInterface
 {
-
     /**
      * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
     public function getOrderByIdSalesOrder($idSalesOrder);
-
 }

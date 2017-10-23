@@ -23,7 +23,6 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
  */
 class AuthorizeConverterTest extends AbstractConverterTest
 {
-
     /**
      * @return void
      */
@@ -63,5 +62,4 @@ class AuthorizeConverterTest extends AbstractConverterTest
 
         return $decryptedArray;
     }
-
 }

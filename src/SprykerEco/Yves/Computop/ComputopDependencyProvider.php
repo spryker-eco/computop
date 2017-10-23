@@ -16,7 +16,6 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-
     const COMPUTOP_CLIENT = 'computop service';
     const COMPUTOP_SERVICE = 'computop client';
     const CLIENT_QUOTE = 'quote client';
@@ -49,5 +48,4 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         return $container;
     }
-
 }

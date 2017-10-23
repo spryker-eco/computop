@@ -13,7 +13,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class OrderPayPalConverter extends AbstractOrderConverter
 {
-
     /**
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -62,5 +61,4 @@ class OrderPayPalConverter extends AbstractOrderConverter
 
         return $responseTransfer;
     }
-
 }

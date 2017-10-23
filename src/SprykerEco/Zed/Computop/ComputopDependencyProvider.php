@@ -17,7 +17,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-
     const COMPUTOP_SERVICE = 'computop_service';
     const FACADE_OMS = 'oms facade';
     const FACADE_SALES = 'sales facade';
@@ -71,5 +70,4 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         return $container;
     }
-
 }

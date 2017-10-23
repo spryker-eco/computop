@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DirectDebitSubForm extends AbstractSubForm
 {
-
     const PAYMENT_METHOD = 'direct_debit';
 
     /**
@@ -68,5 +67,4 @@ class DirectDebitSubForm extends AbstractSubForm
             'data_class' => ComputopDirectDebitPaymentTransfer::class,
         ])->setRequired(self::OPTIONS_FIELD_NAME);
     }
-
 }

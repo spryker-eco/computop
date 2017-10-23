@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
-
     const FIELD_URL = 'url';
 
     /**
@@ -89,5 +88,4 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
 
         return $this;
     }
-
 }

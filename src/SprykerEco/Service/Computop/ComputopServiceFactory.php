@@ -15,7 +15,6 @@ use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
 
 class ComputopServiceFactory extends AbstractServiceFactory
 {
-
     /**
      * @return \SprykerEco\Service\Computop\Model\BlowfishHasherInterface
      */
@@ -47,5 +46,4 @@ class ComputopServiceFactory extends AbstractServiceFactory
     {
         return new HmacHasher($this->getConfig());
     }
-
 }

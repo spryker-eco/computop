@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 
 class ReverseApiAdapter extends AbstractApiAdapter
 {
-
     /**
      * @return string
      */
@@ -17,5 +16,4 @@ class ReverseApiAdapter extends AbstractApiAdapter
     {
         return $this->config->getReverseAction();
     }
-
 }

@@ -15,7 +15,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class SofortMapper extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -80,5 +79,4 @@ class SofortMapper extends AbstractMapper
     {
         return Config::get(ComputopConstants::COMPUTOP_SOFORT_ORDER_ACTION);
     }
-
 }

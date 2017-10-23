@@ -19,7 +19,6 @@ use SprykerEco\Service\Computop\Model\HmacHasher;
  */
 class ComputopHashTest extends AbstractComputopTest
 {
-
     const VALUE = 'value';
     const EXPECTED_VALUE = '18B40402BBF3FEED824E9F762B412F1108C4D678B2A067425B99963CD68B1D6A';
 
@@ -41,5 +40,4 @@ class ComputopHashTest extends AbstractComputopTest
     {
         return new HmacHasher($this->helper->createComputopConfigMock());
     }
-
 }

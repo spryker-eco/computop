@@ -22,7 +22,6 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
  */
 class ComputopMapperTestHelper extends Test
 {
-
     /**
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
@@ -56,5 +55,4 @@ class ComputopMapperTestHelper extends Test
 
         return $compuropHeaderTransfer;
     }
-
 }

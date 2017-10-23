@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 
 class DirectDebitMapper implements MapperInterface
 {
-
     /**
      * @return string
      */
@@ -54,5 +53,4 @@ class DirectDebitMapper implements MapperInterface
 
         return $result;
     }
-
 }

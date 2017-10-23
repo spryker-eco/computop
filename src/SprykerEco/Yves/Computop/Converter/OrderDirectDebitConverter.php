@@ -13,7 +13,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class OrderDirectDebitConverter extends AbstractOrderConverter
 {
-
     /**
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -37,5 +36,4 @@ class OrderDirectDebitConverter extends AbstractOrderConverter
 
         return $responseTransfer;
     }
-
 }

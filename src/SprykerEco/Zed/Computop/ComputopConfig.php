@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-
     const OMS_STATUS_NEW = 'new';
     const OMS_STATUS_AUTHORIZED = 'authorized';
     const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
@@ -212,5 +211,4 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return self::COMPUTOP_OMS_EVENT_CAPTURE;
     }
-
 }

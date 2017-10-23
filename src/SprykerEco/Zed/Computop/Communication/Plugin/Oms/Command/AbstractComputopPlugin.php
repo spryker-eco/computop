@@ -19,7 +19,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 abstract class AbstractComputopPlugin extends AbstractPlugin
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      * @param array $salesOrderItems
@@ -79,5 +78,4 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
     {
         return $orderTransfer->getTotals()->getGrandTotal();
     }
-
 }

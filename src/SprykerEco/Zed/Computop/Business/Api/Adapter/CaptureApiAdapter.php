@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Api\Adapter;
 
 class CaptureApiAdapter extends AbstractApiAdapter
 {
-
     /**
      * @return string
      */
@@ -17,5 +16,4 @@ class CaptureApiAdapter extends AbstractApiAdapter
     {
         return $this->config->getCaptureAction();
     }
-
 }

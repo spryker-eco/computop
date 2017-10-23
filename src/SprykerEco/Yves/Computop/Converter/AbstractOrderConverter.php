@@ -11,7 +11,6 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterfac
 
 abstract class AbstractOrderConverter implements ConverterInterface
 {
-
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
      */
@@ -24,5 +23,4 @@ abstract class AbstractOrderConverter implements ConverterInterface
     {
         $this->computopService = $computopService;
     }
-
 }

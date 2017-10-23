@@ -17,7 +17,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class CreditCardMapper extends AbstractPrePlaceMapper
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -69,5 +68,4 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     {
         return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION);
     }
-
 }

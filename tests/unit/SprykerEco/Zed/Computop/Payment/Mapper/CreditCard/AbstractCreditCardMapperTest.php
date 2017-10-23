@@ -14,7 +14,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 abstract class AbstractCreditCardMapperTest extends Test
 {
-
     /**
      * Return needed mapper
      *
@@ -50,5 +49,4 @@ abstract class AbstractCreditCardMapperTest extends Test
         $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopFieldNameConstants::DATA]);
         $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopFieldNameConstants::LENGTH]);
     }
-
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 class ComputopToSalesBridge implements ComputopToSalesInterface
 {
-
     /**
      * @var \Spryker\Zed\Sales\Business\SalesFacadeInterface
      */
@@ -36,5 +35,4 @@ class ComputopToSalesBridge implements ComputopToSalesInterface
                 $idSalesOrder
             );
     }
-
 }

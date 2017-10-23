@@ -16,7 +16,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
  */
 class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
-
     /**
      *
      * {@inheritdoc}
@@ -37,5 +36,4 @@ class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderIn
 
         return [];
     }
-
 }

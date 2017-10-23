@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopToComputopClientInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $cardPaymentTransfer
      *
@@ -26,5 +25,4 @@ interface ComputopToComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortResponse(QuoteTransfer $quoteTransfer);
-
 }

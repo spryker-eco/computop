@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 
 interface AbstractMapperInterface
 {
-
     /**
      * @return string
      */
@@ -23,5 +22,4 @@ interface AbstractMapperInterface
      * @return array
      */
     public function buildRequest(OrderTransfer $orderTransfer);
-
 }

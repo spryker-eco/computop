@@ -19,7 +19,6 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  */
 class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 {
-
     /**
      * {@inheritdoc}
      *
@@ -220,5 +219,4 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
         return $checkoutResponse;
     }
-
 }

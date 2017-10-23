@@ -12,7 +12,6 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ResponseHandlerInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -23,5 +22,4 @@ interface ResponseHandlerInterface
         TransferInterface $responseTransfer,
         OrderTransfer $orderTransfer
     );
-
 }

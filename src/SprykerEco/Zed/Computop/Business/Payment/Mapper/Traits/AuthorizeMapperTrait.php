@@ -14,7 +14,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
 
 trait AuthorizeMapperTrait
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
@@ -45,5 +44,4 @@ trait AuthorizeMapperTrait
             $orderTransfer->getItems()->getArrayCopy()
         );
     }
-
 }

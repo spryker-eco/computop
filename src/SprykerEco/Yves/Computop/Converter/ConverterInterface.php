@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 
 interface ConverterInterface
 {
-
     /**
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -19,5 +18,4 @@ interface ConverterInterface
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header);
-
 }

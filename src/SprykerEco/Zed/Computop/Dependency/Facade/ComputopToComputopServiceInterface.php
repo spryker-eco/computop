@@ -11,7 +11,6 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopToComputopServiceInterface
 {
-
     /**
      * @param array $items
      *
@@ -64,5 +63,4 @@ interface ComputopToComputopServiceInterface
      * @return array
      */
     public function getEncryptedArray(array $dataSubArray, $password);
-
 }

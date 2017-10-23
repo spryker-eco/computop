@@ -12,7 +12,6 @@ use SprykerTest\Shared\Testify\Helper\Environment;
 
 class EnvironmentModule extends Environment
 {
-
     /**
      * @inheritdoc
      *
@@ -24,5 +23,4 @@ class EnvironmentModule extends Environment
         $this->_initialize();
         parent::__construct($moduleContainer, $config);
     }
-
 }

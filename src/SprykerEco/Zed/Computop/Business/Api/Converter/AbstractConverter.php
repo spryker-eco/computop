@@ -13,7 +13,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
 
 abstract class AbstractConverter
 {
-
     /**
      * @param array $decryptedArray
      *
@@ -68,5 +67,4 @@ abstract class AbstractConverter
 
         return $decryptedArray;
     }
-
 }

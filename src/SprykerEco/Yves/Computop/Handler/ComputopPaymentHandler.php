@@ -14,7 +14,6 @@ use SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException;
 
 class ComputopPaymentHandler
 {
-
     /**
      * @var array
      */
@@ -109,5 +108,4 @@ class ComputopPaymentHandler
 
         return $quoteTransfer;
     }
-
 }

@@ -22,7 +22,6 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 class OrderPaymentTestHelper extends Test
 {
-
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
      */
@@ -107,5 +106,4 @@ class OrderPaymentTestHelper extends Test
     {
         return new ComputopConfig();
     }
-
 }

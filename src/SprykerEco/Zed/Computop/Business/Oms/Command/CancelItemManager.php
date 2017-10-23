@@ -14,7 +14,6 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 class CancelItemManager implements CancelItemManagerInterface
 {
-
     use DatabaseTransactionHandlerTrait;
 
     /**
@@ -68,5 +67,4 @@ class CancelItemManager implements CancelItemManagerInterface
         $computopOrderItem->setStatus($this->config->getOmsStatusCancelled());
         $computopOrderItem->save();
     }
-
 }

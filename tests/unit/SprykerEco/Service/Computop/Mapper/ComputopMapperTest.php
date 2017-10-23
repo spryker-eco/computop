@@ -21,7 +21,6 @@ use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
  */
 class ComputopMapperTest extends AbstractComputopTest
 {
-
     /**
      * @return void
      */
@@ -57,5 +56,4 @@ class ComputopMapperTest extends AbstractComputopTest
 
         $this->assertSame(ComputopMapperTestConstants::EXPECTED_PLAINTEXT, $plaintext);
     }
-
 }

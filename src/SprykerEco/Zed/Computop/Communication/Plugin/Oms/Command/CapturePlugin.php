@@ -18,7 +18,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
  */
 class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
-
     /**
      * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
      */
@@ -118,5 +117,4 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
     {
         return $this->orderEntity;
     }
-
 }

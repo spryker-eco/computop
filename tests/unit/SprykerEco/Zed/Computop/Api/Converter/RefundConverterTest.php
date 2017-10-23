@@ -23,7 +23,6 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
  */
 class RefundConverterTest extends AbstractConverterTest
 {
-
     /**
      * @return void
      */
@@ -73,5 +72,4 @@ class RefundConverterTest extends AbstractConverterTest
 
         return $decryptedArray;
     }
-
 }

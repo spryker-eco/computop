@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\MessageTransfer;
 
 class ComputopToMessengerBridge implements ComputopToMessengerInterface
 {
-
     /**
      * @var \Spryker\Zed\Messenger\Business\MessengerFacadeInterface
      */
@@ -44,5 +43,4 @@ class ComputopToMessengerBridge implements ComputopToMessengerInterface
     {
         $this->messengerFacade->addInfoMessage($message);
     }
-
 }

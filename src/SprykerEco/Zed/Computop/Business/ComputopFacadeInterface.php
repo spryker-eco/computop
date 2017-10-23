@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopFacadeInterface
 {
-
     /**
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
@@ -96,5 +95,4 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
-
 }

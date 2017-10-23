@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 
 class CreditCardMapper implements MapperInterface
 {
-
     /**
      * @return string
      */
@@ -54,5 +53,4 @@ class CreditCardMapper implements MapperInterface
 
         return $result;
     }
-
 }

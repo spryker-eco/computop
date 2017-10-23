@@ -9,7 +9,6 @@ namespace SprykerEco\Service\Computop\Model\Converter;
 
 interface ComputopInterface
 {
-
     /**
      * @param array $decryptedArray
      * @param string $method
@@ -52,5 +51,4 @@ interface ComputopInterface
      * @return void
      */
     public function checkMacResponse($responseMac, $neededMac, $method);
-
 }

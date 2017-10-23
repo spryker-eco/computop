@@ -18,7 +18,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPostSaveHookInterface
 {
-
     /**
      * This plugin is called after the order is placed.
      *
@@ -33,5 +32,4 @@ class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPostSave
     {
         $this->getFacade()->postSaveHook($quoteTransfer, $checkoutResponse);
     }
-
 }

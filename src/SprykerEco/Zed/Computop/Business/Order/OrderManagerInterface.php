@@ -13,7 +13,6 @@ use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
 interface OrderManagerInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface $mapper
      *
@@ -28,5 +27,4 @@ interface OrderManagerInterface
      * @return void
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
-
 }

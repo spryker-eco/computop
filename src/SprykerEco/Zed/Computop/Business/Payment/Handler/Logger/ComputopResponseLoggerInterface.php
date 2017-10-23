@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 
 interface ComputopResponseLoggerInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      * @param string $method
@@ -19,5 +18,4 @@ interface ComputopResponseLoggerInterface
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
     public function log(ComputopResponseHeaderTransfer $header, $method);
-
 }

@@ -9,8 +9,6 @@ namespace Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard;
 
 interface CreditCardMapperTestConstants
 {
-
     const DATA_VALUE = 'Data';
     const LENGTH_VALUE = 10;
-
 }

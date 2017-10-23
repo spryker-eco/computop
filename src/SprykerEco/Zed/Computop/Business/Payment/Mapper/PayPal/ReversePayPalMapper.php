@@ -11,7 +11,5 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\ReverseMapperTrait;
 
 class ReversePayPalMapper extends AbstractPayPalMapper
 {
-
     use ReverseMapperTrait;
-
 }

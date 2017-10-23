@@ -18,7 +18,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  */
 class IsCancelledPlugin extends AbstractPlugin implements ConditionInterface
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
@@ -31,5 +30,4 @@ class IsCancelledPlugin extends AbstractPlugin implements ConditionInterface
 
         return ($computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusCancelled());
     }
-
 }

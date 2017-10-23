@@ -24,7 +24,6 @@ use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
  */
 class ComputopConverterTest extends AbstractComputopTest
 {
-
     const METHOD = 'AUTHORIZE';
 
     const PAY_ID_VALUE = 'PAY_ID_VALUE';
@@ -123,5 +122,4 @@ class ComputopConverterTest extends AbstractComputopTest
 
         return $decryptedArray;
     }
-
 }

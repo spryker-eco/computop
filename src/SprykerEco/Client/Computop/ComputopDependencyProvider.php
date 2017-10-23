@@ -12,7 +12,6 @@ use Spryker\Client\Kernel\Container;
 
 class ComputopDependencyProvider extends AbstractDependencyProvider
 {
-
     const CLIENT_ZED_REQUEST = 'zed request client';
 
     /**
@@ -40,5 +39,4 @@ class ComputopDependencyProvider extends AbstractDependencyProvider
 
         return $container;
     }
-
 }

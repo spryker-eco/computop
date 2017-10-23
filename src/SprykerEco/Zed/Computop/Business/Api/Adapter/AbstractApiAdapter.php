@@ -15,7 +15,6 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 
 abstract class AbstractApiAdapter implements AdapterInterface
 {
-
     const DEFAULT_TIMEOUT = 45;
 
     /**
@@ -81,5 +80,4 @@ abstract class AbstractApiAdapter implements AdapterInterface
 
         return $response->getBody();
     }
-
 }

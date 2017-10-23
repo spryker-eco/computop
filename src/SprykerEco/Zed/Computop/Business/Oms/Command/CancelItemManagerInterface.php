@@ -9,12 +9,10 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 interface CancelItemManagerInterface
 {
-
     /**
      * @param array $orderItems
      *
      * @return array
      */
     public function changeComputopItemsStatus(array $orderItems);
-
 }

@@ -15,7 +15,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface;
 
 abstract class AbstractPaymentRequest
 {
-
     /**
      * @var \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
@@ -110,5 +109,4 @@ abstract class AbstractPaymentRequest
 
         return $this->methodMappers[$methodName];
     }
-
 }

@@ -11,7 +11,6 @@ use Spryker\Service\Kernel\AbstractBundleConfig;
 
 class HmacHasher implements HmacHasherInterface
 {
-
     const HASH_TYPE = 'sha256';
 
     /**
@@ -38,5 +37,4 @@ class HmacHasher implements HmacHasherInterface
             hash_hmac(self::HASH_TYPE, $value, $this->config->getHmacPassword())
         );
     }
-
 }

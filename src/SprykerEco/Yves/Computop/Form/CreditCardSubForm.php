@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreditCardSubForm extends AbstractSubForm
 {
-
     const PAYMENT_METHOD = 'credit_card';
 
     /**
@@ -68,5 +67,4 @@ class CreditCardSubForm extends AbstractSubForm
             'data_class' => ComputopCreditCardPaymentTransfer::class,
         ])->setRequired(self::OPTIONS_FIELD_NAME);
     }
-
 }

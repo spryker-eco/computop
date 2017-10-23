@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 
 class ComputopToCalculationBridge implements ComputopToCalculationInterface
 {
-
     /**
      * @var \Spryker\Zed\Calculation\Business\CalculationFacadeInterface
      */
@@ -34,5 +33,4 @@ class ComputopToCalculationBridge implements ComputopToCalculationInterface
     {
         return $this->calculationFacade->recalculateOrder($orderTransfer);
     }
-
 }

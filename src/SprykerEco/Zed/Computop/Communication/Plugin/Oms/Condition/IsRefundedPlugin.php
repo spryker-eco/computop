@@ -18,7 +18,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  */
 class IsRefundedPlugin extends AbstractPlugin implements ConditionInterface
 {
-
     /**
      * @api
      *
@@ -33,5 +32,4 @@ class IsRefundedPlugin extends AbstractPlugin implements ConditionInterface
 
         return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusRefunded();
     }
-
 }

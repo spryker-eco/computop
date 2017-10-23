@@ -16,7 +16,6 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
  */
 class ComputopCommunicationFactory extends AbstractCommunicationFactory
 {
-
     /**
      * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesInterface
      */
@@ -67,5 +66,4 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
             ->queryPaymentByOrderId($idSalesOrder)
             ->findOne();
     }
-
 }

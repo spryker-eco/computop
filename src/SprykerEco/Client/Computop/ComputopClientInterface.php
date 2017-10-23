@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
  */
 interface ComputopClientInterface
 {
-
     /**
      * Specification:
      * - Save response log to DB
@@ -39,5 +38,4 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortResponse(QuoteTransfer $quoteTransfer);
-
 }

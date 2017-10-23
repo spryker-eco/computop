@@ -13,7 +13,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\AuthorizeMapperTrait;
 
 class AuthorizePayPalMapper extends AbstractPayPalMapper
 {
-
     use AuthorizeMapperTrait;
 
     /**
@@ -29,5 +28,4 @@ class AuthorizePayPalMapper extends AbstractPayPalMapper
 
         return $computopPaymentTransfer;
     }
-
 }

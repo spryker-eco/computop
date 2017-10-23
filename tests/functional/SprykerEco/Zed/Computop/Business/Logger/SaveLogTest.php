@@ -24,7 +24,6 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
  */
 class SaveLogTest extends AbstractSetUpTest
 {
-
     const METHOD_VALUE = 'METHOD';
     const PAY_ID_VALUE = 'PAY_ID_VALUE';
     const X_ID_VALUE = 'X_ID_VALUE';
@@ -101,5 +100,4 @@ class SaveLogTest extends AbstractSetUpTest
 
         return $stub;
     }
-
 }

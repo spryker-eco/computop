@@ -11,12 +11,10 @@ use GuzzleHttp\Psr7\Stream;
 
 interface ConverterInterface
 {
-
     /**
      * @param \GuzzleHttp\Psr7\Stream $response
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function toTransactionResponseTransfer(Stream $response);
-
 }

@@ -14,7 +14,6 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class InquireResponseHandler extends AbstractResponseHandler
 {
-
     use DatabaseTransactionHandlerTrait;
 
     const METHOD = 'INQUIRE';
@@ -60,5 +59,4 @@ class InquireResponseHandler extends AbstractResponseHandler
         $paymentEntityDetails->setAmountCred($responseTransfer->getAmountCred());
         $paymentEntityDetails->save();
     }
-
 }

@@ -13,7 +13,6 @@ use SprykerEco\Service\Computop\Model\AbstractComputop;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {
-
     const ITEMS_SEPARATOR = '|';
     const ATTRIBUTES_SEPARATOR = '-';
 
@@ -107,5 +106,4 @@ class Computop extends AbstractComputop implements ComputopInterface
 
         return $description;
     }
-
 }

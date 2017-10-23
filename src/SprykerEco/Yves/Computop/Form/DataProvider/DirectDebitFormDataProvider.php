@@ -14,7 +14,6 @@ use SprykerEco\Yves\Computop\Mapper\Order\MapperInterface;
 
 class DirectDebitFormDataProvider extends AbstractFormDataProvider
 {
-
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
      */
@@ -79,5 +78,4 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
     {
         return $quoteTransfer->getPayment()->getComputopDirectDebit();
     }
-
 }

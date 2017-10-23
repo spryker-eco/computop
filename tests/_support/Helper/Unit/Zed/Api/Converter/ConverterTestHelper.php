@@ -17,7 +17,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
 class ConverterTestHelper extends Test
 {
-
     const AUTHORIZE_METHOD = 'AUTHORIZE';
 
     /**
@@ -107,5 +106,4 @@ class ConverterTestHelper extends Test
 
         return $header;
     }
-
 }

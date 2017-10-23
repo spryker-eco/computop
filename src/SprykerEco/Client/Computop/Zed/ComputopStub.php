@@ -13,7 +13,6 @@ use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class ComputopStub extends ZedRequestStub
 {
-
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
      *
@@ -33,5 +32,4 @@ class ComputopStub extends ZedRequestStub
     {
         $this->zedStub->call('/computop/gateway/save-sofort-response', $responseTransfer);
     }
-
 }

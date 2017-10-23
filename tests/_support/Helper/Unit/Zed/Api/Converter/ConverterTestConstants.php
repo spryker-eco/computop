@@ -9,7 +9,6 @@ namespace Computop\Helper\Unit\Zed\Api\Converter;
 
 interface ConverterTestConstants
 {
-
     const REF_NR_VALUE = 'RefNr';
     const A_ID_VALUE = 'AID';
     const TRANSACTION_ID_VALUE = 'TransactionID';
@@ -17,5 +16,4 @@ interface ConverterTestConstants
     const AMOUNT_VALUE_NOT_ZERO = '1';
     const CODE_EXT_VALUE = 'CodeExt';
     const ERROR_TEXT_VALUE = 'ErrorText';
-
 }

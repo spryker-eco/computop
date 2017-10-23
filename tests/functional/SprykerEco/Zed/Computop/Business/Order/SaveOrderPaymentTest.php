@@ -25,7 +25,6 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
  */
 class SaveOrderPaymentTest extends AbstractSetUpTest
 {
-
     /**
      * @return void
      */
@@ -80,5 +79,4 @@ class SaveOrderPaymentTest extends AbstractSetUpTest
 
         return $saveOrderTransfer;
     }
-
 }

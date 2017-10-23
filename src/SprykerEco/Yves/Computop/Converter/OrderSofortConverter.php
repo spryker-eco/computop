@@ -13,7 +13,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class OrderSofortConverter extends AbstractOrderConverter
 {
-
     /**
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -40,5 +39,4 @@ class OrderSofortConverter extends AbstractOrderConverter
 
         return $responseTransfer;
     }
-
 }

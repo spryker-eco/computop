@@ -11,7 +11,6 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface AbstractMapperInterface
 {
-
     /**
      * @return string
      */
@@ -24,5 +23,4 @@ interface AbstractMapperInterface
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
     public function updateComputopPaymentTransfer(TransferInterface $quoteTransfer, TransferInterface $computopPaymentTransfer);
-
 }

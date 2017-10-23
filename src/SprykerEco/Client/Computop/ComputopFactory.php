@@ -12,7 +12,6 @@ use SprykerEco\Client\Computop\Zed\ComputopStub;
 
 class ComputopFactory extends AbstractFactory
 {
-
     /**
      * @return \SprykerEco\Client\Computop\Zed\ComputopStub
      */
@@ -28,5 +27,4 @@ class ComputopFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_ZED_REQUEST);
     }
-
 }

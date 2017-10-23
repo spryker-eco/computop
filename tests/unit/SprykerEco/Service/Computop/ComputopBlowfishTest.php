@@ -20,7 +20,6 @@ use SprykerEco\Service\Computop\Model\BlowfishHasher;
  */
 class ComputopBlowfishTest extends AbstractComputopTest
 {
-
     const PLAINTEXT_VALUE = 'plaintext';
     const LENGTH_VALUE = 9;
     const PASSWORD_VALUE = 'password';
@@ -95,5 +94,4 @@ class ComputopBlowfishTest extends AbstractComputopTest
     {
         return new BlowfishHasher();
     }
-
 }

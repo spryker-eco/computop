@@ -11,7 +11,6 @@ use Propel\Runtime\Collection\ObjectCollection;
 
 interface ComputopToOmsInterface
 {
-
     /**
      * @param string $eventId
      * @param \Propel\Runtime\Collection\ObjectCollection $orderItems
@@ -21,5 +20,4 @@ interface ComputopToOmsInterface
      * @return array
      */
     public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []);
-
 }

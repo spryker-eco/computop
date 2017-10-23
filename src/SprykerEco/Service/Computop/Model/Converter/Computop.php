@@ -15,7 +15,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {
-
     /**
      * @param array $decryptedArray
      * @param string $method
@@ -175,5 +174,4 @@ class Computop extends AbstractComputop implements ComputopInterface
     {
         return strtolower($key);
     }
-
 }

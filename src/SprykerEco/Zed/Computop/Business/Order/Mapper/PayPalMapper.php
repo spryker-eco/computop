@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 
 class PayPalMapper implements MapperInterface
 {
-
     /**
      * @return string
      */
@@ -55,5 +54,4 @@ class PayPalMapper implements MapperInterface
         //todo: add additional data
         return $result;
     }
-
 }

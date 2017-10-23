@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\MessageTransfer;
 
 interface ComputopToMessengerInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\MessageTransfer $message
      *
@@ -25,5 +24,4 @@ interface ComputopToMessengerInterface
      * @return void
      */
     public function addInfoMessage(MessageTransfer $message);
-
 }

@@ -17,7 +17,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class PayPalMapper extends AbstractPrePlaceMapper
 {
-
     const NO_SHIPPING = 1;
 
     /**
@@ -72,5 +71,4 @@ class PayPalMapper extends AbstractPrePlaceMapper
     {
         return Config::get(ComputopConstants::COMPUTOP_PAY_PAL_ORDER_ACTION);
     }
-
 }

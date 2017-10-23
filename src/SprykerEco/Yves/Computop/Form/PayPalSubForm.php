@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayPalSubForm extends AbstractSubForm
 {
-
     const PAYMENT_METHOD = 'pay_pal';
 
     /**
@@ -68,5 +67,4 @@ class PayPalSubForm extends AbstractSubForm
             'data_class' => ComputopPayPalPaymentTransfer::class,
         ])->setRequired(self::OPTIONS_FIELD_NAME);
     }
-
 }

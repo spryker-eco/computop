@@ -12,7 +12,6 @@ use Unit\SprykerEco\Zed\Computop\Api\Converter\AbstractConverterTest;
 
 abstract class AbstractInquireConverterTest extends AbstractConverterTest
 {
-
     /**
      * @return array
      */
@@ -30,5 +29,4 @@ abstract class AbstractInquireConverterTest extends AbstractConverterTest
 
         return $converter;
     }
-
 }

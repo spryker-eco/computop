@@ -14,7 +14,6 @@ use Computop\Module\FunctionalModule;
 
 abstract class AbstractSetUpTest extends Test
 {
-
     /**
      * @var \Computop\Module\FunctionalModule
      */
@@ -43,5 +42,4 @@ abstract class AbstractSetUpTest extends Test
         $this->orderHelper = $orderHelper;
         $this->apiHelper = $apiHelper;
     }
-
 }

@@ -11,7 +11,6 @@ use Spryker\Service\Kernel\AbstractBundleConfig;
 
 abstract class AbstractComputop
 {
-
     const MAC_SEPARATOR = '*';
     const DATA_SEPARATOR = '&';
     const DATA_SUB_SEPARATOR = '=';
@@ -28,5 +27,4 @@ abstract class AbstractComputop
     {
         $this->config = $config;
     }
-
 }

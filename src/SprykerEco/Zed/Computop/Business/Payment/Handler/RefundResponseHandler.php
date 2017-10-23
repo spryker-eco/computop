@@ -13,7 +13,6 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class RefundResponseHandler extends AbstractResponseHandler
 {
-
     use DatabaseTransactionHandlerTrait;
 
     const METHOD = 'REFUND';
@@ -72,5 +71,4 @@ class RefundResponseHandler extends AbstractResponseHandler
         $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
         $paymentEntityDetails->save();
     }
-
 }

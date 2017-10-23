@@ -24,7 +24,6 @@ use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvide
 
 class FunctionalModule extends Module
 {
-
     /**
      * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
      */
@@ -183,5 +182,4 @@ class FunctionalModule extends Module
 
         return $processEntity;
     }
-
 }

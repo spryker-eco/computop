@@ -16,7 +16,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
  */
 class ComputopService extends AbstractService implements ComputopServiceInterface
 {
-
     /**
      * {@inheritdoc}
      *
@@ -203,5 +202,4 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     {
         return $this->getFactory()->createBlowfishHasher()->getBlowfishDecryptedValue($cipher, $length, $password);
     }
-
 }

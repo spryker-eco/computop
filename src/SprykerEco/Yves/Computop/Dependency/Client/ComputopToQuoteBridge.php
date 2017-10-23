@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class ComputopToQuoteBridge implements ComputopToQuoteInterface
 {
-
     /**
      * @var \Spryker\Client\Quote\QuoteClientInterface
      */
@@ -39,5 +38,4 @@ class ComputopToQuoteBridge implements ComputopToQuoteInterface
     {
         $this->quoteClient->setQuote($quoteTransfer);
     }
-
 }

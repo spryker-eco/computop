@@ -14,7 +14,6 @@ use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
 
 class ComputopServiceTestHelper extends Test
 {
-
     const PASSWORD = 'password';
 
     /**
@@ -48,5 +47,4 @@ class ComputopServiceTestHelper extends Test
     {
         return new ComputopConverter($this->createComputopConfigMock());
     }
-
 }

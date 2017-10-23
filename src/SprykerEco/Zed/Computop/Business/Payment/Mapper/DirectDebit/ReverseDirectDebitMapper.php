@@ -11,7 +11,5 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits\ReverseMapperTrait;
 
 class ReverseDirectDebitMapper extends AbstractDirectDebitMapper
 {
-
     use ReverseMapperTrait;
-
 }

@@ -16,7 +16,6 @@ use SprykerEco\Service\Computop\Exception\BlowfishException;
  */
 class BlowfishHasher implements BlowfishHasherInterface
 {
-
     /**
      * @var array
      */
@@ -48,7 +47,9 @@ class BlowfishHasher implements BlowfishHasherInterface
      */
     public function getBlowfishEncryptedValue($plaintext, $length, $password)
     {
-        if (mb_strlen($password) <= 0) $password = ' ';
+        if (mb_strlen($password) <= 0) {
+            $password = ' ';
+        }
         if (mb_strlen($plaintext) != $length) {
             throw new BlowfishException('Length mismatch. The parameter len differs from actual length.');
         }
@@ -70,7 +71,9 @@ class BlowfishHasher implements BlowfishHasherInterface
      */
     public function getBlowfishDecryptedValue($cipher, $length, $password)
     {
-        if (mb_strlen($password) <= 0) $password = ' ';
+        if (mb_strlen($password) <= 0) {
+            $password = ' ';
+        }
         # converts hex to bin
         $cipher = pack('H' . strlen($cipher), $cipher);
         if ($length > strlen($cipher)) {
@@ -87,8 +90,9 @@ class BlowfishHasher implements BlowfishHasherInterface
      */
     protected function expand($text)
     {
-        while (strlen($text) % 8 != 0)
+        while (strlen($text) % 8 != 0) {
             $text .= chr(0);
+        }
         return $text;
     }
 
@@ -99,9 +103,12 @@ class BlowfishHasher implements BlowfishHasherInterface
      */
     protected function bfSetKey($key)
     {
-        if (strlen($key) <= 0) $key = ' ';
-        while (strlen($key) < 72)
+        if (strlen($key) <= 0) {
+            $key = ' ';
+        }
+        while (strlen($key) < 72) {
             $key .= $key;
+        }
         $key = mb_substr($key, 0, 72);
         $this->pModifiedKeys = $this->pKeys;
         $this->sModifiedKeys = $this->sKeys;
@@ -109,12 +116,13 @@ class BlowfishHasher implements BlowfishHasherInterface
         $lBlock = 0;
         $rBlock = 0;
 
-        for ($iteration = 0; $iteration < 18; $iteration++)
+        for ($iteration = 0; $iteration < 18; $iteration++) {
             $this->pModifiedKeys[$iteration] ^= $this->asc2int(substr(
                 $key,
                 $iteration * 4,
                 4
             ));
+        }
         for ($iteration = 0; $iteration < 18; $iteration += 2) {
             list($lBlock, $rBlock) = $this->bfEncrypt($lBlock, $rBlock);
             $this->pModifiedKeys[$iteration] = $lBlock;
@@ -261,5 +269,4 @@ class BlowfishHasher implements BlowfishHasherInterface
         $rBlock ^= $this->pModifiedKeys[0];
         return [$rBlock, $lBlock];
     }
-
 }

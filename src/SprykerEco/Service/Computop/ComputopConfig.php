@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-
     /**
      * Test mode enabled
      * It changes description for API calls
@@ -44,5 +43,4 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return self::COMPUTOP_TEST_MODE_ENABLED;
     }
-
 }

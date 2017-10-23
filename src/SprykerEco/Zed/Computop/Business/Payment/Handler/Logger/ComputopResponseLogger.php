@@ -12,7 +12,6 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 
 class ComputopResponseLogger implements ComputopResponseLoggerInterface
 {
-
     /**
      * {@inheritdoc}
      *
@@ -30,5 +29,4 @@ class ComputopResponseLogger implements ComputopResponseLoggerInterface
 
         return $logEntity;
     }
-
 }

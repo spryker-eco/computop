@@ -13,7 +13,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class SofortMapper extends AbstractPostPlaceMapper
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -33,5 +32,4 @@ class SofortMapper extends AbstractPostPlaceMapper
 
         return $computopPaymentTransfer;
     }
-
 }

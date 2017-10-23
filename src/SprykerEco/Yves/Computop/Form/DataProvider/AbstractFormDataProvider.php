@@ -12,7 +12,6 @@ use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 
 abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -33,5 +32,4 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
 
         return $this->getComputopPayment($quoteTransfer)->getAmount() === $quoteTransfer->getTotals()->getGrandTotal();
     }
-
 }

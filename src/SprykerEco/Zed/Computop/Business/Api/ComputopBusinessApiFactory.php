@@ -25,7 +25,6 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
  */
 class ComputopBusinessApiFactory extends ComputopBusinessFactory
 {
-
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
@@ -105,5 +104,4 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory
     {
         return new RefundConverter($this->getComputopService(), $this->getConfig());
     }
-
 }

@@ -11,7 +11,6 @@ use Propel\Runtime\Collection\ObjectCollection;
 
 class ComputopToOmsBridge implements ComputopToOmsInterface
 {
-
     /**
      * @var \Spryker\Zed\Oms\Business\OmsFacadeInterface
      */
@@ -37,5 +36,4 @@ class ComputopToOmsBridge implements ComputopToOmsInterface
     {
         return $this->omsFacade->triggerEvent($eventId, $orderItems, $logContext, $data);
     }
-
 }

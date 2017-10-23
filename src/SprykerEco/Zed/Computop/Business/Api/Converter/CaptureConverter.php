@@ -12,7 +12,6 @@ use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
 
 class CaptureConverter extends AbstractConverter implements ConverterInterface
 {
-
     /**
      * @param array $decryptedArray
      *
@@ -35,5 +34,4 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
 
         return $computopResponseTransfer;
     }
-
 }

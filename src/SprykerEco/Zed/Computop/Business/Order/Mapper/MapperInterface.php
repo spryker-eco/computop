@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PaymentTransfer;
 
 interface MapperInterface
 {
-
     /**
      * @return string
      */
@@ -37,5 +36,4 @@ interface MapperInterface
      * @return array
      */
     public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer);
-
 }

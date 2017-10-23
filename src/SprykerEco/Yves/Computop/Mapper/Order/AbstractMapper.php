@@ -15,7 +15,6 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterfac
 
 abstract class AbstractMapper implements MapperInterface
 {
-
     const TRANS_ID_SEPARATOR = '-';
 
     /**
@@ -78,5 +77,4 @@ abstract class AbstractMapper implements MapperInterface
     {
         return $this->application['request']->getClientIp();
     }
-
 }

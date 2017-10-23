@@ -31,7 +31,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Sofort\RefundSofortMapper;
  */
 class ComputopBusinessMapperFactory extends ComputopBusinessFactory
 {
-
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
@@ -181,5 +180,4 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory
     {
         return new RefundSofortMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
-
 }
