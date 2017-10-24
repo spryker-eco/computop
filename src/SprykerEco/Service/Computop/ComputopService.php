@@ -144,7 +144,7 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     public function getEncryptedArray(array $dataSubArray, $password)
     {
         $plaintext = $this->getFactory()->createComputopMapper()->getDataPlaintext($dataSubArray);
-        $length = strlen($plaintext);
+        $length = mb_strlen($plaintext);
 
         $encryptedArray[ComputopFieldNameConstants::DATA] = $this->getBlowfishEncryptedValue(
             $plaintext,
