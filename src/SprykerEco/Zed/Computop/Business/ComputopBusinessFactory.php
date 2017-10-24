@@ -53,7 +53,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected $orderFactory = null;
 
     /**
-     * @return \Spryker\Zed\Kernel\Business\BusinessFactoryInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactoryInterface
      */
     public function createMapperFactory()
     {
@@ -65,7 +65,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Spryker\Zed\Kernel\Business\BusinessFactoryInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactoryInterface
      */
     public function createApiFactory()
     {
@@ -77,7 +77,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Spryker\Zed\Kernel\Business\BusinessFactoryInterface
+     * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactoryInterface
      */
     public function createOrderFactory()
     {
@@ -140,6 +140,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquireCreditCardMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePayPalMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquireDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePaydirektMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -161,6 +162,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $paymentRequest->registerMapper($this->createMapperFactory()->createReverseCreditCardMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createReversePayPalMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createReverseDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePaydirektMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -182,6 +184,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureCreditCardMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePayPalMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureDirectDebitMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePaydirektMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }
@@ -204,6 +207,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPayPalMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundDirectDebitMapper($computopHeaderPayment));
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundSofortMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper($computopHeaderPayment));
 
         return $paymentRequest;
     }

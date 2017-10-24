@@ -18,6 +18,10 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\CaptureDirectDeb
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\InquireDirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\RefundDirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\DirectDebit\ReverseDirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\Paydirekt\CapturePaydirektMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\Paydirekt\InquirePaydirektMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\Paydirekt\RefundPaydirektMapper;
+use SprykerEco\Zed\Computop\Business\Payment\Mapper\Paydirekt\ReversePaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\AuthorizePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\CapturePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Payment\Mapper\PayPal\InquirePayPalMapper;
@@ -29,7 +33,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\Sofort\RefundSofortMapper;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
  */
-class ComputopBusinessMapperFactory extends ComputopBusinessFactory
+class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements ComputopBusinessMapperFactoryInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
@@ -179,5 +183,45 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory
     public function createRefundSofortMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         return new RefundSofortMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    public function createReversePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new ReversePaydirektMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    public function createInquirePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new InquirePaydirektMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    public function createCapturePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new CapturePaydirektMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     */
+    public function createRefundPaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    {
+        return new RefundPaydirektMapper($this->getComputopService(), $this->getConfig(), $computopHeaderPayment);
     }
 }

@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Order;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\DirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PayPalMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\SofortMapper;
 
@@ -17,7 +18,7 @@ use SprykerEco\Zed\Computop\Business\Order\Mapper\SofortMapper;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
  */
-class ComputopBusinessOrderFactory extends ComputopBusinessFactory
+class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements ComputopBusinessOrderFactoryInterface
 {
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
@@ -49,5 +50,13 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory
     public function createOrderSofortMapper()
     {
         return new SofortMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderPaydirektMapper()
+    {
+        return new PaydirektMapper();
     }
 }

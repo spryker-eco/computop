@@ -23,7 +23,7 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
  */
-class ComputopBusinessApiFactory extends ComputopBusinessFactory
+class ComputopBusinessApiFactory extends ComputopBusinessFactory implements ComputopBusinessApiFactoryInterface
 {
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
