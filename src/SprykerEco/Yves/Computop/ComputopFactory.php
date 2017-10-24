@@ -186,7 +186,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createSofortPaymentHandler()
     {
-        return new ComputopSofortPaymentHandler($this->getComputopService());
+        return new ComputopSofortPaymentHandler();
     }
 
     /**

@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Exception;
+namespace SprykerEco\Zed\Computop\Business\Exception;
 
 use Exception;
 

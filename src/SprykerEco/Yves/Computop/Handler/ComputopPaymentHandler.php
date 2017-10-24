@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Handler;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException;
+use SprykerEco\Yves\Computop\Exception\PaymentMethodNotFoundException;
 
 class ComputopPaymentHandler
 {
@@ -90,7 +90,7 @@ class ComputopPaymentHandler
      * @param string $paymentSelection
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $computopPaymentTransfer
      *
-     * @throws \SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException
+     * @throws \SprykerEco\Yves\Computop\Exception\PaymentMethodNotFoundException
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

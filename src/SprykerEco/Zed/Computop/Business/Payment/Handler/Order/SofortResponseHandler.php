@@ -64,7 +64,7 @@ class SofortResponseHandler
     ) {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopSofort()->getSofortOrderResponse();
 
-        $this->handleDatabaseTransaction(function () use ($quoteTransfer, $responseTransfer) {
+        $this->handleDatabaseTransaction(function () use ($responseTransfer) {
             $this->saveComputopOrderDetails($responseTransfer);
             $this->triggerEvent($this->getPaymentEntity($responseTransfer));
         });

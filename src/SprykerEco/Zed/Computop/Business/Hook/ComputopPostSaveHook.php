@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException;
+use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -93,7 +93,7 @@ class ComputopPostSaveHook
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @throws \SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
