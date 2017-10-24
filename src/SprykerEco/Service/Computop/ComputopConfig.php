@@ -25,7 +25,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function isMacRequired($method)
     {
-        return in_array($method, $this->get(ComputopConstants::COMPUTOP_RESPONSE_MAC_REQUIRED));
+        return in_array($method, $this->get(ComputopConstants::RESPONSE_MAC_REQUIRED));
     }
 
     /**
@@ -33,7 +33,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getHmacPassword()
     {
-        return $this->get(ComputopConstants::COMPUTOP_HMAC_PASSWORD);
+        return $this->get(ComputopConstants::HMAC_PASSWORD);
     }
 
     /**

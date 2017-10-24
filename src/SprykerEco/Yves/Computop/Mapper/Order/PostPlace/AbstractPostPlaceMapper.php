@@ -27,7 +27,7 @@ abstract class AbstractPostPlaceMapper extends AbstractMapper
     {
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
+        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::MERCHANT_ID));
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);

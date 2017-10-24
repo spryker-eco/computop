@@ -40,7 +40,7 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
     {
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::COMPUTOP_MERCHANT_ID));
+        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::MERCHANT_ID));
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
@@ -55,7 +55,7 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+            Config::get(ComputopConstants::BLOWFISH_PASSWORD)
         );
 
         $length = $decryptedValues[ComputopFieldNameConstants::LENGTH];

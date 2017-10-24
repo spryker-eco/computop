@@ -66,6 +66,6 @@ class CreditCardMapper extends AbstractPrePlaceMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_CREDIT_CARD_ORDER_ACTION);
+        return Config::get(ComputopConstants::CREDIT_CARD_ORDER_ACTION);
     }
 }

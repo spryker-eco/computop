@@ -39,7 +39,7 @@ class SofortMapper extends AbstractMapper
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD)
+            Config::get(ComputopConstants::BLOWFISH_PASSWORD)
         );
 
         $length = $decryptedValues[ComputopFieldNameConstants::LENGTH];
@@ -77,6 +77,6 @@ class SofortMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::COMPUTOP_SOFORT_ORDER_ACTION);
+        return Config::get(ComputopConstants::SOFORT_ORDER_ACTION);
     }
 }

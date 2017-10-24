@@ -64,6 +64,8 @@ interface ComputopServiceInterface
      * Specification:
      * - Gets value from response array by key (discarding formatting)
      *
+     * @api
+     *
      * @param array $responseArray
      * @param string $key
      *

@@ -39,7 +39,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getMerchantId()
     {
-        return $this->get(ComputopConstants::COMPUTOP_MERCHANT_ID);
+        return $this->get(ComputopConstants::MERCHANT_ID);
     }
 
     /**
@@ -47,7 +47,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getBlowfishPass()
     {
-        return $this->get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD);
+        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
     }
 
     /**
@@ -55,7 +55,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getAuthorizeAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_AUTHORIZE_ACTION);
+        return $this->get(ComputopConstants::AUTHORIZE_ACTION);
     }
 
     /**
@@ -63,7 +63,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getCaptureAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_CAPTURE_ACTION);
+        return $this->get(ComputopConstants::CAPTURE_ACTION);
     }
 
     /**
@@ -71,7 +71,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getRefundAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_REFUND_ACTION);
+        return $this->get(ComputopConstants::REFUND_ACTION);
     }
 
     /**
@@ -79,7 +79,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getInquireAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_INQUIRE_ACTION);
+        return $this->get(ComputopConstants::INQUIRE_ACTION);
     }
 
     /**
@@ -87,7 +87,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getReverseAction()
     {
-        return $this->get(ComputopConstants::COMPUTOP_REVERSE_ACTION);
+        return $this->get(ComputopConstants::REVERSE_ACTION);
     }
 
     /**
@@ -105,7 +105,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function isNeededRedirectAfterPlaceOrder($method)
     {
-        return in_array($method, $this->get(ComputopConstants::COMPUTOP_PAYMENT_METHODS_WITHOUT_ORDER_CALL));
+        return in_array($method, $this->get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL));
     }
 
     /**

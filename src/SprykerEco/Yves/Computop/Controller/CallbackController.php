@@ -44,7 +44,7 @@ class CallbackController extends AbstractController
         $this->decryptedArray = $this
             ->getFactory()
             ->getComputopService()
-            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::COMPUTOP_BLOWFISH_PASSWORD));
+            ->getDecryptedArray($responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
 
         $this->orderResponseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
             $this->decryptedArray,
