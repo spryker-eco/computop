@@ -84,6 +84,5 @@
             </transition>
 
         </transitions>
-
     </process>
 </statemachine>

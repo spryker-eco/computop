@@ -4,10 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://static.spryker.com http://static.spryker.com/oms-01.xsd">
 
-    <process name="ComputopSofort01" main="true">
+    <process name="ComputopPaydirekt01" main="true">
         <states>
             <state name="new" reserved="true" />
+            <state name="cancelled" reserved="false" />
             <state name="captured" reserved="true" />
+            <state name="capturing failed" reserved="false" />
             <state name="shipped" reserved="true" />
             <state name="refunded" reserved="false" />
             <state name="refunding failed" reserved="false" />
@@ -15,7 +17,8 @@
         </states>
 
         <events>
-            <event name="capture" manual="true"/>
+            <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days" />
+            <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true" />
             <event name="refund" manual="true" command="Computop/Refund"/>
             <event name="close" manual="true" />
@@ -23,9 +26,21 @@
 
         <transitions>
 
-            <transition>
+            <transition condition="Computop/IsCancelled">
+                <source>new</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition condition="Computop/IsCaptured" happy="true">
                 <source>new</source>
                 <target>captured</target>
+                <event>capture</event>
+            </transition>
+
+            <transition>
+                <source>new</source>
+                <target>capturing failed</target>
                 <event>capture</event>
             </transition>
 
