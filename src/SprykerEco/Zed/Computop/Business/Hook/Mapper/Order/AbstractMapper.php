@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Order;
 
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 

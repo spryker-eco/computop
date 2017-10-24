@@ -15,7 +15,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;

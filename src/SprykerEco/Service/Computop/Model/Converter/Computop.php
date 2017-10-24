@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 class Computop extends AbstractComputop implements ComputopInterface
 {

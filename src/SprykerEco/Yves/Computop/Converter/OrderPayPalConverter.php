@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 class OrderPayPalConverter extends AbstractOrderConverter
 {

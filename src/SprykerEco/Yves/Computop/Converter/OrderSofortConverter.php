@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 class OrderSofortConverter extends AbstractOrderConverter
 {

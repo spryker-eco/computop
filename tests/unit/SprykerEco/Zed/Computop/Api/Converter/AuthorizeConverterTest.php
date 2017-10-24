@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
 
 use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 
 /**

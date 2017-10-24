@@ -10,7 +10,7 @@ namespace Unit\SprykerEco\Zed\Computop\Payment\Mapper\CreditCard;
 use Codeception\TestCase\Test;
 use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestConstants;
 use Computop\Helper\Unit\Zed\Payment\Mapper\CreditCard\CreditCardMapperTestHelper;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 abstract class AbstractCreditCardMapperTest extends Test
 {

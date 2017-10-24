@@ -11,7 +11,7 @@ use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use GuzzleHttp\Psr7;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 

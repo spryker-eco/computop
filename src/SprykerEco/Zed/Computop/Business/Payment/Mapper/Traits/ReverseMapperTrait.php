@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 trait ReverseMapperTrait
 {

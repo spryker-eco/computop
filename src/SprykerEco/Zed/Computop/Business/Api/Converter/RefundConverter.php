@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopRefundResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 class RefundConverter extends AbstractConverter implements ConverterInterface
 {

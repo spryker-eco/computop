@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 

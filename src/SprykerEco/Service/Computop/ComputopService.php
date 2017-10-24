@@ -9,7 +9,7 @@ namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractService;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 /**
  * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()

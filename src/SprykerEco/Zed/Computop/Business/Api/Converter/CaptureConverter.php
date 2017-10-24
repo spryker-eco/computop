@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopCaptureResponseTransfer;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 
 class CaptureConverter extends AbstractConverter implements ConverterInterface
 {

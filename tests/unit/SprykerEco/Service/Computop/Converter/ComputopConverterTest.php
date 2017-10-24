@@ -10,7 +10,7 @@ namespace Unit\SprykerEco\Service\Computop\Converter;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
 use Unit\SprykerEco\Service\Computop\AbstractComputopTest;
 
 /**

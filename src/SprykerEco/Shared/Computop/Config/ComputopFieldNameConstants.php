@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Shared\Computop;
+namespace SprykerEco\Shared\Computop\Config;
 
 interface ComputopFieldNameConstants
 {
