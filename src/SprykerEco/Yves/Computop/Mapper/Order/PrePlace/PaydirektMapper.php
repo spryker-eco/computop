@@ -16,8 +16,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class PaydirektMapper extends AbstractPrePlaceMapper
 {
-    const NO_SHIPPING = 1;
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -37,6 +35,11 @@ class PaydirektMapper extends AbstractPrePlaceMapper
 
         $computopPaymentTransfer->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal());
         $computopPaymentTransfer->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal());
+        $computopPaymentTransfer->setShippingFirstName($quoteTransfer->getShippingAddress()->getFirstName());
+        $computopPaymentTransfer->setShippingLastName($quoteTransfer->getShippingAddress()->getLastName());
+        $computopPaymentTransfer->setShippingZip($quoteTransfer->getShippingAddress()->getZipCode());
+        $computopPaymentTransfer->setShippingCity($quoteTransfer->getShippingAddress()->getCity());
+        $computopPaymentTransfer->setShippingCountryCode($quoteTransfer->getShippingAddress()->getIso2Code());
 
         return $computopPaymentTransfer;
     }
@@ -58,7 +61,15 @@ class PaydirektMapper extends AbstractPrePlaceMapper
         $dataSubArray[ComputopFieldNameConstants::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-//todo: check this part after set up account
+
+        //todo: check this part after set up account
+//        $dataSubArray[ComputopFieldNameConstants::SHOP_API_KEY] = 'Test';
+
+        $dataSubArray[ComputopFieldNameConstants::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
+        $dataSubArray[ComputopFieldNameConstants::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
+        $dataSubArray[ComputopFieldNameConstants::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopFieldNameConstants::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
+        $dataSubArray[ComputopFieldNameConstants::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
         $dataSubArray[ComputopFieldNameConstants::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
         $dataSubArray[ComputopFieldNameConstants::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
 

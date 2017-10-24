@@ -93,6 +93,11 @@ interface ComputopFieldNameConstants
     const ACCOUNT_BANK = 'AccBank';
     const MDT_SEQ_TYPE = 'mdtseqtype';
     const SHOP_API_KEY = 'shopApiKey';
-    const SHIPPING_AMOUNT = 'shAmount';
     const SHOPPING_BASKET_AMOUNT = 'ShoppingBasketAmount';
+    const SHIPPING_AMOUNT = 'shAmount';
+    const SHIPPING_FIRST_NAME = 'sdFirstName';
+    const SHIPPING_LAST_NAME = 'sdLastName';
+    const SHIPPING_ZIP = 'sdZip';
+    const SHIPPING_CITY = 'sdCity';
+    const SHIPPING_COUNTRY_CODE = 'sdCountryCode';
 }
