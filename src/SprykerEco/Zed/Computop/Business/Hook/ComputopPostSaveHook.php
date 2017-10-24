@@ -9,8 +9,8 @@ namespace SprykerEco\Zed\Computop\Business\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
+use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 

@@ -53,7 +53,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected $orderFactory = null;
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory
+     * @return \Spryker\Zed\Kernel\Business\BusinessFactoryInterface
      */
     public function createMapperFactory()
     {
@@ -65,7 +65,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory
+     * @return \Spryker\Zed\Kernel\Business\BusinessFactoryInterface
      */
     public function createApiFactory()
     {
@@ -77,7 +77,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory
+     * @return \Spryker\Zed\Kernel\Business\BusinessFactoryInterface
      */
     public function createOrderFactory()
     {
@@ -269,9 +269,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * TODO: Check
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\OrderResponseHandlerInterface
      */
     public function createSofortResponseHandler()
     {
@@ -297,7 +295,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return mixed
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function getPaymentMethod(OrderTransfer $orderTransfer)
     {

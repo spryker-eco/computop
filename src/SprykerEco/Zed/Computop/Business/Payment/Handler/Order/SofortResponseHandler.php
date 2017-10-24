@@ -15,7 +15,7 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
-class SofortResponseHandler
+class SofortResponseHandler implements OrderResponseHandlerInterface
 {
     use DatabaseTransactionHandlerTrait;
 
@@ -59,9 +59,8 @@ class SofortResponseHandler
      *
      * @return void
      */
-    public function handle(
-        QuoteTransfer $quoteTransfer
-    ) {
+    public function handle(QuoteTransfer $quoteTransfer)
+    {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopSofort()->getSofortOrderResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {

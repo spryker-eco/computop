@@ -27,5 +27,4 @@ interface ComputopPostSaveHookInterface
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
-
 }
