@@ -16,6 +16,9 @@ class ComputopToQuoteBridge implements ComputopToQuoteInterface
      */
     protected $quoteClient;
 
+    /**
+     * @param \Spryker\Client\Quote\QuoteClientInterface $quoteClient
+     */
     public function __construct($quoteClient)
     {
         $this->quoteClient = $quoteClient;

@@ -16,6 +16,9 @@ class ComputopToComputopServiceBridge implements ComputopToComputopServiceInterf
      */
     protected $computopService;
 
+    /**
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
+     */
     public function __construct($computopService)
     {
         $this->computopService = $computopService;
