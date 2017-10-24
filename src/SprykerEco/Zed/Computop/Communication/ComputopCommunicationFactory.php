@@ -57,7 +57,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @param integer $idSalesOrder
      *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */
     public function getSavedComputopEntity($idSalesOrder)
     {

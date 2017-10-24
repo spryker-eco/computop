@@ -307,7 +307,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook
+     * @return \SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHookInterface
      */
     public function createPostSaveHook()
     {

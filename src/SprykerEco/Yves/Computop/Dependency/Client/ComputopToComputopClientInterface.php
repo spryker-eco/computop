@@ -13,6 +13,10 @@ use Generated\Shared\Transfer\QuoteTransfer;
 interface ComputopToComputopClientInterface
 {
     /**
+     * Save main response data to DB
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $cardPaymentTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
@@ -20,6 +24,10 @@ interface ComputopToComputopClientInterface
     public function logResponse(ComputopResponseHeaderTransfer $cardPaymentTransfer);
 
     /**
+     * Save Sofort response to DB
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer

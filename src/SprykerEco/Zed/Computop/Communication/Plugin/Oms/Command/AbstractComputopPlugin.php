@@ -60,7 +60,7 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
     /**
      * @param integer $idSalesOrder
      *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */
     protected function getSavedComputopEntity($idSalesOrder)
     {

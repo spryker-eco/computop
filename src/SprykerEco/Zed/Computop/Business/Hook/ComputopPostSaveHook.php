@@ -14,7 +14,7 @@ use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
-class ComputopPostSaveHook
+class ComputopPostSaveHook implements ComputopPostSaveHookInterface
 {
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
@@ -65,7 +65,7 @@ class ComputopPostSaveHook
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function setRedirect(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    protected function setRedirect(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
