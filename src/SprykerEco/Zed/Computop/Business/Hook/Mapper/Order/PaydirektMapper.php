@@ -5,41 +5,49 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Order\PrePlace;
+namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Order;
 
-use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class PaydirektMapper extends AbstractPrePlaceMapper
+class PaydirektMapper extends AbstractMapper
 {
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
+     * @return string
      */
-    protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
+    public function getMethodName()
     {
-        $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
+        return ComputopConfig::PAYMENT_METHOD_PAYDIREKT;
+    }
 
-        $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
-        $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS_PATH_NAME))
-        );
-        $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function updateComputopPaymentTransfer(TransferInterface $quoteTransfer, TransferInterface $computopPaymentTransfer)
+    {
+        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
+        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+        $computopPaymentTransfer->setMac(
+            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
-        $computopPaymentTransfer->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal());
-        $computopPaymentTransfer->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal());
-        $computopPaymentTransfer->setShippingFirstName($quoteTransfer->getShippingAddress()->getFirstName());
-        $computopPaymentTransfer->setShippingLastName($quoteTransfer->getShippingAddress()->getLastName());
-        $computopPaymentTransfer->setShippingZip($quoteTransfer->getShippingAddress()->getZipCode());
-        $computopPaymentTransfer->setShippingCity($quoteTransfer->getShippingAddress()->getCity());
-        $computopPaymentTransfer->setShippingCountryCode($quoteTransfer->getShippingAddress()->getIso2Code());
+        $decryptedValues = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopPaymentTransfer),
+            Config::get(ComputopConstants::BLOWFISH_PASSWORD)
+        );
+
+        $length = $decryptedValues[ComputopFieldName::LENGTH];
+        $data = $decryptedValues[ComputopFieldName::DATA];
+
+        $computopPaymentTransfer->setData($data);
+        $computopPaymentTransfer->setLen($length);
+        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
 
         return $computopPaymentTransfer;
     }
@@ -57,14 +65,11 @@ class PaydirektMapper extends AbstractPrePlaceMapper
         $dataSubArray[ComputopFieldName::CURRENCY] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopFieldName::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
         $dataSubArray[ComputopFieldName::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopFieldName::CAPTURE] = $cardPaymentTransfer->getCapture();
         $dataSubArray[ComputopFieldName::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopFieldName::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopFieldName::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
 
-        //todo: check this part after set up account
-//        $dataSubArray[ComputopFieldName::SHOP_API_KEY] = 'Test';
-
+        $dataSubArray[ComputopFieldName::SHOP_API_KEY] = $cardPaymentTransfer->getShopApiKey();
         $dataSubArray[ComputopFieldName::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
         $dataSubArray[ComputopFieldName::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
         $dataSubArray[ComputopFieldName::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();

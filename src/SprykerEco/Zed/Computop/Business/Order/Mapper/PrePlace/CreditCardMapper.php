@@ -5,19 +5,20 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
+namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
-class DirectDebitMapper implements MapperInterface
+class CreditCardMapper implements MapperInterface
 {
     /**
      * @return string
      */
     public function getMethodName()
     {
-        return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
+        return ComputopConfig::PAYMENT_METHOD_CREDIT_CARD;
     }
 
     /**
@@ -27,7 +28,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopDirectDebit();
+        return $paymentTransfer->getComputopCreditCard();
     }
 
     /**
@@ -37,7 +38,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getDirectDebitOrderResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getCreditCardOrderResponse();
     }
 
     /**
@@ -47,7 +48,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer $computopResponse */
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer $computopResponse */
         $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);
         $result = $computopResponse->toArray();
 

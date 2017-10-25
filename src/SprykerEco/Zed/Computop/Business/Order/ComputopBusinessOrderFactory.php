@@ -8,11 +8,11 @@
 namespace SprykerEco\Zed\Computop\Business\Order;
 
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\CreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\DirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PaydirektMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PayPalMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\SofortMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PaydirektMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\SofortMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\CreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\DirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\PayPalMapper;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()

@@ -5,10 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
+namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
 class PaydirektMapper implements MapperInterface
 {
@@ -47,10 +48,6 @@ class PaydirektMapper implements MapperInterface
      */
     public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer $computopResponse */
-        $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);
-        $result = $computopResponse->toArray();
-
-        return $result;
+        return [];
     }
 }

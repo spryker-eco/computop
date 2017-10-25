@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Handler\PrePlace;
+namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;

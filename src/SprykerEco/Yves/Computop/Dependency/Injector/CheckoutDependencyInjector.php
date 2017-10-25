@@ -65,6 +65,7 @@ class CheckoutDependencyInjector implements DependencyInjectorInterface
         $container->extend(CheckoutDependencyProvider::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
             $paymentHandlerPlugin = new ComputopPaymentHandlerPlugin();
             $paymentMethodHandler->add($paymentHandlerPlugin, ComputopConfig::PAYMENT_METHOD_SOFORT);
+            $paymentMethodHandler->add($paymentHandlerPlugin, ComputopConfig::PAYMENT_METHOD_PAYDIREKT);
 
             return $paymentMethodHandler;
         });

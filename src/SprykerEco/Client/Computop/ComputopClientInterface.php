@@ -38,4 +38,16 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Save response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePaydirektResponse(QuoteTransfer $quoteTransfer);
 }

@@ -19,6 +19,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      */
     protected static $paymentMethods = [
         ComputopConfig::PAYMENT_METHOD_SOFORT => ComputopConfig::PAYMENT_METHOD_SOFORT,
+        ComputopConfig::PAYMENT_METHOD_PAYDIREKT => ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
     ];
 
     /**
@@ -82,6 +83,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
             throw new PaymentMethodNotFoundException(sprintf('Selected payment method "%s" not found in PaymentTransfer', $paymentMethod));
         }
         $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
+
         return $computopPaymentTransfer;
     }
 

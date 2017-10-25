@@ -5,10 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
+namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
 class SofortMapper implements MapperInterface
 {

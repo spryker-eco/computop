@@ -25,4 +25,11 @@ interface ComputopStubInterface
      * @return void
      */
     public function saveSofortResponse(QuoteTransfer $responseTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function savePaydirektResponse(QuoteTransfer $responseTransfer);
 }

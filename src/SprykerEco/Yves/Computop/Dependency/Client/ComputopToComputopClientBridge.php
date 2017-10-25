@@ -44,4 +44,14 @@ class ComputopToComputopClientBridge implements ComputopToComputopClientInterfac
     {
         return $this->computopClient->saveSofortResponse($quoteTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePaydirektResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->computopClient->savePaydirektResponse($quoteTransfer);
+    }
 }

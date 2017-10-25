@@ -32,4 +32,14 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     {
         $this->zedStub->call('/computop/gateway/save-sofort-response', $responseTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function savePaydirektResponse(QuoteTransfer $responseTransfer)
+    {
+        $this->zedStub->call('/computop/gateway/save-paydirekt-response', $responseTransfer);
+    }
 }

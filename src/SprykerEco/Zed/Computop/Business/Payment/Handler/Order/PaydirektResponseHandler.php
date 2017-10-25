@@ -7,11 +7,11 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Order;
 
-use Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 
-class SofortResponseHandler extends AbstractResponseHandler
+class PaydirektResponseHandler extends AbstractResponseHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -20,7 +20,7 @@ class SofortResponseHandler extends AbstractResponseHandler
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopSofort()->getSofortOrderResponse();
+        $responseTransfer = $quoteTransfer->getPayment()->getComputopPaydirekt()->getPaydirektOrderResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
             $this->saveComputopOrderDetails($responseTransfer);
@@ -29,11 +29,11 @@ class SofortResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopSofortOrderResponseTransfer $responseTransfer)
+    protected function saveComputopOrderDetails(ComputopPaydirektOrderResponseTransfer $responseTransfer)
     {
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;
@@ -47,16 +47,14 @@ class SofortResponseHandler extends AbstractResponseHandler
         $paymentEntity->save();
 
         foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
-            //Sofort sets captured status on first call
-            $item->setStatus($this->config->getOmsStatusCaptured());
+            //Paydirekt sets authorize status on first call
+            $item->setStatus($this->config->getOmsStatusAuthorized());
             $item->save();
         }
 
         $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->setAccountOwner($responseTransfer->getAccountOwner());
-        $paymentEntityDetails->setAccountBank($responseTransfer->getAccountBank());
-        $paymentEntityDetails->setBankAccountBic($responseTransfer->getBankAccountBic());
-        $paymentEntityDetails->setBankAccountIban($responseTransfer->getBankAccountIban());
+
+        //TODO: update data
         $paymentEntityDetails->save();
     }
 
@@ -72,7 +70,7 @@ class SofortResponseHandler extends AbstractResponseHandler
             ->find();
 
         $this->omsFacade->triggerEvent(
-            $this->config->getOmsCaptureEventName(),
+            $this->config->getOmsAuthorizeEventName(),
             $orderItems,
             []
         );
