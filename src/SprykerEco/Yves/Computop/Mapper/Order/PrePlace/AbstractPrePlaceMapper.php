@@ -12,7 +12,7 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Order\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -58,8 +58,8 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
             Config::get(ComputopConstants::BLOWFISH_PASSWORD)
         );
 
-        $length = $decryptedValues[ComputopFieldNameConstants::LENGTH];
-        $data = $decryptedValues[ComputopFieldNameConstants::DATA];
+        $length = $decryptedValues[ComputopFieldName::LENGTH];
+        $data = $decryptedValues[ComputopFieldName::DATA];
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
@@ -78,9 +78,9 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
     protected function getUrlToComputop($merchantId, $data, $length)
     {
         return $this->getActionUrl() . '?' . http_build_query([
-                ComputopFieldNameConstants::MERCHANT_ID => $merchantId,
-                ComputopFieldNameConstants::DATA => $data,
-                ComputopFieldNameConstants::LENGTH => $length,
+                ComputopFieldName::MERCHANT_ID => $merchantId,
+                ComputopFieldName::DATA => $data,
+                ComputopFieldName::LENGTH => $length,
             ]);
     }
 }

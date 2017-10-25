@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
@@ -46,17 +46,17 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopFieldNameConstants::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldNameConstants::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopFieldNameConstants::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopFieldNameConstants::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopFieldNameConstants::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopFieldNameConstants::CAPTURE] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopFieldNameConstants::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopFieldNameConstants::TX_TYPE] = $cardPaymentTransfer->getTxType();
-        $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopFieldNameConstants::ETI_ID] = ComputopConfig::ETI_ID;
+        $dataSubArray[ComputopFieldName::TRANS_ID] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopFieldName::AMOUNT] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopFieldName::CURRENCY] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopFieldName::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopFieldName::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopFieldName::CAPTURE] = $cardPaymentTransfer->getCapture();
+        $dataSubArray[ComputopFieldName::RESPONSE] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopFieldName::MAC] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopFieldName::TX_TYPE] = $cardPaymentTransfer->getTxType();
+        $dataSubArray[ComputopFieldName::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopFieldName::ETI_ID] = ComputopConfig::ETI_ID;
 
         return $dataSubArray;
     }

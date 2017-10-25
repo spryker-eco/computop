@@ -11,7 +11,7 @@ use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use GuzzleHttp\Psr7;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
@@ -49,13 +49,13 @@ class ConverterTestHelper extends Test
     public function getMainDecryptedArray()
     {
         $decryptedArray = [
-            ComputopFieldNameConstants::MID => 'mid',
-            ComputopFieldNameConstants::PAY_ID => 'PayID',
-            ComputopFieldNameConstants::XID => 'XID',
-            ComputopFieldNameConstants::TRANS_ID => 'TransID',
-            ComputopFieldNameConstants::STATUS => 'OK',
-            ComputopFieldNameConstants::CODE => '00000000',
-            ComputopFieldNameConstants::DESCRIPTION => 'Description',
+            ComputopFieldName::MID => 'mid',
+            ComputopFieldName::PAY_ID => 'PayID',
+            ComputopFieldName::XID => 'XID',
+            ComputopFieldName::TRANS_ID => 'TransID',
+            ComputopFieldName::STATUS => 'OK',
+            ComputopFieldName::CODE => '00000000',
+            ComputopFieldName::DESCRIPTION => 'Description',
         ];
 
         return $decryptedArray;
@@ -97,12 +97,12 @@ class ConverterTestHelper extends Test
         $header->fromArray($decryptedArray, true);
 
         //different naming style
-        $header->setMId($decryptedArray[ComputopFieldNameConstants::MID]);
-        $header->setTransId($decryptedArray[ComputopFieldNameConstants::TRANS_ID]);
-        $header->setPayId($decryptedArray[ComputopFieldNameConstants::PAY_ID]);
+        $header->setMId($decryptedArray[ComputopFieldName::MID]);
+        $header->setTransId($decryptedArray[ComputopFieldName::TRANS_ID]);
+        $header->setPayId($decryptedArray[ComputopFieldName::PAY_ID]);
         $header->setIsSuccess($header->getStatus() === ComputopSharedConfig::SUCCESS_STATUS);
         $header->setMethod($method);
-        $header->setXId($decryptedArray[ComputopFieldNameConstants::XID]);
+        $header->setXId($decryptedArray[ComputopFieldName::XID]);
 
         return $header;
     }

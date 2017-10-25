@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Zed\Computop\Api\Converter;
 
 use Computop\Helper\Unit\Zed\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 
 /**
@@ -58,7 +58,7 @@ class AuthorizeConverterTest extends AbstractConverterTest
     {
         $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopFieldNameConstants::REF_NR] = ConverterTestConstants::REF_NR_VALUE;
+        $decryptedArray[ComputopFieldName::REF_NR] = ConverterTestConstants::REF_NR_VALUE;
 
         return $decryptedArray;
     }

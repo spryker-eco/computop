@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class PaydirektMapper extends AbstractPrePlaceMapper
@@ -52,26 +52,26 @@ class PaydirektMapper extends AbstractPrePlaceMapper
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopFieldNameConstants::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldNameConstants::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopFieldNameConstants::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopFieldNameConstants::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopFieldNameConstants::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopFieldNameConstants::CAPTURE] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopFieldNameConstants::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopFieldNameConstants::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopFieldNameConstants::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopFieldName::TRANS_ID] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopFieldName::AMOUNT] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopFieldName::CURRENCY] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopFieldName::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopFieldName::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopFieldName::CAPTURE] = $cardPaymentTransfer->getCapture();
+        $dataSubArray[ComputopFieldName::RESPONSE] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopFieldName::MAC] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopFieldName::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
 
         //todo: check this part after set up account
-//        $dataSubArray[ComputopFieldNameConstants::SHOP_API_KEY] = 'Test';
+//        $dataSubArray[ComputopFieldName::SHOP_API_KEY] = 'Test';
 
-        $dataSubArray[ComputopFieldNameConstants::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
-        $dataSubArray[ComputopFieldNameConstants::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
-        $dataSubArray[ComputopFieldNameConstants::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
-        $dataSubArray[ComputopFieldNameConstants::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
-        $dataSubArray[ComputopFieldNameConstants::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
-        $dataSubArray[ComputopFieldNameConstants::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
-        $dataSubArray[ComputopFieldNameConstants::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
+        $dataSubArray[ComputopFieldName::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
+        $dataSubArray[ComputopFieldName::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
+        $dataSubArray[ComputopFieldName::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopFieldName::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
+        $dataSubArray[ComputopFieldName::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
+        $dataSubArray[ComputopFieldName::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
+        $dataSubArray[ComputopFieldName::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
 
         return $dataSubArray;
     }

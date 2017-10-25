@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 
 class OrderPaydirektConverter extends AbstractOrderConverter
 {
@@ -26,7 +26,7 @@ class OrderPaydirektConverter extends AbstractOrderConverter
         $responseTransfer->setHeader($header);
         //optional fields
         //todo: update after set up account
-        $responseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopFieldNameConstants::REF_NR));
+        $responseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::REF_NR));
 
         return $responseTransfer;
     }

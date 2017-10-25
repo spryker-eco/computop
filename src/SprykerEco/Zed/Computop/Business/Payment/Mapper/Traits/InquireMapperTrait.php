@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Mapper\Traits;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 
 trait InquireMapperTrait
 {
@@ -19,9 +19,9 @@ trait InquireMapperTrait
      */
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
-        $dataSubArray[ComputopFieldNameConstants::PAY_ID] = $computopPaymentTransfer->getPayId();
-        $dataSubArray[ComputopFieldNameConstants::TRANS_ID] = $computopPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldNameConstants::MAC] = $computopPaymentTransfer->getMac();
+        $dataSubArray[ComputopFieldName::PAY_ID] = $computopPaymentTransfer->getPayId();
+        $dataSubArray[ComputopFieldName::TRANS_ID] = $computopPaymentTransfer->getTransId();
+        $dataSubArray[ComputopFieldName::MAC] = $computopPaymentTransfer->getMac();
 
         return $dataSubArray;
     }

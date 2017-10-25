@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Order;
 
-use SprykerEco\Shared\Computop\Config\ComputopFieldNameConstants;
+use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
@@ -43,9 +43,9 @@ abstract class AbstractMapper implements AbstractMapperInterface
     protected function getUrlToComputop($merchantId, $data, $length)
     {
         return $this->getActionUrl() . '?' . http_build_query([
-                ComputopFieldNameConstants::MERCHANT_ID => $merchantId,
-                ComputopFieldNameConstants::DATA => $data,
-                ComputopFieldNameConstants::LENGTH => $length,
+                ComputopFieldName::MERCHANT_ID => $merchantId,
+                ComputopFieldName::DATA => $data,
+                ComputopFieldName::LENGTH => $length,
             ]);
     }
 }
