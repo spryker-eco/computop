@@ -106,6 +106,19 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="birthday" required="false" type="VARCHAR"/>
         <column name="age" required="false" type="INTEGER"/>
 
+        <column name="shopping_basket_category" required="false" type="VARCHAR"/>
+        <column name="shipping_first_name" required="false" type="VARCHAR"/>
+        <column name="shipping_last_name" required="false" type="VARCHAR"/>
+        <column name="shipping_company" required="false" type="VARCHAR"/>
+        <column name="shipping_address_addition" required="false" type="VARCHAR"/>
+        <column name="shipping_street" required="false" type="VARCHAR"/>
+        <column name="shipping_street_number" required="false" type="VARCHAR"/>
+        <column name="shipping_zip" required="false" type="VARCHAR"/>
+        <column name="shipping_city" required="false" type="VARCHAR"/>
+        <column name="shipping_country_code" required="false" type="VARCHAR"/>
+        <column name="shipping_email" required="false" type="VARCHAR"/>
+        <column name="age_accepted" required="false" type="VARCHAR"/>
+
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>
         </foreign-key>
