@@ -98,7 +98,23 @@ class CallbackController extends AbstractController
             $this->getFactory()->createOrderPaydirektConverter()
         );
 
-        return $this->successAction($this->getFactory()->createPaydirektPaymentHandler());
+        $handler = $this->getFactory()->createPaydirektPaymentHandler();
+
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+
+        $quoteTransfer = $handler->addPaymentToQuote(
+            $quoteTransfer,
+            $this->orderResponseTransfer
+        );
+
+        $this->getFactory()->getComputopClient()->savePaydirektResponse($quoteTransfer);
+
+        if (!$quoteTransfer->getCustomer()) {
+            //Todo: add translation
+            $this->addSuccessMessage('Your order has been placed successfully! Thank you for shopping with us!');
+        }
+
+        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath());
     }
 
     /**
