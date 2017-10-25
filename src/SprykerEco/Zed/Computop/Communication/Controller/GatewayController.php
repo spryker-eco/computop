@@ -35,4 +35,14 @@ class GatewayController extends AbstractGatewayController
     {
         return $this->getFacade()->saveSofortResponse($quoteTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePaydirektResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->savePaydirektResponse($quoteTransfer);
+    }
 }

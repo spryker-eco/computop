@@ -209,6 +209,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * TODO: add test
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePaydirektResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createPaydirektResponseHandler()->handle(
+            $quoteTransfer
+        );
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * TODO: add test
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer

@@ -24,15 +24,15 @@ use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopDirectDebitPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPayPalPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopSofortPaymentHandler;
+use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\SofortMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\DirectDebitMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\PayPalMapper;
 
 /**
@@ -177,7 +177,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaymentHandlerInterface
      */
     public function createPaydirektPaymentHandler()
     {
@@ -185,7 +185,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaymentHandlerInterface
      */
     public function createSofortPaymentHandler()
     {

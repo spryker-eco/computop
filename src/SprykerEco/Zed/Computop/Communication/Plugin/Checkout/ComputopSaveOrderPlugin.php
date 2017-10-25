@@ -14,7 +14,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
- * @method \SprykerEco\Zed\Computop\Communication\CopmputopCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
 class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutSaveOrderInterface
 {
