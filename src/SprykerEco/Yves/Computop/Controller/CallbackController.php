@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Controller;
 
-use Pyz\Yves\Checkout\Plugin\Provider\CheckoutControllerProvider;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -127,7 +126,7 @@ class CallbackController extends AbstractController
             $this->addSuccessMessage('Your order has been placed successfully! Thank you for shopping with us!');
         }
 
-        return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUCCESS);
+        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath());
     }
 
     /**
@@ -137,7 +136,7 @@ class CallbackController extends AbstractController
     {
         $this->addErrorMessage($this->getErrorMessageText());
 
-        return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_PAYMENT);
+        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
     }
 
     /**
@@ -159,7 +158,7 @@ class CallbackController extends AbstractController
 
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
 
-        return $this->redirectResponseInternal(CheckoutControllerProvider::CHECKOUT_SUMMARY);
+        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessOrderRedirectPath());
     }
 
     /**
@@ -176,7 +175,7 @@ class CallbackController extends AbstractController
     /**
      * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected function getOrderResponseTransfer(ConverterInterface $converter)
     {

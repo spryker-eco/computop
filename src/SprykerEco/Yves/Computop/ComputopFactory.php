@@ -35,6 +35,9 @@ use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\PayPalMapper;
 
+/**
+ * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
+ */
 class ComputopFactory extends AbstractFactory
 {
     /**
@@ -134,7 +137,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \Silex\Application
+     * @return \Symfony\Component\HttpKernel\HttpKernelInterface
      */
     public function getApplication()
     {
@@ -275,5 +278,13 @@ class ComputopFactory extends AbstractFactory
     public function createComputopPaymentHandler()
     {
         return new ComputopPaymentHandler();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\ComputopConfigInterface
+     */
+    public function getComputopConfig()
+    {
+        return $this->getConfig();
     }
 }
