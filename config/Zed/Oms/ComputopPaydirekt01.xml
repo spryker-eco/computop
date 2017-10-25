@@ -7,6 +7,7 @@
     <process name="ComputopPaydirekt01" main="true">
         <states>
             <state name="new" reserved="true" />
+            <state name="authorized" reserved="true" />
             <state name="cancelled" reserved="false" />
             <state name="captured" reserved="true" />
             <state name="capturing failed" reserved="false" />
@@ -17,6 +18,7 @@
         </states>
 
         <events>
+            <event name="authorize" onEnter="true"/>
             <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days" />
             <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true" />
@@ -26,14 +28,20 @@
 
         <transitions>
 
-            <transition condition="Computop/IsCancelled">
+            <transition>
                 <source>new</source>
+                <target>authorized</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition condition="Computop/IsCancelled">
+                <source>authorized</source>
                 <target>cancelled</target>
                 <event>cancel</event>
             </transition>
 
             <transition condition="Computop/IsCaptured" happy="true">
-                <source>new</source>
+                <source>authorized</source>
                 <target>captured</target>
                 <event>capture</event>
             </transition>
