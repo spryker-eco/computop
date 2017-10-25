@@ -28,6 +28,7 @@ class ComputopConfig extends AbstractBundleConfig
 
     //Events
     const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
+    const COMPUTOP_OMS_EVENT_AUTHORIZE = 'authorize';
 
     /**
      * Refund with shipment price
@@ -202,6 +203,14 @@ class ComputopConfig extends AbstractBundleConfig
     public function getInquireMethodName()
     {
         return self::INQUIRE_METHOD;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsAuthorizeEventName()
+    {
+        return self::COMPUTOP_OMS_EVENT_AUTHORIZE;
     }
 
     /**
