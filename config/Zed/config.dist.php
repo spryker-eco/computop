@@ -9,6 +9,7 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 $config[ComputopConstants::MERCHANT_ID] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
 $config[ComputopConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
 $config[ComputopConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
+$config[ComputopConstants::PAYDIREKT_SHOP_KEY] = 'PAYDIREKT_SHOP_KEY'; //Set up real data
 
 $config[ComputopConstants::CREDIT_CARD_ORDER_ACTION] = 'https://www.computop-paygate.com/payssl.aspx';
 $config[ComputopConstants::AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/authorize.aspx';
