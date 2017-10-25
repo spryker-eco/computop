@@ -118,7 +118,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Client\Computop\ComputopClient
+     * @return \SprykerEco\Client\Computop\ComputopClientInterface
      */
     public function getComputopClient()
     {
@@ -270,7 +270,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
      */
     public function createComputopPaymentHandler()
     {

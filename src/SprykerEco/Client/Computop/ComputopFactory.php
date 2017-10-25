@@ -13,7 +13,7 @@ use SprykerEco\Client\Computop\Zed\ComputopStub;
 class ComputopFactory extends AbstractFactory
 {
     /**
-     * @return \SprykerEco\Client\Computop\Zed\ComputopStub
+     * @return \SprykerEco\Client\Computop\Zed\ComputopStubInterface
      */
     public function createZedStub()
     {

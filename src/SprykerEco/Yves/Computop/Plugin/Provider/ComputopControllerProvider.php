@@ -7,10 +7,10 @@
 
 namespace SprykerEco\Yves\Computop\Plugin\Provider;
 
-use Pyz\Yves\Application\Plugin\Provider\AbstractYvesControllerProvider;
 use Silex\Application;
+use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
-class ComputopControllerProvider extends AbstractYvesControllerProvider
+class ComputopControllerProvider extends YvesControllerProvider
 {
     const NAME = 'computop';
     const MODULE_NAME = 'Computop';

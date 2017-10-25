@@ -12,7 +12,7 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Exception\PaymentMethodNotFoundException;
 
-class ComputopPaymentHandler
+class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
 {
     /**
      * @var array
@@ -68,7 +68,7 @@ class ComputopPaymentHandler
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param string $paymentSelection
      *
-     * @throws \SprykerEco\Yves\Computop\Handler\Exception\PaymentMethodNotFoundException
+     * @throws \SprykerEco\Yves\Computop\Exception\PaymentMethodNotFoundException
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
