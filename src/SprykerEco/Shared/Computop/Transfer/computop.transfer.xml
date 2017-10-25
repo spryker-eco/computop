@@ -274,6 +274,17 @@
         <property name="reference" type="string" />
         <property name="transactionId" type="string" />
         <property name="shoppingBasketCategory" type="string" />
+        <property name="shippingFirstName" type="string" />
+        <property name="shippingLastName" type="string" />
+        <property name="shippingCompany" type="string" />
+        <property name="shippingAddressAddition" type="string" />
+        <property name="shippingStreet" type="string" />
+        <property name="shippingStreetNumber" type="string" />
+        <property name="shippingZip" type="string" />
+        <property name="shippingCity" type="string" />
+        <property name="shippingCountryCode" type="string" />
+        <property name="shippingEmail" type="string" />
+        <property name="ageAccepted" type="string" />
     </transfer>
 
     <transfer name="ComputopAuthorizeResponse">

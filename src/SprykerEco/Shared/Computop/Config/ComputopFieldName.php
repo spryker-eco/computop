@@ -94,10 +94,17 @@ interface ComputopFieldName
     const MDT_SEQ_TYPE = 'mdtseqtype';
     const SHOP_API_KEY = 'shopApiKey';
     const SHOPPING_BASKET_AMOUNT = 'ShoppingBasketAmount';
+    const SHOPPING_BASKET_CATEGORY = 'ShoppingBasketCategory';
     const SHIPPING_AMOUNT = 'shAmount';
     const SHIPPING_FIRST_NAME = 'sdFirstName';
     const SHIPPING_LAST_NAME = 'sdLastName';
     const SHIPPING_ZIP = 'sdZip';
     const SHIPPING_CITY = 'sdCity';
     const SHIPPING_COUNTRY_CODE = 'sdCountryCode';
+    const SHIPPING_COMPANY = 'sdCompany';
+    const SHIPPING_ADDRESS_ADDITION = 'sdAddressAddition';
+    const SHIPPING_STREET = 'sdStreet';
+    const SHIPPING_STREET_NUMBER = 'sdStreetNr';
+    const SHIPPING_EMAIL = 'sdEMail';
+    const AGE_ACCEPTED = 'AgeAccepted';
 }

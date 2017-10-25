@@ -24,7 +24,7 @@ $config[ComputopConstants::SOFORT_ORDER_ACTION] = 'https://www.computop-paygate.
 $config[ComputopConstants::PAYDIREKT_ORDER_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
 
 $config[ComputopConstants::RESPONSE_MAC_REQUIRED] = [
-    ComputopConfig::ORDER_METHOD, // Todo: add methods in case of Paygate form connection
+    ComputopConfig::INIT_METHOD, // Todo: add methods in case of Paygate form connection
 ]; //MAC is required for methods (to check MAC on response)
 
 $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [

@@ -47,7 +47,7 @@ class CallbackController extends AbstractController
 
         $this->orderResponseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
             $this->decryptedArray,
-            ComputopConfig::ORDER_METHOD
+            ComputopConfig::INIT_METHOD
         );
 
         $this->getFactory()->getComputopClient()->logResponse($this->orderResponseHeaderTransfer);

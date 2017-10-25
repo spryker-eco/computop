@@ -22,5 +22,5 @@ class ComputopConfig extends AbstractBundleConfig
     const CAPTURE_MANUAL_TYPE = 'MANUAL';
     const SUCCESS_STATUS = 'OK';
 
-    const ORDER_METHOD = 'ORDER';
+    const INIT_METHOD = 'INIT';
 }
