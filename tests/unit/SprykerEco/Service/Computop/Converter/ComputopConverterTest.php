@@ -71,11 +71,11 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertFalse($header->getIsSuccess());
 
         $this->assertSame(ComputopFieldName::MID, $header->getMId());
-        $this->assertSame(ComputopFieldName::TRANS_ID_VALUE, $header->getTransId());
-        $this->assertSame(ComputopFieldName::PAY_ID_VALUE, $header->getPayId());
+        $this->assertSame(ComputopFieldName::TRANS_ID, $header->getTransId());
+        $this->assertSame(ComputopFieldName::PAY_ID, $header->getPayId());
         $this->assertSame(self::STATUS_ERROR_VALUE, $header->getStatus());
         $this->assertSame(ComputopFieldName::CODE, $header->getCode());
-        $this->assertSame(ComputopFieldName::X_ID_VALUE, $header->getXId());
+        $this->assertSame(ComputopFieldName::XID, $header->getXId());
     }
 
     /**

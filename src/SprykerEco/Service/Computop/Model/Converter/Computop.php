@@ -23,6 +23,7 @@ class Computop extends AbstractComputop implements ComputopInterface
      */
     public function extractHeader(array $decryptedArray, $method)
     {
+        $decryptedArray = $this->formatResponseArray($decryptedArray);
         $this->checkDecryptedResponse($decryptedArray);
 
         $header = new ComputopResponseHeaderTransfer();

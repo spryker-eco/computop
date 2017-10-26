@@ -35,12 +35,12 @@ class CaptureConverterTest extends AbstractConverterTest
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-        $this->assertEquals(ConverterTestConstants::A_ID_VALUE, $responseTransfer->getAId());
-        $this->assertEquals(ConverterTestConstants::TRANSACTION_ID_VALUE, $responseTransfer->getTransactionId());
-        $this->assertEquals(ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO, $responseTransfer->getAmount());
-        $this->assertEquals(ConverterTestConstants::CODE_EXT_VALUE, $responseTransfer->getCodeExt());
-        $this->assertEquals(ConverterTestConstants::ERROR_TEXT_VALUE, $responseTransfer->getErrorText());
-        $this->assertEquals(ConverterTestConstants::REF_NR_VALUE, $responseTransfer->getRefNr());
+        $this->assertEquals(ComputopFieldName::A_ID, $responseTransfer->getAId());
+        $this->assertEquals(ComputopFieldName::TRANSACTION_ID, $responseTransfer->getTransactionId());
+        $this->assertEquals(ComputopFieldName::AMOUNT, $responseTransfer->getAmount());
+        $this->assertEquals(ComputopFieldName::CODE_EXT, $responseTransfer->getCodeExt());
+        $this->assertEquals(ComputopFieldName::ERROR_TEXT, $responseTransfer->getErrorText());
+        $this->assertEquals(ComputopFieldName::REF_NR, $responseTransfer->getRefNr());
     }
 
     /**

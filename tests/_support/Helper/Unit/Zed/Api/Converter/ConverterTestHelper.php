@@ -79,7 +79,7 @@ class ConverterTestHelper extends Test
             ->willReturn($this->getHeaderResponseTransfer($decryptedArray));
 
         $computopServiceMock->method('getResponseValue')
-            ->willReturn('testValue');
+            ->willReturnArgument(1);
 
         return $computopServiceMock;
     }
