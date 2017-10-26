@@ -11,6 +11,12 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactory;
+use SprykerEco\Zed\Computop\Business\Api\Request\AuthorizationRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\CaptureRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\InquireRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\RefundRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\ReverseRequest;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\SofortMapper;
@@ -25,12 +31,6 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\PaydirektResponseHand
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory;
-use SprykerEco\Zed\Computop\Business\Payment\Request\AuthorizationRequest;
-use SprykerEco\Zed\Computop\Business\Payment\Request\CaptureRequest;
-use SprykerEco\Zed\Computop\Business\Payment\Request\InquireRequest;
-use SprykerEco\Zed\Computop\Business\Payment\Request\RefundRequest;
-use SprykerEco\Zed\Computop\Business\Payment\Request\ReverseRequest;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
@@ -40,7 +40,7 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @var null|\SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactory
+     * @var null|\SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactory
      */
     protected $mapperFactory = null;
 
@@ -55,7 +55,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected $orderFactory = null;
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\ComputopBusinessMapperFactoryInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactoryInterface
      */
     public function createMapperFactory()
     {
@@ -110,7 +110,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      * @param string $paymentMethod
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
     public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -130,7 +130,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      * @param string $paymentMethod
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
     public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -152,7 +152,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      * @param string $paymentMethod
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
     public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -174,7 +174,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      * @param string $paymentMethod
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
     public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -196,7 +196,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      * @param string $paymentMethod
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
     public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {

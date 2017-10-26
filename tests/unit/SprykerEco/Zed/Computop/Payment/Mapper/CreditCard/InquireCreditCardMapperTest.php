@@ -7,7 +7,7 @@
 
 namespace Unit\SprykerEco\Zed\Computop\Payment\Mapper\CreditCard;
 
-use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\InquireCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\InquireCreditCardMapper;
 
 /**
  * @group Unit
@@ -21,7 +21,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Mapper\CreditCard\InquireCreditCard
 class InquireCreditCardMapperTest extends AbstractCreditCardMapperTest
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
      */
     protected function createMapper()
     {
