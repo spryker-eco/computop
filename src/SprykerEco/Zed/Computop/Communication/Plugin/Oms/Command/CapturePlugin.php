@@ -58,7 +58,7 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
             return $orderTransfer->getTotals()->getGrandTotal();
         }
 
-        return $orderTransfer->getTotals()->getSubtotal();
+        return $orderTransfer->getTotals()->getSubtotal() - $orderTransfer->getTotals()->getDiscountTotal();
     }
 
     /**

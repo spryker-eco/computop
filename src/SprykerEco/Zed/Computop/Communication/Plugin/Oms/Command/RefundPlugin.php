@@ -58,7 +58,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
             return $orderTransfer->getTotals()->getRefundTotal();
         }
 
-        return $orderTransfer->getTotals()->getSubtotal();
+        return $orderTransfer->getTotals()->getSubtotal() - $orderTransfer->getTotals()->getDiscountTotal();
     }
 
     /**
