@@ -51,26 +51,6 @@ abstract class AbstractPaymentRequest
     }
 
     /**
-     * @param array $requestData
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    protected function sendRequest(array $requestData)
-    {
-        $requestData = $this
-            ->adapter
-            ->sendRequest($requestData);
-
-        $responseTransfer = $this
-            ->converter
-            ->toTransactionResponseTransfer(
-                $requestData
-            );
-
-        return $responseTransfer;
-    }
-
-    /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
@@ -92,6 +72,26 @@ abstract class AbstractPaymentRequest
     public function registerMapper(AbstractMapperInterface $paymentMethod)
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
+    }
+
+    /**
+     * @param array $requestData
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    protected function sendRequest(array $requestData)
+    {
+        $requestData = $this
+            ->adapter
+            ->sendRequest($requestData);
+
+        $responseTransfer = $this
+            ->converter
+            ->toTransactionResponseTransfer(
+                $requestData
+            );
+
+        return $responseTransfer;
     }
 
     /**
