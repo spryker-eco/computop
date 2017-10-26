@@ -82,6 +82,6 @@ class RefundPaymentTest extends AbstractPaymentTest
      */
     protected function getApiAdapterFunctionName()
     {
-        return 'createRefundAdapter';
+        return 'getRefundAdapter';
     }
 }

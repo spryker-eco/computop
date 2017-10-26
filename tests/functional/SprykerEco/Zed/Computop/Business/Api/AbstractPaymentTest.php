@@ -14,9 +14,9 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
+use SprykerEco\Zed\Computop\ComputopConfig as SprykerComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
@@ -81,7 +81,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
             $paymentOrderItemEntity
                 ->setFkPaymentComputop($computopPaymentEntity->getIdPaymentComputop())
                 ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
-            $paymentOrderItemEntity->setStatus(ComputopConstants::COMPUTOP_OMS_STATUS_NEW);
+            $paymentOrderItemEntity->setStatus(SprykerComputopConfig::OMS_STATUS_NEW);
             $paymentOrderItemEntity->save();
         }
     }

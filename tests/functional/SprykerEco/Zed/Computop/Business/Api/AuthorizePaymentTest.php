@@ -86,6 +86,6 @@ class AuthorizePaymentTest extends AbstractPaymentTest
      */
     protected function getApiAdapterFunctionName()
     {
-        return 'createAuthorizeAdapter';
+        return 'getAuthorizeAdapter';
     }
 }

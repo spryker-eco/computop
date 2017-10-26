@@ -90,6 +90,6 @@ class InquirePaymentTest extends AbstractPaymentTest
      */
     protected function getApiAdapterFunctionName()
     {
-        return 'createInquireAdapter';
+        return 'getInquireAdapter';
     }
 }

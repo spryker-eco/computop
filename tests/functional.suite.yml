@@ -11,6 +11,4 @@ modules:
         # add a framework module here
         - \Computop\Module\EnvironmentModule
         - \Computop\Helper\Functional
-        - \Propel\Module\PropelInstall
-        - \Propel\Module\Database
         - \Computop\Module\FunctionalModule
