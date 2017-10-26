@@ -7,8 +7,50 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+
 interface ComputopBusinessApiFactoryInterface
 {
+    /**
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+
+    /**
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+
+    /**
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+
+    /**
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+
+    /**
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
