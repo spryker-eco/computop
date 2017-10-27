@@ -15,6 +15,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig as SprykerComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
@@ -91,6 +92,15 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
      */
     protected function createFactory()
     {
+        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
+        $apiBuilder->setMethods([
+            $this->getApiAdapterFunctionName(),
+        ]);
+        $apiStub = $apiBuilder->getMock();
+
+        $apiStub->method($this->getApiAdapterFunctionName())
+                ->willReturn($this->getApiAdapter());
+
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(
             [
@@ -98,7 +108,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getComputopService',
                 'getQueryContainer',
                 'getPaymentMethod',
-                $this->getApiAdapterFunctionName(),
+                'createApiFactory',
             ]
         );
 
@@ -116,8 +126,8 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $stub->method('getPaymentMethod')
             ->willReturn(ComputopConfig::PAYMENT_METHOD_CREDIT_CARD);
 
-        $stub->method($this->getApiAdapterFunctionName())
-            ->willReturn($this->getApiAdapter());
+        $stub->method('createApiFactory')
+            ->willReturn($apiStub);
 
         return $stub;
     }

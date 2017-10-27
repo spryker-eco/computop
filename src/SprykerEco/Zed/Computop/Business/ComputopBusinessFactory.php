@@ -285,44 +285,4 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_OMS);
     }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function getAuthorizeAdapter()
-    {
-        return $this->createApiFactory()->createAuthorizeAdapter();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function getInquireAdapter()
-    {
-        return $this->createApiFactory()->createInquireAdapter();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function getReverseAdapter()
-    {
-        return $this->createApiFactory()->createReverseAdapter();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function getCaptureAdapter()
-    {
-        return $this->createApiFactory()->createCaptureAdapter();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    protected function getRefundAdapter()
-    {
-        return $this->createApiFactory()->createRefundAdapter();
-    }
 }

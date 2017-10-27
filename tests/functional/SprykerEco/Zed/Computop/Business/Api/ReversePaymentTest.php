@@ -82,6 +82,6 @@ class ReversePaymentTest extends AbstractPaymentTest
      */
     protected function getApiAdapterFunctionName()
     {
-        return 'getReverseAdapter';
+        return 'createReverseAdapter';
     }
 }

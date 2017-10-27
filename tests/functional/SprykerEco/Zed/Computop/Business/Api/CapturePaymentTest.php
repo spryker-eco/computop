@@ -82,6 +82,6 @@ class CapturePaymentTest extends AbstractPaymentTest
      */
     protected function getApiAdapterFunctionName()
     {
-        return 'getCaptureAdapter';
+        return 'createCaptureAdapter';
     }
 }

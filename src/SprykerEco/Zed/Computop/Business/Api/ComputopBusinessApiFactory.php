@@ -58,7 +58,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new AuthorizationRequest(
-            $this->getAuthorizeAdapter(),
+            $this->createAuthorizeAdapter(),
             $this->createApiFactory()->createAuthorizeConverter(),
             $paymentMethod
         );
@@ -78,7 +78,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new InquireRequest(
-            $this->getInquireAdapter(),
+            $this->createInquireAdapter(),
             $this->createApiFactory()->createInquireConverter(),
             $paymentMethod
         );
@@ -100,7 +100,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new ReverseRequest(
-            $this->getReverseAdapter(),
+            $this->createReverseAdapter(),
             $this->createApiFactory()->createReverseConverter(),
             $paymentMethod
         );
@@ -122,7 +122,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new CaptureRequest(
-            $this->getCaptureAdapter(),
+            $this->createCaptureAdapter(),
             $this->createApiFactory()->createCaptureConverter(),
             $paymentMethod
         );
@@ -144,7 +144,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new RefundRequest(
-            $this->getRefundAdapter(),
+            $this->createRefundAdapter(),
             $this->createApiFactory()->createRefundConverter(),
             $paymentMethod
         );
@@ -156,46 +156,6 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper($computopHeaderPayment));
 
         return $paymentRequest;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createAuthorizeAdapter()
-    {
-        return new AuthorizeApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createReverseAdapter()
-    {
-        return new ReverseApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createInquireAdapter()
-    {
-        return new InquireApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createCaptureAdapter()
-    {
-        return new CaptureApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createRefundAdapter()
-    {
-        return new RefundApiAdapter($this->getConfig());
     }
 
     /**
@@ -236,5 +196,45 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     public function createRefundConverter()
     {
         return new RefundConverter($this->getComputopService(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createAuthorizeAdapter()
+    {
+        return new AuthorizeApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createReverseAdapter()
+    {
+        return new ReverseApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createInquireAdapter()
+    {
+        return new InquireApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createCaptureAdapter()
+    {
+        return new CaptureApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createRefundAdapter()
+    {
+        return new RefundApiAdapter($this->getConfig());
     }
 }

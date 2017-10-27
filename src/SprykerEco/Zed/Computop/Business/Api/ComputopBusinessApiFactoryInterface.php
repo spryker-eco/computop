@@ -52,31 +52,6 @@ interface ComputopBusinessApiFactoryInterface
     public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createAuthorizeAdapter();
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createReverseAdapter();
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createInquireAdapter();
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createCaptureAdapter();
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
-     */
-    public function createRefundAdapter();
-
-    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     public function createAuthorizeConverter();
