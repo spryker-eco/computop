@@ -1,5 +1,13 @@
 <?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEcoTest\Zed\Computop;
+
+use Codeception\Actor;
 
 /**
  * Inherited Methods
@@ -15,8 +23,8 @@ namespace SprykerEcoTest\Zed\Computop;
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
-class ComputopZedTester extends \Codeception\Actor
+ */
+class ComputopZedTester extends Actor
 {
     use _generated\ComputopZedTesterActions;
 

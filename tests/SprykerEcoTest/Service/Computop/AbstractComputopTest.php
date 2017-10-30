@@ -8,7 +8,6 @@
 namespace SprykerEcoTest\Service\Computop;
 
 use Codeception\TestCase\Test;
-use SprykerEcoTest\Service\Computop\ComputopServiceTestHelper;
 use SprykerEcoTest\Service\Computop\Mapper\ComputopMapperTestHelper;
 
 abstract class AbstractComputopTest extends Test

@@ -7,7 +7,6 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Api;
 
-use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 use GuzzleHttp\Psr7;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
@@ -20,6 +19,7 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig as SprykerComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
+use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 
 abstract class AbstractPaymentTest extends AbstractSetUpTest
 {

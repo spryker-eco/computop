@@ -8,7 +8,6 @@
 namespace SprykerEcoTest\Zed\Computop\Api\Converter;
 
 use Codeception\TestCase\Test;
-use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestHelper;
 
 abstract class AbstractConverterTest extends Test
 {

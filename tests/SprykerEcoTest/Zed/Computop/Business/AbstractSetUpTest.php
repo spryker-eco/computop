@@ -9,8 +9,8 @@ namespace SprykerEcoTest\Zed\Computop\Business;
 
 use Codeception\TestCase\Test;
 use SprykerEcoTest\Zed\Computop\Api\ApiPaymentTestHelper;
-use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
 use SprykerEcoTest\Zed\Computop\Module\FunctionalModule;
+use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
 
 abstract class AbstractSetUpTest extends Test
 {

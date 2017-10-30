@@ -8,8 +8,6 @@
 namespace SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard;
 
 use Codeception\TestCase\Test;
-use SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard\CreditCardMapperTestConstants;
-use SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard\CreditCardMapperTestHelper;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 
 abstract class AbstractCreditCardMapperTest extends Test

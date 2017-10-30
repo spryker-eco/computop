@@ -7,12 +7,12 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Logger;
 
-use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLogQuery;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
+use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 
 /**
  * @group Functional

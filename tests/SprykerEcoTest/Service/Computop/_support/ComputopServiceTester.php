@@ -1,5 +1,13 @@
 <?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEcoTest\Service\Computop;
+
+use Codeception\Actor;
 
 /**
  * Inherited Methods
@@ -15,8 +23,8 @@ namespace SprykerEcoTest\Service\Computop;
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
-class ComputopServiceTester extends \Codeception\Actor
+ */
+class ComputopServiceTester extends Actor
 {
     use _generated\ComputopServiceTesterActions;
 

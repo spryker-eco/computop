@@ -7,9 +7,9 @@
 
 namespace SprykerEcoTest\Zed\Computop\Api\Converter\Inquire;
 
-use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
 
 /**
  * @group Unit

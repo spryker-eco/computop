@@ -7,13 +7,12 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
-use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestConstants;
-use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestConstants;
 
 /**
  * @group Functional

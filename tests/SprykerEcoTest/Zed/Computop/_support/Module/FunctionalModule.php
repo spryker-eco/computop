@@ -35,7 +35,7 @@ class FunctionalModule extends Module
      *
      * Requires module container (to provide access between modules of suite) and config.
      *
-     * @param ModuleContainer $moduleContainer
+     * @param \Codeception\Lib\ModuleContainer $moduleContainer
      * @param null $config
      */
     public function __construct(ModuleContainer $moduleContainer, $config = null)
@@ -49,7 +49,9 @@ class FunctionalModule extends Module
     /**
      * **HOOK** executed before test
      *
-     * @param TestInterface $test
+     * @param \Codeception\TestInterface $test
+     *
+     * @return void
      */
     public function _before(TestInterface $test)
     {
@@ -61,7 +63,7 @@ class FunctionalModule extends Module
     }
 
     /**
-     * @param TestInterface $test
+     * @param \Codeception\TestInterface $test
      *
      * @return void
      */
@@ -77,7 +79,7 @@ class FunctionalModule extends Module
     }
 
     /**
-     * @param TestInterface $test
+     * @param \Codeception\TestInterface $test
      * @param \Exception $fail
      *
      * @return void

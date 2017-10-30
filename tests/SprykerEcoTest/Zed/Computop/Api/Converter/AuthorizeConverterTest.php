@@ -7,7 +7,6 @@
 
 namespace SprykerEcoTest\Zed\Computop\Api\Converter;
 
-use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;

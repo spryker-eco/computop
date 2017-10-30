@@ -7,7 +7,6 @@
 
 namespace SprykerEcoTest\Service\Computop\Mapper;
 
-use SprykerEcoTest\Service\Computop\Mapper\ComputopMapperTestConstants;
 use SprykerEcoTest\Service\Computop\AbstractComputopTest;
 
 /**
