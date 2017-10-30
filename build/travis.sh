@@ -26,7 +26,8 @@ function runTests {
     ./setup_test -f
 
     echo "Running tests..."
-    vendor/bin/codecept run -c "tests/PyzTest/Zed/$moduleNiceName" Business
+    vendor/bin/codecept build -c "vendor/spryker-eco/$MODULE_NAME/"
+    vendor/bin/codecept run -c "vendor/spryker-eco/$MODULE_NAME/"
     if [ "$?" = 0 ]; then
         buildMessage="$buildMessage\n${GREEN}Tests are green"
         result=0
