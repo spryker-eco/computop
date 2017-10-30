@@ -9,13 +9,6 @@ globalResult=1
 buildMessage=""
 
 function runTests {
-    echo "Preparing environment..."
-    echo "Copying test files to DemoShop folder "
-    cp -r "vendor/spryker-eco/$MODULE_NAME/tests/Functional/SprykerEco/Zed/$moduleNiceName" tests/PyzTest/Zed/
-
-    echo "Fix namespace of tests..."
-    grep -rl ' Functional\\SprykerEco' "tests/PyzTest/Zed/$moduleNiceName/Business/" | xargs sed -i -e 's/ Functional\\SprykerEco/ PyzTest/g'
-
     echo "Copy configuration..."
     if [ -f "vendor/spryker-eco/$MODULE_NAME/config/Shared/config.dist.php" ]; then
         tail -n +2 "vendor/spryker-eco/$MODULE_NAME/config/Shared/config.dist.php" >> config/Shared/config_default-devtest.php
