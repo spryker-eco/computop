@@ -2,7 +2,7 @@
 
 RED='\033[1;31m'
 GREEN='\033[1;32m'
-moduleNiceName='Amazonpay'
+moduleNiceName='Computop'
 modulePath="$TRAVIS_BUILD_DIR/$MODULE_DIR"
 scriptPath="$TRAVIS_BUILD_DIR/$MODULE_DIR/build"
 globalResult=1
