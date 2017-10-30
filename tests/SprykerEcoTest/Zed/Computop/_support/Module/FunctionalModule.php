@@ -36,7 +36,7 @@ class FunctionalModule extends Module
      * Requires module container (to provide access between modules of suite) and config.
      *
      * @param \Codeception\Lib\ModuleContainer $moduleContainer
-     * @param null $config
+     * @param mixed $config
      */
     public function __construct(ModuleContainer $moduleContainer, $config = null)
     {
