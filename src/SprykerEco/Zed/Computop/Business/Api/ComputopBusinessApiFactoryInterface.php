@@ -7,32 +7,49 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+
 interface ComputopBusinessApiFactoryInterface
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createAuthorizeAdapter();
+    public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createReverseAdapter();
+    public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createInquireAdapter();
+    public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createCaptureAdapter();
+    public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createRefundAdapter();
+    public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
