@@ -107,4 +107,6 @@ interface ComputopFieldName
     const SHIPPING_STREET_NUMBER = 'sdStreetNr';
     const SHIPPING_EMAIL = 'sdEMail';
     const AGE_ACCEPTED = 'AgeAccepted';
+    const PAYMENT_PURPOSE = 'paymentPurpose';
+    const PAYMENT_GUARANTEE = 'paymentGuarantee';
 }
