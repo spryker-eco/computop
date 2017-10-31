@@ -15,7 +15,7 @@ interface ComputopStubInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return void
      */
     public function logResponse(ComputopResponseHeaderTransfer $responseTransfer);
 

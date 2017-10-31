@@ -23,7 +23,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return void
      */
     public function logResponse(ComputopResponseHeaderTransfer $responseTransfer);
 
@@ -35,7 +35,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @return void
      */
     public function saveSofortResponse(QuoteTransfer $quoteTransfer);
 
@@ -47,7 +47,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @return void
      */
     public function savePaydirektResponse(QuoteTransfer $quoteTransfer);
 }
