@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model\Converter;
 
-interface ComputopInterface
+interface ComputopConverterInterface
 {
     /**
      * @param array $decryptedArray

@@ -10,7 +10,7 @@ namespace SprykerEco\Service\Computop\Model\Mapper;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
-interface ComputopInterface
+interface ComputopMapperInterface
 {
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer

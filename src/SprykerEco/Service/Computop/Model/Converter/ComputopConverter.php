@@ -13,7 +13,7 @@ use SprykerEco\Service\Computop\Model\AbstractComputop;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopFieldName;
 
-class Computop extends AbstractComputop implements ComputopInterface
+class ComputopConverter extends AbstractComputop implements ComputopConverterInterface
 {
     /**
      * @param array $decryptedArray

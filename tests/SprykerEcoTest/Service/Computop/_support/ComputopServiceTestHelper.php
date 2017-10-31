@@ -9,8 +9,8 @@ namespace SprykerEcoTest\Service\Computop;
 
 use Codeception\TestCase\Test;
 use SprykerEco\Service\Computop\ComputopConfig;
-use SprykerEco\Service\Computop\Model\Converter\Computop as ComputopConverter;
-use SprykerEco\Service\Computop\Model\Mapper\Computop as ComputopMapper;
+use SprykerEco\Service\Computop\Model\Converter\ComputopConverter;
+use SprykerEco\Service\Computop\Model\Mapper\ComputopMapper;
 
 class ComputopServiceTestHelper extends Test
 {
@@ -33,7 +33,7 @@ class ComputopServiceTestHelper extends Test
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Mapper\Computop
+     * @return \SprykerEco\Service\Computop\Model\Mapper\ComputopMapperInterface
      */
     public function createMapper()
     {
@@ -41,7 +41,7 @@ class ComputopServiceTestHelper extends Test
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\Model\Converter\Computop
+     * @return \SprykerEco\Service\Computop\Model\Converter\ComputopConverterInterface
      */
     public function createConverter()
     {

@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\Model\AbstractComputop;
 
-class Computop extends AbstractComputop implements ComputopInterface
+class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
 {
     const ITEMS_SEPARATOR = '|';
     const ATTRIBUTES_SEPARATOR = '-';
