@@ -29,7 +29,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Save response to DB
+     * - Save Sofort response to DB
      *
      * @api
      *
@@ -41,7 +41,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Save response to DB
+     * - Save Paydirekt response to DB
      *
      * @api
      *
