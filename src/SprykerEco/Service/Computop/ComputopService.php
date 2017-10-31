@@ -74,11 +74,11 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
         /** @var \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header */
         $header = $this->getFactory()->createComputopConverter()->extractHeader($decryptedArray, $method);
 
-        $neededMac = $this->getHashValue($this->getFactory()->createComputopMapper()->getMacResponseEncryptedValue($header));
+        $expectedMac = $this->getHashValue($this->getFactory()->createComputopMapper()->getMacResponseEncryptedValue($header));
         $this
             ->getFactory()
             ->createComputopConverter()
-            ->checkMacResponse($header->getMac(), $neededMac, $header->getMethod());
+            ->checkMacResponse($header->getMac(), $expectedMac, $header->getMethod());
 
         return $header;
     }

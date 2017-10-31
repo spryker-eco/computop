@@ -43,12 +43,12 @@ interface ComputopInterface
 
     /**
      * @param string $responseMac
-     * @param string $neededMac
+     * @param string $expectedMac
      * @param string $method
      *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      *
      * @return void
      */
-    public function checkMacResponse($responseMac, $neededMac, $method);
+    public function checkMacResponse($responseMac, $expectedMac, $method);
 }

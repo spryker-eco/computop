@@ -94,16 +94,16 @@ class Computop extends AbstractComputop implements ComputopInterface
 
     /**
      * @param string $responseMac
-     * @param string $neededMac
+     * @param string $expectedMac
      * @param string $method
      *
      * @throws \SprykerEco\Service\Computop\Exception\ComputopConverterException
      *
      * @return void
      */
-    public function checkMacResponse($responseMac, $neededMac, $method)
+    public function checkMacResponse($responseMac, $expectedMac, $method)
     {
-        if ($this->config->isMacRequired($method) && $responseMac !== $neededMac) {
+        if ($this->config->isMacRequired($method) && $responseMac !== $expectedMac) {
             throw new ComputopConverterException('MAC is incorrect');
         }
     }
