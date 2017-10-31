@@ -148,6 +148,34 @@ class CallbackController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successIdealAction()
+    {
+        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+            $this->getFactory()->createOrderIdealConverter()
+        );
+
+        $handler = $this->getFactory()->createIdealPaymentHandler();
+
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+
+        $quoteTransfer = $handler->addPaymentToQuote(
+            $quoteTransfer,
+            $this->orderResponseTransfer
+        );
+
+        $this->getFactory()->getComputopClient()->saveSofortResponse($quoteTransfer);
+
+        if (!$quoteTransfer->getCustomer()) {
+            //Todo: add translation
+            $this->addSuccessMessage('Your order has been placed successfully! Thank you for shopping with us!');
+        }
+
+        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function failureAction()
     {
         $this->addErrorMessage($this->getErrorMessageText());
