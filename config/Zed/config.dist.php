@@ -22,6 +22,7 @@ $config[ComputopConstants::PAY_PAL_ORDER_ACTION] = 'https://www.computop-paygate
 $config[ComputopConstants::DIRECT_DEBIT_ORDER_ACTION] = 'https://www.computop-paygate.com/paysdd.aspx';
 $config[ComputopConstants::SOFORT_ORDER_ACTION] = 'https://www.computop-paygate.com/sofort.aspx';
 $config[ComputopConstants::PAYDIREKT_ORDER_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
+$config[ComputopConstants::IDEAL_ORDER_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 
 $config[ComputopConstants::RESPONSE_MAC_REQUIRED] = [
     ComputopConfig::INIT_METHOD, // Todo: add methods in case of Paygate form connection
