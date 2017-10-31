@@ -38,6 +38,16 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return void
      */
+    public function saveIdealResponse(QuoteTransfer $responseTransfer)
+    {
+        $this->zedStub->call('/computop/gateway/save-ideal-response', $responseTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
     public function savePaydirektResponse(QuoteTransfer $responseTransfer)
     {
         $this->zedStub->call('/computop/gateway/save-paydirekt-response', $responseTransfer);

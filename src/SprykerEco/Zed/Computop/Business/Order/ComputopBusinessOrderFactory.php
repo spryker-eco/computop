@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Order;
 
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\IdealMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\SofortMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\CreditCardMapper;
@@ -58,5 +59,13 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     public function createOrderPaydirektMapper()
     {
         return new PaydirektMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderIdealMapper()
+    {
+        return new IdealMapper();
     }
 }

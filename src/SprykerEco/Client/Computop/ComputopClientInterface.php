@@ -41,6 +41,18 @@ interface ComputopClientInterface
 
     /**
      * Specification:
+     * - Save Ideal response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveIdealResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Save Paydirekt response to DB
      *
      * @api

@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\IdealMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\SofortMapper;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
@@ -21,6 +22,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\IdealResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\PaydirektResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundResponseHandler;
@@ -79,6 +81,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $orderSaver->registerMapper($this->createOrderFactory()->createOrderDirectDebitMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createOrderSofortMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createOrderPaydirektMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createOrderIdealMapper());
 
         return $orderSaver;
     }
@@ -209,6 +212,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\OrderResponseHandlerInterface
      */
+    public function createIdealResponseHandler()
+    {
+        return new IdealResponseHandler($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\OrderResponseHandlerInterface
+     */
     public function createPaydirektResponseHandler()
     {
         return new PaydirektResponseHandler($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
@@ -250,6 +261,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook = new ComputopPostSaveHook($this->getConfig());
         $postSaveHook->registerMapper($this->createPostSaveSofortMapper());
         $postSaveHook->registerMapper($this->createPostSavePaydirektMapper());
+        $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
 
         return $postSaveHook;
     }
@@ -268,6 +280,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createPostSavePaydirektMapper()
     {
         return new PaydirektMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
+     */
+    protected function createPostSaveIdealMapper()
+    {
+        return new IdealMapper($this->getConfig(), $this->getComputopService());
     }
 
     /**

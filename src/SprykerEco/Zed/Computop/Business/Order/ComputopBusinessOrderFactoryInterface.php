@@ -33,4 +33,9 @@ interface ComputopBusinessOrderFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     public function createOrderPaydirektMapper();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createOrderIdealMapper();
 }

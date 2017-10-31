@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop;
 use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerEco\Yves\Computop\Converter\OrderCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\OrderDirectDebitConverter;
+use SprykerEco\Yves\Computop\Converter\OrderIdealConverter;
 use SprykerEco\Yves\Computop\Converter\OrderPaydirektConverter;
 use SprykerEco\Yves\Computop\Converter\OrderPayPalConverter;
 use SprykerEco\Yves\Computop\Converter\OrderSofortConverter;
@@ -26,6 +27,7 @@ use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopCreditCardPaymentHandler;
@@ -212,6 +214,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaymentHandlerInterface
+     */
+    public function createIdealPaymentHandler()
+    {
+        return new ComputopIdealPaymentHandler();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
     public function createOrderCreditCardConverter()
@@ -249,6 +259,14 @@ class ComputopFactory extends AbstractFactory
     public function createOrderSofortConverter()
     {
         return new OrderSofortConverter($this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    public function createOrderIdealConverter()
+    {
+        return new OrderIdealConverter($this->getComputopService());
     }
 
     /**
