@@ -16,7 +16,7 @@ class ComputopConfig extends AbstractBundleConfig
     const OMS_STATUS_AUTHORIZED = 'authorized';
     const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
     const OMS_STATUS_CAPTURED = 'captured';
-    const OMS_STATUS_CAPTURING_FAILED = 'capturing failed';
+    const OMS_STATUS_CAPTURING_FAILED = 'capture failed';
     const OMS_STATUS_CANCELLED = 'cancelled';
     const OMS_STATUS_REFUNDED = 'refunded';
 

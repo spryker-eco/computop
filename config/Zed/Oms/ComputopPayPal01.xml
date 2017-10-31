@@ -14,7 +14,7 @@
             <state name="capturing failed" reserved="false" />
             <state name="shipped" reserved="true" />
             <state name="refunded" reserved="false" />
-            <state name="refunding failed" reserved="false" />
+            <state name="refund failed" reserved="false" />
             <state name="closed" reserved="false"/>
         </states>
 
@@ -67,7 +67,7 @@
 
             <transition>
                 <source>captured</source>
-                <target>refunding failed</target>
+                <target>refund failed</target>
                 <event>refund</event>
             </transition>
 
