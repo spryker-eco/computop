@@ -41,9 +41,5 @@
   },
   "require-dev": {
     "spryker/code-sniffer": "dev-master"
-  },
-  "scripts": {
-    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v --ignore=/vendor/ ./",
-    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v --ignore=/vendor/ ./"
   }
 }
