@@ -3,9 +3,14 @@
  * Copy over the following configs to your config
  */
 
+use Spryker\Shared\Oms\OmsConstants;
+use Spryker\Shared\Sales\SalesConstants;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
+/**
+ * Add new options
+ */
 $config[ComputopConstants::MERCHANT_ID] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
 $config[ComputopConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
 $config[ComputopConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
@@ -32,4 +37,32 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
     ComputopConfig::PAYMENT_METHOD_IDEAL,
+];
+
+/**
+ * Update existing one options
+ */
+$config[OmsConstants::PROCESS_LOCATION] = [
+    //...
+    APPLICATION_ROOT_DIR . '/vendor/spryker-eco/computop/config/Zed/Oms',
+];
+$config[OmsConstants::ACTIVE_PROCESSES] = [
+    //...
+    //Add needed payment types
+    'ComputopCreditCard01',
+    'ComputopDirectDebit01',
+    'ComputopPaydirekt01',
+    'ComputopPayPal01',
+    'ComputopSofort01',
+    'ComputopIdeal01',
+];
+$config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
+    //...
+    //Add needed payment types
+    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD => 'ComputopCreditCard01',
+    ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT => 'ComputopDirectDebit01',
+    ComputopConfig::PAYMENT_METHOD_PAYDIREKT => 'ComputopPaydirekt01',
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL => 'ComputopPayPal01',
+    ComputopConfig::PAYMENT_METHOD_SOFORT => 'ComputopSofort01',
+    ComputopConfig::PAYMENT_METHOD_IDEAL => 'ComputopIdeal01',
 ];
