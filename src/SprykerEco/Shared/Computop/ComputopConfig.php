@@ -13,10 +13,11 @@ class ComputopConfig extends AbstractBundleConfig
 {
     const PROVIDER_NAME = 'Computop';
     const PAYMENT_METHOD_CREDIT_CARD = 'ComputopCreditCard';
-    const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
     const PAYMENT_METHOD_DIRECT_DEBIT = 'ComputopDirectDebit';
-    const PAYMENT_METHOD_SOFORT = 'ComputopSofort';
+    const PAYMENT_METHOD_IDEAL = 'ComputopIdeal';
     const PAYMENT_METHOD_PAYDIREKT = 'ComputopPaydirekt';
+    const PAYMENT_METHOD_PAY_PAL = 'ComputopPayPal';
+    const PAYMENT_METHOD_SOFORT = 'ComputopSofort';
 
     //Computop provider constants
     const CAPTURE_MANUAL_TYPE = 'MANUAL';
