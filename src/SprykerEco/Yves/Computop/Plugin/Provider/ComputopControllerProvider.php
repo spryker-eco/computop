@@ -31,6 +31,9 @@ class ComputopControllerProvider extends YvesControllerProvider
     const PAYDIREKT_SUCCESS_PATH = '/computop/paydirekt-success';
     const PAYDIREKT_SUCCESS_PATH_NAME = 'computop-paydirekt-success';
 
+    const IDEAL_SUCCESS_PATH = '/computop/ideal-success';
+    const IDEAL_SUCCESS_PATH_NAME = 'computop-ideal-success';
+
     const FAILURE_PATH = '/computop/failure';
     const FAILURE_PATH_NAME = 'computop-failure';
 
@@ -79,6 +82,14 @@ class ComputopControllerProvider extends YvesControllerProvider
             self::MODULE_NAME,
             self::CALLBACK_CONTROLLER_NAME,
             'successPaydirekt'
+        );
+
+        $this->createController(
+            self::IDEAL_SUCCESS_PATH,
+            self::IDEAL_SUCCESS_PATH_NAME,
+            self::MODULE_NAME,
+            self::CALLBACK_CONTROLLER_NAME,
+            'successIdeal'
         );
 
         $this->createController(
