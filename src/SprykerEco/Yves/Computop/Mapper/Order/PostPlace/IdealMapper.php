@@ -7,27 +7,26 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Order\PostPlace;
 
-use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
+use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class SofortMapper extends AbstractPostPlaceMapper
+class IdealMapper extends AbstractPostPlaceMapper
 {
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopSofortPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopIdealPaymentTransfer
      */
     protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
     {
-        $computopPaymentTransfer = new ComputopSofortPaymentTransfer();
+        $computopPaymentTransfer = new ComputopIdealPaymentTransfer();
 
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS_PATH_NAME))
         );
+        //ToDo:update mapper
         $computopPaymentTransfer->setOrderDesc(
             $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );

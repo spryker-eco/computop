@@ -16,10 +16,12 @@ use SprykerEco\Yves\Computop\Converter\OrderSofortConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\IdealFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PaydirektFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
+use SprykerEco\Yves\Computop\Form\IdealSubForm;
 use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
@@ -29,6 +31,7 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPayPalPaymentHandler;
+use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\SofortMapper;
 use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\CreditCardMapper;
@@ -81,6 +84,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createIdealForm()
+    {
+        return new IdealSubForm();
+    }
+
+    /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createCreditCardFormDataProvider()
@@ -118,6 +129,14 @@ class ComputopFactory extends AbstractFactory
     public function createPaydirektFormDataProvider()
     {
         return new PaydirektFormDataProvider($this->getQuoteClient(), $this->createOrderPaydirektMapper());
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    public function createIdealFormDataProvider()
+    {
+        return new IdealFormDataProvider($this->getQuoteClient(), $this->createOrderIdealMapper());
     }
 
     /**
@@ -270,6 +289,14 @@ class ComputopFactory extends AbstractFactory
     public function createOrderPaydirektMapper()
     {
         return new PaydirektMapper($this->getComputopService(), $this->getApplication());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     */
+    public function createOrderIdealMapper()
+    {
+        return new IdealMapper($this->getComputopService(), $this->getApplication());
     }
 
     /**

@@ -29,4 +29,6 @@ $config[ComputopConstants::RESPONSE_MAC_REQUIRED] = [
 
 $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
+    ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
+    ComputopConfig::PAYMENT_METHOD_IDEAL,
 ];

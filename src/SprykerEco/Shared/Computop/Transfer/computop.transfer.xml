@@ -167,6 +167,31 @@
         <property name="paydirektOrderResponse" type="ComputopPaydirektOrderResponse"/>
     </transfer>
 
+    <transfer name="ComputopIdealPayment">
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="refNr" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="orderDesc" type="string" />
+        <property name="mac" type="string" />
+        <property name="userData" type="string" />
+        <property name="urlSuccess" type="string" />
+        <property name="urlFailure" type="string" />
+        <property name="urlNotify" type="string" />
+        <property name="response" type="string" />
+        <property name="reqId" type="string" />
+        <property name="bic" type="string" />
+        <property name="issuerId" type="string" />
+        <property name="plain" type="string" />
+        <property name="custom" type="string" />
+        <property name="clientIp" type="string" />
+        <property name="data" type="string" />
+        <property name="len" type="int" />
+        <property name="url" type="string" />
+        <property name="idealOrderResponse" type="ComputopIdealOrderResponse"/>
+    </transfer>
+
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
         <property name="code" type="string" />
@@ -287,6 +312,22 @@
         <property name="ageAccepted" type="string" />
     </transfer>
 
+    <transfer name="ComputopIdealOrderResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="userData" type="string" />
+        <property name="accountBank" type="string" />
+        <property name="accountOwner" type="string" />
+        <property name="bankAccountIban" type="string" />
+        <property name="bankAccountBic" type="string" />
+        <property name="paymentPurpose" type="string" />
+        <property name="paymentGuarantee" type="string" />
+        <property name="errorText" type="string" />
+        <property name="transactionID" type="string" />
+        <property name="plain" type="string" />
+        <property name="custom" type="string" />
+    </transfer>
+
     <transfer name="ComputopAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
@@ -338,6 +379,7 @@
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
         <property name="computopSofort" type="ComputopSofortPayment" />
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
+        <property name="computopIdeal" type="ComputopIdealPayment" />
     </transfer>
 
     <transfer name="Order">
@@ -346,6 +388,7 @@
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
         <property name="computopSofort" type="ComputopSofortPayment" />
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
+        <property name="computopIdeal" type="ComputopIdealPayment" />
     </transfer>
 
 </transfers>

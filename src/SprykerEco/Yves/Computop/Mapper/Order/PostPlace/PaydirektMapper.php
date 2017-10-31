@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Order\PostPlace;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
@@ -24,6 +25,7 @@ class PaydirektMapper extends AbstractPostPlaceMapper
     {
         $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
 
+        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAYDIREKT_SUCCESS_PATH_NAME))

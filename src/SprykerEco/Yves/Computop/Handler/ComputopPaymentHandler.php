@@ -8,8 +8,10 @@
 namespace SprykerEco\Yves\Computop\Handler;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Exception\PaymentMethodNotFoundException;
 
 class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
@@ -17,10 +19,13 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
     /**
      * @var array
      */
-    protected static $paymentMethods = [
-        ComputopConfig::PAYMENT_METHOD_SOFORT => ComputopConfig::PAYMENT_METHOD_SOFORT,
-        ComputopConfig::PAYMENT_METHOD_PAYDIREKT => ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
-    ];
+    protected $paymentMethods = [];
+
+    public function __construct()
+    {
+        $paymentMethods = Config::get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL);
+        $this->paymentMethods = array_combine($paymentMethods, $paymentMethods);
+    }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -48,8 +53,8 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
         $quoteTransfer
             ->getPayment()
             ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
-            ->setPaymentMethod(self::$paymentMethods[$paymentSelection])
-            ->setPaymentSelection(self::$paymentMethods[$paymentSelection]);
+            ->setPaymentMethod($this->paymentMethods[$paymentSelection])
+            ->setPaymentSelection($this->paymentMethods[$paymentSelection]);
     }
 
     /**
