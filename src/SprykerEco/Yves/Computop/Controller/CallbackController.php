@@ -210,8 +210,9 @@ class CallbackController extends AbstractController
      */
     protected function getErrorMessageText()
     {
-        $errorMessageText = 'Error:';
-        $errorMessageText .= ' (' . $this->orderResponseHeaderTransfer->getDescription() . ' | ' . $this->orderResponseHeaderTransfer->getCode() . ')';
+        $errorText = $this->orderResponseHeaderTransfer->getDescription();
+        $errorCode = $this->orderResponseHeaderTransfer->getCode();
+        $errorMessageText = sprintf('Error: %s ( %s )', $errorText, $errorCode);
 
         return $errorMessageText;
     }
