@@ -22,6 +22,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
@@ -36,6 +38,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
@@ -62,6 +66,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
@@ -86,6 +92,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
@@ -112,6 +120,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param array $orderItems
      *
      * @return void
@@ -126,6 +136,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
@@ -152,6 +164,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
@@ -177,6 +191,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      * @param string $method
      *
@@ -191,6 +207,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * TODO: add test
+     *
+     * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -208,6 +226,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * TODO: add test
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -224,6 +244,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     /**
      * TODO: add test
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -239,6 +261,8 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
     /**
      * TODO: add test
+     *
+     * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
