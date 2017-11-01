@@ -36,37 +36,11 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @var null|\SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory
-     */
-    protected $apiFactory = null;
-
-    /**
-     * @var null|\SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory
-     */
-    protected $orderFactory = null;
-
-    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactoryInterface
      */
     public function createApiFactory()
     {
-        if ($this->apiFactory === null) {
-            $this->apiFactory = new ComputopBusinessApiFactory();
-        }
-
-        return $this->apiFactory;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactoryInterface
-     */
-    public function createOrderFactory()
-    {
-        if ($this->orderFactory === null) {
-            $this->orderFactory = new ComputopBusinessOrderFactory();
-        }
-
-        return $this->orderFactory;
+        return new ComputopBusinessApiFactory();
     }
 
     /**
@@ -264,6 +238,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
 
         return $postSaveHook;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactoryInterface
+     */
+    protected function createOrderFactory()
+    {
+        return new ComputopBusinessOrderFactory();
     }
 
     /**

@@ -33,20 +33,11 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 class ComputopBusinessApiFactory extends ComputopBusinessFactory implements ComputopBusinessApiFactoryInterface
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactoryInterface|null
-     */
-    protected $mapperFactory = null;
-
-    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactoryInterface
      */
     protected function createMapperFactory()
     {
-        if ($this->mapperFactory === null) {
-            $this->mapperFactory = new ComputopBusinessMapperFactory();
-        }
-
-        return $this->mapperFactory;
+        return new ComputopBusinessMapperFactory();
     }
 
     /**
