@@ -7,9 +7,9 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Order;
 
+use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {
@@ -19,15 +19,15 @@ abstract class AbstractMapper implements AbstractMapperInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected $computopService;
 
     /**
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      */
-    public function __construct(ComputopConfig $config, ComputopToComputopServiceInterface $computopService)
+    public function __construct(ComputopConfig $config, ComputopServiceInterface $computopService)
     {
         $this->config = $config;
         $this->computopService = $computopService;

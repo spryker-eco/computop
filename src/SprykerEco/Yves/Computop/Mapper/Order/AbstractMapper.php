@@ -11,14 +11,14 @@ use Silex\Application;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
+use SprykerEco\Service\Computop\ComputopServiceInterface;
 
 abstract class AbstractMapper implements MapperInterface
 {
     const TRANS_ID_SEPARATOR = '-';
 
     /**
-     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
+     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected $computopService;
 
@@ -35,10 +35,10 @@ abstract class AbstractMapper implements MapperInterface
     abstract protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer);
 
     /**
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \Silex\Application $application
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService, Application $application)
+    public function __construct(ComputopServiceInterface $computopService, Application $application)
     {
         $this->computopService = $computopService;
         $this->application = $application;

@@ -17,7 +17,6 @@ use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig as SprykerComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 
@@ -118,7 +117,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
             ->willReturn($this->apiHelper->createConfig());
 
         $stub->method('getComputopService')
-            ->willReturn(new ComputopToComputopServiceBridge(new ComputopService()));
+            ->willReturn(new ComputopService(new ComputopService()));
 
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());

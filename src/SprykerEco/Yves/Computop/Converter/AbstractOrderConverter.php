@@ -7,19 +7,19 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface;
+use SprykerEco\Service\Computop\ComputopServiceInterface;
 
 abstract class AbstractOrderConverter implements ConverterInterface
 {
     /**
-     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
+     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected $computopService;
 
     /**
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService)
+    public function __construct(ComputopServiceInterface $computopService)
     {
         $this->computopService = $computopService;
     }

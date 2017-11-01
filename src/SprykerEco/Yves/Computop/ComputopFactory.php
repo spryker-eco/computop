@@ -150,7 +150,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
+     * @return \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     public function getComputopService()
     {

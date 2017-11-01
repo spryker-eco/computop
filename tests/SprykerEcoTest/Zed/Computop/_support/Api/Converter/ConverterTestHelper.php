@@ -10,10 +10,10 @@ namespace SprykerEcoTest\Zed\Computop\Api\Converter;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use GuzzleHttp\Psr7;
+use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
 class ConverterTestHelper extends Test
 {
@@ -69,7 +69,7 @@ class ConverterTestHelper extends Test
     public function createComputopServiceMock(array $decryptedArray)
     {
         $computopServiceMock = $this->createPartialMock(
-            ComputopToComputopServiceBridge::class,
+            ComputopService::class,
             ['getDecryptedArray', 'extractHeader', 'getResponseValue']
         );
         $computopServiceMock->method('getDecryptedArray')

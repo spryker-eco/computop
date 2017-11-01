@@ -9,8 +9,8 @@ namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
+use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationBridge;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesBridge;
@@ -45,7 +45,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container[self::COMPUTOP_SERVICE] = function () use ($container) {
-            return new ComputopToComputopServiceBridge($container->getLocator()->computop()->service());
+            return new ComputopService($container->getLocator()->computop()->service());
         };
 
         return $container;
@@ -61,7 +61,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideBusinessLayerDependencies($container);
 
         $container[self::COMPUTOP_SERVICE] = function () use ($container) {
-            return new ComputopToComputopServiceBridge($container->getLocator()->computop()->service());
+            return new ComputopService($container->getLocator()->computop()->service());
         };
 
         $container[self::FACADE_OMS] = function () use ($container) {

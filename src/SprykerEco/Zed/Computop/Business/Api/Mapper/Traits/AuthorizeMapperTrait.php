@@ -9,8 +9,8 @@ namespace SprykerEco\Zed\Computop\Business\Api\Mapper\Traits;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 trait AuthorizeMapperTrait
 {
@@ -33,12 +33,12 @@ trait AuthorizeMapperTrait
     }
 
     /**
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return string
      */
-    protected function getOrderDesc(ComputopToComputopServiceInterface $computopService, OrderTransfer $orderTransfer)
+    protected function getOrderDesc(ComputopServiceInterface $computopService, OrderTransfer $orderTransfer)
     {
         return $computopService->getTestModeDescriptionValue(
             $orderTransfer->getItems()->getArrayCopy()

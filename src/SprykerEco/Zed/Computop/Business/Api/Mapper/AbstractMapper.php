@@ -11,14 +11,14 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 abstract class AbstractMapper implements AbstractMapperInterface
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected $computopService;
 
@@ -47,12 +47,12 @@ abstract class AbstractMapper implements AbstractMapperInterface
     abstract protected function createPaymentTransfer(OrderTransfer $orderTransfer);
 
     /**
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      */
     public function __construct(
-        ComputopToComputopServiceInterface $computopService,
+        ComputopServiceInterface $computopService,
         ComputopConfig $config,
         ComputopHeaderPaymentTransfer $computopHeaderPayment
     ) {

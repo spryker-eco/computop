@@ -8,13 +8,13 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use GuzzleHttp\Psr7\Stream;
+use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 abstract class AbstractConverter
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected $computopService;
 
@@ -31,10 +31,10 @@ abstract class AbstractConverter
     abstract protected function getResponseTransfer(array $decryptedArray);
 
     /**
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopToComputopServiceInterface $computopService, ComputopConfig $config)
+    public function __construct(ComputopServiceInterface $computopService, ComputopConfig $config)
     {
         $this->computopService = $computopService;
         $this->config = $config;

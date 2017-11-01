@@ -12,9 +12,9 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
+use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
 class CreditCardMapperTestHelper extends Test
 {
@@ -77,7 +77,7 @@ class CreditCardMapperTestHelper extends Test
         ];
 
         $computopServiceMock = $this->createPartialMock(
-            ComputopToComputopServiceBridge::class,
+            ComputopService::class,
             ['getMacEncryptedValue', 'getEncryptedArray', 'getDescriptionValue', 'getTestModeDescriptionValue']
         );
 

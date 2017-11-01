@@ -10,8 +10,8 @@ namespace SprykerEco\Yves\Computop;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopClientBridge;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceBridge;
+use SprykerEco\Client\Computop\ComputopClient;
+use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -29,11 +29,11 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public function provideDependencies(Container $container)
     {
         $container[self::COMPUTOP_CLIENT] = function (Container $container) {
-            return new ComputopToComputopClientBridge($container->getLocator()->computop()->client());
+            return new ComputopClient($container->getLocator()->computop()->client());
         };
 
         $container[self::COMPUTOP_SERVICE] = function () use ($container) {
-            return new ComputopToComputopServiceBridge($container->getLocator()->computop()->service());
+            return new ComputopService($container->getLocator()->computop()->service());
         };
 
         $container[self::CLIENT_QUOTE] = function () use ($container) {

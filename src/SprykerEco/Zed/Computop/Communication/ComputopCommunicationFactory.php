@@ -47,7 +47,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     * @return \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     public function getComputopService()
     {

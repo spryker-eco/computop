@@ -273,7 +273,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
+     * @return \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected function getComputopService()
     {
