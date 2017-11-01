@@ -18,11 +18,6 @@ abstract class AbstractApiAdapter implements AdapterInterface
     const DEFAULT_TIMEOUT = 45;
 
     /**
-     * @return string
-     */
-    abstract protected function getUrl();
-
-    /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
     protected $config;
@@ -31,6 +26,11 @@ abstract class AbstractApiAdapter implements AdapterInterface
      * @var \GuzzleHttp\Client
      */
     protected $client;
+
+    /**
+     * @return string
+     */
+    abstract protected function getUrl();
 
     /**
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config

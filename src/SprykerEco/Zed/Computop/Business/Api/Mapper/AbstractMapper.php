@@ -18,20 +18,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
 abstract class AbstractMapper implements AbstractMapperInterface
 {
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
-     *
-     * @return array
-     */
-    abstract public function getDataSubArray(TransferInterface $computopPaymentTransfer);
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
-     */
-    abstract protected function createPaymentTransfer(OrderTransfer $orderTransfer);
-
-    /**
      * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
      */
     protected $computopService;
@@ -45,6 +31,20 @@ abstract class AbstractMapper implements AbstractMapperInterface
      * @var \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      */
     protected $computopHeaderPayment;
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     *
+     * @return array
+     */
+    abstract public function getDataSubArray(TransferInterface $computopPaymentTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     */
+    abstract protected function createPaymentTransfer(OrderTransfer $orderTransfer);
 
     /**
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService

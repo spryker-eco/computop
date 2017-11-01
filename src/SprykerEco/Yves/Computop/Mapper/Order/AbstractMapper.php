@@ -18,13 +18,6 @@ abstract class AbstractMapper implements MapperInterface
     const TRANS_ID_SEPARATOR = '-';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer|\Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
-     */
-    abstract protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer);
-
-    /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface
      */
     protected $computopService;
@@ -33,6 +26,13 @@ abstract class AbstractMapper implements MapperInterface
      * @var \Silex\Application
      */
     protected $application;
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer|\Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     */
+    abstract protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer);
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopServiceInterface $computopService

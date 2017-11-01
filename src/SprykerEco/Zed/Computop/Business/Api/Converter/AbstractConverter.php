@@ -14,13 +14,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
 abstract class AbstractConverter
 {
     /**
-     * @param array $decryptedArray
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    abstract protected function getResponseTransfer(array $decryptedArray);
-
-    /**
      * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface
      */
     protected $computopService;
@@ -29,6 +22,13 @@ abstract class AbstractConverter
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
     protected $config;
+
+    /**
+     * @param array $decryptedArray
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    abstract protected function getResponseTransfer(array $decryptedArray);
 
     /**
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface $computopService

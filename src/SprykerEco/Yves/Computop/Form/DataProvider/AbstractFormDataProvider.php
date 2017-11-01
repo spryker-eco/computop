@@ -15,13 +15,6 @@ use SprykerEco\Yves\Computop\Mapper\Order\MapperInterface;
 abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    abstract protected function getComputopPayment(AbstractTransfer $quoteTransfer);
-
-    /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
      */
     protected $quoteClient;
@@ -30,6 +23,13 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      * @var \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
      */
     protected $orderMapper;
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    abstract protected function getComputopPayment(AbstractTransfer $quoteTransfer);
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface $quoteClient
