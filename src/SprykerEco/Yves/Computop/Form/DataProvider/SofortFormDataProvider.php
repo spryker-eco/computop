@@ -26,7 +26,7 @@ class SofortFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
-            $computopTransfer = $this->cardMapper->createComputopPaymentTransfer($quoteTransfer);
+            $computopTransfer = $this->orderMapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopSofort($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
 

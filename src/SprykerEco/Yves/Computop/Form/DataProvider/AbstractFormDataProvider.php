@@ -29,16 +29,16 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     /**
      * @var \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
      */
-    protected $cardMapper;
+    protected $orderMapper;
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface $quoteClient
-     * @param \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface $cardMapper
+     * @param \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface $orderMapper
      */
-    public function __construct(ComputopToQuoteInterface $quoteClient, MapperInterface $cardMapper)
+    public function __construct(ComputopToQuoteInterface $quoteClient, MapperInterface $orderMapper)
     {
         $this->quoteClient = $quoteClient;
-        $this->cardMapper = $cardMapper;
+        $this->orderMapper = $orderMapper;
     }
 
     /**
