@@ -22,7 +22,7 @@ class IdealMapper extends AbstractPostPlaceMapper
     {
         $computopPaymentTransfer = new ComputopIdealPaymentTransfer();
 
-        $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
+        $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS_PATH_NAME))
         );

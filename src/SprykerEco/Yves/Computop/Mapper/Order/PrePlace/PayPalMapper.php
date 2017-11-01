@@ -28,7 +28,7 @@ class PayPalMapper extends AbstractPrePlaceMapper
     {
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
-        $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
+        $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS_PATH_NAME))

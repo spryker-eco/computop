@@ -49,7 +49,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return string
      */
-    protected function getTransId(TransferInterface $quoteTransfer)
+    protected function generateTransId(TransferInterface $quoteTransfer)
     {
         $parameters = [
             time(),

@@ -29,7 +29,7 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
     {
         $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
-        $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
+        $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::DIRECT_DEBIT_SUCCESS_PATH_NAME))

@@ -26,7 +26,7 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
-        $computopPaymentTransfer->setTransId($this->getTransId($quoteTransfer));
+        $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS_PATH_NAME))
