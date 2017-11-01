@@ -173,6 +173,6 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
      */
     protected function formatKey($key)
     {
-        return strtolower($key);
+        return mb_strtolower($key);
     }
 }
