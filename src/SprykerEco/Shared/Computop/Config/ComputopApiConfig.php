@@ -10,6 +10,7 @@ namespace SprykerEco\Shared\Computop\Config;
 interface ComputopApiConfig
 {
     const MERCHANT_ID = 'MerchantID';
+    const MERCHANT_ID_SHORT = 'mid';
     const TRANS_ID = 'TransID';
     const AMOUNT = 'Amount';
     const AMOUNT_AUTH = 'AmountAuth';
@@ -25,15 +26,14 @@ interface ComputopApiConfig
     const TX_TYPE = 'TxType';
     const ORDER_DESC = 'OrderDesc';
     const PAY_ID = 'PayID';
-    const MID = 'mid';
     const STATUS = 'Status';
     const DESCRIPTION = 'Description';
     const CODE = 'Code';
-    const XID = 'XID';
+    const X_ID = 'XID';
     const TYPE = 'Type';
     const PC_NR = 'PCNr';
-    const CC_EXPIRY = 'CCExpiry';
-    const CC_BRAND = 'CCBrand';
+    const CREDIT_CARD_EXPIRY = 'CCExpiry';
+    const CREDIT_CARD_BRAND = 'CCBrand';
     const MASKED_PAN = 'MaskedPan';
     const CAVV = 'CAVV';
     const ECI = 'ECI';

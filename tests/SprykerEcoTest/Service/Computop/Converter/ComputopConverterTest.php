@@ -48,12 +48,12 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertTrue($header->getIsSuccess());
 
         //todo:update test
-        $this->assertSame(ComputopApiConfig::MID, $header->getMId());
+        $this->assertSame(ComputopApiConfig::MERCHANT_ID_SHORT, $header->getMId());
         $this->assertSame(ComputopApiConfig::TRANS_ID, $header->getTransId());
         $this->assertSame(ComputopApiConfig::PAY_ID, $header->getPayId());
         $this->assertSame(ComputopConfig::SUCCESS_STATUS, $header->getStatus());
         $this->assertSame(ComputopApiConfig::CODE, $header->getCode());
-        $this->assertSame(ComputopApiConfig::XID, $header->getXId());
+        $this->assertSame(ComputopApiConfig::X_ID, $header->getXId());
     }
 
     /**
@@ -70,12 +70,12 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $header);
         $this->assertFalse($header->getIsSuccess());
 
-        $this->assertSame(ComputopApiConfig::MID, $header->getMId());
+        $this->assertSame(ComputopApiConfig::MERCHANT_ID_SHORT, $header->getMId());
         $this->assertSame(ComputopApiConfig::TRANS_ID, $header->getTransId());
         $this->assertSame(ComputopApiConfig::PAY_ID, $header->getPayId());
         $this->assertSame(self::STATUS_ERROR_VALUE, $header->getStatus());
         $this->assertSame(ComputopApiConfig::CODE, $header->getCode());
-        $this->assertSame(ComputopApiConfig::XID, $header->getXId());
+        $this->assertSame(ComputopApiConfig::X_ID, $header->getXId());
     }
 
     /**
@@ -112,12 +112,12 @@ class ComputopConverterTest extends AbstractComputopTest
     protected function getDecryptedArray($status)
     {
         $decryptedArray = [
-            ComputopApiConfig::MID => ComputopApiConfig::MID,
+            ComputopApiConfig::MERCHANT_ID_SHORT => ComputopApiConfig::MERCHANT_ID_SHORT,
             ComputopApiConfig::TRANS_ID => ComputopApiConfig::TRANS_ID,
             ComputopApiConfig::PAY_ID => ComputopApiConfig::PAY_ID,
             ComputopApiConfig::STATUS => $status,
             ComputopApiConfig::CODE => ComputopApiConfig::CODE,
-            ComputopApiConfig::XID => ComputopApiConfig::XID,
+            ComputopApiConfig::X_ID => ComputopApiConfig::X_ID,
         ];
 
         return $decryptedArray;

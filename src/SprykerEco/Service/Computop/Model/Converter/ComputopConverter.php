@@ -28,12 +28,12 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
 
         $header = new ComputopResponseHeaderTransfer();
         $header->fromArray($decryptedArray, true);
-        $header->setMId($this->getResponseValue($decryptedArray, ComputopApiConfig::MID));
+        $header->setMId($this->getResponseValue($decryptedArray, ComputopApiConfig::MERCHANT_ID_SHORT));
         $header->setTransId($this->getResponseValue($decryptedArray, ComputopApiConfig::TRANS_ID));
         $header->setPayId($this->getResponseValue($decryptedArray, ComputopApiConfig::PAY_ID));
         //optional
         $header->setMac($this->getResponseValue($decryptedArray, ComputopApiConfig::MAC));
-        $header->setXId($this->getResponseValue($decryptedArray, ComputopApiConfig::XID));
+        $header->setXId($this->getResponseValue($decryptedArray, ComputopApiConfig::X_ID));
 
         $header->setIsSuccess($header->getStatus() === ComputopConfig::SUCCESS_STATUS);
         $header->setMethod($method);
@@ -118,7 +118,7 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
     protected function checkDecryptedResponse($decryptedArray)
     {
         $keys = [
-            ComputopApiConfig::MID,
+            ComputopApiConfig::MERCHANT_ID_SHORT,
             ComputopApiConfig::TRANS_ID,
             ComputopApiConfig::PAY_ID,
         ];

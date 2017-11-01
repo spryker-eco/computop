@@ -209,9 +209,9 @@
     <transfer name="ComputopCreditCardOrderResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="userData" type="string" />
-        <property name="pcnr" type="string" />
-        <property name="cCExpiry" type="string" />
-        <property name="cCBrand" type="string" />
+        <property name="pcNr" type="string" />
+        <property name="creditCardExpiry" type="string" />
+        <property name="creditCardBrand" type="string" />
         <property name="maskedPan" type="string" />
         <property name="cavv" type="string" />
         <property name="eci" type="string" />

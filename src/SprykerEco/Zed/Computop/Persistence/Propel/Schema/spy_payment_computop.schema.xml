@@ -36,9 +36,9 @@
     <table name="spy_payment_computop_detail" phpName="SpyPaymentComputopDetail">
         <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true"/>
 
-        <column name="pcnr" type="VARCHAR"/>
-        <column name="c_c_brand" required="false" type="VARCHAR"/>
-        <column name="c_c_expiry" required="false" type="VARCHAR"/>
+        <column name="pc_nr" type="VARCHAR"/>
+        <column name="credit_card_brand" required="false" type="VARCHAR"/>
+        <column name="credit_card_expiry" required="false" type="VARCHAR"/>
         <column name="masked_pan" required="false" type="VARCHAR"/>
         <column name="cavv" required="false" type="VARCHAR"/>
         <column name="eci" required="false" type="VARCHAR"/>

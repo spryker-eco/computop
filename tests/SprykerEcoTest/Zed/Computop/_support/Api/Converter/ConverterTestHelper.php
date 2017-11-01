@@ -49,9 +49,9 @@ class ConverterTestHelper extends Test
     public function getMainDecryptedArray()
     {
         $decryptedArray = [
-            ComputopApiConfig::MID => 'mid',
+            ComputopApiConfig::MERCHANT_ID_SHORT => 'mid',
             ComputopApiConfig::PAY_ID => 'PayID',
-            ComputopApiConfig::XID => 'XID',
+            ComputopApiConfig::X_ID => 'XID',
             ComputopApiConfig::TRANS_ID => 'TransID',
             ComputopApiConfig::STATUS => 'OK',
             ComputopApiConfig::CODE => '00000000',
@@ -97,12 +97,12 @@ class ConverterTestHelper extends Test
         $header->fromArray($decryptedArray, true);
 
         //different naming style
-        $header->setMId($decryptedArray[ComputopApiConfig::MID]);
+        $header->setMId($decryptedArray[ComputopApiConfig::MERCHANT_ID_SHORT]);
         $header->setTransId($decryptedArray[ComputopApiConfig::TRANS_ID]);
         $header->setPayId($decryptedArray[ComputopApiConfig::PAY_ID]);
         $header->setIsSuccess($header->getStatus() === ComputopSharedConfig::SUCCESS_STATUS);
         $header->setMethod($method);
-        $header->setXId($decryptedArray[ComputopApiConfig::XID]);
+        $header->setXId($decryptedArray[ComputopApiConfig::X_ID]);
 
         return $header;
     }
