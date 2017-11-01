@@ -12,31 +12,24 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
 class ComputopControllerProvider extends YvesControllerProvider
 {
-    const NAME = 'computop';
-    const MODULE_NAME = 'Computop';
-    const CALLBACK_CONTROLLER_NAME = 'Callback';
-
-    const CREDIT_CARD_SUCCESS_PATH = '/computop/credit-card-success';
-    const CREDIT_CARD_SUCCESS_PATH_NAME = 'computop-credit-card-success';
-
-    const PAY_PAL_SUCCESS_PATH = '/computop/pay-pal-success';
-    const PAY_PAL_SUCCESS_PATH_NAME = 'computop-pay-pal-success';
-
-    const DIRECT_DEBIT_SUCCESS_PATH = '/computop/direct-debit-success';
-    const DIRECT_DEBIT_SUCCESS_PATH_NAME = 'computop-direct-debit-success';
-
-    const SOFORT_SUCCESS_PATH = '/computop/sofort-success';
-    const SOFORT_SUCCESS_PATH_NAME = 'computop-sofort-success';
-
-    const PAYDIREKT_SUCCESS_PATH = '/computop/paydirekt-success';
-    const PAYDIREKT_SUCCESS_PATH_NAME = 'computop-paydirekt-success';
-
-    const IDEAL_SUCCESS_PATH = '/computop/ideal-success';
-    const IDEAL_SUCCESS_PATH_NAME = 'computop-ideal-success';
-
-    const FAILURE_PATH = '/computop/failure';
+    const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
+    const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
+    const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
+    const SOFORT_SUCCESS = 'computop-sofort-success';
+    const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+    const IDEAL_SUCCESS = 'computop-ideal-success';
     const FAILURE_PATH_NAME = 'computop-failure';
 
+    /**
+     * @var string
+     */
+    protected $moduleName = 'Computop';
+    
+    /**
+     * @var string
+     */
+    protected $callbackControllerName = 'Callback';
+    
     /**
      * @param \Silex\Application $app
      *
@@ -45,58 +38,58 @@ class ComputopControllerProvider extends YvesControllerProvider
     protected function defineControllers(Application $app)
     {
         $this->createController(
-            self::CREDIT_CARD_SUCCESS_PATH,
-            self::CREDIT_CARD_SUCCESS_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            '/computop/credit-card-success',
+            self::CREDIT_CARD_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
             'successCreditCard'
         );
 
         $this->createController(
-            self::PAY_PAL_SUCCESS_PATH,
-            self::PAY_PAL_SUCCESS_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            '/computop/pay-pal-success',
+            self::PAY_PAL_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
             'successPayPal'
         );
 
         $this->createController(
-            self::DIRECT_DEBIT_SUCCESS_PATH,
-            self::DIRECT_DEBIT_SUCCESS_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            '/computop/direct-debit-success',
+            self::DIRECT_DEBIT_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
             'successDirectDebit'
         );
 
         $this->createController(
-            self::SOFORT_SUCCESS_PATH,
-            self::SOFORT_SUCCESS_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            '/computop/sofort-success',
+            self::SOFORT_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
             'successSofort'
         );
 
         $this->createController(
-            self::PAYDIREKT_SUCCESS_PATH,
-            self::PAYDIREKT_SUCCESS_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            '/computop/paydirekt-success',
+            self::PAYDIREKT_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
             'successPaydirekt'
         );
 
         $this->createController(
-            self::IDEAL_SUCCESS_PATH,
-            self::IDEAL_SUCCESS_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            '/computop/ideal-success',
+            self::IDEAL_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
             'successIdeal'
         );
 
         $this->createController(
-            self::FAILURE_PATH,
+            '/computop/failure',
             self::FAILURE_PATH_NAME,
-            self::MODULE_NAME,
-            self::CALLBACK_CONTROLLER_NAME,
+            $this->moduleName,
+            $this->callbackControllerName,
             'failure'
         );
     }

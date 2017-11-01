@@ -26,7 +26,7 @@ class SofortMapper extends AbstractPostPlaceMapper
         $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS_PATH_NAME))
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())

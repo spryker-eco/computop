@@ -24,7 +24,7 @@ class IdealMapper extends AbstractPostPlaceMapper
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS_PATH_NAME))
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))
         );
         //ToDo:update mapper
         $computopPaymentTransfer->setOrderDesc(
