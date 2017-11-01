@@ -29,6 +29,9 @@ interface ComputopFacadeInterface
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
 
     /**
+     * Specification:
+     * - Makes Authorization API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -39,6 +42,9 @@ interface ComputopFacadeInterface
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
+     * Specification:
+     * - Makes Inquire API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -49,6 +55,9 @@ interface ComputopFacadeInterface
     public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
+     * Specification:
+     * - Makes Reverse API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -59,6 +68,9 @@ interface ComputopFacadeInterface
     public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
+     * Specification:
+     * - Cancel payment items in DB.
+     *
      * @api
      *
      * @param array $orderItems
@@ -68,6 +80,9 @@ interface ComputopFacadeInterface
     public function cancelPaymentItems(array $orderItems);
 
     /**
+     * Specification:
+     * - Makes Capture API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -78,6 +93,9 @@ interface ComputopFacadeInterface
     public function capturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
+     * Specification:
+     * - Makes Refund API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -88,6 +106,9 @@ interface ComputopFacadeInterface
     public function refundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
+     * Specification:
+     * - Saves Response header to DB.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
@@ -98,6 +119,9 @@ interface ComputopFacadeInterface
     public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method);
 
     /**
+     * Specification:
+     * - Saves Sofort Response to DB.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -107,6 +131,9 @@ interface ComputopFacadeInterface
     public function saveSofortResponse(QuoteTransfer $quoteTransfer);
 
     /**
+     * Specification:
+     * - Saves IDeal Response to DB.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -116,6 +143,9 @@ interface ComputopFacadeInterface
     public function saveIdealResponse(QuoteTransfer $quoteTransfer);
 
     /**
+     * Specification:
+     * - Saves Paydirekt Response to DB.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -123,14 +153,4 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektResponse(QuoteTransfer $quoteTransfer);
-
-    /**
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 }

@@ -30,6 +30,6 @@ class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPluginIn
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
-        $this->getFacade()->postSaveHook($quoteTransfer, $checkoutResponse);
+        $this->getFactory()->createPostSaveHook()->execute($quoteTransfer, $checkoutResponse);
     }
 }

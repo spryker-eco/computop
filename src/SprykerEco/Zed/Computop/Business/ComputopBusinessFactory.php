@@ -11,10 +11,6 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
-use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\IdealMapper;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\PaydirektMapper;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\SofortMapper;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
@@ -228,48 +224,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHookInterface
-     */
-    public function createPostSaveHook()
-    {
-        $postSaveHook = new ComputopPostSaveHook($this->getConfig());
-        $postSaveHook->registerMapper($this->createPostSaveSofortMapper());
-        $postSaveHook->registerMapper($this->createPostSavePaydirektMapper());
-        $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
-
-        return $postSaveHook;
-    }
-
-    /**
      * @return \SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactoryInterface
      */
     protected function createOrderFactory()
     {
         return new ComputopBusinessOrderFactory();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
-     */
-    protected function createPostSaveSofortMapper()
-    {
-        return new SofortMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
-     */
-    protected function createPostSavePaydirektMapper()
-    {
-        return new PaydirektMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
-     */
-    protected function createPostSaveIdealMapper()
-    {
-        return new IdealMapper($this->getConfig(), $this->getComputopService());
     }
 
     /**

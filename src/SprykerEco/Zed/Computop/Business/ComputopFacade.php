@@ -258,21 +258,4 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
         return $quoteTransfer;
     }
-
-    /**
-     * TODO: add test
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
-    {
-        $checkoutResponse = $this->getFactory()->createPostSaveHook()->execute($quoteTransfer, $checkoutResponse);
-
-        return $checkoutResponse;
-    }
 }

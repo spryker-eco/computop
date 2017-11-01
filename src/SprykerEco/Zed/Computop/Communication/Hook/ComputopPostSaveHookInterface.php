@@ -5,16 +5,16 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Hook;
+namespace SprykerEco\Zed\Computop\Communication\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface;
+use SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface;
 
 interface ComputopPostSaveHookInterface
 {
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
      *
      * @return void
      */

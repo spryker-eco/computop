@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Order;
+namespace SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order;
 
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -13,14 +13,14 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class SofortMapper extends AbstractMapper
+class IdealMapper extends AbstractMapper
 {
     /**
      * @return string
      */
     public function getMethodName()
     {
-        return ComputopConfig::PAYMENT_METHOD_SOFORT;
+        return ComputopConfig::PAYMENT_METHOD_IDEAL;
     }
 
     /**
@@ -68,6 +68,7 @@ class SofortMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        //ToDo: add additional options if need. Waiting for Computop answer
 
         return $dataSubArray;
     }
@@ -77,6 +78,6 @@ class SofortMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::SOFORT_ORDER_ACTION);
+        return Config::get(ComputopConstants::IDEAL_ORDER_ACTION);
     }
 }

@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Hook;
+namespace SprykerEco\Zed\Computop\Communication\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface;
+use SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ComputopPostSaveHook implements ComputopPostSaveHookInterface
@@ -22,7 +22,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface[]
+     * @var \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface[]
      */
     protected $methodMappers = [];
 
@@ -35,7 +35,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface
+     * @return \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface
      */
     protected function getMethodMapper($methodName)
     {
