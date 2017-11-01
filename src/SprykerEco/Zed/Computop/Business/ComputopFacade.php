@@ -125,7 +125,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc
+     * {@inheritdoc}
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
