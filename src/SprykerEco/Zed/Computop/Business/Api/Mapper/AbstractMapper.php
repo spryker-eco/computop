@@ -71,8 +71,8 @@ abstract class AbstractMapper implements AbstractMapperInterface
     {
         $encryptedArray = $this->getEncryptedArray($orderTransfer);
 
-        $length = $encryptedArray[ComputopApiConfig::LENGTH];
         $data = $encryptedArray[ComputopApiConfig::DATA];
+        $length = $encryptedArray[ComputopApiConfig::LENGTH];
         $merchantId = $this->config->getMerchantId();
 
         return $this->buildRequestData($data, $length, $merchantId);
@@ -105,9 +105,9 @@ abstract class AbstractMapper implements AbstractMapperInterface
     protected function buildRequestData($data, $length, $merchantId)
     {
         $requestData = [
-            ComputopApiConfig::MERCHANT_ID => $merchantId,
             ComputopApiConfig::DATA => $data,
             ComputopApiConfig::LENGTH => $length,
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
         ];
 
         return $requestData;
