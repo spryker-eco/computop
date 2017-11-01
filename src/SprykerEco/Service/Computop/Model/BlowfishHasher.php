@@ -9,11 +9,6 @@ namespace SprykerEco\Service\Computop\Model;
 
 use SprykerEco\Service\Computop\Exception\BlowfishException;
 
-/**
- * Class BlowfishHasher
- *
- * This class provides the Blowfish encryption for PHP environment.
- */
 class BlowfishHasher implements BlowfishHasherInterface
 {
     /**
@@ -74,7 +69,7 @@ class BlowfishHasher implements BlowfishHasherInterface
         if (mb_strlen($password) <= 0) {
             $password = ' ';
         }
-        # converts hex to bin
+
         $cipher = pack('H' . strlen($cipher), $cipher);
         if ($length > strlen($cipher)) {
             throw new BlowfishException('Length mismatch. The parameter len is too large.');
