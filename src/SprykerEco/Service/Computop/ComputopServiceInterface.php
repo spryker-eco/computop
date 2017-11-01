@@ -119,13 +119,13 @@ interface ComputopServiceInterface
      *
      * @api
      *
-     * @param string $plainText
+     * @param string $plaintext
      * @param int $length
      * @param string $password
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plainText, $length, $password);
+    public function getBlowfishEncryptedValue($plaintext, $length, $password);
 
     /**
      * Specification:

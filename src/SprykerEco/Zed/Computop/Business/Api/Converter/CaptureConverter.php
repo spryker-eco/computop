@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopCaptureResponseTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class CaptureConverter extends AbstractConverter implements ConverterInterface
 {
@@ -25,12 +25,12 @@ class CaptureConverter extends AbstractConverter implements ConverterInterface
             $this->computopService->extractHeader($decryptedArray, $this->config->getCaptureMethodName())
         );
         //optional fields
-        $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::A_ID));
-        $computopResponseTransfer->setTransactionId($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::TRANSACTION_ID));
-        $computopResponseTransfer->setAmount($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::AMOUNT));
-        $computopResponseTransfer->setCodeExt($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::CODE_EXT));
-        $computopResponseTransfer->setErrorText($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::ERROR_TEXT));
-        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::REF_NR));
+        $computopResponseTransfer->setAId($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::A_ID));
+        $computopResponseTransfer->setTransactionId($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::TRANSACTION_ID));
+        $computopResponseTransfer->setAmount($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::AMOUNT));
+        $computopResponseTransfer->setCodeExt($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CODE_EXT));
+        $computopResponseTransfer->setErrorText($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ERROR_TEXT));
+        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::REF_NR));
 
         return $computopResponseTransfer;
     }

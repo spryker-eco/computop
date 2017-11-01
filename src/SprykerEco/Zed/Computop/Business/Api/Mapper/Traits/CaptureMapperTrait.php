@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Mapper\Traits;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 trait CaptureMapperTrait
 {
@@ -19,11 +19,11 @@ trait CaptureMapperTrait
      */
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
-        $dataSubArray[ComputopFieldName::PAY_ID] = $computopPaymentTransfer->getPayId();
-        $dataSubArray[ComputopFieldName::TRANS_ID] = $computopPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldName::AMOUNT] = $computopPaymentTransfer->getAmount();
-        $dataSubArray[ComputopFieldName::CURRENCY] = $computopPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopFieldName::MAC] = $computopPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::PAY_ID] = $computopPaymentTransfer->getPayId();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopPaymentTransfer->getMac();
 
         return $dataSubArray;
     }

@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class AuthorizeConverter extends AbstractConverter implements ConverterInterface
 {
@@ -25,7 +25,7 @@ class AuthorizeConverter extends AbstractConverter implements ConverterInterface
             $this->computopService->extractHeader($decryptedArray, $this->config->getAuthorizeMethodName())
         );
         //optional field
-        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::REF_NR));
+        $computopResponseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::REF_NR));
 
         return $computopResponseTransfer;
     }

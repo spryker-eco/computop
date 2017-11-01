@@ -10,7 +10,7 @@ namespace SprykerEco\Service\Computop\Model;
 interface BlowfishHasherInterface
 {
     /**
-     * @param string $plainText
+     * @param string $plaintext
      * @param int $length
      * @param string $password
      *
@@ -18,7 +18,7 @@ interface BlowfishHasherInterface
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plainText, $length, $password);
+    public function getBlowfishEncryptedValue($plaintext, $length, $password);
 
     /**
      * @param string $cipher

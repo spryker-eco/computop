@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard;
 
 use Codeception\TestCase\Test;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 abstract class AbstractCreditCardMapperTest extends Test
 {
@@ -44,7 +44,7 @@ abstract class AbstractCreditCardMapperTest extends Test
         $service = $this->createMapper();
         $mappedData = $service->buildRequest($orderTransferMock);
 
-        $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopFieldName::DATA]);
-        $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopFieldName::LENGTH]);
+        $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopApiConfig::DATA]);
+        $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopApiConfig::LENGTH]);
     }
 }

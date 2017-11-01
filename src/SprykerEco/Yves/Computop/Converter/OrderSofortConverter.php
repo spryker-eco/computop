@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class OrderSofortConverter extends AbstractOrderConverter
 {
@@ -24,18 +24,18 @@ class OrderSofortConverter extends AbstractOrderConverter
         $responseTransfer = new ComputopSofortOrderResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
-        $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::ACCOUNT_BANK));
-        $responseTransfer->setAccountOwner($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::ACCOUNT_OWNER));
-        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::B_I_C));
-        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::I_B_A_N));
+        $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_BANK));
+        $responseTransfer->setAccountOwner($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_OWNER));
+        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::B_I_C));
+        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::I_B_A_N));
         //optional fields
-        $responseTransfer->setFirstName($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::FIRST_NAME));
-        $responseTransfer->setLastName($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::LAST_NAME));
-        $responseTransfer->setAddressStreet($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::ADDRESS_STREET));
-        $responseTransfer->setAddressCity($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::ADDRESS_CITY));
-        $responseTransfer->setAddressZip($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::ADDRESS_ZIP));
-        $responseTransfer->setBirthday($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::BIRTHDAY));
-        $responseTransfer->setAge($this->computopService->getResponseValue($decryptedArray, ComputopFieldName::AGE));
+        $responseTransfer->setFirstName($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::FIRST_NAME));
+        $responseTransfer->setLastName($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::LAST_NAME));
+        $responseTransfer->setAddressStreet($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_STREET));
+        $responseTransfer->setAddressCity($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_CITY));
+        $responseTransfer->setAddressZip($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_ZIP));
+        $responseTransfer->setBirthday($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::BIRTHDAY));
+        $responseTransfer->setAge($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::AGE));
 
         return $responseTransfer;
     }

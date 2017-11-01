@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Shared\Computop\Config;
 
-interface ComputopFieldName
+interface ComputopApiConfig
 {
     const MERCHANT_ID = 'MerchantID';
     const TRANS_ID = 'TransID';

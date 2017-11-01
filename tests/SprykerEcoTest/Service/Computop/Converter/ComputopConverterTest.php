@@ -10,7 +10,7 @@ namespace SprykerEcoTest\Service\Computop\Converter;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEcoTest\Service\Computop\AbstractComputopTest;
 
 /**
@@ -48,12 +48,12 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertTrue($header->getIsSuccess());
 
         //todo:update test
-        $this->assertSame(ComputopFieldName::MID, $header->getMId());
-        $this->assertSame(ComputopFieldName::TRANS_ID, $header->getTransId());
-        $this->assertSame(ComputopFieldName::PAY_ID, $header->getPayId());
+        $this->assertSame(ComputopApiConfig::MID, $header->getMId());
+        $this->assertSame(ComputopApiConfig::TRANS_ID, $header->getTransId());
+        $this->assertSame(ComputopApiConfig::PAY_ID, $header->getPayId());
         $this->assertSame(ComputopConfig::SUCCESS_STATUS, $header->getStatus());
-        $this->assertSame(ComputopFieldName::CODE, $header->getCode());
-        $this->assertSame(ComputopFieldName::XID, $header->getXId());
+        $this->assertSame(ComputopApiConfig::CODE, $header->getCode());
+        $this->assertSame(ComputopApiConfig::XID, $header->getXId());
     }
 
     /**
@@ -70,12 +70,12 @@ class ComputopConverterTest extends AbstractComputopTest
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $header);
         $this->assertFalse($header->getIsSuccess());
 
-        $this->assertSame(ComputopFieldName::MID, $header->getMId());
-        $this->assertSame(ComputopFieldName::TRANS_ID, $header->getTransId());
-        $this->assertSame(ComputopFieldName::PAY_ID, $header->getPayId());
+        $this->assertSame(ComputopApiConfig::MID, $header->getMId());
+        $this->assertSame(ComputopApiConfig::TRANS_ID, $header->getTransId());
+        $this->assertSame(ComputopApiConfig::PAY_ID, $header->getPayId());
         $this->assertSame(self::STATUS_ERROR_VALUE, $header->getStatus());
-        $this->assertSame(ComputopFieldName::CODE, $header->getCode());
-        $this->assertSame(ComputopFieldName::XID, $header->getXId());
+        $this->assertSame(ComputopApiConfig::CODE, $header->getCode());
+        $this->assertSame(ComputopApiConfig::XID, $header->getXId());
     }
 
     /**
@@ -86,8 +86,8 @@ class ComputopConverterTest extends AbstractComputopTest
         $converter = $this->helper->createConverter();
 
         $responseArray = [
-            ComputopFieldName::DATA => 'data',
-            ComputopFieldName::LENGTH => 4,
+            ComputopApiConfig::DATA => 'data',
+            ComputopApiConfig::LENGTH => 4,
         ];
 
         $converter->checkEncryptedResponse($responseArray);
@@ -112,12 +112,12 @@ class ComputopConverterTest extends AbstractComputopTest
     protected function getDecryptedArray($status)
     {
         $decryptedArray = [
-            ComputopFieldName::MID => ComputopFieldName::MID,
-            ComputopFieldName::TRANS_ID => ComputopFieldName::TRANS_ID,
-            ComputopFieldName::PAY_ID => ComputopFieldName::PAY_ID,
-            ComputopFieldName::STATUS => $status,
-            ComputopFieldName::CODE => ComputopFieldName::CODE,
-            ComputopFieldName::XID => ComputopFieldName::XID,
+            ComputopApiConfig::MID => ComputopApiConfig::MID,
+            ComputopApiConfig::TRANS_ID => ComputopApiConfig::TRANS_ID,
+            ComputopApiConfig::PAY_ID => ComputopApiConfig::PAY_ID,
+            ComputopApiConfig::STATUS => $status,
+            ComputopApiConfig::CODE => ComputopApiConfig::CODE,
+            ComputopApiConfig::XID => ComputopApiConfig::XID,
         ];
 
         return $decryptedArray;

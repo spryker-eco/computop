@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Mapper\Traits;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceInterface;
 
 trait AuthorizeMapperTrait
@@ -21,13 +21,13 @@ trait AuthorizeMapperTrait
      */
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
-        $dataSubArray[ComputopFieldName::PAY_ID] = $computopPaymentTransfer->getPayId();
-        $dataSubArray[ComputopFieldName::TRANS_ID] = $computopPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldName::AMOUNT] = $computopPaymentTransfer->getAmount();
-        $dataSubArray[ComputopFieldName::CURRENCY] = $computopPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopFieldName::CAPTURE] = $computopPaymentTransfer->getCapture();
-        $dataSubArray[ComputopFieldName::MAC] = $computopPaymentTransfer->getMac();
-        $dataSubArray[ComputopFieldName::ORDER_DESC] = $computopPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopApiConfig::PAY_ID] = $computopPaymentTransfer->getPayId();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::CAPTURE] = $computopPaymentTransfer->getCapture();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPaymentTransfer->getOrderDesc();
 
         return $dataSubArray;
     }

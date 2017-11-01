@@ -9,7 +9,7 @@ namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractService;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 /**
  * @method \SprykerEco\Service\Computop\ComputopServiceFactory getFactory()
@@ -118,8 +118,8 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
             ->checkEncryptedResponse($responseArray);
 
         $responseDecryptedString = $this->getBlowfishDecryptedValue(
-            $responseArray[ComputopFieldName::DATA],
-            $responseArray[ComputopFieldName::LENGTH],
+            $responseArray[ComputopApiConfig::DATA],
+            $responseArray[ComputopApiConfig::LENGTH],
             $password
         );
 
@@ -146,13 +146,13 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
         $plainText = $this->getFactory()->createComputopMapper()->getDataPlainText($dataSubArray);
         $length = mb_strlen($plainText);
 
-        $encryptedArray[ComputopFieldName::DATA] = $this->getBlowfishEncryptedValue(
+        $encryptedArray[ComputopApiConfig::DATA] = $this->getBlowfishEncryptedValue(
             $plainText,
             $length,
             $password
         );
 
-        $encryptedArray[ComputopFieldName::LENGTH] = $length;
+        $encryptedArray[ComputopApiConfig::LENGTH] = $length;
 
         return $encryptedArray;
     }
@@ -182,9 +182,9 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plainText, $length, $password)
+    public function getBlowfishEncryptedValue($plaintext, $length, $password)
     {
-        return $this->getFactory()->createBlowfishHasher()->getBlowfishEncryptedValue($plainText, $length, $password);
+        return $this->getFactory()->createBlowfishHasher()->getBlowfishEncryptedValue($plaintext, $length, $password);
     }
 
     /**

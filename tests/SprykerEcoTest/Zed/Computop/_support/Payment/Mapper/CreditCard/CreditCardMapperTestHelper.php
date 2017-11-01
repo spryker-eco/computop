@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopServiceBridge;
 
@@ -72,8 +72,8 @@ class CreditCardMapperTestHelper extends Test
     public function createComputopServiceMock()
     {
         $encryptedArray = [
-            ComputopFieldName::LENGTH => CreditCardMapperTestConstants::LENGTH_VALUE,
-            ComputopFieldName::DATA => CreditCardMapperTestConstants::DATA_VALUE,
+            ComputopApiConfig::LENGTH => CreditCardMapperTestConstants::LENGTH_VALUE,
+            ComputopApiConfig::DATA => CreditCardMapperTestConstants::DATA_VALUE,
         ];
 
         $computopServiceMock = $this->createPartialMock(

@@ -51,8 +51,8 @@ class ComputopMapperTest extends AbstractComputopTest
     {
         $mapper = $this->helper->createMapper();
         $arrayForPlaintext = ['test_key' => 'test_value'];
-        $plainText = $mapper->getDataPlainText($arrayForPlaintext);
+        $plaintext = $mapper->getDataPlainText($arrayForPlaintext);
 
-        $this->assertSame(ComputopMapperTestConstants::EXPECTED_PLAINTEXT, $plainText);
+        $this->assertSame(ComputopMapperTestConstants::EXPECTED_PLAINTEXT, $plaintext);
     }
 }

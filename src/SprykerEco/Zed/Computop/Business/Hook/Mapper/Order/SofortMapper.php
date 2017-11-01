@@ -11,7 +11,7 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class SofortMapper extends AbstractMapper
 {
@@ -42,8 +42,8 @@ class SofortMapper extends AbstractMapper
             Config::get(ComputopConstants::BLOWFISH_PASSWORD)
         );
 
-        $length = $decryptedValues[ComputopFieldName::LENGTH];
-        $data = $decryptedValues[ComputopFieldName::DATA];
+        $length = $decryptedValues[ComputopApiConfig::LENGTH];
+        $data = $decryptedValues[ComputopApiConfig::DATA];
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
@@ -60,14 +60,14 @@ class SofortMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopFieldName::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldName::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopFieldName::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopFieldName::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopFieldName::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopFieldName::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopFieldName::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopFieldName::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
 
         return $dataSubArray;
     }

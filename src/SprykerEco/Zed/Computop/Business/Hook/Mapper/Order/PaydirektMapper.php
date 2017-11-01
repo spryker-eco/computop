@@ -11,7 +11,7 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class PaydirektMapper extends AbstractMapper
 {
@@ -42,8 +42,8 @@ class PaydirektMapper extends AbstractMapper
             Config::get(ComputopConstants::BLOWFISH_PASSWORD)
         );
 
-        $length = $decryptedValues[ComputopFieldName::LENGTH];
-        $data = $decryptedValues[ComputopFieldName::DATA];
+        $length = $decryptedValues[ComputopApiConfig::LENGTH];
+        $data = $decryptedValues[ComputopApiConfig::DATA];
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
@@ -60,23 +60,23 @@ class PaydirektMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopFieldName::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopFieldName::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopFieldName::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopFieldName::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopFieldName::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopFieldName::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopFieldName::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopFieldName::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
 
-        $dataSubArray[ComputopFieldName::SHOP_API_KEY] = $cardPaymentTransfer->getShopApiKey();
-        $dataSubArray[ComputopFieldName::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
-        $dataSubArray[ComputopFieldName::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
-        $dataSubArray[ComputopFieldName::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
-        $dataSubArray[ComputopFieldName::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
-        $dataSubArray[ComputopFieldName::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
-        $dataSubArray[ComputopFieldName::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
-        $dataSubArray[ComputopFieldName::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
+        $dataSubArray[ComputopApiConfig::SHOP_API_KEY] = $cardPaymentTransfer->getShopApiKey();
+        $dataSubArray[ComputopApiConfig::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
+        $dataSubArray[ComputopApiConfig::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
+        $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
+        $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
+        $dataSubArray[ComputopApiConfig::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
 
         return $dataSubArray;
     }

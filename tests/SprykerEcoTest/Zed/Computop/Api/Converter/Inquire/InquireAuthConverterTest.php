@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Api\Converter\Inquire;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
 
 /**
@@ -44,9 +44,9 @@ class InquireAuthConverterTest extends AbstractInquireConverterTest
     {
         $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopFieldName::AMOUNT_AUTH] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
-        $decryptedArray[ComputopFieldName::AMOUNT_CAP] = ConverterTestConstants::AMOUNT_VALUE_ZERO;
-        $decryptedArray[ComputopFieldName::AMOUNT_CRED] = ConverterTestConstants::AMOUNT_VALUE_ZERO;
+        $decryptedArray[ComputopApiConfig::AMOUNT_AUTH] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopApiConfig::AMOUNT_CAP] = ConverterTestConstants::AMOUNT_VALUE_ZERO;
+        $decryptedArray[ComputopApiConfig::AMOUNT_CRED] = ConverterTestConstants::AMOUNT_VALUE_ZERO;
 
         return $decryptedArray;
     }

@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Shared\Computop\Config\ComputopFieldName;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 
 /**
@@ -34,12 +34,12 @@ class RefundConverterTest extends AbstractConverterTest
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-        $this->assertEquals(ComputopFieldName::A_ID, $responseTransfer->getAId());
-        $this->assertEquals(ComputopFieldName::TRANSACTION_ID, $responseTransfer->getTransactionId());
-        $this->assertEquals(ComputopFieldName::AMOUNT, $responseTransfer->getAmount());
-        $this->assertEquals(ComputopFieldName::CODE_EXT, $responseTransfer->getCodeExt());
-        $this->assertEquals(ComputopFieldName::ERROR_TEXT, $responseTransfer->getErrorText());
-        $this->assertEquals(ComputopFieldName::REF_NR, $responseTransfer->getRefNr());
+        $this->assertEquals(ComputopApiConfig::A_ID, $responseTransfer->getAId());
+        $this->assertEquals(ComputopApiConfig::TRANSACTION_ID, $responseTransfer->getTransactionId());
+        $this->assertEquals(ComputopApiConfig::AMOUNT, $responseTransfer->getAmount());
+        $this->assertEquals(ComputopApiConfig::CODE_EXT, $responseTransfer->getCodeExt());
+        $this->assertEquals(ComputopApiConfig::ERROR_TEXT, $responseTransfer->getErrorText());
+        $this->assertEquals(ComputopApiConfig::REF_NR, $responseTransfer->getRefNr());
     }
 
     /**
@@ -62,12 +62,12 @@ class RefundConverterTest extends AbstractConverterTest
     {
         $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopFieldName::A_ID] = ConverterTestConstants::A_ID_VALUE;
-        $decryptedArray[ComputopFieldName::TRANSACTION_ID] = ConverterTestConstants::TRANSACTION_ID_VALUE;
-        $decryptedArray[ComputopFieldName::AMOUNT] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
-        $decryptedArray[ComputopFieldName::CODE_EXT] = ConverterTestConstants::CODE_EXT_VALUE;
-        $decryptedArray[ComputopFieldName::ERROR_TEXT] = ConverterTestConstants::ERROR_TEXT_VALUE;
-        $decryptedArray[ComputopFieldName::REF_NR] = ConverterTestConstants::REF_NR_VALUE;
+        $decryptedArray[ComputopApiConfig::A_ID] = ConverterTestConstants::A_ID_VALUE;
+        $decryptedArray[ComputopApiConfig::TRANSACTION_ID] = ConverterTestConstants::TRANSACTION_ID_VALUE;
+        $decryptedArray[ComputopApiConfig::AMOUNT] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopApiConfig::CODE_EXT] = ConverterTestConstants::CODE_EXT_VALUE;
+        $decryptedArray[ComputopApiConfig::ERROR_TEXT] = ConverterTestConstants::ERROR_TEXT_VALUE;
+        $decryptedArray[ComputopApiConfig::REF_NR] = ConverterTestConstants::REF_NR_VALUE;
 
         return $decryptedArray;
     }
