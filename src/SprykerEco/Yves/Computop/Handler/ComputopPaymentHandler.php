@@ -36,7 +36,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
-        $this->setPaymentProviderAndMethod($quoteTransfer, $paymentSelection);
+        $this->setPaymentProviderMethodSelection($quoteTransfer, $paymentSelection);
         $this->setComputopPayment($quoteTransfer, $paymentSelection);
 
         return $quoteTransfer;
@@ -48,7 +48,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return void
      */
-    protected function setPaymentProviderAndMethod(QuoteTransfer $quoteTransfer, $paymentSelection)
+    protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
         $quoteTransfer
             ->getPayment()
