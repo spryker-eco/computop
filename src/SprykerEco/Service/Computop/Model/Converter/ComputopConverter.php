@@ -87,7 +87,7 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
             ComputopFieldName::LENGTH,
         ];
 
-        if (!$this->checkArrayKeysExists($keys, $responseArray)) {
+        if (!$this->existArrayKeys($keys, $responseArray)) {
             throw new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
         }
     }
@@ -123,7 +123,7 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
             ComputopFieldName::PAY_ID,
         ];
 
-        if (!$this->checkArrayKeysExists($keys, $decryptedArray)) {
+        if (!$this->existArrayKeys($keys, $decryptedArray)) {
             throw new ComputopConverterException('Response does not have expected values. Please check Computop documentation.');
         }
     }
@@ -134,7 +134,7 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
      *
      * @return bool
      */
-    protected function checkArrayKeysExists(array $keys, array $arraySearch)
+    protected function existArrayKeys(array $keys, array $arraySearch)
     {
         $arraySearch = $this->formatResponseArray($arraySearch);
 
