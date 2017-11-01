@@ -31,7 +31,7 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
- * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
 class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements ComputopBusinessMapperFactoryInterface
 {

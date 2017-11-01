@@ -31,7 +31,7 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
- * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {

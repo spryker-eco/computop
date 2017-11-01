@@ -17,7 +17,7 @@ use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\PayPalMapper;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
- * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
 class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements ComputopBusinessOrderFactoryInterface
 {

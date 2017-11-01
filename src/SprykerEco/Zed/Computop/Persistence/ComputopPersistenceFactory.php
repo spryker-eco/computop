@@ -13,7 +13,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
- * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
 class ComputopPersistenceFactory extends AbstractPersistenceFactory
 {
