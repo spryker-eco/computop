@@ -102,6 +102,7 @@ class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
             $description .= 'Name:' . $item->getName();
             $description .= self::ATTRIBUTES_SEPARATOR . 'Sku:' . $item->getSku();
             $description .= self::ATTRIBUTES_SEPARATOR . 'Quantity:' . $item->getQuantity();
+            $description .= self::ITEMS_SEPARATOR;
         }
 
         return $description;
