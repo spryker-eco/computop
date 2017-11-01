@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-interface AbstractMapperInterface
+interface ApiMapperInterface
 {
     /**
      * @return string

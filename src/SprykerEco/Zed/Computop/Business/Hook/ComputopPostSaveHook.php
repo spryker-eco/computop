@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ComputopPostSaveHook implements ComputopPostSaveHookInterface
@@ -22,7 +22,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface[]
+     * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface[]
      */
     protected $methodMappers = [];
 
@@ -35,11 +35,11 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
      *
      * @return void
      */
-    public function registerMapper(AbstractMapperInterface $paymentMethod)
+    public function registerMapper(OrderMapperInterface $paymentMethod)
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
@@ -79,7 +79,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface
      */
     protected function getMethodMapper($methodName)
     {

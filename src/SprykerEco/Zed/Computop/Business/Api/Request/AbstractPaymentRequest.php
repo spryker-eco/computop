@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Api\Request;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
-use SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 
 abstract class AbstractPaymentRequest
@@ -31,7 +31,7 @@ abstract class AbstractPaymentRequest
     protected $paymentMethod;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface[]
+     * @var \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface[]
      */
     protected $methodMappers = [];
 
@@ -65,11 +65,11 @@ abstract class AbstractPaymentRequest
     }
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface $paymentMethod
      *
      * @return void
      */
-    public function registerMapper(AbstractMapperInterface $paymentMethod)
+    public function registerMapper(ApiMapperInterface $paymentMethod)
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
@@ -99,7 +99,7 @@ abstract class AbstractPaymentRequest
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     protected function getMethodMapper($methodName)
     {

@@ -15,7 +15,7 @@ use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
-abstract class AbstractMapper implements AbstractMapperInterface
+abstract class AbstractMapper implements ApiMapperInterface
 {
     /**
      * @var \SprykerEco\Service\Computop\ComputopServiceInterface

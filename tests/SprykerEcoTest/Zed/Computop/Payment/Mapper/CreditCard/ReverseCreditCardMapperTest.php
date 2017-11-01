@@ -21,7 +21,7 @@ use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\ReverseCreditCardMapp
 class ReverseCreditCardMapperTest extends AbstractCreditCardMapperTest
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     protected function createMapper()
     {

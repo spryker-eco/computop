@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Order;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
-interface AbstractMapperInterface
+interface OrderMapperInterface
 {
     /**
      * @return string

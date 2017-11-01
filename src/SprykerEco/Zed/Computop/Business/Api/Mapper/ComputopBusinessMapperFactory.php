@@ -38,7 +38,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createAuthorizeCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -48,7 +48,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createReverseCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -58,7 +58,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createInquireCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -68,7 +68,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createCaptureCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -78,7 +78,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createRefundCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -88,7 +88,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createAuthorizePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -98,7 +98,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createReversePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -108,7 +108,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createInquirePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -118,7 +118,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createCapturePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -128,7 +128,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createRefundPayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -138,7 +138,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createReverseDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -148,7 +148,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createInquireDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -158,7 +158,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createCaptureDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -168,7 +168,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createRefundDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -178,7 +178,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createRefundSofortMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -188,7 +188,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createReversePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -198,7 +198,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createInquirePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -208,7 +208,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createCapturePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -218,7 +218,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     /**
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\AbstractMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createRefundPaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {

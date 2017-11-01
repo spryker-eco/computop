@@ -9,16 +9,16 @@ namespace SprykerEco\Zed\Computop\Business\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface;
 
 interface ComputopPostSaveHookInterface
 {
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\AbstractMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
      *
      * @return void
      */
-    public function registerMapper(AbstractMapperInterface $paymentMethod);
+    public function registerMapper(OrderMapperInterface $paymentMethod);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
