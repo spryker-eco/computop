@@ -86,9 +86,9 @@ interface ComputopApiConfig
     const MC_GROSS = 'mc_gross';
     const MANDATE_ID = 'mandateid';
     const DATE_OF_SIGNATURE_ID = 'dtofsgntr';
-    const I_B_A_N = 'IBAN';
-    const P_B_A_N = 'pban';
-    const B_I_C = 'bic';
+    const BANK_ACCOUNT_IBAN = 'IBAN';
+    const BANK_ACCOUNT_PBAN = 'pban';
+    const BANK_ACCOUNT_BIC = 'bic';
     const ACCOUNT_OWNER = 'AccOwner';
     const ACCOUNT_BANK = 'AccBank';
     const MDT_SEQ_TYPE = 'mdtseqtype';

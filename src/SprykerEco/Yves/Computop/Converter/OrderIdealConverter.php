@@ -27,8 +27,8 @@ class OrderIdealConverter extends AbstractOrderConverter
         $responseTransfer->setRefNr($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::REF_NR));
         $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_BANK));
         $responseTransfer->setAccountOwner($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_OWNER));
-        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::B_I_C));
-        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::I_B_A_N));
+        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_BIC));
+        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_IBAN));
         $responseTransfer->setPaymentPurpose($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::PAYMENT_PURPOSE));
         $responseTransfer->setPaymentGuarantee($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::PAYMENT_GUARANTEE));
         $responseTransfer->setErrorText($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ERROR_TEXT));
