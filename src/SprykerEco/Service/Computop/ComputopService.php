@@ -143,11 +143,11 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function getEncryptedArray(array $dataSubArray, $password)
     {
-        $plaintext = $this->getFactory()->createComputopMapper()->getDataPlaintext($dataSubArray);
-        $length = mb_strlen($plaintext);
+        $plainText = $this->getFactory()->createComputopMapper()->getDataPlainText($dataSubArray);
+        $length = mb_strlen($plainText);
 
         $encryptedArray[ComputopFieldName::DATA] = $this->getBlowfishEncryptedValue(
-            $plaintext,
+            $plainText,
             $length,
             $password
         );
@@ -176,15 +176,15 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @api
      *
-     * @param string $plaintext
+     * @param string $plainText
      * @param int $length
      * @param string $password
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plaintext, $length, $password)
+    public function getBlowfishEncryptedValue($plainText, $length, $password)
     {
-        return $this->getFactory()->createBlowfishHasher()->getBlowfishEncryptedValue($plaintext, $length, $password);
+        return $this->getFactory()->createBlowfishHasher()->getBlowfishEncryptedValue($plainText, $length, $password);
     }
 
     /**

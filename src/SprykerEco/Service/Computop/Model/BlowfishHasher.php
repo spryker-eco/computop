@@ -37,7 +37,7 @@ class BlowfishHasher implements BlowfishHasherInterface
     protected $sModifiedKeys;
 
     /**
-     * @param string $plaintext
+     * @param string $plainText
      * @param int $length
      * @param string $password
      *
@@ -45,19 +45,19 @@ class BlowfishHasher implements BlowfishHasherInterface
      *
      * @return string
      */
-    public function getBlowfishEncryptedValue($plaintext, $length, $password)
+    public function getBlowfishEncryptedValue($plainText, $length, $password)
     {
         if (mb_strlen($password) <= 0) {
             $password = ' ';
         }
-        if (mb_strlen($plaintext) != $length) {
+        if (mb_strlen($plainText) != $length) {
             throw new BlowfishException('Length mismatch. The parameter len differs from actual length.');
         }
 
-        $plaintext = $this->expand($plaintext);
+        $plainText = $this->expand($plainText);
         $this->bfSetKey($password);
 
-        return bin2hex($this->encrypt($plaintext));
+        return bin2hex($this->encrypt($plainText));
     }
 
     /**

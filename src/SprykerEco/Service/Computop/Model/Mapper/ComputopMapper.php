@@ -60,7 +60,7 @@ class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
      *
      * @return string
      */
-    public function getDataPlaintext(array $dataSubArray)
+    public function getDataPlainText(array $dataSubArray)
     {
         $dataArray = [];
         foreach ($dataSubArray as $key => $value) {
