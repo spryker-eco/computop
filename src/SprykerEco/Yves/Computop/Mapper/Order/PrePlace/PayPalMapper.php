@@ -69,6 +69,6 @@ class PayPalMapper extends AbstractPrePlaceMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::PAY_PAL_ORDER_ACTION);
+        return Config::get(ComputopConstants::PAYPAL_ORDER_ACTION);
     }
 }

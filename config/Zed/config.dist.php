@@ -23,7 +23,7 @@ $config[ComputopConstants::REVERSE_ACTION] = 'https://www.computop-paygate.com/r
 $config[ComputopConstants::INQUIRE_ACTION] = 'https://www.computop-paygate.com/inquire.aspx';
 $config[ComputopConstants::REFUND_ACTION] = 'https://www.computop-paygate.com/credit.aspx';
 
-$config[ComputopConstants::PAY_PAL_ORDER_ACTION] = 'https://www.computop-paygate.com/paypal.aspx';
+$config[ComputopConstants::PAYPAL_ORDER_ACTION] = 'https://www.computop-paygate.com/paypal.aspx';
 $config[ComputopConstants::DIRECT_DEBIT_ORDER_ACTION] = 'https://www.computop-paygate.com/paysdd.aspx';
 $config[ComputopConstants::SOFORT_ORDER_ACTION] = 'https://www.computop-paygate.com/sofort.aspx';
 $config[ComputopConstants::PAYDIREKT_ORDER_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
