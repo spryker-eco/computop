@@ -31,7 +31,7 @@ interface ComputopApiConfig
     const CODE = 'Code';
     const XID = 'XID';
     const TYPE = 'Type';
-    const PCN_R = 'PCNr';
+    const PC_NR = 'PCNr';
     const CC_EXPIRY = 'CCExpiry';
     const CC_BRAND = 'CCBrand';
     const MASKED_PAN = 'MaskedPan';
