@@ -296,7 +296,7 @@
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
-        <property name="tId" type="string" />
+        <property name="customerTransactionId" type="string" />
         <property name="reference" type="string" />
         <property name="transactionId" type="string" />
         <property name="shoppingBasketCategory" type="string" />

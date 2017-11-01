@@ -30,6 +30,7 @@ interface ComputopApiConfig
     const DESCRIPTION = 'Description';
     const CODE = 'Code';
     const X_ID = 'XID';
+    const CUSTOMER_TRANSACTION_ID = 'TID';
     const TYPE = 'Type';
     const PC_NR = 'PCNr';
     const CREDIT_CARD_EXPIRY = 'CCExpiry';

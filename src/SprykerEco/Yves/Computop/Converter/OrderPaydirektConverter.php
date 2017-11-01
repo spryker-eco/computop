@@ -38,6 +38,7 @@ class OrderPaydirektConverter extends AbstractOrderConverter
         $responseTransfer->setShippingCountryCode($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::SHIPPING_COUNTRY_CODE));
         $responseTransfer->setShippingEmail($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::SHIPPING_EMAIL));
         $responseTransfer->setAgeAccepted($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::AGE_ACCEPTED));
+        $responseTransfer->setCustomerTransactionId($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CUSTOMER_TRANSACTION_ID));
 
         return $responseTransfer;
     }

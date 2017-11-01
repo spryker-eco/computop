@@ -105,6 +105,7 @@ If the actual amount differs from the requested amount this will be returned."/>
         <column name="bank_account_pban" required="false" type="VARCHAR"/>
         <column name="birthday" required="false" type="VARCHAR"/>
         <column name="age" required="false" type="INTEGER"/>
+        <column name="customer_transaction_id" required="false" type="INTEGER"/>
 
         <column name="shopping_basket_category" required="false" type="VARCHAR"/>
         <column name="shipping_first_name" required="false" type="VARCHAR"/>

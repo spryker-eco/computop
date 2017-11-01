@@ -54,6 +54,7 @@ class PaydirektResponseHandler extends AbstractResponseHandler
 
         $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
+        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
         $paymentEntityDetails->save();
     }
 
