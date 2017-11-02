@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Form;
 
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,7 @@ class IdealSubForm extends AbstractSubForm
      */
     public function getName()
     {
-        return ComputopConfig::PAYMENT_METHOD_IDEAL;
+        return PaymentTransfer::COMPUTOP_IDEAL;
     }
 
     /**
@@ -29,7 +30,7 @@ class IdealSubForm extends AbstractSubForm
      */
     public function getPropertyPath()
     {
-        return ComputopConfig::PAYMENT_METHOD_IDEAL;
+        return PaymentTransfer::COMPUTOP_IDEAL;
     }
 
     /**

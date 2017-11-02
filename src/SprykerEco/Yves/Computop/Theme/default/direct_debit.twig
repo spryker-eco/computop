@@ -1,11 +1,11 @@
 <div class="small-12 medium-9 large-6">
     <div class="small-12 columns">
-        {{ form_widget(form.ComputopDirectDebit.MerchantID, {'full_name': 'MerchantID'}) }}
-        {{ form_widget(form.ComputopDirectDebit.Data, {'full_name': 'Data'}) }}
-        {{ form_widget(form.ComputopDirectDebit.Len, {'full_name': 'Len'}) }}
-        {{ form_widget(form.ComputopDirectDebit.url) }}
+        {{ form_widget(form.computopDirectDebit.MerchantID, {'full_name': 'MerchantID'}) }}
+        {{ form_widget(form.computopDirectDebit.Data, {'full_name': 'Data'}) }}
+        {{ form_widget(form.computopDirectDebit.Len, {'full_name': 'Len'}) }}
+        {{ form_widget(form.computopDirectDebit.url) }}
 
-        <a href="{{ form.ComputopDirectDebit.vars.value.url }}">
+        <a href="{{ form.computopDirectDebit.vars.value.url }}">
             {{ 'Pay with Computop Direct Debit' | trans }}
         </a>
     </div>
