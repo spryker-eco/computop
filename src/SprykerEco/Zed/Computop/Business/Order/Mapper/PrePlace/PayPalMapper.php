@@ -46,7 +46,7 @@ class PayPalMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer)
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer $computopResponse */
         $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);

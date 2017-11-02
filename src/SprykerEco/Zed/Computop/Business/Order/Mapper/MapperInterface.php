@@ -35,5 +35,5 @@ interface MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer);
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer);
 }
