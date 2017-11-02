@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Order;
 
-use Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 
@@ -20,7 +20,7 @@ class PaydirektResponseHandler extends AbstractResponseHandler
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopPaydirekt()->getPaydirektOrderResponse();
+        $responseTransfer = $quoteTransfer->getPayment()->getComputopPaydirekt()->getPaydirektInitResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
             $this->saveComputopOrderDetails($responseTransfer);
@@ -29,11 +29,11 @@ class PaydirektResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopPaydirektOrderResponseTransfer $responseTransfer)
+    protected function saveComputopOrderDetails(ComputopPaydirektInitResponseTransfer $responseTransfer)
     {
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;

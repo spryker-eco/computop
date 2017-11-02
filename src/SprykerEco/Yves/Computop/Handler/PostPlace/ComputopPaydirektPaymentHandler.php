@@ -32,7 +32,7 @@ class ComputopPaydirektPaymentHandler implements ComputopPaymentHandlerInterface
             $quoteTransfer->getPayment()->setComputopPaydirekt($computopTransfer);
         }
 
-        $quoteTransfer->getPayment()->getComputopPaydirekt()->setPaydirektOrderResponse(
+        $quoteTransfer->getPayment()->getComputopPaydirekt()->setPaydirektInitResponse(
             $responseTransfer
         );
 

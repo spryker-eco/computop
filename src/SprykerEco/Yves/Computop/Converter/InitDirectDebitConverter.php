@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
@@ -17,11 +17,11 @@ class InitDirectDebitConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *
-     * @return \Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer
      */
     public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
-        $responseTransfer = new ComputopDirectDebitOrderResponseTransfer();
+        $responseTransfer = new ComputopDirectDebitInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields

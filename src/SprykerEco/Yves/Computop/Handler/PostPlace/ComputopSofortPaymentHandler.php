@@ -32,7 +32,7 @@ class ComputopSofortPaymentHandler implements ComputopPaymentHandlerInterface
             $quoteTransfer->getPayment()->setComputopSofort($computopTransfer);
         }
 
-        $quoteTransfer->getPayment()->getComputopSofort()->setSofortOrderResponse(
+        $quoteTransfer->getPayment()->getComputopSofort()->setSofortInitResponse(
             $responseTransfer
         );
 

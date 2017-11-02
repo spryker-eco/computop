@@ -8,7 +8,7 @@
 namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitSofortConverter extends AbstractInitConverter
@@ -17,11 +17,11 @@ class InitSofortConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *
-     * @return \Generated\Shared\Transfer\ComputopSofortOrderResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer
      */
     public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
-        $responseTransfer = new ComputopSofortOrderResponseTransfer();
+        $responseTransfer = new ComputopSofortInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_BANK));

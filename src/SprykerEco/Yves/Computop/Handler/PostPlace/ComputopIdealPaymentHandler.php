@@ -32,7 +32,7 @@ class ComputopIdealPaymentHandler implements ComputopPaymentHandlerInterface
             $quoteTransfer->getPayment()->setComputopIdeal($computopTransfer);
         }
 
-        $quoteTransfer->getPayment()->getComputopIdeal()->setIdealOrderResponse(
+        $quoteTransfer->getPayment()->getComputopIdeal()->setIdealInitResponse(
             $responseTransfer
         );
 

@@ -38,7 +38,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getDirectDebitOrderResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getDirectDebitInitResponse();
     }
 
     /**
@@ -48,7 +48,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer $computopResponse */
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $computopResponse */
         $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);
         $result = $computopResponse->toArray();
 

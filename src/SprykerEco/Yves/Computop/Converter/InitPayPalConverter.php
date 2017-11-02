@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
@@ -17,11 +17,11 @@ class InitPayPalConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *
-     * @return \Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer
      */
     public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
-        $responseTransfer = new ComputopPayPalOrderResponseTransfer();
+        $responseTransfer = new ComputopPayPalInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         $responseTransfer->setEmail($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::EMAIL));

@@ -36,7 +36,7 @@
         <property name="url" type="string" />
         <property name="clientIp" type="string" />
         <property name="finishAuth" type="string" />
-        <property name="creditCardOrderResponse" type="ComputopCreditCardOrderResponse"/>
+        <property name="creditCardInitResponse" type="ComputopCreditCardInitResponse"/>
     </transfer>
 
     <transfer name="ComputopDirectDebitPayment">
@@ -58,7 +58,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-        <property name="directDebitOrderResponse" type="ComputopDirectDebitOrderResponse"/>
+        <property name="directDebitInitResponse" type="ComputopDirectDebitInitResponse"/>
     </transfer>
 
     <transfer name="ComputopPayPalPayment">
@@ -108,7 +108,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-        <property name="payPalOrderResponse" type="ComputopPayPalOrderResponse"/>
+        <property name="payPalInitResponse" type="ComputopPayPalInitResponse"/>
     </transfer>
 
     <transfer name="ComputopSofortPayment">
@@ -129,7 +129,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-        <property name="sofortOrderResponse" type="ComputopSofortOrderResponse"/>
+        <property name="sofortInitResponse" type="ComputopSofortInitResponse"/>
     </transfer>
 
     <transfer name="ComputopPaydirektPayment">
@@ -164,7 +164,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-        <property name="paydirektOrderResponse" type="ComputopPaydirektOrderResponse"/>
+        <property name="paydirektInitResponse" type="ComputopPaydirektInitResponse"/>
     </transfer>
 
     <transfer name="ComputopIdealPayment">
@@ -190,7 +190,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
-        <property name="idealOrderResponse" type="ComputopIdealOrderResponse"/>
+        <property name="idealInitResponse" type="ComputopIdealInitResponse"/>
     </transfer>
 
     <transfer name="ComputopResponseHeader">
@@ -206,7 +206,7 @@
         <property name="method" type="string" />
     </transfer>
 
-    <transfer name="ComputopCreditCardOrderResponse">
+    <transfer name="ComputopCreditCardInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="userData" type="string" />
         <property name="pcNr" type="string" />
@@ -222,7 +222,7 @@
         <property name="custom" type="string" />
     </transfer>
 
-    <transfer name="ComputopDirectDebitOrderResponse">
+    <transfer name="ComputopDirectDebitInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="type" type="string" />
         <property name="bankAccountIban" type="string" />
@@ -237,7 +237,7 @@
         <property name="bankAccountPban" type="string" />
     </transfer>
 
-    <transfer name="ComputopPayPalOrderResponse">
+    <transfer name="ComputopPayPalInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
@@ -277,7 +277,7 @@
         <property name="mcGross" type="string" />
     </transfer>
 
-    <transfer name="ComputopSofortOrderResponse">
+    <transfer name="ComputopSofortInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="accountOwner" type="string"/>
         <property name="accountBank" type="string"/>
@@ -292,7 +292,7 @@
         <property name="age" type="string" />
     </transfer>
 
-    <transfer name="ComputopPaydirektOrderResponse">
+    <transfer name="ComputopPaydirektInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
@@ -313,7 +313,7 @@
         <property name="ageAccepted" type="string" />
     </transfer>
 
-    <transfer name="ComputopIdealOrderResponse">
+    <transfer name="ComputopIdealInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />

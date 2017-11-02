@@ -22,7 +22,7 @@ class ComputopCreditCardPaymentHandler implements ComputopPaymentHandlerInterfac
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() !== null) {
-            $quoteTransfer->getPayment()->getComputopCreditCard()->setCreditCardOrderResponse(
+            $quoteTransfer->getPayment()->getComputopCreditCard()->setCreditCardInitResponse(
                 $responseTransfer
             );
 

@@ -22,7 +22,7 @@ class ComputopPayPalPaymentHandler implements ComputopPaymentHandlerInterface
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() !== null) {
-            $quoteTransfer->getPayment()->getComputopPayPal()->setPayPalOrderResponse(
+            $quoteTransfer->getPayment()->getComputopPayPal()->setPayPalInitResponse(
                 $responseTransfer
             );
 

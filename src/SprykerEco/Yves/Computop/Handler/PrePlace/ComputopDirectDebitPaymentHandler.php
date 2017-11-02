@@ -22,7 +22,7 @@ class ComputopDirectDebitPaymentHandler implements ComputopPaymentHandlerInterfa
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() !== null) {
-            $quoteTransfer->getPayment()->getComputopDirectDebit()->setDirectDebitOrderResponse(
+            $quoteTransfer->getPayment()->getComputopDirectDebit()->setDirectDebitInitResponse(
                 $responseTransfer
             );
 

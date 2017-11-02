@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Order;
 
 use Codeception\TestCase\Test;
-use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -72,17 +72,17 @@ class OrderPaymentTestHelper extends Test
         $computopPayment->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
         $computopPayment->setClientIp(OrderPaymentTestConstants::CLIENT_IP_VALUE);
         $computopPayment->setTransId(OrderPaymentTestConstants::TRANS_ID_VALUE);
-        $computopPayment->setCreditCardOrderResponse($this->createComputopOrderResponseTransfer());
+        $computopPayment->setCreditCardInitResponse($this->createComputopOrderResponseTransfer());
 
         return $computopPayment;
     }
 
     /**
-     * @return \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer
      */
     public function createComputopOrderResponseTransfer()
     {
-        $computopResponse = new ComputopCreditCardOrderResponseTransfer();
+        $computopResponse = new ComputopCreditCardInitResponseTransfer();
         $computopResponse->setHeader($this->createComputopResponseHeaderTransfer());
 
         return $computopResponse;

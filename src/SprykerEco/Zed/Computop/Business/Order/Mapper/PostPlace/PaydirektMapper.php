@@ -38,7 +38,7 @@ class PaydirektMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getPaydirektOrderResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getPaydirektInitResponse();
     }
 
     /**

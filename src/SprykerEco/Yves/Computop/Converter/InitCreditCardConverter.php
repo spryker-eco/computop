@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
+use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
@@ -17,11 +17,11 @@ class InitCreditCardConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer
      */
     public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
-        $responseTransfer = new ComputopCreditCardOrderResponseTransfer();
+        $responseTransfer = new ComputopCreditCardInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields

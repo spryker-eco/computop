@@ -38,7 +38,7 @@ class IdealMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getIdealOrderResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getIdealInitResponse();
     }
 
     /**

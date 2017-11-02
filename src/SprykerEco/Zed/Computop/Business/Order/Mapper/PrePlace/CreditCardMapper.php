@@ -38,7 +38,7 @@ class CreditCardMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getCreditCardOrderResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getCreditCardInitResponse();
     }
 
     /**
@@ -48,7 +48,7 @@ class CreditCardMapper implements MapperInterface
      */
     public function getPaymentDetailForOrderArray(PaymentTransfer $paymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer $computopResponse */
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer $computopResponse */
         $computopResponse = $this->getComputopResponseTransfer($paymentTransfer);
         $result = $computopResponse->toArray();
 
