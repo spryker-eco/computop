@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Order\PrePlace;
+namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
@@ -14,7 +14,7 @@ use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
-use SprykerEco\Yves\Computop\Mapper\Order\AbstractMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractPrePlaceMapper extends AbstractMapper

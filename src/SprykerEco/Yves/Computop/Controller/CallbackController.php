@@ -59,7 +59,7 @@ class CallbackController extends AbstractController
     public function successCreditCardAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
-            $this->getFactory()->createOrderCreditCardConverter()
+            $this->getFactory()->createInitCreditCardConverter()
         );
 
         return $this->successAction($this->getFactory()->createCreditCardPaymentHandler());
@@ -71,7 +71,7 @@ class CallbackController extends AbstractController
     public function successPayPalAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
-            $this->getFactory()->createOrderPayPalConverter()
+            $this->getFactory()->createInitPayPalConverter()
         );
 
         return $this->successAction($this->getFactory()->createPayPalPaymentHandler());
@@ -83,7 +83,7 @@ class CallbackController extends AbstractController
     public function successDirectDebitAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
-            $this->getFactory()->createOrderDirectDebitConverter()
+            $this->getFactory()->createInitDirectDebitConverter()
         );
 
         return $this->successAction($this->getFactory()->createDirectDebitPaymentHandler());
@@ -95,7 +95,7 @@ class CallbackController extends AbstractController
     public function successPaydirektAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
-            $this->getFactory()->createOrderPaydirektConverter()
+            $this->getFactory()->createInitPaydirektConverter()
         );
 
         $handler = $this->getFactory()->createPaydirektPaymentHandler();
@@ -123,7 +123,7 @@ class CallbackController extends AbstractController
     public function successSofortAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
-            $this->getFactory()->createOrderSofortConverter()
+            $this->getFactory()->createInitSofortConverter()
         );
 
         $handler = $this->getFactory()->createSofortPaymentHandler();
@@ -151,7 +151,7 @@ class CallbackController extends AbstractController
     public function successIdealAction()
     {
         $this->orderResponseTransfer = $this->getOrderResponseTransfer(
-            $this->getFactory()->createOrderIdealConverter()
+            $this->getFactory()->createInitIdealConverter()
         );
 
         $handler = $this->getFactory()->createIdealPaymentHandler();

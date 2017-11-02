@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface;
-use SprykerEco\Yves\Computop\Mapper\Order\MapperInterface;
+use SprykerEco\Yves\Computop\Mapper\Init\MapperInterface;
 
 abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInterface
 {
@@ -20,7 +20,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     protected $quoteClient;
 
     /**
-     * @var \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @var \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     protected $orderMapper;
 
@@ -33,7 +33,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface $quoteClient
-     * @param \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface $orderMapper
+     * @param \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface $orderMapper
      */
     public function __construct(ComputopToQuoteInterface $quoteClient, MapperInterface $orderMapper)
     {

@@ -5,9 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Order\PrePlace;
+namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
-use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use DateTime;
+use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -15,21 +16,23 @@ use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class CreditCardMapper extends AbstractPrePlaceMapper
+class DirectDebitMapper extends AbstractPrePlaceMapper
 {
+    const DATE_FORMAT = 'd.m.Y';
+
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
      */
     protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
     {
-        $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
+        $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
-        $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
+        $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS))
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::DIRECT_DEBIT_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
@@ -45,7 +48,7 @@ class CreditCardMapper extends AbstractPrePlaceMapper
      */
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -54,9 +57,10 @@ class CreditCardMapper extends AbstractPrePlaceMapper
         $dataSubArray[ComputopApiConfig::CAPTURE] = $cardPaymentTransfer->getCapture();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = ComputopConfig::ETI_ID;
+        $dataSubArray[ComputopApiConfig::MANDATE_ID] = $cardPaymentTransfer->getMandateId();
+        $dataSubArray[ComputopApiConfig::DATE_OF_SIGNATURE_ID] = $this->getDateOfSignature();
 
         return $dataSubArray;
     }
@@ -64,8 +68,18 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     /**
      * @return string
      */
+    protected function getDateOfSignature()
+    {
+        $now = new DateTime();
+
+        return $now->format(self::DATE_FORMAT);
+    }
+
+    /**
+     * @return string
+     */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
+        return Config::get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);
     }
 }

@@ -5,14 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Order\PostPlace;
+namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\ComputopConfig;
-use SprykerEco\Yves\Computop\Mapper\Order\AbstractMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractPostPlaceMapper extends AbstractMapper

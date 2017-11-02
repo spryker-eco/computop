@@ -33,12 +33,12 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPayPalPaymentHandler;
-use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\IdealMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\PaydirektMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PostPlace\SofortMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\CreditCardMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\DirectDebitMapper;
-use SprykerEco\Yves\Computop\Mapper\Order\PrePlace\PayPalMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\CreditCardMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\DirectDebitMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalMapper;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
@@ -224,7 +224,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createOrderCreditCardConverter()
+    public function createInitCreditCardConverter()
     {
         return new InitCreditCardConverter($this->getComputopService());
     }
@@ -232,7 +232,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createOrderPayPalConverter()
+    public function createInitPayPalConverter()
     {
         return new InitPayPalConverter($this->getComputopService());
     }
@@ -240,7 +240,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createOrderDirectDebitConverter()
+    public function createInitDirectDebitConverter()
     {
         return new InitDirectDebitConverter($this->getComputopService());
     }
@@ -248,7 +248,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createOrderPaydirektConverter()
+    public function createInitPaydirektConverter()
     {
         return new InitPaydirektConverter($this->getComputopService());
     }
@@ -256,7 +256,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createOrderSofortConverter()
+    public function createInitSofortConverter()
     {
         return new InitSofortConverter($this->getComputopService());
     }
@@ -264,13 +264,13 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createOrderIdealConverter()
+    public function createInitIdealConverter()
     {
         return new InitIdealConverter($this->getComputopService());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderCreditCardMapper()
     {
@@ -278,7 +278,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderPayPalMapper()
     {
@@ -286,7 +286,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderDirectDebitMapper()
     {
@@ -294,7 +294,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderSofortMapper()
     {
@@ -302,7 +302,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderPaydirektMapper()
     {
@@ -310,7 +310,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Order\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderIdealMapper()
     {
