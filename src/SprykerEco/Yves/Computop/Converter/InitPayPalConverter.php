@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopPayPalOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class OrderPayPalConverter extends AbstractOrderConverter
+class InitPayPalConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray

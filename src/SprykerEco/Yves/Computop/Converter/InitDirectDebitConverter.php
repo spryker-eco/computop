@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopDirectDebitOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class OrderDirectDebitConverter extends AbstractOrderConverter
+class InitDirectDebitConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray

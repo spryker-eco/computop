@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopCreditCardOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class OrderCreditCardConverter extends AbstractOrderConverter
+class InitCreditCardConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray

@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 
-abstract class AbstractOrderConverter implements ConverterInterface
+abstract class AbstractInitConverter implements ConverterInterface
 {
     /**
      * @var \SprykerEco\Service\Computop\ComputopServiceInterface

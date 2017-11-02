@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopPaydirektOrderResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class OrderPaydirektConverter extends AbstractOrderConverter
+class InitPaydirektConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray

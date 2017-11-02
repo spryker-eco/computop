@@ -8,12 +8,12 @@
 namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
-use SprykerEco\Yves\Computop\Converter\OrderCreditCardConverter;
-use SprykerEco\Yves\Computop\Converter\OrderDirectDebitConverter;
-use SprykerEco\Yves\Computop\Converter\OrderIdealConverter;
-use SprykerEco\Yves\Computop\Converter\OrderPaydirektConverter;
-use SprykerEco\Yves\Computop\Converter\OrderPayPalConverter;
-use SprykerEco\Yves\Computop\Converter\OrderSofortConverter;
+use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
+use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
+use SprykerEco\Yves\Computop\Converter\InitIdealConverter;
+use SprykerEco\Yves\Computop\Converter\InitPaydirektConverter;
+use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
+use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
@@ -226,7 +226,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderCreditCardConverter()
     {
-        return new OrderCreditCardConverter($this->getComputopService());
+        return new InitCreditCardConverter($this->getComputopService());
     }
 
     /**
@@ -234,7 +234,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderPayPalConverter()
     {
-        return new OrderPayPalConverter($this->getComputopService());
+        return new InitPayPalConverter($this->getComputopService());
     }
 
     /**
@@ -242,7 +242,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderDirectDebitConverter()
     {
-        return new OrderDirectDebitConverter($this->getComputopService());
+        return new InitDirectDebitConverter($this->getComputopService());
     }
 
     /**
@@ -250,7 +250,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderPaydirektConverter()
     {
-        return new OrderPaydirektConverter($this->getComputopService());
+        return new InitPaydirektConverter($this->getComputopService());
     }
 
     /**
@@ -258,7 +258,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderSofortConverter()
     {
-        return new OrderSofortConverter($this->getComputopService());
+        return new InitSofortConverter($this->getComputopService());
     }
 
     /**
@@ -266,7 +266,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderIdealConverter()
     {
-        return new OrderIdealConverter($this->getComputopService());
+        return new InitIdealConverter($this->getComputopService());
     }
 
     /**
