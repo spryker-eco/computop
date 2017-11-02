@@ -78,6 +78,6 @@ class SofortMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::SOFORT_ORDER_ACTION);
+        return Config::get(ComputopConstants::SOFORT_INIT_ACTION);
     }
 }

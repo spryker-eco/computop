@@ -80,6 +80,6 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::DIRECT_DEBIT_ORDER_ACTION);
+        return Config::get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);
     }
 }

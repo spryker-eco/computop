@@ -79,6 +79,6 @@ class IdealMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::IDEAL_ORDER_ACTION);
+        return Config::get(ComputopConstants::IDEAL_INIT_ACTION);
     }
 }

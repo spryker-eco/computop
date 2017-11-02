@@ -87,6 +87,6 @@ class PaydirektMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::PAYDIREKT_ORDER_ACTION);
+        return Config::get(ComputopConstants::PAYDIREKT_INIT_ACTION);
     }
 }
