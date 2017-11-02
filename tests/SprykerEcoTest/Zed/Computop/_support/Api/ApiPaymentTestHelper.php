@@ -8,11 +8,12 @@
 namespace SprykerEcoTest\Zed\Computop\Api;
 
 use Codeception\TestCase\Test;
-
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
+use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ApiPaymentTestHelper extends Test
@@ -33,6 +34,7 @@ class ApiPaymentTestHelper extends Test
         $orderTransfer = new OrderTransfer();
         $orderTransfer->setTotals(new TotalsTransfer());
         $orderTransfer->setCustomer(new CustomerTransfer());
+        $orderTransfer->addPayment($this->createPaymentTransfer());
         return $orderTransfer;
     }
 
@@ -50,5 +52,18 @@ class ApiPaymentTestHelper extends Test
         $headerPayment->setTransId($transId);
 
         return $headerPayment;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PaymentTransfer
+     */
+    protected function createPaymentTransfer()
+    {
+        $paymentTransfer = new PaymentTransfer();
+        $paymentTransfer->setPaymentProvider(SharedComputopConfig::PROVIDER_NAME)
+            ->setPaymentMethod(SharedComputopConfig::PAYMENT_METHOD_CREDIT_CARD)
+            ->setPaymentSelection(SharedComputopConfig::PAYMENT_METHOD_CREDIT_CARD);
+
+        return $paymentTransfer;
     }
 }

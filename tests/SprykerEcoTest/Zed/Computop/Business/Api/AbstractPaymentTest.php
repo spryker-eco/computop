@@ -106,7 +106,6 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getConfig',
                 'getComputopService',
                 'getQueryContainer',
-                'getPaymentMethod',
                 'createApiFactory',
             ]
         );
@@ -121,9 +120,6 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
-
-        $stub->method('getPaymentMethod')
-            ->willReturn(ComputopConfig::PAYMENT_METHOD_CREDIT_CARD);
 
         $stub->method('createApiFactory')
             ->willReturn($apiStub);
