@@ -29,11 +29,11 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public function provideDependencies(Container $container)
     {
         $container[self::COMPUTOP_CLIENT] = function (Container $container) {
-            return new ComputopClient($container->getLocator()->computop()->client());
+            return new ComputopClient();
         };
 
         $container[self::COMPUTOP_SERVICE] = function () use ($container) {
-            return new ComputopService($container->getLocator()->computop()->service());
+            return new ComputopService();
         };
 
         $container[self::CLIENT_QUOTE] = function () use ($container) {
