@@ -57,58 +57,58 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createAuthorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return $this->createApiFactory()->createAuthorizationPaymentRequest($paymentMethod, $computopHeaderPayment);
+        return $this->createApiFactory()->createAuthorizationPaymentRequest($orderTransfer, $computopHeaderPayment);
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createInquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return $this->createApiFactory()->createInquirePaymentRequest($paymentMethod, $computopHeaderPayment);
+        return $this->createApiFactory()->createInquirePaymentRequest($orderTransfer, $computopHeaderPayment);
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createReversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return $this->createApiFactory()->createReversePaymentRequest($paymentMethod, $computopHeaderPayment);
+        return $this->createApiFactory()->createReversePaymentRequest($orderTransfer, $computopHeaderPayment);
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createCapturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return $this->createApiFactory()->createCapturePaymentRequest($paymentMethod, $computopHeaderPayment);
+        return $this->createApiFactory()->createCapturePaymentRequest($orderTransfer, $computopHeaderPayment);
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createRefundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        return $this->createApiFactory()->createRefundPaymentRequest($paymentMethod, $computopHeaderPayment);
+        return $this->createApiFactory()->createRefundPaymentRequest($orderTransfer, $computopHeaderPayment);
     }
 
     /**
@@ -209,18 +209,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createCancelItemManager()
     {
         return new CancelItemManager($this->getQueryContainer(), $this->getConfig());
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    public function getPaymentMethod(OrderTransfer $orderTransfer)
-    {
-        $paymentsArray = $orderTransfer->getPayments()->getArrayCopy();
-
-        return array_shift($paymentsArray)->getPaymentMethod();
     }
 
     /**

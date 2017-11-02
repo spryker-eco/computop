@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Api;
 
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
@@ -41,17 +42,17 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createAuthorizationPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createAuthorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new AuthorizationRequest(
             $this->createAuthorizeAdapter(),
             $this->createApiFactory()->createAuthorizeConverter(),
-            $paymentMethod
+            $orderTransfer
         );
 
         $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper($computopHeaderPayment));
@@ -61,17 +62,17 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createInquirePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createInquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new InquireRequest(
             $this->createInquireAdapter(),
             $this->createApiFactory()->createInquireConverter(),
-            $paymentMethod
+            $orderTransfer
         );
 
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquireCreditCardMapper($computopHeaderPayment));
@@ -83,17 +84,17 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createReversePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createReversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new ReverseRequest(
             $this->createReverseAdapter(),
             $this->createApiFactory()->createReverseConverter(),
-            $paymentMethod
+            $orderTransfer
         );
 
         $paymentRequest->registerMapper($this->createMapperFactory()->createReverseCreditCardMapper($computopHeaderPayment));
@@ -105,17 +106,17 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createCapturePaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createCapturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new CaptureRequest(
             $this->createCaptureAdapter(),
             $this->createApiFactory()->createCaptureConverter(),
-            $paymentMethod
+            $orderTransfer
         );
 
         $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureCreditCardMapper($computopHeaderPayment));
@@ -127,17 +128,17 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createRefundPaymentRequest($paymentMethod, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createRefundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $paymentRequest = new RefundRequest(
             $this->createRefundAdapter(),
             $this->createApiFactory()->createRefundConverter(),
-            $paymentMethod
+            $orderTransfer
         );
 
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundCreditCardMapper($computopHeaderPayment));

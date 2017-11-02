@@ -48,11 +48,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createAuthorizationPaymentRequest($paymentMethod, $computopHeaderPayment)
+            ->createAuthorizationPaymentRequest($orderTransfer, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -75,11 +73,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createInquirePaymentRequest($paymentMethod, $computopHeaderPayment)
+            ->createInquirePaymentRequest($orderTransfer, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -102,11 +98,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createReversePaymentRequest($paymentMethod, $computopHeaderPayment)
+            ->createReversePaymentRequest($orderTransfer, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -146,11 +140,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createCapturePaymentRequest($paymentMethod, $computopHeaderPayment)
+            ->createCapturePaymentRequest($orderTransfer, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this
@@ -173,11 +165,9 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function refundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $paymentMethod = $this->getFactory()->getPaymentMethod($orderTransfer);
-
         $computopResponseTransfer = $this
             ->getFactory()
-            ->createRefundPaymentRequest($paymentMethod, $computopHeaderPayment)
+            ->createRefundPaymentRequest($orderTransfer, $computopHeaderPayment)
             ->request($orderTransfer);
 
         $this

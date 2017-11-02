@@ -8,10 +8,12 @@
 namespace SprykerEco\Zed\Computop\Business\Api\Request;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
+use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotSetException;
 
 abstract class AbstractPaymentRequest
 {
@@ -38,16 +40,16 @@ abstract class AbstractPaymentRequest
     /**
      * @param \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface $adapter
      * @param \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface $converter
-     * @param string $paymentMethod
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      */
     public function __construct(
         AdapterInterface $adapter,
         ConverterInterface $converter,
-        $paymentMethod
+        OrderTransfer $orderTransfer
     ) {
         $this->adapter = $adapter;
         $this->converter = $converter;
-        $this->paymentMethod = $paymentMethod;
+        $this->paymentMethod = $this->getPaymentMethodFromOrder($orderTransfer);
     }
 
     /**
@@ -108,5 +110,33 @@ abstract class AbstractPaymentRequest
         }
 
         return $this->methodMappers[$methodName];
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotSetException
+     *
+     * @return string
+     */
+    protected function getPaymentMethodFromOrder(OrderTransfer $orderTransfer)
+    {
+        $paymentsArray = $orderTransfer->getPayments()->getArrayCopy();
+
+        if (!$paymentsArray) {
+            throw new PaymentMethodNotSetException('The payment is not set.');
+        }
+
+        return $this->getPaymentMethodFromPayment(array_shift($paymentsArray));
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
+     *
+     * @return string
+     */
+    protected function getPaymentMethodFromPayment(PaymentTransfer $paymentTransfer)
+    {
+        return $paymentTransfer->getPaymentMethod();
     }
 }
