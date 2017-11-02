@@ -21,3 +21,4 @@ suites:
                 - Asserts
                 - \SprykerEcoTest\Zed\Computop\Module\EnvironmentModule
                 - \SprykerEcoTest\Zed\Computop\Module\FunctionalModule
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper

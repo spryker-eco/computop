@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop;
 
 use Codeception\Actor;
+use Codeception\Scenario;
 
 /**
  * Inherited Methods
@@ -28,7 +29,19 @@ class ComputopZedTester extends Actor
 {
     use _generated\ComputopZedTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    public function __construct(Scenario $scenario)
+    {
+        parent::__construct($scenario);
+        $this->setUpConfig();
+    }
+
+    /**
+     * Set up config
+     */
+    public function setUpConfig()
+    {
+        $this->setConfig('COMPUTOP:MERCHANT_ID', 'COMPUTOP:MERCHANT_ID');
+        $this->setConfig('COMPUTOP:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
+        $this->setConfig('COMPUTOP:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
+    }
 }
