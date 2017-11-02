@@ -48,6 +48,7 @@ class ComputopZedTester extends Actor
         $this->setConfig('COMPUTOP:MERCHANT_ID', 'COMPUTOP:MERCHANT_ID');
         $this->setConfig('COMPUTOP:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
         $this->setConfig('COMPUTOP:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
-        $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', false);
+        $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
+        $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['ComputopSofort', 'ComputopPaydirekt', 'ComputopIdeal']);
     }
 }
