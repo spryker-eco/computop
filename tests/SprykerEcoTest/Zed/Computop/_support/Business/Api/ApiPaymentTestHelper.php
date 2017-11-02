@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Api;
+namespace SprykerEcoTest\Zed\Computop\Business\Api;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;

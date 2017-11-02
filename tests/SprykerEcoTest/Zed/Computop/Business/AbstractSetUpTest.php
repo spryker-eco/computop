@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Business;
 
 use Codeception\TestCase\Test;
-use SprykerEcoTest\Zed\Computop\Api\ApiPaymentTestHelper;
+use SprykerEcoTest\Zed\Computop\Business\Api\ApiPaymentTestHelper;
 use SprykerEcoTest\Zed\Computop\Module\FunctionalModule;
 use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
 
@@ -25,14 +25,14 @@ abstract class AbstractSetUpTest extends Test
     protected $orderHelper;
 
     /**
-     * @var \SprykerEcoTest\Zed\Computop\Api\ApiPaymentTestHelper
+     * @var \SprykerEcoTest\Zed\Computop\Business\Api\ApiPaymentTestHelper
      */
     protected $apiHelper;
 
     /**
      * @param \SprykerEcoTest\Zed\Computop\Module\FunctionalModule $helper
      * @param \SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper $orderHelper
-     * @param \SprykerEcoTest\Zed\Computop\Api\ApiPaymentTestHelper $apiHelper
+     * @param \SprykerEcoTest\Zed\Computop\Business\Api\ApiPaymentTestHelper $apiHelper
      *
      * @return void
      */

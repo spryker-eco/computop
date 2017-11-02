@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
 use Codeception\TestCase\Test;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -20,12 +20,12 @@ abstract class AbstractCreditCardMapperTest extends Test
     abstract protected function createMapper();
 
     /**
-     * @var \SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard\CreditCardMapperTestHelper
+     * @var \SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard\CreditCardMapperTestHelper
      */
     protected $helper;
 
     /**
-     * @param \SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard\CreditCardMapperTestHelper $helper
+     * @param \SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard\CreditCardMapperTestHelper $helper
      *
      * @return void
      */

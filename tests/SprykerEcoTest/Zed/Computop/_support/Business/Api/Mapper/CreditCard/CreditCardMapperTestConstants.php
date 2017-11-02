@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
 interface CreditCardMapperTestConstants
 {

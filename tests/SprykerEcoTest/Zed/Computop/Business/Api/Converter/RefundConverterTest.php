@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Api\Converter;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -18,9 +18,9 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
  * @group Computop
  * @group Api
  * @group Converter
- * @group ReverseConverterTest
+ * @group RefundConverterTest
  */
-class ReverseConverterTest extends AbstractConverterTest
+class RefundConverterTest extends AbstractConverterTest
 {
     /**
      * @return void
@@ -30,15 +30,16 @@ class ReverseConverterTest extends AbstractConverterTest
         $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopReverseResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-        $this->assertEquals(ConverterTestConstants::A_ID_VALUE, $responseTransfer->getAId());
-        $this->assertEquals(ConverterTestConstants::TRANSACTION_ID_VALUE, $responseTransfer->getTransactionId());
-        $this->assertEquals(ConverterTestConstants::CODE_EXT_VALUE, $responseTransfer->getCodeExt());
-        $this->assertEquals(ConverterTestConstants::ERROR_TEXT_VALUE, $responseTransfer->getErrorText());
-        $this->assertEquals(ConverterTestConstants::REF_NR_VALUE, $responseTransfer->getRefNr());
+        $this->assertEquals(ComputopApiConfig::A_ID, $responseTransfer->getAId());
+        $this->assertEquals(ComputopApiConfig::TRANSACTION_ID, $responseTransfer->getTransactionId());
+        $this->assertEquals(ComputopApiConfig::AMOUNT, $responseTransfer->getAmount());
+        $this->assertEquals(ComputopApiConfig::CODE_EXT, $responseTransfer->getCodeExt());
+        $this->assertEquals(ComputopApiConfig::ERROR_TEXT, $responseTransfer->getErrorText());
+        $this->assertEquals(ComputopApiConfig::REF_NR, $responseTransfer->getRefNr());
     }
 
     /**
@@ -63,6 +64,7 @@ class ReverseConverterTest extends AbstractConverterTest
 
         $decryptedArray[ComputopApiConfig::A_ID] = ConverterTestConstants::A_ID_VALUE;
         $decryptedArray[ComputopApiConfig::TRANSACTION_ID] = ConverterTestConstants::TRANSACTION_ID_VALUE;
+        $decryptedArray[ComputopApiConfig::AMOUNT] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
         $decryptedArray[ComputopApiConfig::CODE_EXT] = ConverterTestConstants::CODE_EXT_VALUE;
         $decryptedArray[ComputopApiConfig::ERROR_TEXT] = ConverterTestConstants::ERROR_TEXT_VALUE;
         $decryptedArray[ComputopApiConfig::REF_NR] = ConverterTestConstants::REF_NR_VALUE;

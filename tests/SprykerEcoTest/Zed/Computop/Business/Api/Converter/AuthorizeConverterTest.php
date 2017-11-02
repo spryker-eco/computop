@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Api\Converter\Inquire;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
+use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 
 /**
  * @group Unit
@@ -18,9 +18,9 @@ use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
  * @group Computop
  * @group Api
  * @group Converter
- * @group InquireConverterTest
+ * @group AuthorizeConverterTest
  */
-class InquireCredConverterTest extends AbstractInquireConverterTest
+class AuthorizeConverterTest extends AbstractConverterTest
 {
     /**
      * @return void
@@ -30,11 +30,24 @@ class InquireCredConverterTest extends AbstractInquireConverterTest
         $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopInquireResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
-//        $this->assertTrue($responseTransfer->getIsCredLast());//ToDo:add if need
+        $this->assertEquals(ConverterTestConstants::REF_NR_VALUE, $responseTransfer->getRefNr());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter
+     */
+    protected function createConverter()
+    {
+        $computopServiceMock = $this->helper->createComputopServiceMock($this->getDecryptedArray());
+        $configMock = $this->helper->createComputopConfigMock();
+
+        $converter = new AuthorizeConverter($computopServiceMock, $configMock);
+
+        return $converter;
     }
 
     /**
@@ -44,9 +57,7 @@ class InquireCredConverterTest extends AbstractInquireConverterTest
     {
         $decryptedArray = $this->helper->getMainDecryptedArray();
 
-        $decryptedArray[ComputopApiConfig::AMOUNT_AUTH] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
-        $decryptedArray[ComputopApiConfig::AMOUNT_CAP] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
-        $decryptedArray[ComputopApiConfig::AMOUNT_CRED] = ConverterTestConstants::AMOUNT_VALUE_NOT_ZERO;
+        $decryptedArray[ComputopApiConfig::REF_NR] = ConverterTestConstants::REF_NR_VALUE;
 
         return $decryptedArray;
     }

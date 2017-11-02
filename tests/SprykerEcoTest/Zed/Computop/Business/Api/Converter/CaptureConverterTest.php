@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Api\Converter;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
 
 /**
  * @group Unit
@@ -18,9 +18,9 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
  * @group Computop
  * @group Api
  * @group Converter
- * @group RefundConverterTest
+ * @group CaptureConverterTest
  */
-class RefundConverterTest extends AbstractConverterTest
+class CaptureConverterTest extends AbstractConverterTest
 {
     /**
      * @return void
@@ -30,7 +30,7 @@ class RefundConverterTest extends AbstractConverterTest
         $response = $this->helper->prepareResponse();
         $service = $this->createConverter();
 
-        /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $responseTransfer */
         $responseTransfer = $service->toTransactionResponseTransfer($response);
 
         $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $responseTransfer->getHeader());
@@ -43,14 +43,14 @@ class RefundConverterTest extends AbstractConverterTest
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter
      */
     protected function createConverter()
     {
         $computopServiceMock = $this->helper->createComputopServiceMock($this->getDecryptedArray());
         $configMock = $this->helper->createComputopConfigMock();
 
-        $converter = new RefundConverter($computopServiceMock, $configMock);
+        $converter = new CaptureConverter($computopServiceMock, $configMock);
 
         return $converter;
     }

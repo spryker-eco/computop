@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Api\Converter\Inquire;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Converter\Inquire;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEcoTest\Zed\Computop\Api\Converter\ConverterTestConstants;
+use SprykerEcoTest\Zed\Computop\Business\Api\Converter\ConverterTestConstants;
 
 /**
  * @group Unit

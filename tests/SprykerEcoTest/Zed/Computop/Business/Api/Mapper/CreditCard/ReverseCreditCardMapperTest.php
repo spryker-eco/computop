@@ -5,9 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Payment\Mapper\CreditCard;
+namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
-use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\CaptureCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\ReverseCreditCardMapper;
 
 /**
  * @group Unit
@@ -16,16 +16,16 @@ use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\CaptureCreditCardMapp
  * @group Computop
  * @group Api
  * @group Mapper
- * @group CaptureCreditCardMapperTest
+ * @group ReverseCreditCardMapperTest
  */
-class CaptureCreditCardMapperTest extends AbstractCreditCardMapperTest
+class ReverseCreditCardMapperTest extends AbstractCreditCardMapperTest
 {
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     protected function createMapper()
     {
-        return new CaptureCreditCardMapper(
+        return new ReverseCreditCardMapper(
             $this->helper->createComputopServiceMock(),
             $this->helper->createComputopConfigMock(),
             $this->helper->createComputopHeaderPaymentTransfer()
