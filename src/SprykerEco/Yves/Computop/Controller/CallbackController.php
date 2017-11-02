@@ -58,7 +58,7 @@ class CallbackController extends AbstractController
      */
     public function successCreditCardAction()
     {
-        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+        $this->orderResponseTransfer = $this->getInitResponseTransfer(
             $this->getFactory()->createInitCreditCardConverter()
         );
 
@@ -70,7 +70,7 @@ class CallbackController extends AbstractController
      */
     public function successPayPalAction()
     {
-        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+        $this->orderResponseTransfer = $this->getInitResponseTransfer(
             $this->getFactory()->createInitPayPalConverter()
         );
 
@@ -82,7 +82,7 @@ class CallbackController extends AbstractController
      */
     public function successDirectDebitAction()
     {
-        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+        $this->orderResponseTransfer = $this->getInitResponseTransfer(
             $this->getFactory()->createInitDirectDebitConverter()
         );
 
@@ -94,7 +94,7 @@ class CallbackController extends AbstractController
      */
     public function successPaydirektAction()
     {
-        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+        $this->orderResponseTransfer = $this->getInitResponseTransfer(
             $this->getFactory()->createInitPaydirektConverter()
         );
 
@@ -122,7 +122,7 @@ class CallbackController extends AbstractController
      */
     public function successSofortAction()
     {
-        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+        $this->orderResponseTransfer = $this->getInitResponseTransfer(
             $this->getFactory()->createInitSofortConverter()
         );
 
@@ -150,7 +150,7 @@ class CallbackController extends AbstractController
      */
     public function successIdealAction()
     {
-        $this->orderResponseTransfer = $this->getOrderResponseTransfer(
+        $this->orderResponseTransfer = $this->getInitResponseTransfer(
             $this->getFactory()->createInitIdealConverter()
         );
 
@@ -222,7 +222,7 @@ class CallbackController extends AbstractController
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getOrderResponseTransfer(ConverterInterface $converter)
+    protected function getInitResponseTransfer(ConverterInterface $converter)
     {
         $orderResponseTransfer = $converter->createResponseTransfer(
             $this->decryptedArray,
