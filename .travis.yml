@@ -29,7 +29,7 @@ env:
   global:
     - APPLICATION_ENV=devtest
     - APPLICATION_STORE=DE
-    - MODULE_DIR=computop
+    - MODULE_DIR=module
     - SHOP_DIR=current
     - MODULE_NAME=computop
 
