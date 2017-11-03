@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Form;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IdealSubForm extends AbstractSubForm
@@ -39,22 +38,6 @@ class IdealSubForm extends AbstractSubForm
     public function getTemplatePath()
     {
         return ComputopConfig::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return void
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $this->addMerchantId($builder, $options);
-        $this->addData($builder, $options);
-        $this->addLen($builder, $options);
-
-        //TODO: test data - need to remove after test
-        $this->addLink($builder, $options);
     }
 
     /**

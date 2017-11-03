@@ -49,11 +49,6 @@ class CreditCardSubForm extends AbstractSubForm
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addMerchantId($builder, $options);
-        $this->addData($builder, $options);
-        $this->addLen($builder, $options);
-
-        //TODO: test data - need to remove after test
         $this->addLink($builder, $options);
     }
 

@@ -11,7 +11,6 @@ use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use Symfony\Component\Form\FormBuilderInterface;
 
 abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
@@ -25,54 +24,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     {
         return ComputopConfig::PROVIDER_NAME;
     }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return $this
-     */
-    protected function addMerchantId(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add(
-            ComputopApiConfig::MERCHANT_ID,
-            'hidden'
-        );
-        return $this;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return $this
-     */
-    protected function addData(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add(
-            ComputopApiConfig::DATA,
-            'hidden'
-        );
-
-        return $this;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return $this
-     */
-    protected function addLen(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add(
-            ComputopApiConfig::LENGTH,
-            'hidden'
-        );
-
-        return $this;
-    }
-
+    
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
