@@ -115,7 +115,7 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
      *
      * @return void
      */
-    protected function checkDecryptedResponse($decryptedArray)
+    protected function checkDecryptedResponse(array $decryptedArray)
     {
         $keys = [
             ComputopApiConfig::MERCHANT_ID_SHORT,
