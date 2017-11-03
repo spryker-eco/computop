@@ -14,8 +14,8 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const COMPUTOP_CLIENT = 'COMPUTOP_CLIENT';
-    const COMPUTOP_SERVICE = 'COMPUTOP_SERVICE';
+    const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
+    const SERVICE_COMPUTOP = 'SERVICE_COMPUTOP';
     const CLIENT_QUOTE = 'CLIENT_QUOTE';
     const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
 
@@ -26,11 +26,11 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideDependencies(Container $container)
     {
-        $container[self::COMPUTOP_CLIENT] = function (Container $container) {
+        $container[self::CLIENT_COMPUTOP] = function (Container $container) {
             return $container->getLocator()->computop()->client();
         };
 
-        $container[self::COMPUTOP_SERVICE] = function () use ($container) {
+        $container[self::SERVICE_COMPUTOP] = function () use ($container) {
             return $container->getLocator()->computop()->service();
         };
 

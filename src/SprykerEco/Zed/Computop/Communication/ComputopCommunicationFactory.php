@@ -55,7 +55,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
      */
     public function getComputopService()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
     }
 
     /**

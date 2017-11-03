@@ -224,7 +224,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function getComputopService()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
     }
 
     /**

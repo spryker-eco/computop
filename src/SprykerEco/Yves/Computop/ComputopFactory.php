@@ -146,7 +146,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function getComputopClient()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_CLIENT);
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP);
     }
 
     /**
@@ -154,7 +154,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function getComputopService()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::COMPUTOP_SERVICE);
+        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
     }
 
     /**
