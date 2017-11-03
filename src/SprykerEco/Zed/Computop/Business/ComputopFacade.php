@@ -196,7 +196,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * TODO: add test
+     * {@inheritdoc}
      *
      * @api
      *
@@ -214,7 +214,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * TODO: add test
+     * {@inheritdoc}
      *
      * @api
      *
@@ -232,7 +232,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * TODO: add test
+     * {@inheritdoc}
      *
      * @api
      *
