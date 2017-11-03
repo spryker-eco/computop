@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Order;
 
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 abstract class AbstractResponseHandler implements OrderResponseHandlerInterface
@@ -22,7 +22,7 @@ abstract class AbstractResponseHandler implements OrderResponseHandlerInterface
     protected $queryContainer;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface
+     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface
      */
     protected $omsFacade;
 
@@ -38,12 +38,12 @@ abstract class AbstractResponseHandler implements OrderResponseHandlerInterface
 
     /**
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface $omsFacade
+     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
     public function __construct(
         ComputopQueryContainerInterface $queryContainer,
-        ComputopToOmsInterface $omsFacade,
+        ComputopToOmsFacadeInterface $omsFacade,
         ComputopConfig $config
     ) {
         $this->queryContainer = $queryContainer;

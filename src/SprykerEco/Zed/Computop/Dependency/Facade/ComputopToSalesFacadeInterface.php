@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-interface ComputopToSalesInterface
+interface ComputopToSalesFacadeInterface
 {
     /**
      * @param int $idSalesOrder

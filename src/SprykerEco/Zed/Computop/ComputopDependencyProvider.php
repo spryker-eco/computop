@@ -10,10 +10,10 @@ namespace SprykerEco\Zed\Computop;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Service\Computop\ComputopService;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationBridge;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerBridge;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsBridge;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationFacadeBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -33,15 +33,15 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideCommunicationLayerDependencies($container);
 
         $container[self::FACADE_SALES] = function (Container $container) {
-            return new ComputopToSalesBridge($container->getLocator()->sales()->facade());
+            return new ComputopToSalesFacadeBridge($container->getLocator()->sales()->facade());
         };
 
         $container[self::FACADE_CALCULATION] = function (Container $container) {
-            return new ComputopToCalculationBridge($container->getLocator()->calculation()->facade());
+            return new ComputopToCalculationFacadeBridge($container->getLocator()->calculation()->facade());
         };
 
         $container[self::FACADE_FLASH_MESSENGER] = function (Container $container) {
-            return new ComputopToMessengerBridge($container->getLocator()->messenger()->facade());
+            return new ComputopToMessengerFacadeBridge($container->getLocator()->messenger()->facade());
         };
 
         $container[self::COMPUTOP_SERVICE] = function () use ($container) {
@@ -65,7 +65,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container[self::FACADE_OMS] = function () use ($container) {
-            return new ComputopToOmsBridge($container->getLocator()->oms()->facade());
+            return new ComputopToOmsFacadeBridge($container->getLocator()->oms()->facade());
         };
 
         return $container;

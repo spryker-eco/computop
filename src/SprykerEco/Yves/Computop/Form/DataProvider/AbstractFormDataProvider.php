@@ -9,13 +9,13 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\MapperInterface;
 
 abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
+     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface
      */
     protected $quoteClient;
 
@@ -32,10 +32,10 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     abstract protected function getComputopPayment(AbstractTransfer $quoteTransfer);
 
     /**
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface $quoteClient
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface $orderMapper
      */
-    public function __construct(ComputopToQuoteInterface $quoteClient, MapperInterface $orderMapper)
+    public function __construct(ComputopToQuoteClientInterface $quoteClient, MapperInterface $orderMapper)
     {
         $this->quoteClient = $quoteClient;
         $this->orderMapper = $orderMapper;

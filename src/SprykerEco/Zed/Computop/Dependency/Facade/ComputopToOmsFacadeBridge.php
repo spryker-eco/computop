@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 use Propel\Runtime\Collection\ObjectCollection;
 
-class ComputopToOmsBridge implements ComputopToOmsInterface
+class ComputopToOmsFacadeBridge implements ComputopToOmsFacadeInterface
 {
     /**
      * @var \Spryker\Zed\Oms\Business\OmsFacadeInterface

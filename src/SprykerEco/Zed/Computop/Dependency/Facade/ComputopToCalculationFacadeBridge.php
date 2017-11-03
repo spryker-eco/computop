@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-class ComputopToCalculationBridge implements ComputopToCalculationInterface
+class ComputopToCalculationFacadeBridge implements ComputopToCalculationFacadeInterface
 {
     /**
      * @var \Spryker\Zed\Calculation\Business\CalculationFacadeInterface

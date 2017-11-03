@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Dependency\Client;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-class ComputopToQuoteBridge implements ComputopToQuoteInterface
+class ComputopToQuoteClientBridge implements ComputopToQuoteClientInterface
 {
     /**
      * @var \Spryker\Client\Quote\QuoteClientInterface

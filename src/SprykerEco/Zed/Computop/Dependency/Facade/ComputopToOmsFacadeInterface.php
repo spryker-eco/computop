@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 use Propel\Runtime\Collection\ObjectCollection;
 
-interface ComputopToOmsInterface
+interface ComputopToOmsFacadeInterface
 {
     /**
      * @param string $eventId

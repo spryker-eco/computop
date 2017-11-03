@@ -21,7 +21,7 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 class ComputopCommunicationFactory extends AbstractCommunicationFactory
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeInterface
      */
     public function getSalesFacade()
     {
@@ -31,7 +31,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationFacadeInterface
      */
     public function getCalculationFacade()
     {

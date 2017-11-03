@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -35,7 +35,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container[self::CLIENT_QUOTE] = function () use ($container) {
-            return new ComputopToQuoteBridge($container->getLocator()->quote()->client());
+            return new ComputopToQuoteClientBridge($container->getLocator()->quote()->client());
         };
 
         $container[self::PLUGIN_APPLICATION] = function () {

@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-interface ComputopToCalculationInterface
+interface ComputopToCalculationFacadeInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

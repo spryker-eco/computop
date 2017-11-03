@@ -27,7 +27,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 /**
@@ -178,7 +178,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
      */
     protected function createFactory()
     {
-        $omsFacadeStub = $this->createMock(ComputopToOmsBridge::class, ['triggerEvent' => '']);
+        $omsFacadeStub = $this->createMock(ComputopToOmsFacadeBridge::class, ['triggerEvent' => '']);
 
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(

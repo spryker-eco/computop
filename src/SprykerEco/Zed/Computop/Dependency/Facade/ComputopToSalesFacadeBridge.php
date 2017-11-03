@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-class ComputopToSalesBridge implements ComputopToSalesInterface
+class ComputopToSalesFacadeBridge implements ComputopToSalesFacadeInterface
 {
     /**
      * @var \Spryker\Zed\Sales\Business\SalesFacadeInterface

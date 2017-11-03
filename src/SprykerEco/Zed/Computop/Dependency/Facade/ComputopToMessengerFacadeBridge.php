@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
 use Generated\Shared\Transfer\MessageTransfer;
 
-class ComputopToMessengerBridge implements ComputopToMessengerInterface
+class ComputopToMessengerFacadeBridge implements ComputopToMessengerFacadeInterface
 {
     /**
      * @var \Spryker\Zed\Messenger\Business\MessengerFacadeInterface

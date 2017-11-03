@@ -166,7 +166,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteInterface
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface
      */
     public function getQuoteClient()
     {

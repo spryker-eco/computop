@@ -228,7 +228,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface
      */
     protected function getOmsFacade()
     {
