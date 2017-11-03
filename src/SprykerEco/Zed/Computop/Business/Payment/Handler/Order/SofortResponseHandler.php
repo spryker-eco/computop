@@ -61,7 +61,7 @@ class SofortResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity $paymentEntity
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity
      *
      * @return void
      */
