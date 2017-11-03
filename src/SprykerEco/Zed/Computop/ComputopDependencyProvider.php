@@ -17,11 +17,11 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const COMPUTOP_SERVICE = 'computop_service';
-    const FACADE_OMS = 'oms facade';
-    const FACADE_SALES = 'sales facade';
-    const FACADE_CALCULATION = 'calculation facade';
-    const FACADE_FLASH_MESSENGER = 'flash messenger facade';
+    const COMPUTOP_SERVICE = 'COMPUTOP_SERVICE';
+    const FACADE_OMS = 'FACADE_OMS';
+    const FACADE_SALES = 'FACADE_SALES';
+    const FACADE_CALCULATION = 'FACADE_CALCULATION';
+    const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

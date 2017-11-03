@@ -14,10 +14,10 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const COMPUTOP_CLIENT = 'computop service';
-    const COMPUTOP_SERVICE = 'computop client';
-    const CLIENT_QUOTE = 'quote client';
-    const PLUGIN_APPLICATION = 'application plugin';
+    const COMPUTOP_CLIENT = 'COMPUTOP_CLIENT';
+    const COMPUTOP_SERVICE = 'COMPUTOP_SERVICE';
+    const CLIENT_QUOTE = 'CLIENT_QUOTE';
+    const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
