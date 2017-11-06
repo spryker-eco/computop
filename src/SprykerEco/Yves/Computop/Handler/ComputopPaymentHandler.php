@@ -36,8 +36,8 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
-        $this->setPaymentProviderMethodSelection($quoteTransfer, $paymentSelection);
-        $this->setComputopPayment($quoteTransfer, $paymentSelection);
+        $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer, $paymentSelection);
+        $quoteTransfer = $this->setComputopPayment($quoteTransfer, $paymentSelection);
 
         return $quoteTransfer;
     }
@@ -46,11 +46,11 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param string $paymentSelection
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
-        $quoteTransfer
+        return $quoteTransfer
             ->getPayment()
             ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
             ->setPaymentMethod($this->paymentMethods[$paymentSelection])
@@ -61,13 +61,13 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param string $paymentSelection
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function setComputopPayment(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
         $computopPaymentTransfer = $this->getComputopPaymentTransfer($quoteTransfer, $paymentSelection);
 
-        $this->setComputopPaymentToQuote($quoteTransfer, $paymentSelection, clone $computopPaymentTransfer);
+        return $this->setComputopPaymentToQuote($quoteTransfer, $paymentSelection, clone $computopPaymentTransfer);
     }
 
     /**
