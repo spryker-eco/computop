@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
@@ -42,110 +40,90 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createAuthorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createAuthorizationPaymentRequest()
     {
         $paymentRequest = new AuthorizationRequest(
             $this->createAuthorizeAdapter(),
-            $this->createApiFactory()->createAuthorizeConverter(),
-            $orderTransfer
+            $this->createApiFactory()->createAuthorizeConverter()
         );
 
-        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayPalMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayPalMapper());
 
         return $paymentRequest;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createInquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createInquirePaymentRequest()
     {
         $paymentRequest = new InquireRequest(
             $this->createInquireAdapter(),
-            $this->createApiFactory()->createInquireConverter(),
-            $orderTransfer
+            $this->createApiFactory()->createInquireConverter()
         );
 
-        $paymentRequest->registerMapper($this->createMapperFactory()->createInquireCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createInquireDirectDebitMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePaydirektMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquireCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePayPalMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquireDirectDebitMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePaydirektMapper());
 
         return $paymentRequest;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createReversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createReversePaymentRequest()
     {
         $paymentRequest = new ReverseRequest(
             $this->createReverseAdapter(),
-            $this->createApiFactory()->createReverseConverter(),
-            $orderTransfer
+            $this->createApiFactory()->createReverseConverter()
         );
 
-        $paymentRequest->registerMapper($this->createMapperFactory()->createReverseCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createReverseDirectDebitMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePaydirektMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReverseCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePayPalMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReverseDirectDebitMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePaydirektMapper());
 
         return $paymentRequest;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createCapturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createCapturePaymentRequest()
     {
         $paymentRequest = new CaptureRequest(
             $this->createCaptureAdapter(),
-            $this->createApiFactory()->createCaptureConverter(),
-            $orderTransfer
+            $this->createApiFactory()->createCaptureConverter()
         );
 
-        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureDirectDebitMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePaydirektMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePayPalMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureDirectDebitMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePaydirektMapper());
 
         return $paymentRequest;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createRefundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function createRefundPaymentRequest()
     {
         $paymentRequest = new RefundRequest(
             $this->createRefundAdapter(),
-            $this->createApiFactory()->createRefundConverter(),
-            $orderTransfer
+            $this->createApiFactory()->createRefundConverter()
         );
 
-        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundCreditCardMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPayPalMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundDirectDebitMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundSofortMapper($computopHeaderPayment));
-        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper($computopHeaderPayment));
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPayPalMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundDirectDebitMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundSofortMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper());
 
         return $paymentRequest;
     }

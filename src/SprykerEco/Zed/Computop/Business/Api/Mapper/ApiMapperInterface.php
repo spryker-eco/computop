@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Mapper;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
 interface ApiMapperInterface
@@ -18,8 +19,9 @@ interface ApiMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return array
      */
-    public function buildRequest(OrderTransfer $orderTransfer);
+    public function buildRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 }

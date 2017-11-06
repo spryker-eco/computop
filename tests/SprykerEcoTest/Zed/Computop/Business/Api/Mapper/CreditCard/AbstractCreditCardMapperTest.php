@@ -40,9 +40,10 @@ abstract class AbstractCreditCardMapperTest extends Test
     public function testBuildRequest()
     {
         $orderTransferMock = $this->helper->createOrderTransferMock();
+        $computopHeaderPaymentTransfer = $this->helper->createComputopHeaderPaymentTransfer();
 
         $service = $this->createMapper();
-        $mappedData = $service->buildRequest($orderTransferMock);
+        $mappedData = $service->buildRequest($orderTransferMock, $computopHeaderPaymentTransfer);
 
         $this->assertEquals(CreditCardMapperTestConstants::DATA_VALUE, $mappedData[ComputopApiConfig::DATA]);
         $this->assertEquals(CreditCardMapperTestConstants::LENGTH_VALUE, $mappedData[ComputopApiConfig::LENGTH]);

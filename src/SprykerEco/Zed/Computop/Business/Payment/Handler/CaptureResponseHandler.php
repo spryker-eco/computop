@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
 class CaptureResponseHandler extends AbstractResponseHandler
@@ -18,18 +18,23 @@ class CaptureResponseHandler extends AbstractResponseHandler
     const METHOD = 'CAPTURE';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ComputopCaptureResponseTransfer
      */
     public function handle(
-        TransferInterface $responseTransfer,
-        OrderTransfer $orderTransfer
+        OrderTransfer $orderTransfer,
+        ComputopHeaderPaymentTransfer $computopHeaderPayment
     ) {
+        /** @var \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $responseTransfer */
+        $responseTransfer = $this->request->request($orderTransfer, $computopHeaderPayment);
+
         $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {
             $this->saveComputopOrderDetails($responseTransfer, $orderTransfer);
         });
+
+        return $responseTransfer;
     }
 
     /**

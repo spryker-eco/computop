@@ -49,17 +49,10 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function authorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $computopResponseTransfer = $this
-            ->getFactory()
-            ->createAuthorizationPaymentRequest($orderTransfer, $computopHeaderPayment)
-            ->request($orderTransfer);
-
-        $this
+        return $this
             ->getFactory()
             ->createAuthorizeResponseHandler()
-            ->handle($computopResponseTransfer, $orderTransfer);
-
-        return $computopResponseTransfer;
+            ->handle($orderTransfer, $computopHeaderPayment);
     }
 
     /**
@@ -70,21 +63,14 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Generated\Shared\Transfer\ComputopInquireResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $computopResponseTransfer = $this
-            ->getFactory()
-            ->createInquirePaymentRequest($orderTransfer, $computopHeaderPayment)
-            ->request($orderTransfer);
-
-        $this
+        return $this
             ->getFactory()
             ->createInquireResponseHandler()
-            ->handle($computopResponseTransfer, $orderTransfer);
-
-        return $computopResponseTransfer;
+            ->handle($orderTransfer, $computopHeaderPayment);
     }
 
     /**
@@ -95,21 +81,14 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Generated\Shared\Transfer\ComputopReverseResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $computopResponseTransfer = $this
-            ->getFactory()
-            ->createReversePaymentRequest($orderTransfer, $computopHeaderPayment)
-            ->request($orderTransfer);
-
-        $this
+        return $this
             ->getFactory()
             ->createReverseResponseHandler()
-            ->handle($computopResponseTransfer, $orderTransfer);
-
-        return $computopResponseTransfer;
+            ->handle($orderTransfer, $computopHeaderPayment);
     }
 
     /**
@@ -137,21 +116,14 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Generated\Shared\Transfer\ComputopCaptureResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function capturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $computopResponseTransfer = $this
-            ->getFactory()
-            ->createCapturePaymentRequest($orderTransfer, $computopHeaderPayment)
-            ->request($orderTransfer);
-
-        $this
+        return $this
             ->getFactory()
             ->createCaptureResponseHandler()
-            ->handle($computopResponseTransfer, $orderTransfer);
-
-        return $computopResponseTransfer;
+            ->handle($orderTransfer, $computopHeaderPayment);
     }
 
     /**
@@ -162,21 +134,14 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Generated\Shared\Transfer\ComputopRefundResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function refundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $computopResponseTransfer = $this
-            ->getFactory()
-            ->createRefundPaymentRequest($orderTransfer, $computopHeaderPayment)
-            ->request($orderTransfer);
-
-        $this
+        return $this
             ->getFactory()
             ->createRefundResponseHandler()
-            ->handle($computopResponseTransfer, $orderTransfer);
-
-        return $computopResponseTransfer;
+            ->handle($orderTransfer, $computopHeaderPayment);
     }
 
     /**

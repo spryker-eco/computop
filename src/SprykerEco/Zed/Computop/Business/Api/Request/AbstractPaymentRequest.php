@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Request;
 
+use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
@@ -40,28 +41,26 @@ abstract class AbstractPaymentRequest
     /**
      * @param \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface $adapter
      * @param \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface $converter
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      */
     public function __construct(
         AdapterInterface $adapter,
-        ConverterInterface $converter,
-        OrderTransfer $orderTransfer
+        ConverterInterface $converter
     ) {
         $this->adapter = $adapter;
         $this->converter = $converter;
-        $this->paymentMethod = $this->getPaymentMethodFromOrder($orderTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function request(OrderTransfer $orderTransfer)
+    public function request(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $requestData = $this
-            ->getMethodMapper($this->paymentMethod)
-            ->buildRequest($orderTransfer);
+            ->getMethodMapper($this->getPaymentMethodFromOrder($orderTransfer))
+            ->buildRequest($orderTransfer, $computopHeaderPayment);
 
         return $this->sendRequest($requestData);
     }

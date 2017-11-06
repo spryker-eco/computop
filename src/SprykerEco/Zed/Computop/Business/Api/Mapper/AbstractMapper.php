@@ -28,11 +28,6 @@ abstract class AbstractMapper implements ApiMapperInterface
     protected $config;
 
     /**
-     * @var \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     */
-    protected $computopHeaderPayment;
-
-    /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
      * @return array
@@ -49,27 +44,25 @@ abstract class AbstractMapper implements ApiMapperInterface
     /**
      * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      */
     public function __construct(
         ComputopServiceInterface $computopService,
-        ComputopConfig $config,
-        ComputopHeaderPaymentTransfer $computopHeaderPayment
+        ComputopConfig $config
     ) {
 
         $this->computopService = $computopService;
         $this->config = $config;
-        $this->computopHeaderPayment = $computopHeaderPayment;
     }
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return array
      */
-    public function buildRequest(OrderTransfer $orderTransfer)
+    public function buildRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $encryptedArray = $this->getEncryptedArray($orderTransfer);
+        $encryptedArray = $this->getEncryptedArray($orderTransfer, $computopHeaderPayment);
 
         $data = $encryptedArray[ComputopApiConfig::DATA];
         $length = $encryptedArray[ComputopApiConfig::LENGTH];
@@ -80,12 +73,13 @@ abstract class AbstractMapper implements ApiMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return array
      */
-    protected function getEncryptedArray(OrderTransfer $orderTransfer)
+    protected function getEncryptedArray(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
-        $computopPaymentTransfer = $this->getComputopPaymentTransfer($orderTransfer);
+        $computopPaymentTransfer = $this->getComputopPaymentTransfer($orderTransfer, $computopHeaderPayment);
 
         $encryptedArray = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
@@ -115,13 +109,14 @@ abstract class AbstractMapper implements ApiMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer)
+    protected function getComputopPaymentTransfer(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $computopPaymentTransfer = $this->createPaymentTransfer($orderTransfer);
-        $computopPaymentTransfer->fromArray($this->computopHeaderPayment->toArray(), true);
+        $computopPaymentTransfer->fromArray($computopHeaderPayment->toArray(), true);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
 

@@ -7,50 +7,32 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
-
 interface ComputopBusinessApiFactoryInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createAuthorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createAuthorizationPaymentRequest();
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createInquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createInquirePaymentRequest();
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createReversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createReversePaymentRequest();
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createCapturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createCapturePaymentRequest();
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
-    public function createRefundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createRefundPaymentRequest();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface

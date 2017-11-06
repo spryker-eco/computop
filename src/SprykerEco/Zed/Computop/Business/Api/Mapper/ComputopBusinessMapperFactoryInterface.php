@@ -7,140 +7,100 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Mapper;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
-
 interface ComputopBusinessMapperFactoryInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createAuthorizeCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createAuthorizeCreditCardMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createReverseCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createReverseCreditCardMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createInquireCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createInquireCreditCardMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createCaptureCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createCaptureCreditCardMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createRefundCreditCardMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createRefundCreditCardMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createAuthorizePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createAuthorizePayPalMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createReversePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createReversePayPalMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createInquirePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createInquirePayPalMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createCapturePayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createCapturePayPalMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createRefundPayPalMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createRefundPayPalMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createReverseDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createReverseDirectDebitMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createInquireDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createInquireDirectDebitMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createCaptureDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createCaptureDirectDebitMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createRefundDirectDebitMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createRefundDirectDebitMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createRefundSofortMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createRefundSofortMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createReversePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createReversePaydirektMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createInquirePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createInquirePaydirektMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createCapturePaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createCapturePaydirektMapper();
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
-    public function createRefundPaydirektMapper(ComputopHeaderPaymentTransfer $computopHeaderPayment);
+    public function createRefundPaydirektMapper();
 }

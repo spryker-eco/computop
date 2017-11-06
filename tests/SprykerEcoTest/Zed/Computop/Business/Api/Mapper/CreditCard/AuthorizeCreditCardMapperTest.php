@@ -27,8 +27,7 @@ class AuthorizeCreditCardMapperTest extends AbstractCreditCardMapperTest
     {
         return new AuthorizeCreditCardMapper(
             $this->helper->createComputopServiceMock(),
-            $this->helper->createComputopConfigMock(),
-            $this->helper->createComputopHeaderPaymentTransfer()
+            $this->helper->createComputopConfigMock()
         );
     }
 }
