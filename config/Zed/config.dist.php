@@ -3,7 +3,6 @@
  * Copy over the following configs to your config
  */
 
-use Generated\Shared\Transfer\PaymentTransfer;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use SprykerEco\Shared\Computop\ComputopConfig;
