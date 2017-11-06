@@ -31,9 +31,10 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $orderSaver = $this->getFactory()->createOrderSaver();
-
-        $orderSaver->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
+        $this
+            ->getFactory()
+            ->createOrderSaver()
+            ->saveOrderPayment($quoteTransfer, $checkoutResponseTransfer);
     }
 
     /**
