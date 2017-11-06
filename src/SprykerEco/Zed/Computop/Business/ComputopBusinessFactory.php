@@ -12,15 +12,15 @@ use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireResponseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\IdealResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\PaydirektResponseHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseResponseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseHandler;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
@@ -95,11 +95,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
      */
-    public function createAuthorizeResponseHandler()
+    public function createAuthorizeHandler()
     {
-        return new AuthorizeResponseHandler(
+        return new AuthorizeHandler(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
             $this->getConfig(),
@@ -108,11 +108,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
      */
-    public function createReverseResponseHandler()
+    public function createReverseHandler()
     {
-        return new ReverseResponseHandler(
+        return new ReverseHandler(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
             $this->getConfig(),
@@ -121,11 +121,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
      */
-    public function createInquireResponseHandler()
+    public function createInquireHandler()
     {
-        return new InquireResponseHandler(
+        return new InquireHandler(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
             $this->getConfig(),
@@ -134,11 +134,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
      */
-    public function createCaptureResponseHandler()
+    public function createCaptureHandler()
     {
-        return new CaptureResponseHandler(
+        return new CaptureHandler(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
             $this->getConfig(),
@@ -147,11 +147,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\ResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
      */
-    public function createRefundResponseHandler()
+    public function createRefundHandler()
     {
-        return new RefundResponseHandler(
+        return new RefundHandler(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
             $this->getConfig(),

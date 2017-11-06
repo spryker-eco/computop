@@ -8,27 +8,26 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
-use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
-class ReverseResponseHandler extends AbstractResponseHandler
+class CaptureHandler extends AbstractHandler
 {
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'REVERSE';
+    const METHOD = 'CAPTURE';
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Generated\Shared\Transfer\ComputopReverseResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopCaptureResponseTransfer
      */
     public function handle(
         OrderTransfer $orderTransfer,
         ComputopHeaderPaymentTransfer $computopHeaderPayment
     ) {
-        /** @var \Generated\Shared\Transfer\ComputopReverseResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $responseTransfer */
         $responseTransfer = $this->request->request($orderTransfer, $computopHeaderPayment);
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {
@@ -39,12 +38,12 @@ class ReverseResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopReverseResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
+    protected function saveComputopOrderDetails($responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 
@@ -63,9 +62,18 @@ class ReverseResponseHandler extends AbstractResponseHandler
                 if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
                     continue;
                 }
-                $item->setStatus($this->config->getOmsStatusCancelled());
+                $item->setStatus($this->config->getOmsStatusCaptured());
                 $item->save();
             }
         }
+
+        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
+        $paymentEntityDetails->setAId($responseTransfer->getAId());
+        $paymentEntityDetails->setAmount($responseTransfer->getAmount());
+        $paymentEntityDetails->setCodeExt($responseTransfer->getCodeExt());
+        $paymentEntityDetails->setErrorText($responseTransfer->getErrorText());
+        $paymentEntityDetails->setTransactionId($responseTransfer->getTransactionId());
+        $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
+        $paymentEntityDetails->save();
     }
 }

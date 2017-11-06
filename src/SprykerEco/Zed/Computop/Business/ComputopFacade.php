@@ -51,7 +51,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this
             ->getFactory()
-            ->createAuthorizeResponseHandler()
+            ->createAuthorizeHandler()
             ->handle($orderTransfer, $computopHeaderPayment);
     }
 
@@ -69,7 +69,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this
             ->getFactory()
-            ->createInquireResponseHandler()
+            ->createInquireHandler()
             ->handle($orderTransfer, $computopHeaderPayment);
     }
 
@@ -87,7 +87,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this
             ->getFactory()
-            ->createReverseResponseHandler()
+            ->createReverseHandler()
             ->handle($orderTransfer, $computopHeaderPayment);
     }
 
@@ -122,7 +122,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this
             ->getFactory()
-            ->createCaptureResponseHandler()
+            ->createCaptureHandler()
             ->handle($orderTransfer, $computopHeaderPayment);
     }
 
@@ -140,7 +140,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this
             ->getFactory()
-            ->createRefundResponseHandler()
+            ->createRefundHandler()
             ->handle($orderTransfer, $computopHeaderPayment);
     }
 

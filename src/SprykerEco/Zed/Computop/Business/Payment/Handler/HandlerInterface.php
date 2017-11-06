@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
-interface ResponseHandlerInterface
+interface HandlerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

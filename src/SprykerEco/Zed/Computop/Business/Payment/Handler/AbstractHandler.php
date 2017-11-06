@@ -13,7 +13,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogg
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
-abstract class AbstractResponseHandler implements ResponseHandlerInterface
+abstract class AbstractHandler implements HandlerInterface
 {
     /**
      * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface

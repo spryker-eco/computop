@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 
-class AuthorizeResponseHandler extends AbstractResponseHandler
+class AuthorizeHandler extends AbstractHandler
 {
     use DatabaseTransactionHandlerTrait;
 
