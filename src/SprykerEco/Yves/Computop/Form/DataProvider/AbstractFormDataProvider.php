@@ -54,7 +54,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return boolean
+     * @return bool
      */
     protected function isValidPayment(AbstractTransfer $quoteTransfer)
     {
