@@ -50,11 +50,13 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      */
     protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
-        return $quoteTransfer
+        $quoteTransfer
             ->getPayment()
             ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
             ->setPaymentMethod($this->paymentMethods[$paymentSelection])
             ->setPaymentSelection($this->paymentMethods[$paymentSelection]);
+
+        return $quoteTransfer;
     }
 
     /**
