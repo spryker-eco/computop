@@ -39,7 +39,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createAuthorizeCreditCardMapper()
     {
-        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new AuthorizeCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -47,7 +47,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createReverseCreditCardMapper()
     {
-        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new ReverseCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -55,7 +55,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createInquireCreditCardMapper()
     {
-        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new InquireCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -63,7 +63,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createCaptureCreditCardMapper()
     {
-        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new CaptureCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -71,7 +71,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createRefundCreditCardMapper()
     {
-        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig());
+        return new RefundCreditCardMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -79,7 +79,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createAuthorizePayPalMapper()
     {
-        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig());
+        return new AuthorizePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -87,7 +87,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createReversePayPalMapper()
     {
-        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig());
+        return new ReversePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -95,7 +95,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createInquirePayPalMapper()
     {
-        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig());
+        return new InquirePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -103,7 +103,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createCapturePayPalMapper()
     {
-        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig());
+        return new CapturePayPalMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -111,7 +111,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createRefundPayPalMapper()
     {
-        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig());
+        return new RefundPayPalMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -119,7 +119,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createReverseDirectDebitMapper()
     {
-        return new ReverseDirectDebitMapper($this->getComputopService(), $this->getConfig());
+        return new ReverseDirectDebitMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -127,7 +127,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createInquireDirectDebitMapper()
     {
-        return new InquireDirectDebitMapper($this->getComputopService(), $this->getConfig());
+        return new InquireDirectDebitMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -135,7 +135,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createCaptureDirectDebitMapper()
     {
-        return new CaptureDirectDebitMapper($this->getComputopService(), $this->getConfig());
+        return new CaptureDirectDebitMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -143,7 +143,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createRefundDirectDebitMapper()
     {
-        return new RefundDirectDebitMapper($this->getComputopService(), $this->getConfig());
+        return new RefundDirectDebitMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -151,7 +151,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createRefundSofortMapper()
     {
-        return new RefundSofortMapper($this->getComputopService(), $this->getConfig());
+        return new RefundSofortMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -159,7 +159,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createReversePaydirektMapper()
     {
-        return new ReversePaydirektMapper($this->getComputopService(), $this->getConfig());
+        return new ReversePaydirektMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -167,7 +167,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createInquirePaydirektMapper()
     {
-        return new InquirePaydirektMapper($this->getComputopService(), $this->getConfig());
+        return new InquirePaydirektMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -175,7 +175,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createCapturePaydirektMapper()
     {
-        return new CapturePaydirektMapper($this->getComputopService(), $this->getConfig());
+        return new CapturePaydirektMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 
     /**
@@ -183,6 +183,6 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
      */
     public function createRefundPaydirektMapper()
     {
-        return new RefundPaydirektMapper($this->getComputopService(), $this->getConfig());
+        return new RefundPaydirektMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 }

@@ -7,9 +7,10 @@
 
 namespace SprykerEco\Zed\Computop;
 
+use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
-use SprykerEco\Service\Computop\ComputopService;
+use SprykerEco\Zed\Computop\Dependency\ComputopToStoreBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
@@ -22,6 +23,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     const FACADE_SALES = 'FACADE_SALES';
     const FACADE_CALCULATION = 'FACADE_CALCULATION';
     const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
+    const STORE = 'STORE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -45,7 +47,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return new ComputopService($container->getLocator()->computop()->service());
+            return $container->getLocator()->computop()->service();
         };
 
         return $container;
@@ -61,11 +63,15 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideBusinessLayerDependencies($container);
 
         $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return new ComputopService($container->getLocator()->computop()->service());
+            return $container->getLocator()->computop()->service();
         };
 
         $container[self::FACADE_OMS] = function () use ($container) {
             return new ComputopToOmsFacadeBridge($container->getLocator()->oms()->facade());
+        };
+
+        $container[self::STORE] = function () {
+            return new ComputopToStoreBridge(Store::getInstance());
         };
 
         return $container;

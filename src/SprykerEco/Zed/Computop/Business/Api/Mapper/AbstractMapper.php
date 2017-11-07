@@ -9,11 +9,11 @@ namespace SprykerEco\Zed\Computop\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface;
 
 abstract class AbstractMapper implements ApiMapperInterface
 {
@@ -26,6 +26,11 @@ abstract class AbstractMapper implements ApiMapperInterface
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
     protected $config;
+
+    /**
+     * @var \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface
+     */
+    protected $store;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
@@ -44,14 +49,17 @@ abstract class AbstractMapper implements ApiMapperInterface
     /**
      * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
+     * @param \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface $store
      */
     public function __construct(
         ComputopServiceInterface $computopService,
-        ComputopConfig $config
+        ComputopConfig $config,
+        ComputopToStoreInterface $store
     ) {
 
         $this->computopService = $computopService;
         $this->config = $config;
+        $this->store = $store;
     }
 
     /**
@@ -118,7 +126,7 @@ abstract class AbstractMapper implements ApiMapperInterface
         $computopPaymentTransfer = $this->createPaymentTransfer($orderTransfer);
         $computopPaymentTransfer->fromArray($computopHeaderPayment->toArray(), true);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
 
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)

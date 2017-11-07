@@ -7,10 +7,12 @@
 
 namespace SprykerEco\Yves\Computop;
 
+use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
+use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -18,6 +20,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     const SERVICE_COMPUTOP = 'SERVICE_COMPUTOP';
     const CLIENT_QUOTE = 'CLIENT_QUOTE';
     const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
+    const STORE = 'STORE';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -42,6 +45,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             $pimplePlugin = new Pimple();
 
             return $pimplePlugin->getApplication();
+        };
+
+        $container[self::STORE] = function () {
+            return new ComputopToStoreBridge(Store::getInstance());
         };
 
         return $container;

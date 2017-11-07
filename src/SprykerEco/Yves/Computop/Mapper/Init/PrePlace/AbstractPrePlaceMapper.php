@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Spryker\Shared\Config\Config;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -42,7 +41,7 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
 
         $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::MERCHANT_ID));
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopPaymentTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());

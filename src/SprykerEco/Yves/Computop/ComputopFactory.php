@@ -172,6 +172,14 @@ class ComputopFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
     }
+    
+    /**
+     * @return \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
+     */
+    public function getStore()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
+    }
 
     /**
      * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
@@ -274,7 +282,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderCreditCardMapper()
     {
-        return new CreditCardMapper($this->getComputopService(), $this->getApplication());
+        return new CreditCardMapper($this->getComputopService(), $this->getApplication(), $this->getStore());
     }
 
     /**
@@ -282,7 +290,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderPayPalMapper()
     {
-        return new PayPalMapper($this->getComputopService(), $this->getApplication());
+        return new PayPalMapper($this->getComputopService(), $this->getApplication(), $this->getStore());
     }
 
     /**
@@ -290,7 +298,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderDirectDebitMapper()
     {
-        return new DirectDebitMapper($this->getComputopService(), $this->getApplication());
+        return new DirectDebitMapper($this->getComputopService(), $this->getApplication(), $this->getStore());
     }
 
     /**
@@ -298,7 +306,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderSofortMapper()
     {
-        return new SofortMapper($this->getComputopService(), $this->getApplication());
+        return new SofortMapper($this->getComputopService(), $this->getApplication(), $this->getStore());
     }
 
     /**
@@ -306,7 +314,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderPaydirektMapper()
     {
-        return new PaydirektMapper($this->getComputopService(), $this->getApplication());
+        return new PaydirektMapper($this->getComputopService(), $this->getApplication(), $this->getStore());
     }
 
     /**
@@ -314,7 +322,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createOrderIdealMapper()
     {
-        return new IdealMapper($this->getComputopService(), $this->getApplication());
+        return new IdealMapper($this->getComputopService(), $this->getApplication(), $this->getStore());
     }
 
     /**

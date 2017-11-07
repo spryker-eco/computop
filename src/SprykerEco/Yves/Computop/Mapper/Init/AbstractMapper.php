@@ -12,6 +12,7 @@ use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
+use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
 
 abstract class AbstractMapper implements MapperInterface
 {
@@ -26,6 +27,11 @@ abstract class AbstractMapper implements MapperInterface
      * @var \Silex\Application
      */
     protected $application;
+    
+    /**
+     * @var \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
+     */
+    protected $store;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -37,11 +43,16 @@ abstract class AbstractMapper implements MapperInterface
     /**
      * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \Silex\Application $application
+     * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      */
-    public function __construct(ComputopServiceInterface $computopService, Application $application)
-    {
+    public function __construct(
+        ComputopServiceInterface $computopService,
+        Application $application,
+        ComputopToStoreInterface $store
+    ) {
         $this->computopService = $computopService;
         $this->application = $application;
+        $this->store = $store;
     }
 
     /**

@@ -222,4 +222,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_OMS);
     }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface
+     */
+    public function getStore()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
+    }
 }
