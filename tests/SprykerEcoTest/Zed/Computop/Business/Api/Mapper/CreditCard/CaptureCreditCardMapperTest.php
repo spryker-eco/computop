@@ -28,7 +28,7 @@ class CaptureCreditCardMapperTest extends AbstractCreditCardMapperTest
         return new CaptureCreditCardMapper(
             $this->helper->createComputopServiceMock(),
             $this->helper->createComputopConfigMock(),
-            $this->helper->createComputopHeaderPaymentTransfer()
+            $this->helper->createStoreMock()
         );
     }
 }

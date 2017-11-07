@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\ComputopToStoreBridge;
 
 class CreditCardMapperTestHelper extends Test
 {
@@ -107,5 +108,21 @@ class CreditCardMapperTestHelper extends Test
         $headerPayment->setTransId($transId);
 
         return $headerPayment;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    public function createStoreMock()
+    {
+        $storeMock = $this->createPartialMock(
+            ComputopToStoreBridge::class,
+            ['getCurrencyIsoCode']
+        );
+
+        $storeMock->method('getCurrencyIsoCode')
+            ->willReturn('EUR');
+
+        return $storeMock;
     }
 }
