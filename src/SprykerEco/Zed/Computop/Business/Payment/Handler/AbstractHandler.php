@@ -7,60 +7,30 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
-use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface;
 
 abstract class AbstractHandler implements HandlerInterface
 {
-    /**
-     * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
-     */
-    protected $queryContainer;
-
-    /**
-     * @var \SprykerEco\Zed\Computop\ComputopConfig
-     */
-    protected $config;
-
     /**
      * @var \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
      */
     protected $request;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface $logger
-     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
-     * @param \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface $request
+     * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
      */
-    public function __construct(
-        ComputopQueryContainerInterface $queryContainer,
-        ComputopResponseLoggerInterface $logger,
-        ComputopConfig $config,
-        RequestInterface $request
-    ) {
-        $this->queryContainer = $queryContainer;
-        $this->logger = $logger;
-        $this->config = $config;
-        $this->request = $request;
-    }
+    protected $saver;
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $headerTransfer
-     * @param string $method
-     *
-     * @return \Orm\Zed\Computop\Persistence\Base\SpyPaymentComputopApiLog
+     * @param \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface $request
+     * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface $saver
      */
-    protected function logHeader(ComputopResponseHeaderTransfer $headerTransfer, $method)
-    {
-        return $this->logger->log($headerTransfer, $method);
+    public function __construct(
+        RequestInterface $request,
+        SaverInterface $saver
+    ) {
+        $this->request = $request;
+        $this->saver = $saver;
     }
 }

@@ -23,7 +23,7 @@ class SofortResponseSaver extends AbstractResponseSaver
         $responseTransfer = $quoteTransfer->getPayment()->getComputopSofort()->getSofortInitResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopOrderDetails($responseTransfer);
+            $this->saveComputopDetails($responseTransfer);
             $this->triggerEvent($this->getPaymentEntity($responseTransfer->getHeader()->getTransId()));
         });
     }
@@ -33,7 +33,7 @@ class SofortResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopSofortInitResponseTransfer $responseTransfer)
+    protected function saveComputopDetails(ComputopSofortInitResponseTransfer $responseTransfer)
     {
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;

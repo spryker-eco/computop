@@ -23,7 +23,7 @@ class IdealResponseSaver extends AbstractResponseSaver
         $responseTransfer = $quoteTransfer->getPayment()->getComputopIdeal()->getIdealInitResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopOrderDetails($responseTransfer);
+            $this->saveComputopDetails($responseTransfer);
             $this->triggerEvent($this->getPaymentEntity($responseTransfer->getHeader()->getTransId()));
         });
     }
@@ -33,7 +33,7 @@ class IdealResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopIdealInitResponseTransfer $responseTransfer)
+    protected function saveComputopDetails(ComputopIdealInitResponseTransfer $responseTransfer)
     {
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;

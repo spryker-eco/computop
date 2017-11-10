@@ -23,7 +23,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPaydirekt()->getPaydirektInitResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopOrderDetails($responseTransfer);
+            $this->saveComputopDetails($responseTransfer);
             $this->triggerEvent($this->getPaymentEntity($responseTransfer->getHeader()->getTransId()));
         });
     }
@@ -33,7 +33,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopPaydirektInitResponseTransfer $responseTransfer)
+    protected function saveComputopDetails(ComputopPaydirektInitResponseTransfer $responseTransfer)
     {
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;
