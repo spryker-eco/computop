@@ -8,10 +8,6 @@
 namespace SprykerEco\Zed\Computop\Communication;
 
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
-use SprykerEco\Zed\Computop\Communication\Hook\ComputopPostSaveHook;
-use SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\IdealMapper;
-use SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\PaydirektMapper;
-use SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\SofortMapper;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
@@ -69,42 +65,5 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
             ->getQueryContainer()
             ->queryPaymentByOrderId($idSalesOrder)
             ->findOne();
-    }
-    
-    /**
-     * @return \SprykerEco\Zed\Computop\Communication\Hook\ComputopPostSaveHookInterface
-     */
-    public function createPostSaveHook()
-    {
-        $postSaveHook = new ComputopPostSaveHook($this->getConfig());
-        $postSaveHook->registerMapper($this->createPostSaveSofortMapper());
-        $postSaveHook->registerMapper($this->createPostSavePaydirektMapper());
-        $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
-
-        return $postSaveHook;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface
-     */
-    protected function createPostSaveSofortMapper()
-    {
-        return new SofortMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface
-     */
-    protected function createPostSavePaydirektMapper()
-    {
-        return new PaydirektMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface
-     */
-    protected function createPostSaveIdealMapper()
-    {
-        return new IdealMapper($this->getConfig(), $this->getComputopService());
     }
 }

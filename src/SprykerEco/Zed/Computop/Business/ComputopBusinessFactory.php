@@ -9,6 +9,10 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitIdealMapper;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPaydirektMapper;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitSofortMapper;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
@@ -52,6 +56,43 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $orderSaver->registerMapper($this->createOrderFactory()->createOrderIdealMapper());
 
         return $orderSaver;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHookInterface
+     */
+    public function createPostSaveHook()
+    {
+        $postSaveHook = new ComputopPostSaveHook($this->getConfig());
+        $postSaveHook->registerMapper($this->createPostSaveSofortMapper());
+        $postSaveHook->registerMapper($this->createPostSavePaydirektMapper());
+        $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
+
+        return $postSaveHook;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSaveSofortMapper()
+    {
+        return new InitSofortMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSavePaydirektMapper()
+    {
+        return new InitPaydirektMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSaveIdealMapper()
+    {
+        return new InitIdealMapper($this->getConfig(), $this->getComputopService());
     }
 
     /**

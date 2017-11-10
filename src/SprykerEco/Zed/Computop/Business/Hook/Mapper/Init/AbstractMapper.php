@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order;
+namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
-abstract class AbstractMapper implements OrderMapperInterface
+abstract class AbstractMapper implements InitMapperInterface
 {
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig

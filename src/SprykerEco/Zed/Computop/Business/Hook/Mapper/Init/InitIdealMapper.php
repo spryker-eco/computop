@@ -5,21 +5,21 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order;
+namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class PaydirektMapper extends AbstractMapper
+class InitIdealMapper extends AbstractMapper
 {
     /**
      * @return string
      */
     public function getMethodName()
     {
-        return ComputopConfig::PAYMENT_METHOD_PAYDIREKT;
+        return ComputopConfig::PAYMENT_METHOD_IDEAL;
     }
 
     /**
@@ -58,7 +58,7 @@ class PaydirektMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $cardPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -67,15 +67,7 @@ class PaydirektMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-
-        $dataSubArray[ComputopApiConfig::SHOP_API_KEY] = $cardPaymentTransfer->getShopApiKey();
-        $dataSubArray[ComputopApiConfig::SHIPPING_FIRST_NAME] = $cardPaymentTransfer->getShippingFirstName();
-        $dataSubArray[ComputopApiConfig::SHIPPING_LAST_NAME] = $cardPaymentTransfer->getShippingLastName();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
-        $dataSubArray[ComputopApiConfig::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
-        $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
-        $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
-        $dataSubArray[ComputopApiConfig::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
+        //ToDo: add additional options if need. Waiting for Computop answer
 
         return $dataSubArray;
     }
@@ -85,6 +77,6 @@ class PaydirektMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return $this->config->getPaydirektInitAction();
+        return $this->config->getIdealInitAction();
     }
 }

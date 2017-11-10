@@ -5,14 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order;
+namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class SofortMapper extends AbstractMapper
+class InitSofortMapper extends AbstractMapper
 {
     /**
      * @return string

@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Communication\Hook;
+namespace SprykerEco\Zed\Computop\Business\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
-use SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
 class ComputopPostSaveHook implements ComputopPostSaveHookInterface
@@ -22,7 +22,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface[]
+     * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface[]
      */
     protected $methodMappers = [];
 
@@ -35,11 +35,11 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface $paymentMethod
      *
      * @return void
      */
-    public function registerMapper(OrderMapperInterface $paymentMethod)
+    public function registerMapper(InitMapperInterface $paymentMethod)
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
@@ -79,7 +79,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order\OrderMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
     protected function getMethodMapper($methodName)
     {
