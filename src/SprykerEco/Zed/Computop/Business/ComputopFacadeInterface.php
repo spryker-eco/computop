@@ -8,9 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopFacadeInterface
@@ -27,19 +25,6 @@ interface ComputopFacadeInterface
      * @return void
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
-
-    /**
-     * Specification:
-     * - Makes Refund API call.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \Generated\Shared\Transfer\ComputopRefundResponseTransfer
-     */
-    public function refundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
 
     /**
      * Specification:

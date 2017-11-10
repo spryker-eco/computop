@@ -19,6 +19,8 @@ use SprykerEco\Zed\Computop\Business\Oms\Command\CaptureCommandHandler;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\AuthorizeManager;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManager;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CaptureManager;
+use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager;
+use SprykerEco\Zed\Computop\Business\Oms\Command\RefundCommandHandler;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeHandler;
@@ -336,6 +338,17 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CommandHandlerInterface
+     */
+    public function createRefundCommandHandler()
+    {
+        return new RefundCommandHandler(
+            $this->createRefundHandler(),
+            $this->createRefundManager()
+        );
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
     protected function createAuthorizeManager()
@@ -357,6 +370,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createCaptureManager()
     {
         return new CaptureManager($this->getQueryContainer(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
+     */
+    protected function createRefundManager()
+    {
+        return new RefundManager($this->getQueryContainer(), $this->getConfig());
     }
 
     /**

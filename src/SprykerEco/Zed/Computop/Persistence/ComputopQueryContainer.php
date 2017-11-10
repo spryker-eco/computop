@@ -87,7 +87,7 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function getSpySalesOrderItemsByIdStatus($idSalesOrder)
+    public function getSpySalesOrderItemsById($idSalesOrder)
     {
         return $this
             ->getFactory()

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -114,21 +113,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
+     *
      * {@inheritdoc}
      *
      * @api
      *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function refundPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function refundCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
         return $this
             ->getFactory()
-            ->createRefundHandler()
-            ->handle($orderTransfer, $computopHeaderPayment);
+            ->createRefundCommandHandler()
+            ->handle($orderItems, $orderTransfer);
     }
 
     /**

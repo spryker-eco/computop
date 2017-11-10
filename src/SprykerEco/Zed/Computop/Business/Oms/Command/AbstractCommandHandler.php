@@ -20,7 +20,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     protected $handler;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
     protected $manager;
 

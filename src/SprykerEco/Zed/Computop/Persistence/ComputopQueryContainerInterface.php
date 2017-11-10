@@ -57,5 +57,5 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function getSpySalesOrderItemsByIdStatus($idSalesOrder);
+    public function getSpySalesOrderItemsById($idSalesOrder);
 }
