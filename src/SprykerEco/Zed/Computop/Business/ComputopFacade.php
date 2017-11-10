@@ -95,21 +95,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
+     *
      * {@inheritdoc}
      *
      * @api
      *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function capturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
         return $this
             ->getFactory()
-            ->createCaptureHandler()
-            ->handle($orderTransfer, $computopHeaderPayment);
+            ->createCaptureCommandHandler()
+            ->handle($orderItems, $orderTransfer);
     }
 
     /**

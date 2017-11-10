@@ -30,19 +30,6 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Makes Capture API call.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \Generated\Shared\Transfer\ComputopCaptureResponseTransfer
-     */
-    public function capturePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
-
-    /**
-     * Specification:
      * - Makes Refund API call.
      *
      * @api
