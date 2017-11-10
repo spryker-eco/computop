@@ -12,7 +12,9 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
+use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory getFactory()
@@ -191,7 +193,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveSofortResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createSofortResponseHandler()->handle(
+        $this->getFactory()->createSofortResponseSaver()->handle(
             $quoteTransfer
         );
 
@@ -209,7 +211,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveIdealResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createIdealResponseHandler()->handle(
+        $this->getFactory()->createIdealResponseSaver()->handle(
             $quoteTransfer
         );
 
@@ -227,7 +229,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function savePaydirektResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createPaydirektResponseHandler()->handle(
+        $this->getFactory()->createPaydirektResponseSaver()->handle(
             $quoteTransfer
         );
 

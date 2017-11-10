@@ -14,15 +14,16 @@ use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitIdealMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitSofortMapper;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
+use SprykerEco\Zed\Computop\Business\Oms\Command\CapturePluginManager;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\IdealResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\PaydirektResponseHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\IdealResponseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\PaydirektResponseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Order\SofortResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseHandler;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
@@ -201,27 +202,27 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\OrderResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\InitResponseSaverInterface
      */
-    public function createSofortResponseHandler()
+    public function createSofortResponseSaver()
     {
-        return new SofortResponseHandler($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new SofortResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\OrderResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\InitResponseSaverInterface
      */
-    public function createIdealResponseHandler()
+    public function createIdealResponseSaver()
     {
-        return new IdealResponseHandler($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new IdealResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\OrderResponseHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Order\InitResponseSaverInterface
      */
-    public function createPaydirektResponseHandler()
+    public function createPaydirektResponseSaver()
     {
-        return new PaydirektResponseHandler($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new PaydirektResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**

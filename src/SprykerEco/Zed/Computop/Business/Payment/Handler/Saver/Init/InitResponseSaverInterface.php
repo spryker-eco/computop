@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Order;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface OrderResponseHandlerInterface
+interface InitResponseSaverInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

@@ -7,11 +7,11 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Order;
 
-use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 
-class IdealResponseHandler extends AbstractResponseHandler
+class SofortResponseSaver extends AbstractResponseSaver
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -20,7 +20,7 @@ class IdealResponseHandler extends AbstractResponseHandler
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopIdeal()->getIdealInitResponse();
+        $responseTransfer = $quoteTransfer->getPayment()->getComputopSofort()->getSofortInitResponse();
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
             $this->saveComputopOrderDetails($responseTransfer);
@@ -29,11 +29,11 @@ class IdealResponseHandler extends AbstractResponseHandler
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopIdealInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopOrderDetails(ComputopIdealInitResponseTransfer $responseTransfer)
+    protected function saveComputopOrderDetails(ComputopSofortInitResponseTransfer $responseTransfer)
     {
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;
@@ -47,7 +47,7 @@ class IdealResponseHandler extends AbstractResponseHandler
         $paymentEntity->save();
 
         foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
-            //Ideal sets captured status on first call
+            //Sofort sets captured status on first call
             $item->setStatus($this->config->getOmsStatusCaptured());
             $item->save();
         }
@@ -57,19 +57,11 @@ class IdealResponseHandler extends AbstractResponseHandler
         $paymentEntityDetails->setAccountBank($responseTransfer->getAccountBank());
         $paymentEntityDetails->setBankAccountBic($responseTransfer->getBankAccountBic());
         $paymentEntityDetails->setBankAccountIban($responseTransfer->getBankAccountIban());
-        $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
-        $paymentEntityDetails->setPaymentPurpose($responseTransfer->getPaymentPurpose());
-        $paymentEntityDetails->setPaymentGuarantee($responseTransfer->getPaymentGuarantee());
-        $paymentEntityDetails->setErrorText($responseTransfer->getErrorText());
-        $paymentEntityDetails->setTransactionID($responseTransfer->getTransactionID());
-        $paymentEntityDetails->setPlain($responseTransfer->getPlain());
-        $paymentEntityDetails->setCustom($responseTransfer->getCustom());
-
         $paymentEntityDetails->save();
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity $paymentEntity
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity
      *
      * @return void
      */

@@ -12,7 +12,7 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
-abstract class AbstractResponseHandler implements OrderResponseHandlerInterface
+abstract class AbstractResponseSaver implements InitResponseSaverInterface
 {
     use DatabaseTransactionHandlerTrait;
 
