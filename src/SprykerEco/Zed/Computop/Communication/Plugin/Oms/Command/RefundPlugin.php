@@ -88,11 +88,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
             ->filterByFkSalesOrder($orderEntity->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName_In(
-                [
-                    $this->getConfig()->getOmsStatusNew(),
-                    $this->getConfig()->getOmsStatusAuthorized(),
-                    $this->getConfig()->getOmsStatusCaptured(),
-                ]
+                (array) $this->getConfig()->getBeforeRefundStatuses()
             )
             ->endUse()
             ->find();

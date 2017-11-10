@@ -134,6 +134,31 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return array
+     */
+    public function getBeforeCaptureStatuses()
+    {
+        return [
+            $this->getOmsStatusNew(),
+            $this->getOmsStatusAuthorized(),
+            $this->getOmsStatusAuthorizationFailed(),
+            $this->getOmsStatusCancelled(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getBeforeRefundStatuses()
+    {
+        return [
+            $this->getOmsStatusNew(),
+            $this->getOmsStatusAuthorized(),
+            $this->getOmsStatusCaptured(),
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getOmsStatusNew()
