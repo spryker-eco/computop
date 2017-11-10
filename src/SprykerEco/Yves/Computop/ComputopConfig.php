@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Yves\Computop;
 
+use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Yves\Kernel\AbstractBundleConfig;
+use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
@@ -38,5 +40,69 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getCallbackFailureRedirectPath()
     {
         return 'checkout-payment';
+    }
+
+    /**
+     * @return array
+     */
+    public function getPaymentMethodsWithoutOrderCall()
+    {
+        return $this->get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUrlSsl()
+    {
+        return $this->get(ApplicationConstants::BASE_URL_SSL_YVES);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantId()
+    {
+        return $this->get(ComputopConstants::MERCHANT_ID);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaydirektShopKey()
+    {
+        return $this->get(ComputopConstants::PAYDIREKT_SHOP_KEY);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlowfishPassword()
+    {
+        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaypalInitAction()
+    {
+        return $this->get(ComputopConstants::PAYPAL_INIT_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirectDebitInitAction()
+    {
+        return $this->get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreditCardInitAction()
+    {
+        return $this->get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
     }
 }

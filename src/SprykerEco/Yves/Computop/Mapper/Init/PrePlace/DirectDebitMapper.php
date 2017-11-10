@@ -9,9 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use DateTime;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -80,6 +78,6 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);
+        return $this->config->getDirectDebitInitAction();
     }
 }

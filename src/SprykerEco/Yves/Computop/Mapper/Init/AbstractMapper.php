@@ -8,10 +8,9 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Silex\Application;
-use Spryker\Shared\Application\ApplicationConstants;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
+use SprykerEco\Yves\Computop\ComputopConfigInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
 
 abstract class AbstractMapper implements MapperInterface
@@ -34,6 +33,11 @@ abstract class AbstractMapper implements MapperInterface
     protected $store;
 
     /**
+     * @var \SprykerEco\Yves\Computop\ComputopConfigInterface
+     */
+    protected $config;
+
+    /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer|\Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
@@ -44,15 +48,18 @@ abstract class AbstractMapper implements MapperInterface
      * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \Silex\Application $application
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
+     * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
      */
     public function __construct(
         ComputopServiceInterface $computopService,
         Application $application,
-        ComputopToStoreInterface $store
+        ComputopToStoreInterface $store,
+        ComputopConfigInterface $config
     ) {
         $this->computopService = $computopService;
         $this->application = $application;
         $this->store = $store;
+        $this->config = $config;
     }
 
     /**
@@ -78,7 +85,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function getAbsoluteUrl($path)
     {
-        return Config::get(ApplicationConstants::BASE_URL_SSL_YVES) . $path;
+        return $this->config->getBaseUrlSsl() . $path;
     }
 
     /**

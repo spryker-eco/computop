@@ -8,9 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -69,6 +67,6 @@ class PayPalMapper extends AbstractPrePlaceMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::PAYPAL_INIT_ACTION);
+        return $this->config->getPaypalInitAction();
     }
 }

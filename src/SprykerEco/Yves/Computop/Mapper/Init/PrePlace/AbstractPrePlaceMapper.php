@@ -7,10 +7,8 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
@@ -39,7 +37,7 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
     {
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::MERCHANT_ID));
+        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
@@ -54,7 +52,7 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            Config::get(ComputopConstants::BLOWFISH_PASSWORD)
+            $this->config->getBlowfishPassword()
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];

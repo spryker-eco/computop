@@ -8,10 +8,9 @@
 namespace SprykerEco\Yves\Computop\Handler;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Yves\Computop\ComputopConfigInterface;
 use SprykerEco\Yves\Computop\Exception\PaymentMethodNotFoundException;
 
 class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
@@ -21,9 +20,19 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      */
     protected $paymentMethods = [];
 
-    public function __construct()
+    /**
+     * @var \SprykerEco\Yves\Computop\ComputopConfigInterface
+     */
+    protected $config;
+
+    /**
+     * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
+     */
+    public function __construct(ComputopConfigInterface $config)
     {
-        $paymentMethods = Config::get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL);
+        $this->config = $config;
+
+        $paymentMethods = $this->config->getPaymentMethodsWithoutOrderCall();
         $this->paymentMethods = array_combine($paymentMethods, $paymentMethods);
     }
 

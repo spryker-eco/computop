@@ -8,10 +8,8 @@
 namespace SprykerEco\Zed\Computop\Communication\Hook\Mapper\Order;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class IdealMapper extends AbstractMapper

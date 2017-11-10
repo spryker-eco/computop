@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -25,7 +23,7 @@ abstract class AbstractPostPlaceMapper extends AbstractMapper
     {
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
 
-        $computopPaymentTransfer->setMerchantId(Config::get(ComputopConstants::MERCHANT_ID));
+        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);

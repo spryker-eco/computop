@@ -8,9 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -66,6 +64,6 @@ class CreditCardMapper extends AbstractPrePlaceMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
+        return $this->config->getCreditCardInitAction();
     }
 }
