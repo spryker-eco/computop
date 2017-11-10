@@ -40,7 +40,7 @@ class PaydirektMapper extends AbstractMapper
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            Config::get(ComputopConstants::BLOWFISH_PASSWORD)
+            $this->config->getBlowfishPass()
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
@@ -87,6 +87,6 @@ class PaydirektMapper extends AbstractMapper
      */
     protected function getActionUrl()
     {
-        return Config::get(ComputopConstants::PAYDIREKT_INIT_ACTION);
+        return $this->config->getPaydirektInitAction();
     }
 }

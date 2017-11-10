@@ -92,6 +92,30 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return string
+     */
+    public function getIdealInitAction()
+    {
+        return $this->get(ComputopConstants::IDEAL_INIT_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaydirektInitAction()
+    {
+        return $this->get(ComputopConstants::PAYDIREKT_INIT_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSofortInitAction()
+    {
+        return $this->get(ComputopConstants::SOFORT_INIT_ACTION);
+    }
+
+    /**
      * @return bool
      */
     public function isRefundShipmentPriceEnabled()
