@@ -17,11 +17,6 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
     /**
-     * @var \Orm\Zed\Sales\Persistence\SpySalesOrder
-     */
-    protected $orderEntity;
-
-    /**
      *
      * {@inheritdoc}
      *
@@ -35,9 +30,6 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
      */
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
-        $this->orderEntity = $orderEntity;
-
-        $orderEntity->getItems()->setData($orderItems);
         $orderTransfer = $this->getOrderTransfer($orderEntity);
 
         return $this
