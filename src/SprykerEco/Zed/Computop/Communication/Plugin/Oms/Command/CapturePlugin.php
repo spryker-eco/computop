@@ -85,7 +85,7 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
             ->filterByFkSalesOrder($orderEntity->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName_In(
-                (array) $this->getConfig()->getBeforeCaptureStatuses()
+                (array)$this->getConfig()->getBeforeCaptureStatuses()
             )
             ->endUse()
             ->find();
