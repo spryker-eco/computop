@@ -12,9 +12,7 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
-use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory getFactory()
@@ -59,74 +57,41 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
+     *
      * {@inheritdoc}
      *
      * @api
      *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function authorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
         return $this
             ->getFactory()
-            ->createAuthorizeHandler()
-            ->handle($orderTransfer, $computopHeaderPayment);
+            ->createAuthorizeCommandHandler()
+            ->handle($orderItems, $orderTransfer);
     }
 
     /**
+     *
      * {@inheritdoc}
      *
      * @api
      *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return array
      */
-    public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    public function cancelCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
         return $this
             ->getFactory()
-            ->createInquireHandler()
-            ->handle($orderTransfer, $computopHeaderPayment);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
-    {
-        return $this
-            ->getFactory()
-            ->createReverseHandler()
-            ->handle($orderTransfer, $computopHeaderPayment);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @api
-     *
-     * @param array $orderItems
-     *
-     * @return void
-     */
-    public function cancelPaymentItems(array $orderItems)
-    {
-        $this
-            ->getFactory()
-            ->createCancelItemManager()
-            ->changeComputopItemsStatus($orderItems);
+            ->createCancelCommandHandler()
+            ->handle($orderItems, $orderTransfer);
     }
 
     /**

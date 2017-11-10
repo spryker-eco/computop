@@ -51,4 +51,11 @@ interface ComputopQueryContainerInterface
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
     public function queryPaymentItemByOrderItemId($orderItemId);
+
+    /**
+     * @param int $idSalesOrder
+     *
+     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
+     */
+    public function getSpySalesOrderItemsByIdStatus($idSalesOrder);
 }

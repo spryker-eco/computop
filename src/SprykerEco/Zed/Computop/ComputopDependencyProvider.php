@@ -42,10 +42,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return new ComputopToCalculationFacadeBridge($container->getLocator()->calculation()->facade());
         };
 
-        $container[self::FACADE_FLASH_MESSENGER] = function (Container $container) {
-            return new ComputopToMessengerFacadeBridge($container->getLocator()->messenger()->facade());
-        };
-
         $container[self::SERVICE_COMPUTOP] = function () use ($container) {
             return $container->getLocator()->computop()->service();
         };
@@ -72,6 +68,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::STORE] = function () {
             return new ComputopToStoreBridge(Store::getInstance());
+        };
+
+        $container[self::FACADE_FLASH_MESSENGER] = function (Container $container) {
+            return new ComputopToMessengerFacadeBridge($container->getLocator()->messenger()->facade());
         };
 
         return $container;

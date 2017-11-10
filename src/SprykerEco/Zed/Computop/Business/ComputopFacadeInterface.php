@@ -30,57 +30,6 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Makes Authorization API call.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    public function authorizationPaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
-
-    /**
-     * Specification:
-     * - Makes Inquire API call.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \Generated\Shared\Transfer\ComputopInquireResponseTransfer
-     */
-    public function inquirePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
-
-    /**
-     * Specification:
-     * - Makes Reverse API call.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
-     *
-     * @return \Generated\Shared\Transfer\ComputopReverseResponseTransfer
-     */
-    public function reversePaymentRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment);
-
-    /**
-     * Specification:
-     * - Cancel payment items in DB.
-     *
-     * @api
-     *
-     * @param array $orderItems
-     *
-     * @return void
-     */
-    public function cancelPaymentItems(array $orderItems);
-
-    /**
-     * Specification:
      * - Makes Capture API call.
      *
      * @api

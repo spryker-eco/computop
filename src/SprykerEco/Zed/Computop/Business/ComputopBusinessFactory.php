@@ -13,7 +13,10 @@ use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitIdealMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitSofortMapper;
-use SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManager;
+use SprykerEco\Zed\Computop\Business\Oms\Command\AuthorizeCommandHandler;
+use SprykerEco\Zed\Computop\Business\Oms\Command\CancelCommandHandler;
+use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\AuthorizeManager;
+use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManager;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeHandler;
@@ -288,11 +291,51 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CancelItemManagerInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface
      */
-    public function createCancelItemManager()
+    public function getStore()
     {
-        return new CancelItemManager($this->getQueryContainer(), $this->getConfig());
+        return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CommandHandlerInterface
+     */
+    public function createAuthorizeCommandHandler()
+    {
+        return new AuthorizeCommandHandler(
+            $this->createAuthorizeHandler(),
+            $this->createAuthorizeManager()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CommandHandlerInterface
+     */
+    public function createCancelCommandHandler()
+    {
+        return new CancelCommandHandler(
+            $this->createInquireHandler(),
+            $this->createReverseHandler(),
+            $this->createCancelItemManager(),
+            $this->getFlashMessengerFacade()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
+     */
+    protected function createAuthorizeManager()
+    {
+        return new AuthorizeManager($this->getQueryContainer(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface
+     */
+    protected function createCancelItemManager()
+    {
+        return new CancelManager($this->getQueryContainer(), $this->getConfig());
     }
 
     /**
@@ -320,10 +363,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeInterface
      */
-    public function getStore()
+    protected function getFlashMessengerFacade()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
+        return $this->getProvidedDependency(
+            ComputopDependencyProvider::FACADE_FLASH_MESSENGER
+        );
     }
 }

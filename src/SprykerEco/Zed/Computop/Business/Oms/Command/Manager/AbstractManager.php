@@ -5,14 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Oms\Command;
+namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
-use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
-class CancelItemManager implements CancelItemManagerInterface
+abstract class AbstractManager implements ManagerInterface
 {
     use DatabaseTransactionHandlerTrait;
 
@@ -37,34 +36,15 @@ class CancelItemManager implements CancelItemManagerInterface
     }
 
     /**
-     * @param array $orderItems
+     * @param integer $idSalesOrder
      *
-     * @return array
+     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */
-    public function changeComputopItemsStatus(array $orderItems)
+    public function getSavedComputopEntity($idSalesOrder)
     {
-        $this->handleDatabaseTransaction(function () use ($orderItems) {
-            foreach ($orderItems as $orderItem) {
-                $this->changeStatus($orderItem);
-            }
-        });
-
-        return [];
-    }
-
-    /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
-     *
-     * @return void
-     */
-    protected function changeStatus(SpySalesOrderItem $orderItem)
-    {
-        $computopOrderItem = $this
+        return $this
             ->queryContainer
-            ->queryPaymentItemByOrderItemId($orderItem->getIdSalesOrderItem())
+            ->queryPaymentByOrderId($idSalesOrder)
             ->findOne();
-
-        $computopOrderItem->setStatus($this->config->getOmsStatusCancelled());
-        $computopOrderItem->save();
     }
 }

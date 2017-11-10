@@ -26,14 +26,14 @@ class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderIn
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      * @param \Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject $data
      *
-     * @return array
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
-        $orderEntity = $this->getOrderTransfer($orderEntity, $orderItems);
-        $computopHeaderPayment = $this->createComputopHeaderPayment($orderEntity);
-        $this->getFacade()->authorizationPaymentRequest($orderEntity, $computopHeaderPayment);
+        $orderTransfer = $this->getOrderTransfer($orderEntity);
 
-        return [];
+        return $this
+            ->getFacade()
+            ->authorizeCommandHandle($orderItems, $orderTransfer);
     }
 }

@@ -53,17 +53,4 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
     }
-
-    /**
-     * @param integer $idSalesOrder
-     *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
-     */
-    public function getSavedComputopEntity($idSalesOrder)
-    {
-        return $this
-            ->getQueryContainer()
-            ->queryPaymentByOrderId($idSalesOrder)
-            ->findOne();
-    }
 }
