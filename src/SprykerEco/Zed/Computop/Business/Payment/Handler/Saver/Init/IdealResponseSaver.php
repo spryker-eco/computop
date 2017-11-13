@@ -75,9 +75,10 @@ class IdealResponseSaver extends AbstractResponseSaver
      */
     protected function triggerEvent($paymentEntity)
     {
-        $orderItems = SpySalesOrderItemQuery::create()
-            ->filterByFkSalesOrder($paymentEntity->getFkSalesOrder())
-            ->find();
+        $orderItems = $this
+                ->queryContainer
+                ->getSpySalesOrderItemsById($paymentEntity->getFkSalesOrder())
+                ->find();
 
         $this->omsFacade->triggerEvent(
             $this->config->getOmsCaptureEventName(),

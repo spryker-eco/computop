@@ -65,8 +65,9 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      */
     protected function triggerEvent($paymentEntity)
     {
-        $orderItems = SpySalesOrderItemQuery::create()
-            ->filterByFkSalesOrder($paymentEntity->getFkSalesOrder())
+        $orderItems = $this
+            ->queryContainer
+            ->getSpySalesOrderItemsById($paymentEntity->getFkSalesOrder())
             ->find();
 
         $this->omsFacade->triggerEvent(
