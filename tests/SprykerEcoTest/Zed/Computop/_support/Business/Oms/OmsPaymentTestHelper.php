@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Business\Api;
+namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -14,7 +14,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
-class ApiPaymentTestHelper extends Test
+class OmsPaymentTestHelper extends Test
 {
     /**
      * @return \SprykerEco\Zed\Computop\ComputopConfig

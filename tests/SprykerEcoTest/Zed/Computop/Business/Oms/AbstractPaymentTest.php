@@ -115,7 +115,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $stub = $builder->getMock();
 
         $stub->method('getConfig')
-            ->willReturn($this->apiHelper->createConfig());
+            ->willReturn($this->omsHelper->createConfig());
 
         $stub->method('getComputopService')
             ->willReturn(new ComputopService());
@@ -158,7 +158,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $orderTransfer->setIdSalesOrder($this->helper->orderEntity->getIdSalesOrder());
         $orderTransfer->setTotals(new TotalsTransfer());
         $orderTransfer->setCustomer(new CustomerTransfer());
-        $orderTransfer->addPayment($this->apiHelper->createPaymentTransfer());
+        $orderTransfer->addPayment($this->omsHelper->createPaymentTransfer());
 
         $totals = new TotalsTransfer();
         $totals->setGrandTotal(self::GRAND_TOTAL);
@@ -166,7 +166,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $totals->setSubtotal(self::SUB_TOTAL);
         $totals->setDiscountTotal(self::DISCOUNT_TOTAL);
         $orderTransfer->setTotals($totals);
-        $orderTransfer->setItems(new ArrayObject($this->apiHelper->createOrderItems()));
+        $orderTransfer->setItems(new ArrayObject($this->omsHelper->createOrderItems()));
 
         return $orderTransfer;
     }

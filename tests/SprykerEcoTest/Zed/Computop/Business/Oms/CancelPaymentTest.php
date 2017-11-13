@@ -44,7 +44,7 @@ class CancelPaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $orderTransfer = $this->createOrderTransfer();
-        $orderItems = $this->apiHelper->createOrderItems();
+        $orderItems = $this->omsHelper->createOrderItems();
 
         //todo: update test with negative testing
         /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $response */

@@ -40,7 +40,7 @@ class RefundPaymentTest extends AbstractPaymentTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $orderTransfer = $this->createOrderTransfer();
-        $orderItems = $this->apiHelper->createOrderItems();
+        $orderItems = $this->omsHelper->createOrderItems();
 
         //todo: update test
         /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $response */

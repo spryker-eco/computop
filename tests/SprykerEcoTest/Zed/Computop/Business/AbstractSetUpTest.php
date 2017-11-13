@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Business;
 
 use Codeception\TestCase\Test;
-use SprykerEcoTest\Zed\Computop\Business\Api\ApiPaymentTestHelper;
+use SprykerEcoTest\Zed\Computop\Business\Oms\OmsPaymentTestHelper;
 use SprykerEcoTest\Zed\Computop\Module\FunctionalModule;
 use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
 
@@ -25,21 +25,21 @@ abstract class AbstractSetUpTest extends Test
     protected $orderHelper;
 
     /**
-     * @var \SprykerEcoTest\Zed\Computop\Business\Api\ApiPaymentTestHelper
+     * @var \SprykerEcoTest\Zed\Computop\Business\Oms\OmsPaymentTestHelper
      */
-    protected $apiHelper;
+    protected $omsHelper;
 
     /**
      * @param \SprykerEcoTest\Zed\Computop\Module\FunctionalModule $helper
      * @param \SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper $orderHelper
-     * @param \SprykerEcoTest\Zed\Computop\Business\Api\ApiPaymentTestHelper $apiHelper
+     * @param \SprykerEcoTest\Zed\Computop\Business\Oms\OmsPaymentTestHelper $omsHelper
      *
      * @return void
      */
-    protected function _inject(FunctionalModule $helper, OrderPaymentTestHelper $orderHelper, ApiPaymentTestHelper $apiHelper)
+    protected function _inject(FunctionalModule $helper, OrderPaymentTestHelper $orderHelper, OmsPaymentTestHelper $omsHelper)
     {
         $this->helper = $helper;
         $this->orderHelper = $orderHelper;
-        $this->apiHelper = $apiHelper;
+        $this->omsHelper = $omsHelper;
     }
 }
