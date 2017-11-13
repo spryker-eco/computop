@@ -46,14 +46,6 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactoryInterface
-     */
-    public function createApiFactory()
-    {
-        return new ComputopBusinessApiFactory();
-    }
-
-    /**
      * @return \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
      */
     public function createOrderSaver()
@@ -81,185 +73,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
 
         return $postSaveHook;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
-     */
-    protected function createPostSaveSofortMapper()
-    {
-        return new InitSofortMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
-     */
-    protected function createPostSavePaydirektMapper()
-    {
-        return new InitPaydirektMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
-     */
-    protected function createPostSaveIdealMapper()
-    {
-        return new InitIdealMapper($this->getConfig(), $this->getComputopService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
-     */
-    public function createAuthorizationPaymentRequest()
-    {
-        return $this->createApiFactory()->createAuthorizationPaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
-     */
-    public function createInquirePaymentRequest()
-    {
-        return $this->createApiFactory()->createInquirePaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
-     */
-    public function createReversePaymentRequest()
-    {
-        return $this->createApiFactory()->createReversePaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
-     */
-    public function createCapturePaymentRequest()
-    {
-        return $this->createApiFactory()->createCapturePaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
-     */
-    public function createRefundPaymentRequest()
-    {
-        return $this->createApiFactory()->createRefundPaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
-     */
-    public function createAuthorizeHandler()
-    {
-        return new AuthorizeHandler(
-            $this->createAuthorizationPaymentRequest(),
-            $this->createAuthorizeSaver()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
-     */
-    public function createReverseHandler()
-    {
-        return new ReverseHandler(
-            $this->createReversePaymentRequest(),
-            $this->createReverseSaver()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
-     */
-    public function createInquireHandler()
-    {
-        return new InquireHandler(
-            $this->createInquirePaymentRequest(),
-            $this->createInquireSaver()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
-     */
-    public function createCaptureHandler()
-    {
-        return new CaptureHandler(
-            $this->createCapturePaymentRequest(),
-            $this->createCaptureSaver()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
-     */
-    public function createRefundHandler()
-    {
-        return new RefundHandler(
-            $this->createRefundPaymentRequest(),
-            $this->createRefundSaver()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
-     */
-    public function createAuthorizeSaver()
-    {
-        return new AuthorizeSaver(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger(),
-            $this->getConfig()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
-     */
-    public function createReverseSaver()
-    {
-        return new ReverseSaver(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger(),
-            $this->getConfig()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
-     */
-    public function createInquireSaver()
-    {
-        return new InquireSaver(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger(),
-            $this->getConfig()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
-     */
-    public function createCaptureSaver()
-    {
-        return new CaptureSaver(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger(),
-            $this->getConfig()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
-     */
-    public function createRefundSaver()
-    {
-        return new RefundSaver(
-            $this->getQueryContainer(),
-            $this->createComputopResponseLogger(),
-            $this->getConfig()
-        );
     }
 
     /**
@@ -349,6 +162,169 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    protected function createAuthorizationPaymentRequest()
+    {
+        return $this->createApiFactory()->createAuthorizationPaymentRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    protected function createInquirePaymentRequest()
+    {
+        return $this->createApiFactory()->createInquirePaymentRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    protected function createReversePaymentRequest()
+    {
+        return $this->createApiFactory()->createReversePaymentRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    protected function createCapturePaymentRequest()
+    {
+        return $this->createApiFactory()->createCapturePaymentRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     */
+    protected function createRefundPaymentRequest()
+    {
+        return $this->createApiFactory()->createRefundPaymentRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactoryInterface
+     */
+    protected function createApiFactory()
+    {
+        return new ComputopBusinessApiFactory();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     */
+    protected function createAuthorizeHandler()
+    {
+        return new AuthorizeHandler(
+            $this->createAuthorizationPaymentRequest(),
+            $this->createAuthorizeSaver()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     */
+    protected function createReverseHandler()
+    {
+        return new ReverseHandler(
+            $this->createReversePaymentRequest(),
+            $this->createReverseSaver()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     */
+    protected function createInquireHandler()
+    {
+        return new InquireHandler(
+            $this->createInquirePaymentRequest(),
+            $this->createInquireSaver()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     */
+    protected function createCaptureHandler()
+    {
+        return new CaptureHandler(
+            $this->createCapturePaymentRequest(),
+            $this->createCaptureSaver()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     */
+    protected function createRefundHandler()
+    {
+        return new RefundHandler(
+            $this->createRefundPaymentRequest(),
+            $this->createRefundSaver()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
+     */
+    protected function createAuthorizeSaver()
+    {
+        return new AuthorizeSaver(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
+     */
+    protected function createReverseSaver()
+    {
+        return new ReverseSaver(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
+     */
+    protected function createInquireSaver()
+    {
+        return new InquireSaver(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
+     */
+    protected function createCaptureSaver()
+    {
+        return new CaptureSaver(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
+     */
+    protected function createRefundSaver()
+    {
+        return new RefundSaver(
+            $this->getQueryContainer(),
+            $this->createComputopResponseLogger(),
+            $this->getConfig()
+        );
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
     protected function createAuthorizeManager()
@@ -389,6 +365,30 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSaveSofortMapper()
+    {
+        return new InitSofortMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSavePaydirektMapper()
+    {
+        return new InitPaydirektMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSaveIdealMapper()
+    {
+        return new InitIdealMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
      * @return \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     protected function getComputopService()
@@ -409,8 +409,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function getFlashMessengerFacade()
     {
-        return $this->getProvidedDependency(
-            ComputopDependencyProvider::FACADE_FLASH_MESSENGER
-        );
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_FLASH_MESSENGER);
     }
 }
