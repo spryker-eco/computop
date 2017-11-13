@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopFacadeInterface
@@ -41,6 +42,71 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Executes post save order hook.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
+     *
+     * @return void
+     */
+    public function postSaveHookExecute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
+
+    /**
+     * Specification:
+     * - Handle Authorize OMS command, make request, save response.
+     *
+     * @api
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     * - Handle Cancel OMS command, make request, save response.
+     *
+     * @api
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return array
+     */
+    public function cancelCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     * - Handle Capture OMS command, make request, save response.
+     *
+     * @api
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     * - Handle Refund OMS command, make request, save response.
+     *
+     * @api
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function refundCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
      * - Saves Sofort Response to DB.
      *
      * @api
@@ -49,7 +115,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortResponse(QuoteTransfer $quoteTransfer);
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -61,7 +127,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealResponse(QuoteTransfer $quoteTransfer);
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -73,5 +139,5 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektResponse(QuoteTransfer $quoteTransfer);
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 }
