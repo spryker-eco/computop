@@ -91,7 +91,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return array
+     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -108,18 +108,18 @@ class CancelCommandHandler extends AbstractCommandHandler
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return array
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
         $computopResponseTransfer = $this->reversePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
             $this->setInfoMessage('Authorization was reverted');
-            return [];
+            return $computopResponseTransfer;
         }
 
         $this->setErrorMessage('Authorization was not reverted. Please check logs');
-        return [];
+        return $computopResponseTransfer;
     }
 
     /**
@@ -133,7 +133,7 @@ class CancelCommandHandler extends AbstractCommandHandler
 
         $this->setInfoMessage('Item(s) was(were) changed');
 
-        return [];
+        return $orderItems;
     }
 
     /**
