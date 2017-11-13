@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 
 class IdealResponseSaver extends AbstractResponseSaver
 {
