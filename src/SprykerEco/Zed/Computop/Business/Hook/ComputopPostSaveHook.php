@@ -53,7 +53,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
         if ($this->config->isNeededRedirectAfterPlaceOrder($quoteTransfer->getPayment()->getPaymentSelection())) {
-            $this->setRedirect($quoteTransfer, $checkoutResponseTransfer);
+            $checkoutResponseTransfer = $this->setRedirect($quoteTransfer, $checkoutResponseTransfer);
         }
 
         return $checkoutResponseTransfer;
@@ -72,6 +72,8 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());
+
+        return $checkoutResponseTransfer;
     }
 
     /**
