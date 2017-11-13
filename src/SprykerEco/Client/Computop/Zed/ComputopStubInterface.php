@@ -24,19 +24,19 @@ interface ComputopStubInterface
      *
      * @return void
      */
-    public function saveSofortResponse(QuoteTransfer $responseTransfer);
+    public function saveSofortInitResponse(QuoteTransfer $responseTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
      *
      * @return void
      */
-    public function saveIdealResponse(QuoteTransfer $responseTransfer);
+    public function saveIdealInitResponse(QuoteTransfer $responseTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
      *
      * @return void
      */
-    public function savePaydirektResponse(QuoteTransfer $responseTransfer);
+    public function savePaydirektInitResponse(QuoteTransfer $responseTransfer);
 }

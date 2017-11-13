@@ -31,9 +31,9 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveSofortInitResponseAction(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFacade()->saveSofortResponse($quoteTransfer);
+        return $this->getFacade()->saveSofortInitResponse($quoteTransfer);
     }
 
     /**
@@ -41,9 +41,9 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveIdealInitResponseAction(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFacade()->saveIdealResponse($quoteTransfer);
+        return $this->getFacade()->saveIdealInitResponse($quoteTransfer);
     }
 
     /**
@@ -51,8 +51,8 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektResponseAction(QuoteTransfer $quoteTransfer)
+    public function savePaydirektInitResponseAction(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFacade()->savePaydirektResponse($quoteTransfer);
+        return $this->getFacade()->savePaydirektInitResponse($quoteTransfer);
     }
 }

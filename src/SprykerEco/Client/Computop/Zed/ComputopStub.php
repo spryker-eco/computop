@@ -28,9 +28,9 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return void
      */
-    public function saveSofortResponse(QuoteTransfer $responseTransfer)
+    public function saveSofortInitResponse(QuoteTransfer $responseTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-sofort-response', $responseTransfer);
+        $this->zedStub->call('/computop/gateway/save-sofort-init-response', $responseTransfer);
     }
 
     /**
@@ -38,9 +38,9 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return void
      */
-    public function saveIdealResponse(QuoteTransfer $responseTransfer)
+    public function saveIdealInitResponse(QuoteTransfer $responseTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-ideal-response', $responseTransfer);
+        $this->zedStub->call('/computop/gateway/save-ideal-init-response', $responseTransfer);
     }
 
     /**
@@ -48,8 +48,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return void
      */
-    public function savePaydirektResponse(QuoteTransfer $responseTransfer)
+    public function savePaydirektInitResponse(QuoteTransfer $responseTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-paydirekt-response', $responseTransfer);
+        $this->zedStub->call('/computop/gateway/save-paydirekt-init-response', $responseTransfer);
     }
 }

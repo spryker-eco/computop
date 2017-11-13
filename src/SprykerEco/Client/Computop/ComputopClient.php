@@ -39,9 +39,9 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return void
      */
-    public function saveSofortResponse(QuoteTransfer $quoteTransfer)
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->saveSofortResponse($quoteTransfer);
+         $this->getFactory()->createZedStub()->saveSofortInitResponse($quoteTransfer);
     }
 
     /**
@@ -53,9 +53,9 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return void
      */
-    public function saveIdealResponse(QuoteTransfer $quoteTransfer)
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->saveIdealResponse($quoteTransfer);
+         $this->getFactory()->createZedStub()->saveIdealInitResponse($quoteTransfer);
     }
 
     /**
@@ -67,8 +67,8 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return void
      */
-    public function savePaydirektResponse(QuoteTransfer $quoteTransfer)
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->savePaydirektResponse($quoteTransfer);
+         $this->getFactory()->createZedStub()->savePaydirektInitResponse($quoteTransfer);
     }
 }

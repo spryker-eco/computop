@@ -41,6 +41,23 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @api
      *
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param string $method
+     *
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     */
+    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method)
+    {
+        $this->getFactory()->createComputopResponseLogger()->log($header, $method);
+
+        return $header;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
@@ -136,28 +153,11 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
-     * @param string $method
-     *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
-     */
-    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method)
-    {
-        $this->getFactory()->createComputopResponseLogger()->log($header, $method);
-
-        return $header;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortResponse(QuoteTransfer $quoteTransfer)
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
     {
         $this->getFactory()->createSofortResponseSaver()->handle(
             $quoteTransfer
@@ -175,7 +175,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealResponse(QuoteTransfer $quoteTransfer)
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
     {
         $this->getFactory()->createIdealResponseSaver()->handle(
             $quoteTransfer
@@ -193,7 +193,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektResponse(QuoteTransfer $quoteTransfer)
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
         $this->getFactory()->createPaydirektResponseSaver()->handle(
             $quoteTransfer

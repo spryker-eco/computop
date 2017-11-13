@@ -37,7 +37,7 @@ interface ComputopClientInterface
      *
      * @return void
      */
-    public function saveSofortResponse(QuoteTransfer $quoteTransfer);
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -49,7 +49,7 @@ interface ComputopClientInterface
      *
      * @return void
      */
-    public function saveIdealResponse(QuoteTransfer $quoteTransfer);
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -61,5 +61,5 @@ interface ComputopClientInterface
      *
      * @return void
      */
-    public function savePaydirektResponse(QuoteTransfer $quoteTransfer);
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 }

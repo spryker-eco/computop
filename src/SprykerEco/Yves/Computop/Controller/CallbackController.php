@@ -107,7 +107,7 @@ class CallbackController extends AbstractController
             $this->orderResponseTransfer
         );
 
-        $this->getFactory()->getComputopClient()->savePaydirektResponse($quoteTransfer);
+        $this->getFactory()->getComputopClient()->savePaydirektInitResponse($quoteTransfer);
 
         if (!$quoteTransfer->getCustomer()) {
             //Todo: add translation
@@ -135,7 +135,7 @@ class CallbackController extends AbstractController
             $this->orderResponseTransfer
         );
 
-        $this->getFactory()->getComputopClient()->saveSofortResponse($quoteTransfer);
+        $this->getFactory()->getComputopClient()->saveSofortInitResponse($quoteTransfer);
 
         if (!$quoteTransfer->getCustomer()) {
             //Todo: add translation
@@ -163,7 +163,7 @@ class CallbackController extends AbstractController
             $this->orderResponseTransfer
         );
 
-        $this->getFactory()->getComputopClient()->saveSofortResponse($quoteTransfer);
+        $this->getFactory()->getComputopClient()->saveSofortInitResponse($quoteTransfer);
 
         if (!$quoteTransfer->getCustomer()) {
             //Todo: add translation

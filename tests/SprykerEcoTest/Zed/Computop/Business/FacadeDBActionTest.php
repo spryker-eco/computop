@@ -58,12 +58,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testSaveSofortResponse()
+    public function testsaveSofortInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $service->saveSofortResponse($this->getQuoteTrasfer());
+        $service->saveSofortInitResponse($this->getQuoteTrasfer());
 
         $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
 
@@ -74,12 +74,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testSaveIdealResponse()
+    public function testsaveIdealInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $service->saveIdealResponse($this->getQuoteTrasfer());
+        $service->saveIdealInitResponse($this->getQuoteTrasfer());
 
         $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
 
@@ -90,12 +90,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testSavePaydirektResponse()
+    public function testsavePaydirektInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $service->savePaydirektResponse($this->getQuoteTrasfer());
+        $service->savePaydirektInitResponse($this->getQuoteTrasfer());
 
         $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
 
