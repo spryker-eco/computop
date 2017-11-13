@@ -19,9 +19,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
-use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
@@ -58,7 +56,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testsaveSofortInitResponse()
+    public function testSaveSofortInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
@@ -74,7 +72,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testsaveIdealInitResponse()
+    public function testSaveIdealInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
@@ -90,7 +88,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testsavePaydirektInitResponse()
+    public function testSavePaydirektInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
@@ -101,35 +99,6 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
         $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
-    }
-
-    /**
-     * @return void
-     */
-    public function testCancelPaymentItems()
-    {
-        $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        //todo: update test
-//        $service->cancelPaymentItems($this->getPaymentItems());
-//        $computopItem = SpyPaymentComputopOrderItemQuery::create()->findByFkSalesOrderItem($this->salesOrderItemId)->getFirst();
-//
-//        $this->assertSame($computopItem->getStatus(), 'cancelled');
-    }
-
-    /**
-     * @return array
-     */
-    protected function getPaymentItems()
-    {
-        $item = SpyPaymentComputopOrderItemQuery::create()->findOne();
-        $this->salesOrderItemId = $item->getFkSalesOrderItem();
-
-        $paymentItem = new SpySalesOrderItem();
-        $paymentItem->setIdSalesOrderItem($this->salesOrderItemId);
-
-        return [$paymentItem];
     }
 
     /**
