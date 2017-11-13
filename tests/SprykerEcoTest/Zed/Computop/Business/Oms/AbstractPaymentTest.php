@@ -5,8 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Business\Api;
+namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
+use ArrayObject;
+use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use GuzzleHttp\Psr7;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
@@ -14,28 +18,33 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig as SprykerComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 
 abstract class AbstractPaymentTest extends AbstractSetUpTest
 {
+    const GRAND_TOTAL = 10;
+    const REFUND_TOTAL = 10;
+    const SUB_TOTAL = 8;
+    const DISCOUNT_TOTAL = 1;
+
     /**
      * @return string
      */
     abstract protected function getPayIdValue();
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    abstract protected function getApiAdapter();
-
-    /**
      * @return string
      */
-    abstract protected function getApiAdapterFunctionName();
+    abstract protected function getTransIdValue();
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    abstract protected function getApiAdapterStub();
 
     /**
      * Set up DB data
@@ -67,7 +76,8 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
             ->setPaymentMethod(ComputopConfig::PAYMENT_METHOD_CREDIT_CARD)
             ->setReference($this->helper->orderEntity->getOrderReference())
             ->setFkSalesOrder($this->helper->orderEntity->getIdSalesOrder())
-            ->setPayId($this->getPayIdValue());
+            ->setPayId($this->getPayIdValue())
+            ->setTransId($this->getTransIdValue());
         $computopPaymentEntity->save();
 
         $paymentDetailEntity = new SpyPaymentComputopDetail();
@@ -91,15 +101,6 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
      */
     protected function createFactory()
     {
-        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
-        $apiBuilder->setMethods([
-            $this->getApiAdapterFunctionName(),
-        ]);
-        $apiStub = $apiBuilder->getMock();
-
-        $apiStub->method($this->getApiAdapterFunctionName())
-                ->willReturn($this->getApiAdapter());
-
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(
             [
@@ -107,6 +108,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getComputopService',
                 'getQueryContainer',
                 'createApiFactory',
+                'getFlashMessengerFacade',
             ]
         );
 
@@ -116,13 +118,16 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
             ->willReturn($this->apiHelper->createConfig());
 
         $stub->method('getComputopService')
-            ->willReturn(new ComputopService(new ComputopService()));
+            ->willReturn(new ComputopService());
 
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
 
         $stub->method('createApiFactory')
-            ->willReturn($apiStub);
+            ->willReturn($this->getApiAdapterStub());
+
+        $stub->method('getFlashMessengerFacade')
+            ->willReturn($this->createMock(ComputopToMessengerFacadeBridge::class));
 
         return $stub;
     }
@@ -142,5 +147,27 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $stream = Psr7\stream_for($expectedResponse);
 
         return $stream;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\OrderTransfer
+     */
+    protected function createOrderTransfer()
+    {
+        $orderTransfer = new OrderTransfer();
+        $orderTransfer->setIdSalesOrder($this->helper->orderEntity->getIdSalesOrder());
+        $orderTransfer->setTotals(new TotalsTransfer());
+        $orderTransfer->setCustomer(new CustomerTransfer());
+        $orderTransfer->addPayment($this->apiHelper->createPaymentTransfer());
+
+        $totals = new TotalsTransfer();
+        $totals->setGrandTotal(self::GRAND_TOTAL);
+        $totals->setRefundTotal(self::REFUND_TOTAL);
+        $totals->setSubtotal(self::SUB_TOTAL);
+        $totals->setDiscountTotal(self::DISCOUNT_TOTAL);
+        $orderTransfer->setTotals($totals);
+        $orderTransfer->setItems(new ArrayObject($this->apiHelper->createOrderItems()));
+
+        return $orderTransfer;
     }
 }

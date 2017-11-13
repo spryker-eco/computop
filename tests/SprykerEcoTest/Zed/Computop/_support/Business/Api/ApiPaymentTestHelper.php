@@ -8,11 +8,9 @@
 namespace SprykerEcoTest\Zed\Computop\Business\Api;
 
 use Codeception\TestCase\Test;
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use Generated\Shared\Transfer\TotalsTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
+use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
@@ -27,37 +25,23 @@ class ApiPaymentTestHelper extends Test
     }
 
     /**
-     * @return \Generated\Shared\Transfer\OrderTransfer
+     * @return array
      */
-    public function createOrderTransfer()
+    public function createOrderItems()
     {
-        $orderTransfer = new OrderTransfer();
-        $orderTransfer->setTotals(new TotalsTransfer());
-        $orderTransfer->setCustomer(new CustomerTransfer());
-        $orderTransfer->addPayment($this->createPaymentTransfer());
-        return $orderTransfer;
-    }
+        $item = SpyPaymentComputopOrderItemQuery::create()->findOne();
+        $idSalesOrderItem = $item->getFkSalesOrderItem();
 
-    /**
-     * @param string $payId
-     * @param string $transId
-     *
-     * @return \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer
-     */
-    public function createComputopHeaderPaymentTransfer($payId, $transId)
-    {
-        $headerPayment = new ComputopHeaderPaymentTransfer();
-        $headerPayment->setAmount(100);
-        $headerPayment->setPayId($payId);
-        $headerPayment->setTransId($transId);
+        $orderItem = new SpySalesOrderItem();
+        $orderItem->setIdSalesOrderItem($idSalesOrderItem);
 
-        return $headerPayment;
+        return [$orderItem];
     }
 
     /**
      * @return \Generated\Shared\Transfer\PaymentTransfer
      */
-    protected function createPaymentTransfer()
+    public function createPaymentTransfer()
     {
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setPaymentProvider(SharedComputopConfig::PROVIDER_NAME)

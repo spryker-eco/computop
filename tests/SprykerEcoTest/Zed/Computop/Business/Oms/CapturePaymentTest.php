@@ -5,11 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Business\Api;
+namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
 use Generated\Shared\Transfer\ComputopCaptureResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -38,23 +39,23 @@ class CapturePaymentTest extends AbstractPaymentTest
     {
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $orderTransfer = $this->apiHelper->createOrderTransfer();
-        $computopHeaderPaymentTransfer = $this->apiHelper->createComputopHeaderPaymentTransfer($this->getPayIdValue(), self::TRANS_ID_VALUE);
+        $orderTransfer = $this->createOrderTransfer();
+        $orderItems = $this->apiHelper->createOrderItems();
 
         //todo: update test
         /** @var \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $response */
-//        $response = $service->capturePaymentRequest($orderTransfer, $computopHeaderPaymentTransfer);
-//
-//        $this->assertInstanceOf(ComputopCaptureResponseTransfer::class, $response);
-//        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
-//
-//        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
-//        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
-//        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
-//        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
-//        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
-//
-//        $this->assertTrue($response->getHeader()->getIsSuccess());
+        $response = $service->captureCommandHandle($orderItems, $orderTransfer);
+
+        $this->assertInstanceOf(ComputopCaptureResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+
+        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
+        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
+        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
+        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
+
+        $this->assertTrue($response->getHeader()->getIsSuccess());
     }
 
     /**
@@ -66,23 +67,32 @@ class CapturePaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return string
      */
-    protected function getApiAdapter()
+    protected function getTransIdValue()
     {
-        $mock = $this->createPartialMock(CaptureApiAdapter::class, ['sendRequest']);
-
-        $mock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_CAPTURE_VALUE, self::LEN_CAPTURE_VALUE));
-
-        return $mock;
+        return self::TRANS_ID_VALUE;
     }
 
     /**
-     * @return string
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getApiAdapterFunctionName()
+    protected function getApiAdapterStub()
     {
-        return 'createCaptureAdapter';
+        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
+        $apiBuilder->setMethods([
+            'createCaptureAdapter',
+        ]);
+        $apiStub = $apiBuilder->getMock();
+
+        $apiMock = $this->createPartialMock(CaptureApiAdapter::class, ['sendRequest']);
+
+        $apiMock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_CAPTURE_VALUE, self::LEN_CAPTURE_VALUE));
+
+        $apiStub->method('createCaptureAdapter')
+            ->willReturn($apiMock);
+
+        return $apiStub;
     }
 }

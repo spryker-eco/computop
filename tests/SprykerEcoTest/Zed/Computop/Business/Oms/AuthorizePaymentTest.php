@@ -5,11 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEcoTest\Zed\Computop\Business\Api;
+namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
 use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -42,23 +43,22 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     {
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $orderTransfer = $this->apiHelper->createOrderTransfer();
-        $computopHeaderPaymentTransfer = $this->apiHelper->createComputopHeaderPaymentTransfer($this->getPayIdValue(), self::TRANS_ID_VALUE);
+        $orderTransfer = $this->createOrderTransfer();
+        $orderItems = $this->apiHelper->createOrderItems();
 
-        //todo: update test
         /** @var \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $response */
-//        $response = $service->authorizationPaymentRequest($orderTransfer, $computopHeaderPaymentTransfer);
-//
-//        $this->assertInstanceOf(ComputopAuthorizeResponseTransfer::class, $response);
-//        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
-//
-//        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
-//        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
-//        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
-//        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
-//        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
-//
-//        $this->assertTrue($response->getHeader()->getIsSuccess());
+        $response = $service->authorizeCommandHandle($orderItems, $orderTransfer);
+
+        $this->assertInstanceOf(ComputopAuthorizeResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+
+        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
+        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
+        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
+        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
+
+        $this->assertTrue($response->getHeader()->getIsSuccess());
     }
 
     /**
@@ -70,23 +70,32 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return string
      */
-    protected function getApiAdapter()
+    protected function getTransIdValue()
     {
-        $mock = $this->createPartialMock(AuthorizeApiAdapter::class, ['sendRequest']);
-
-        $mock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_AUTHORIZE_VALUE, self::LEN_AUTHORIZE_VALUE));
-
-        return $mock;
+        return self::TRANS_ID_VALUE;
     }
 
     /**
-     * @return string
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getApiAdapterFunctionName()
+    protected function getApiAdapterStub()
     {
-        return 'createAuthorizeAdapter';
+        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
+        $apiBuilder->setMethods([
+            'createAuthorizeAdapter',
+        ]);
+        $apiStub = $apiBuilder->getMock();
+
+        $apiMock = $this->createPartialMock(AuthorizeApiAdapter::class, ['sendRequest']);
+
+        $apiMock->method('sendRequest')
+            ->willReturn($this->getStream(self::DATA_AUTHORIZE_VALUE, self::LEN_AUTHORIZE_VALUE));
+
+        $apiStub->method('createAuthorizeAdapter')
+            ->willReturn($apiMock);
+
+        return $apiStub;
     }
 }
