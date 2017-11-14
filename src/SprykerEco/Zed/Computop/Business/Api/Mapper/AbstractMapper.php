@@ -56,7 +56,6 @@ abstract class AbstractMapper implements ApiMapperInterface
         ComputopConfig $config,
         ComputopToStoreInterface $store
     ) {
-
         $this->computopService = $computopService;
         $this->config = $config;
         $this->store = $store;

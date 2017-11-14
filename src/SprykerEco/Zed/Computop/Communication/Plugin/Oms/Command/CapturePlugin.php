@@ -12,7 +12,7 @@ use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
 /**
- * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  */
 class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {

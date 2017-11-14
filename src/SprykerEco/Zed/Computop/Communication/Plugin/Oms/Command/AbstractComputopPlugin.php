@@ -11,7 +11,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
