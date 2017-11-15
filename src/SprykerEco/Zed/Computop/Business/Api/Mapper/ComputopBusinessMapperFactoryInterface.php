@@ -113,4 +113,14 @@ interface ComputopBusinessMapperFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
      */
     public function createRefundEasyCreditMapper();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
+     */
+    public function createCaptureIdealMapper();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
+     */
+    public function createRefundIdealMapper();
 }
