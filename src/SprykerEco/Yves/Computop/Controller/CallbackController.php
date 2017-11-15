@@ -19,6 +19,12 @@ use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
  */
 class CallbackController extends AbstractController
 {
+    const MESSAGE_PAYMENT_SUCCESS = 'Your order has been placed successfully! Thank you for shopping with us!';
+
+    const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
+
+    const MESSAGE_ERROR = 'Error: %s ( %s )';
+
     /**
      * @var array
      */
@@ -94,7 +100,7 @@ class CallbackController extends AbstractController
         );
 
         if (!$quoteTransfer->getCustomer()) {
-            $this->addErrorMessage('Please login and try again');
+            $this->addErrorMessage(static::MESSAGE_LOG_OUT_ERROR);
         }
 
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
@@ -118,8 +124,7 @@ class CallbackController extends AbstractController
             );
 
         if (!$quoteTransfer->getCustomer()) {
-            //Todo: add translation
-            $this->addSuccessMessage('Your order has been placed successfully! Thank you for shopping with us!');
+            $this->addSuccessMessage(static::MESSAGE_PAYMENT_SUCCESS);
         }
 
         return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath());
@@ -153,7 +158,7 @@ class CallbackController extends AbstractController
     {
         $errorText = $responseHeaderTransfer->getDescription();
         $errorCode = $responseHeaderTransfer->getCode();
-        $errorMessageText = sprintf('Error: %s ( %s )', $errorText, $errorCode);
+        $errorMessageText = sprintf(static::MESSAGE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
     }
