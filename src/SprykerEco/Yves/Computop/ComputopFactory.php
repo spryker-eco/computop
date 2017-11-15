@@ -201,51 +201,51 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createCreditCardPaymentHandler()
     {
-        return new ComputopCreditCardPaymentHandler();
+        return new ComputopCreditCardPaymentHandler($this->createInitCreditCardConverter(), $this->getComputopClient());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createPayPalPaymentHandler()
     {
-        return new ComputopPayPalPaymentHandler();
+        return new ComputopPayPalPaymentHandler($this->createInitPayPalConverter(), $this->getComputopClient());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createDirectDebitPaymentHandler()
     {
-        return new ComputopDirectDebitPaymentHandler();
+        return new ComputopDirectDebitPaymentHandler($this->createInitDirectDebitConverter(), $this->getComputopClient());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createPaydirektPaymentHandler()
     {
-        return new ComputopPaydirektPaymentHandler();
+        return new ComputopPaydirektPaymentHandler($this->createInitPaydirektConverter(), $this->getComputopClient());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createSofortPaymentHandler()
     {
-        return new ComputopSofortPaymentHandler();
+        return new ComputopSofortPaymentHandler($this->createInitSofortConverter(), $this->getComputopClient());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createIdealPaymentHandler()
     {
-        return new ComputopIdealPaymentHandler();
+        return new ComputopIdealPaymentHandler($this->createInitIdealConverter(), $this->getComputopClient());
     }
 
     /**
@@ -253,7 +253,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createInitCreditCardConverter()
     {
-        return new InitCreditCardConverter($this->getComputopService());
+        return new InitCreditCardConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -261,7 +261,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createInitPayPalConverter()
     {
-        return new InitPayPalConverter($this->getComputopService());
+        return new InitPayPalConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -269,7 +269,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createInitDirectDebitConverter()
     {
-        return new InitDirectDebitConverter($this->getComputopService());
+        return new InitDirectDebitConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -277,7 +277,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createInitPaydirektConverter()
     {
-        return new InitPaydirektConverter($this->getComputopService());
+        return new InitPaydirektConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -285,7 +285,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createInitSofortConverter()
     {
-        return new InitSofortConverter($this->getComputopService());
+        return new InitSofortConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
@@ -293,7 +293,7 @@ class ComputopFactory extends AbstractFactory
      */
     public function createInitIdealConverter()
     {
-        return new InitIdealConverter($this->getComputopService());
+        return new InitIdealConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
