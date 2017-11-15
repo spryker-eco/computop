@@ -49,6 +49,14 @@ use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalMapper;
 class ComputopFactory extends AbstractFactory
 {
     /**
+     * @return \SprykerEco\Yves\Computop\ComputopConfigInterface
+     */
+    public function getComputopConfig()
+    {
+        return $this->getConfig();
+    }
+
+    /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createCreditCardForm()
@@ -191,14 +199,6 @@ class ComputopFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
     }
-    
-    /**
-     * @return \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
-     */
-    public function getStore()
-    {
-        return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
-    }
 
     /**
      * @return \SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPaymentHandlerInterface
@@ -297,62 +297,6 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderCreditCardMapper()
-    {
-        return new CreditCardMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderPayPalMapper()
-    {
-        return new PayPalMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderDirectDebitMapper()
-    {
-        return new DirectDebitMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderSofortMapper()
-    {
-        return new SofortMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderPaydirektMapper()
-    {
-        return new PaydirektMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderIdealMapper()
-    {
-        return new IdealMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-    
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
-     */
-    public function createOrderEasyCreditMapper()
-    {
-        return new EasyCreditMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
-    }
-
-    /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
      */
     public function createComputopPaymentHandler()
@@ -361,10 +305,66 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\ComputopConfigInterface
+     * @return \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
      */
-    public function getComputopConfig()
+    protected function getStore()
     {
-        return $this->getConfig();
+        return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderCreditCardMapper()
+    {
+        return new CreditCardMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderPayPalMapper()
+    {
+        return new PayPalMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderDirectDebitMapper()
+    {
+        return new DirectDebitMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderSofortMapper()
+    {
+        return new SofortMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderPaydirektMapper()
+    {
+        return new PaydirektMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderIdealMapper()
+    {
+        return new IdealMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
+    }
+    
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderEasyCreditMapper()
+    {
+        return new EasyCreditMapper($this->getComputopService(), $this->getApplication(), $this->getStore(), $this->getConfig());
     }
 }
