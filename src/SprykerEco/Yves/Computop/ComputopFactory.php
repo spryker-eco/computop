@@ -57,6 +57,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
+     */
+    public function createComputopPaymentHandler()
+    {
+        return new ComputopPaymentHandler($this->getConfig());
+    }
+
+    /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createCreditCardForm()
@@ -169,14 +177,6 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Client\Computop\ComputopClientInterface
-     */
-    public function getComputopClient()
-    {
-        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP);
-    }
-
-    /**
      * @return \SprykerEco\Service\Computop\ComputopServiceInterface
      */
     public function getComputopService()
@@ -251,7 +251,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitCreditCardConverter()
+    protected function createInitCreditCardConverter()
     {
         return new InitCreditCardConverter($this->getComputopService(), $this->getConfig());
     }
@@ -259,7 +259,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitPayPalConverter()
+    protected function createInitPayPalConverter()
     {
         return new InitPayPalConverter($this->getComputopService(), $this->getConfig());
     }
@@ -267,7 +267,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitDirectDebitConverter()
+    protected function createInitDirectDebitConverter()
     {
         return new InitDirectDebitConverter($this->getComputopService(), $this->getConfig());
     }
@@ -275,7 +275,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitPaydirektConverter()
+    protected function createInitPaydirektConverter()
     {
         return new InitPaydirektConverter($this->getComputopService(), $this->getConfig());
     }
@@ -283,7 +283,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitSofortConverter()
+    protected function createInitSofortConverter()
     {
         return new InitSofortConverter($this->getComputopService(), $this->getConfig());
     }
@@ -291,17 +291,17 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitIdealConverter()
+    protected function createInitIdealConverter()
     {
         return new InitIdealConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
+     * @return \SprykerEco\Client\Computop\ComputopClientInterface
      */
-    public function createComputopPaymentHandler()
+    protected function getComputopClient()
     {
-        return new ComputopPaymentHandler($this->getConfig());
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP);
     }
 
     /**
