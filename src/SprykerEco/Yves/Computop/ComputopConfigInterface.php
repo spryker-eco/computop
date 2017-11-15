@@ -63,4 +63,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getCreditCardInitAction();
+    
+    /**
+     * @return string
+     */
+    public function getEasyCreditInitAction();
 }
