@@ -22,7 +22,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     /**
      * @var \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    protected $orderMapper;
+    protected $mapper;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -33,12 +33,12 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
-     * @param \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface $orderMapper
+     * @param \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface $mapper
      */
-    public function __construct(ComputopToQuoteClientInterface $quoteClient, MapperInterface $orderMapper)
+    public function __construct(ComputopToQuoteClientInterface $quoteClient, MapperInterface $mapper)
     {
         $this->quoteClient = $quoteClient;
-        $this->orderMapper = $orderMapper;
+        $this->mapper = $mapper;
     }
 
     /**
