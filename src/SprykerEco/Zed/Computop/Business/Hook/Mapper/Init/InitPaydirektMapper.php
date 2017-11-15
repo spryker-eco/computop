@@ -30,6 +30,7 @@ class InitPaydirektMapper extends AbstractMapper
      */
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
