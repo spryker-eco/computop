@@ -13,11 +13,13 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 class ComputopControllerProvider extends YvesControllerProvider
 {
     const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
-    const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
     const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
-    const SOFORT_SUCCESS = 'computop-sofort-success';
-    const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+    const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
     const IDEAL_SUCCESS = 'computop-ideal-success';
+    const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+    const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
+    const SOFORT_SUCCESS = 'computop-sofort-success';
+
     const FAILURE_PATH_NAME = 'computop-failure';
 
     /**
@@ -46,14 +48,6 @@ class ComputopControllerProvider extends YvesControllerProvider
         );
 
         $this->createController(
-            '/computop/pay-pal-success',
-            self::PAY_PAL_SUCCESS,
-            $this->moduleName,
-            $this->callbackControllerName,
-            'successPayPal'
-        );
-
-        $this->createController(
             '/computop/direct-debit-success',
             self::DIRECT_DEBIT_SUCCESS,
             $this->moduleName,
@@ -62,11 +56,19 @@ class ComputopControllerProvider extends YvesControllerProvider
         );
 
         $this->createController(
-            '/computop/sofort-success',
-            self::SOFORT_SUCCESS,
+            '/computop/easy-credit-success',
+            self::EASY_CREDIT_SUCCESS,
             $this->moduleName,
             $this->callbackControllerName,
-            'successSofort'
+            'successEasyCredit'
+        );
+
+        $this->createController(
+            '/computop/ideal-success',
+            self::IDEAL_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'successIdeal'
         );
 
         $this->createController(
@@ -78,11 +80,19 @@ class ComputopControllerProvider extends YvesControllerProvider
         );
 
         $this->createController(
-            '/computop/ideal-success',
-            self::IDEAL_SUCCESS,
+            '/computop/pay-pal-success',
+            self::PAY_PAL_SUCCESS,
             $this->moduleName,
             $this->callbackControllerName,
-            'successIdeal'
+            'successPayPal'
+        );
+
+        $this->createController(
+            '/computop/sofort-success',
+            self::SOFORT_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'successSofort'
         );
 
         $this->createController(

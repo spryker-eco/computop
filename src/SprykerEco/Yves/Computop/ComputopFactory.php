@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop;
 use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
+use SprykerEco\Yves\Computop\Converter\InitEasyCreditConverter;
 use SprykerEco\Yves\Computop\Converter\InitIdealConverter;
 use SprykerEco\Yves\Computop\Converter\InitPaydirektConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
@@ -34,6 +35,7 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopDirectDebitPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopEasyCreditPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
@@ -227,6 +229,14 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
+    public function createEasyCreditPaymentHandler()
+    {
+        return new ComputopEasyCreditPaymentHandler($this->createInitEasyCreditConverter(), $this->getComputopClient());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
+     */
     public function createPaydirektPaymentHandler()
     {
         return new ComputopPaydirektPaymentHandler($this->createInitPaydirektConverter(), $this->getComputopClient());
@@ -270,6 +280,14 @@ class ComputopFactory extends AbstractFactory
     protected function createInitDirectDebitConverter()
     {
         return new InitDirectDebitConverter($this->getComputopService(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    protected function createInitEasyCreditConverter()
+    {
+        return new InitEasyCreditConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
