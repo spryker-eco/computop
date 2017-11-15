@@ -11,28 +11,9 @@ use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Yves\Computop\Handler\AbstractPrePostPaymentHandler;
 
-class ComputopSofortPaymentHandler extends AbstractPrePostPaymentHandler
+class ComputopSofortPaymentHandler extends AbstractPostPlacePaymentHandler
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param array $responseArray
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
-    {
-        /** @var \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer */
-        $responseTransfer = $this->converter->getResponseTransfer($responseArray);
-        $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
-
-        $this->computopClient->logResponse($responseTransfer->getHeader());
-        $this->computopClient->saveSofortInitResponse($quoteTransfer);
-
-        return $quoteTransfer;
-    }
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
@@ -56,5 +37,15 @@ class ComputopSofortPaymentHandler extends AbstractPrePostPaymentHandler
         );
 
         return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->computopClient->saveSofortInitResponse($quoteTransfer);
     }
 }
