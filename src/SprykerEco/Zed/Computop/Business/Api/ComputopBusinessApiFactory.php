@@ -105,6 +105,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePayPalMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureDirectDebitMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePaydirektMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureEasyCreditMapper());
 
         return $paymentRequest;
     }
@@ -124,6 +125,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundDirectDebitMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundSofortMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundEasyCreditMapper());
 
         return $paymentRequest;
     }

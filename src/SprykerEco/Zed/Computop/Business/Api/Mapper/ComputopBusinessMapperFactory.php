@@ -16,6 +16,8 @@ use SprykerEco\Zed\Computop\Business\Api\Mapper\DirectDebit\CaptureDirectDebitMa
 use SprykerEco\Zed\Computop\Business\Api\Mapper\DirectDebit\InquireDirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\DirectDebit\RefundDirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\DirectDebit\ReverseDirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\EasyCredit\CaptureEasyCreditMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\EasyCredit\RefundEasyCreditMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\Paydirekt\CapturePaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\Paydirekt\InquirePaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\Paydirekt\RefundPaydirektMapper;
@@ -184,5 +186,21 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     public function createRefundPaydirektMapper()
     {
         return new RefundPaydirektMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
+     */
+    public function createCaptureEasyCreditMapper()
+    {
+        return new CaptureEasyCreditMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
+     */
+    public function createRefundEasyCreditMapper()
+    {
+        return new RefundEasyCreditMapper($this->getComputopService(), $this->getConfig(), $this->getStore());
     }
 }
