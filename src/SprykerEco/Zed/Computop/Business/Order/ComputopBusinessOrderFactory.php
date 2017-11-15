@@ -13,6 +13,7 @@ use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\SofortMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\DirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\EasyCreditMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\PayPalMapper;
 
 /**
@@ -24,7 +25,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderCreditCardMapper()
+    public function createInitCreditCardMapper()
     {
         return new CreditCardMapper();
     }
@@ -32,7 +33,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderPayPalMapper()
+    public function createInitPayPalMapper()
     {
         return new PayPalMapper();
     }
@@ -40,7 +41,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderDirectDebitMapper()
+    public function createInitDirectDebitMapper()
     {
         return new DirectDebitMapper();
     }
@@ -48,7 +49,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderSofortMapper()
+    public function createInitSofortMapper()
     {
         return new SofortMapper();
     }
@@ -56,7 +57,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderPaydirektMapper()
+    public function createInitPaydirektMapper()
     {
         return new PaydirektMapper();
     }
@@ -64,8 +65,16 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderIdealMapper()
+    public function createInitIdealMapper()
     {
         return new IdealMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createInitEasyCreditMapper()
+    {
+        return new EasyCreditMapper();
     }
 }

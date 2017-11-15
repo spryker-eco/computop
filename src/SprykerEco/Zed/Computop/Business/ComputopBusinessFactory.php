@@ -52,12 +52,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         $orderSaver = new OrderManager($this->getConfig());
 
-        $orderSaver->registerMapper($this->createOrderFactory()->createOrderCreditCardMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createOrderPayPalMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createOrderDirectDebitMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createOrderSofortMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createOrderPaydirektMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createOrderIdealMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitCreditCardMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitPayPalMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitDirectDebitMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitSofortMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitPaydirektMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitIdealMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitEasyCreditMapper());
 
         return $orderSaver;
     }

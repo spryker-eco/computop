@@ -124,7 +124,6 @@ class CallbackController extends AbstractController
     protected function successPostPlaceAction(ComputopPrePostPaymentHandlerInterface $handler)
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-
         $quoteTransfer = $handler
             ->handle(
                 $quoteTransfer,

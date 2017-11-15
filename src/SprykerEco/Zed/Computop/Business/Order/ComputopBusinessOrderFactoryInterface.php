@@ -12,30 +12,35 @@ interface ComputopBusinessOrderFactoryInterface
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderCreditCardMapper();
+    public function createInitCreditCardMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderPayPalMapper();
+    public function createInitPayPalMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderDirectDebitMapper();
+    public function createInitDirectDebitMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderSofortMapper();
+    public function createInitSofortMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderPaydirektMapper();
+    public function createInitPaydirektMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createOrderIdealMapper();
+    public function createInitIdealMapper();
+    
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createInitEasyCreditMapper();
 }
