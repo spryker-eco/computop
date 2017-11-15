@@ -23,7 +23,7 @@ class CallbackController extends AbstractController
 
     const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
 
-    const MESSAGE_ERROR = 'Error: %s ( %s )';
+    const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
 
     /**
      * @var array
@@ -165,7 +165,7 @@ class CallbackController extends AbstractController
     {
         $errorText = $responseHeaderTransfer->getDescription();
         $errorCode = $responseHeaderTransfer->getCode();
-        $errorMessageText = sprintf(static::MESSAGE_ERROR, $errorText, $errorCode);
+        $errorMessageText = sprintf(static::MESSAGE_RESPONSE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
     }
