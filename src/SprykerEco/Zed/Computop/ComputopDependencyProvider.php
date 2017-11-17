@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
+use SprykerEco\Zed\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Zed\Computop\Dependency\ComputopToStoreBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
@@ -24,6 +25,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     const FACADE_CALCULATION = 'FACADE_CALCULATION';
     const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
     const STORE = 'STORE';
+    const CLIENT_QUOTE = 'CLIENT_QUOTE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -72,6 +74,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::FACADE_FLASH_MESSENGER] = function (Container $container) {
             return new ComputopToMessengerFacadeBridge($container->getLocator()->messenger()->facade());
+        };
+
+        $container[self::CLIENT_QUOTE] = function () use ($container) {
+            return new ComputopToQuoteClientBridge($container->getLocator()->quote()->client());
         };
 
         return $container;
