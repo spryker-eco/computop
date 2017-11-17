@@ -116,6 +116,14 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return string
+     */
+    public function getEasyCreditStatusUrl()
+    {
+        return $this->get(ComputopConstants::EASY_CREDIT_STATUS_ACTION);
+    }
+
+    /**
      * @return bool
      */
     public function isRefundShipmentPriceEnabled()

@@ -9,20 +9,23 @@ namespace SprykerEco\Zed\Computop\Business\Api;
 
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\EasyCredit\EasyCreditStatusApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\EasyCredit\EasyCreditStatusConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactory;
-use SprykerEco\Zed\Computop\Business\Api\Request\AuthorizationRequest;
-use SprykerEco\Zed\Computop\Business\Api\Request\CaptureRequest;
-use SprykerEco\Zed\Computop\Business\Api\Request\InquireRequest;
-use SprykerEco\Zed\Computop\Business\Api\Request\RefundRequest;
-use SprykerEco\Zed\Computop\Business\Api\Request\ReverseRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\AuthorizationRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\CaptureRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\InquireRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\RefundRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\ReverseRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\EasyCreditStatusRequest;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 
 /**
@@ -40,7 +43,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createAuthorizationPaymentRequest()
     {
@@ -56,7 +59,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createInquirePaymentRequest()
     {
@@ -74,7 +77,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createReversePaymentRequest()
     {
@@ -92,7 +95,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createCapturePaymentRequest()
     {
@@ -112,7 +115,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createRefundPaymentRequest()
     {
@@ -128,6 +131,20 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundEasyCreditMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundIdealMapper());
+
+        return $paymentRequest;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface
+     */
+    public function createEasyCreditStatusRequest()
+    {
+        $paymentRequest = new EasyCreditStatusRequest(
+            $this->createEasyCreditStatusAdapter(),
+            $this->createApiFactory()->createEasyCreditConverter(),
+            $this->createMapperFactory()->createStatusEasyCreditMapper()
+        );
 
         return $paymentRequest;
     }
@@ -173,6 +190,14 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     */
+    public function createEasyCreditConverter()
+    {
+        return new EasyCreditStatusConverter($this->getComputopService(), $this->getConfig());
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
     protected function createAuthorizeAdapter()
@@ -210,5 +235,13 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     protected function createRefundAdapter()
     {
         return new RefundApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createEasyCreditStatusAdapter()
+    {
+        return new EasyCreditStatusApiAdapter($this->getConfig());
     }
 }

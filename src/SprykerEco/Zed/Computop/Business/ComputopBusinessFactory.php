@@ -23,12 +23,13 @@ use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager;
 use SprykerEco\Zed\Computop\Business\Oms\Command\RefundCommandHandler;
 use SprykerEco\Zed\Computop\Business\Order\ComputopBusinessOrderFactory;
 use SprykerEco\Zed\Computop\Business\Order\OrderManager;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\AuthorizeHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\CaptureHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\InquireHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogger;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\RefundHandler;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\ReverseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\AuthorizeHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\CaptureHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\InquireHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\RefundHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\ReverseHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\EasyCreditStatusHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\AuthorizeSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\CaptureSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\IdealResponseSaver;
@@ -163,7 +164,18 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface
+     */
+    public function createEasyCreditStatusHandler()
+    {
+        return new EasyCreditStatusHandler(
+            $this->createEasyCreditStatusRequest()
+            //            $this->getQuoteClient()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     protected function createAuthorizationPaymentRequest()
     {
@@ -171,7 +183,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     protected function createInquirePaymentRequest()
     {
@@ -179,7 +191,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     protected function createReversePaymentRequest()
     {
@@ -187,7 +199,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     protected function createCapturePaymentRequest()
     {
@@ -195,11 +207,19 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     protected function createRefundPaymentRequest()
     {
         return $this->createApiFactory()->createRefundPaymentRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface
+     */
+    protected function createEasyCreditStatusRequest()
+    {
+        return $this->createApiFactory()->createEasyCreditStatusRequest();
     }
 
     /**
@@ -211,7 +231,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected function createAuthorizeHandler()
     {
@@ -222,7 +242,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected function createReverseHandler()
     {
@@ -233,7 +253,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected function createInquireHandler()
     {
@@ -244,7 +264,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected function createCaptureHandler()
     {
@@ -255,7 +275,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected function createRefundHandler()
     {
@@ -411,5 +431,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getFlashMessengerFacade()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_FLASH_MESSENGER);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Client\ComputopToQuoteClientInterface
+     */
+    protected function getQuoteClient()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
     }
 }

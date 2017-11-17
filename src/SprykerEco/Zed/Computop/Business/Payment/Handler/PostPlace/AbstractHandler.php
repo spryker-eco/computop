@@ -5,15 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Payment\Handler;
+namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace;
 
-use SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface;
+use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface;
 
 abstract class AbstractHandler implements HandlerInterface
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @var \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     protected $request;
 
@@ -23,11 +23,11 @@ abstract class AbstractHandler implements HandlerInterface
     protected $saver;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface $request
+     * @param \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface $request
      * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface $saver
      */
     public function __construct(
-        RequestInterface $request,
+        PostPlaceRequestInterface $request,
         SaverInterface $saver
     ) {
         $this->request = $request;

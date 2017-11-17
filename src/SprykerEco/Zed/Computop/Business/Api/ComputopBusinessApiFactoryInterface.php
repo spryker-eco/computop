@@ -10,29 +10,34 @@ namespace SprykerEco\Zed\Computop\Business\Api;
 interface ComputopBusinessApiFactoryInterface
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createAuthorizationPaymentRequest();
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createInquirePaymentRequest();
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createReversePaymentRequest();
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createCapturePaymentRequest();
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RequestInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createRefundPaymentRequest();
+    
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface
+     */
+    public function createEasyCreditStatusRequest();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
@@ -58,4 +63,9 @@ interface ComputopBusinessApiFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     public function createRefundConverter();
+    
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     */
+    public function createEasyCreditConverter();
 }

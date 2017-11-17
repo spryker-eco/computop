@@ -200,4 +200,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
         return $quoteTransfer;
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * todo: add test
+     */
+    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this
+            ->getFactory()
+            ->createEasyCreditStatusHandler()
+            ->handle($quoteTransfer);
+    }
 }

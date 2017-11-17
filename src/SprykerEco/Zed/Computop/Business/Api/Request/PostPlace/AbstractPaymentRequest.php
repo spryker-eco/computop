@@ -5,18 +5,18 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Api\Request;
+namespace SprykerEco\Zed\Computop\Business\Api\Request\PostPlace;
 
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
-use SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotSetException;
 
-abstract class AbstractPaymentRequest
+abstract class AbstractPaymentRequest implements PostPlaceRequestInterface
 {
     /**
      * @var \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
@@ -66,11 +66,11 @@ abstract class AbstractPaymentRequest
     }
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface $paymentMethod
+     * @param \SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface $paymentMethod
      *
      * @return void
      */
-    public function registerMapper(ApiMapperInterface $paymentMethod)
+    public function registerMapper(ApiPostPlaceMapperInterface $paymentMethod)
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }

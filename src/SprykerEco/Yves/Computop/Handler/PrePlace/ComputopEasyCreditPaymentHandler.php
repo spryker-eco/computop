@@ -15,6 +15,21 @@ class ComputopEasyCreditPaymentHandler extends AbstractPrePlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param array $responseArray
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
+    {
+        $quoteTransfer = parent::handle($quoteTransfer, $responseArray);
+        $this->computopClient->easyCreditStatusApiCall($quoteTransfer);
+        //Todo: Add API call success/failure handling and saving to DB
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer

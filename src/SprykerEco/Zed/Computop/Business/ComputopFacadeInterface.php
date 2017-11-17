@@ -140,4 +140,16 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
+    
+    /**
+     * Specification:
+     * - Makes Easy Credit Status API call
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer);
 }
