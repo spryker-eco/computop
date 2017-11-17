@@ -39,4 +39,11 @@ interface ComputopStubInterface
      * @return void
      */
     public function savePaydirektInitResponse(QuoteTransfer $responseTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
 }
