@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+namespace SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\EasyCredit;
+
+use SprykerEco\Zed\Computop\Business\Api\Mapper\Traits\CaptureMapperTrait;
+
+class CaptureEasyCreditMapper extends AbstractEasyCreditMapper
+{
+    use CaptureMapperTrait;
+}

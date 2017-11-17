@@ -215,6 +215,18 @@
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
     </transfer>
 
+    <transfer name="ComputopEasyCreditStatus">
+        <property name="payId" type="string" />
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="refNr" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="mac" type="string" />
+        <property name="eventToken" type="string" />
+        <property name="easyCreditStatusResponse" type="ComputopEasyCreditStatusResponse"/>
+    </transfer>
+
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
         <property name="code" type="string" />
@@ -355,6 +367,16 @@
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
+        <property name="codeExt" type="string" />
+        <property name="ErrorText" type="string" />
+    </transfer>
+
+    <transfer name="ComputopEasyCreditStatusResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="Decision" type="string" />
+        <property name="Process" type="string" />
+        <property name="Financing" type="string" />
         <property name="codeExt" type="string" />
         <property name="ErrorText" type="string" />
     </transfer>
