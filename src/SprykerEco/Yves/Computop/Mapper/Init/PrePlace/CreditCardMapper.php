@@ -66,4 +66,33 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     {
         return $this->config->getCreditCardInitAction();
     }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     */
+    public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
+    {
+        $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
+
+        $decryptedValues = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopPaymentTransfer),
+            $this->config->getBlowfishPassword()
+        );
+
+        $length = $decryptedValues[ComputopApiConfig::LENGTH];
+        $data = $decryptedValues[ComputopApiConfig::DATA];
+
+        $computopPaymentTransfer->setUrl(
+            $this->getUrlToComputop(
+                $computopPaymentTransfer->getMerchantId(),
+                $data,
+                $length,
+                $this->getAbsoluteUrl($this->application->path($this->config->getCallbackFailureRedirectPath()))
+            )
+        );
+
+        return $computopPaymentTransfer;
+    }
 }

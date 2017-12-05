@@ -18,6 +18,7 @@
         <property name="mac" type="string" />
         <property name="urlSuccess" type="string" />
         <property name="urlFailure" type="string" />
+        <property name="urlBack" type="string" />
         <property name="response" type="string" />
         <property name="urlNotify" type="string" />
         <property name="userData" type="string" />
