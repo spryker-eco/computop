@@ -75,21 +75,16 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
      * @param string $merchantId
      * @param string $data
      * @param int $length
-     * @param string $urlBack
      *
      * @return string
      */
-    protected function getUrlToComputop($merchantId, $data, $length, $urlBack = '')
+    protected function getUrlToComputop($merchantId, $data, $length)
     {
         $queryData = [
             ComputopApiConfig::MERCHANT_ID => $merchantId,
             ComputopApiConfig::DATA => $data,
             ComputopApiConfig::LENGTH => $length,
         ];
-        
-        if ($urlBack !== '') {
-            $queryData[ComputopApiConfig::URL_BACK] = $urlBack;
-        }
 
         return $this->getActionUrl() . '?' . http_build_query($queryData);
     }

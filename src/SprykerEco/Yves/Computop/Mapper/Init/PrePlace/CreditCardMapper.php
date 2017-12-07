@@ -68,31 +68,23 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param string $merchantId
+     * @param string $data
+     * @param int $length
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return string
      */
-    public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
+    protected function getUrlToComputop($merchantId, $data, $length)
     {
-        $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
+        $queryData = [
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
+            ComputopApiConfig::DATA => $data,
+            ComputopApiConfig::LENGTH => $length,
+            ComputopApiConfig::URL_BACK => $this->getAbsoluteUrl(
+                    $this->application->path($this->config->getCallbackFailureRedirectPath())
+                )
+        ];
 
-        $decryptedValues = $this->computopService->getEncryptedArray(
-            $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
-        );
-
-        $length = $decryptedValues[ComputopApiConfig::LENGTH];
-        $data = $decryptedValues[ComputopApiConfig::DATA];
-
-        $computopPaymentTransfer->setUrl(
-            $this->getUrlToComputop(
-                $computopPaymentTransfer->getMerchantId(),
-                $data,
-                $length,
-                $this->getAbsoluteUrl($this->application->path($this->config->getCallbackFailureRedirectPath()))
-            )
-        );
-
-        return $computopPaymentTransfer;
+        return $this->getActionUrl() . '?' . http_build_query($queryData);
     }
 }
