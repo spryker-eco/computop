@@ -22,8 +22,13 @@ class ComputopEasyCreditPaymentHandler extends AbstractPrePlacePaymentHandler
     public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
     {
         $quoteTransfer = parent::handle($quoteTransfer, $responseArray);
+        $quoteTransfer->getPayment()->getComputopEasyCredit()->fromArray(
+            $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse()->getHeader()->toArray(),
+            true
+        );
+
         $this->computopClient->easyCreditStatusApiCall($quoteTransfer);
-        //Todo: Add API call success/failure handling and saving to DB
+        $this->computopClient->logResponse($quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader());
 
         return $quoteTransfer;
     }

@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Api;
 
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\EasyCredit\EasyCreditAuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\EasyCredit\EasyCreditStatusApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
@@ -53,6 +54,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         );
 
         $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeEasyCreditMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayPalMapper());
 
         return $paymentRequest;
@@ -145,6 +147,23 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
             $this->createApiFactory()->createEasyCreditConverter(),
             $this->createMapperFactory()->createStatusEasyCreditMapper()
         );
+
+        return $paymentRequest;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
+     */
+    public function createEasyCreditAuthorizeRequest()
+    {
+        $paymentRequest = new AuthorizationRequest(
+            $this->createEasyCreditAuthorizeAdapter(),
+            $this->createApiFactory()->createAuthorizeConverter()
+        );
+
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeEasyCreditMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayPalMapper());
 
         return $paymentRequest;
     }
@@ -243,5 +262,13 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     protected function createEasyCreditStatusAdapter()
     {
         return new EasyCreditStatusApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createEasyCreditAuthorizeAdapter()
+    {
+        return new EasyCreditAuthorizeApiAdapter($this->getConfig());
     }
 }

@@ -164,13 +164,35 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\CommandHandlerInterface
+     */
+    public function createEasyCreditAuthorizeCommandHandler()
+    {
+        return new AuthorizeCommandHandler(
+            $this->createEasyCreditAuthorizeHandler(),
+            $this->createAuthorizeManager()
+        );
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface
      */
     public function createEasyCreditStatusHandler()
     {
         return new EasyCreditStatusHandler(
-            $this->createEasyCreditStatusRequest()
-            //            $this->getQuoteClient()
+            $this->createEasyCreditStatusRequest(),
+            $this->getMoneyFacade()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
+     */
+    public function createEasyCreditAuthorizeHandler()
+    {
+        return new AuthorizeHandler(
+            $this->createEasyCreditAuthorizeRequest(),
+            $this->createAuthorizeSaver()
         );
     }
 
@@ -220,6 +242,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createEasyCreditStatusRequest()
     {
         return $this->createApiFactory()->createEasyCreditStatusRequest();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
+     */
+    protected function createEasyCreditAuthorizeRequest()
+    {
+        return $this->createApiFactory()->createEasyCreditAuthorizeRequest();
     }
 
     /**
@@ -434,10 +464,10 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Client\ComputopToQuoteClientInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface
      */
-    protected function getQuoteClient()
+    protected function getMoneyFacade()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_MONEY);
     }
 }

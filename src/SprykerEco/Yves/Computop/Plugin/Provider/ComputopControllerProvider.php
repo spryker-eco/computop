@@ -21,6 +21,7 @@ class ComputopControllerProvider extends YvesControllerProvider
     const SOFORT_SUCCESS = 'computop-sofort-success';
 
     const FAILURE_PATH_NAME = 'computop-failure';
+    const NOTIFY_PATH_NAME = 'computop-notify';
 
     /**
      * @var string
@@ -101,6 +102,14 @@ class ComputopControllerProvider extends YvesControllerProvider
             $this->moduleName,
             $this->callbackControllerName,
             'failure'
+        );
+
+        $this->createController(
+            '/computop/notify',
+            self::NOTIFY_PATH_NAME,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'notify'
         );
     }
 }

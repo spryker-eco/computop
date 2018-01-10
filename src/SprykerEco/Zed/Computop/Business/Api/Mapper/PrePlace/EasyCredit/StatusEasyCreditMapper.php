@@ -22,11 +22,13 @@ class StatusEasyCreditMapper extends AbstractPrePlaceMapper implements ApiPrePla
      */
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $dataSubArray[ComputopApiConfig::PAY_ID] = $computopPaymentTransfer->getPayId();
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::MAC] = $computopPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_GET;
 
         return $dataSubArray;
     }

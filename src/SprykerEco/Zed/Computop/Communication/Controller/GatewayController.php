@@ -59,10 +59,10 @@ class GatewayController extends AbstractGatewayController
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFacade()->easyCreditStatusApiCallAction($quoteTransfer);
+        return $this->getFacade()->easyCreditStatusApiCall($quoteTransfer);
     }
 }

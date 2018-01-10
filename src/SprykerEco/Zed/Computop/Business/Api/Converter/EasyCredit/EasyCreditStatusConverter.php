@@ -13,6 +13,8 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
 
 class EasyCreditStatusConverter extends AbstractConverter implements ConverterInterface
 {
+    const DECISION_INDEX = 'desicion';
+
     /**
      * @param array $decryptedArray
      *
@@ -24,8 +26,12 @@ class EasyCreditStatusConverter extends AbstractConverter implements ConverterIn
         $computopResponseTransfer->setHeader(
             $this->computopService->extractHeader($decryptedArray, $this->config->getReverseMethodName())
         );
-        //optional fields
-        //todo: extract JSON format
+        $computopResponseTransfer->fromArray($decryptedArray, true);
+
+        //easy credit index mistake will be fixed in future
+        if (isset($decryptedArray[static::DECISION_INDEX])) {
+            $computopResponseTransfer->setDecision($decryptedArray[static::DECISION_INDEX]);
+        }
 
         return $computopResponseTransfer;
     }

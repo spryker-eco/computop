@@ -107,6 +107,14 @@ class CallbackController extends AbstractController
             $this->responseArray
         );
 
+        if (!$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()) {
+            $this->addErrorMessage(
+                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
+            );
+
+            return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
+        }
+
         if (!$quoteTransfer->getCustomer()) {
             $this->addErrorMessage(static::MESSAGE_LOG_OUT_ERROR);
         }
@@ -141,6 +149,25 @@ class CallbackController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function failureAction()
+    {
+        $decryptedArray = $this
+            ->getFactory()
+            ->getComputopService()
+            ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+
+        $responseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
+            $decryptedArray,
+            ComputopConfig::INIT_METHOD
+        );
+        $this->addErrorMessage($this->getErrorMessageText($responseHeaderTransfer));
+
+        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function notifyAction()
     {
         $decryptedArray = $this
             ->getFactory()

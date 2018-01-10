@@ -24,6 +24,7 @@ $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygat
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
 $config[ComputopConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
+$config[ComputopConstants::EASY_CREDIT_AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
 
 $config[ComputopConstants::AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/authorize.aspx';
 $config[ComputopConstants::CAPTURE_ACTION] = 'https://www.computop-paygate.com/capture.aspx';

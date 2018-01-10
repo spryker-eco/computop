@@ -149,7 +149,20 @@ interface ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Handle Authorize OMS command, make request, save response.
+     *
+     * @api
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer);
+    public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 }

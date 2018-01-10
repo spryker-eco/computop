@@ -103,7 +103,12 @@ interface ComputopBusinessMapperFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface
      */
     public function createRefundPaydirektMapper();
-    
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface
+     */
+    public function createAuthorizeEasyCreditMapper();
+
     /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface
      */
