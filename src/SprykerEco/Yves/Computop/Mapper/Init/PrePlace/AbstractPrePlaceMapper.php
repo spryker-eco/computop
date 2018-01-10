@@ -44,6 +44,9 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
+        $computopPaymentTransfer->setUrlNotify(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
+        );
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );

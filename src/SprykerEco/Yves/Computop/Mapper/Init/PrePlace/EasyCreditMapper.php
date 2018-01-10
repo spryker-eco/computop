@@ -44,7 +44,9 @@ class EasyCreditMapper extends AbstractPrePlaceMapper
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
         $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_INIT;
 
         return $dataSubArray;
     }

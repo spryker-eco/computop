@@ -210,9 +210,12 @@
         <property name="userData" type="string" />
         <property name="clientIp" type="string" />
         <property name="data" type="string" />
+        <property name="date" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
+        <property name="easyCreditStatusResponse" type="ComputopEasyCreditStatusResponse"/>
+
     </transfer>
 
     <transfer name="ComputopEasyCreditStatus">

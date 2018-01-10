@@ -23,9 +23,7 @@ class InitEasyCreditConverter extends AbstractInitConverter
         $responseTransfer = new ComputopEasyCreditInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
-        //optional fields
-        //todo:add optional fields
-        
+
         return $responseTransfer;
     }
 }

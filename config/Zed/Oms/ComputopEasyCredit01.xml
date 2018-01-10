@@ -18,7 +18,7 @@
         </states>
 
         <events>
-            <event name="authorize" onEnter="true" command="Computop/Authorize"/>
+            <event name="authorize" onEnter="true" command="Computop/EasyCreditAuthorize"/>
             <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true" />
             <event name="refund" manual="true" command="Computop/Refund"/>

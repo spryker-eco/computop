@@ -10,9 +10,8 @@ namespace SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\EasyCredit;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
-class RefundEasyCreditMapper extends AbstractEasyCreditMapper
+class AuthorizeEasyCreditMapper extends AbstractEasyCreditMapper
 {
-    const DATE_TIME_FORMAT = 'YYYY-mm-dd';
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
@@ -22,9 +21,7 @@ class RefundEasyCreditMapper extends AbstractEasyCreditMapper
     {
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $dataSubArray = parent::getDataSubArray($computopPaymentTransfer);
-        $dataSubArray[ComputopApiConfig::DATE] = $computopPaymentTransfer->getDate();
-
-        $dataSubArray[ComputopApiConfig::REASON] = ComputopApiConfig::REASON_FULL_CANCELL;
+        $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_AUTHORIZE;
 
         return $dataSubArray;
     }

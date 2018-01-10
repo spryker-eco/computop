@@ -9,6 +9,7 @@ namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractService;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Service\Computop\Exception\ComputopConverterException;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 /**
@@ -112,10 +113,16 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      */
     public function getDecryptedArray(array $responseArray, $password)
     {
-        $this
-            ->getFactory()
-            ->createComputopConverter()
-            ->checkEncryptedResponse($responseArray);
+        try {
+            $this
+                ->getFactory()
+                ->createComputopConverter()
+                ->checkEncryptedResponse($responseArray);
+        } catch (ComputopConverterException $e) {
+            //TODO: remove this temporary unencrypted response when it is fixed on easyCredit api side
+
+            return $responseArray;
+        }
 
         $responseDecryptedString = $this->getBlowfishDecryptedValue(
             $responseArray[ComputopApiConfig::DATA],

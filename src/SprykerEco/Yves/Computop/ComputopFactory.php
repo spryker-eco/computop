@@ -231,7 +231,10 @@ class ComputopFactory extends AbstractFactory
      */
     public function createEasyCreditPaymentHandler()
     {
-        return new ComputopEasyCreditPaymentHandler($this->createInitEasyCreditConverter(), $this->getComputopClient());
+        return new ComputopEasyCreditPaymentHandler(
+            $this->createInitEasyCreditConverter(),
+            $this->getComputopClient()
+        );
     }
 
     /**
