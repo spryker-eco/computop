@@ -29,7 +29,9 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
-    "sort-packages": true
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "process-timeout": 600
   },
   "repositories": [
     {
@@ -39,7 +41,7 @@
   ],
   "extra": {
     "branch-alias": {
-      "dev-master": "*"
+      "dev-master": "1.0.x-dev"
     }
   },
   "require-dev": {

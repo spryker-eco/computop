@@ -90,7 +90,7 @@ function checkPHPStan {
 function checkWithLatestDemoShop {
     echo "Checking module with latest Demo Shop..."
     composer config repositories.ecomodule path "$TRAVIS_BUILD_DIR/$MODULE_DIR"
-    composer require "spryker-eco/$MODULE_NAME @dev"
+    composer require "spryker-eco/$MODULE_NAME @dev" -vvv
     result=$?
     if [ "$result" = 0 ]; then
         buildMessage="${buildMessage}\n${GREEN}$MODULE_NAME is compatible with the modules used in Demo Shop"
