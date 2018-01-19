@@ -90,7 +90,6 @@ function checkPHPStan {
 function checkWithLatestDemoShop {
     echo "Checking module with latest Demo Shop..."
     composer config repositories.ecomodule path "$TRAVIS_BUILD_DIR/$MODULE_DIR"
-    composer config repositories.ecomodule.packagist false
     composer config --list
     composer require "spryker-eco/$MODULE_NAME @dev"
     cat composer.json
