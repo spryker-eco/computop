@@ -91,6 +91,7 @@ function checkWithLatestDemoShop {
     echo "Checking module with latest Demo Shop..."
     composer config repositories.ecomodule path "$TRAVIS_BUILD_DIR/$MODULE_DIR"
     composer require "spryker-eco/$MODULE_NAME @dev"
+    ls -la "$TRAVIS_BUILD_DIR/$MODULE_DIR"
     cat composer.json
     result=$?
     if [ "$result" = 0 ]; then
