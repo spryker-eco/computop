@@ -29,22 +29,14 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
-    "preferred-install": "dist",
     "sort-packages": true,
-    "process-timeout": 600
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://code.spryker.com/repo/private"
-    }
-  ],
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     }
   },
   "require-dev": {
-    "spryker/code-sniffer": "dev-master"
+    "spryker/code-sniffer": "*"
   }
 }
