@@ -107,7 +107,9 @@ class CallbackController extends AbstractController
             $this->responseArray
         );
 
-        if (!$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()) {
+        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
+            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
+        ) {
             $this->addErrorMessage(
                 $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
             );
