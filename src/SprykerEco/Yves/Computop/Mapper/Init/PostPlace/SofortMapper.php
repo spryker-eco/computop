@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 class SofortMapper extends AbstractPostPlaceMapper
@@ -23,7 +23,7 @@ class SofortMapper extends AbstractPostPlaceMapper
     {
         $computopPaymentTransfer = new ComputopSofortPaymentTransfer();
 
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(ComputopConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))

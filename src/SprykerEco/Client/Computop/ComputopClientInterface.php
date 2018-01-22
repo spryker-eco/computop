@@ -17,7 +17,7 @@ interface ComputopClientInterface
 {
     /**
      * Specification:
-     * - Save response log to DB
+     * - Saves response log to DB
      *
      * @api
      *
@@ -29,7 +29,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Save Sofort response to DB
+     * - Saves Sofort response to DB
      *
      * @api
      *
@@ -41,7 +41,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Save Ideal response to DB
+     * - Saves Ideal response to DB
      *
      * @api
      *
@@ -53,7 +53,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Save Paydirekt response to DB
+     * - Saves Paydirekt response to DB
      *
      * @api
      *
@@ -62,4 +62,16 @@ interface ComputopClientInterface
      * @return void
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
+    
+    /**
+     * Specification:
+     * - Makes Easy Credit Status API call
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
 }

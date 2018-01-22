@@ -13,12 +13,15 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 class ComputopControllerProvider extends YvesControllerProvider
 {
     const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
-    const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
     const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
-    const SOFORT_SUCCESS = 'computop-sofort-success';
-    const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+    const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
     const IDEAL_SUCCESS = 'computop-ideal-success';
+    const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+    const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
+    const SOFORT_SUCCESS = 'computop-sofort-success';
+
     const FAILURE_PATH_NAME = 'computop-failure';
+    const NOTIFY_PATH_NAME = 'computop-notify';
 
     /**
      * @var string
@@ -46,14 +49,6 @@ class ComputopControllerProvider extends YvesControllerProvider
         );
 
         $this->createController(
-            '/computop/pay-pal-success',
-            self::PAY_PAL_SUCCESS,
-            $this->moduleName,
-            $this->callbackControllerName,
-            'successPayPal'
-        );
-
-        $this->createController(
             '/computop/direct-debit-success',
             self::DIRECT_DEBIT_SUCCESS,
             $this->moduleName,
@@ -62,19 +57,11 @@ class ComputopControllerProvider extends YvesControllerProvider
         );
 
         $this->createController(
-            '/computop/sofort-success',
-            self::SOFORT_SUCCESS,
+            '/computop/easy-credit-success',
+            self::EASY_CREDIT_SUCCESS,
             $this->moduleName,
             $this->callbackControllerName,
-            'successSofort'
-        );
-
-        $this->createController(
-            '/computop/paydirekt-success',
-            self::PAYDIREKT_SUCCESS,
-            $this->moduleName,
-            $this->callbackControllerName,
-            'successPaydirekt'
+            'successEasyCredit'
         );
 
         $this->createController(
@@ -86,11 +73,43 @@ class ComputopControllerProvider extends YvesControllerProvider
         );
 
         $this->createController(
+            '/computop/paydirekt-success',
+            self::PAYDIREKT_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'successPaydirekt'
+        );
+
+        $this->createController(
+            '/computop/pay-pal-success',
+            self::PAY_PAL_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'successPayPal'
+        );
+
+        $this->createController(
+            '/computop/sofort-success',
+            self::SOFORT_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'successSofort'
+        );
+
+        $this->createController(
             '/computop/failure',
             self::FAILURE_PATH_NAME,
             $this->moduleName,
             $this->callbackControllerName,
             'failure'
+        );
+
+        $this->createController(
+            '/computop/notify',
+            self::NOTIFY_PATH_NAME,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'notify'
         );
     }
 }

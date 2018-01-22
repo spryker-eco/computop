@@ -200,4 +200,42 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 
         return $quoteTransfer;
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
+    {
+        $this
+            ->getFactory()
+            ->createEasyCreditStatusHandler()
+            ->handle($quoteTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
+    {
+        return $this
+            ->getFactory()
+            ->createEasyCreditAuthorizeCommandHandler()
+            ->handle($orderItems, $orderTransfer);
+    }
 }

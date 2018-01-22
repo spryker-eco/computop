@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\Computop\Model;
 
-use Spryker\Service\Kernel\AbstractBundleConfig;
+use SprykerEco\Service\Computop\ComputopConfigInterface;
 
 abstract class AbstractComputop
 {
@@ -21,9 +21,9 @@ abstract class AbstractComputop
     protected $config;
 
     /**
-     * @param \Spryker\Service\Kernel\AbstractBundleConfig $config
+     * @param \SprykerEco\Service\Computop\ComputopConfigInterface $config
      */
-    public function __construct(AbstractBundleConfig $config)
+    public function __construct(ComputopConfigInterface $config)
     {
         $this->config = $config;
     }

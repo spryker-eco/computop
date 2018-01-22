@@ -21,6 +21,7 @@ interface ComputopApiConfig
     const URL_SUCCESS = 'URLSuccess';
     const URL_FAILURE = 'URLFailure';
     const URL_BACK = 'URLBack';
+    const URL_NOTIFY = 'URLNotify';
     const CAPTURE = 'Capture';
     const RESPONSE = 'Response';
     const MAC = 'MAC';
@@ -111,4 +112,14 @@ interface ComputopApiConfig
     const AGE_ACCEPTED = 'AgeAccepted';
     const PAYMENT_PURPOSE = 'paymentPurpose';
     const PAYMENT_GUARANTEE = 'paymentGuarantee';
+    const EVENT_TOKEN = 'EventToken';
+    const EVENT_TOKEN_INIT = 'INT';
+    const EVENT_TOKEN_GET = 'GET';
+    const EVENT_TOKEN_AUTHORIZE = 'CON';
+    const DATE = 'Date';
+    const REASON = 'Reason';
+    const REASON_FULL_CANCELL = 'WIDERRUF_VOLLSTAENDIG';
+    const REASON_PART_CANCELL = 'WIDERRUF_TEILWEISE';
+    const REASON_FULL_CANCELL_GUARANTEE = 'RUECKGABE_GARANTIE_GEWAEHRLEISTUNG';
+    const REASON_PART_CANCELL_GUARANTEE = 'MINDERUNG_GARANTIE_GEWAEHRLEISTUNG';
 }

@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 use DateTime;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -27,6 +28,7 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
     {
         $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
+        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
         $computopPaymentTransfer->setUrlSuccess(

@@ -17,9 +17,9 @@ class InitDirectDebitConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *
-     * @return \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
+    protected function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
     {
         $responseTransfer = new ComputopDirectDebitInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);

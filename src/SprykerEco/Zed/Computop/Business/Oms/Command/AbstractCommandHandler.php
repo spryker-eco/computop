@@ -10,12 +10,12 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface;
 
 abstract class AbstractCommandHandler implements CommandHandlerInterface
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected $handler;
 
@@ -25,7 +25,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     protected $manager;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\HandlerInterface $handler
+     * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface $handler
      * @param \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface $manager
      */
     public function __construct(

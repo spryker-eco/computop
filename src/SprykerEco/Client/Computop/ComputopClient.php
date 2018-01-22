@@ -71,4 +71,18 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     {
          $this->getFactory()->createZedStub()->savePaydirektInitResponse($quoteTransfer);
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
+    {
+         $this->getFactory()->createZedStub()->easyCreditStatusApiCall($quoteTransfer);
+    }
 }

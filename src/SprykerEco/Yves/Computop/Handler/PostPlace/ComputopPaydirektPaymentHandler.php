@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
-class ComputopPaydirektPaymentHandler implements ComputopPaymentHandlerInterface
+class ComputopPaydirektPaymentHandler extends AbstractPostPlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -20,7 +20,7 @@ class ComputopPaydirektPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
+    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
@@ -37,5 +37,15 @@ class ComputopPaydirektPaymentHandler implements ComputopPaymentHandlerInterface
         );
 
         return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->computopClient->savePaydirektInitResponse($quoteTransfer);
     }
 }

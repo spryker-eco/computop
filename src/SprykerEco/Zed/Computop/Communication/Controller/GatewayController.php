@@ -55,4 +55,14 @@ class GatewayController extends AbstractGatewayController
     {
         return $this->getFacade()->savePaydirektInitResponse($quoteTransfer);
     }
+    
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->easyCreditStatusApiCall($quoteTransfer);
+    }
 }

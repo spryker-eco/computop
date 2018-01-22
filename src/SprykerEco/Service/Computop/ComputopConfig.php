@@ -10,7 +10,7 @@ namespace SprykerEco\Service\Computop;
 use Spryker\Service\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class ComputopConfig extends AbstractBundleConfig
+class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
     /**
      * Test mode enabled
