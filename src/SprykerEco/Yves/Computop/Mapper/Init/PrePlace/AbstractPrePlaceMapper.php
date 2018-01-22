@@ -61,7 +61,13 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+        $computopPaymentTransfer->setUrl(
+            $this->getUrlToComputop(
+                $computopPaymentTransfer->getMerchantId(),
+                $data,
+                $length
+            )
+        );
 
         return $computopPaymentTransfer;
     }
@@ -75,10 +81,12 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
      */
     protected function getUrlToComputop($merchantId, $data, $length)
     {
-        return $this->getActionUrl() . '?' . http_build_query([
-                ComputopApiConfig::MERCHANT_ID => $merchantId,
-                ComputopApiConfig::DATA => $data,
-                ComputopApiConfig::LENGTH => $length,
-            ]);
+        $queryData = [
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
+            ComputopApiConfig::DATA => $data,
+            ComputopApiConfig::LENGTH => $length,
+        ];
+
+        return $this->getActionUrl() . '?' . http_build_query($queryData);
     }
 }

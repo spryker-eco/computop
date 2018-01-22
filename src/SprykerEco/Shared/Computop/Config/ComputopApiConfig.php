@@ -20,6 +20,7 @@ interface ComputopApiConfig
     const CURRENCY = 'Currency';
     const URL_SUCCESS = 'URLSuccess';
     const URL_FAILURE = 'URLFailure';
+    const URL_BACK = 'URLBack';
     const URL_NOTIFY = 'URLNotify';
     const CAPTURE = 'Capture';
     const RESPONSE = 'Response';

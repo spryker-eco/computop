@@ -68,4 +68,25 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     {
         return $this->config->getCreditCardInitAction();
     }
+
+    /**
+     * @param string $merchantId
+     * @param string $data
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function getUrlToComputop($merchantId, $data, $length)
+    {
+        $queryData = [
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
+            ComputopApiConfig::DATA => $data,
+            ComputopApiConfig::LENGTH => $length,
+            ComputopApiConfig::URL_BACK => $this->getAbsoluteUrl(
+                    $this->application->path($this->config->getCallbackFailureRedirectPath())
+                )
+        ];
+
+        return $this->getActionUrl() . '?' . http_build_query($queryData);
+    }
 }
