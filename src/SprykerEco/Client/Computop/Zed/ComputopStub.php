@@ -56,10 +56,10 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/easy-credit-status-api-call', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/easy-credit-status-api-call', $quoteTransfer);
     }
 }

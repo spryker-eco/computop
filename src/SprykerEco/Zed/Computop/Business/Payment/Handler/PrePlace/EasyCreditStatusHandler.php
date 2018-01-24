@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface;
 
 class EasyCreditStatusHandler extends AbstractHandler
@@ -19,15 +20,23 @@ class EasyCreditStatusHandler extends AbstractHandler
     protected $moneyFacade;
 
     /**
+     * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface $request
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface $moneyFacade
+     * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface $logger
      */
     public function __construct(
         PrePlaceRequestInterface $request,
-        ComputopToMoneyFacadeInterface $moneyFacade
+        ComputopToMoneyFacadeInterface $moneyFacade,
+        ComputopResponseLoggerInterface $logger
     ) {
         parent::__construct($request);
         $this->moneyFacade = $moneyFacade;
+        $this->logger = $logger;
     }
 
     /**
@@ -52,6 +61,7 @@ class EasyCreditStatusHandler extends AbstractHandler
             $quoteTransfer->getPayment()->setAmount($paymentAmount);
             $quoteTransfer->getPayment()->getComputopEasyCredit()->setAmount($paymentAmount);
         }
+        $this->logger->log($responseTransfer->getHeader(), $responseTransfer->getHeader()->getMethod());
 
         return $responseTransfer;
     }

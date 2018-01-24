@@ -79,10 +79,10 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->easyCreditStatusApiCall($quoteTransfer);
+         return $this->getFactory()->createZedStub()->easyCreditStatusApiCall($quoteTransfer);
     }
 }
