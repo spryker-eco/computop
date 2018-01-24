@@ -28,7 +28,6 @@ class ComputopEasyCreditPaymentHandler extends AbstractPrePlacePaymentHandler
         );
 
         $quoteTransfer = $this->computopClient->easyCreditStatusApiCall($quoteTransfer);
-        //$this->computopClient->logResponse($quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader());
 
         return $quoteTransfer;
     }
