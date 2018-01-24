@@ -30,6 +30,7 @@ class InitSofortMapper extends AbstractMapper
      */
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
@@ -58,7 +59,7 @@ class InitSofortMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $cardPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();

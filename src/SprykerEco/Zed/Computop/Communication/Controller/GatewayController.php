@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
- * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  */
 class GatewayController extends AbstractGatewayController
 {
@@ -54,5 +54,15 @@ class GatewayController extends AbstractGatewayController
     public function savePaydirektInitResponseAction(QuoteTransfer $quoteTransfer)
     {
         return $this->getFacade()->savePaydirektInitResponse($quoteTransfer);
+    }
+    
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->easyCreditStatusApiCall($quoteTransfer);
     }
 }

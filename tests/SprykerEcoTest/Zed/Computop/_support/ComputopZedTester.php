@@ -50,5 +50,6 @@ class ComputopZedTester extends Actor
         $this->setConfig('COMPUTOP:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
         $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
         $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['computopSofort', 'computopPaydirekt', 'computopIdeal']);
+        $this->setConfig('COMPUTOP:SOFORT_INIT_ACTION', 'https://www.computop-paygate.com/sofort.aspx');
     }
 }

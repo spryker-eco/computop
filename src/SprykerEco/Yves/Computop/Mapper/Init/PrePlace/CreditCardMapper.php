@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -24,6 +25,7 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
+        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(
@@ -65,5 +67,26 @@ class CreditCardMapper extends AbstractPrePlaceMapper
     protected function getActionUrl()
     {
         return $this->config->getCreditCardInitAction();
+    }
+
+    /**
+     * @param string $merchantId
+     * @param string $data
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function getUrlToComputop($merchantId, $data, $length)
+    {
+        $queryData = [
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
+            ComputopApiConfig::DATA => $data,
+            ComputopApiConfig::LENGTH => $length,
+            ComputopApiConfig::URL_BACK => $this->getAbsoluteUrl(
+                    $this->application->path($this->config->getCallbackFailureRedirectPath())
+                )
+        ];
+
+        return $this->getActionUrl() . '?' . http_build_query($queryData);
     }
 }

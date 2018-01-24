@@ -13,7 +13,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPluginInterface;
 
 /**
- * @method \SprykerEco\Zed\Computop\Business\ComputopFacade getFacade()
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
 class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutPluginInterface

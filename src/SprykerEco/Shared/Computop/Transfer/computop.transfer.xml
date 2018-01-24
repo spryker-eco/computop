@@ -18,6 +18,7 @@
         <property name="mac" type="string" />
         <property name="urlSuccess" type="string" />
         <property name="urlFailure" type="string" />
+        <property name="urlBack" type="string" />
         <property name="response" type="string" />
         <property name="urlNotify" type="string" />
         <property name="userData" type="string" />
@@ -193,6 +194,43 @@
         <property name="idealInitResponse" type="ComputopIdealInitResponse"/>
     </transfer>
 
+    <transfer name="ComputopEasyCreditPayment">
+        <property name="payId" type="string" />
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="refNr" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="mac" type="string" />
+        <property name="term" type="string" />
+        <property name="eventToken" type="string" />
+        <property name="urlSuccess" type="string" />
+        <property name="urlFailure" type="string" />
+        <property name="urlNotify" type="string" />
+        <property name="response" type="string" />
+        <property name="userData" type="string" />
+        <property name="clientIp" type="string" />
+        <property name="data" type="string" />
+        <property name="date" type="string" />
+        <property name="len" type="int" />
+        <property name="url" type="string" />
+        <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
+        <property name="easyCreditStatusResponse" type="ComputopEasyCreditStatusResponse"/>
+
+    </transfer>
+
+    <transfer name="ComputopEasyCreditStatus">
+        <property name="payId" type="string" />
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="refNr" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="mac" type="string" />
+        <property name="eventToken" type="string" />
+        <property name="easyCreditStatusResponse" type="ComputopEasyCreditStatusResponse"/>
+    </transfer>
+
     <transfer name="ComputopResponseHeader">
         <property name="status" type="string" />
         <property name="code" type="string" />
@@ -329,6 +367,24 @@
         <property name="custom" type="string" />
     </transfer>
 
+    <transfer name="ComputopEasyCreditInitResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="userData" type="string" />
+        <property name="codeExt" type="string" />
+        <property name="ErrorText" type="string" />
+    </transfer>
+
+    <transfer name="ComputopEasyCreditStatusResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="Decision" type="string" />
+        <property name="Process" type="string" />
+        <property name="Financing" type="string" />
+        <property name="codeExt" type="string" />
+        <property name="ErrorText" type="string" />
+    </transfer>
+
     <transfer name="ComputopAuthorizeResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
@@ -381,6 +437,7 @@
         <property name="computopSofort" type="ComputopSofortPayment" />
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
         <property name="computopIdeal" type="ComputopIdealPayment" />
+        <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
     </transfer>
 
     <transfer name="Order">
@@ -390,6 +447,7 @@
         <property name="computopSofort" type="ComputopSofortPayment" />
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
         <property name="computopIdeal" type="ComputopIdealPayment" />
+        <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
     </transfer>
 
 </transfers>

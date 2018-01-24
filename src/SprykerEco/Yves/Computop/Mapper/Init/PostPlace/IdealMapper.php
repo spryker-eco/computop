@@ -21,7 +21,7 @@ class IdealMapper extends AbstractPostPlaceMapper
     protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopIdealPaymentTransfer();
-
+        
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))

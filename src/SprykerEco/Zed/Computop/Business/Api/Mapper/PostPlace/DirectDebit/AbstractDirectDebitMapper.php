@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+namespace SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\DirectDebit;
+
+use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
+use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\AbstractPostPlaceMapper;
+
+abstract class AbstractDirectDebitMapper extends AbstractPostPlaceMapper
+{
+    /**
+     * @return string
+     */
+    public function getMethodName()
+    {
+        return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
+     */
+    protected function createPaymentTransfer(OrderTransfer $orderTransfer)
+    {
+        return new ComputopDirectDebitPaymentTransfer();
+    }
+}

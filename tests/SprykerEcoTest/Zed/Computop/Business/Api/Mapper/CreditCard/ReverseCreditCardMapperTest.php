@@ -7,7 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
-use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\ReverseCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\ReverseCreditCardMapper;
 
 /**
  * @group Unit
@@ -21,7 +21,7 @@ use SprykerEco\Zed\Computop\Business\Api\Mapper\CreditCard\ReverseCreditCardMapp
 class ReverseCreditCardMapperTest extends AbstractCreditCardMapperTest
 {
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface
      */
     protected function createMapper()
     {

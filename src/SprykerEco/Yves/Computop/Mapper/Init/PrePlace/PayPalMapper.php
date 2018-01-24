@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -25,7 +26,8 @@ class PayPalMapper extends AbstractPrePlaceMapper
     protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
-
+        
+        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(

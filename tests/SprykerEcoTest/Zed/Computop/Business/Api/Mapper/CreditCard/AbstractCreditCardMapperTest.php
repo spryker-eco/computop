@@ -15,7 +15,7 @@ abstract class AbstractCreditCardMapperTest extends Test
     /**
      * Return needed mapper
      *
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\ApiMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\ApiPostPlaceMapperInterface
      */
     abstract protected function createMapper();
 

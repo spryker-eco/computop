@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
@@ -40,11 +39,13 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
+        );
+        $computopPaymentTransfer->setUrlNotify(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
@@ -60,7 +61,13 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+        $computopPaymentTransfer->setUrl(
+            $this->getUrlToComputop(
+                $computopPaymentTransfer->getMerchantId(),
+                $data,
+                $length
+            )
+        );
 
         return $computopPaymentTransfer;
     }
@@ -74,10 +81,12 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
      */
     protected function getUrlToComputop($merchantId, $data, $length)
     {
-        return $this->getActionUrl() . '?' . http_build_query([
-                ComputopApiConfig::MERCHANT_ID => $merchantId,
-                ComputopApiConfig::DATA => $data,
-                ComputopApiConfig::LENGTH => $length,
-            ]);
+        $queryData = [
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
+            ComputopApiConfig::DATA => $data,
+            ComputopApiConfig::LENGTH => $length,
+        ];
+
+        return $this->getActionUrl() . '?' . http_build_query($queryData);
     }
 }

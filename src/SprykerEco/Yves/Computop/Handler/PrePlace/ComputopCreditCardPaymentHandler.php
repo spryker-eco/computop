@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 
-class ComputopCreditCardPaymentHandler implements ComputopPaymentHandlerInterface
+class ComputopCreditCardPaymentHandler extends AbstractPrePlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -19,7 +19,7 @@ class ComputopCreditCardPaymentHandler implements ComputopPaymentHandlerInterfac
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
+    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment() !== null) {
             $quoteTransfer->getPayment()->getComputopCreditCard()->setCreditCardInitResponse(
