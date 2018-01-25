@@ -21,6 +21,7 @@ interface ComputopApiConfig
     const URL_SUCCESS = 'URLSuccess';
     const URL_FAILURE = 'URLFailure';
     const URL_BACK = 'URLBack';
+    const TEMPLATE = 'template';
     const URL_NOTIFY = 'URLNotify';
     const CAPTURE = 'Capture';
     const RESPONSE = 'Response';
