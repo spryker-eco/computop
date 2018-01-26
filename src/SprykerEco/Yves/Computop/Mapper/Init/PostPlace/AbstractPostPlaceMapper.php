@@ -28,6 +28,7 @@ abstract class AbstractPostPlaceMapper extends AbstractMapper
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
+        $computopPaymentTransfer->setReqId($this->generateReqId($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );

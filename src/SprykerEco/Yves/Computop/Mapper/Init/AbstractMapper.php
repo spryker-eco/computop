@@ -79,6 +79,20 @@ abstract class AbstractMapper implements MapperInterface
     }
 
     /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return string
+     */
+    protected function generateReqId(TransferInterface $quoteTransfer)
+    {
+        $parameters = [
+            $quoteTransfer->getTotals()->getHash(),
+            $quoteTransfer->getCustomer()->getCustomerReference()
+        ];
+        return md5(implode(self::TRANS_ID_SEPARATOR, $parameters));
+    }
+
+    /**
      * @param string $path
      *
      * @return string

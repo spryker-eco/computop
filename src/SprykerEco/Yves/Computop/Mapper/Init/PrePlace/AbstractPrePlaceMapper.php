@@ -50,6 +50,7 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
+        $computopPaymentTransfer->setReqId($this->generateReqId($quoteTransfer));
 
         $decryptedValues = $this->computopService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
