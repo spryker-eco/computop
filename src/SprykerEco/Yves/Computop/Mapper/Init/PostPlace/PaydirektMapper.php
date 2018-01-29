@@ -24,7 +24,7 @@ class PaydirektMapper extends AbstractPostPlaceMapper
         $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
         
         $computopPaymentTransfer->setCapture(ComputopConfig::CAPTURE_MANUAL_TYPE);
-        $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
+        $computopPaymentTransfer->setTransId(substr($this->generateTransId($quoteTransfer), 0, 20));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAYDIREKT_SUCCESS))
         );
