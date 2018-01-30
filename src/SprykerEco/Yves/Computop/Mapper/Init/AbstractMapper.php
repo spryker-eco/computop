@@ -87,7 +87,7 @@ abstract class AbstractMapper implements MapperInterface
     {
         $parameters = [
             $quoteTransfer->getTotals()->getHash(),
-            $quoteTransfer->getCustomer()->getCustomerReference()
+            $quoteTransfer->getCustomer()->getCustomerReference(),
         ];
         return md5(implode(self::TRANS_ID_SEPARATOR, $parameters));
     }
