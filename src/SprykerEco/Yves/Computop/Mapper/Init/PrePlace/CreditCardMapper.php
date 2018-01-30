@@ -57,7 +57,6 @@ class CreditCardMapper extends AbstractPrePlaceMapper
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = ComputopConfig::ETI_ID;
-        $dataSubArray[ComputopApiConfig::TEMPLATE] = $cardPaymentTransfer->getTemplate();
 
         return $dataSubArray;
     }
