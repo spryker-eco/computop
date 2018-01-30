@@ -84,8 +84,8 @@ class CreditCardMapper extends AbstractPrePlaceMapper
             ComputopApiConfig::DATA => $data,
             ComputopApiConfig::LENGTH => $length,
             ComputopApiConfig::URL_BACK => $this->getAbsoluteUrl(
-                    $this->application->path($this->config->getCallbackFailureRedirectPath())
-                )
+                $this->application->path($this->config->getCallbackFailureRedirectPath())
+            ),
         ];
 
         if ($this->config->getCreditCardTemplateEnabled()) {
