@@ -181,7 +181,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new EasyCreditStatusHandler(
             $this->createEasyCreditStatusRequest(),
-            $this->getMoneyFacade()
+            $this->getMoneyFacade(),
+            $this->createComputopResponseLogger()
         );
     }
 

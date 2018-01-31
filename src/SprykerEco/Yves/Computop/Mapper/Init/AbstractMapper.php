@@ -127,6 +127,17 @@ abstract class AbstractMapper implements MapperInterface
     }
 
     /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param int $limit
+     *
+     * @return string
+     */
+    protected function getLimitedTransId(TransferInterface $quoteTransfer, $limit)
+    {
+        return substr($this->generateTransId($quoteTransfer), 0, $limit);
+    }
+
+    /**
      * @param string $path
      *
      * @return string
