@@ -10,9 +10,10 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class PaydirektMapper extends AbstractPostPlaceMapper
+class PaydirektMapper extends AbstractMapper
 {
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
