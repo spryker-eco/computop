@@ -87,6 +87,10 @@ class CreditCardMapper extends AbstractPrePlaceMapper
             ),
         ];
 
+        if ($this->config->getCreditCardTemplateEnabled()) {
+            $queryData[ComputopApiConfig::TEMPLATE] = $merchantId;
+        }
+
         return $this->getActionUrl() . '?' . http_build_query($queryData);
     }
 }
