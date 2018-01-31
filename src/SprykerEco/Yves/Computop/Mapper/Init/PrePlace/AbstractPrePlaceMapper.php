@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
@@ -34,16 +33,8 @@ abstract class AbstractPrePlaceMapper extends AbstractMapper
      */
     public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
     {
-        $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
+        $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
-        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
-        $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
-        $computopPaymentTransfer->setClientIp($this->getClientIp());
-        $computopPaymentTransfer->setUrlFailure(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
-        );
         $computopPaymentTransfer->setUrlNotify(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );

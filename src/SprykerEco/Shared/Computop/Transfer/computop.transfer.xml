@@ -47,6 +47,7 @@
         <property name="amount" type="int" />
         <property name="currency" type="string" />
         <property name="capture" type="string" />
+        <property name="reqId" type="string" />
         <property name="txType" type="string" />
         <property name="orderDesc" type="string" />
         <property name="clientIp" type="string" />
@@ -119,6 +120,7 @@
         <property name="amount" type="int" />
         <property name="currency" type="string" />
         <property name="capture" type="string" />
+        <property name="reqId" type="string" />
         <property name="txType" type="string" />
         <property name="response" type="string" />
         <property name="orderDesc" type="string" />
@@ -199,6 +201,7 @@
         <property name="merchantId" type="string" />
         <property name="transId" type="string" />
         <property name="refNr" type="string" />
+        <property name="reqId" type="string" />
         <property name="amount" type="int" />
         <property name="currency" type="string" />
         <property name="mac" type="string" />
