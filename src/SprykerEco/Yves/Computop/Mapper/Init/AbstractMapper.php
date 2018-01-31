@@ -8,13 +8,13 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Silex\Application;
-use Spryker\Service\UtilText\UtilTextService;
 use Spryker\Service\UtilText\Model\Hash;
+use Spryker\Service\UtilText\UtilTextService;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
+use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\ComputopConfigInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractMapper implements MapperInterface
@@ -42,7 +42,7 @@ abstract class AbstractMapper implements MapperInterface
     protected $config;
 
     /**
-     * @var UtilTextService
+     * @var \Spryker\Service\UtilText\UtilTextService
      */
     protected $textService;
 

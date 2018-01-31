@@ -433,7 +433,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return UtilTextService
+     * @return \Spryker\Service\UtilText\UtilTextService
      */
     protected function createUtilTextService()
     {
