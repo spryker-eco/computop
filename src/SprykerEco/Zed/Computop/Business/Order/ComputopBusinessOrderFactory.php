@@ -11,10 +11,10 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\IdealMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\SofortMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\CreditCardMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\DirectDebitMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\EasyCreditMapper;
-use SprykerEco\Zed\Computop\Business\Order\Mapper\PrePlace\PayPalMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\CreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\DirectDebitMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\EasyCreditMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayPalMapper;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()

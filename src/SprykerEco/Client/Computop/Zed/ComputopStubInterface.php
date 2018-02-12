@@ -41,6 +41,34 @@ interface ComputopStubInterface
     public function savePaydirektInitResponse(QuoteTransfer $responseTransfer);
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function saveCreditCardInitResponse(QuoteTransfer $responseTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function savePayPalInitResponse(QuoteTransfer $responseTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $responseTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $responseTransfer);
+
+    /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer

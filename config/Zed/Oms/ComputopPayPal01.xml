@@ -19,7 +19,7 @@
         </states>
 
         <events>
-            <event name="authorize" onEnter="true" command="Computop/Authorize"/>
+            <event name="authorize" manual="true" command="Computop/Authorize"/>
             <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days" />
             <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true" />

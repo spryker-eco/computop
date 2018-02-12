@@ -79,6 +79,62 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @return void
+     */
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createZedStub()->saveCreditCardInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createZedStub()->savePayPalInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createZedStub()->saveDirectDebitInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createZedStub()->saveEasyCreditInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)

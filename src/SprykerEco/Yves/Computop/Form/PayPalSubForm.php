@@ -42,17 +42,6 @@ class PayPalSubForm extends AbstractSubForm
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return void
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $this->addLink($builder, $options);
-    }
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void

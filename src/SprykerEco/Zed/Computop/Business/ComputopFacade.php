@@ -192,6 +192,78 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createCreditCardResponseSaver()->handle(
+            $quoteTransfer
+        );
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createPayPalResponseSaver()->handle(
+            $quoteTransfer
+        );
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createDirectDebitResponseSaver()->handle(
+            $quoteTransfer
+        );
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        $this->getFactory()->createEasyCreditResponseSaver()->handle(
+            $quoteTransfer
+        );
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
         $this->getFactory()->createPaydirektResponseSaver()->handle(

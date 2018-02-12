@@ -43,7 +43,7 @@ class CallbackController extends AbstractController
      */
     public function successCreditCardAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createCreditCardPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createCreditCardPaymentHandler());
     }
 
     /**
@@ -51,7 +51,7 @@ class CallbackController extends AbstractController
      */
     public function successPayPalAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createPayPalPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createPayPalPaymentHandler());
     }
 
     /**
@@ -59,7 +59,7 @@ class CallbackController extends AbstractController
      */
     public function successDirectDebitAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createDirectDebitPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createDirectDebitPaymentHandler());
     }
 
     /**
@@ -67,7 +67,7 @@ class CallbackController extends AbstractController
      */
     public function successEasyCreditAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createEasyCreditPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createEasyCreditPaymentHandler());
     }
 
     /**
@@ -139,6 +139,16 @@ class CallbackController extends AbstractController
                 $quoteTransfer,
                 $this->responseArray
             );
+
+        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
+            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
+        ) {
+            $this->addErrorMessage(
+                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
+            );
+
+            return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
+        }
 
         if (!$quoteTransfer->getCustomer()) {
             $this->addSuccessMessage(static::MESSAGE_PAYMENT_SUCCESS);

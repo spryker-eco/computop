@@ -5,17 +5,55 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
+namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
+use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class CreditCardMapper extends AbstractPrePlaceMapper
+class CreditCardMapper extends AbstractMapper
 {
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
+    {
+        $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
+
+        $computopPaymentTransfer->setUrlNotify(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
+        );
+        $computopPaymentTransfer->setMac(
+            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
+        );
+
+        $decryptedValues = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopPaymentTransfer),
+            $this->config->getBlowfishPassword()
+        );
+
+        $length = $decryptedValues[ComputopApiConfig::LENGTH];
+        $data = $decryptedValues[ComputopApiConfig::DATA];
+
+        $computopPaymentTransfer->setData($data);
+        $computopPaymentTransfer->setLen($length);
+        $computopPaymentTransfer->setUrl(
+            $this->getUrlToComputop(
+                $computopPaymentTransfer->getMerchantId(),
+                $data,
+                $length
+            )
+        );
+
+        return $computopPaymentTransfer;
+    }
+
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

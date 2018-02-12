@@ -62,7 +62,55 @@ interface ComputopClientInterface
      * @return void
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
-    
+
+    /**
+     * Specification:
+     * - Saves CreditCard response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves PayPal response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves DirectDebit response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves EasyCredit response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return void
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
+
     /**
      * Specification:
      * - Makes Easy Credit Status API call

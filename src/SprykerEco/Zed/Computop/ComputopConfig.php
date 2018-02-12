@@ -140,16 +140,6 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $method
-     *
-     * @return bool
-     */
-    public function isNeededRedirectAfterPlaceOrder($method)
-    {
-        return in_array($method, $this->get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL));
-    }
-
-    /**
      * @return array
      */
     public function getBeforeCaptureStatuses()
