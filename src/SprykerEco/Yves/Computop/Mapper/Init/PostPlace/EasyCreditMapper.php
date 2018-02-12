@@ -7,11 +7,9 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
-use DateTime;
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 

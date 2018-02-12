@@ -30,22 +30,6 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testPostSaveHookExecuteWithoutRedirect()
-    {
-        $service = new ComputopFacade();
-        $service->setFactory($this->orderHelper->createFactory());
-        $checkoutResponse = $service->postSaveHookExecute(
-            $this->orderHelper->createQuoteTransfer(),
-            $this->createCheckoutResponse()
-        );
-
-        $this->assertNull($checkoutResponse->getIsExternalRedirect());
-        $this->assertNull($checkoutResponse->getRedirectUrl());
-    }
-
-    /**
-     * @return void
-     */
     public function testPostSaveHookExecuteWithRedirect()
     {
         $service = new ComputopFacade();

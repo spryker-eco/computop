@@ -31,20 +31,20 @@ use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopEasyCreditPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
-use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
-use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
-use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()

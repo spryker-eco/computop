@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitCreditCardMapper extends AbstractMapper
 {
