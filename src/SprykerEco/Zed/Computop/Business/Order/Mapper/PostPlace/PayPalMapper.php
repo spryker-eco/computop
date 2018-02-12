@@ -24,7 +24,7 @@ class PayPalMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {

@@ -42,7 +42,7 @@ class EasyCreditResponseSaver extends AbstractResponseSaver
         $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
 
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXid($responseTransfer->getHeader()->getXId());
+        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
         $paymentEntity->save();
 
         $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();

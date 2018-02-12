@@ -42,7 +42,7 @@ class IdealResponseSaver extends AbstractResponseSaver
         $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
 
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXid($responseTransfer->getHeader()->getXId());
+        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
         $paymentEntity->save();
 
         foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
@@ -60,7 +60,7 @@ class IdealResponseSaver extends AbstractResponseSaver
         $paymentEntityDetails->setPaymentPurpose($responseTransfer->getPaymentPurpose());
         $paymentEntityDetails->setPaymentGuarantee($responseTransfer->getPaymentGuarantee());
         $paymentEntityDetails->setErrorText($responseTransfer->getErrorText());
-        $paymentEntityDetails->setTransactionID($responseTransfer->getTransactionID());
+        $paymentEntityDetails->setTransactionId($responseTransfer->getTransactionID());
         $paymentEntityDetails->setPlain($responseTransfer->getPlain());
         $paymentEntityDetails->setCustom($responseTransfer->getCustom());
 

@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Silex\Application;
 use Spryker\Service\UtilText\Model\Hash;
-use Spryker\Service\UtilText\UtilTextService;
+use Spryker\Service\UtilText\UtilTextServiceInterface;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Yves\Computop\ComputopConfig;
@@ -58,14 +58,14 @@ abstract class AbstractMapper implements MapperInterface
      * @param \Silex\Application $application
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
-     * @param \Spryker\Service\UtilText\UtilTextService $textService
+     * @param \Spryker\Service\UtilText\UtilTextServiceInterface $textService
      */
     public function __construct(
         ComputopServiceInterface $computopService,
         Application $application,
         ComputopToStoreInterface $store,
         ComputopConfigInterface $config,
-        UtilTextService $textService
+        UtilTextServiceInterface $textService
     ) {
         $this->computopService = $computopService;
         $this->application = $application;

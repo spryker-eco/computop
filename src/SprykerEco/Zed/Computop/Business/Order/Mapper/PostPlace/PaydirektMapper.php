@@ -24,7 +24,7 @@ class PaydirektMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
