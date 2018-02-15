@@ -102,6 +102,86 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
+     * @return void
+     */
+    public function testSaveCreditCardInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->saveCreditCardInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testSavePayPalInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->savePayPalInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testSaveDirectDebitInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->saveDirectDebitInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testSaveEasyCreditInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->saveEasyCreditInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testEasyCreditStatusApiCall()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->easyCreditStatusApiCall($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function getQuoteTrasfer()
