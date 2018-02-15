@@ -7,10 +7,18 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
+use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
+use Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
@@ -211,6 +219,28 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopPaydirektInitTransfer->setHeader($computopHeader);
         $computopPaydirektTransfer = new ComputopPaydirektPaymentTransfer();
         $computopPaydirektTransfer->setPaydirektInitResponse($computopPaydirektInitTransfer);
+
+        $computopCredicCardInitTransfer = new ComputopCreditCardInitResponseTransfer();
+        $computopCredicCardInitTransfer->setHeader($computopHeader);
+        $computopCredicCardTransfer = new ComputopCreditCardPaymentTransfer();
+        $computopCredicCardTransfer->setCreditCardInitResponse($computopCredicCardInitTransfer);
+
+        $computopPayPalInitTransfer = new ComputopPayPalInitResponseTransfer();
+        $computopPayPalInitTransfer->setHeader($computopHeader);
+        $computopPayPalTransfer = new ComputopPayPalPaymentTransfer();
+        $computopPayPalTransfer->setPayPalInitResponse($computopPayPalInitTransfer);
+
+        $computopDirectDebitInitTransfer = new ComputopDirectDebitInitResponseTransfer();
+        $computopDirectDebitInitTransfer->setHeader($computopHeader);
+        $computopDirectDebitTransfer = new ComputopDirectDebitPaymentTransfer();
+        $computopDirectDebitTransfer->setDirectDebitInitResponse($computopDirectDebitInitTransfer);
+
+        $computopEasyCreditInitTransfer = new ComputopEasyCreditInitResponseTransfer();
+        $computopEasyCreditInitTransfer->setHeader($computopHeader);
+        $computopEasyCreditTransfer = new ComputopEasyCreditPaymentTransfer();
+        $computopEasyCreditTransfer->setEasyCreditInitResponse($computopEasyCreditInitTransfer);
+
+
 
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($computopSofortTransfer);
