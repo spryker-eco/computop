@@ -85,7 +85,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getPaypalInitAction()
+    public function getPaypalInitActionUrl()
     {
         return $this->get(ComputopConstants::PAYPAL_INIT_ACTION);
     }
@@ -93,7 +93,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getDirectDebitInitAction()
+    public function getDirectDebitInitActionUrl()
     {
         return $this->get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);
     }
@@ -101,7 +101,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getCreditCardInitAction()
+    public function getCreditCardInitActionUrl()
     {
         return $this->get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
     }
@@ -109,7 +109,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getEasyCreditInitAction()
+    public function getEasyCreditInitActionUrl()
     {
         return $this->get(ComputopConstants::EASY_CREDIT_INIT_ACTION);
     }

@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
-use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
@@ -22,11 +21,6 @@ class ComputopIdealPaymentHandler extends AbstractPostPlacePaymentHandler
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
-        if ($quoteTransfer->getPayment() === null) {
-            $paymentTransfer = new PaymentTransfer();
-            $quoteTransfer->setPayment($paymentTransfer);
-        }
-
         if ($quoteTransfer->getPayment()->getComputopIdeal() === null) {
             $computopTransfer = new ComputopIdealPaymentTransfer();
             $quoteTransfer->getPayment()->setComputopIdeal($computopTransfer);

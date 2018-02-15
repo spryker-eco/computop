@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Yves\Computop\Handler\AbstractPrePostPaymentHandler;
@@ -38,6 +39,10 @@ abstract class AbstractPostPlacePaymentHandler extends AbstractPrePostPaymentHan
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
+        if ($quoteTransfer->getPayment() === null) {
+            $paymentTransfer = new PaymentTransfer();
+            $quoteTransfer->setPayment($paymentTransfer);
+        }
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
 
         $this->computopClient->logResponse($responseTransfer->getHeader());

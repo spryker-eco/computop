@@ -20,53 +20,53 @@ interface ComputopStubInterface
     public function logResponse(ComputopResponseHeaderTransfer $responseTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function saveSofortInitResponse(QuoteTransfer $responseTransfer);
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function saveIdealInitResponse(QuoteTransfer $responseTransfer);
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function savePaydirektInitResponse(QuoteTransfer $responseTransfer);
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function saveCreditCardInitResponse(QuoteTransfer $responseTransfer);
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function savePayPalInitResponse(QuoteTransfer $responseTransfer);
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function saveDirectDebitInitResponse(QuoteTransfer $responseTransfer);
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    public function saveEasyCreditInitResponse(QuoteTransfer $responseTransfer);
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

@@ -23,7 +23,6 @@ class PayPalResponseSaver extends AbstractResponseSaver
 
         $this->handleDatabaseTransaction(function () use ($responseTransfer) {
             $this->saveComputopDetails($responseTransfer);
-            $this->triggerEvent($this->getPaymentEntity($responseTransfer->getHeader()->getTransId()));
         });
     }
 
@@ -38,7 +37,6 @@ class PayPalResponseSaver extends AbstractResponseSaver
             return;
         }
 
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
 
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
@@ -48,24 +46,20 @@ class PayPalResponseSaver extends AbstractResponseSaver
         $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
         $paymentEntityDetails->save();
-    }
 
-    /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity
-     *
-     * @return void
-     */
-    protected function triggerEvent($paymentEntity)
-    {
         $orderItems = $this
             ->queryContainer
             ->getSpySalesOrderItemsById($paymentEntity->getFkSalesOrder())
             ->find();
 
-        $this->omsFacade->triggerEvent(
-            $this->config->getOmsAuthorizeEventName(),
-            $orderItems,
-            []
-        );
+        foreach ($orderItems as $selectedItem) {
+            foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
+                if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
+                    continue;
+                }
+                $item->setStatus($this->config->getOmsStatusInitialized());
+                $item->save();
+            }
+        }
     }
 }

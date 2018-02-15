@@ -52,22 +52,22 @@ interface ComputopConfigInterface
     /**
      * @return string
      */
-    public function getPaypalInitAction();
+    public function getPaypalInitActionUrl();
 
     /**
      * @return string
      */
-    public function getDirectDebitInitAction();
+    public function getDirectDebitInitActionUrl();
 
     /**
      * @return string
      */
-    public function getCreditCardInitAction();
+    public function getCreditCardInitActionUrl();
     
     /**
      * @return string
      */
-    public function getEasyCreditInitAction();
+    public function getEasyCreditInitActionUrl();
 
     /**
      * @return string

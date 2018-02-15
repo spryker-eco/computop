@@ -8,7 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
@@ -18,12 +18,13 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 class CreditCardMapper extends AbstractMapper
 {
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
         $computopPaymentTransfer->setUrlNotify(
@@ -44,10 +45,9 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
         $computopPaymentTransfer->setUrl(
-            $this->getUrlToComputop(
-                $computopPaymentTransfer->getMerchantId(),
-                $data,
-                $length
+            $this->getActionUrl(
+                $this->config->getCreditCardInitActionUrl(),
+                $this->getQueryParameters($computopPaymentTransfer->getMerchantId(), $data, $length)
             )
         );
 
@@ -55,11 +55,11 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
@@ -77,13 +77,12 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -100,35 +99,20 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * @return string
-     */
-    protected function getActionUrl()
-    {
-        return $this->config->getCreditCardInitAction();
-    }
-
-    /**
      * @param string $merchantId
      * @param string $data
      * @param int $length
      *
-     * @return string
+     * @return array
      */
-    protected function getUrlToComputop($merchantId, $data, $length)
+    protected function getQueryParameters($merchantId, $data, $length)
     {
-        $queryData = [
-            ComputopApiConfig::MERCHANT_ID => $merchantId,
-            ComputopApiConfig::DATA => $data,
-            ComputopApiConfig::LENGTH => $length,
-            ComputopApiConfig::URL_BACK => $this->getAbsoluteUrl(
-                $this->application->path($this->config->getCallbackFailureRedirectPath())
-            ),
-        ];
+        $queryData = parent::getQueryParameters($merchantId, $data, $length);
 
         if ($this->config->getCreditCardTemplateEnabled()) {
             $queryData[ComputopApiConfig::TEMPLATE] = $merchantId;
         }
 
-        return $this->getActionUrl() . '?' . http_build_query($queryData);
+        return $queryData;
     }
 }

@@ -8,7 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
@@ -16,12 +16,13 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 class EasyCreditMapper extends AbstractMapper
 {
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    public function createComputopPaymentTransfer(TransferInterface $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
         $computopPaymentTransfer->setUrlNotify(
@@ -42,10 +43,9 @@ class EasyCreditMapper extends AbstractMapper
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
         $computopPaymentTransfer->setUrl(
-            $this->getUrlToComputop(
-                $computopPaymentTransfer->getMerchantId(),
-                $data,
-                $length
+            $this->getActionUrl(
+                $this->config->getEasyCreditInitActionUrl(),
+                $this->getQueryParameters($computopPaymentTransfer->getMerchantId(), $data, $length)
             )
         );
 
@@ -53,11 +53,11 @@ class EasyCreditMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopEasyCreditPaymentTransfer();
 
@@ -70,13 +70,12 @@ class EasyCreditMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $cardPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopEasyCreditPaymentTransfer $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -87,31 +86,5 @@ class EasyCreditMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_INIT;
 
         return $dataSubArray;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getActionUrl()
-    {
-        return $this->config->getEasyCreditInitAction();
-    }
-
-    /**
-     * @param string $merchantId
-     * @param string $data
-     * @param int $length
-     *
-     * @return string
-     */
-    protected function getUrlToComputop($merchantId, $data, $length)
-    {
-        $queryData = [
-            ComputopApiConfig::MERCHANT_ID => $merchantId,
-            ComputopApiConfig::DATA => $data,
-            ComputopApiConfig::LENGTH => $length,
-        ];
-
-        return $this->getActionUrl() . '?' . http_build_query($queryData);
     }
 }

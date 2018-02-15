@@ -99,38 +99,6 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function successPrePlaceAction(ComputopPrePostPaymentHandlerInterface $handler)
-    {
-        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer = $handler->handle(
-            $quoteTransfer,
-            $this->responseArray
-        );
-
-        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
-            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
-        ) {
-            $this->addErrorMessage(
-                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
-            );
-
-            return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
-        }
-
-        if (!$quoteTransfer->getCustomer()) {
-            $this->addErrorMessage(static::MESSAGE_LOG_OUT_ERROR);
-        }
-
-        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
-
-        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessOrderRedirectPath());
-    }
-
-    /**
-     * @param \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface $handler
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function successPostPlaceAction(ComputopPrePostPaymentHandlerInterface $handler)
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
