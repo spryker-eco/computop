@@ -181,12 +181,10 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $this->setUpDB();
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $service->easyCreditStatusApiCall($this->getQuoteTrasfer());
-
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
-
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        /** @var \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer $response */
+        $response = $service->easyCreditStatusApiCall($this->getQuoteTrasfer());
+        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
     }
 
     /**
@@ -239,8 +237,6 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditInitTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer = new ComputopEasyCreditPaymentTransfer();
         $computopEasyCreditTransfer->setEasyCreditInitResponse($computopEasyCreditInitTransfer);
-
-
 
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($computopSofortTransfer);

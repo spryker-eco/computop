@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
@@ -49,6 +50,7 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
     protected function createCheckoutResponse()
     {
         $checkoutResponse = new CheckoutResponseTransfer();
+        $checkoutResponse->setSaveOrder((new SaveOrderTransfer)->setOrderReference('DE--1'));
 
         return $checkoutResponse;
     }
