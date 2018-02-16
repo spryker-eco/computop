@@ -246,6 +246,10 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopSofort($computopSofortTransfer);
         $paymentTransfer->setComputopIdeal($computopIdealTransfer);
         $paymentTransfer->setComputopPaydirekt($computopPaydirektTransfer);
+        $paymentTransfer->setComputopCreditCard($computopCredicCardTransfer);
+        $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
+        $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
+        $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->setPayment($paymentTransfer);
