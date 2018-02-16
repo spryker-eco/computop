@@ -63,6 +63,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      */
     protected function setRedirect(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
+        $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
         $checkoutResponseTransfer
