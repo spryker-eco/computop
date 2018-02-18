@@ -243,6 +243,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditStatusTransfer = new ComputopEasyCreditStatusResponseTransfer();
         $computopEasyCreditStatusTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer->setEasyCreditStatusResponse($computopEasyCreditStatusTransfer);
+        $computopEasyCreditTransfer->fromArray($computopHeader->toArray(), true);
 
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($computopSofortTransfer);
