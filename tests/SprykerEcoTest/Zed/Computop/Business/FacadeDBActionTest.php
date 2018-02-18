@@ -298,11 +298,21 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\ComputopConfig
+     * @return \PHPUnit_Framework_MockObject_MockObject | \SprykerEco\Zed\Computop\ComputopConfig
      */
     protected function createConfig()
     {
-        return new ComputopConfig();
+        $builder = $this->getMockBuilder(ComputopConfig::class);
+        $builder->setMethods(
+            [
+                'getEasyCreditStatusUrl',
+            ]
+        );
+        $stub = $builder->getMock();
+        $stub->method('getEasyCreditStatusUrl')
+            ->willReturn('https://www.computop-paygate.com/easyCreditDirect.aspx');
+
+        return $stub;
     }
 
     /**
