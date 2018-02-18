@@ -55,6 +55,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
     const STATUS_VALUE = 'OK';
     const CODE_VALUE = '00000000';
     const DESCRIPTION_VALUE = 'DESCRIPTION_VALUE';
+    const AMOUNT_VALUE = 15000;
+    const CURRENCY_VALUE = 'EUR';
 
     const ID_SALES_ORDER_ITEM = 1;
 
@@ -244,6 +246,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditStatusTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer->setEasyCreditStatusResponse($computopEasyCreditStatusTransfer);
         $computopEasyCreditTransfer->fromArray($computopHeader->toArray(), true);
+        $computopEasyCreditTransfer->setAmount(self::AMOUNT_VALUE);
+        $computopEasyCreditTransfer->setCurrency(self::CURRENCY_VALUE);
 
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($computopSofortTransfer);
