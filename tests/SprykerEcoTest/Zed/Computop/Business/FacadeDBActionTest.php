@@ -33,6 +33,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
@@ -259,6 +260,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     protected function createFactory()
     {
         $omsFacadeStub = $this->createMock(ComputopToOmsFacadeBridge::class, ['triggerEvent' => '']);
+        $moneyFacadeStub = $this->createMock(ComputopToMoneyFacadeBridge::class, ['triggerEvent' => '']);
 
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(
@@ -266,6 +268,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getQueryContainer',
                 'getOmsFacade',
                 'getConfig',
+                'getMoneyFacade',
             ]
         );
 
@@ -278,6 +281,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         $stub->method('getConfig')
             ->willReturn($this->createConfig());
+        $stub->method('getMoneyFacade')
+            ->willReturn($moneyFacadeStub);
 
         return $stub;
     }
