@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
+use Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
@@ -238,6 +239,10 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditInitTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer = new ComputopEasyCreditPaymentTransfer();
         $computopEasyCreditTransfer->setEasyCreditInitResponse($computopEasyCreditInitTransfer);
+
+        $computopEasyCreditStatusTransfer = new ComputopEasyCreditStatusResponseTransfer();
+        $computopEasyCreditStatusTransfer->setHeader($computopHeader);
+        $computopEasyCreditTransfer->setEasyCreditStatusResponse($computopEasyCreditStatusTransfer);
 
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($computopSofortTransfer);
