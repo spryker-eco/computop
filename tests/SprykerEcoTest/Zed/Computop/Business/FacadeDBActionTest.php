@@ -358,14 +358,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
     protected function createStatusRequest()
     {
-        $builder = $this->getMockBuilder(EasyCreditStatusRequest::class);
-        $builder->setMethods(
-            [
-                'request',
-            ]
-        );
-
-        $stub = $builder->getMock();
+        $stub = $this->createMock(EasyCreditStatusRequest::class, ['triggerEvent' => '']);
         $stub->method('request')
             ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
 
