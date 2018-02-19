@@ -31,12 +31,14 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
+use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
+use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
  * @group Functional
@@ -64,6 +66,25 @@ class FacadeDBActionTest extends AbstractSetUpTest
      * @var integer
      */
     protected $salesOrderItemId;
+
+    /**
+     * @return void
+     *
+     * @throws \Codeception\Exception\ModuleException
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        /** @var \SprykerTest\Shared\Testify\Helper\ConfigHelper $configHelper */
+        $configHelper = $this->getModule('\\' . ConfigHelper::class);
+
+        $config[ComputopConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
+
+        foreach ($config as $key => $value) {
+            $configHelper->setConfig($key, $value);
+        }
+    }
 
     /**
      * @return void
@@ -298,21 +319,11 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject | \SprykerEco\Zed\Computop\ComputopConfig
+     * @return \SprykerEco\Zed\Computop\ComputopConfig
      */
     protected function createConfig()
     {
-        $builder = $this->getMockBuilder(ComputopConfig::class);
-        $builder->setMethods(
-            [
-                'getEasyCreditStatusUrl',
-            ]
-        );
-        $stub = $builder->getMock();
-        $stub->method('getEasyCreditStatusUrl')
-            ->willReturn('https://www.computop-paygate.com/easyCreditDirect.aspx');
-
-        return $stub;
+        return new ComputopConfig();
     }
 
     /**
