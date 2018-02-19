@@ -28,6 +28,11 @@ class InitEasyCreditConverter extends AbstractInitConverter
         return $responseTransfer;
     }
 
+    /**
+     * @param ComputopResponseHeaderTransfer $header
+     *
+     * @return ComputopResponseHeaderTransfer
+     */
     protected function updateResponseHeader(ComputopResponseHeaderTransfer $header)
     {
         if ($header->getStatus() === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
