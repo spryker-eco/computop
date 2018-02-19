@@ -70,8 +70,6 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
     /**
      * @return void
-     *
-     * @throws \Codeception\Exception\ModuleException
      */
     protected function setUp()
     {
@@ -207,8 +205,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $this->setUpDB();
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer $response */
-        $response = $service->easyCreditStatusApiCall($this->getQuoteTrasfer());
+        $quote = $service->easyCreditStatusApiCall($this->getQuoteTrasfer());
+        $response = $quote->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse();
         $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
         $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
     }
@@ -302,7 +300,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getOmsFacade',
                 'getConfig',
                 'getMoneyFacade',
-                'createEasyCreditStatusRequest'
+                'createEasyCreditStatusRequest',
             ]
         );
 
@@ -356,6 +354,9 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopOrderItem->save();
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createStatusRequest()
     {
         $stub = $this->createMock(EasyCreditStatusRequest::class, ['triggerEvent' => '']);
@@ -365,6 +366,9 @@ class FacadeDBActionTest extends AbstractSetUpTest
         return $stub;
     }
 
+    /**
+     * @return ComputopEasyCreditStatusResponseTransfer
+     */
     protected function createComputopEasyCreditStatusResponseTransfer()
     {
         return (new ComputopEasyCreditStatusResponseTransfer())
