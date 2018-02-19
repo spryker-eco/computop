@@ -32,6 +32,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\EasyCreditStatusRequest;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -292,6 +293,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     {
         $omsFacadeStub = $this->createMock(ComputopToOmsFacadeBridge::class, ['triggerEvent' => '']);
         $moneyFacadeStub = $this->createMock(ComputopToMoneyFacadeBridge::class, ['triggerEvent' => '']);
+        $handler = $this->createMock(ComputopToMoneyFacadeBridge::class, ['triggerEvent' => '']);
 
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(
@@ -300,20 +302,21 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getOmsFacade',
                 'getConfig',
                 'getMoneyFacade',
+                'createEasyCreditStatusRequest'
             ]
         );
 
         $stub = $builder->getMock();
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
-
         $stub->method('getOmsFacade')
             ->willReturn($omsFacadeStub);
-
         $stub->method('getConfig')
             ->willReturn($this->createConfig());
         $stub->method('getMoneyFacade')
             ->willReturn($moneyFacadeStub);
+        $stub->method('createEasyCreditStatusRequest')
+            ->willReturn($this->createStatusRequest());
 
         return $stub;
     }
@@ -351,5 +354,37 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->setFkSalesOrderItem($orderItemEntity->getIdSalesOrderItem())
             ->setStatus('test');
         $computopOrderItem->save();
+    }
+
+    protected function createStatusRequest()
+    {
+        $builder = $this->getMockBuilder(EasyCreditStatusRequest::class);
+        $builder->setMethods(
+            [
+                'request',
+            ]
+        );
+
+        $stub = $builder->getMock();
+        $stub->method('request')
+            ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
+
+        return $stub;
+    }
+
+    protected function createComputopEasyCreditStatusResponseTransfer()
+    {
+        return (new ComputopEasyCreditStatusResponseTransfer())
+            ->setHeader(
+                (new ComputopResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setMId(self::M_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setDescription(self::DESCRIPTION_VALUE)
+                    ->setIsSuccess(true)
+                    ->setStatus(self::STATUS_VALUE)
+            );
     }
 }
