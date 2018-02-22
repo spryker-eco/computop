@@ -367,7 +367,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
-     * @return ComputopEasyCreditStatusResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer
      */
     protected function createComputopEasyCreditStatusResponseTransfer()
     {

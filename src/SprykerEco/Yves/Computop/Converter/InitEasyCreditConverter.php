@@ -29,9 +29,9 @@ class InitEasyCreditConverter extends AbstractInitConverter
     }
 
     /**
-     * @param ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
      *
-     * @return ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
      */
     protected function updateResponseHeader(ComputopResponseHeaderTransfer $header)
     {
