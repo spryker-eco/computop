@@ -48,11 +48,11 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return void
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        return $this->setRedirect($quoteTransfer, $checkoutResponseTransfer);
+        $this->setRedirect($quoteTransfer, $checkoutResponseTransfer);
     }
 
     /**
