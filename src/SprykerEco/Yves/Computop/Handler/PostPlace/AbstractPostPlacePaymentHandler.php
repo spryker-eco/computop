@@ -39,10 +39,6 @@ abstract class AbstractPostPlacePaymentHandler extends AbstractPrePostPaymentHan
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
-        if ($quoteTransfer->getPayment() === null) {
-            $paymentTransfer = new PaymentTransfer();
-            $quoteTransfer->setPayment($paymentTransfer);
-        }
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
 
         $this->computopClient->logResponse($responseTransfer->getHeader());
