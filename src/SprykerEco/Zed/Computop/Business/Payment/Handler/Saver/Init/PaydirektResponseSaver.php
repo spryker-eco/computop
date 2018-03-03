@@ -15,46 +15,60 @@ class PaydirektResponseSaver extends AbstractResponseSaver
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer)
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPaydirekt()->getPaydirektInitResponse();
+        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
+        if ($responseTransfer->getHeader()->getIsSuccess()) {
+            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
+                $this->savePaymentComputopEntity($responseTransfer);
+                $this->savePaymentComputopDetailEntity($responseTransfer);
+                $this->savePaymentComputopOrderItemsEntities();
+                $this->triggerEvent($this->getPaymentEntity());
+            });
+        }
 
-        $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopDetails($responseTransfer);
-            $this->triggerEvent($this->getPaymentEntity($responseTransfer->getHeader()->getTransId()));
-        });
+        return $quoteTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer
+     * @param ComputopPaydirektInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopPaydirektInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopPaydirektInitResponseTransfer $responseTransfer)
     {
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
-            return;
-        }
-
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
-        $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
-
+        $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
         $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
         $paymentEntity->save();
+    }
 
-        foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
+    /**
+     * @param ComputopPaydirektInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    protected function savePaymentComputopDetailEntity(ComputopPaydirektInitResponseTransfer $responseTransfer)
+    {
+        $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
+        $paymentEntityDetails->fromArray($responseTransfer->toArray());
+        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
+        $paymentEntityDetails->save();
+    }
+
+    /**
+     * @return void
+     */
+    protected function savePaymentComputopOrderItemsEntities()
+    {
+        foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
             //Paydirekt sets authorize status on first call
             $item->setStatus($this->config->getOmsStatusAuthorized());
             $item->save();
         }
-
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->fromArray($responseTransfer->toArray());
-        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
-        $paymentEntityDetails->save();
     }
 
     /**

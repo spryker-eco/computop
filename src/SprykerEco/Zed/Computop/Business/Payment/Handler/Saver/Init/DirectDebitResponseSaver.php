@@ -15,36 +15,43 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer)
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopDirectDebit()->getDirectDebitInitResponse();
+        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
+        if ($responseTransfer->getHeader()->getIsSuccess()) {
+            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
+                $this->savePaymentComputopEntity($responseTransfer);
+                $this->savePaymentComputopDetailEntity($responseTransfer);
+            });
+        }
 
-        $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopDetails($responseTransfer);
-        });
+        return $quoteTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $responseTransfer
+     * @param ComputopDirectDebitInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopDirectDebitInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer)
     {
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
-            return;
-        }
-
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
-        $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
-
+        $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
         $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
         $paymentEntity->save();
+    }
 
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
+    /**
+     * @param ComputopDirectDebitInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    protected function savePaymentComputopDetailEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer)
+    {
+        $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
         $paymentEntityDetails->save();
     }

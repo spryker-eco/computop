@@ -39,15 +39,16 @@ class CreditCardMapper extends AbstractMapper
             $this->config->getBlowfishPassword()
         );
 
-        $length = $decryptedValues[ComputopApiConfig::LENGTH];
-        $data = $decryptedValues[ComputopApiConfig::DATA];
-
-        $computopPaymentTransfer->setData($data);
-        $computopPaymentTransfer->setLen($length);
+        $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
+        $computopPaymentTransfer->setLen($decryptedValues[ComputopApiConfig::LENGTH]);
         $computopPaymentTransfer->setUrl(
             $this->getActionUrl(
                 $this->config->getCreditCardInitActionUrl(),
-                $this->getQueryParameters($computopPaymentTransfer->getMerchantId(), $data, $length)
+                $this->getQueryParameters(
+                    $computopPaymentTransfer->getMerchantId(),
+                    $decryptedValues[ComputopApiConfig::DATA],
+                    $decryptedValues[ComputopApiConfig::LENGTH]
+                )
             )
         );
 

@@ -158,11 +158,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createSofortResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createSofortResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -176,11 +172,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createIdealResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createIdealResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -194,11 +186,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createCreditCardResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createCreditCardResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -212,11 +200,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createPayPalResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createPayPalResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -230,11 +214,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createDirectDebitResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createDirectDebitResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -248,11 +228,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createEasyCreditResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createEasyCreditResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -266,11 +242,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createPaydirektResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createPaydirektResponseSaver()->save($quoteTransfer);
     }
 
     /**

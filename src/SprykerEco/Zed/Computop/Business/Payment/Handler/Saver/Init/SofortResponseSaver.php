@@ -15,48 +15,62 @@ class SofortResponseSaver extends AbstractResponseSaver
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer)
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopSofort()->getSofortInitResponse();
+        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
+        if ($responseTransfer->getHeader()->getIsSuccess()) {
+            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
+                $this->savePaymentComputopEntity($responseTransfer);
+                $this->savePaymentComputopDetailEntity($responseTransfer);
+                $this->savePaymentComputopOrderItemsEntities();
+                $this->triggerEvent($this->getPaymentEntity());
+            });
+        }
 
-        $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopDetails($responseTransfer);
-            $this->triggerEvent($this->getPaymentEntity($responseTransfer->getHeader()->getTransId()));
-        });
+        return $quoteTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer
+     * @param ComputopSofortInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopSofortInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopSofortInitResponseTransfer $responseTransfer)
     {
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
-            return;
-        }
-
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
-        $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
-
+        $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
         $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
         $paymentEntity->save();
+    }
 
-        foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
-            //Sofort sets captured status on first call
-            $item->setStatus($this->config->getOmsStatusCaptured());
-            $item->save();
-        }
-
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
+    /**
+     * @param ComputopSofortInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    protected function savePaymentComputopDetailEntity(ComputopSofortInitResponseTransfer $responseTransfer)
+    {
+        $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->setAccountOwner($responseTransfer->getAccountOwner());
         $paymentEntityDetails->setAccountBank($responseTransfer->getAccountBank());
         $paymentEntityDetails->setBankAccountBic($responseTransfer->getBankAccountBic());
         $paymentEntityDetails->setBankAccountIban($responseTransfer->getBankAccountIban());
         $paymentEntityDetails->save();
+    }
+
+    /**
+     * @return void
+     */
+    protected function savePaymentComputopOrderItemsEntities()
+    {
+        foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
+            //Sofort sets captured status on first call
+            $item->setStatus($this->config->getOmsStatusCaptured());
+            $item->save();
+        }
     }
 
     /**

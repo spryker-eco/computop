@@ -15,46 +15,60 @@ class EasyCreditResponseSaver extends AbstractResponseSaver
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer)
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse();
+        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
+        if ($responseTransfer->getHeader()->getIsSuccess()) {
+            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
+                $this->savePaymentComputopEntity($responseTransfer);
+                $this->savePaymentComputopDetailEntity($responseTransfer);
+                $this->savePaymentComputopOrderItemsEntities();
+            });
+        }
 
-        $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-            $this->saveComputopDetails($responseTransfer);
-        });
+        return $quoteTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer
+     * @param ComputopEasyCreditInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopEasyCreditInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopEasyCreditInitResponseTransfer $responseTransfer)
     {
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
-            return;
-        }
-
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
-        $paymentEntity = $this->getPaymentEntity($responseTransfer->getHeader()->getTransId());
-
+        $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
         $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
         $paymentEntity->save();
+    }
 
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
+    /**
+     * @param ComputopEasyCreditInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    protected function savePaymentComputopDetailEntity(ComputopEasyCreditInitResponseTransfer $responseTransfer)
+    {
+        $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
         $paymentEntityDetails->save();
+    }
 
+    /**
+     * @return void
+     */
+    protected function savePaymentComputopOrderItemsEntities()
+    {
         $orderItems = $this
             ->queryContainer
-            ->getSpySalesOrderItemsById($paymentEntity->getFkSalesOrder())
+            ->getSpySalesOrderItemsById($this->getPaymentEntity()->getFkSalesOrder())
             ->find();
 
         foreach ($orderItems as $selectedItem) {
-            foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
+            foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
                 if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
                     continue;
                 }
