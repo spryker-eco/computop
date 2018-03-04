@@ -33,7 +33,7 @@ class PayPalResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopPayPalInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -46,7 +46,7 @@ class PayPalResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopPayPalInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer $responseTransfer
      *
      * @return void
      */

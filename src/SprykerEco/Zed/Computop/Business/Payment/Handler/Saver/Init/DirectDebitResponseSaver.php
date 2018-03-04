@@ -32,7 +32,7 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopDirectDebitInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -45,7 +45,7 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopDirectDebitInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $responseTransfer
      *
      * @return void
      */

@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 
-use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Yves\Computop\Handler\AbstractPrePostPaymentHandler;

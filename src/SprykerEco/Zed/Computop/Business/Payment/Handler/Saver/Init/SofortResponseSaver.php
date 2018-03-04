@@ -34,7 +34,7 @@ class SofortResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopSofortInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -47,7 +47,7 @@ class SofortResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopSofortInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer
      *
      * @return void
      */

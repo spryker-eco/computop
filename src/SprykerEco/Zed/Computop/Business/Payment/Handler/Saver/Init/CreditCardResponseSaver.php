@@ -33,7 +33,7 @@ class CreditCardResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopCreditCardInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -46,7 +46,7 @@ class CreditCardResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopCreditCardInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer $responseTransfer
      *
      * @return void
      */

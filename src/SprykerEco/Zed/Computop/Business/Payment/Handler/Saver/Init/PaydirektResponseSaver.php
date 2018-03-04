@@ -34,7 +34,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopPaydirektInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -47,7 +47,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopPaydirektInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer
      *
      * @return void
      */

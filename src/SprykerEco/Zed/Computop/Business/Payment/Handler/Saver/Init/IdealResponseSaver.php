@@ -34,7 +34,7 @@ class IdealResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopIdealInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopIdealInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -47,7 +47,7 @@ class IdealResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopIdealInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopIdealInitResponseTransfer $responseTransfer
      *
      * @return void
      */

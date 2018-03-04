@@ -33,7 +33,7 @@ class EasyCreditResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopEasyCreditInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer
      *
      * @return void
      */
@@ -46,7 +46,7 @@ class EasyCreditResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param ComputopEasyCreditInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer
      *
      * @return void
      */
