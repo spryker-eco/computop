@@ -26,71 +26,71 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-sofort-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-sofort-init-response', $quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-ideal-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-ideal-init-response', $quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-paydirekt-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-paydirekt-init-response', $quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-credit-card-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-credit-card-init-response', $quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-pay-pal-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-pay-pal-init-response', $quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-direct-debit-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-direct-debit-init-response', $quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->zedStub->call('/computop/gateway/save-easy-credit-init-response', $quoteTransfer);
+        return $this->zedStub->call('/computop/gateway/save-easy-credit-init-response', $quoteTransfer);
     }
 
     /**

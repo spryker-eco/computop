@@ -37,11 +37,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->saveSofortInitResponse($quoteTransfer);
+         return $this->getFactory()->createZedStub()->saveSofortInitResponse($quoteTransfer);
     }
 
     /**
@@ -51,11 +51,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->saveIdealInitResponse($quoteTransfer);
+         return $this->getFactory()->createZedStub()->saveIdealInitResponse($quoteTransfer);
     }
 
     /**
@@ -65,11 +65,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
-         $this->getFactory()->createZedStub()->savePaydirektInitResponse($quoteTransfer);
+         return $this->getFactory()->createZedStub()->savePaydirektInitResponse($quoteTransfer);
     }
 
     /**
@@ -79,11 +79,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createZedStub()->saveCreditCardInitResponse($quoteTransfer);
+        return $this->getFactory()->createZedStub()->saveCreditCardInitResponse($quoteTransfer);
     }
 
     /**
@@ -93,11 +93,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createZedStub()->savePayPalInitResponse($quoteTransfer);
+        return $this->getFactory()->createZedStub()->savePayPalInitResponse($quoteTransfer);
     }
 
     /**
@@ -107,11 +107,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createZedStub()->saveDirectDebitInitResponse($quoteTransfer);
+        return $this->getFactory()->createZedStub()->saveDirectDebitInitResponse($quoteTransfer);
     }
 
     /**
@@ -121,11 +121,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createZedStub()->saveEasyCreditInitResponse($quoteTransfer);
+        return $this->getFactory()->createZedStub()->saveEasyCreditInitResponse($quoteTransfer);
     }
 
     /**

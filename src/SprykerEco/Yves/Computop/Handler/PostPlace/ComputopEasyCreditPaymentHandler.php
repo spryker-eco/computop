@@ -55,10 +55,10 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function saveInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->computopClient->saveEasyCreditInitResponse($quoteTransfer);
+        return $this->computopClient->saveEasyCreditInitResponse($quoteTransfer);
     }
 }

@@ -35,7 +35,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -47,7 +47,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -59,7 +59,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -71,7 +71,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -83,7 +83,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -95,7 +95,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -107,7 +107,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
 
