@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Controller;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Spryker\Shared\Config\Config;
-use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
@@ -24,19 +23,6 @@ class CallbackController extends AbstractController
     const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
 
     const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
-
-    /**
-     * @var array
-     */
-    protected $responseArray;
-
-    /**
-     * @return void
-     */
-    public function initialize()
-    {
-        $this->responseArray = $this->getApplication()['request']->query->all();
-    }
 
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

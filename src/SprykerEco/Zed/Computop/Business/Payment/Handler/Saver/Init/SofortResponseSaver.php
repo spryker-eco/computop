@@ -67,7 +67,6 @@ class SofortResponseSaver extends AbstractResponseSaver
     protected function savePaymentComputopOrderItemsEntities()
     {
         foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
-            //Sofort sets captured status on first call
             $item->setStatus($this->config->getOmsStatusCaptured());
             $item->save();
         }

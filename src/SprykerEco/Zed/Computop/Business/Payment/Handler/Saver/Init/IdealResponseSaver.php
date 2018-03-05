@@ -75,7 +75,6 @@ class IdealResponseSaver extends AbstractResponseSaver
     protected function savePaymentComputopOrderItemsEntities()
     {
         foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
-            //Ideal sets captured status on first call
             $item->setStatus($this->config->getOmsStatusCaptured());
             $item->save();
         }

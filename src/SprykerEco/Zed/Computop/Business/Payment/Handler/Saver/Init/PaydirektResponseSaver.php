@@ -65,7 +65,6 @@ class PaydirektResponseSaver extends AbstractResponseSaver
     protected function savePaymentComputopOrderItemsEntities()
     {
         foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
-            //Paydirekt sets authorize status on first call
             $item->setStatus($this->config->getOmsStatusAuthorized());
             $item->save();
         }
