@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Controller;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
@@ -94,13 +95,7 @@ class CallbackController extends AbstractController
                 $this->responseArray
             );
 
-        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
-            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
-        ) {
-            $this->addErrorMessage(
-                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
-            );
-
+        if (!$this->validateEaseCreditStatusResponse($quoteTransfer)) {
             return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
         }
 
@@ -161,5 +156,25 @@ class CallbackController extends AbstractController
         $errorMessageText = sprintf(static::MESSAGE_RESPONSE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return bool
+     */
+    protected function validateEaseCreditStatusResponse(QuoteTransfer $quoteTransfer)
+    {
+        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
+            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
+        ) {
+            $this->addErrorMessage(
+                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
+            );
+
+            return false;
+        }
+
+        return true;
     }
 }
