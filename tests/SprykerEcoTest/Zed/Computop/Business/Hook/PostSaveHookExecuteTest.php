@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
@@ -26,22 +27,6 @@ use SprykerEco\Zed\Computop\Business\ComputopFacade;
 class PostSaveHookExecuteTest extends AbstractSetUpTest
 {
     const EXPECTED_REDIRECT_URL = 'https://www.computop-paygate.com/sofort.aspx?MerchantID=COMPUTOP%3AMERCHANT_ID&Data=f0957c5d3799a902211fb2e019cef4f459f29d4d908ffc66e6aa0fb839023c62be996fc15b44bcd681ce7bb5ff988c7132af0ed482e94bb18b7c51300761b20d36abc40b4150018f2288bff9340ac0cee2666374f2001af2ca46df7d5a263d3bf479f12682514dec3e232907943934372705bfcf7168e601f3077066797271ad3c48ea551d6158b0b75b385f33ced67648035196b21345712d61dc95be2cd949b5d6de1e41eb5aa2e145d311eaa4f26e8fecd22eaac0d3cc&Len=177';
-
-    /**
-     * @return void
-     */
-    public function testPostSaveHookExecuteWithoutRedirect()
-    {
-        $service = new ComputopFacade();
-        $service->setFactory($this->orderHelper->createFactory());
-        $checkoutResponse = $service->postSaveHookExecute(
-            $this->orderHelper->createQuoteTransfer(),
-            $this->createCheckoutResponse()
-        );
-
-        $this->assertNull($checkoutResponse->getIsExternalRedirect());
-        $this->assertNull($checkoutResponse->getRedirectUrl());
-    }
 
     /**
      * @return void
@@ -65,6 +50,7 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
     protected function createCheckoutResponse()
     {
         $checkoutResponse = new CheckoutResponseTransfer();
+        $checkoutResponse->setSaveOrder((new SaveOrderTransfer)->setOrderReference('DE--1'));
 
         return $checkoutResponse;
     }

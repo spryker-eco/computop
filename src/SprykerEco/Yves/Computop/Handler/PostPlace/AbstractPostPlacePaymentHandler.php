@@ -24,7 +24,7 @@ abstract class AbstractPostPlacePaymentHandler extends AbstractPrePostPaymentHan
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     abstract protected function saveInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -41,8 +41,7 @@ abstract class AbstractPostPlacePaymentHandler extends AbstractPrePostPaymentHan
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
 
         $this->computopClient->logResponse($responseTransfer->getHeader());
-        $this->saveInitResponse($quoteTransfer);
 
-        return $quoteTransfer;
+        return $this->saveInitResponse($quoteTransfer);
     }
 }

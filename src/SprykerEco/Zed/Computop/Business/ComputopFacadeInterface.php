@@ -131,6 +131,54 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Saves CreditCard Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves PayPal Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves DirectDebit Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves EasyCredit Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Saves Paydirekt Response to DB.
      *
      * @api

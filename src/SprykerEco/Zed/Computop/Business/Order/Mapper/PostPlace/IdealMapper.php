@@ -24,7 +24,7 @@ class IdealMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopIdealPaymentTransfer
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {

@@ -14,7 +14,7 @@ interface InitResponseSaverInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer);
+    public function save(QuoteTransfer $quoteTransfer);
 }

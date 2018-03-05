@@ -158,11 +158,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createSofortResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createSofortResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -176,11 +172,63 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createIdealResponseSaver()->handle(
-            $quoteTransfer
-        );
+        return $this->getFactory()->createIdealResponseSaver()->save($quoteTransfer);
+    }
 
-        return $quoteTransfer;
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createCreditCardResponseSaver()->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createPayPalResponseSaver()->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createDirectDebitResponseSaver()->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createEasyCreditResponseSaver()->save($quoteTransfer);
     }
 
     /**
@@ -194,11 +242,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $this->getFactory()->createPaydirektResponseSaver()->handle(
-            $quoteTransfer
-        );
-
-        return $quoteTransfer;
+        return $this->getFactory()->createPaydirektResponseSaver()->save($quoteTransfer);
     }
 
     /**

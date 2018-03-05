@@ -5,26 +5,63 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
+namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use DateTime;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
+use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
-class DirectDebitMapper extends AbstractPrePlaceMapper
+class DirectDebitMapper extends AbstractMapper
 {
-    const DATE_FORMAT = 'd.m.Y';
-
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(TransferInterface $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
+    {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
+        $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
+
+        $computopPaymentTransfer->setUrlNotify(
+            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
+        );
+        $computopPaymentTransfer->setMac(
+            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
+        );
+
+        $decryptedValues = $this->computopService->getEncryptedArray(
+            $this->getDataSubArray($computopPaymentTransfer),
+            $this->config->getBlowfishPassword()
+        );
+
+        $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
+        $computopPaymentTransfer->setLen($decryptedValues[ComputopApiConfig::LENGTH]);
+        $computopPaymentTransfer->setUrl(
+            $this->getActionUrl(
+                $this->config->getDirectDebitInitActionUrl(),
+                $this->getQueryParameters(
+                    $computopPaymentTransfer->getMerchantId(),
+                    $decryptedValues[ComputopApiConfig::DATA],
+                    $decryptedValues[ComputopApiConfig::LENGTH]
+                )
+            )
+        );
+
+        return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
+     */
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
@@ -42,13 +79,12 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $cardPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopDirectDebitPaymentTransfer $cardPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $cardPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -72,14 +108,6 @@ class DirectDebitMapper extends AbstractPrePlaceMapper
     {
         $now = new DateTime();
 
-        return $now->format(self::DATE_FORMAT);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getActionUrl()
-    {
-        return $this->config->getDirectDebitInitAction();
+        return $now->format(ComputopSharedConfig::DIRECT_DEBIT_DATE_FORMAT);
     }
 }

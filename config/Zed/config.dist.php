@@ -40,6 +40,10 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
     ComputopConfig::PAYMENT_METHOD_IDEAL,
+    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+    ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
+    ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
 ];
 
 /**

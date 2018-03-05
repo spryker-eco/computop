@@ -8,8 +8,8 @@
 namespace SprykerEco\Yves\Computop\Controller;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
-use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
@@ -26,24 +26,11 @@ class CallbackController extends AbstractController
     const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
 
     /**
-     * @var array
-     */
-    protected $responseArray;
-
-    /**
-     * @return void
-     */
-    public function initialize()
-    {
-        $this->responseArray = $this->getApplication()['request']->query->all();
-    }
-
-    /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function successCreditCardAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createCreditCardPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createCreditCardPaymentHandler());
     }
 
     /**
@@ -51,7 +38,7 @@ class CallbackController extends AbstractController
      */
     public function successPayPalAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createPayPalPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createPayPalPaymentHandler());
     }
 
     /**
@@ -59,7 +46,7 @@ class CallbackController extends AbstractController
      */
     public function successDirectDebitAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createDirectDebitPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createDirectDebitPaymentHandler());
     }
 
     /**
@@ -67,7 +54,7 @@ class CallbackController extends AbstractController
      */
     public function successEasyCreditAction()
     {
-        return $this->successPrePlaceAction($this->getFactory()->createEasyCreditPaymentHandler());
+        return $this->successPostPlaceAction($this->getFactory()->createEasyCreditPaymentHandler());
     }
 
     /**
@@ -99,38 +86,6 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function successPrePlaceAction(ComputopPrePostPaymentHandlerInterface $handler)
-    {
-        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer = $handler->handle(
-            $quoteTransfer,
-            $this->responseArray
-        );
-
-        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
-            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
-        ) {
-            $this->addErrorMessage(
-                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
-            );
-
-            return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
-        }
-
-        if (!$quoteTransfer->getCustomer()) {
-            $this->addErrorMessage(static::MESSAGE_LOG_OUT_ERROR);
-        }
-
-        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
-
-        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessOrderRedirectPath());
-    }
-
-    /**
-     * @param \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface $handler
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function successPostPlaceAction(ComputopPrePostPaymentHandlerInterface $handler)
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
@@ -139,6 +94,10 @@ class CallbackController extends AbstractController
                 $quoteTransfer,
                 $this->responseArray
             );
+
+        if (!$this->validateEaseCreditStatusResponse($quoteTransfer)) {
+            return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
+        }
 
         if (!$quoteTransfer->getCustomer()) {
             $this->addSuccessMessage(static::MESSAGE_PAYMENT_SUCCESS);
@@ -197,5 +156,25 @@ class CallbackController extends AbstractController
         $errorMessageText = sprintf(static::MESSAGE_RESPONSE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return bool
+     */
+    protected function validateEaseCreditStatusResponse(QuoteTransfer $quoteTransfer)
+    {
+        if ($quoteTransfer->getPayment()->getPaymentMethod() === ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
+            && !$quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getHeader()->getIsSuccess()
+        ) {
+            $this->addErrorMessage(
+                $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse()->getErrorText()
+            );
+
+            return false;
+        }
+
+        return true;
     }
 }

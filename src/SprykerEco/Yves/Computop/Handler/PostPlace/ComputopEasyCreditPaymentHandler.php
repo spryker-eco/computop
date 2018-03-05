@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Handler\PrePlace;
+namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 
+use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
 
-class ComputopEasyCreditPaymentHandler extends AbstractPrePlacePaymentHandler
+class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -40,13 +40,14 @@ class ComputopEasyCreditPaymentHandler extends AbstractPrePlacePaymentHandler
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
-        if ($quoteTransfer->getPayment() !== null) {
-            $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditInitResponse(
-                $responseTransfer
-            );
-
-            $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer);
+        if ($quoteTransfer->getPayment()->getComputopEasyCredit() === null) {
+            $computopTransfer = new ComputopEasyCreditPaymentTransfer();
+            $quoteTransfer->getPayment()->setComputopEasyCredit($computopTransfer);
         }
+
+        $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditInitResponse(
+            $responseTransfer
+        );
 
         return $quoteTransfer;
     }
@@ -56,14 +57,8 @@ class ComputopEasyCreditPaymentHandler extends AbstractPrePlacePaymentHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer)
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
     {
-        $quoteTransfer
-            ->getPayment()
-            ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
-            ->setPaymentMethod(ComputopConfig::PAYMENT_METHOD_EASY_CREDIT)
-            ->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_EASY_CREDIT);
-
-        return $quoteTransfer;
+        return $this->computopClient->saveEasyCreditInitResponse($quoteTransfer);
     }
 }

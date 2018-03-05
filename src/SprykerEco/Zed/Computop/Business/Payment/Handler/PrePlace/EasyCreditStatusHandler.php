@@ -48,8 +48,8 @@ class EasyCreditStatusHandler extends AbstractHandler
     {
         $computopHeaderPayment = $this->createComputopHeaderPayment($quoteTransfer);
 
-        $responseTransfer = $this->request->request($quoteTransfer, $computopHeaderPayment);
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer $responseTransfer */
+        $responseTransfer = $this->request->request($quoteTransfer, $computopHeaderPayment);
         $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
         $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
         $responseTransfer->getHeader()->setIsSuccess($this->parseStatusValue($decision));

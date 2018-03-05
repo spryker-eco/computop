@@ -13,6 +13,7 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 class ComputopConfig extends AbstractBundleConfig
 {
     const OMS_STATUS_NEW = 'new';
+    const OMS_STATUS_INITIALIZED = 'init';
     const OMS_STATUS_AUTHORIZED = 'authorized';
     const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
     const OMS_STATUS_CAPTURED = 'captured';
@@ -140,16 +141,6 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $method
-     *
-     * @return bool
-     */
-    public function isNeededRedirectAfterPlaceOrder($method)
-    {
-        return in_array($method, $this->get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL));
-    }
-
-    /**
      * @return array
      */
     public function getBeforeCaptureStatuses()
@@ -180,6 +171,14 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsStatusNew()
     {
         return self::OMS_STATUS_NEW;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOmsStatusInitialized()
+    {
+        return self::OMS_STATUS_INITIALIZED;
     }
 
     /**

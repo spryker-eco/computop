@@ -54,17 +54,18 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     /**
      * @param string $transactionId
      *
+     * @return void
+     */
+    protected function setPaymentEntity($transactionId)
+    {
+        $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
+    }
+
+    /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
-    protected function getPaymentEntity($transactionId)
+    protected function getPaymentEntity()
     {
-        if (!isset($this->paymentEntity)) {
-            $this->paymentEntity = $this
-                ->queryContainer
-                ->queryPaymentByTransactionId($transactionId)
-                ->findOne();
-        }
-
         return $this->paymentEntity;
     }
 }

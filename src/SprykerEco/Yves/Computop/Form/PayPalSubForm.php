@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Form;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayPalSubForm extends AbstractSubForm
@@ -39,17 +38,6 @@ class PayPalSubForm extends AbstractSubForm
     public function getTemplatePath()
     {
         return ComputopConfig::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return void
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $this->addLink($builder, $options);
     }
 
     /**

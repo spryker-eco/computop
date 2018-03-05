@@ -24,6 +24,7 @@
         <property name="userData" type="string" />
         <property name="capture" type="string" />
         <property name="reqId" type="string" />
+        <property name="refNr" type="string" />
         <property name="plain" type="string" />
         <property name="custom" type="string" />
         <property name="expirationTime" type="string" />
@@ -48,6 +49,7 @@
         <property name="currency" type="string" />
         <property name="capture" type="string" />
         <property name="reqId" type="string" />
+        <property name="refNr" type="string" />
         <property name="txType" type="string" />
         <property name="orderDesc" type="string" />
         <property name="clientIp" type="string" />
@@ -84,6 +86,7 @@
         <property name="response" type="string" />
         <property name="urlNotify" type="string" />
         <property name="reqId" type="string" />
+        <property name="refNr" type="string" />
         <property name="account" type="string" />
         <property name="brandName" type="string" />
         <property name="bgColor" type="string" />
@@ -121,6 +124,7 @@
         <property name="currency" type="string" />
         <property name="capture" type="string" />
         <property name="reqId" type="string" />
+        <property name="refNr" type="string" />
         <property name="txType" type="string" />
         <property name="response" type="string" />
         <property name="orderDesc" type="string" />
@@ -149,6 +153,7 @@
         <property name="urlNotify" type="string" />
         <property name="response" type="string" />
         <property name="reqId" type="string" />
+        <property name="refNr" type="string" />
         <property name="capture" type="string" />
         <property name="shopApiKey" type="string" />
         <property name="shippingAmount" type="string" />

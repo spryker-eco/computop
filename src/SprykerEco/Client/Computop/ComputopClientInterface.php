@@ -35,7 +35,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -47,7 +47,7 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
@@ -59,10 +59,58 @@ interface ComputopClientInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
-    
+
+    /**
+     * Specification:
+     * - Saves CreditCard response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves PayPal response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves DirectDebit response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves EasyCredit response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
+
     /**
      * Specification:
      * - Makes Easy Credit Status API call

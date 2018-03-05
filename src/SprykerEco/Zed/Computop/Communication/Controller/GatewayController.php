@@ -51,6 +51,46 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function saveCreditCardInitResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->saveCreditCardInitResponse($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalInitResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->savePayPalInitResponse($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveDirectDebitInitResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->saveDirectDebitInitResponse($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function saveEasyCreditInitResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->saveEasyCreditInitResponse($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePaydirektInitResponseAction(QuoteTransfer $quoteTransfer)
     {
         return $this->getFacade()->savePaydirektInitResponse($quoteTransfer);
