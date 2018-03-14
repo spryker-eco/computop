@@ -14,6 +14,7 @@ use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
 {
@@ -33,6 +34,11 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
     protected $store;
 
     /**
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
+     */
+    protected $queryContainer;
+
+    /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
      * @return array
@@ -48,15 +54,18 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
      * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      * @param \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface $store
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
      */
     public function __construct(
         ComputopServiceInterface $computopService,
         ComputopConfig $config,
-        ComputopToStoreInterface $store
+        ComputopToStoreInterface $store,
+        ComputopQueryContainerInterface $queryContainer
     ) {
         $this->computopService = $computopService;
         $this->config = $config;
         $this->store = $store;
+        $this->queryContainer = $queryContainer;
     }
 
     /**
@@ -116,7 +125,7 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected function getComputopPaymentTransfer(QuoteTransfer $quoteTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
     {
@@ -128,6 +137,12 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
         $computopPaymentTransfer->setMac(
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
+
+        $paymentEntity = $this->queryContainer
+            ->queryPaymentByTransactionId($computopHeaderPayment->getTransId())
+            ->findOne();
+        $computopPaymentTransfer->setReqId($paymentEntity->getReqId());
+        $computopPaymentTransfer->setRefNr($paymentEntity->getReference());
 
         return $computopPaymentTransfer;
     }
