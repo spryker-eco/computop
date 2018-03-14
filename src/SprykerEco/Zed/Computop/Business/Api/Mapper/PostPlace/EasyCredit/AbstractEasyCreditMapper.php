@@ -51,6 +51,8 @@ abstract class AbstractEasyCreditMapper extends AbstractPostPlaceMapper
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $dataSubArray[ComputopApiConfig::PAY_ID] = $computopPaymentTransfer->getPayId();
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::REQ_ID] = $computopPaymentTransfer->getReqId();
+        $dataSubArray[ComputopApiConfig::REF_NR] = $computopPaymentTransfer->getRefNr();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::MAC] = $computopPaymentTransfer->getMac();
