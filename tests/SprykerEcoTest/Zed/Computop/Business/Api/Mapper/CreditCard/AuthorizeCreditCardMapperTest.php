@@ -8,7 +8,6 @@
 namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\AuthorizeCreditCardMapper;
-use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 /**
  * @group Unit
