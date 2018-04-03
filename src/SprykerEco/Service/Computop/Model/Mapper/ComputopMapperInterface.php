@@ -34,15 +34,6 @@ interface ComputopMapperInterface
     public function getDataPlainText(array $dataSubArray);
 
     /**
-     * Needed for payment methods without test mode on Computop server (like Credit Card)
-     *
-     * @param array $items
-     *
-     * @return string
-     */
-    public function getTestModeDescriptionValue(array $items);
-
-    /**
      * @param array $items
      *
      * @return string
