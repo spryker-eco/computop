@@ -15,6 +15,7 @@
         <column name="x_id" type="VARCHAR"/>
         <column name="pay_id" type="VARCHAR"/>
         <column name="trans_id" type="VARCHAR"/>
+        <column name="req_id" type="VARCHAR"/>
 
         <foreign-key name="spy_payment_computop-fk_sales_order" foreignTable="spy_sales_order" phpName="SpySalesOrder">
             <reference foreign="id_sales_order" local="fk_sales_order"/>

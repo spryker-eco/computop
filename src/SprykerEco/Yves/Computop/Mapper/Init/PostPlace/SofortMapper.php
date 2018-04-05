@@ -30,7 +30,7 @@ class SofortMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

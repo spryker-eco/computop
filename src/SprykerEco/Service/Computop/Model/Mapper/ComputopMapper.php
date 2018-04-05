@@ -16,9 +16,6 @@ class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
     const ITEMS_SEPARATOR = '|';
     const ATTRIBUTES_SEPARATOR = '-';
 
-    const ORDER_DESC_SUCCESS = 'Test:0000';
-    const ORDER_DESC_ERROR = 'Test:0305';
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
      *
@@ -68,25 +65,6 @@ class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
         }
 
         return implode(self::DATA_SEPARATOR, $dataArray);
-    }
-
-    /**
-     * @param array $items
-     *
-     * @return string
-     */
-    public function getTestModeDescriptionValue(array $items)
-    {
-        $description = '';
-
-        if ($this->config->isTestMode()) {
-            $description = self::ORDER_DESC_SUCCESS;
-            $description .= self::ITEMS_SEPARATOR;
-        }
-
-        $description .= $this->getDescriptionValue($items);
-
-        return $description;
     }
 
     /**

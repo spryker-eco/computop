@@ -125,11 +125,21 @@ abstract class AbstractMapper implements MapperInterface
     protected function generateReqId(QuoteTransfer $quoteTransfer)
     {
         $parameters = [
+            $this->createUniqueSalt(),
             $quoteTransfer->getTotals()->getHash(),
             $quoteTransfer->getCustomer()->getCustomerReference(),
         ];
+        $string = $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::SHA256);
 
-        return $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::SHA256);
+        return substr($string, 0, ComputopApiConfig::REQ_ID_LENGTH);
+    }
+
+    /**
+     * @return int
+     */
+    protected function createUniqueSalt()
+    {
+        return time();
     }
 
     /**

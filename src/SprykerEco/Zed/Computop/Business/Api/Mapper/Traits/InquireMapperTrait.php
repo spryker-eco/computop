@@ -21,6 +21,8 @@ trait InquireMapperTrait
     {
         $dataSubArray[ComputopApiConfig::PAY_ID] = $computopPaymentTransfer->getPayId();
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::REQ_ID] = $computopPaymentTransfer->getReqId();
+        $dataSubArray[ComputopApiConfig::REF_NR] = $computopPaymentTransfer->getRefNr();
         $dataSubArray[ComputopApiConfig::MAC] = $computopPaymentTransfer->getMac();
 
         return $dataSubArray;

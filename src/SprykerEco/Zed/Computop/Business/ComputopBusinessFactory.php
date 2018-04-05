@@ -46,6 +46,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\SofortResponseSa
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\RefundSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\ReverseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\PaymentHydrator;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
@@ -546,5 +547,15 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getMoneyFacade()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_MONEY);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\PaymentHydrator
+     */
+    protected function createPaymentHydrator()
+    {
+        return new PaymentHydrator(
+            $this->getQueryContainer()
+        );
     }
 }

@@ -72,7 +72,7 @@ class DirectDebitMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::DIRECT_DEBIT_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

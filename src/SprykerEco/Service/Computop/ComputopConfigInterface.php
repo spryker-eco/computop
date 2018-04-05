@@ -20,9 +20,4 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getHmacPassword();
-
-    /**
-     * @return bool
-     */
-    public function isTestMode();
 }

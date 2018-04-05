@@ -12,10 +12,13 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use SprykerEco\Service\Computop\ComputopService;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\ComputopToStoreBridge;
+use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 class CreditCardMapperTestHelper extends Test
 {
@@ -124,5 +127,33 @@ class CreditCardMapperTestHelper extends Test
             ->willReturn('EUR');
 
         return $storeMock;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    public function createQueryContainerMock()
+    {
+        $entity = new SpyPaymentComputop();
+        $entity->setReqId('d3rf4iuhi2hiuhiufhiauhfiuaghfig23');
+        $entity->setReference('DE--1');
+
+        $queryMock = $this->createPartialMock(
+            SpyPaymentComputopQuery::class,
+            ['findOne']
+        );
+
+        $queryMock->method('findOne')
+            ->willReturn($entity);
+
+        $queryContainerMock = $this->createPartialMock(
+            ComputopQueryContainer::class,
+            ['queryPaymentByTransactionId']
+        );
+
+        $queryContainerMock->method('queryPaymentByTransactionId')
+            ->willReturn($queryMock);
+
+        return $queryContainerMock;
     }
 }
