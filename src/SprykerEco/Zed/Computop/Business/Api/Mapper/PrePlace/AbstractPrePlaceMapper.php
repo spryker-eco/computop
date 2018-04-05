@@ -138,12 +138,20 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
-        $paymentEntity = $this->queryContainer
-            ->queryPaymentByTransactionId($computopHeaderPayment->getTransId())
-            ->findOne();
+        $paymentEntity = $this->getPaymentEntity($computopHeaderPayment->getTransId());
         $computopPaymentTransfer->setReqId($paymentEntity->getReqId());
         $computopPaymentTransfer->setRefNr($paymentEntity->getReference());
 
         return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param $transactionId
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    protected function getPaymentEntity($transactionId)
+    {
+        return $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
     }
 }
