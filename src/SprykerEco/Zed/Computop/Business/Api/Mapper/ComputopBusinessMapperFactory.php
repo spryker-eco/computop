@@ -361,7 +361,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
             $this->getComputopService(),
             $this->getConfig(),
             $this->getStore(),
-            $this->getQueryContainer()
+            $this->createPaymentHydrator()
         );
     }
 }
