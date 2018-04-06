@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Zed\Computop\Business\Payment\PaymentHydrator;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -35,9 +34,9 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
     protected $store;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Payment\PaymentHydrator
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
      */
-    protected $paymentHydrator;
+    protected $queryContainer;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
@@ -55,18 +54,18 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
      * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      * @param \SprykerEco\Zed\Computop\Dependency\ComputopToStoreInterface $store
-     * @param \SprykerEco\Zed\Computop\Business\Payment\PaymentHydrator $paymentHydrator
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
      */
     public function __construct(
         ComputopServiceInterface $computopService,
         ComputopConfig $config,
         ComputopToStoreInterface $store,
-        PaymentHydrator $paymentHydrator
+        ComputopQueryContainerInterface $queryContainer
     ) {
         $this->computopService = $computopService;
         $this->config = $config;
         $this->store = $store;
-        $this->paymentHydrator = $paymentHydrator;
+        $this->queryContainer = $queryContainer;
     }
 
     /**
@@ -139,6 +138,20 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
-        return $this->paymentHydrator->hydratePaymentTransfer($computopPaymentTransfer, $computopHeaderPayment);
+        $paymentEntity = $this->getPaymentEntity($computopHeaderPayment->getTransId());
+        $computopPaymentTransfer->setReqId($paymentEntity->getReqId());
+        $computopPaymentTransfer->setRefNr($paymentEntity->getReference());
+
+        return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param $transactionId
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    protected function getPaymentEntity($transactionId)
+    {
+        return $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
     }
 }
