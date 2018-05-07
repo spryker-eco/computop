@@ -36,6 +36,8 @@ interface ComputopApiConfig
     const CUSTOMER_TRANSACTION_ID = 'TID';
     const TYPE = 'Type';
     const PC_NR = 'PCNr';
+    const CREDIT_CARD_NUMBER = 'CCNr';
+    const CREDIT_CARD_VERIFICATION_CODE = 'CCCVC';
     const CREDIT_CARD_EXPIRY = 'CCExpiry';
     const CREDIT_CARD_BRAND = 'CCBrand';
     const MASKED_PAN = 'MaskedPan';

@@ -16,6 +16,7 @@ $config[ComputopConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //
 $config[ComputopConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
 $config[ComputopConstants::PAYDIREKT_SHOP_KEY] = 'PAYDIREKT_SHOP_KEY'; //Set up real data
 
+$config[ComputopConstants::PAY_NOW_INIT_ACTION] = 'https://www.computop-paygate.com/paynow.aspx';
 $config[ComputopConstants::CREDIT_CARD_INIT_ACTION] = 'https://www.computop-paygate.com/payssl.aspx';
 $config[ComputopConstants::PAYPAL_INIT_ACTION] = 'https://www.computop-paygate.com/paypal.aspx';
 $config[ComputopConstants::DIRECT_DEBIT_INIT_ACTION] = 'https://www.computop-paygate.com/paysdd.aspx';
@@ -40,6 +41,7 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
     ComputopConfig::PAYMENT_METHOD_IDEAL,
+    ComputopConfig::PAYMENT_METHOD_PAY_NOW,
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
     ComputopConfig::PAYMENT_METHOD_PAY_PAL,
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
@@ -56,6 +58,7 @@ $config[OmsConstants::PROCESS_LOCATION] = [
 $config[OmsConstants::ACTIVE_PROCESSES] = [
     //...
     //Add needed payment types
+    'ComputopPayNowd01',
     'ComputopCreditCard01',
     'ComputopDirectDebit01',
     'ComputopPaydirekt01',
@@ -66,6 +69,7 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     //...
     //Add needed payment types
+    ComputopConfig::PAYMENT_METHOD_PAY_NOW => 'ComputopPayNow01',
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD => 'ComputopCreditCard01',
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT => 'ComputopDirectDebit01',
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT => 'ComputopPaydirekt01',
