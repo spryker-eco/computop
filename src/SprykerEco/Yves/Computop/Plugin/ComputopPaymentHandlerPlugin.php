@@ -25,6 +25,6 @@ class ComputopPaymentHandlerPlugin extends AbstractPlugin implements StepHandler
      */
     public function addToDataClass(Request $request, AbstractTransfer $quoteTransfer)
     {
-        $this->getFactory()->createComputopPaymentHandler()->addPaymentToQuote($quoteTransfer);
+        return $this->getFactory()->createComputopPaymentHandler()->addPaymentToQuote($quoteTransfer);
     }
 }

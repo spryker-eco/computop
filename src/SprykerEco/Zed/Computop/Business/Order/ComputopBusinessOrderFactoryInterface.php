@@ -17,6 +17,11 @@ interface ComputopBusinessOrderFactoryInterface
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
+    public function createInitPayNowMapper();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
     public function createInitPayPalMapper();
 
     /**

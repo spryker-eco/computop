@@ -7,7 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
-use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\RefundCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\RefundPayNowMapper;
 
 /**
  * @group Unit
@@ -25,7 +25,7 @@ class RefundCreditCardMapperTest extends AbstractCreditCardMapperTest
      */
     protected function createMapper()
     {
-        return new RefundCreditCardMapper(
+        return new RefundPayNowMapper(
             $this->helper->createComputopServiceMock(),
             $this->helper->createComputopConfigMock(),
             $this->helper->createStoreMock(),

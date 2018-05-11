@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\Stream;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
-abstract class AbstractConverter
+abstract class AbstractConverter implements ConverterInterface
 {
     /**
      * @var \SprykerEco\Service\Computop\ComputopServiceInterface

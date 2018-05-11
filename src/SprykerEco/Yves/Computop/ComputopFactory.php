@@ -22,12 +22,14 @@ use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\EasyCreditFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\IdealFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PaydirektFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayNowFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Computop\Form\EasyCreditSubForm;
 use SprykerEco\Yves\Computop\Form\IdealSubForm;
 use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
+use SprykerEco\Yves\Computop\Form\PayNowSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
@@ -38,6 +40,7 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
+use SprykerEco\Yves\Computop\Mapper\Init\PayNowMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
@@ -73,6 +76,14 @@ class ComputopFactory extends AbstractFactory
     public function createCreditCardForm()
     {
         return new CreditCardSubForm();
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createPayNowForm()
+    {
+        return new PayNowSubForm();
     }
 
     /**
@@ -129,6 +140,14 @@ class ComputopFactory extends AbstractFactory
     public function createCreditCardFormDataProvider()
     {
         return new CreditCardFormDataProvider($this->getQuoteClient(), $this->createOrderCreditCardMapper());
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    public function createPayNowFormDataProvider()
+    {
+        return new PayNowFormDataProvider($this->getQuoteClient(), $this->createOrderPayNowMapper());
     }
 
     /**
@@ -340,6 +359,20 @@ class ComputopFactory extends AbstractFactory
     protected function createOrderCreditCardMapper()
     {
         return new CreditCardMapper(
+            $this->getComputopService(),
+            $this->getApplication(),
+            $this->getStore(),
+            $this->getConfig(),
+            $this->createUtilTextService()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    protected function createOrderPayNowMapper()
+    {
+        return new PayNowMapper(
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),

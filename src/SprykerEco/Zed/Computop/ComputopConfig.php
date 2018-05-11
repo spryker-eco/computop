@@ -12,6 +12,7 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
+    const ETI_ID = '0.0.1';
     const OMS_STATUS_NEW = 'new';
     const OMS_STATUS_INITIALIZED = 'init';
     const OMS_STATUS_AUTHORIZED = 'authorized';
@@ -130,6 +131,22 @@ class ComputopConfig extends AbstractBundleConfig
     public function getEasyCreditAuthorizeUrl()
     {
         return $this->get(ComputopConstants::EASY_CREDIT_AUTHORIZE_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayNowInitActionUrl()
+    {
+        return $this->get(ComputopConstants::PAY_NOW_INIT_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlowfishPassword()
+    {
+        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
     }
 
     /**

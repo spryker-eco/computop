@@ -9,6 +9,8 @@ namespace SprykerEco\Zed\Computop\Business\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Zed\Computop\Business\Api\Request\Init\InitRequestInterface;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface;
@@ -25,6 +27,11 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface[]
      */
     protected $methodMappers = [];
+
+    /**
+     * @var \SprykerEco\Zed\Computop\Business\Api\Request\Init\InitRequestInterface[]
+     */
+    protected $methodRequests = [];
 
     /**
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
@@ -44,15 +51,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    public function registerRequest(InitRequestInterface $request)
     {
-        return $this->setRedirect($quoteTransfer, $checkoutResponseTransfer);
+        $this->methodRequests[$request->getMethodName()] = $request;
     }
 
     /**
@@ -61,11 +62,28 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    protected function setRedirect(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
+        if (true) {
+            return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
+        }
+
+
+
+        return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    protected function setRedirect(TransferInterface $computopPaymentTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    {
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());

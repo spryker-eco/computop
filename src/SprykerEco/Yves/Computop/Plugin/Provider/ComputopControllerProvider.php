@@ -13,6 +13,7 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 class ComputopControllerProvider extends YvesControllerProvider
 {
     const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
+    const PAY_NOW_SUCCESS = 'computop-paynow-success';
     const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
     const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
     const IDEAL_SUCCESS = 'computop-ideal-success';
@@ -46,6 +47,14 @@ class ComputopControllerProvider extends YvesControllerProvider
             $this->moduleName,
             $this->callbackControllerName,
             'successCreditCard'
+        );
+
+        $this->createController(
+            '/computop/paynow-success',
+            self::PAY_NOW_SUCCESS,
+            $this->moduleName,
+            $this->callbackControllerName,
+            'successPayNow'
         );
 
         $this->createController(

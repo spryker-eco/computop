@@ -105,6 +105,14 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     {
         return $this->get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
     }
+
+    /**
+     * @return string
+     */
+    public function getPayNowInitActionUrl()
+    {
+        return $this->get(ComputopConstants::PAY_NOW_INIT_ACTION);
+    }
     
     /**
      * @return string

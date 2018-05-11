@@ -3,7 +3,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
-    <transfer name="ComputopPayment">
+    <transfer name="ComputopPayNowPayment">
+        <property name="creditCardNumber" type="int" />
+        <property name="creditCardVerificationCode" type="int" />
+        <property name="creditCardExpiresMonth" type="string" />
+        <property name="creditCardExpiresYear" type="string" />
+        <property name="creditCardBrand" type="string" />
         <property name="payId" type="string" />
         <property name="merchantId" type="string" />
         <property name="transId" type="string" />
@@ -12,31 +17,24 @@
         <property name="mac" type="string" />
         <property name="urlSuccess" type="string" />
         <property name="urlFailure" type="string" />
+        <property name="urlBack" type="string" />
         <property name="response" type="string" />
         <property name="urlNotify" type="string" />
         <property name="userData" type="string" />
         <property name="capture" type="string" />
         <property name="reqId" type="string" />
         <property name="refNr" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="payNowPayment" type="ComputopPayNowPayment" />
-    </transfer>
-
-    <transfer name="ComputopPayNowPayment">
-        <property name="creditCardNumber" type="int" />
-        <property name="creditCardVerification" type="int" />
-        <property name="creditCardExpiry" type="string" />
-        <property name="creditCardBrand" type="string" />
         <property name="plain" type="string" />
         <property name="custom" type="string" />
         <property name="expirationTime" type="string" />
+        <property name="orderDesc" type="string" />
         <property name="customField" type="array" />
         <property name="paymentMethod" type="string" />
+        <property name="data" type="string" />
+        <property name="len" type="int" />
         <property name="txType" type="string" />
+        <property name="url" type="string" />
+        <property name="clientIp" type="string" />
         <property name="finishAuth" type="string" />
         <property name="payNowInitResponse" type="ComputopPayNowInitResponse"/>
     </transfer>
@@ -492,7 +490,7 @@
     </transfer>
 
     <transfer name="Payment">
-        <property name="computopPayment" type="ComputopPayment" />
+        <property name="computopPayNow" type="ComputopPayNowPayment" />
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
         <property name="computopPayPal" type="ComputopPayPalPayment" />
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
@@ -503,7 +501,7 @@
     </transfer>
 
     <transfer name="Order">
-        <property name="computopPayment" type="ComputopPayment" />
+        <property name="computopPayNow" type="ComputopPayNowPayment" />
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
         <property name="computopPayPal" type="ComputopPayPalPayment" />
         <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />

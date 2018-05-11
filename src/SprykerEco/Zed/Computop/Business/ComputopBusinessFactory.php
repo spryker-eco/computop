@@ -15,6 +15,7 @@ use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitDirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitEasyCreditMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitIdealMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPaydirektMapper;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPayNowMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPayPalMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitSofortMapper;
 use SprykerEco\Zed\Computop\Business\Oms\Command\AuthorizeCommandHandler;
@@ -62,6 +63,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $orderSaver = new OrderManager($this->getConfig());
 
         $orderSaver->registerMapper($this->createOrderFactory()->createInitCreditCardMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitPayNowMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitPayPalMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitDirectDebitMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitSofortMapper());
@@ -82,6 +84,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSavePaydirektMapper());
         $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
         $postSaveHook->registerMapper($this->createPostSaveCreditCart());
+        $postSaveHook->registerMapper($this->createPostSavePayNow());
         $postSaveHook->registerMapper($this->createPostSavePayPal());
         $postSaveHook->registerMapper($this->createPostSaveDirectDebit());
         $postSaveHook->registerMapper($this->createPostSaveEasyCredit());
@@ -474,6 +477,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createPostSaveCreditCart()
     {
         return new InitCreditCardMapper($this->getConfig(), $this->getComputopService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    protected function createPostSavePayNow()
+    {
+        return new InitPayNowMapper($this->getConfig(), $this->getComputopService());
     }
 
     /**

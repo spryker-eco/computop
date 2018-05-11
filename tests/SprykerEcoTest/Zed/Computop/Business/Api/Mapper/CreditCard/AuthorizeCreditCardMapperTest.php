@@ -7,7 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Api\Mapper\CreditCard;
 
-use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\AuthorizeCreditCardMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\AuthorizePayNowMapper;
 
 /**
  * @group Unit
@@ -25,7 +25,7 @@ class AuthorizeCreditCardMapperTest extends AbstractCreditCardMapperTest
      */
     protected function createMapper()
     {
-        return new AuthorizeCreditCardMapper(
+        return new AuthorizePayNowMapper(
             $this->helper->createComputopServiceMock(),
             $this->helper->createComputopConfigMock(),
             $this->helper->createStoreMock(),
