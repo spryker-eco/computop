@@ -51,6 +51,11 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
 
+    /**
+     * @param \SprykerEco\Zed\Computop\Business\Api\Request\Init\InitRequestInterface $request
+     *
+     * @return void
+     */
     public function registerRequest(InitRequestInterface $request)
     {
         $this->methodRequests[$request->getMethodName()] = $request;
@@ -71,6 +76,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
             return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
         }
 
+        $request = $this->getMethodRequest($quoteTransfer->getPayment()->getPaymentSelection());
+
+        $request->request($computopPaymentTransfer);
 
 
         return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
@@ -105,6 +113,22 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         return $this->methodMappers[$methodName];
+    }
+
+    /**
+     * @param string $methodName
+     *
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\Init\InitRequestInterface
+     */
+    protected function getMethodRequest($methodName)
+    {
+        if (isset($this->methodRequests[$methodName]) === false) {
+            throw new ComputopMethodMapperException('The method request is not registered.');
+        }
+
+        return $this->methodRequests[$methodName];
     }
 
     /**
