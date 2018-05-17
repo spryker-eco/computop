@@ -8,7 +8,10 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\PayNow\PayNowInitApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use SprykerEco\Zed\Computop\Business\Api\Converter\PayNow\PayNowInitConverter;
+use SprykerEco\Zed\Computop\Business\Api\Request\Init\PayNowInitRequest;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitDirectDebitMapper;
@@ -84,10 +87,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSavePaydirektMapper());
         $postSaveHook->registerMapper($this->createPostSaveIdealMapper());
         $postSaveHook->registerMapper($this->createPostSaveCreditCart());
-        $postSaveHook->registerMapper($this->createPostSavePayNow());
+        $postSaveHook->registerMapper($this->createPostSavePayNowMapper());
         $postSaveHook->registerMapper($this->createPostSavePayPal());
         $postSaveHook->registerMapper($this->createPostSaveDirectDebit());
         $postSaveHook->registerMapper($this->createPostSaveEasyCredit());
+
+        $postSaveHook->registerRequest($this->createApiFactory()->createPayNowInitRequest());
 
         return $postSaveHook;
     }
@@ -482,7 +487,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
-    protected function createPostSavePayNow()
+    protected function createPostSavePayNowMapper()
     {
         return new InitPayNowMapper($this->getConfig(), $this->getComputopService());
     }

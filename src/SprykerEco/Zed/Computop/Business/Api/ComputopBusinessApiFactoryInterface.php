@@ -45,6 +45,11 @@ interface ComputopBusinessApiFactoryInterface
     public function createEasyCreditAuthorizeRequest();
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\Init\PayNowInitRequest
+     */
+    public function createPayNowInitRequest();
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     public function createAuthorizeConverter();
@@ -73,4 +78,9 @@ interface ComputopBusinessApiFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
      */
     public function createEasyCreditConverter();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\PayNow\PayNowInitConverter
+     */
+    public function createPayNowInitConverter();
 }

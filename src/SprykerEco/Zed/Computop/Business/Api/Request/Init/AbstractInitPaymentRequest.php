@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\ApiPrePlaceMapperInterface;
 
 abstract class AbstractInitPaymentRequest implements InitRequestInterface
 {
