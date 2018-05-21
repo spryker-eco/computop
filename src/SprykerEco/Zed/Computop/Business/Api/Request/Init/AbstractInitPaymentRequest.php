@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface;
-use SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\ApiPrePlaceMapperInterface;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\Init\ApiInitMapperInterface;
 
 abstract class AbstractInitPaymentRequest implements InitRequestInterface
 {
@@ -33,12 +33,12 @@ abstract class AbstractInitPaymentRequest implements InitRequestInterface
     /**
      * @param \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface $adapter
      * @param \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface $converter
-     * @param \SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\ApiPrePlaceMapperInterface $mapper
+     * @param \SprykerEco\Zed\Computop\Business\Api\Mapper\Init\ApiInitMapperInterface $mapper
      */
     public function __construct(
         AdapterInterface $adapter,
         ConverterInterface $converter,
-        ApiPrePlaceMapperInterface $mapper
+        ApiInitMapperInterface $mapper
     ) {
         $this->adapter = $adapter;
         $this->converter = $converter;
@@ -46,16 +46,15 @@ abstract class AbstractInitPaymentRequest implements InitRequestInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function request($quoteTransfer, $computopHeaderPayment)
+    public function request($computopPaymentTransfer)
     {
         $requestData = $this
             ->mapper
-            ->buildRequest($quoteTransfer, $computopHeaderPayment);
+            ->buildRequest($computopPaymentTransfer);
 
         return $this->sendRequest($requestData);
     }

@@ -32,7 +32,7 @@ use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\PayPal\RefundPayPalMap
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\PayPal\ReversePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\Sofort\RefundSofortMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\EasyCredit\StatusEasyCreditMapper;
-use SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\PayNow\InitPayNowMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\Init\PayNow\InitPayNowMapper;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 
 /**
@@ -367,7 +367,7 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\PayNow\InitPayNowMapper
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\Init\PayNow\InitPayNowMapper
      */
     public function createInitPayNowMapper()
     {

@@ -18,10 +18,9 @@ interface InitRequestInterface
     public function getMethodName();
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function request($orderTransfer, $computopHeaderPayment);
+    public function request($computopPaymentTransfer);
 }

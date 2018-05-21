@@ -39,6 +39,7 @@ abstract class AbstractApiAdapter implements AdapterInterface
     {
         $this->client = new Client([
             RequestOptions::TIMEOUT => self::DEFAULT_TIMEOUT,
+            RequestOptions::VERIFY => false,
         ]);
 
         $this->config = $config;
