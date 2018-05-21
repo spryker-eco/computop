@@ -52,6 +52,13 @@ interface ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
 
     /**

@@ -68,6 +68,16 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->zedStub->call('/computop/gateway/save-pay-now-init-response', $quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->zedStub->call('/computop/gateway/save-pay-pal-init-response', $quoteTransfer);

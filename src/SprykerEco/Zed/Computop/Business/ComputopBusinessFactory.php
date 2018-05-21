@@ -45,6 +45,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\DirectDebitRespo
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\EasyCreditResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\IdealResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PaydirektResponseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PayNowResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PayPalResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\SofortResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
@@ -127,6 +128,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createCreditCardResponseSaver()
     {
         return new CreditCardResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\InitResponseSaverInterface
+     */
+    public function createPayNowResponseSaver()
+    {
+        return new PayNowResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**

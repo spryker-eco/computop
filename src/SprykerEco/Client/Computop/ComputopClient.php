@@ -95,6 +95,20 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createZedStub()->savePayNowInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()->createZedStub()->savePayPalInitResponse($quoteTransfer);

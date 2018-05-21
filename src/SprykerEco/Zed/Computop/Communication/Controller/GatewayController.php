@@ -61,6 +61,16 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponseAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->savePayNowInitResponse($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponseAction(QuoteTransfer $quoteTransfer)
     {
         return $this->getFacade()->savePayPalInitResponse($quoteTransfer);

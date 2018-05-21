@@ -33,14 +33,6 @@ class PayNowMapper extends AbstractMapper
             $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
-        /*$decryptedValues = $this->computopService->getEncryptedArray(
-            $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
-        );
-
-        $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
-        $computopPaymentTransfer->setLen($decryptedValues[ComputopApiConfig::LENGTH]);*/
-
         $computopPaymentTransfer->setUrl(
             $this->config->getPayNowInitActionUrl()
         );

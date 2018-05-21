@@ -14,6 +14,7 @@ use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
 use SprykerEco\Yves\Computop\Converter\InitEasyCreditConverter;
 use SprykerEco\Yves\Computop\Converter\InitIdealConverter;
 use SprykerEco\Yves\Computop\Converter\InitPaydirektConverter;
+use SprykerEco\Yves\Computop\Converter\InitPayNowConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
@@ -38,6 +39,7 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopEasyCreditPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayNowPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PayNowMapper;
@@ -233,6 +235,14 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
+    public function createPayNowPaymentHandler()
+    {
+        return new ComputopPayNowPaymentHandler($this->createInitPayNowConverter(), $this->getComputopClient());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
+     */
     public function createPayPalPaymentHandler()
     {
         return new ComputopPayPalPaymentHandler($this->createInitPayPalConverter(), $this->getComputopClient());
@@ -287,6 +297,14 @@ class ComputopFactory extends AbstractFactory
     protected function createInitCreditCardConverter()
     {
         return new InitCreditCardConverter($this->getComputopService(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    protected function createInitPayNowConverter()
+    {
+        return new InitPayNowConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**

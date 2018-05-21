@@ -143,6 +143,18 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Saves PayNow Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Saves PayPal Response to DB.
      *
      * @api

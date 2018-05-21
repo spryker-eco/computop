@@ -76,6 +76,17 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
      * Specification:
      * - Saves PayPal response to DB
      *

@@ -36,6 +36,14 @@ class CallbackController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successPayNowAction()
+    {
+        return $this->successPostPlaceAction($this->getFactory()->createPayNowPaymentHandler());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function successPayPalAction()
     {
         return $this->successPostPlaceAction($this->getFactory()->createPayPalPaymentHandler());
