@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
-use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 class PayNowResponseSaver extends AbstractResponseSaver
@@ -33,11 +33,11 @@ class PayNowResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function savePaymentComputopEntity(ComputopCreditCardInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopPayNowInitResponseTransfer $responseTransfer)
     {
         $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
@@ -46,11 +46,11 @@ class PayNowResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(ComputopCreditCardInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopDetailEntity(ComputopPayNowInitResponseTransfer $responseTransfer)
     {
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());

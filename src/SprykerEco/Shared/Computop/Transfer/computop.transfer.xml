@@ -3,12 +3,20 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
-    <transfer name="ComputopPayNowPayment">
+    <transfer name="ComputopPayNowForm">
         <property name="creditCardNumber" type="int" />
         <property name="creditCardVerificationCode" type="int" />
         <property name="creditCardExpiresMonth" type="string" />
         <property name="creditCardExpiresYear" type="string" />
         <property name="creditCardBrand" type="string" />
+    </transfer>
+
+    <transfer name="ComputopInitPayment">
+        <property name="data" type="string" />
+        <property name="len" type="int" />
+    </transfer>
+
+    <transfer name="ComputopPayNowPayment">
         <property name="payId" type="string" />
         <property name="merchantId" type="string" />
         <property name="transId" type="string" />
@@ -509,6 +517,10 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
         <property name="computopIdeal" type="ComputopIdealPayment" />
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
+    </transfer>
+
+    <transfer name="CheckoutResponse">
+        <property name="computopInitPayment" type="ComputopInitPayment" />
     </transfer>
 
 </transfers>

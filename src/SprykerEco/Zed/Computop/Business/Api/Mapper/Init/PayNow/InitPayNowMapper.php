@@ -24,10 +24,6 @@ class InitPayNowMapper extends AbstractInitMapper implements ApiInitMapperInterf
     public function getDataSubArray(TransferInterface $computopPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPaymentTransfer */
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_NUMBER] = $computopPaymentTransfer->getCreditCardNumber();
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_VERIFICATION_CODE] = $computopPaymentTransfer->getCreditCardVerificationCode();
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_EXPIRY] = $computopPaymentTransfer->getCreditCardExpiresYear() . $computopPaymentTransfer->getCreditCardExpiresMonth();
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_BRAND] = $computopPaymentTransfer->getCreditCardBrand();
 
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaymentTransfer->getAmount();

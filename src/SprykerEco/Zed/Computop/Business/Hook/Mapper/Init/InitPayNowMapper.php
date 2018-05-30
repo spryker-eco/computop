@@ -62,11 +62,6 @@ class InitPayNowMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::REF_NR] = $cardPaymentTransfer->getRefNr();
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_BRAND] = $cardPaymentTransfer->getCreditCardBrand();
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_NUMBER] = $cardPaymentTransfer->getCreditCardNumber();
-        $expires = $cardPaymentTransfer->getCreditCardExpiresYear() . $cardPaymentTransfer->getCreditCardExpiresMonth();
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_EXPIRY] = (string) $expires;
-        $dataSubArray[ComputopApiConfig::CREDIT_CARD_VERIFICATION_CODE] = $cardPaymentTransfer->getCreditCardVerificationCode();
         $dataSubArray[ComputopApiConfig::ETI_ID] = ZedComputopConfig::ETI_ID;
 
         return $dataSubArray;

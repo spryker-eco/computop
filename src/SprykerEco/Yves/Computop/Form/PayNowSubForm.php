@@ -73,11 +73,11 @@ class PayNowSubForm extends AbstractSubForm
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addCardBrand($builder, $options)
+        /*$this->addCardBrand($builder, $options)
             ->addCardNumber($builder)
             ->addCardExpiresMonth($builder, $options)
             ->addCardExpiresYear($builder, $options)
-            ->addCardSecurityCode($builder);
+            ->addCardSecurityCode($builder);*/
     }
 
     /**

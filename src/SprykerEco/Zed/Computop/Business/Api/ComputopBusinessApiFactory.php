@@ -12,7 +12,6 @@ use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\EasyCredit\EasyCreditAuthorizeApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\EasyCredit\EasyCreditStatusApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\PayNow\PayNowInitApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
@@ -22,7 +21,6 @@ use SprykerEco\Zed\Computop\Business\Api\Converter\PayNow\PayNowInitConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactory;
-use SprykerEco\Zed\Computop\Business\Api\Request\Init\PayNowInitRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\AuthorizationRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\CaptureRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\InquireRequest;
@@ -58,6 +56,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeCreditCardMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizeEasyCreditMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayPalMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createAuthorizePayNowMapper());
 
         return $paymentRequest;
     }
@@ -76,6 +75,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePayPalMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquireDirectDebitMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePaydirektMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createInquirePayNowMapper());
 
         return $paymentRequest;
     }
@@ -94,6 +94,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createReversePayPalMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createReverseDirectDebitMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createReversePaydirektMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createReversePayNowMapper());
 
         return $paymentRequest;
     }
@@ -114,6 +115,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePaydirektMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureEasyCreditMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createCaptureIdealMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createCapturePayNowMapper());
 
         return $paymentRequest;
     }
@@ -135,6 +137,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPaydirektMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundEasyCreditMapper());
         $paymentRequest->registerMapper($this->createMapperFactory()->createRefundIdealMapper());
+        $paymentRequest->registerMapper($this->createMapperFactory()->createRefundPayNowMapper());
 
         return $paymentRequest;
     }
@@ -151,18 +154,6 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
         );
 
         return $paymentRequest;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\Init\PayNowInitRequest
-     */
-    public function createPayNowInitRequest()
-    {
-        return new PayNowInitRequest(
-            $this->createPayNowInitApiAdapter(),
-            $this->createPayNowInitConverter(),
-            $this->createMapperFactory()->createInitPayNowMapper()
-        );
     }
 
     /**
@@ -292,13 +283,5 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     protected function createEasyCreditAuthorizeAdapter()
     {
         return new EasyCreditAuthorizeApiAdapter($this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\PayNow\PayNowInitApiAdapter
-     */
-    protected function createPayNowInitApiAdapter()
-    {
-        return new PayNowInitApiAdapter($this->getConfig());
     }
 }
