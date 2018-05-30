@@ -16,8 +16,8 @@ use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\EasyCredit\EasyCreditStatusConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
-use SprykerEco\Zed\Computop\Business\Api\Converter\PayNow\PayNowInitConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactory;
@@ -218,15 +218,7 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
      */
     public function createEasyCreditConverter()
     {
-        return new PayNowInitConverter($this->getComputopService(), $this->getConfig());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\PayNow\PayNowInitConverter
-     */
-    public function createPayNowInitConverter()
-    {
-        return new PayNowInitConverter($this->getComputopService(), $this->getConfig());
+        return new EasyCreditStatusConverter($this->getComputopService(), $this->getConfig());
     }
 
     /**
