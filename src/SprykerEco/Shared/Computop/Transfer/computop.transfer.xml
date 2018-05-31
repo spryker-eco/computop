@@ -438,6 +438,59 @@
         <property name="transactionId" type="string" />
     </transfer>
 
+    <transfer name="ComputopCrif">
+        <property name="merchantId" type="string" />
+        <property name="transId" type="string" />
+        <property name="refNr" type="string" />
+        <property name="orderDesc" type="string" />
+        <property name="amount" type="int" />
+        <property name="currency" type="string" />
+        <property name="mac" type="string" />
+        <property name="productName" type="string" />
+        <property name="customerId" type="string" />
+        <property name="legalForm" type="string" />
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="gender" type="string" />
+        <property name="dateOfBirth" type="string" />
+        <property name="addrStreet" type="string" />
+        <property name="addrStreetNr" type="string" />
+        <property name="addrAddition" type="string" />
+        <property name="addrCity" type="string" />
+        <property name="addrZip" type="int" />
+        <property name="addrCountryCode" type="string" />
+        <property name="email" type="string" />
+        <property name="phone" type="string" />
+        <property name="articleList" type="string" />
+    </transfer>
+
+    <transfer name="ComputopCrifResponse">
+        <property name="mid" type="string" />
+        <property name="payId" type="string" />
+        <property name="xid" type="string" />
+        <property name="transId" type="string" />
+        <property name="refNr" type="string" />
+        <property name="status" type="string" />
+        <property name="description" type="string" />
+        <property name="code" type="int" />
+        <property name="mac" type="string" />
+        <property name="result" type="string" />
+        <property name="partialResults" type="string" />
+        <property name="limit" type="int" />
+        <property name="addrStreet" type="string" />
+        <property name="addrStreetNr" type="string" />
+        <property name="addrCity" type="string" />
+        <property name="addrZip" type="int" />
+        <property name="addrCountryCode" type="string" />
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="gender" type="string" />
+        <property name="dateOfBirth" type="string" />
+        <property name="archiveId" type="int" />
+        <property name="unitId" type="int" />
+        <property name="instruction" type="string" />
+    </transfer>
+
     <transfer name="Payment">
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
         <property name="computopPayPal" type="ComputopPayPalPayment" />
