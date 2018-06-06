@@ -133,6 +133,14 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return string
+     */
+    public function getCrifActionUrl()
+    {
+        return $this->get(ComputopConstants::CRIF_ACTION);
+    }
+
+    /**
      * @return bool
      */
     public function isRefundShipmentPriceEnabled()

@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Api\Mapper;
 
+use Spryker\Service\UtilText\UtilTextService;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\AuthorizeCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\CaptureCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\CreditCard\InquireCreditCardMapper;
@@ -32,6 +33,7 @@ use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\PayPal\RefundPayPalMap
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\PayPal\ReversePayPalMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PostPlace\Sofort\RefundSofortMapper;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\EasyCredit\StatusEasyCreditMapper;
+use SprykerEco\Zed\Computop\Business\Api\Mapper\RiskCheck\CrifMapper;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 
 /**
@@ -363,5 +365,25 @@ class ComputopBusinessMapperFactory extends ComputopBusinessFactory implements C
             $this->getStore(),
             $this->getQueryContainer()
         );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\RiskCheck\ApiRiskCheckMapperInterface;
+     */
+    public function createCrifMapper()
+    {
+        return new CrifMapper(
+            $this->getComputopService(),
+            $this->getConfig(),
+            $this->createUtilTextService()
+        );
+    }
+
+    /**
+     * @return \Spryker\Service\UtilText\UtilTextServiceInterface
+     */
+    protected function createUtilTextService()
+    {
+        return new UtilTextService();
     }
 }

@@ -14,12 +14,14 @@ use SprykerEco\Zed\Computop\Business\Api\Adapter\EasyCredit\EasyCreditStatusApiA
 use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
+use SprykerEco\Zed\Computop\Business\Api\Adapter\RiskCheck\CrifApiAdapter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\AuthorizeConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\CaptureConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\EasyCredit\EasyCreditStatusConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\InquireConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\RefundConverter;
 use SprykerEco\Zed\Computop\Business\Api\Converter\ReverseConverter;
+use SprykerEco\Zed\Computop\Business\Api\Converter\RiskCheck\CrifConverter;
 use SprykerEco\Zed\Computop\Business\Api\Mapper\ComputopBusinessMapperFactory;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\AuthorizationRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\CaptureRequest;
@@ -27,6 +29,7 @@ use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\InquireRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\RefundRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\ReverseRequest;
 use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\EasyCreditStatusRequest;
+use SprykerEco\Zed\Computop\Business\Api\Request\RiskCheck\CrifRequest;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 
 /**
@@ -152,6 +155,18 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RiskCheck\RiskCheckRequestInterface
+     */
+    public function createCrifRequest()
+    {
+        return new CrifRequest(
+            $this->createCrifAdapter(),
+            $this->createCrifConverter(),
+            $this->createMapperFactory()->createCrifMapper()
+        );
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createEasyCreditAuthorizeRequest()
@@ -217,6 +232,14 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Converter\ConverterInterface
+     */
+    public function createCrifConverter()
+    {
+        return new CrifConverter($this->getComputopService(), $this->getConfig());
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
      */
     protected function createAuthorizeAdapter()
@@ -270,5 +293,13 @@ class ComputopBusinessApiFactory extends ComputopBusinessFactory implements Comp
     protected function createEasyCreditAuthorizeAdapter()
     {
         return new EasyCreditAuthorizeApiAdapter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Adapter\AdapterInterface
+     */
+    protected function createCrifAdapter()
+    {
+        return new CrifApiAdapter($this->getConfig());
     }
 }

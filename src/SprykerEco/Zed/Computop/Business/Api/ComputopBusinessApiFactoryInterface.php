@@ -40,6 +40,11 @@ interface ComputopBusinessApiFactoryInterface
     public function createEasyCreditStatusRequest();
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Request\RiskCheck\RiskCheckRequestInterface
+     */
+    public function createCrifRequest();
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
      */
     public function createEasyCreditAuthorizeRequest();

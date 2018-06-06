@@ -465,6 +465,7 @@
     </transfer>
 
     <transfer name="ComputopCrifResponse">
+        <property name="header" type="ComputopResponseHeader"/>
         <property name="mid" type="string" />
         <property name="payId" type="string" />
         <property name="xid" type="string" />

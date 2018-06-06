@@ -133,4 +133,9 @@ interface ComputopBusinessMapperFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\PrePlace\ApiPrePlaceMapperInterface
      */
     public function createStatusEasyCreditMapper();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Api\Mapper\RiskCheck\ApiRiskCheckMapperInterface;
+     */
+    public function createCrifMapper();
 }

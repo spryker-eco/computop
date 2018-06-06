@@ -17,6 +17,7 @@ use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitIdealMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPayPalMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitSofortMapper;
+use SprykerEco\Zed\Computop\Business\Logger\ComputopResponseLogger as ComputopLogger;
 use SprykerEco\Zed\Computop\Business\Oms\Command\AuthorizeCommandHandler;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CancelCommandHandler;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CaptureCommandHandler;
@@ -46,6 +47,8 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\SofortResponseSa
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\RefundSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\ReverseSaver;
+use SprykerEco\Zed\Computop\Business\RiskCheck\Handler\CrifHandler;
+use SprykerEco\Zed\Computop\Business\RiskCheck\Saver\CrifSaver;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
@@ -231,6 +234,26 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\RiskCheck\Handler\HandlerInterface
+     */
+    public function createCrifHandler()
+    {
+        return new CrifHandler(
+            $this->createApiFactory()->createCrifRequest(),
+            $this->createCrifSaver()
+
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Logger\LoggerInterface
+     */
+    public function createComputopLogger()
+    {
+        return new ComputopLogger();
+    }
+
+    /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     public function createEasyCreditAuthorizeHandler()
@@ -357,6 +380,18 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new RefundHandler(
             $this->createRefundPaymentRequest(),
             $this->createRefundSaver()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\RiskCheck\Saver\RiskCheckSaverInterface
+     */
+    protected function createCrifSaver()
+    {
+        return new CrifSaver(
+            $this->getQueryContainer(),
+            $this->createComputopLogger(),
+            $this->getConfig()
         );
     }
 
@@ -546,5 +581,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getMoneyFacade()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_MONEY);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilterInterface
+     */
+    public function createPaymentMethodFilter()
+    {
+        return new PaymentMethodFilter($this->getConfig());
     }
 }

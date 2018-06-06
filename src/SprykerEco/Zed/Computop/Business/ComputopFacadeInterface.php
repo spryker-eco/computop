@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopFacadeInterface
@@ -213,4 +214,29 @@ interface ComputopFacadeInterface
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     * - Perform CRIF risk check API call
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Filters available payment methods by gift card black list
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer);
 }
