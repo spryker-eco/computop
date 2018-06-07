@@ -11,8 +11,8 @@ use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\ComputopConfig as ZedComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
+use SprykerEco\Zed\Computop\ComputopConfig as ZedComputopConfig;
 
 class InitPayNowMapper extends AbstractMapper
 {

@@ -9,8 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Silex\Application;
-use Spryker\Service\UtilText\Model\Hash;
-use Spryker\Service\UtilText\UtilTextServiceInterface;
 use SprykerEco\Service\Computop\ComputopServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
@@ -20,8 +18,6 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractMapper implements MapperInterface
 {
-    const TRANS_ID_SEPARATOR = '-';
-
     /**
      * @var \SprykerEco\Service\Computop\ComputopServiceInterface
      */
@@ -43,11 +39,6 @@ abstract class AbstractMapper implements MapperInterface
     protected $config;
 
     /**
-     * @var \Spryker\Service\UtilText\UtilTextService
-     */
-    protected $textService;
-
-    /**
      * @var array
      */
     protected $decryptedValues;
@@ -64,20 +55,17 @@ abstract class AbstractMapper implements MapperInterface
      * @param \Silex\Application $application
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
-     * @param \Spryker\Service\UtilText\UtilTextServiceInterface $textService
      */
     public function __construct(
         ComputopServiceInterface $computopService,
         Application $application,
         ComputopToStoreInterface $store,
-        ComputopConfigInterface $config,
-        UtilTextServiceInterface $textService
+        ComputopConfigInterface $config
     ) {
         $this->computopService = $computopService;
         $this->application = $application;
         $this->store = $store;
         $this->config = $config;
-        $this->textService = $textService;
     }
 
     /**
@@ -108,13 +96,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function generateTransId(QuoteTransfer $quoteTransfer)
     {
-        $parameters = [
-            time(),
-            rand(100, 1000),
-            $quoteTransfer->getCustomer()->getCustomerReference(),
-        ];
-
-        return $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::MD5);
+        return $this->computopService->generateTransId($quoteTransfer);
     }
 
     /**

@@ -29,7 +29,6 @@ class PayNowFormDataProvider extends AbstractFormDataProvider
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
 
-
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopPayNow($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);

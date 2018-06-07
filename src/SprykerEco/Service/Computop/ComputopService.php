@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Service\Computop;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Service\Kernel\AbstractService;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\Computop\Exception\ComputopConverterException;
@@ -222,5 +223,19 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     public function generateReqId(TransferInterface $transfer)
     {
         return $this->getFactory()->createComputopMapper()->generateReqId($transfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return string
+     */
+    public function generateTransId(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createComputopMapper()->generateTransId($quoteTransfer);
     }
 }

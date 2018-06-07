@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop;
 
-use Spryker\Service\UtilText\UtilTextService;
 use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
@@ -42,12 +41,12 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayNowPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
-use SprykerEco\Yves\Computop\Mapper\Init\PayNowMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayNowMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 
@@ -380,8 +379,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
 
@@ -394,8 +392,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
 
@@ -408,8 +405,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
 
@@ -422,8 +418,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
 
@@ -436,8 +431,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
 
@@ -450,8 +444,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
 
@@ -464,8 +457,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
     }
     
@@ -478,16 +470,7 @@ class ComputopFactory extends AbstractFactory
             $this->getComputopService(),
             $this->getApplication(),
             $this->getStore(),
-            $this->getConfig(),
-            $this->createUtilTextService()
+            $this->getConfig()
         );
-    }
-
-    /**
-     * @return \Spryker\Service\UtilText\UtilTextServiceInterface
-     */
-    protected function createUtilTextService()
-    {
-        return new UtilTextService();
     }
 }

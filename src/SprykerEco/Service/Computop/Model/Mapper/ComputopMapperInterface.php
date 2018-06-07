@@ -8,7 +8,7 @@
 namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopMapperInterface
@@ -56,4 +56,11 @@ interface ComputopMapperInterface
      * @return string
      */
     public function generateReqId(TransferInterface $transfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return string
+     */
+    public function generateTransId(QuoteTransfer $quoteTransfer);
 }

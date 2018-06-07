@@ -146,7 +146,7 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
     }
 
     /**
-     * @param $transactionId
+     * @param string $transactionId
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */

@@ -39,8 +39,16 @@ class ComputopServiceFactory extends AbstractServiceFactory
     {
         return new ComputopMapper(
             $this->getConfig(),
-            new UtilTextService()
+            $this->createTextService()
         );
+    }
+
+    /**
+     * @return \Spryker\Service\UtilText\UtilTextServiceInterface
+     */
+    public function createTextService()
+    {
+        return new UtilTextService();
     }
 
     /**

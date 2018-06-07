@@ -8,7 +8,7 @@
 namespace SprykerEco\Service\Computop\Model\Mapper;
 
 use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Service\UtilText\Model\Hash;
 use Spryker\Service\UtilText\UtilTextServiceInterface;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -21,6 +21,9 @@ class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
     const ATTRIBUTES_SEPARATOR = '-';
     const REQ_ID_LENGTH = 32;
 
+    /**
+     * @var \Spryker\Service\UtilText\UtilTextServiceInterface
+     */
     protected $textService;
 
     /**
@@ -146,10 +149,30 @@ class ComputopMapper extends AbstractComputop implements ComputopMapperInterface
     }
 
     /**
-     * @return int
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return string
+     */
+    public function generateTransId(QuoteTransfer $quoteTransfer)
+    {
+        $parameters = [
+            $this->createUniqueSalt(),
+            $quoteTransfer->getCustomer()->getCustomerReference(),
+        ];
+
+        return $this->textService->hashValue(implode(self::ATTRIBUTES_SEPARATOR, $parameters), Hash::MD5);
+    }
+
+    /**
+     * @return string
      */
     protected function createUniqueSalt()
     {
-        return time();
+        $params = [
+            time(),
+            rand(100, 1000),
+        ];
+
+        return implode(self::ATTRIBUTES_SEPARATOR, $params);
     }
 }
