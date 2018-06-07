@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Yves\Computop\Form\PayNowSubForm;
 
 class PayNowFormDataProvider extends AbstractFormDataProvider
 {
@@ -36,77 +35,6 @@ class PayNowFormDataProvider extends AbstractFormDataProvider
         }
 
         return $quoteTransfer;
-    }
-
-    /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return array
-     */
-    public function getOptions(AbstractTransfer $quoteTransfer)
-    {
-        return [
-            PayNowSubForm::OPTION_CREDIT_CARD_BRAND_CHOICES => $this->getBrandChoices(),
-            PayNowSubForm::OPTION_CREDIT_CARD_EXPIRES_MONTH_CHOICES => $this->getMonthChoices(),
-            PayNowSubForm::OPTION_CREDIT_CARD_EXPIRES_YEAR_CHOICES => $this->getYearChoices(),
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getBrandChoices()
-    {
-        return [
-            'VISA' => 'Visa',
-            'MasterCard' => 'Master Card',
-            'AMEX' => 'American Express',
-            'DINERS' => 'Diners Club',
-            'JCB' => 'JCB',
-            'CBN' => 'CBN',
-            'SWITCH' => 'Switch',
-            'SOLO' => 'Solo',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getMonthChoices()
-    {
-        return [
-            '01' => '01',
-            '02' => '02',
-            '03' => '03',
-            '04' => '04',
-            '05' => '05',
-            '06' => '06',
-            '07' => '07',
-            '08' => '08',
-            '09' => '09',
-            '10' => '10',
-            '11' => '11',
-            '12' => '12',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getYearChoices()
-    {
-        $currentYear = date('Y');
-
-        return [
-            $currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-        ];
     }
 
     /**
