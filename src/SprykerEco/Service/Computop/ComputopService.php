@@ -26,6 +26,20 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
      *
      * @return string
      */
+    public function getTestModeDescriptionValue(array $items)
+    {
+        return $this->getFactory()->createComputopMapper()->getTestModeDescriptionValue($items);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param array $items
+     *
+     * @return string
+     */
     public function getDescriptionValue(array $items)
     {
         return $this->getFactory()->createComputopMapper()->getDescriptionValue($items);

@@ -13,6 +13,12 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
     /**
+     * Test mode enabled
+     * It changes description for API calls
+     */
+    const COMPUTOP_TEST_MODE_ENABLED = false;
+
+    /**
      * @param string $method
      *
      * @return bool
@@ -28,5 +34,13 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getHmacPassword()
     {
         return $this->get(ComputopConstants::HMAC_PASSWORD);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTestMode()
+    {
+        return self::COMPUTOP_TEST_MODE_ENABLED;
     }
 }
