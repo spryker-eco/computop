@@ -16,7 +16,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      * Test mode enabled
      * It changes description for API calls
      */
-    const COMPUTOP_TEST_MODE_ENABLED = false;
+    const COMPUTOP_TEST_MODE_ENABLED = true;
 
     /**
      * @param string $method
