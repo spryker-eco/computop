@@ -8,6 +8,7 @@
 namespace SprykerEco\Service\Computop;
 
 use Spryker\Service\Kernel\AbstractServiceFactory;
+use Spryker\Service\UtilText\UtilTextService;
 use SprykerEco\Service\Computop\Model\BlowfishHasher;
 use SprykerEco\Service\Computop\Model\Converter\ComputopConverter;
 use SprykerEco\Service\Computop\Model\HmacHasher;
@@ -36,7 +37,10 @@ class ComputopServiceFactory extends AbstractServiceFactory
      */
     public function createComputopMapper()
     {
-        return new ComputopMapper($this->getConfig());
+        return new ComputopMapper(
+            $this->getConfig(),
+            new UtilTextService()
+        );
     }
 
     /**

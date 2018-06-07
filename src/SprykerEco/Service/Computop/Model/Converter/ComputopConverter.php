@@ -35,7 +35,10 @@ class ComputopConverter extends AbstractComputop implements ComputopConverterInt
         $header->setMac($this->getResponseValue($decryptedArray, ComputopApiConfig::MAC));
         $header->setXId($this->getResponseValue($decryptedArray, ComputopApiConfig::X_ID));
 
-        $header->setIsSuccess($header->getStatus() === ComputopConfig::SUCCESS_STATUS);
+        $header->setIsSuccess(
+            $header->getStatus() === ComputopConfig::SUCCESS_STATUS ||
+            $header->getStatus() === ComputopConfig::SUCCESS_OK
+        );
         $header->setMethod($method);
 
         return $header;

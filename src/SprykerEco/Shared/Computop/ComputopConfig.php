@@ -24,6 +24,7 @@ class ComputopConfig extends AbstractBundleConfig
     //Computop provider constants
     const CAPTURE_MANUAL_TYPE = 'MANUAL';
     const SUCCESS_STATUS = 'success';
+    const SUCCESS_OK = 'OK';
     const AUTHORIZE_REQUEST_STATUS = 'AUTHORIZE_REQUEST';
     const DIRECT_DEBIT_DATE_FORMAT = 'd.m.Y';
     const PAY_PAL_NO_SHIPPING = 1;

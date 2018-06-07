@@ -128,4 +128,16 @@ interface ComputopServiceInterface
      * @return string
      */
     public function getBlowfishDecryptedValue($cipher, $length, $password);
+
+    /**
+     * Specification:
+     * - Generate ReqId for Computop calls
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer|\Spryker\Shared\Kernel\Transfer\TransferInterface $orderTransfer
+     *
+     * @return string
+     */
+    public function generateReqId(TransferInterface $transfer);
 }

@@ -142,7 +142,7 @@ abstract class AbstractPostPlaceMapper implements ApiPostPlaceMapperInterface
         $paymentEntity = $this->queryContainer
             ->queryPaymentByTransactionId($computopHeaderPayment->getTransId())
             ->findOne();
-        $computopPaymentTransfer->setReqId($paymentEntity->getReqId());
+        $computopPaymentTransfer->setReqId($this->computopService->generateReqId($orderTransfer));
         $computopPaymentTransfer->setRefNr($paymentEntity->getReference());
 
         return $computopPaymentTransfer;

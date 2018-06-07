@@ -93,7 +93,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
-        $computopPaymentTransfer->setReqId($this->generateReqId($quoteTransfer));
+        $computopPaymentTransfer->setReqId($this->computopService->generateReqId($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
@@ -115,31 +115,6 @@ abstract class AbstractMapper implements MapperInterface
         ];
 
         return $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::MD5);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return string
-     */
-    protected function generateReqId(QuoteTransfer $quoteTransfer)
-    {
-        $parameters = [
-            $this->createUniqueSalt(),
-            $quoteTransfer->getTotals()->getHash(),
-            $quoteTransfer->getCustomer()->getCustomerReference(),
-        ];
-        $string = $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::SHA256);
-
-        return substr($string, 0, ComputopApiConfig::REQ_ID_LENGTH);
-    }
-
-    /**
-     * @return int
-     */
-    protected function createUniqueSalt()
-    {
-        return time();
     }
 
     /**

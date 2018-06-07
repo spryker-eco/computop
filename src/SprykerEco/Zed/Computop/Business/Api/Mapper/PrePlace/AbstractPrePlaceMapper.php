@@ -139,7 +139,7 @@ abstract class AbstractPrePlaceMapper implements ApiPrePlaceMapperInterface
         );
 
         $paymentEntity = $this->getPaymentEntity($computopHeaderPayment->getTransId());
-        $computopPaymentTransfer->setReqId($paymentEntity->getReqId());
+        $computopPaymentTransfer->setReqId($this->computopService->generateReqId($quoteTransfer));
         $computopPaymentTransfer->setRefNr($paymentEntity->getReference());
 
         return $computopPaymentTransfer;

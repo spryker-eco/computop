@@ -83,22 +83,4 @@ class PayNowMapper extends AbstractMapper
 
         return $dataSubArray;
     }
-
-    /**
-     * @param string $merchantId
-     * @param string $data
-     * @param int $length
-     *
-     * @return array
-     */
-    protected function getQueryParameters($merchantId, $data, $length)
-    {
-        $queryData = parent::getQueryParameters($merchantId, $data, $length);
-
-        if ($this->config->getCreditCardTemplateEnabled()) {
-            $queryData[ComputopApiConfig::TEMPLATE] = $merchantId;
-        }
-
-        return $queryData;
-    }
 }

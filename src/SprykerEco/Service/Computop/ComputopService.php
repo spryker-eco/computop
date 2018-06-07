@@ -195,4 +195,18 @@ class ComputopService extends AbstractService implements ComputopServiceInterfac
     {
         return $this->getFactory()->createBlowfishHasher()->getBlowfishDecryptedValue($cipher, $length, $password);
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer|\Spryker\Shared\Kernel\Transfer\TransferInterface $transfer
+     *
+     * @return string
+     */
+    public function generateReqId(TransferInterface $transfer)
+    {
+        return $this->getFactory()->createComputopMapper()->generateReqId($transfer);
+    }
 }
