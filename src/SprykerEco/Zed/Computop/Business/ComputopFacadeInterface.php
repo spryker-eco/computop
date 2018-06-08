@@ -225,4 +225,16 @@ interface ComputopFacadeInterface
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     * - Checks if init call to Computop already performed
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 }

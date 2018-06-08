@@ -296,4 +296,21 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->createEasyCreditAuthorizeCommandHandler()
             ->handle($orderItems, $orderTransfer);
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
+    {
+        return $this
+            ->getFactory()
+            ->createPaymentReader()
+            ->isComputopPaymentExist($quoteTransfer);
+    }
 }

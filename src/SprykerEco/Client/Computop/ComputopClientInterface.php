@@ -133,4 +133,16 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Checks if init call to Computop already performed
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 }

@@ -48,6 +48,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\SofortResponseSa
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\RefundSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\ReverseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Reader\ComputopPaymentReader;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
 /**
@@ -251,6 +252,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $this->createEasyCreditAuthorizeRequest(),
             $this->createAuthorizeSaver()
         );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Reader\ComputopPaymentReaderInterface
+     */
+    public function createPaymentReader()
+    {
+        return new ComputopPaymentReader($this->getQueryContainer());
     }
 
     /**

@@ -506,6 +506,7 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
         <property name="computopIdeal" type="ComputopIdealPayment" />
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
+        <property name="isComputopPaymentExist" type="bool" />
     </transfer>
 
     <transfer name="Order">
