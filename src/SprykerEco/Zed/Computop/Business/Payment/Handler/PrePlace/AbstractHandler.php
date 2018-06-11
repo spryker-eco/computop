@@ -7,34 +7,33 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface;
 
 abstract class AbstractHandler implements PrePlaceHandlerInterface
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface
+     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface
      */
-    protected $request;
+    protected $computopApiFacade;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface $request
+     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface $computopApiFacade
      */
-    public function __construct(
-        PrePlaceRequestInterface $request
-    ) {
-        $this->request = $request;
+    public function __construct(ComputopToComputopApiFacadeInterface $computopApiFacade)
+    {
+        $this->computopApiFacade = $computopApiFacade;
     }
     
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer
      */
     protected function createComputopHeaderPayment(QuoteTransfer $quoteTransfer)
     {
-        $headerPayment = new ComputopHeaderPaymentTransfer();
+        $headerPayment = new ComputopApiHeaderPaymentTransfer();
         $computopEntity = $quoteTransfer->getPayment()->getComputopEasyCredit();
         $headerPayment->fromArray($computopEntity->toArray(), true);
 

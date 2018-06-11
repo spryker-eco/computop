@@ -7,6 +7,9 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
+use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
+
 class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeInterface
 {
     /**
@@ -20,5 +23,18 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function __construct($computopApiFacade)
     {
         $this->computopApiFacade = $computopApiFacade;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $headerPaymentTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
+    public function performEasyCreditStatusRequest(
+        QuoteTransfer $quoteTransfer,
+        ComputopApiHeaderPaymentTransfer $headerPaymentTransfer
+    ) {
+        return $this->computopApiFacade->performEasyCreditStatusRequest($quoteTransfer, $headerPaymentTransfer);
     }
 }

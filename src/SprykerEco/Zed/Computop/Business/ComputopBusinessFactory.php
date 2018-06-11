@@ -237,7 +237,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createEasyCreditStatusHandler()
     {
         return new EasyCreditStatusHandler(
-            $this->createEasyCreditStatusRequest(),
+            $this->getComputopApiFacade(),
             $this->getMoneyFacade(),
             $this->createComputopResponseLogger()
         );
@@ -300,14 +300,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createRefundPaymentRequest()
     {
         return $this->createApiFactory()->createRefundPaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface
-     */
-    protected function createEasyCreditStatusRequest()
-    {
-        return $this->createApiFactory()->createEasyCreditStatusRequest();
     }
 
     /**
