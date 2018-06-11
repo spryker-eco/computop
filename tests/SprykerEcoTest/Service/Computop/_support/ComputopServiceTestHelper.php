@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Service\Computop;
 
 use Codeception\TestCase\Test;
+use Spryker\Service\UtilText\UtilTextService;
 use SprykerEco\Service\Computop\ComputopConfig;
 use SprykerEco\Service\Computop\Model\Converter\ComputopConverter;
 use SprykerEco\Service\Computop\Model\Mapper\ComputopMapper;
@@ -37,7 +38,10 @@ class ComputopServiceTestHelper extends Test
      */
     public function createMapper()
     {
-        return new ComputopMapper($this->createComputopConfigMock());
+        return new ComputopMapper(
+            $this->createComputopConfigMock(),
+            $this->createTextService()
+        );
     }
 
     /**
@@ -46,5 +50,13 @@ class ComputopServiceTestHelper extends Test
     public function createConverter()
     {
         return new ComputopConverter($this->createComputopConfigMock());
+    }
+
+    /**
+     * @return \Spryker\Service\UtilText\UtilTextServiceInterface
+     */
+    protected function createTextService()
+    {
+        return new UtilTextService();
     }
 }
