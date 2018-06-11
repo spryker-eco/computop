@@ -31,10 +31,10 @@ class PayPalMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
         $computopPaymentTransfer->setMac(
-            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
+            $this->computopApiService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
-        $decryptedValues = $this->computopService->getEncryptedArray(
+        $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
             $this->config->getBlowfishPassword()
         );
@@ -71,7 +71,7 @@ class PayPalMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

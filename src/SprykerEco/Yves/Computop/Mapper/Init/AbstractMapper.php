@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Silex\Application;
-use SprykerEco\Service\Computop\ComputopServiceInterface;
+use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\ComputopConfigInterface;
@@ -19,9 +19,9 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 abstract class AbstractMapper implements MapperInterface
 {
     /**
-     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
+     * @var \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
-    protected $computopService;
+    protected $computopApiService;
 
     /**
      * @var \Silex\Application
@@ -51,18 +51,18 @@ abstract class AbstractMapper implements MapperInterface
     abstract protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
      * @param \Silex\Application $application
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
      */
     public function __construct(
-        ComputopServiceInterface $computopService,
+        ComputopApiServiceInterface $computopApiService,
         Application $application,
         ComputopToStoreInterface $store,
         ComputopConfigInterface $config
     ) {
-        $this->computopService = $computopService;
+        $this->computopApiService = $computopApiService;
         $this->application = $application;
         $this->store = $store;
         $this->config = $config;
@@ -81,7 +81,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
-        $computopPaymentTransfer->setReqId($this->computopService->generateReqId($quoteTransfer));
+        $computopPaymentTransfer->setReqId($this->computopApiService->generateReqId($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
@@ -96,7 +96,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function generateTransId(QuoteTransfer $quoteTransfer)
     {
-        return $this->computopService->generateTransId($quoteTransfer);
+        return $this->computopApiService->generateTransId($quoteTransfer);
     }
 
     /**

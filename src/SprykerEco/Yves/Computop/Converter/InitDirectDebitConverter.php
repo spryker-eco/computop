@@ -25,14 +25,14 @@ class InitDirectDebitConverter extends AbstractInitConverter
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields
-        $responseTransfer->setBankAccountIban($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_IBAN));
-        $responseTransfer->setBankAccountBic($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_BIC));
-        $responseTransfer->setAccountOwner($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_OWNER));
-        $responseTransfer->setAccountBank($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_BANK));
-        $responseTransfer->setMandateId($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::MANDATE_ID));
-        $responseTransfer->setDateOfSignature($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::DATE_OF_SIGNATURE_ID));
-        $responseTransfer->setBankAccountPban($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_PBAN));
-        $responseTransfer->setMdtSeqType($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::MDT_SEQ_TYPE));
+        $responseTransfer->setBankAccountIban($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_IBAN));
+        $responseTransfer->setBankAccountBic($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_BIC));
+        $responseTransfer->setAccountOwner($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_OWNER));
+        $responseTransfer->setAccountBank($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ACCOUNT_BANK));
+        $responseTransfer->setMandateId($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::MANDATE_ID));
+        $responseTransfer->setDateOfSignature($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::DATE_OF_SIGNATURE_ID));
+        $responseTransfer->setBankAccountPban($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BANK_ACCOUNT_PBAN));
+        $responseTransfer->setMdtSeqType($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::MDT_SEQ_TYPE));
 
         return $responseTransfer;
     }

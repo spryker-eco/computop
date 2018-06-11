@@ -25,15 +25,15 @@ class InitPayNowConverter extends AbstractInitConverter
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields
-        $responseTransfer->setPcNr($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::PC_NR));
-        $responseTransfer->setCreditCardBrand($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_BRAND));
-        $responseTransfer->setCreditCardExpiry($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_EXPIRY));
-        $responseTransfer->setMaskedPan($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::MASKED_PAN));
-        $responseTransfer->setCavv($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CAVV));
-        $responseTransfer->setEci($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ECI));
-        $responseTransfer->setType($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::TYPE));
-        $responseTransfer->setPlain($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::PLAIN));
-        $responseTransfer->setCustom($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CUSTOM));
+        $responseTransfer->setPcNr($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PC_NR));
+        $responseTransfer->setCreditCardBrand($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_BRAND));
+        $responseTransfer->setCreditCardExpiry($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_EXPIRY));
+        $responseTransfer->setMaskedPan($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::MASKED_PAN));
+        $responseTransfer->setCavv($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CAVV));
+        $responseTransfer->setEci($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ECI));
+        $responseTransfer->setType($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::TYPE));
+        $responseTransfer->setPlain($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PLAIN));
+        $responseTransfer->setCustom($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CUSTOM));
 
         return $responseTransfer;
     }

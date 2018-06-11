@@ -31,7 +31,7 @@ class PayNowMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
         $computopPaymentTransfer->setMac(
-            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
+            $this->computopApiService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
         $computopPaymentTransfer->setUrl(
@@ -57,7 +57,7 @@ class PayNowMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_NOW_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

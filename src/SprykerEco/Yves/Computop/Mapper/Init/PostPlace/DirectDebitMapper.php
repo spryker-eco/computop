@@ -32,10 +32,10 @@ class DirectDebitMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
         $computopPaymentTransfer->setMac(
-            $this->computopService->getMacEncryptedValue($computopPaymentTransfer)
+            $this->computopApiService->getMacEncryptedValue($computopPaymentTransfer)
         );
 
-        $decryptedValues = $this->computopService->getEncryptedArray(
+        $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
             $this->config->getBlowfishPassword()
         );
@@ -72,7 +72,7 @@ class DirectDebitMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::DIRECT_DEBIT_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

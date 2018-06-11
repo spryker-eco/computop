@@ -14,7 +14,8 @@
     "spryker/step-engine": "^3.1.0",
     "spryker/quote": "^1.0.0 || ^2.0.0",
     "spryker/transfer": "^3.0.0",
-    "spryker/zed-request": "^3.0.0"
+    "spryker/zed-request": "^3.0.0",
+    "spryker-eco/computop-api": "dev-feature/ECO-1574-Split-computop-module-into-API-and-main"
   },
   "autoload": {
     "psr-4": {
@@ -37,6 +38,10 @@
     {
       "type": "composer",
       "url": "https://code.spryker.com/repo/private"
+    },
+    {
+      "type": "git",
+      "url": "git@github.com:spryker-eco/computop-api.git"
     }
   ],
   "extra": {
