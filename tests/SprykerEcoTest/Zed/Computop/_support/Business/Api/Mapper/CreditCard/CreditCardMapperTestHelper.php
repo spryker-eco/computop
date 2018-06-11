@@ -94,6 +94,12 @@ class CreditCardMapperTestHelper extends Test
         $computopServiceMock->method('getTestModeDescriptionValue')
             ->willReturn('');
 
+        $computopServiceMock->method('generateReqId')
+            ->willReturn('');
+
+        $computopServiceMock->method('generateTransId')
+            ->willReturn('');
+
         return $computopServiceMock;
     }
 
