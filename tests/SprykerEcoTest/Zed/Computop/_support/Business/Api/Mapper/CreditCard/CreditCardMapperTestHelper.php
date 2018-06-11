@@ -82,7 +82,14 @@ class CreditCardMapperTestHelper extends Test
 
         $computopServiceMock = $this->createPartialMock(
             ComputopService::class,
-            ['getMacEncryptedValue', 'getEncryptedArray', 'getDescriptionValue', 'getTestModeDescriptionValue']
+            [
+                'getMacEncryptedValue',
+                'getEncryptedArray',
+                'getDescriptionValue',
+                'getTestModeDescriptionValue',
+                'generateReqId',
+                'generateTransId',
+            ]
         );
 
         $computopServiceMock->method('getEncryptedArray')
