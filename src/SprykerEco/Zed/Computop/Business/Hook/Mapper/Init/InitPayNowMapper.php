@@ -33,7 +33,7 @@ class InitPayNowMapper extends AbstractMapper
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
     {
         $computopPaymentTransfer->setRefNr($quoteTransfer->getOrderReference());
-        $decryptedValues = $this->computopService->getEncryptedArray(
+        $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
             $this->config->getBlowfishPassword()
         );

@@ -486,7 +486,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveSofortMapper()
     {
-        return new InitSofortMapper($this->getConfig(), $this->getComputopService());
+        return new InitSofortMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -494,7 +494,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveCreditCart()
     {
-        return new InitCreditCardMapper($this->getConfig(), $this->getComputopService());
+        return new InitCreditCardMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -502,7 +502,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSavePayNowMapper()
     {
-        return new InitPayNowMapper($this->getConfig(), $this->getComputopService());
+        return new InitPayNowMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -510,7 +510,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSavePayPal()
     {
-        return new InitPayPalMapper($this->getConfig(), $this->getComputopService());
+        return new InitPayPalMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -518,7 +518,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveDirectDebit()
     {
-        return new InitDirectDebitMapper($this->getConfig(), $this->getComputopService());
+        return new InitDirectDebitMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -526,7 +526,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveEasyCredit()
     {
-        return new InitEasyCreditMapper($this->getConfig(), $this->getComputopService());
+        return new InitEasyCreditMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -534,7 +534,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSavePaydirektMapper()
     {
-        return new InitPaydirektMapper($this->getConfig(), $this->getComputopService());
+        return new InitPaydirektMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -542,7 +542,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveIdealMapper()
     {
-        return new InitIdealMapper($this->getConfig(), $this->getComputopService());
+        return new InitIdealMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -551,6 +551,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getComputopService()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
+    }
+
+    /**
+     * @return \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
+     */
+    protected function getComputopApiService()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP_API);
     }
 
     /**
