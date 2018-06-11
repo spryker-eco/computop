@@ -584,4 +584,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_MONEY);
     }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface
+     */
+    protected function getComputopApiFacade()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_COMPUTOP_API);
+    }
 }
