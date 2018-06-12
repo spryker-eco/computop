@@ -42,13 +42,11 @@ class EasyCreditStatusHandler extends AbstractHandler
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
         $computopHeaderPayment = $this->createComputopHeaderPayment($quoteTransfer);
-
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer $responseTransfer */
 
         $responseTransfer = $this
             ->computopApiFacade
