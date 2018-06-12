@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitDirectDebitMapper;
@@ -260,14 +259,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPaymentReader()
     {
         return new ComputopPaymentReader($this->getQueryContainer());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactoryInterface
-     */
-    protected function createApiFactory()
-    {
-        return new ComputopBusinessApiFactory();
     }
 
     /**
