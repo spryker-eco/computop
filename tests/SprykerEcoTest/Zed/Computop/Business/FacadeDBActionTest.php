@@ -13,14 +13,14 @@ use Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
-use Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -216,7 +216,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
      */
     protected function getQuoteTrasfer()
     {
-        $computopHeader = new ComputopResponseHeaderTransfer();
+        $computopHeader = new ComputopApiResponseHeaderTransfer();
         $computopHeader
             ->setTransId(self::TRANS_ID_VALUE)
             ->setPayId(self::PAY_ID_VALUE)
@@ -262,7 +262,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditTransfer = new ComputopEasyCreditPaymentTransfer();
         $computopEasyCreditTransfer->setEasyCreditInitResponse($computopEasyCreditInitTransfer);
 
-        $computopEasyCreditStatusTransfer = new ComputopEasyCreditStatusResponseTransfer();
+        $computopEasyCreditStatusTransfer = new ComputopApiEasyCreditStatusResponseTransfer();
         $computopEasyCreditStatusTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer->setEasyCreditStatusResponse($computopEasyCreditStatusTransfer);
         $computopEasyCreditTransfer->fromArray($computopHeader->toArray(), true);
@@ -300,7 +300,6 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getOmsFacade',
                 'getConfig',
                 'getMoneyFacade',
-                'createEasyCreditStatusRequest',
             ]
         );
 
@@ -313,8 +312,6 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->willReturn($this->createConfig());
         $stub->method('getMoneyFacade')
             ->willReturn($moneyFacadeStub);
-        $stub->method('createEasyCreditStatusRequest')
-            ->willReturn($this->createStatusRequest());
 
         return $stub;
     }
@@ -352,36 +349,5 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->setFkSalesOrderItem($orderItemEntity->getIdSalesOrderItem())
             ->setStatus('test');
         $computopOrderItem->save();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function createStatusRequest()
-    {
-        $stub = $this->createMock(EasyCreditStatusRequest::class, ['triggerEvent' => '']);
-        $stub->method('request')
-            ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
-
-        return $stub;
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer
-     */
-    protected function createComputopEasyCreditStatusResponseTransfer()
-    {
-        return (new ComputopEasyCreditStatusResponseTransfer())
-            ->setHeader(
-                (new ComputopResponseHeaderTransfer())
-                    ->setTransId(self::TRANS_ID_VALUE)
-                    ->setPayId(self::PAY_ID_VALUE)
-                    ->setMId(self::M_ID_VALUE)
-                    ->setXId(self::X_ID_VALUE)
-                    ->setCode(self::CODE_VALUE)
-                    ->setDescription(self::DESCRIPTION_VALUE)
-                    ->setIsSuccess(true)
-                    ->setStatus(self::STATUS_VALUE)
-            );
     }
 }

@@ -7,10 +7,8 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
-use Generated\Shared\Transfer\ComputopRefundResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\RefundApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use Generated\Shared\Transfer\ComputopApiRefundResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -43,11 +41,11 @@ class RefundPaymentTest extends AbstractPaymentTest
         $orderItems = $this->omsHelper->createOrderItems();
 
         //todo: update test
-        /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $response */
+        /** @var \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $response */
         $response = $service->refundCommandHandle($orderItems, $orderTransfer);
 
-        $this->assertInstanceOf(ComputopRefundResponseTransfer::class, $response);
-        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+        $this->assertInstanceOf(ComputopApiRefundResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
         $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
@@ -72,27 +70,5 @@ class RefundPaymentTest extends AbstractPaymentTest
     protected function getTransIdValue()
     {
         return self::TRANS_ID_VALUE;
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getApiAdapterStub()
-    {
-        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
-        $apiBuilder->setMethods([
-            'createRefundAdapter',
-        ]);
-        $apiStub = $apiBuilder->getMock();
-
-        $apiMock = $this->createPartialMock(RefundApiAdapter::class, ['sendRequest']);
-
-        $apiMock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_REFUND_VALUE, self::LEN_REFUND_VALUE));
-
-        $apiStub->method('createRefundAdapter')
-            ->willReturn($apiMock);
-
-        return $apiStub;
     }
 }

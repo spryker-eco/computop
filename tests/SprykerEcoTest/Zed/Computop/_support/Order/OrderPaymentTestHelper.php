@@ -10,13 +10,13 @@ namespace SprykerEcoTest\Zed\Computop\Order;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Service\Computop\ComputopService;
+use SprykerEco\Service\ComputopApi\ComputopApiService;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -36,7 +36,7 @@ class OrderPaymentTestHelper extends Test
             [
                 'getConfig',
                 'getQueryContainer',
-                'getComputopService',
+                'getComputopApiService',
             ]
         );
 
@@ -48,8 +48,8 @@ class OrderPaymentTestHelper extends Test
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
 
-        $stub->method('getComputopService')
-            ->willReturn(new ComputopService());
+        $stub->method('getComputopApiService')
+            ->willReturn(new ComputopApiService());
 
         return $stub;
     }
@@ -112,11 +112,11 @@ class OrderPaymentTestHelper extends Test
     }
 
     /**
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
     public function createComputopResponseHeaderTransfer()
     {
-        $computopHeaderResponse = new ComputopResponseHeaderTransfer();
+        $computopHeaderResponse = new ComputopApiResponseHeaderTransfer();
         $computopHeaderResponse->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
 
         return $computopHeaderResponse;

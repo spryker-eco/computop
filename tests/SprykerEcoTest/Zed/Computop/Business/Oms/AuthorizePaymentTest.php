@@ -7,10 +7,8 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
-use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -46,11 +44,11 @@ class AuthorizePaymentTest extends AbstractPaymentTest
         $orderTransfer = $this->createOrderTransfer();
         $orderItems = $this->omsHelper->createOrderItems();
 
-        /** @var \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $response */
+        /** @var \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer $response */
         $response = $service->authorizeCommandHandle($orderItems, $orderTransfer);
 
-        $this->assertInstanceOf(ComputopAuthorizeResponseTransfer::class, $response);
-        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+        $this->assertInstanceOf(ComputopApiAuthorizeResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
         $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
@@ -75,27 +73,5 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     protected function getTransIdValue()
     {
         return self::TRANS_ID_VALUE;
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getApiAdapterStub()
-    {
-        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
-        $apiBuilder->setMethods([
-            'createAuthorizeAdapter',
-        ]);
-        $apiStub = $apiBuilder->getMock();
-
-        $apiMock = $this->createPartialMock(AuthorizeApiAdapter::class, ['sendRequest']);
-
-        $apiMock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_AUTHORIZE_VALUE, self::LEN_AUTHORIZE_VALUE));
-
-        $apiStub->method('createAuthorizeAdapter')
-            ->willReturn($apiMock);
-
-        return $apiStub;
     }
 }

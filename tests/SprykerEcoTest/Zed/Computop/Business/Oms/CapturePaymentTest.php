@@ -7,10 +7,8 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
-use Generated\Shared\Transfer\ComputopCaptureResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\CaptureApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 
 /**
@@ -43,11 +41,11 @@ class CapturePaymentTest extends AbstractPaymentTest
         $orderItems = $this->omsHelper->createOrderItems();
 
         //todo: update test
-        /** @var \Generated\Shared\Transfer\ComputopCaptureResponseTransfer $response */
+        /** @var \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer $response */
         $response = $service->captureCommandHandle($orderItems, $orderTransfer);
 
-        $this->assertInstanceOf(ComputopCaptureResponseTransfer::class, $response);
-        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+        $this->assertInstanceOf(ComputopApiCaptureResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
         $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
@@ -72,27 +70,5 @@ class CapturePaymentTest extends AbstractPaymentTest
     protected function getTransIdValue()
     {
         return self::TRANS_ID_VALUE;
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getApiAdapterStub()
-    {
-        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
-        $apiBuilder->setMethods([
-            'createCaptureAdapter',
-        ]);
-        $apiStub = $apiBuilder->getMock();
-
-        $apiMock = $this->createPartialMock(CaptureApiAdapter::class, ['sendRequest']);
-
-        $apiMock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_CAPTURE_VALUE, self::LEN_CAPTURE_VALUE));
-
-        $apiStub->method('createCaptureAdapter')
-            ->willReturn($apiMock);
-
-        return $apiStub;
     }
 }
