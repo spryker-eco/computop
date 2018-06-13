@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver;
 
+use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -34,12 +35,12 @@ class AuthorizeSaver extends AbstractSaver
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
+    protected function saveComputopDetails(ComputopApiAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 

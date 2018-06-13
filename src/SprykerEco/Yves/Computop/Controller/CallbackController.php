@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Controller;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -153,11 +153,11 @@ class CallbackController extends AbstractController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseHeaderTransfer
      *
      * @return string
      */
-    protected function getErrorMessageText(ComputopResponseHeaderTransfer $responseHeaderTransfer)
+    protected function getErrorMessageText(ComputopApiResponseHeaderTransfer $responseHeaderTransfer)
     {
         $errorText = $responseHeaderTransfer->getDescription();
         $errorCode = $responseHeaderTransfer->getCode();

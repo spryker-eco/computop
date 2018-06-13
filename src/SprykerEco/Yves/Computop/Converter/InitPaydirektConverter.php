@@ -8,18 +8,18 @@
 namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitPaydirektConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
     {
         $responseTransfer = new ComputopPaydirektInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);

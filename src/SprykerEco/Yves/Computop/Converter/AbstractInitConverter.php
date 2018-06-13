@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 
@@ -25,11 +25,11 @@ abstract class AbstractInitConverter implements ConverterInterface
 
     /**
      * @param array $decryptedArray
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    abstract protected function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header);
+    abstract protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header);
         
     /**
      * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService

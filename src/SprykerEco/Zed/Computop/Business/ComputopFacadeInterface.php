@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -33,12 +33,12 @@ interface ComputopFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      * @param string $method
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method);
+    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, $method);
 
     /**
      * Specification:

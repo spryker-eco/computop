@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Communication\Controller;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
@@ -17,11 +17,11 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 class GatewayController extends AbstractGatewayController
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $headerTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $headerTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseAction(ComputopResponseHeaderTransfer $headerTransfer)
+    public function logResponseAction(ComputopApiResponseHeaderTransfer $headerTransfer)
     {
         return $this->getFacade()->logResponseHeader($headerTransfer, $headerTransfer->getMethod());
     }

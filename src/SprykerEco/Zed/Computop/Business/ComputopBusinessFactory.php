@@ -481,14 +481,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\ComputopServiceInterface
-     */
-    protected function getComputopService()
-    {
-        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
-    }
-
-    /**
      * @return \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
     protected function getComputopApiService()

@@ -20,7 +20,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const SERVICE_COMPUTOP = 'SERVICE_COMPUTOP';
     const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
     const FACADE_OMS = 'FACADE_OMS';
     const FACADE_MONEY = 'FACADE_MONEY';
@@ -47,14 +46,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return new ComputopToCalculationFacadeBridge($container->getLocator()->calculation()->facade());
         };
 
-        $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return $container->getLocator()->computop()->service();
-        };
-
-        $container[self::SERVICE_COMPUTOP_API] = function () use ($container) {
-            return $container->getLocator()->computopApi()->service();
-        };
-
         return $container;
     }
 
@@ -67,8 +58,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
-        $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return $container->getLocator()->computop()->service();
+        $container[self::SERVICE_COMPUTOP_API] = function () use ($container) {
+            return $container->getLocator()->computopApi()->service();
         };
 
         $container[self::FACADE_OMS] = function () use ($container) {

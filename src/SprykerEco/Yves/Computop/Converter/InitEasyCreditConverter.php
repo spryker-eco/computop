@@ -7,19 +7,19 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 
 class InitEasyCreditConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
     {
         $responseTransfer = new ComputopEasyCreditInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
@@ -29,11 +29,11 @@ class InitEasyCreditConverter extends AbstractInitConverter
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    protected function updateResponseHeader(ComputopResponseHeaderTransfer $header)
+    protected function updateResponseHeader(ComputopApiResponseHeaderTransfer $header)
     {
         if ($header->getStatus() === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
             $header->setIsSuccess(true);

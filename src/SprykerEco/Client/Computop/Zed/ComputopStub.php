@@ -7,18 +7,18 @@
 
 namespace SprykerEco\Client\Computop\Zed;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class ComputopStub extends ZedRequestStub implements ComputopStubInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseTransfer
      *
      * @return void
      */
-    public function logResponse(ComputopResponseHeaderTransfer $responseTransfer)
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer)
     {
         $this->zedStub->call('/computop/gateway/log-response', $responseTransfer);
     }
