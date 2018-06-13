@@ -32,10 +32,10 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\EasyCreditStatusRequest;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
@@ -300,6 +300,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getOmsFacade',
                 'getConfig',
                 'getMoneyFacade',
+                'getComputopApiFacade',
             ]
         );
 
@@ -312,6 +313,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->willReturn($this->createConfig());
         $stub->method('getMoneyFacade')
             ->willReturn($moneyFacadeStub);
+        $stub->method('getComputopApiFacade')
+            ->willReturn($this->createComputopApiFacade());
 
         return $stub;
     }
@@ -349,5 +352,43 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->setFkSalesOrderItem($orderItemEntity->getIdSalesOrderItem())
             ->setStatus('test');
         $computopOrderItem->save();
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
+     */
+    protected function createComputopApiFacade()
+    {
+        $builder = $this->getMockBuilder(ComputopToComputopApiFacadeBridge::class);
+        $builder->setMethods(
+            [
+                'performEasyCreditStatusRequest',
+            ]
+        );
+
+        $stub = $builder->getMock();
+        $stub->method('performEasyCreditStatusRequest')
+            ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
+
+        return $stub;
+    }
+
+    /**
+    * @return \Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer
+    */
+    protected function createComputopEasyCreditStatusResponseTransfer()
+    {
+        return (new ComputopApiEasyCreditStatusResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setMId(self::M_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setDescription(self::DESCRIPTION_VALUE)
+                    ->setIsSuccess(true)
+                    ->setStatus(self::STATUS_VALUE)
+            );
     }
 }
