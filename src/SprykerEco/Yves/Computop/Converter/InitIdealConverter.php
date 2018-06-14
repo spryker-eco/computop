@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitIdealConverter extends AbstractInitConverter

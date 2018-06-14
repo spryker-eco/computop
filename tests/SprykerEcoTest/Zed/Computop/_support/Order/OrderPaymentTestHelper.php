@@ -8,9 +8,9 @@
 namespace SprykerEcoTest\Zed\Computop\Order;
 
 use Codeception\TestCase\Test;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;

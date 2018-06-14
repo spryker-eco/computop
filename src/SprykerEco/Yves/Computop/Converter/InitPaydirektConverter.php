@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitPaydirektConverter extends AbstractInitConverter

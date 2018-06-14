@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitPayPalConverter extends AbstractInitConverter

@@ -78,7 +78,7 @@ class CancelPaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|ComputopToComputopApiFacadeBridge
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
     protected function createComputopApiFacade()
     {
@@ -114,7 +114,8 @@ class CancelPaymentTest extends AbstractPaymentTest
                     ->setStatus(self::STATUS_VALUE)
                     ->setCode(self::CODE_VALUE)
                     ->setIsSuccess(true)
-            );
+            )
+            ->setIsAuthLast(true);
     }
 
     /**

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver;
 
 use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
-use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;

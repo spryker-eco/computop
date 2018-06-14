@@ -77,7 +77,7 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|ComputopToComputopApiFacadeBridge
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
     protected function createComputopApiFacade()
     {
