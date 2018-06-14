@@ -7,20 +7,22 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
+use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
 use Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
-use Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -31,11 +33,12 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
-use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\EasyCreditStatusRequest;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
@@ -152,6 +155,22 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
+    public function testSavePayNowInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->savePayNowInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
     public function testSavePayPalInitResponse()
     {
         $this->setUpDB();
@@ -212,11 +231,39 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
+     * @return void
+     */
+    public function testIsComputopPaymentExistSuccess()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $response = $service->isComputopPaymentExist($this->getQuoteTrasfer());
+
+        $this->assertTrue($response->getPayment()->getIsComputopPaymentExist());
+    }
+
+    /**
+     * @return void
+     */
+    public function testIsComputopPaymentExistFailure()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $quoteTransfer = $this->getQuoteTrasfer();
+        $quoteTransfer->getPayment()->getComputopPayNow()->setTransId('FAILURE_TRANS_VALUE');
+        $response = $service->isComputopPaymentExist($quoteTransfer);
+
+        $this->assertNotTrue($response->getPayment()->getIsComputopPaymentExist());
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function getQuoteTrasfer()
     {
-        $computopHeader = new ComputopResponseHeaderTransfer();
+        $computopHeader = new ComputopApiResponseHeaderTransfer();
         $computopHeader
             ->setTransId(self::TRANS_ID_VALUE)
             ->setPayId(self::PAY_ID_VALUE)
@@ -247,6 +294,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopCredicCardTransfer = new ComputopCreditCardPaymentTransfer();
         $computopCredicCardTransfer->setCreditCardInitResponse($computopCredicCardInitTransfer);
 
+        $computopPayNowInitTransfer = new ComputopPayNowInitResponseTransfer();
+        $computopPayNowInitTransfer->setHeader($computopHeader);
+        $computopPayNowTransfer = new ComputopPayNowPaymentTransfer();
+        $computopPayNowTransfer->setPayNowInitResponse($computopPayNowInitTransfer);
+        $computopPayNowTransfer->setTransId('TRANS_ID_VALUE');
+
         $computopPayPalInitTransfer = new ComputopPayPalInitResponseTransfer();
         $computopPayPalInitTransfer->setHeader($computopHeader);
         $computopPayPalTransfer = new ComputopPayPalPaymentTransfer();
@@ -262,7 +315,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditTransfer = new ComputopEasyCreditPaymentTransfer();
         $computopEasyCreditTransfer->setEasyCreditInitResponse($computopEasyCreditInitTransfer);
 
-        $computopEasyCreditStatusTransfer = new ComputopEasyCreditStatusResponseTransfer();
+        $computopEasyCreditStatusTransfer = new ComputopApiEasyCreditStatusResponseTransfer();
         $computopEasyCreditStatusTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer->setEasyCreditStatusResponse($computopEasyCreditStatusTransfer);
         $computopEasyCreditTransfer->fromArray($computopHeader->toArray(), true);
@@ -274,9 +327,11 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopIdeal($computopIdealTransfer);
         $paymentTransfer->setComputopPaydirekt($computopPaydirektTransfer);
         $paymentTransfer->setComputopCreditCard($computopCredicCardTransfer);
+        $paymentTransfer->setComputopPayNow($computopPayNowTransfer);
         $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
         $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
         $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
+        $paymentTransfer->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW);
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->setPayment($paymentTransfer);
@@ -300,7 +355,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getOmsFacade',
                 'getConfig',
                 'getMoneyFacade',
-                'createEasyCreditStatusRequest',
+                'getComputopApiFacade',
             ]
         );
 
@@ -313,8 +368,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->willReturn($this->createConfig());
         $stub->method('getMoneyFacade')
             ->willReturn($moneyFacadeStub);
-        $stub->method('createEasyCreditStatusRequest')
-            ->willReturn($this->createStatusRequest());
+        $stub->method('getComputopApiFacade')
+            ->willReturn($this->createComputopApiFacade());
 
         return $stub;
     }
@@ -355,25 +410,30 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
-    protected function createStatusRequest()
+    protected function createComputopApiFacade()
     {
-        $stub = $this->createMock(EasyCreditStatusRequest::class, ['triggerEvent' => '']);
-        $stub->method('request')
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                ['performEasyCreditStatusRequest']
+            );
+
+        $stub->method('performEasyCreditStatusRequest')
             ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
 
         return $stub;
     }
 
     /**
-     * @return \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer
      */
     protected function createComputopEasyCreditStatusResponseTransfer()
     {
-        return (new ComputopEasyCreditStatusResponseTransfer())
+        return (new ComputopApiEasyCreditStatusResponseTransfer())
             ->setHeader(
-                (new ComputopResponseHeaderTransfer())
+                (new ComputopApiResponseHeaderTransfer())
                     ->setTransId(self::TRANS_ID_VALUE)
                     ->setPayId(self::PAY_ID_VALUE)
                     ->setMId(self::M_ID_VALUE)

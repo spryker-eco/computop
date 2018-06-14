@@ -17,7 +17,7 @@ use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
     const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
-    const SERVICE_COMPUTOP = 'SERVICE_COMPUTOP';
+    const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
     const CLIENT_QUOTE = 'CLIENT_QUOTE';
     const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
     const STORE = 'STORE';
@@ -33,8 +33,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return $container->getLocator()->computop()->client();
         };
 
-        $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return $container->getLocator()->computop()->service();
+        $container[self::SERVICE_COMPUTOP_API] = function () use ($container) {
+            return $container->getLocator()->computopApi()->service();
         };
 
         $container[self::CLIENT_QUOTE] = function () use ($container) {

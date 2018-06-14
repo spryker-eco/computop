@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Controller;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -121,10 +121,10 @@ class CallbackController extends AbstractController
     {
         $decryptedArray = $this
             ->getFactory()
-            ->getComputopService()
+            ->getComputopApiService()
             ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
+        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractHeader(
             $decryptedArray,
             ComputopConfig::INIT_METHOD
         );
@@ -140,10 +140,10 @@ class CallbackController extends AbstractController
     {
         $decryptedArray = $this
             ->getFactory()
-            ->getComputopService()
+            ->getComputopApiService()
             ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
+        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractHeader(
             $decryptedArray,
             ComputopConfig::INIT_METHOD
         );
@@ -153,11 +153,11 @@ class CallbackController extends AbstractController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseHeaderTransfer
      *
      * @return string
      */
-    protected function getErrorMessageText(ComputopResponseHeaderTransfer $responseHeaderTransfer)
+    protected function getErrorMessageText(ComputopApiResponseHeaderTransfer $responseHeaderTransfer)
     {
         $errorText = $responseHeaderTransfer->getDescription();
         $errorCode = $responseHeaderTransfer->getCode();

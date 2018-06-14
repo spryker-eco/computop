@@ -7,33 +7,33 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitPayNowConverter extends AbstractInitConverter
 {
     /**
      * @param array $decryptedArray
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header)
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
     {
         $responseTransfer = new ComputopPayNowInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
         //optional fields
-        $responseTransfer->setPcNr($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::PC_NR));
-        $responseTransfer->setCreditCardBrand($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_BRAND));
-        $responseTransfer->setCreditCardExpiry($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_EXPIRY));
-        $responseTransfer->setMaskedPan($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::MASKED_PAN));
-        $responseTransfer->setCavv($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CAVV));
-        $responseTransfer->setEci($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::ECI));
-        $responseTransfer->setType($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::TYPE));
-        $responseTransfer->setPlain($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::PLAIN));
-        $responseTransfer->setCustom($this->computopService->getResponseValue($decryptedArray, ComputopApiConfig::CUSTOM));
+        $responseTransfer->setPcNr($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PC_NR));
+        $responseTransfer->setCreditCardBrand($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_BRAND));
+        $responseTransfer->setCreditCardExpiry($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CREDIT_CARD_EXPIRY));
+        $responseTransfer->setMaskedPan($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::MASKED_PAN));
+        $responseTransfer->setCavv($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CAVV));
+        $responseTransfer->setEci($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ECI));
+        $responseTransfer->setType($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::TYPE));
+        $responseTransfer->setPlain($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PLAIN));
+        $responseTransfer->setCustom($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::CUSTOM));
 
         return $responseTransfer;
     }

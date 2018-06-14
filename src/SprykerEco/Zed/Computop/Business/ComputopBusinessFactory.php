@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitCreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitDirectDebitMapper;
@@ -237,7 +236,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createEasyCreditStatusHandler()
     {
         return new EasyCreditStatusHandler(
-            $this->createEasyCreditStatusRequest(),
+            $this->getComputopApiFacade(),
             $this->getMoneyFacade(),
             $this->createComputopResponseLogger()
         );
@@ -249,7 +248,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createEasyCreditAuthorizeHandler()
     {
         return new AuthorizeHandler(
-            $this->createEasyCreditAuthorizeRequest(),
+            $this->getComputopApiFacade(),
             $this->createAuthorizeSaver()
         );
     }
@@ -263,76 +262,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
-     */
-    protected function createAuthorizationPaymentRequest()
-    {
-        return $this->createApiFactory()->createAuthorizationPaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
-     */
-    protected function createInquirePaymentRequest()
-    {
-        return $this->createApiFactory()->createInquirePaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
-     */
-    protected function createReversePaymentRequest()
-    {
-        return $this->createApiFactory()->createReversePaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
-     */
-    protected function createCapturePaymentRequest()
-    {
-        return $this->createApiFactory()->createCapturePaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
-     */
-    protected function createRefundPaymentRequest()
-    {
-        return $this->createApiFactory()->createRefundPaymentRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface
-     */
-    protected function createEasyCreditStatusRequest()
-    {
-        return $this->createApiFactory()->createEasyCreditStatusRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
-     */
-    protected function createEasyCreditAuthorizeRequest()
-    {
-        return $this->createApiFactory()->createEasyCreditAuthorizeRequest();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactoryInterface
-     */
-    protected function createApiFactory()
-    {
-        return new ComputopBusinessApiFactory();
-    }
-
-    /**
      * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface
      */
     protected function createAuthorizeHandler()
     {
         return new AuthorizeHandler(
-            $this->createAuthorizationPaymentRequest(),
+            $this->getComputopApiFacade(),
             $this->createAuthorizeSaver()
         );
     }
@@ -343,7 +278,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createReverseHandler()
     {
         return new ReverseHandler(
-            $this->createReversePaymentRequest(),
+            $this->getComputopApiFacade(),
             $this->createReverseSaver()
         );
     }
@@ -354,7 +289,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createInquireHandler()
     {
         return new InquireHandler(
-            $this->createInquirePaymentRequest(),
+            $this->getComputopApiFacade(),
             $this->createInquireSaver()
         );
     }
@@ -365,7 +300,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createCaptureHandler()
     {
         return new CaptureHandler(
-            $this->createCapturePaymentRequest(),
+            $this->getComputopApiFacade(),
             $this->createCaptureSaver()
         );
     }
@@ -376,7 +311,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function createRefundHandler()
     {
         return new RefundHandler(
-            $this->createRefundPaymentRequest(),
+            $this->getComputopApiFacade(),
             $this->createRefundSaver()
         );
     }
@@ -486,7 +421,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveSofortMapper()
     {
-        return new InitSofortMapper($this->getConfig(), $this->getComputopService());
+        return new InitSofortMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -494,7 +429,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveCreditCart()
     {
-        return new InitCreditCardMapper($this->getConfig(), $this->getComputopService());
+        return new InitCreditCardMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -502,7 +437,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSavePayNowMapper()
     {
-        return new InitPayNowMapper($this->getConfig(), $this->getComputopService());
+        return new InitPayNowMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -510,7 +445,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSavePayPal()
     {
-        return new InitPayPalMapper($this->getConfig(), $this->getComputopService());
+        return new InitPayPalMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -518,7 +453,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveDirectDebit()
     {
-        return new InitDirectDebitMapper($this->getConfig(), $this->getComputopService());
+        return new InitDirectDebitMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -526,7 +461,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveEasyCredit()
     {
-        return new InitEasyCreditMapper($this->getConfig(), $this->getComputopService());
+        return new InitEasyCreditMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -534,7 +469,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSavePaydirektMapper()
     {
-        return new InitPaydirektMapper($this->getConfig(), $this->getComputopService());
+        return new InitPaydirektMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
@@ -542,15 +477,15 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     protected function createPostSaveIdealMapper()
     {
-        return new InitIdealMapper($this->getConfig(), $this->getComputopService());
+        return new InitIdealMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**
-     * @return \SprykerEco\Service\Computop\ComputopServiceInterface
+     * @return \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
-    protected function getComputopService()
+    protected function getComputopApiService()
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
+        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP_API);
     }
 
     /**
@@ -575,5 +510,13 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getMoneyFacade()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_MONEY);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface
+     */
+    protected function getComputopApiFacade()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_COMPUTOP_API);
     }
 }

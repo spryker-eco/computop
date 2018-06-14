@@ -3,14 +3,6 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
-    <transfer name="ComputopPayNowForm">
-        <property name="creditCardNumber" type="int" />
-        <property name="creditCardVerificationCode" type="int" />
-        <property name="creditCardExpiresMonth" type="string" />
-        <property name="creditCardExpiresYear" type="string" />
-        <property name="creditCardBrand" type="string" />
-    </transfer>
-
     <transfer name="ComputopInitPayment">
         <property name="data" type="string" />
         <property name="len" type="int" />
@@ -48,7 +40,7 @@
     </transfer>
 
     <transfer name="ComputopPayNowInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="userData" type="string" />
         <property name="pcNr" type="string" />
         <property name="creditCardExpiry" type="string" />
@@ -61,12 +53,6 @@
         <property name="type" type="string" />
         <property name="plain" type="string" />
         <property name="custom" type="string" />
-    </transfer>
-
-    <transfer name="ComputopHeaderPayment">
-        <property name="payId" type="string" />
-        <property name="amount" type="int" />
-        <property name="transId" type="string" />
     </transfer>
 
     <transfer name="ComputopCreditCardPayment">
@@ -282,7 +268,7 @@
         <property name="len" type="int" />
         <property name="url" type="string" />
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
-        <property name="easyCreditStatusResponse" type="ComputopEasyCreditStatusResponse"/>
+        <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
 
     </transfer>
 
@@ -295,24 +281,11 @@
         <property name="currency" type="string" />
         <property name="mac" type="string" />
         <property name="eventToken" type="string" />
-        <property name="easyCreditStatusResponse" type="ComputopEasyCreditStatusResponse"/>
-    </transfer>
-
-    <transfer name="ComputopResponseHeader">
-        <property name="status" type="string" />
-        <property name="code" type="string" />
-        <property name="isSuccess" type="bool" />
-        <property name="description" type="string" />
-        <property name="transId" type="string" />
-        <property name="payId" type="string" />
-        <property name="xId" type="string" />
-        <property name="mId" type="string" />
-        <property name="mac" type="string" />
-        <property name="method" type="string" />
+        <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
     </transfer>
 
     <transfer name="ComputopCreditCardInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="userData" type="string" />
         <property name="pcNr" type="string" />
         <property name="creditCardExpiry" type="string" />
@@ -328,7 +301,7 @@
     </transfer>
 
     <transfer name="ComputopDirectDebitInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="type" type="string" />
         <property name="bankAccountIban" type="string" />
         <property name="bankAccountBic" type="string" />
@@ -343,7 +316,7 @@
     </transfer>
 
     <transfer name="ComputopPayPalInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
         <property name="name" type="string" />
@@ -383,7 +356,7 @@
     </transfer>
 
     <transfer name="ComputopSofortInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="accountOwner" type="string"/>
         <property name="accountBank" type="string"/>
         <property name="bankAccountBic" type="string"/>
@@ -398,7 +371,7 @@
     </transfer>
 
     <transfer name="ComputopPaydirektInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
         <property name="customerTransactionId" type="string" />
@@ -419,7 +392,7 @@
     </transfer>
 
     <transfer name="ComputopIdealInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
         <property name="accountBank" type="string" />
@@ -435,66 +408,11 @@
     </transfer>
 
     <transfer name="ComputopEasyCreditInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
         <property name="codeExt" type="string" />
         <property name="ErrorText" type="string" />
-    </transfer>
-
-    <transfer name="ComputopEasyCreditStatusResponse">
-        <property name="header" type="ComputopResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="Decision" type="string" />
-        <property name="Process" type="string" />
-        <property name="Financing" type="string" />
-        <property name="codeExt" type="string" />
-        <property name="ErrorText" type="string" />
-    </transfer>
-
-    <transfer name="ComputopAuthorizeResponse">
-        <property name="header" type="ComputopResponseHeader"/>
-        <property name="refNr" type="string" />
-    </transfer>
-
-    <transfer name="ComputopInquireResponse">
-        <property name="header" type="ComputopResponseHeader"/>
-        <property name="amountAuth" type="string" />
-        <property name="amountCap" type="string" />
-        <property name="amountCred" type="string" />
-        <property name="lastStatus" type="string" />
-        <property name="isAuthLast" type="bool" />
-        <property name="isCapLast" type="bool" />
-        <property name="isCredLast" type="bool" />
-    </transfer>
-
-    <transfer name="ComputopReverseResponse">
-        <property name="header" type="ComputopResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="aId" type="string" />
-        <property name="codeExt" type="string" />
-        <property name="errorText" type="string" />
-        <property name="transactionId" type="string" />
-    </transfer>
-
-    <transfer name="ComputopCaptureResponse">
-        <property name="header" type="ComputopResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="aId" type="string" />
-        <property name="amount" type="string" />
-        <property name="codeExt" type="string" />
-        <property name="errorText" type="string" />
-        <property name="transactionId" type="string" />
-    </transfer>
-
-    <transfer name="ComputopRefundResponse">
-        <property name="header" type="ComputopResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="aId" type="string" />
-        <property name="amount" type="string" />
-        <property name="codeExt" type="string" />
-        <property name="errorText" type="string" />
-        <property name="transactionId" type="string" />
     </transfer>
 
     <transfer name="Payment">

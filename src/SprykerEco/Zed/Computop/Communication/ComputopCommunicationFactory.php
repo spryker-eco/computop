@@ -35,22 +35,4 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
             ComputopDependencyProvider::FACADE_CALCULATION
         );
     }
-
-    /**
-     * @return \Spryker\Zed\Messenger\Business\MessengerFacadeInterface
-     */
-    public function getFlashMessengerFacade()
-    {
-        return $this->getProvidedDependency(
-            ComputopDependencyProvider::FACADE_FLASH_MESSENGER
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Service\Computop\ComputopServiceInterface
-     */
-    public function getComputopService()
-    {
-        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP);
-    }
 }
