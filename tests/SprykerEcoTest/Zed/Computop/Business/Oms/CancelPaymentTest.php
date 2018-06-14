@@ -7,12 +7,11 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
+use Generated\Shared\Transfer\ComputopApiInquireResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopApiReverseResponseTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 
 /**
  * @group Functional
@@ -76,5 +75,62 @@ class CancelPaymentTest extends AbstractPaymentTest
     protected function getTransIdValue()
     {
         return self::TRANS_ID_VALUE;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|ComputopToComputopApiFacadeBridge
+     */
+    protected function createComputopApiFacade()
+    {
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                [
+                    'performInquireRequest',
+                    'performReverseRequest',
+                ]
+            );
+
+        $stub->method('performInquireRequest')
+            ->willReturn($this->createInquireResponseTransfer());
+
+        $stub->method('performReverseRequest')
+            ->willReturn($this->createReverseResponseTransfer());
+
+        return $stub;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer
+     */
+    protected function createInquireResponseTransfer()
+    {
+        return (new ComputopApiInquireResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setStatus(self::STATUS_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+            );
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer
+     */
+    protected function createReverseResponseTransfer()
+    {
+        return (new ComputopApiReverseResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setStatus(self::STATUS_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+            );
     }
 }

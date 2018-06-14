@@ -42,6 +42,11 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     abstract protected function getTransIdValue();
 
     /**
+     * @return \PHPUnit\Framework\MockObject\Builder\InvocationMocker|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
+     */
+    abstract protected function createComputopApiFacade();
+
+    /**
      * Set up DB data
      *
      * @return void
@@ -103,6 +108,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getComputopApiService',
                 'getQueryContainer',
                 'getFlashMessengerFacade',
+                'getComputopApiFacade',
             ]
         );
 
@@ -119,6 +125,9 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
 
         $stub->method('getFlashMessengerFacade')
             ->willReturn($this->createMock(ComputopToMessengerFacadeBridge::class));
+
+        $stub->method('getComputopApiFacade')
+            ->willReturn($this->createMock($this->createComputopApiFacade()));
 
         return $stub;
     }

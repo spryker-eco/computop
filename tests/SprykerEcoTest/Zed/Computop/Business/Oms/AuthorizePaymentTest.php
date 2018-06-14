@@ -10,6 +10,7 @@ namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 
 /**
  * @group Functional
@@ -73,5 +74,41 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     protected function getTransIdValue()
     {
         return self::TRANS_ID_VALUE;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|ComputopToComputopApiFacadeBridge
+     */
+    protected function createComputopApiFacade()
+    {
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                [
+                    'performAuthorizationRequest',
+                ]
+            );
+
+        $stub->method('performAuthorizationRequest')
+            ->willReturn($this->createAuhtorizeResponseTransfer());
+
+        return $stub;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer
+     */
+    protected function createAuhtorizeResponseTransfer()
+    {
+        return (new ComputopApiAuthorizeResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+                    ->setStatus(self::STATUS_VALUE)
+            );
     }
 }

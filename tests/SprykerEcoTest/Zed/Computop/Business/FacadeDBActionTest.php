@@ -359,14 +359,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
      */
     protected function createComputopApiFacade()
     {
-        $builder = $this->getMockBuilder(ComputopToComputopApiFacadeBridge::class);
-        $builder->setMethods(
-            [
-                'performEasyCreditStatusRequest',
-            ]
-        );
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                ['performEasyCreditStatusRequest']
+            );
 
-        $stub = $builder->getMock();
         $stub->method('performEasyCreditStatusRequest')
             ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
 

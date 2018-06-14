@@ -10,6 +10,7 @@ namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 use Generated\Shared\Transfer\ComputopApiRefundResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 
 /**
  * @group Functional
@@ -70,5 +71,41 @@ class RefundPaymentTest extends AbstractPaymentTest
     protected function getTransIdValue()
     {
         return self::TRANS_ID_VALUE;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|ComputopToComputopApiFacadeBridge
+     */
+    protected function createComputopApiFacade()
+    {
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                [
+                    'performRefundRequest',
+                ]
+            );
+
+        $stub->method('performRefundRequest')
+            ->willReturn($this->createRefundResponseTransfer());
+
+        return $stub;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer
+     */
+    protected function createRefundResponseTransfer()
+    {
+        return (new ComputopApiRefundResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+                    ->setStatus(self::STATUS_VALUE)
+            );
     }
 }
