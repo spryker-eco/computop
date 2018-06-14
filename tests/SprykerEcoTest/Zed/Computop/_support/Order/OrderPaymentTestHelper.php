@@ -26,8 +26,8 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 class OrderPaymentTestHelper extends Test
 {
     const CURRENCY_VALUE = 'USD';
-    const DATA_VALUE = 'f0957c5d3799a902211fb2e019cef4f459f29d4d908ffc66e6aa0fb839023c62be996fc15b44bcd681ce7bb5ff988c7132af0ed482e94bb18b7c51300761b20d36abc40b4150018f2288bff9340ac0cee2666374f2001af2ca46df7d5a263d3bf479f12682514dec3e232907943934372705bfcf7168e601f3077066797271ad3c48ea551d6158b0b75b385f33ced67648035196b21345712d61dc95be2cd949b5d6de1e41eb5aa2e145d311eaa4f26e8fecd22eaac0d3cc';
-    const LEN_VALUE = 177;
+    const DATA_VALUE = 'DATA_VALUE';
+    const LEN_VALUE = 10;
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
