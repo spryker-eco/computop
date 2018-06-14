@@ -19,6 +19,8 @@ use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
@@ -31,6 +33,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
@@ -152,6 +155,22 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
+    public function testSavePayNowInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->savePayNowInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
     public function testSavePayPalInitResponse()
     {
         $this->setUpDB();
@@ -212,6 +231,34 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
+     * @return void
+     */
+    public function testIsComputopPaymentExistSuccess()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $response = $service->isComputopPaymentExist($this->getQuoteTrasfer());
+
+        $this->assertTrue($response->getPayment()->getIsComputopPaymentExist());
+    }
+
+    /**
+     * @return void
+     */
+    public function testIsComputopPaymentExistFailure()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $quoteTransfer = $this->getQuoteTrasfer();
+        $quoteTransfer->getPayment()->getComputopPayNow()->setTransId('FAILURE_TRANS_VALUE');
+        $response = $service->isComputopPaymentExist($quoteTransfer);
+
+        $this->assertNotTrue($response->getPayment()->getIsComputopPaymentExist());
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function getQuoteTrasfer()
@@ -247,6 +294,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopCredicCardTransfer = new ComputopCreditCardPaymentTransfer();
         $computopCredicCardTransfer->setCreditCardInitResponse($computopCredicCardInitTransfer);
 
+        $computopPayNowInitTransfer = new ComputopPayNowInitResponseTransfer();
+        $computopPayNowInitTransfer->setHeader($computopHeader);
+        $computopPayNowTransfer = new ComputopPayNowPaymentTransfer();
+        $computopPayNowTransfer->setPayNowInitResponse($computopPayNowInitTransfer);
+        $computopPayNowTransfer->setTransId('TRANS_ID_VALUE');
+
         $computopPayPalInitTransfer = new ComputopPayPalInitResponseTransfer();
         $computopPayPalInitTransfer->setHeader($computopHeader);
         $computopPayPalTransfer = new ComputopPayPalPaymentTransfer();
@@ -274,9 +327,11 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopIdeal($computopIdealTransfer);
         $paymentTransfer->setComputopPaydirekt($computopPaydirektTransfer);
         $paymentTransfer->setComputopCreditCard($computopCredicCardTransfer);
+        $paymentTransfer->setComputopPayNow($computopPayNowTransfer);
         $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
         $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
         $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
+        $paymentTransfer->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW);
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->setPayment($paymentTransfer);
