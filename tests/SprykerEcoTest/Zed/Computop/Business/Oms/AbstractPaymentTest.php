@@ -127,7 +127,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
             ->willReturn($this->createMock(ComputopToMessengerFacadeBridge::class));
 
         $stub->method('getComputopApiFacade')
-            ->willReturn($this->createMock($this->createComputopApiFacade()));
+            ->willReturn($this->createComputopApiFacade());
 
         return $stub;
     }
