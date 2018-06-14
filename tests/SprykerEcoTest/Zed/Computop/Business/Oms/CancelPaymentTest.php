@@ -49,6 +49,7 @@ class CancelPaymentTest extends AbstractPaymentTest
         /** @var \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $response */
         $response = $service->cancelCommandHandle($orderItems, $orderTransfer);
 
+        $this->array
         $this->assertInstanceOf(ComputopApiReverseResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
