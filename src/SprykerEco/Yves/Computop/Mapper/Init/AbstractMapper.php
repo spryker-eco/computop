@@ -7,8 +7,10 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopApiRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Silex\Application;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
@@ -158,5 +160,16 @@ abstract class AbstractMapper implements MapperInterface
         ];
 
         return $queryData;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiRequestTransfer
+     */
+    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer)
+    {
+        return (new ComputopApiRequestTransfer())
+            ->fromArray($computopPaymentTransfer->toArray(), true);
     }
 }

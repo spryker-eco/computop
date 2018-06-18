@@ -31,7 +31,9 @@ class CreditCardMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
         $computopPaymentTransfer->setMac(
-            $this->computopApiService->getMacEncryptedValue($computopPaymentTransfer)
+            $this->computopApiService->getMacEncryptedValue(
+                $this->createRequestTransfer($computopPaymentTransfer)
+            )
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(

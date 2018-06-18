@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopApiRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
@@ -63,5 +64,16 @@ abstract class AbstractMapper implements InitMapperInterface
                 ComputopApiConfig::DATA => $data,
                 ComputopApiConfig::LENGTH => $length,
             ]);
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiRequestTransfer
+     */
+    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer)
+    {
+        return (new ComputopApiRequestTransfer())
+            ->fromArray($computopPaymentTransfer->toArray(), true);
     }
 }
