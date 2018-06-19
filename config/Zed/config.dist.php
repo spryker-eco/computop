@@ -7,6 +7,7 @@ use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 /**
  * Add new options
@@ -24,16 +25,19 @@ $config[ComputopConstants::SOFORT_INIT_ACTION] = 'https://www.computop-paygate.c
 $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
-$config[ComputopConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
-$config[ComputopConstants::EASY_CREDIT_AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
 
-$config[ComputopConstants::AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/authorize.aspx';
-$config[ComputopConstants::CAPTURE_ACTION] = 'https://www.computop-paygate.com/capture.aspx';
-$config[ComputopConstants::REVERSE_ACTION] = 'https://www.computop-paygate.com/reverse.aspx';
-$config[ComputopConstants::INQUIRE_ACTION] = 'https://www.computop-paygate.com/inquire.aspx';
-$config[ComputopConstants::REFUND_ACTION] = 'https://www.computop-paygate.com/credit.aspx';
+$config[ComputopApiConstants::MERCHANT_ID] = $config[ComputopConstants::MERCHANT_ID];
+$config[ComputopApiConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
+$config[ComputopApiConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
+$config[ComputopApiConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
+$config[ComputopApiConstants::EASY_CREDIT_AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
+$config[ComputopApiConstants::AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/authorize.aspx';
+$config[ComputopApiConstants::CAPTURE_ACTION] = 'https://www.computop-paygate.com/capture.aspx';
+$config[ComputopApiConstants::REVERSE_ACTION] = 'https://www.computop-paygate.com/reverse.aspx';
+$config[ComputopApiConstants::INQUIRE_ACTION] = 'https://www.computop-paygate.com/inquire.aspx';
+$config[ComputopApiConstants::REFUND_ACTION] = 'https://www.computop-paygate.com/credit.aspx';
 
-$config[ComputopConstants::RESPONSE_MAC_REQUIRED] = [
+$config[ComputopApiConstants::RESPONSE_MAC_REQUIRED] = [
     ComputopConfig::INIT_METHOD, // Todo: add methods in case of Paygate form connection
 ]; //MAC is required for methods (to check MAC on response)
 
