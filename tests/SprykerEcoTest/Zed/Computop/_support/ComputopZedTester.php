@@ -46,7 +46,7 @@ class ComputopZedTester extends Actor
     public function setUpConfig()
     {
         $this->setConfig('COMPUTOP:MERCHANT_ID', 'COMPUTOP:MERCHANT_ID');
-        $this->setConfig('COMPUTOP:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
+        $this->setConfig('COMPUTOPAPI:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
         $this->setConfig('COMPUTOP:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
         $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
         $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['computopSofort', 'computopPaydirekt', 'computopIdeal']);
