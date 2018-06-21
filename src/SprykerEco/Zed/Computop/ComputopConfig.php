@@ -142,14 +142,6 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return string
-     */
-    public function getBlowfishPassword()
-    {
-        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
-    }
-
-    /**
      * @return bool
      */
     public function isRefundShipmentPriceEnabled()

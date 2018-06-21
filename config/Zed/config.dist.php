@@ -27,7 +27,7 @@ $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.co
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
 
 $config[ComputopApiConstants::MERCHANT_ID] = $config[ComputopConstants::MERCHANT_ID];
-$config[ComputopApiConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
+$config[ComputopApiConstants::BLOWFISH_PASSWORD] = $config[ComputopConstants::BLOWFISH_PASSWORD];
 $config[ComputopApiConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
 $config[ComputopApiConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
 $config[ComputopApiConstants::EASY_CREDIT_AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
