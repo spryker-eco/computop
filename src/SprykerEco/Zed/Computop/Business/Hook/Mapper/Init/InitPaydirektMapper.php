@@ -35,7 +35,7 @@ class InitPaydirektMapper extends AbstractMapper
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
-            $this->computopApiService->getMacEncryptedValue(
+            $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer)
             )
         );

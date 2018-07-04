@@ -31,7 +31,7 @@ class PayNowMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
         $computopPaymentTransfer->setMac(
-            $this->computopApiService->getMacEncryptedValue(
+            $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer)
             )
         );

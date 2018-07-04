@@ -83,7 +83,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
-        $computopPaymentTransfer->setReqId($this->computopApiService->generateReqId($quoteTransfer));
+        $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );

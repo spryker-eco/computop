@@ -122,9 +122,9 @@ class CallbackController extends AbstractController
         $decryptedArray = $this
             ->getFactory()
             ->getComputopApiService()
-            ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+            ->decryptResponseHeader($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractHeader(
+        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
             ComputopConfig::INIT_METHOD
         );
@@ -141,9 +141,9 @@ class CallbackController extends AbstractController
         $decryptedArray = $this
             ->getFactory()
             ->getComputopApiService()
-            ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+            ->decryptResponseHeader($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractHeader(
+        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
             ComputopConfig::INIT_METHOD
         );

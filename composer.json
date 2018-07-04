@@ -15,7 +15,7 @@
     "spryker/quote": "^1.0.0 || ^2.0.0",
     "spryker/transfer": "^3.0.0",
     "spryker/zed-request": "^3.0.0",
-    "spryker-eco/computop-api": "dev-feature/ECO-1574-Split-computop-module-into-API-and-main"
+    "spryker-eco/computop-api": "dev-dev"
   },
   "autoload": {
     "psr-4": {
