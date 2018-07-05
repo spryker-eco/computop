@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Yves\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
@@ -63,7 +64,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      */
     public function getMerchantId()
     {
-        return $this->get(ComputopConstants::MERCHANT_ID);
+        return $this->get(ComputopApiConstants::MERCHANT_ID);
     }
 
     /**
@@ -79,7 +80,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      */
     public function getBlowfishPassword()
     {
-        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
+        return $this->get(ComputopApiConstants::BLOWFISH_PASSWORD);
     }
 
     /**
@@ -105,6 +106,14 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     {
         return $this->get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
     }
+
+    /**
+     * @return string
+     */
+    public function getPayNowInitActionUrl()
+    {
+        return $this->get(ComputopConstants::PAY_NOW_INIT_ACTION);
+    }
     
     /**
      * @return string
@@ -120,5 +129,13 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getCreditCardTemplateEnabled()
     {
         return $this->get(ComputopConstants::CREDIT_CARD_TEMPLATE_ENABLED);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPaymentMethodsCaptureTypes(): array
+    {
+        return $this->get(ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES);
     }
 }

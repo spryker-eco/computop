@@ -7,11 +7,12 @@
 
 namespace SprykerEco\Yves\Computop\Controller;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 
 /**
@@ -31,6 +32,14 @@ class CallbackController extends AbstractController
     public function successCreditCardAction()
     {
         return $this->successPostPlaceAction($this->getFactory()->createCreditCardPaymentHandler());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successPayNowAction()
+    {
+        return $this->successPostPlaceAction($this->getFactory()->createPayNowPaymentHandler());
     }
 
     /**
@@ -113,10 +122,10 @@ class CallbackController extends AbstractController
     {
         $decryptedArray = $this
             ->getFactory()
-            ->getComputopService()
-            ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+            ->getComputopApiService()
+            ->decryptResponseHeader($this->responseArray, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
+        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
             ComputopConfig::INIT_METHOD
         );
@@ -132,10 +141,10 @@ class CallbackController extends AbstractController
     {
         $decryptedArray = $this
             ->getFactory()
-            ->getComputopService()
-            ->getDecryptedArray($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+            ->getComputopApiService()
+            ->decryptResponseHeader($this->responseArray, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopService()->extractHeader(
+        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
             ComputopConfig::INIT_METHOD
         );
@@ -145,11 +154,11 @@ class CallbackController extends AbstractController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseHeaderTransfer
      *
      * @return string
      */
-    protected function getErrorMessageText(ComputopResponseHeaderTransfer $responseHeaderTransfer)
+    protected function getErrorMessageText(ComputopApiResponseHeaderTransfer $responseHeaderTransfer)
     {
         $errorText = $responseHeaderTransfer->getDescription();
         $errorCode = $responseHeaderTransfer->getCode();

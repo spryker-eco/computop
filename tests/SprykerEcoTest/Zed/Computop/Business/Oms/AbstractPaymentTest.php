@@ -15,7 +15,7 @@ use GuzzleHttp\Psr7;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
-use SprykerEco\Service\Computop\ComputopService;
+use SprykerEco\Service\ComputopApi\ComputopApiService;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
@@ -42,9 +42,9 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     abstract protected function getTransIdValue();
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\Builder\InvocationMocker|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
-    abstract protected function getApiAdapterStub();
+    abstract protected function createComputopApiFacade();
 
     /**
      * Set up DB data
@@ -105,10 +105,10 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $builder->setMethods(
             [
                 'getConfig',
-                'getComputopService',
+                'getComputopApiService',
                 'getQueryContainer',
-                'createApiFactory',
                 'getFlashMessengerFacade',
+                'getComputopApiFacade',
             ]
         );
 
@@ -117,17 +117,17 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $stub->method('getConfig')
             ->willReturn($this->omsHelper->createConfig());
 
-        $stub->method('getComputopService')
-            ->willReturn(new ComputopService());
+        $stub->method('getComputopApiService')
+            ->willReturn(new ComputopApiService());
 
         $stub->method('getQueryContainer')
             ->willReturn(new ComputopQueryContainer());
 
-        $stub->method('createApiFactory')
-            ->willReturn($this->getApiAdapterStub());
-
         $stub->method('getFlashMessengerFacade')
             ->willReturn($this->createMock(ComputopToMessengerFacadeBridge::class));
+
+        $stub->method('getComputopApiFacade')
+            ->willReturn($this->createComputopApiFacade());
 
         return $stub;
     }

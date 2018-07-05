@@ -25,7 +25,9 @@ class PaydirektMapper extends AbstractMapper
     {
         $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
         
-        $computopPaymentTransfer->setCapture(ComputopConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(
+            $this->getCaptureType(ComputopConfig::PAYMENT_METHOD_PAYDIREKT)
+        );
         $computopPaymentTransfer->setTransId(
             $this->getLimitedTransId($quoteTransfer, ComputopApiConfig::PAYDIRECT_TRANS_ID_LENGTH)
         );
@@ -33,7 +35,7 @@ class PaydirektMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAYDIREKT_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         $computopPaymentTransfer->setShopApiKey($this->config->getPaydirektShopKey());

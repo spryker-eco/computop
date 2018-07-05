@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Client\Computop;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 /**
@@ -21,11 +21,11 @@ interface ComputopClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseTransfer
      *
      * @return void
      */
-    public function logResponse(ComputopResponseHeaderTransfer $responseTransfer);
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer);
 
     /**
      * Specification:
@@ -76,6 +76,17 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
      * Specification:
      * - Saves PayPal response to DB
      *
@@ -122,6 +133,18 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Checks if init call to Computop already performed
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:

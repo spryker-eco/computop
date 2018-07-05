@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class CreditCardFormDataProvider extends AbstractFormDataProvider
@@ -38,11 +39,11 @@ class CreditCardFormDataProvider extends AbstractFormDataProvider
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getComputopPayment(AbstractTransfer $quoteTransfer)
+    protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
         return $quoteTransfer->getPayment()->getComputopCreditCard();
     }

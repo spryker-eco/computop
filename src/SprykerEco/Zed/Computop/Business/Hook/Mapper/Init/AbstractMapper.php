@@ -7,9 +7,10 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopApiRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Service\Computop\ComputopServiceInterface;
+use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
@@ -21,18 +22,20 @@ abstract class AbstractMapper implements InitMapperInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
+     * @var \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
-    protected $computopService;
+    protected $computopApiService;
 
     /**
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
-     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
      */
-    public function __construct(ComputopConfig $config, ComputopServiceInterface $computopService)
-    {
+    public function __construct(
+        ComputopConfig $config,
+        ComputopApiServiceInterface $computopApiService
+    ) {
         $this->config = $config;
-        $this->computopService = $computopService;
+        $this->computopApiService = $computopApiService;
     }
 
     /**
@@ -61,5 +64,16 @@ abstract class AbstractMapper implements InitMapperInterface
                 ComputopApiConfig::DATA => $data,
                 ComputopApiConfig::LENGTH => $length,
             ]);
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiRequestTransfer
+     */
+    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer)
+    {
+        return (new ComputopApiRequestTransfer())
+            ->fromArray($computopPaymentTransfer->toArray(), true);
     }
 }

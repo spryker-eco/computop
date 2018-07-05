@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<statemachine
+        xmlns="spryker:oms-01"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+
+    <process name="ComputopPayNow01" main="true">
+        <states>
+            <state name="new" reserved="true" />
+            <state name="init" reserved="true" />
+            <state name="invalid" reserved="false" />
+            <state name="authorized" reserved="true" />
+            <state name="authorization failed" reserved="false" />
+            <state name="cancelled" reserved="false" />
+            <state name="captured" reserved="true" />
+            <state name="capture failed" reserved="false" />
+            <state name="shipped" reserved="true" />
+            <state name="refunded" reserved="false" />
+            <state name="refund failed" reserved="false" />
+            <state name="closed" reserved="false" />
+        </states>
+
+        <events>
+            <event name="invalidation" timeout="20min" />
+            <event name="authorize" onEnter="true" command="Computop/Authorize" />
+            <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days" />
+            <event name="capture" manual="true" command="Computop/Capture" />
+            <event name="ship" manual="true" />
+            <event name="refund" manual="true" command="Computop/Refund" />
+            <event name="close" manual="true" />
+        </events>
+
+        <transitions>
+
+            <transition condition="Computop/IsInitialized" happy="true">
+                <source>new</source>
+                <target>init</target>
+            </transition>
+
+            <transition>
+                <source>new</source>
+                <target>invalid</target>
+                <event>invalidation</event>
+            </transition>
+
+            <transition condition="Computop/IsAuthorized" happy="true">
+                <source>init</source>
+                <target>authorized</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition>
+                <source>init</source>
+                <target>authorization failed</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition condition="Computop/IsCancelled">
+                <source>authorized</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition condition="Computop/IsCaptured" happy="true">
+                <source>authorized</source>
+                <target>captured</target>
+                <event>capture</event>
+            </transition>
+
+            <transition>
+                <source>authorized</source>
+                <target>capture failed</target>
+                <event>capture</event>
+            </transition>
+
+            <transition condition="Computop/IsRefunded">
+                <source>captured</source>
+                <target>refunded</target>
+                <event>refund</event>
+            </transition>
+
+            <transition>
+                <source>captured</source>
+                <target>refund failed</target>
+                <event>refund</event>
+            </transition>
+
+            <transition happy="true">
+                <source>captured</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>close</event>
+            </transition>
+
+        </transitions>
+    </process>
+</statemachine>

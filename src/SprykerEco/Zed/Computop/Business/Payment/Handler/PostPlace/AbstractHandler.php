@@ -7,15 +7,15 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace;
 
-use SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface;
 
 abstract class AbstractHandler implements HandlerInterface
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface
+     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface
      */
-    protected $request;
+    protected $computopApiFacade;
 
     /**
      * @var \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface
@@ -23,14 +23,14 @@ abstract class AbstractHandler implements HandlerInterface
     protected $saver;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Api\Request\PostPlace\PostPlaceRequestInterface $request
+     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface $computopApiFacade
      * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface $saver
      */
     public function __construct(
-        PostPlaceRequestInterface $request,
+        ComputopToComputopApiFacadeInterface $computopApiFacade,
         SaverInterface $saver
     ) {
-        $this->request = $request;
+        $this->computopApiFacade = $computopApiFacade;
         $this->saver = $saver;
     }
 }

@@ -7,12 +7,11 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\InquireApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\ReverseApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use Generated\Shared\Transfer\ComputopApiInquireResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiReverseResponseTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 
 /**
  * @group Functional
@@ -47,11 +46,11 @@ class CancelPaymentTest extends AbstractPaymentTest
         $orderItems = $this->omsHelper->createOrderItems();
 
         //todo: update test with negative testing
-        /** @var \Generated\Shared\Transfer\ComputopRefundResponseTransfer $response */
+        /** @var \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $response */
         $response = $service->cancelCommandHandle($orderItems, $orderTransfer);
 
-        $this->assertInstanceOf(ComputopReverseResponseTransfer::class, $response);
-        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+        $this->assertInstanceOf(ComputopApiReverseResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
         $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
@@ -79,49 +78,60 @@ class CancelPaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
-    protected function getApiAdapterStub()
+    protected function createComputopApiFacade()
     {
-        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
-        $apiBuilder->setMethods([
-            'createReverseAdapter',
-            'createInquireAdapter',
-        ]);
-        $apiStub = $apiBuilder->getMock();
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                [
+                    'performInquireRequest',
+                    'performReverseRequest',
+                ]
+            );
 
-        $apiStub->method('createReverseAdapter')
-            ->willReturn($this->getReverseApiMock());
+        $stub->method('performInquireRequest')
+            ->willReturn($this->createInquireResponseTransfer());
 
-        $apiStub->method('createInquireAdapter')
-            ->willReturn($this->getInquireApiMock());
+        $stub->method('performReverseRequest')
+            ->willReturn($this->createReverseResponseTransfer());
 
-        return $apiStub;
+        return $stub;
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer
      */
-    protected function getReverseApiMock()
+    protected function createInquireResponseTransfer()
     {
-        $mock = $this->createPartialMock(ReverseApiAdapter::class, ['sendRequest']);
-
-        $mock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_REVERSE_VALUE, self::LEN_REVERSE_VALUE));
-
-        return $mock;
+        return (new ComputopApiInquireResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setStatus(self::STATUS_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+            )
+            ->setIsAuthLast(true);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer
      */
-    protected function getInquireApiMock()
+    protected function createReverseResponseTransfer()
     {
-        $mock = $this->createPartialMock(InquireApiAdapter::class, ['sendRequest']);
-
-        $mock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_INQUIRE_VALUE, self::LEN_INQUIRE_VALUE));
-
-        return $mock;
+        return (new ComputopApiReverseResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setStatus(self::STATUS_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+            );
     }
 }
