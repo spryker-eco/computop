@@ -9,8 +9,6 @@
     "spryker/guzzle": "^2.0.0",
     "spryker/kernel": "^3.0.0",
     "spryker/oms": "^7.0.0 || ^8.0.0",
-    "spryker/propel": "^3.0.0",
-    "spryker/propel-orm": "^1.0.0",
     "spryker/step-engine": "^3.1.0",
     "spryker/quote": "^1.0.0 || ^2.0.0",
     "spryker/transfer": "^3.0.0",
