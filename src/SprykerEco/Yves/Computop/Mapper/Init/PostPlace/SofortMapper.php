@@ -24,7 +24,9 @@ class SofortMapper extends AbstractMapper
     {
         $computopPaymentTransfer = new ComputopSofortPaymentTransfer();
 
-        $computopPaymentTransfer->setCapture(ComputopConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(
+            $this->getCaptureType(ComputopConfig::PAYMENT_METHOD_SOFORT)
+        );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))

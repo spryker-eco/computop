@@ -52,6 +52,15 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
 ];
 
+$config[ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
+    ComputopConfig::PAYMENT_METHOD_SOFORT => 'MANUAL',
+    ComputopConfig::PAYMENT_METHOD_PAYDIREKT => 'MANUAL',
+    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD => 'MANUAL',
+    ComputopConfig::PAYMENT_METHOD_PAY_NOW => 'MANUAL',
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL => 'MANUAL',
+    ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT => 'MANUAL',
+];
+
 /**
  * Update existing one options
  */

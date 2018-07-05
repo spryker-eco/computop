@@ -52,7 +52,9 @@ class PayNowMapper extends AbstractMapper
     {
         $computopPaymentTransfer = new ComputopPayNowPaymentTransfer();
 
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW)
+        );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(

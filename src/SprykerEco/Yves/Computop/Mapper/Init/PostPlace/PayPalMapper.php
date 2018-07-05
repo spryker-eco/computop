@@ -66,7 +66,9 @@ class PayPalMapper extends AbstractMapper
     {
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL)
+        );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
         $computopPaymentTransfer->setUrlSuccess(

@@ -172,4 +172,16 @@ abstract class AbstractMapper implements MapperInterface
         return (new ComputopApiRequestTransfer())
             ->fromArray($computopPaymentTransfer->toArray(), true);
     }
+
+    /**
+     * @param string $method
+     *
+     * @return string
+     */
+    protected function getCaptureType(string $method): string
+    {
+        $paymentMethodsCaptureTypes = $this->config->getPaymentMethodsCaptureTypes();
+
+        return $paymentMethodsCaptureTypes[$method] ?? '';
+    }
 }

@@ -22,7 +22,6 @@ class ComputopConfig extends AbstractBundleConfig
     const PAYMENT_METHOD_EASY_CREDIT = 'computopEasyCredit';
 
     //Computop provider constants
-    const CAPTURE_MANUAL_TYPE = 'MANUAL';
     const SUCCESS_STATUS = 'success';
     const SUCCESS_OK = 'OK';
     const AUTHORIZE_REQUEST_STATUS = 'AUTHORIZE_REQUEST';

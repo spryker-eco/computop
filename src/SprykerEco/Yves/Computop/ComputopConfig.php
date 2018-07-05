@@ -129,4 +129,12 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     {
         return $this->get(ComputopConstants::CREDIT_CARD_TEMPLATE_ENABLED);
     }
+
+    /**
+     * @return string[]
+     */
+    public function getPaymentMethodsCaptureTypes(): array
+    {
+        return $this->get(ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES);
+    }
 }

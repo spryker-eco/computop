@@ -78,4 +78,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getCreditCardTemplateEnabled();
+
+    /**
+     * @return string[]
+     */
+    public function getPaymentMethodsCaptureTypes();
 }

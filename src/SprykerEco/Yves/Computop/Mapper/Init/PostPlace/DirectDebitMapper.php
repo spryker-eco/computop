@@ -67,7 +67,9 @@ class DirectDebitMapper extends AbstractMapper
     {
         $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
-        $computopPaymentTransfer->setCapture(ComputopSharedConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_DIRECT_DEBIT)
+        );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
         $computopPaymentTransfer->setUrlSuccess(

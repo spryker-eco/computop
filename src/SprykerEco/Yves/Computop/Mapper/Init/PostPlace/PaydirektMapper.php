@@ -25,7 +25,9 @@ class PaydirektMapper extends AbstractMapper
     {
         $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
         
-        $computopPaymentTransfer->setCapture(ComputopConfig::CAPTURE_MANUAL_TYPE);
+        $computopPaymentTransfer->setCapture(
+            $this->getCaptureType(ComputopConfig::PAYMENT_METHOD_PAYDIREKT)
+        );
         $computopPaymentTransfer->setTransId(
             $this->getLimitedTransId($quoteTransfer, ComputopApiConfig::PAYDIRECT_TRANS_ID_LENGTH)
         );
