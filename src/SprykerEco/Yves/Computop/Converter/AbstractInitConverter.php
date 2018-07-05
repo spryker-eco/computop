@@ -7,16 +7,16 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Service\Computop\ComputopServiceInterface;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 
 abstract class AbstractInitConverter implements ConverterInterface
 {
     /**
-     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
+     * @var \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
-    protected $computopService;
+    protected $computopApiService;
     
     /**
      * @var \SprykerEco\Yves\Computop\ComputopConfig
@@ -25,36 +25,36 @@ abstract class AbstractInitConverter implements ConverterInterface
 
     /**
      * @param array $decryptedArray
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    abstract protected function createResponseTransfer(array $decryptedArray, ComputopResponseHeaderTransfer $header);
+    abstract protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header);
         
     /**
-     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
      * @param \SprykerEco\Yves\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopServiceInterface $computopService, $config)
+    public function __construct(ComputopApiServiceInterface $computopApiService, $config)
     {
-        $this->computopService = $computopService;
+        $this->computopApiService = $computopApiService;
         $this->config = $config;
     }
 
     /**
-     * @param array $responseArray
+     * @param array $responseHeader
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getResponseTransfer(array $responseArray)
+    public function getResponseTransfer(array $responseHeader)
     {
         $decryptedArray = $this
-            ->computopService
-            ->getDecryptedArray($responseArray, $this->config->getBlowfishPassword());
+            ->computopApiService
+            ->decryptResponseHeader($responseHeader, $this->config->getBlowfishPassword());
 
         $responseHeaderTransfer = $this
-            ->computopService
-            ->extractHeader(
+            ->computopApiService
+            ->extractResponseHeader(
                 $decryptedArray,
                 ComputopConfig::INIT_METHOD
             );

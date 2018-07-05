@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface;
@@ -39,11 +39,11 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer
      */
     protected function createComputopHeaderPayment(OrderTransfer $orderTransfer)
     {
-        $headerPayment = new ComputopHeaderPaymentTransfer();
+        $headerPayment = new ComputopApiHeaderPaymentTransfer();
         $savedComputopEntity = $this->manager->getSavedComputopEntity($orderTransfer->getIdSalesOrder());
         $headerPayment->fromArray($savedComputopEntity->toArray(), true);
         $headerPayment->setAmount($this->getAmount($orderTransfer));

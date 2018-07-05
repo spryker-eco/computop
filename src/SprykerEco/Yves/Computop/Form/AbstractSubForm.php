@@ -12,6 +12,7 @@ use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
@@ -39,5 +40,13 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
         );
 
         return $this;
+    }
+
+    /**
+     * @return \Symfony\Component\Validator\Constraint
+     */
+    protected function createNotBlankConstraint()
+    {
+        return new NotBlank(['groups' => $this->getPropertyPath()]);
     }
 }

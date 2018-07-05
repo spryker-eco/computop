@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Logger;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 
 class ComputopResponseLogger implements ComputopResponseLoggerInterface
@@ -15,12 +15,12 @@ class ComputopResponseLogger implements ComputopResponseLoggerInterface
     /**
      * {@inheritdoc}
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      * @param string $method
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    public function log(ComputopResponseHeaderTransfer $header, $method)
+    public function log(ComputopApiResponseHeaderTransfer $header, $method)
     {
         $logEntity = new SpyPaymentComputopApiLog();
         $logEntity->fromArray($header->toArray());

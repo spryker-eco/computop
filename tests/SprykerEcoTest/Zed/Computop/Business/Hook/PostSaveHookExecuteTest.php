@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -15,6 +16,7 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
 
 /**
  * @group Functional
@@ -45,6 +47,32 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
     }
 
     /**
+     * @return void
+     */
+    public function testPostSaveHookExecuteWithoutRedirect()
+    {
+        $service = new ComputopFacade();
+        $service->setFactory($this->orderHelper->createFactory());
+        $quoteTransfer = $this->createQuoteTransfer();
+        $quoteTransfer->getPayment()->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW);
+
+        $checkoutResponse = $service->postSaveHookExecute(
+            $quoteTransfer,
+            $this->createCheckoutResponse()
+        );
+
+        $this->assertInstanceOf(ComputopInitPaymentTransfer::class, $checkoutResponse->getComputopInitPayment());
+        $this->assertSame(
+            OrderPaymentTestHelper::DATA_VALUE,
+            $checkoutResponse->getComputopInitPayment()->getData()
+        );
+        $this->assertSame(
+            OrderPaymentTestHelper::LEN_VALUE,
+            $checkoutResponse->getComputopInitPayment()->getLen()
+        );
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     protected function createCheckoutResponse()
@@ -63,6 +91,7 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
         $quoteTransfer = new QuoteTransfer();
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($this->orderHelper->createComputopSofortPaymentTransfer());
+        $paymentTransfer->setComputopPayNow($this->orderHelper->createComputopPayNowPaymentTransfer());
         $paymentTransfer->setPaymentMethod(ComputopSharedConfig::PAYMENT_METHOD_SOFORT);
         $paymentTransfer->setPaymentProvider(ComputopSharedConfig::PROVIDER_NAME);
         $paymentTransfer->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_SOFORT);

@@ -12,6 +12,7 @@ use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Computop\Dependency\ComputopToStoreBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToCalculationFacadeBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
@@ -19,14 +20,14 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const SERVICE_COMPUTOP = 'SERVICE_COMPUTOP';
+    const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
     const FACADE_OMS = 'FACADE_OMS';
     const FACADE_MONEY = 'FACADE_MONEY';
     const FACADE_SALES = 'FACADE_SALES';
     const FACADE_CALCULATION = 'FACADE_CALCULATION';
     const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
+    const FACADE_COMPUTOP_API = 'FACADE_COMPUTOP_API';
     const STORE = 'STORE';
-    const CLIENT_QUOTE = 'CLIENT_QUOTE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -45,10 +46,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return new ComputopToCalculationFacadeBridge($container->getLocator()->calculation()->facade());
         };
 
-        $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return $container->getLocator()->computop()->service();
-        };
-
         return $container;
     }
 
@@ -61,8 +58,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
-        $container[self::SERVICE_COMPUTOP] = function () use ($container) {
-            return $container->getLocator()->computop()->service();
+        $container[self::SERVICE_COMPUTOP_API] = function () use ($container) {
+            return $container->getLocator()->computopApi()->service();
         };
 
         $container[self::FACADE_OMS] = function () use ($container) {
@@ -79,6 +76,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::FACADE_MONEY] = function (Container $container) {
             return new ComputopToMoneyFacadeBridge($container->getLocator()->money()->facade());
+        };
+
+        $container[self::FACADE_COMPUTOP_API] = function (Container $container) {
+            return new ComputopToComputopApiFacadeBridge($container->getLocator()->computopApi()->facade());
         };
 
         return $container;

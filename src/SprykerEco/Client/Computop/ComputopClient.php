@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Client\Computop;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
@@ -21,11 +21,11 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseTransfer
      *
      * @return void
      */
-    public function logResponse(ComputopResponseHeaderTransfer $responseTransfer)
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer)
     {
          $this->getFactory()->createZedStub()->logResponse($responseTransfer);
     }
@@ -95,6 +95,20 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createZedStub()->savePayNowInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()->createZedStub()->savePayPalInitResponse($quoteTransfer);
@@ -140,5 +154,19 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
          return $this->getFactory()->createZedStub()->easyCreditStatusApiCall($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createZedStub()->isComputopPaymentExist($quoteTransfer);
     }
 }

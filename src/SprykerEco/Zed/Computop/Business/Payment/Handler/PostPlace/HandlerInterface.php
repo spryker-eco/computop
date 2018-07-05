@@ -7,19 +7,19 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
 interface HandlerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function handle(
         OrderTransfer $orderTransfer,
-        ComputopHeaderPaymentTransfer $computopHeaderPayment
+        ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
     );
 }

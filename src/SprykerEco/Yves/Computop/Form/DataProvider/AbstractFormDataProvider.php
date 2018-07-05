@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
@@ -25,11 +26,11 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     protected $mapper;
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    abstract protected function getComputopPayment(AbstractTransfer $quoteTransfer);
+    abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
@@ -52,11 +53,11 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return bool
      */
-    protected function isValidPayment(AbstractTransfer $quoteTransfer)
+    protected function isValidPayment(QuoteTransfer $quoteTransfer)
     {
         if ($this->getComputopPayment($quoteTransfer) === null) {
             return false;

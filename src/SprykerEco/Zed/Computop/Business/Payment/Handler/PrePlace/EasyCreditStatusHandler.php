@@ -8,8 +8,8 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface;
 
 class EasyCreditStatusHandler extends AbstractHandler
@@ -25,16 +25,16 @@ class EasyCreditStatusHandler extends AbstractHandler
     protected $logger;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Business\Api\Request\PrePlace\PrePlaceRequestInterface $request
+     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface $computopApiFacade
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface $moneyFacade
      * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface $logger
      */
     public function __construct(
-        PrePlaceRequestInterface $request,
+        ComputopToComputopApiFacadeInterface $computopApiFacade,
         ComputopToMoneyFacadeInterface $moneyFacade,
         ComputopResponseLoggerInterface $logger
     ) {
-        parent::__construct($request);
+        parent::__construct($computopApiFacade);
         $this->moneyFacade = $moneyFacade;
         $this->logger = $logger;
     }
@@ -42,14 +42,16 @@ class EasyCreditStatusHandler extends AbstractHandler
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
         $computopHeaderPayment = $this->createComputopHeaderPayment($quoteTransfer);
 
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditStatusResponseTransfer $responseTransfer */
-        $responseTransfer = $this->request->request($quoteTransfer, $computopHeaderPayment);
+        $responseTransfer = $this
+            ->computopApiFacade
+            ->performEasyCreditStatusRequest($quoteTransfer, $computopHeaderPayment);
+
         $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
         $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
         $responseTransfer->getHeader()->setIsSuccess($this->parseStatusValue($decision));

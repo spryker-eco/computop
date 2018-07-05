@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
-use Generated\Shared\Transfer\ComputopHeaderPaymentTransfer;
+use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface;
@@ -89,11 +89,11 @@ class CancelCommandHandler extends AbstractCommandHandler
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
         $responseTransfer = $this->inquirePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
 
@@ -106,11 +106,11 @@ class CancelCommandHandler extends AbstractCommandHandler
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \Generated\Shared\Transfer\ComputopHeaderPaymentTransfer $computopHeaderPayment
+     * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $computopHeaderPayment
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, ComputopHeaderPaymentTransfer $computopHeaderPayment)
+    protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
         $computopResponseTransfer = $this->reversePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {

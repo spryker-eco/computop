@@ -7,11 +7,10 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
-use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
-use SprykerEco\Zed\Computop\Business\Api\Adapter\AuthorizeApiAdapter;
-use SprykerEco\Zed\Computop\Business\Api\ComputopBusinessApiFactory;
+use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 
 /**
  * @group Functional
@@ -46,11 +45,36 @@ class AuthorizePaymentTest extends AbstractPaymentTest
         $orderTransfer = $this->createOrderTransfer();
         $orderItems = $this->omsHelper->createOrderItems();
 
-        /** @var \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $response */
+        /** @var \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer $response */
         $response = $service->authorizeCommandHandle($orderItems, $orderTransfer);
 
-        $this->assertInstanceOf(ComputopAuthorizeResponseTransfer::class, $response);
-        $this->assertInstanceOf(ComputopResponseHeaderTransfer::class, $response->getHeader());
+        $this->assertInstanceOf(ComputopApiAuthorizeResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
+
+        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
+        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
+        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
+        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
+
+        $this->assertTrue($response->getHeader()->getIsSuccess());
+    }
+
+    /**
+     * @return void
+     */
+    public function testEasyCreditAuthorizePaymentSuccess()
+    {
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $orderTransfer = $this->createOrderTransfer();
+        $orderItems = $this->omsHelper->createOrderItems();
+
+        /** @var \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer $response */
+        $response = $service->authorizeCommandHandle($orderItems, $orderTransfer);
+
+        $this->assertInstanceOf(ComputopApiAuthorizeResponseTransfer::class, $response);
+        $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
         $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
         $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
@@ -78,24 +102,38 @@ class AuthorizePaymentTest extends AbstractPaymentTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
-    protected function getApiAdapterStub()
+    protected function createComputopApiFacade()
     {
-        $apiBuilder = $this->getMockBuilder(ComputopBusinessApiFactory::class);
-        $apiBuilder->setMethods([
-            'createAuthorizeAdapter',
-        ]);
-        $apiStub = $apiBuilder->getMock();
+        $stub = $this
+            ->createPartialMock(
+                ComputopToComputopApiFacadeBridge::class,
+                [
+                    'performAuthorizationRequest',
+                ]
+            );
 
-        $apiMock = $this->createPartialMock(AuthorizeApiAdapter::class, ['sendRequest']);
+        $stub->method('performAuthorizationRequest')
+            ->willReturn($this->createAuhtorizeResponseTransfer());
 
-        $apiMock->method('sendRequest')
-            ->willReturn($this->getStream(self::DATA_AUTHORIZE_VALUE, self::LEN_AUTHORIZE_VALUE));
+        return $stub;
+    }
 
-        $apiStub->method('createAuthorizeAdapter')
-            ->willReturn($apiMock);
-
-        return $apiStub;
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer
+     */
+    protected function createAuhtorizeResponseTransfer()
+    {
+        return (new ComputopApiAuthorizeResponseTransfer())
+            ->setHeader(
+                (new ComputopApiResponseHeaderTransfer())
+                    ->setTransId(self::TRANS_ID_VALUE)
+                    ->setPayId(self::PAY_ID_VALUE)
+                    ->setXId(self::X_ID_VALUE)
+                    ->setCode(self::CODE_VALUE)
+                    ->setIsSuccess(true)
+                    ->setStatus(self::STATUS_VALUE)
+            );
     }
 }

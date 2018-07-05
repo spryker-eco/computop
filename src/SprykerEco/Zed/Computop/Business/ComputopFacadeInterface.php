@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -33,12 +33,12 @@ interface ComputopFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      * @param string $method
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method);
+    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, $method);
 
     /**
      * Specification:
@@ -143,6 +143,18 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Saves PayNow Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Saves PayPal Response to DB.
      *
      * @api
@@ -213,4 +225,16 @@ interface ComputopFacadeInterface
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     * - Checks if init call to Computop already performed
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 }

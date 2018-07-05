@@ -7,7 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Logger;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLogQuery;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
@@ -55,11 +55,11 @@ class SaveLogTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
     protected function createHeader()
     {
-        $header = new ComputopResponseHeaderTransfer();
+        $header = new ComputopApiResponseHeaderTransfer();
         $header
             ->setTransId(self::TRANS_ID_VALUE)
             ->setPayId(self::PAY_ID_VALUE)

@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver;
 
-use Generated\Shared\Transfer\ComputopReverseResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiReverseResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
@@ -34,12 +34,12 @@ class ReverseSaver extends AbstractSaver
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopReverseResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return void
      */
-    public function saveComputopDetails(ComputopReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
+    public function saveComputopDetails(ComputopApiReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 

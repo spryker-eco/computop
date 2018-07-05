@@ -63,6 +63,11 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getCreditCardInitActionUrl();
+
+    /**
+     * @return string
+     */
+    public function getPayNowInitActionUrl();
     
     /**
      * @return string
@@ -73,4 +78,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getCreditCardTemplateEnabled();
+
+    /**
+     * @return string[]
+     */
+    public function getPaymentMethodsCaptureTypes();
 }

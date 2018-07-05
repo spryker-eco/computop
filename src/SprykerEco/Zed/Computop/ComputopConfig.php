@@ -9,9 +9,11 @@ namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
+    const ETI_ID = '0.0.1';
     const OMS_STATUS_NEW = 'new';
     const OMS_STATUS_INITIALIZED = 'init';
     const OMS_STATUS_AUTHORIZED = 'authorized';
@@ -41,7 +43,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getMerchantId()
     {
-        return $this->get(ComputopConstants::MERCHANT_ID);
+        return $this->get(ComputopApiConstants::MERCHANT_ID);
     }
 
     /**
@@ -49,7 +51,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getBlowfishPass()
     {
-        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
+        return $this->get(ComputopApiConstants::BLOWFISH_PASSWORD);
     }
 
     /**
@@ -130,6 +132,14 @@ class ComputopConfig extends AbstractBundleConfig
     public function getEasyCreditAuthorizeUrl()
     {
         return $this->get(ComputopConstants::EASY_CREDIT_AUTHORIZE_ACTION);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayNowInitActionUrl()
+    {
+        return $this->get(ComputopConstants::PAY_NOW_INIT_ACTION);
     }
 
     /**

@@ -12,9 +12,10 @@
     "spryker/propel": "^3.0.0",
     "spryker/propel-orm": "^1.0.0",
     "spryker/step-engine": "^3.1.0",
-    "spryker/quote": "^1.0.0",
+    "spryker/quote": "^1.0.0 || ^2.0.0",
     "spryker/transfer": "^3.0.0",
-    "spryker/zed-request": "^3.0.0"
+    "spryker/zed-request": "^3.0.0",
+    "spryker-eco/computop-api": "dev-dev"
   },
   "autoload": {
     "psr-4": {
@@ -37,6 +38,10 @@
     {
       "type": "composer",
       "url": "https://code.spryker.com/repo/private"
+    },
+    {
+      "type": "git",
+      "url": "git@github.com:spryker-eco/computop-api.git"
     }
   ],
   "extra": {

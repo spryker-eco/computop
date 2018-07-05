@@ -7,18 +7,18 @@
 
 namespace SprykerEco\Client\Computop\Zed;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class ComputopStub extends ZedRequestStub implements ComputopStubInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseTransfer
      *
      * @return void
      */
-    public function logResponse(ComputopResponseHeaderTransfer $responseTransfer)
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer)
     {
         $this->zedStub->call('/computop/gateway/log-response', $responseTransfer);
     }
@@ -68,6 +68,16 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->zedStub->call('/computop/gateway/save-pay-now-init-response', $quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->zedStub->call('/computop/gateway/save-pay-pal-init-response', $quoteTransfer);
@@ -101,5 +111,15 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
         return $this->zedStub->call('/computop/gateway/easy-credit-status-api-call', $quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
+    {
+        return $this->zedStub->call('/computop/gateway/is-computop-payment-exist', $quoteTransfer);
     }
 }

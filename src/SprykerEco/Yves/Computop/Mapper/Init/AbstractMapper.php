@@ -7,11 +7,11 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopApiRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Silex\Application;
-use Spryker\Service\UtilText\Model\Hash;
-use Spryker\Service\UtilText\UtilTextServiceInterface;
-use SprykerEco\Service\Computop\ComputopServiceInterface;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\ComputopConfigInterface;
@@ -20,12 +20,10 @@ use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
 abstract class AbstractMapper implements MapperInterface
 {
-    const TRANS_ID_SEPARATOR = '-';
-
     /**
-     * @var \SprykerEco\Service\Computop\ComputopServiceInterface
+     * @var \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
-    protected $computopService;
+    protected $computopApiService;
 
     /**
      * @var \Silex\Application
@@ -43,11 +41,6 @@ abstract class AbstractMapper implements MapperInterface
     protected $config;
 
     /**
-     * @var \Spryker\Service\UtilText\UtilTextService
-     */
-    protected $textService;
-
-    /**
      * @var array
      */
     protected $decryptedValues;
@@ -60,24 +53,21 @@ abstract class AbstractMapper implements MapperInterface
     abstract protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer);
 
     /**
-     * @param \SprykerEco\Service\Computop\ComputopServiceInterface $computopService
+     * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
      * @param \Silex\Application $application
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
-     * @param \Spryker\Service\UtilText\UtilTextServiceInterface $textService
      */
     public function __construct(
-        ComputopServiceInterface $computopService,
+        ComputopApiServiceInterface $computopApiService,
         Application $application,
         ComputopToStoreInterface $store,
-        ComputopConfigInterface $config,
-        UtilTextServiceInterface $textService
+        ComputopConfigInterface $config
     ) {
-        $this->computopService = $computopService;
+        $this->computopApiService = $computopApiService;
         $this->application = $application;
         $this->store = $store;
         $this->config = $config;
-        $this->textService = $textService;
     }
 
     /**
@@ -93,7 +83,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
-        $computopPaymentTransfer->setReqId($this->generateReqId($quoteTransfer));
+        $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
@@ -108,38 +98,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function generateTransId(QuoteTransfer $quoteTransfer)
     {
-        $parameters = [
-            time(),
-            rand(100, 1000),
-            $quoteTransfer->getCustomer()->getCustomerReference(),
-        ];
-
-        return $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::MD5);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return string
-     */
-    protected function generateReqId(QuoteTransfer $quoteTransfer)
-    {
-        $parameters = [
-            $this->createUniqueSalt(),
-            $quoteTransfer->getTotals()->getHash(),
-            $quoteTransfer->getCustomer()->getCustomerReference(),
-        ];
-        $string = $this->textService->hashValue(implode(self::TRANS_ID_SEPARATOR, $parameters), Hash::SHA256);
-
-        return substr($string, 0, ComputopApiConfig::REQ_ID_LENGTH);
-    }
-
-    /**
-     * @return int
-     */
-    protected function createUniqueSalt()
-    {
-        return time();
+        return $this->computopApiService->generateTransId($quoteTransfer);
     }
 
     /**
@@ -201,5 +160,28 @@ abstract class AbstractMapper implements MapperInterface
         ];
 
         return $queryData;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiRequestTransfer
+     */
+    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer)
+    {
+        return (new ComputopApiRequestTransfer())
+            ->fromArray($computopPaymentTransfer->toArray(), true);
+    }
+
+    /**
+     * @param string $method
+     *
+     * @return string
+     */
+    protected function getCaptureType(string $method): string
+    {
+        $paymentMethodsCaptureTypes = $this->config->getPaymentMethodsCaptureTypes();
+
+        return $paymentMethodsCaptureTypes[$method] ?? '';
     }
 }

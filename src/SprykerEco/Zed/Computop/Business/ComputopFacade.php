@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -41,12 +41,12 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      * @param string $method
      *
-     * @return \Generated\Shared\Transfer\ComputopResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseHeader(ComputopResponseHeaderTransfer $header, $method)
+    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, $method)
     {
         $this->getFactory()->createComputopResponseLogger()->log($header, $method);
 
@@ -198,6 +198,20 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createPayNowResponseSaver()->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()->createPayPalResponseSaver()->save($quoteTransfer);
@@ -281,5 +295,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->getFactory()
             ->createEasyCreditAuthorizeCommandHandler()
             ->handle($orderItems, $orderTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
+    {
+        return $this
+            ->getFactory()
+            ->createPaymentReader()
+            ->isComputopPaymentExist($quoteTransfer);
     }
 }
