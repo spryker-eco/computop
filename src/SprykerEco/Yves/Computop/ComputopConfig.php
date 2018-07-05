@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Yves\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
@@ -135,6 +136,6 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      */
     public function getPaymentMethodsCaptureTypes(): array
     {
-        return $this->get(ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES);
+        return $this->get(ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES);
     }
 }

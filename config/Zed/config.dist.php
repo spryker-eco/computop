@@ -7,6 +7,7 @@ use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 /**
@@ -52,16 +53,14 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
 ];
 
-$config[ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
-    ComputopConfig::PAYMENT_METHOD_SOFORT => 'MANUAL',
-    ComputopConfig::PAYMENT_METHOD_PAYDIREKT => 'MANUAL',
-    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD => 'MANUAL',
-    ComputopConfig::PAYMENT_METHOD_PAY_NOW => 'MANUAL',
-    ComputopConfig::PAYMENT_METHOD_PAY_PAL => 'MANUAL',
-    ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT => 'MANUAL',
+$config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
+    ComputopApiConfig::PAYMENT_METHOD_SOFORT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_PAYDIREKT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_CREDIT_CARD => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_PAY_NOW => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_PAY_PAL => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_DIRECT_DEBIT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
 ];
-
-$config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = $config[ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES];
 
 /**
  * Update existing one options
