@@ -45,9 +45,9 @@ class ComputopZedTester extends Actor
      */
     public function setUpConfig()
     {
-        $this->setConfig('COMPUTOPAPI:MERCHANT_ID', 'COMPUTOPAPI:MERCHANT_ID');
-        $this->setConfig('COMPUTOPAPI:HMAC_PASSWORD', 'COMPUTOPAPI:HMAC_PASSWORD');
-        $this->setConfig('COMPUTOPAPI:BLOWFISH_PASSWORD', 'COMPUTOPAPI:BLOWFISH_PASSWORD');
+        $this->setConfig('COMPUTOPAPI:MERCHANT_ID', 'COMPUTOP:MERCHANT_ID');
+        $this->setConfig('COMPUTOPAPI:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
+        $this->setConfig('COMPUTOPAPI:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
         $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
         $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['computopSofort', 'computopPaydirekt', 'computopIdeal']);
         $this->setConfig('COMPUTOP:SOFORT_INIT_ACTION', 'https://www.computop-paygate.com/sofort.aspx');
