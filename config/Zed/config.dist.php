@@ -13,8 +13,6 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 /**
  * Add new options
  */
-$config[ComputopConstants::MERCHANT_ID] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
-$config[ComputopConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
 $config[ComputopConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
 $config[ComputopConstants::PAYDIREKT_SHOP_KEY] = 'PAYDIREKT_SHOP_KEY'; //Set up real data
 
@@ -27,8 +25,8 @@ $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygat
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
 
-$config[ComputopApiConstants::MERCHANT_ID] = $config[ComputopConstants::MERCHANT_ID];
-$config[ComputopApiConstants::BLOWFISH_PASSWORD] = $config[ComputopConstants::BLOWFISH_PASSWORD];
+$config[ComputopApiConstants::MERCHANT_ID] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
+$config[ComputopApiConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
 $config[ComputopApiConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
 $config[ComputopApiConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
 $config[ComputopApiConstants::EASY_CREDIT_AUTHORIZE_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';

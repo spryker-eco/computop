@@ -9,8 +9,6 @@ namespace SprykerEco\Shared\Computop;
 
 interface ComputopConstants
 {
-    const MERCHANT_ID = 'COMPUTOP:MERCHANT_ID';
-    const BLOWFISH_PASSWORD = 'COMPUTOP:BLOWFISH_PASSWORD';
     const HMAC_PASSWORD = 'COMPUTOP:HMAC_PASSWORD';
     const PAYDIREKT_SHOP_KEY = 'COMPUTOP:PAYDIREKT_SHOP_KEY';
 

@@ -64,7 +64,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      */
     public function getMerchantId()
     {
-        return $this->get(ComputopConstants::MERCHANT_ID);
+        return $this->get(ComputopApiConstants::MERCHANT_ID);
     }
 
     /**
@@ -80,7 +80,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      */
     public function getBlowfishPassword()
     {
-        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
+        return $this->get(ComputopApiConstants::BLOWFISH_PASSWORD);
     }
 
     /**

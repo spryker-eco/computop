@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
@@ -42,7 +43,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getMerchantId()
     {
-        return $this->get(ComputopConstants::MERCHANT_ID);
+        return $this->get(ComputopApiConstants::MERCHANT_ID);
     }
 
     /**
@@ -50,7 +51,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getBlowfishPass()
     {
-        return $this->get(ComputopConstants::BLOWFISH_PASSWORD);
+        return $this->get(ComputopApiConstants::BLOWFISH_PASSWORD);
     }
 
     /**

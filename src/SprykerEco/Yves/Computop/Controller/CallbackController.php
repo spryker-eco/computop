@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
+use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 
 /**
@@ -122,7 +123,7 @@ class CallbackController extends AbstractController
         $decryptedArray = $this
             ->getFactory()
             ->getComputopApiService()
-            ->decryptResponseHeader($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+            ->decryptResponseHeader($this->responseArray, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
         $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
@@ -141,7 +142,7 @@ class CallbackController extends AbstractController
         $decryptedArray = $this
             ->getFactory()
             ->getComputopApiService()
-            ->decryptResponseHeader($this->responseArray, Config::get(ComputopConstants::BLOWFISH_PASSWORD));
+            ->decryptResponseHeader($this->responseArray, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
         $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
