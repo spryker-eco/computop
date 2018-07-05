@@ -61,6 +61,8 @@ $config[ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT => 'MANUAL',
 ];
 
+$config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = $config[ComputopConstants::PAYMENT_METHODS_CAPTURE_TYPES];
+
 /**
  * Update existing one options
  */
