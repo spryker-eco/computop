@@ -25,6 +25,10 @@ $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygat
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
 
+$config[ComputopApiConstants::CRIF_ACTION] = 'https://www.computop-paygate.com/deltavista.aspx';
+$config[ComputopApiConstants::CRIF_PRODUCT_NAME] = 'IdentCheckConsumer';
+$config[ComputopApiConstants::CRIF_LEGAL_FORM] = 'PERSON';
+
 $config[ComputopApiConstants::MERCHANT_ID] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
 $config[ComputopApiConstants::BLOWFISH_PASSWORD] = 'COMPUTOP_BLOWFISH_PASSWORD'; //Set up real data
 $config[ComputopApiConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
@@ -88,4 +92,23 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     ComputopConfig::PAYMENT_METHOD_PAY_PAL => 'ComputopPayPal01',
     ComputopConfig::PAYMENT_METHOD_SOFORT => 'ComputopSofort01',
     ComputopConfig::PAYMENT_METHOD_IDEAL => 'ComputopIdeal01',
+];
+
+$config[ComputopConstants::CRIF_GREEN_AVAILABLE_PAYMENT_METHODS] = [
+    ComputopConfig::PAYMENT_METHOD_SOFORT,
+    ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
+    ComputopConfig::PAYMENT_METHOD_IDEAL,
+    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
+    ComputopConfig::PAYMENT_METHOD_PAY_NOW,
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+    ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
+    ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
+];
+$config[ComputopConstants::CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS] = [
+    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
+    ComputopConfig::PAYMENT_METHOD_PAY_NOW,
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+];
+$config[ComputopConstants::CRIF_RED_AVAILABLE_PAYMENT_METHODS] = [
+    ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
 ];

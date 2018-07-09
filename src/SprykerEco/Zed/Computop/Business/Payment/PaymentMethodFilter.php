@@ -11,31 +11,43 @@ use ArrayObject;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEco\Zed\Computop\ComputopConfig;
 
 class PaymentMethodFilter implements PaymentMethodFilterInterface
 {
+    protected const COMPUTOP_PAYMENT_METHOD = 'computop';
+    protected const CONFIG_METHOD_PART_GET_CRIF = 'getCrif';
+    protected const CONFIG_METHOD_PART_PAYMENT_METHODS = 'PaymentMethods';
+
+    /**
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
+     */
+    public function __construct(ComputopConfig $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
-    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer)
-    {
-        return $paymentMethodsTransfer;
-    }
+    public function filterPaymentMethods(
+        PaymentMethodsTransfer $paymentMethodsTransfer,
+        QuoteTransfer $quoteTransfer
+    ): PaymentMethodsTransfer {
+        $availableMethods = $this->getAvailablePaymentMethods($quoteTransfer);
 
-    /**
-     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
-     *
-     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
-     */
-    protected function excludeBlacklistedPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer)
-    {
         $result = new ArrayObject();
 
         foreach ($paymentMethodsTransfer->getMethods() as $paymentMethod) {
-            if ($this->isBlacklisted($paymentMethod)) {
+            if ($this->isPaymentMethodComputop($paymentMethod) && !$this->isAvailable($paymentMethod, $availableMethods)) {
                 continue;
             }
 
@@ -48,12 +60,41 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return string[]
+     */
+    protected function getAvailablePaymentMethods(QuoteTransfer $quoteTransfer): array
+    {
+        $method = static::CONFIG_METHOD_PART_GET_CRIF .
+            ucfirst(strtolower($quoteTransfer->getComputopCrif()->getResult())) .
+            static::CONFIG_METHOD_PART_PAYMENT_METHODS;
+
+        if (method_exists($this->config, $method)) {
+            return $this->config->$method();
+        }
+
+        return $this->config->getCrifRedPaymentMethods();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentMethodTransfer $paymentMethodTransfer
+     * @param string[] $availableMethods
+     *
+     * @return bool
+     */
+    protected function isAvailable(PaymentMethodTransfer $paymentMethodTransfer, $availableMethods): bool
+    {
+        return in_array($paymentMethodTransfer->getMethodName(), $availableMethods);
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\PaymentMethodTransfer $paymentMethodTransfer
      *
      * @return bool
      */
-    protected function isBlacklisted(PaymentMethodTransfer $paymentMethodTransfer)
+    protected function isPaymentMethodComputop(PaymentMethodTransfer $paymentMethodTransfer): bool
     {
-        return false;
+        return strpos($paymentMethodTransfer->getMethodName(), static::COMPUTOP_PAYMENT_METHOD) !== false;
     }
 }

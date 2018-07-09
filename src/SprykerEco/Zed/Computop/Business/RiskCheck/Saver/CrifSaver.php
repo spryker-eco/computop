@@ -7,64 +7,42 @@
 
 namespace SprykerEco\Zed\Computop\Business\RiskCheck\Saver;
 
-use Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopCrifDetails;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 
 class CrifSaver extends AbstractSaver
 {
     use TransactionTrait;
 
-    const METHOD = 'CRIF';
+    protected const METHOD = 'CRIF';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    public function save(TransferInterface $responseTransfer, QuoteTransfer $quoteTransfer)
-    {
-        $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer, $quoteTransfer) {
-            $this->saveComputopDetails($responseTransfer, $quoteTransfer);
-        });
-
-        return $responseTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopAuthorizeResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiCrifResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopAuthorizeResponseTransfer $responseTransfer, QuoteTransfer $quoteTransfer)
+    public function save(ComputopApiCrifResponseTransfer $responseTransfer, QuoteTransfer $quoteTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeader(), self::METHOD);
+        $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
+            $this->saveComputopDetails($responseTransfer);
+        });
+    }
 
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
-            return;
-        }
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiCrifResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    protected function saveComputopDetails(
+        ComputopApiCrifResponseTransfer $responseTransfer
+    ): void {
+        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
 
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
-        /*$paymentEntity = $this
-            ->queryContainer
-            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
-            ->findOne();
-
-        foreach ($orderTransfer->getItems() as $selectedItem) {
-            foreach ($paymentEntity->getSpyPaymentComputopOrderItems() as $item) {
-                if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
-                    continue;
-                }
-                $item->setStatus($this->config->getOmsStatusAuthorized());
-                $item->save();
-            }
-        }
-
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
-        $paymentEntityDetails->save();*/
+        $paymentEntityDetails = new SpyPaymentComputopCrifDetails();
+        $paymentEntityDetails->fromArray($responseTransfer->toArray());
+        $paymentEntityDetails->save();
     }
 }

@@ -48,8 +48,11 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\SofortResponseSa
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\RefundSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\ReverseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilter;
+use SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Reader\ComputopPaymentReader;
 use SprykerEco\Zed\Computop\Business\RiskCheck\Handler\CrifHandler;
+use SprykerEco\Zed\Computop\Business\RiskCheck\Handler\HandlerInterface;
 use SprykerEco\Zed\Computop\Business\RiskCheck\Saver\CrifSaver;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 
@@ -248,12 +251,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\RiskCheck\Handler\HandlerInterface
      */
-    public function createCrifHandler()
+    public function createCrifHandler(): HandlerInterface
     {
         return new CrifHandler(
-            $this->createApiFactory()->createCrifRequest(),
+            $this->getComputopApiFacade(),
             $this->createCrifSaver()
-
         );
     }
 
@@ -516,6 +518,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilterInterface
+     */
+    public function createPaymentMethodFilter(): PaymentMethodFilterInterface
+    {
+        return new PaymentMethodFilter($this->getConfig());
+    }
+
+    /**
      * @return \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
     protected function getComputopApiService()
@@ -553,13 +563,5 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     protected function getComputopApiFacade()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_COMPUTOP_API);
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilterInterface
-     */
-    public function createPaymentMethodFilter()
-    {
-        return new PaymentMethodFilter($this->getConfig());
     }
 }

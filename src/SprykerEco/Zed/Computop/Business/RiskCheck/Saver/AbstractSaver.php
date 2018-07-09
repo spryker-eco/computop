@@ -7,12 +7,13 @@
 
 namespace SprykerEco\Zed\Computop\Business\RiskCheck\Saver;
 
-use Generated\Shared\Transfer\ComputopResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 use SprykerEco\Zed\Computop\Business\Logger\LoggerInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
-abstract class AbstractSaver implements riskCheckSaverInterface
+abstract class AbstractSaver implements RiskCheckSaverInterface
 {
     /**
      * @var \SprykerEco\Zed\Computop\Business\Logger\LoggerInterface
@@ -45,12 +46,12 @@ abstract class AbstractSaver implements riskCheckSaverInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopResponseHeaderTransfer $headerTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $headerTransfer
      * @param string $method
      *
-     * @return \Orm\Zed\Computop\Persistence\Base\SpyPaymentComputopApiLog
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    protected function logHeader(ComputopResponseHeaderTransfer $headerTransfer, $method)
+    protected function logHeader(ComputopApiResponseHeaderTransfer $headerTransfer, $method): SpyPaymentComputopApiLog
     {
         return $this->logger->log($headerTransfer, $method);
     }

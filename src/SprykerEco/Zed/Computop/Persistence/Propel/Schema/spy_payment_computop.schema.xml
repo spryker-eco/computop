@@ -149,6 +149,25 @@ If the actual amount differs from the requested amount this will be returned."/>
         <id-method-parameter value="spy_payment_computop_api_log_pk_seq"/>
     </table>
 
+    <table name="spy_payment_computop_crif_details">
+        <column name="id_payment_compitop_crif_details" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="mid" required="false" type="VARCHAR" />
+        <column name="xid" required="false" type="VARCHAR"/>
+        <column name="status" required="false" type="VARCHAR" />
+        <column name="description" required="false" type="VARCHAR" />
+        <column name="code" required="false" type="VARCHAR" />
+        <column name="result" required="true" type="VARCHAR" />
+        <column name="limit" required="false" type="INTEGER" />
+        <column name="instruction" required="false" type="VARCHAR" />
+
+        <behavior name="timestampable"/>
+
+        <index name="spy_payment_computop_crif_details-index-xid">
+            <index-column name="xid" />
+        </index>
+
+        <id-method-parameter value="spy_payment_computop_crif_details_pk_seq"/>
+    </table>
 
     <table name="spy_payment_computop_order_item">
         <column name="fk_payment_computop" type="INTEGER" primaryKey="true"/>

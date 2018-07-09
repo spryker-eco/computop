@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\RiskCheck\Handler;
 
+use Generated\Shared\Transfer\ComputopCrifTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 class CrifHandler extends AbstractHandler
@@ -18,8 +19,13 @@ class CrifHandler extends AbstractHandler
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
-        $responseTransfer = $this->request->request($quoteTransfer);
+        $responseTransfer = $this->computopApiFacade->performCrifApiCall($quoteTransfer);
         $this->saver->save($responseTransfer, $quoteTransfer);
+
+        $computopCrifTransfer = (new ComputopCrifTransfer())
+            ->fromArray($responseTransfer->toArray(), true);
+
+        $quoteTransfer->setComputopCrif($computopCrifTransfer);
         return $quoteTransfer;
     }
 }

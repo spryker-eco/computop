@@ -143,14 +143,6 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return string
-     */
-    public function getCrifActionUrl()
-    {
-        return $this->get(ComputopConstants::CRIF_ACTION);
-    }
-
-    /**
      * @return bool
      */
     public function isRefundShipmentPriceEnabled()
@@ -301,5 +293,29 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsCaptureEventName()
     {
         return self::COMPUTOP_OMS_EVENT_CAPTURE;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCrifGreenPaymentMethods(): array
+    {
+        return $this->get(ComputopConstants::CRIF_GREEN_AVAILABLE_PAYMENT_METHODS);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCrifYellowPaymentMethods(): array
+    {
+        return $this->get(ComputopConstants::CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCrifRedPaymentMethods(): array
+    {
+        return $this->get(ComputopConstants::CRIF_RED_AVAILABLE_PAYMENT_METHODS);
     }
 }
