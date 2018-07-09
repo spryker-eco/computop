@@ -7,6 +7,8 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
+use ArrayObject;
+use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
@@ -25,6 +27,8 @@ use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
+use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
@@ -256,6 +260,57 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $response = $service->isComputopPaymentExist($quoteTransfer);
 
         $this->assertNotTrue($response->getPayment()->getIsComputopPaymentExist());
+    }
+
+    /**
+     * @return void
+     */
+    public function testPerformCrifApiCall()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $quoteTransfer = $this->getQuoteTrasfer();
+        $response = $service->isComputopPaymentExist($quoteTransfer);
+
+        $this->assertInstanceOf(ComputopApiCrifResponseTransfer::class, $response->getComputopCrif());
+        $this->assertNotEmpty($response->getComputopCrif()->getResult());
+        $this->assertNotEmpty($response->getComputopCrif()->getStatus());
+        $this->assertNotEmpty($response->getComputopCrif()->getCode());
+        $this->assertNotEmpty($response->getComputopCrif()->getDescription());
+    }
+
+    /**
+     * @return void
+     */
+    public function testFilterPaymentMethods()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $quoteTransfer = $this->getQuoteTrasfer();
+        $response = $service->filterPaymentMethods($this->getPaymentMethodsTransfer(), $quoteTransfer);
+
+        $this->assertInstanceOf(PaymentMethodsTransfer::class, $response);
+        $this->assertGreaterThanOrEqual(1, $response->getMethods()->count());
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    protected function getPaymentMethodsTransfer()
+    {
+        $methods = new ArrayObject();
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_SOFORT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAYDIREKT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_IDEAL));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_DIRECT_DEBIT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT));
+
+        return (new PaymentMethodsTransfer())->setMethods($methods);
     }
 
     /**
