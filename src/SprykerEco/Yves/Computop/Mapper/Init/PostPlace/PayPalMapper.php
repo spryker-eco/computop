@@ -70,7 +70,7 @@ class PayPalMapper extends AbstractMapper
             $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL)
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
-        $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
+        $computopPaymentTransfer->setTxType($this->config->getPayPalTxType());
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS))
         );

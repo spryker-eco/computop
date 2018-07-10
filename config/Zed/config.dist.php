@@ -44,6 +44,12 @@ $config[ComputopApiConstants::RESPONSE_MAC_REQUIRED] = [
     ComputopConfig::INIT_METHOD, // Todo: add methods in case of Paygate form connection
 ]; //MAC is required for methods (to check MAC on response)
 
+$config[ComputopConstants::CREDIT_CARD_TEMPLATE_ENABLED] = false;
+
+$config[ComputopConstants::CREDIT_CARD_TX_TYPE] = 'Order';
+$config[ComputopConstants::PAY_NOW_TX_TYPE] = 'Order';
+$config[ComputopConstants::PAY_PAL_TX_TYPE] = 'Order';
+
 $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT,

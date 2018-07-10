@@ -14,15 +14,14 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
-    const ETI_ID = '0.0.1'; //Parameter is requested by Computop
-    const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
-    const RESPONSE_ENCRYPT_TYPE = 'encrypt';
-    const TX_TYPE_ORDER = 'Order';
+    public const ETI_ID = '0.0.1'; //Parameter is requested by Computop
+    public const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
+    public const RESPONSE_ENCRYPT_TYPE = 'encrypt';
 
     /**
      * @return string
      */
-    public function getCallbackSuccessOrderRedirectPath()
+    public function getCallbackSuccessOrderRedirectPath(): string
     {
         return 'checkout-summary';
     }
@@ -30,7 +29,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getCallbackSuccessCaptureRedirectPath()
+    public function getCallbackSuccessCaptureRedirectPath(): string
     {
         return 'checkout-success';
     }
@@ -38,15 +37,15 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getCallbackFailureRedirectPath()
+    public function getCallbackFailureRedirectPath(): string
     {
         return 'checkout-payment';
     }
 
     /**
-     * @return array
+     * @return string[]
      */
-    public function getPaymentMethodsWithoutOrderCall()
+    public function getPaymentMethodsWithoutOrderCall(): array
     {
         return $this->get(ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL);
     }
@@ -54,7 +53,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getBaseUrlSsl()
+    public function getBaseUrlSsl(): string
     {
         return $this->get(ApplicationConstants::BASE_URL_SSL_YVES);
     }
@@ -62,7 +61,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getMerchantId()
+    public function getMerchantId(): string
     {
         return $this->get(ComputopApiConstants::MERCHANT_ID);
     }
@@ -70,7 +69,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getPaydirektShopKey()
+    public function getPaydirektShopKey(): string
     {
         return $this->get(ComputopConstants::PAYDIREKT_SHOP_KEY);
     }
@@ -78,7 +77,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getBlowfishPassword()
+    public function getBlowfishPassword(): string
     {
         return $this->get(ComputopApiConstants::BLOWFISH_PASSWORD);
     }
@@ -86,7 +85,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getPaypalInitActionUrl()
+    public function getPaypalInitActionUrl(): string
     {
         return $this->get(ComputopConstants::PAYPAL_INIT_ACTION);
     }
@@ -94,7 +93,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getDirectDebitInitActionUrl()
+    public function getDirectDebitInitActionUrl(): string
     {
         return $this->get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);
     }
@@ -102,7 +101,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getCreditCardInitActionUrl()
+    public function getCreditCardInitActionUrl(): string
     {
         return $this->get(ComputopConstants::CREDIT_CARD_INIT_ACTION);
     }
@@ -110,7 +109,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getPayNowInitActionUrl()
+    public function getPayNowInitActionUrl(): string
     {
         return $this->get(ComputopConstants::PAY_NOW_INIT_ACTION);
     }
@@ -118,15 +117,15 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @return string
      */
-    public function getEasyCreditInitActionUrl()
+    public function getEasyCreditInitActionUrl(): string
     {
         return $this->get(ComputopConstants::EASY_CREDIT_INIT_ACTION);
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getCreditCardTemplateEnabled()
+    public function getCreditCardTemplateEnabled(): bool
     {
         return $this->get(ComputopConstants::CREDIT_CARD_TEMPLATE_ENABLED);
     }
@@ -137,5 +136,29 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getPaymentMethodsCaptureTypes(): array
     {
         return $this->get(ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreditCardTxType(): string
+    {
+        return $this->get(ComputopConstants::CREDIT_CARD_TX_TYPE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayNowTxType(): string
+    {
+        return $this->get(ComputopConstants::PAY_NOW_TX_TYPE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayPalTxType(): string
+    {
+        return $this->get(ComputopConstants::PAY_PAL_TX_TYPE);
     }
 }

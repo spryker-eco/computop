@@ -75,7 +75,7 @@ interface ComputopConfigInterface
     public function getEasyCreditInitActionUrl();
 
     /**
-     * @return string
+     * @return bool
      */
     public function getCreditCardTemplateEnabled();
 
@@ -83,4 +83,19 @@ interface ComputopConfigInterface
      * @return string[]
      */
     public function getPaymentMethodsCaptureTypes();
+
+    /**
+     * @return string
+     */
+    public function getCreditCardTxType();
+
+    /**
+     * @return string
+     */
+    public function getPayNowTxType();
+
+    /**
+     * @return string
+     */
+    public function getPayPalTxType();
 }
