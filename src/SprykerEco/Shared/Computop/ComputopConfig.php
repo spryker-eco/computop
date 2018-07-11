@@ -11,21 +11,35 @@ use Spryker\Shared\Kernel\AbstractBundleConfig;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-    const PROVIDER_NAME = 'Computop';
-    const PAYMENT_METHOD_PAY_NOW = 'computopPayNow';
-    const PAYMENT_METHOD_CREDIT_CARD = 'computopCreditCard';
-    const PAYMENT_METHOD_DIRECT_DEBIT = 'computopDirectDebit';
-    const PAYMENT_METHOD_IDEAL = 'computopIdeal';
-    const PAYMENT_METHOD_PAYDIREKT = 'computopPaydirekt';
-    const PAYMENT_METHOD_PAY_PAL = 'computopPayPal';
-    const PAYMENT_METHOD_SOFORT = 'computopSofort';
-    const PAYMENT_METHOD_EASY_CREDIT = 'computopEasyCredit';
+    public const PROVIDER_NAME = 'Computop';
+    public const PAYMENT_METHOD_PAY_NOW = 'computopPayNow';
+    public const PAYMENT_METHOD_CREDIT_CARD = 'computopCreditCard';
+    public const PAYMENT_METHOD_DIRECT_DEBIT = 'computopDirectDebit';
+    public const PAYMENT_METHOD_IDEAL = 'computopIdeal';
+    public const PAYMENT_METHOD_PAYDIREKT = 'computopPaydirekt';
+    public const PAYMENT_METHOD_PAY_PAL = 'computopPayPal';
+    public const PAYMENT_METHOD_SOFORT = 'computopSofort';
+    public const PAYMENT_METHOD_EASY_CREDIT = 'computopEasyCredit';
 
     //Computop provider constants
-    const SUCCESS_STATUS = 'success';
-    const SUCCESS_OK = 'OK';
-    const AUTHORIZE_REQUEST_STATUS = 'AUTHORIZE_REQUEST';
-    const DIRECT_DEBIT_DATE_FORMAT = 'd.m.Y';
-    const PAY_PAL_NO_SHIPPING = 1;
-    const INIT_METHOD = 'INIT';
+    public const SUCCESS_STATUS = 'success';
+    public const SUCCESS_OK = 'OK';
+    public const AUTHORIZE_REQUEST_STATUS = 'AUTHORIZE_REQUEST';
+    public const DIRECT_DEBIT_DATE_FORMAT = 'd.m.Y';
+    public const PAY_PAL_NO_SHIPPING = 1;
+    public const INIT_METHOD = 'INIT';
+
+    public const TX_TYPE_ORDER = 'Order';
+    public const TX_TYPE_AUTH = 'Auth';
+    public const TX_TYPE_BAID = 'BAID';
+
+    public const CRIF_PRODUCT_NAME_IDENT_CHECK_CONSUMER = 'IdentCheckConsumer';
+    public const CRIF_PRODUCT_NAME_QUICK_CHECK_CONSUMER = 'QuickCheckConsumer';
+    public const CRIF_PRODUCT_NAME_CREDIT_CHECK_CONSUMER = 'CreditCheckConsumer';
+    public const CRIF_PRODUCT_NAME_QUICK_CHECK_BUSINESS = 'QuickCheckBusiness';
+    public const CRIF_PRODUCT_NAME_CREDIT_CHECK_BUSINESS = 'CreditCheckBusiness';
+
+    public const CRIF_LEGAL_FORM_PERSON = 'PERSON';
+    public const CRIF_LEGAL_FORM_COMPANY = 'COMPANY';
+    public const CRIF_LEGAL_FORM_UNKNOWN = 'UNKNOWN';
 }
