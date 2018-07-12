@@ -7,10 +7,13 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
+use ArrayObject;
+use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
+use Generated\Shared\Transfer\ComputopCrifTransfer;
 use Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer;
@@ -25,6 +28,8 @@ use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
+use Generated\Shared\Transfer\PaymentMethodTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
@@ -65,6 +70,9 @@ class FacadeDBActionTest extends AbstractSetUpTest
     const CURRENCY_VALUE = 'EUR';
 
     const ID_SALES_ORDER_ITEM = 1;
+
+    public const STATUS_VALUE_SUCCESS = 'SUCCESS';
+    public const CRIF_GREEN_RESULT = 'GREEN';
 
     /**
      * @var integer
@@ -259,6 +267,57 @@ class FacadeDBActionTest extends AbstractSetUpTest
     }
 
     /**
+     * @return void
+     */
+    public function testPerformCrifApiCall()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $quoteTransfer = $this->getQuoteTrasfer();
+        $response = $service->performCrifApiCall($quoteTransfer);
+
+        $this->assertInstanceOf(ComputopCrifTransfer::class, $response->getComputopCrif());
+        $this->assertNotEmpty($response->getComputopCrif()->getResult());
+        $this->assertNotEmpty($response->getComputopCrif()->getStatus());
+        $this->assertNotEmpty($response->getComputopCrif()->getCode());
+        $this->assertNotEmpty($response->getComputopCrif()->getDescription());
+    }
+
+    /**
+     * @return void
+     */
+    public function testFilterPaymentMethods()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $quoteTransfer = $this->getQuoteTrasfer();
+        $response = $service->filterPaymentMethods($this->getPaymentMethodsTransfer(), $quoteTransfer);
+
+        $this->assertInstanceOf(PaymentMethodsTransfer::class, $response);
+        $this->assertGreaterThanOrEqual(1, $response->getMethods()->count());
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    protected function getPaymentMethodsTransfer()
+    {
+        $methods = new ArrayObject();
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_SOFORT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAYDIREKT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_IDEAL));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_DIRECT_DEBIT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT));
+
+        return (new PaymentMethodsTransfer())->setMethods($methods);
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function getQuoteTrasfer()
@@ -335,6 +394,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         $quoteTransfer = new QuoteTransfer();
         $quoteTransfer->setPayment($paymentTransfer);
+
+        $quoteTransfer->setComputopCrif($this->createComputopCrifTransfer());
 
         return $quoteTransfer;
     }
@@ -417,11 +478,17 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $stub = $this
             ->createPartialMock(
                 ComputopToComputopApiFacadeBridge::class,
-                ['performEasyCreditStatusRequest']
+                [
+                    'performEasyCreditStatusRequest',
+                    'performCrifApiCall',
+                ]
             );
 
         $stub->method('performEasyCreditStatusRequest')
             ->willReturn($this->createComputopEasyCreditStatusResponseTransfer());
+
+        $stub->method('performCrifApiCall')
+            ->willReturn($this->createComputopApiCrifResponseTransfer());
 
         return $stub;
     }
@@ -432,16 +499,47 @@ class FacadeDBActionTest extends AbstractSetUpTest
     protected function createComputopEasyCreditStatusResponseTransfer()
     {
         return (new ComputopApiEasyCreditStatusResponseTransfer())
-            ->setHeader(
-                (new ComputopApiResponseHeaderTransfer())
-                    ->setTransId(self::TRANS_ID_VALUE)
-                    ->setPayId(self::PAY_ID_VALUE)
-                    ->setMId(self::M_ID_VALUE)
-                    ->setXId(self::X_ID_VALUE)
-                    ->setCode(self::CODE_VALUE)
-                    ->setDescription(self::DESCRIPTION_VALUE)
-                    ->setIsSuccess(true)
-                    ->setStatus(self::STATUS_VALUE)
-            );
+            ->setHeader($this->createComputopApiResponseHeaderTransfer());
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiCrifResponseTransfer
+     */
+    protected function createComputopApiCrifResponseTransfer()
+    {
+        return (new ComputopApiCrifResponseTransfer())
+            ->setHeader($this->createComputopApiResponseHeaderTransfer())
+            ->setCode(static::CODE_VALUE)
+            ->setResult(static::CRIF_GREEN_RESULT)
+            ->setStatus(static::STATUS_VALUE)
+            ->setDescription(static::STATUS_VALUE_SUCCESS);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    protected function createComputopApiResponseHeaderTransfer()
+    {
+        return (new ComputopApiResponseHeaderTransfer())
+            ->setTransId(static::TRANS_ID_VALUE)
+            ->setPayId(static::PAY_ID_VALUE)
+            ->setMId(static::M_ID_VALUE)
+            ->setXId(static::X_ID_VALUE)
+            ->setCode(static::CODE_VALUE)
+            ->setDescription(static::DESCRIPTION_VALUE)
+            ->setIsSuccess(true)
+            ->setStatus(static::STATUS_VALUE);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopCrifTransfer
+     */
+    protected function createComputopCrifTransfer()
+    {
+        return (new ComputopCrifTransfer())
+            ->setCode(static::CODE_VALUE)
+            ->setResult(static::CRIF_GREEN_RESULT)
+            ->setStatus(static::STATUS_VALUE)
+            ->setDescription(static::STATUS_VALUE_SUCCESS);
     }
 }

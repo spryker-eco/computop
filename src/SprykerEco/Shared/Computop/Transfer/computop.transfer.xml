@@ -415,6 +415,15 @@
         <property name="ErrorText" type="string" />
     </transfer>
 
+    <transfer name="ComputopCrif">
+        <property name="status" type="string" />
+        <property name="description" type="string" />
+        <property name="code" type="string" />
+        <property name="result" type="string" />
+        <property name="limit" type="int" />
+        <property name="instruction" type="string" />
+    </transfer>
+
     <transfer name="Payment">
         <property name="computopPayNow" type="ComputopPayNowPayment" />
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />
@@ -436,6 +445,10 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
         <property name="computopIdeal" type="ComputopIdealPayment" />
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
+    </transfer>
+
+    <transfer name="Quote">
+        <property name="computopCrif" type="ComputopCrif" />
     </transfer>
 
     <transfer name="CheckoutResponse">

@@ -70,7 +70,7 @@ class CreditCardMapper extends AbstractMapper
             $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD)
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
-        $computopPaymentTransfer->setTxType(ComputopConfig::TX_TYPE_ORDER);
+        $computopPaymentTransfer->setTxType($this->config->getCreditCardTxType());
         $computopPaymentTransfer->setUrlSuccess(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::CREDIT_CARD_SUCCESS))
         );

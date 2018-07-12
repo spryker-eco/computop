@@ -145,4 +145,16 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Perform CRIF risk check API call
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
 }

@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 

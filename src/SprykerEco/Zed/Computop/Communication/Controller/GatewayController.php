@@ -125,4 +125,14 @@ class GatewayController extends AbstractGatewayController
     {
         return $this->getFacade()->isComputopPaymentExist($quoteTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function performCrifApiCallAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->performCrifApiCall($quoteTransfer);
+    }
 }

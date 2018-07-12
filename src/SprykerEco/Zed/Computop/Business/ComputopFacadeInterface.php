@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopFacadeInterface
@@ -237,4 +238,29 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Perform CRIF risk check API call
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Filters available payment methods by gift card black list
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer);
 }

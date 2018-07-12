@@ -78,4 +78,11 @@ interface ComputopToComputopApiFacadeInterface
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
     );
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiCrifResponseTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
 }

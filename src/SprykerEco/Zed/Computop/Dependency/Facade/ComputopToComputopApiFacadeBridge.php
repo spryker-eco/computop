@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
+use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -102,5 +103,15 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
     ) {
         return $this->computopApiFacade->performReverseRequest($orderTransfer, $headerApiPaymentTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiCrifResponseTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer): ComputopApiCrifResponseTransfer
+    {
+        return $this->computopApiFacade->performCrifApiCall($quoteTransfer);
     }
 }

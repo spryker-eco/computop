@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -312,5 +313,39 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->getFactory()
             ->createPaymentReader()
             ->isComputopPaymentExist($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer)
+    {
+        return $this
+            ->getFactory()
+            ->createCrifHandler()
+            ->handle($quoteTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()
+            ->createPaymentMethodFilter()
+            ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
     }
 }

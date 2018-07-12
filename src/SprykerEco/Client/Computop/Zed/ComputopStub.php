@@ -122,4 +122,14 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     {
         return $this->zedStub->call('/computop/gateway/is-computop-payment-exist', $quoteTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer)
+    {
+        return $this->zedStub->call('/computop/gateway/perform-crif-api-call', $quoteTransfer);
+    }
 }

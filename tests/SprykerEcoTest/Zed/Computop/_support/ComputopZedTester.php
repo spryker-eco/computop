@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\Computop;
 
 use Codeception\Actor;
 use Codeception\Scenario;
+use SprykerEco\Shared\Computop\ComputopConfig;
 
 /**
  * Inherited Methods
@@ -51,5 +52,32 @@ class ComputopZedTester extends Actor
         $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
         $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['computopSofort', 'computopPaydirekt', 'computopIdeal']);
         $this->setConfig('COMPUTOP:SOFORT_INIT_ACTION', 'https://www.computop-paygate.com/sofort.aspx');
+        $this->setConfig(
+            'COMPUTOP:CRIF_GREEN_AVAILABLE_PAYMENT_METHODS',
+            [
+                ComputopConfig::PAYMENT_METHOD_SOFORT,
+                ComputopConfig::PAYMENT_METHOD_PAYDIREKT,
+                ComputopConfig::PAYMENT_METHOD_IDEAL,
+                ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
+                ComputopConfig::PAYMENT_METHOD_PAY_NOW,
+                ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+                ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
+                ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ]
+        );
+        $this->setConfig(
+            'COMPUTOP:CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS',
+            [
+                ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
+                ComputopConfig::PAYMENT_METHOD_PAY_NOW,
+                ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+            ]
+        );
+        $this->setConfig(
+            'COMPUTOP:CRIF_REDAVAILABLE_PAYMENT_METHODS',
+            [
+                ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
+            ]
+        );
     }
 }
