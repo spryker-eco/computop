@@ -29,7 +29,7 @@ class IdealMapper extends AbstractMapper
         );
         //ToDo:update mapper
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

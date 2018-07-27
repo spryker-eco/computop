@@ -61,7 +61,7 @@ class PayNowMapper extends AbstractMapper
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_NOW_SUCCESS))
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getTestModeDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
         return $computopPaymentTransfer;

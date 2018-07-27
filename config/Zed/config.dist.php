@@ -26,7 +26,7 @@ $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.co
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
 
 $config[ComputopApiConstants::CRIF_ACTION] = 'https://www.computop-paygate.com/deltavista.aspx';
-$config[ComputopApiConstants::CRIF_PRODUCT_NAME] = ComputopConfig::CRIF_PRODUCT_NAME_IDENT_CHECK_CONSUMER;
+$config[ComputopApiConstants::CRIF_PRODUCT_NAME] = ComputopConfig::CRIF_PRODUCT_NAME_QUICK_CHECK_CONSUMER;
 $config[ComputopApiConstants::CRIF_LEGAL_FORM] = ComputopConfig::CRIF_LEGAL_FORM_PERSON;
 
 $config[ComputopApiConstants::MERCHANT_ID] = 'COMPUTOP_MERCHANT_ID'; //Set up real data
@@ -46,9 +46,9 @@ $config[ComputopApiConstants::RESPONSE_MAC_REQUIRED] = [
 
 $config[ComputopConstants::CREDIT_CARD_TEMPLATE_ENABLED] = false;
 
-$config[ComputopConstants::CREDIT_CARD_TX_TYPE] = ComputopConfig::TX_TYPE_ORDER;
-$config[ComputopConstants::PAY_NOW_TX_TYPE] = ComputopConfig::TX_TYPE_ORDER;
-$config[ComputopConstants::PAY_PAL_TX_TYPE] = ComputopConfig::TX_TYPE_ORDER;
+$config[ComputopConstants::CREDIT_CARD_TX_TYPE] = '';
+$config[ComputopConstants::PAY_NOW_TX_TYPE] = '';
+$config[ComputopConstants::PAY_PAL_TX_TYPE] = ComputopConfig::TX_TYPE_AUTH;
 
 $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
@@ -62,7 +62,6 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
 ];
 
 $config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
-    ComputopApiConfig::PAYMENT_METHOD_SOFORT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_PAYDIREKT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_CREDIT_CARD => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_PAY_NOW => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
