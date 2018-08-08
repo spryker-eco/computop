@@ -25,7 +25,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     {
         return ComputopConfig::PROVIDER_NAME;
     }
-    
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options

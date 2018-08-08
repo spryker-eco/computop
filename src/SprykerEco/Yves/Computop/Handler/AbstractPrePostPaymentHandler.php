@@ -16,7 +16,7 @@ abstract class AbstractPrePostPaymentHandler implements ComputopPrePostPaymentHa
      * @var \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
     protected $converter;
-    
+
     /**
      * @var \SprykerEco\Client\Computop\ComputopClientInterface
      */

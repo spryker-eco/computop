@@ -28,12 +28,12 @@ class ComputopControllerProvider extends YvesControllerProvider
      * @var string
      */
     protected $moduleName = 'Computop';
-    
+
     /**
      * @var string
      */
     protected $callbackControllerName = 'Callback';
-    
+
     /**
      * @param \Silex\Application $app
      *

@@ -29,7 +29,7 @@ abstract class AbstractMapper implements MapperInterface
      * @var \Silex\Application
      */
     protected $application;
-    
+
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
      */

@@ -105,7 +105,7 @@ class GatewayController extends AbstractGatewayController
     {
         return $this->getFacade()->savePaydirektInitResponse($quoteTransfer);
     }
-    
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

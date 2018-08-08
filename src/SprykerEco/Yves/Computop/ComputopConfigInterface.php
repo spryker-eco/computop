@@ -68,7 +68,7 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getPayNowInitActionUrl();
-    
+
     /**
      * @return string
      */

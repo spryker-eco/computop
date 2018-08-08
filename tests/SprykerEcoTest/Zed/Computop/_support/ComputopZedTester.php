@@ -74,10 +74,11 @@ class ComputopZedTester extends Actor
             ]
         );
         $this->setConfig(
-            'COMPUTOP:CRIF_REDAVAILABLE_PAYMENT_METHODS',
+            'COMPUTOP:CRIF_RED_AVAILABLE_PAYMENT_METHODS',
             [
                 ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
             ]
         );
+        $this->setConfig('COMPUTOP:CRIF_ENABLED', true);
     }
 }
