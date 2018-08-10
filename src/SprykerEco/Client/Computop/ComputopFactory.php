@@ -10,6 +10,9 @@ namespace SprykerEco\Client\Computop;
 use Spryker\Client\Kernel\AbstractFactory;
 use SprykerEco\Client\Computop\Zed\ComputopStub;
 
+/**
+ * @method \SprykerEco\Client\Computop\ComputopConfig getConfig()
+ */
 class ComputopFactory extends AbstractFactory
 {
     /**
