@@ -181,6 +181,10 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      */
     public function performCrifApiCall(QuoteTransfer $quoteTransfer)
     {
+        if (!$this->getFactory()->getConfig()->isCrifEnabled()) {
+            return $quoteTransfer;
+        }
+
         return $this->getFactory()->createZedStub()->performCrifApiCall($quoteTransfer);
     }
 }

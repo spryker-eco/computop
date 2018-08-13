@@ -201,7 +201,7 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
-    
+
     /**
      * Specification:
      * - Makes Easy Credit Status API call

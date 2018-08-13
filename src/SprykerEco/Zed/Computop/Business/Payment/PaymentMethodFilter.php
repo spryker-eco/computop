@@ -42,6 +42,10 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
         PaymentMethodsTransfer $paymentMethodsTransfer,
         QuoteTransfer $quoteTransfer
     ): PaymentMethodsTransfer {
+        if (!$this->config->isCrifEnabled()) {
+            return $paymentMethodsTransfer;
+        }
+
         $availableMethods = $this->getAvailablePaymentMethods($quoteTransfer);
 
         $result = new ArrayObject();

@@ -460,7 +460,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig()
         );
     }
-    
+
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */

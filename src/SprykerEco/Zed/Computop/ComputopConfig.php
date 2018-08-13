@@ -318,4 +318,12 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return $this->get(ComputopConstants::CRIF_RED_AVAILABLE_PAYMENT_METHODS);
     }
+
+    /**
+     * @return bool
+     */
+    public function isCrifEnabled(): bool
+    {
+        return (bool)$this->get(ComputopConstants::CRIF_ENABLED);
+    }
 }

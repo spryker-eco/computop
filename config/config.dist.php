@@ -99,6 +99,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     ComputopConfig::PAYMENT_METHOD_IDEAL => 'ComputopIdeal01',
 ];
 
+$config[ComputopConstants::CRIF_ENABLED] = false;
 $config[ComputopConstants::CRIF_GREEN_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT,

@@ -43,7 +43,7 @@ interface ComputopBusinessOrderFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     public function createInitIdealMapper();
-    
+
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */

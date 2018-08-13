@@ -276,7 +276,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new CrifHandler(
             $this->getComputopApiFacade(),
-            $this->createCrifSaver()
+            $this->createCrifSaver(),
+            $this->getConfig()
         );
     }
 

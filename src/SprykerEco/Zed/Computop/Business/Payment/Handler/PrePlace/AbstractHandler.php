@@ -25,7 +25,7 @@ abstract class AbstractHandler implements PrePlaceHandlerInterface
     {
         $this->computopApiFacade = $computopApiFacade;
     }
-    
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

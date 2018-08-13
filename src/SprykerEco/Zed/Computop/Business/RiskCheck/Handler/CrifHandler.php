@@ -19,6 +19,9 @@ class CrifHandler extends AbstractHandler
      */
     public function handle(QuoteTransfer $quoteTransfer)
     {
+        if (!$this->config->isCrifEnabled()) {
+            return $quoteTransfer;
+        }
         $responseTransfer = $this->computopApiFacade->performCrifApiCall($quoteTransfer);
         $this->saver->save($responseTransfer, $quoteTransfer);
 
