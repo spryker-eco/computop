@@ -7,13 +7,25 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace;
 
+use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface;
 
 class EasyCreditStatusHandler extends AbstractHandler
 {
+    protected const PLAN = 'ratenplan';
+    protected const PAY_RENT = 'zinsen';
+    protected const ACCRUED_INTEREST = 'anfallendeZinsen';
+    protected const TOTAL = 'gesamtsumme';
+    protected const DECISION = 'entscheidung';
+    protected const DECISION_RESULT = 'entscheidungsergebnis';
+    protected const DECISION_RESULT_GREEN = 'GRUEN';
+
+    protected const COMPUTOP_EASY_CREDIT_EXPENSE_TYPE = 'COMPUTOP_EASY_CREDIT_EXPENSE_TYPE';
+
     /**
      * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface
      */
@@ -42,9 +54,9 @@ class EasyCreditStatusHandler extends AbstractHandler
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer)
+    public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $computopHeaderPayment = $this->createComputopHeaderPayment($quoteTransfer);
 
@@ -52,20 +64,67 @@ class EasyCreditStatusHandler extends AbstractHandler
             ->computopApiFacade
             ->performEasyCreditStatusRequest($quoteTransfer, $computopHeaderPayment);
 
-        $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
-        $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
-        $responseTransfer->getHeader()->setIsSuccess($this->parseStatusValue($decision));
+        if ($responseTransfer->getHeader()->getIsSuccess()) {
+            $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
+            $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
+            $process = $this->parseStatusExplanation($responseTransfer->getProcess());
 
-        $paymentAmount = $this->parsePaymentAmount($financing);
+            $responseTransfer->setDecisionData($decision);
+            $responseTransfer->setFinancingData($financing);
+            $responseTransfer->setProcessData($process);
+
+            $quoteTransfer = $this->addExpense($quoteTransfer, $financing);
+        }
+
         $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditStatusResponse($responseTransfer);
 
-        if ($paymentAmount) {
-            $quoteTransfer->getPayment()->setAmount($paymentAmount);
-            $quoteTransfer->getPayment()->getComputopEasyCredit()->setAmount($paymentAmount);
-        }
         $this->logger->log($responseTransfer->getHeader(), $responseTransfer->getHeader()->getMethod());
 
-        return $responseTransfer;
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param string[] $financing
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function addExpense(QuoteTransfer $quoteTransfer, array $financing): QuoteTransfer
+    {
+        $expenses = $quoteTransfer->getExpenses();
+
+        foreach ($expenses as $index => $expenseTransfer) {
+            if ($expenseTransfer->getType() === static::COMPUTOP_EASY_CREDIT_EXPENSE_TYPE) {
+                $expenses->offsetUnset($index);
+            }
+        }
+
+        $expense = (new ExpenseTransfer())
+            ->setType(static::COMPUTOP_EASY_CREDIT_EXPENSE_TYPE)
+            ->setName(ComputopConfig::PAYMENT_METHOD_EASY_CREDIT)
+            ->setUnitGrossPrice($this->parseExpense($financing))
+            ->setQuantity(1);
+
+        $expenses->append($expense);
+        $quoteTransfer->setExpenses($expenses);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param $financing
+     *
+     * @return int
+     */
+    protected function parseExpense($financing): int
+    {
+        if (!isset($financing[static::PLAN][static::PAY_RENT][static::ACCRUED_INTEREST])) {
+            return 0;
+        }
+
+        $expense = (float)$financing[static::PLAN][static::PAY_RENT][static::ACCRUED_INTEREST];
+
+        return $this->moneyFacade->convertDecimalToInteger($expense);
     }
 
     /**
@@ -73,7 +132,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return array
      */
-    protected function parseStatusExplanation($status)
+    protected function parseStatusExplanation($status): array
     {
         return json_decode(base64_decode($status), true);
     }
@@ -83,10 +142,10 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return bool
      */
-    protected function parseStatusValue($decision)
+    protected function parseStatusValue($decision): bool
     {
-        if (isset($decision['entscheidung']['entscheidungsergebnis'])) {
-            return $decision['entscheidung']['entscheidungsergebnis'] === 'GRUEN';
+        if (isset($decision[static::DECISION][static::DECISION_RESULT])) {
+            return $decision[static::DECISION][static::DECISION_RESULT] === static::DECISION_RESULT_GREEN;
         }
 
         return false;
@@ -95,16 +154,16 @@ class EasyCreditStatusHandler extends AbstractHandler
     /**
      * @param array $financing
      *
-     * @return int|bool
+     * @return int
      */
-    protected function parsePaymentAmount($financing)
+    protected function parsePaymentAmount($financing): int
     {
-        if (isset($financing['ratenplan']['gesamtsumme'])) {
-            $paymentAmount = (float)$financing['ratenplan']['gesamtsumme'];
-
-            return $this->moneyFacade->convertDecimalToInteger($paymentAmount);
+        if (!isset($financing[static::PLAN][static::TOTAL])) {
+            return 0;
         }
 
-        return false;
+        $paymentAmount = (float)$financing[static::PLAN][static::TOTAL];
+
+        return $this->moneyFacade->convertDecimalToInteger($paymentAmount);
     }
 }

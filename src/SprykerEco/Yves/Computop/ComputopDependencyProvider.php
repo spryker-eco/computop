@@ -11,16 +11,18 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
-    const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
-    const CLIENT_QUOTE = 'CLIENT_QUOTE';
-    const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
-    const STORE = 'STORE';
+    public const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
+    public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+    public const CLIENT_QUOTE = 'CLIENT_QUOTE';
+    public const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
+    public const STORE = 'STORE';
+    public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -29,25 +31,29 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideDependencies(Container $container)
     {
-        $container[self::CLIENT_COMPUTOP] = function (Container $container) {
+        $container[static::CLIENT_COMPUTOP] = function (Container $container) {
             return $container->getLocator()->computop()->client();
         };
 
-        $container[self::SERVICE_COMPUTOP_API] = function () use ($container) {
+        $container[static::SERVICE_COMPUTOP_API] = function () use ($container) {
             return $container->getLocator()->computopApi()->service();
         };
 
-        $container[self::CLIENT_QUOTE] = function () use ($container) {
+        $container[static::CLIENT_QUOTE] = function () use ($container) {
             return new ComputopToQuoteClientBridge($container->getLocator()->quote()->client());
         };
 
-        $container[self::PLUGIN_APPLICATION] = function () {
+        $container[static::CLIENT_CALCULATION] = function () use ($container) {
+            return new ComputopToCalculationClientBridge($container->getLocator()->calculation()->client());
+        };
+
+        $container[static::PLUGIN_APPLICATION] = function () {
             $pimplePlugin = new Pimple();
 
             return $pimplePlugin->getApplication();
         };
 
-        $container[self::STORE] = function () {
+        $container[static::STORE] = function () {
             return new ComputopToStoreBridge(Store::getInstance());
         };
 

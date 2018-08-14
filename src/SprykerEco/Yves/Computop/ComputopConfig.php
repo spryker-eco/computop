@@ -18,6 +18,16 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
     public const RESPONSE_ENCRYPT_TYPE = 'encrypt';
 
+    protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
+
+    /**
+     * @return string
+     */
+    public function getEasyCreditSuccessAction(): string
+    {
+        return static::EASY_CREDIT_SUCCESS_ACTION;
+    }
+
     /**
      * @return string
      */

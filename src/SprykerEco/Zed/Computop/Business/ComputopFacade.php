@@ -271,12 +271,10 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
-        $this
+        return $this
             ->getFactory()
             ->createEasyCreditStatusHandler()
             ->handle($quoteTransfer);
-
-        return $quoteTransfer;
     }
 
     /**

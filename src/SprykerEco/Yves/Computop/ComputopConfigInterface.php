@@ -12,6 +12,11 @@ interface ComputopConfigInterface
     /**
      * @return string
      */
+    public function getEasyCreditSuccessAction(): string;
+
+    /**
+     * @return string
+     */
     public function getCallbackSuccessOrderRedirectPath();
 
     /**
