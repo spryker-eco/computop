@@ -112,11 +112,11 @@ class EasyCreditStatusHandler extends AbstractHandler
     }
 
     /**
-     * @param $financing
+     * @param array $financing
      *
      * @return int
      */
-    protected function parseExpense($financing): int
+    protected function parseExpense(array $financing): int
     {
         if (!isset($financing[static::PLAN][static::PAY_RENT][static::ACCRUED_INTEREST])) {
             return 0;
@@ -132,7 +132,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return array
      */
-    protected function parseStatusExplanation($status): array
+    protected function parseStatusExplanation($status)
     {
         return json_decode(base64_decode($status), true);
     }

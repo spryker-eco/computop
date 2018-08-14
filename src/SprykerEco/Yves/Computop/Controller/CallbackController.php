@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Controller;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
