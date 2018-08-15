@@ -407,7 +407,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
     {
         $omsFacadeStub = $this->createMock(ComputopToOmsFacadeBridge::class, ['triggerEvent' => '']);
         $moneyFacadeStub = $this->createMock(ComputopToMoneyFacadeBridge::class, ['triggerEvent' => '']);
-        $handler = $this->createMock(ComputopToMoneyFacadeBridge::class, ['triggerEvent' => '']);
+        $moneyFacadeStub->method('convertDecimalToInteger')
+            ->willReturn(10.35);
 
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(
