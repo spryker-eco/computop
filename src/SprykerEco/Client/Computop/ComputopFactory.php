@@ -16,9 +16,9 @@ use SprykerEco\Client\Computop\Zed\ComputopStub;
 class ComputopFactory extends AbstractFactory
 {
     /**
-     * @return \SprykerEco\Client\Computop\ComputopConfig
+     * @return \SprykerEco\Client\Computop\ComputopConfigInterface
      */
-    public function getComputopConfig(): ComputopConfig
+    public function getComputopConfig(): ComputopConfigInterface
     {
         return $this->getConfig();
     }
