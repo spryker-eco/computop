@@ -10,7 +10,7 @@ namespace SprykerEco\Client\Computop;
 use Spryker\Client\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 
-class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
+class ComputopConfig extends AbstractBundleConfig
 {
     /**
      * @return bool
