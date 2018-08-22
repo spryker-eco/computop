@@ -30,6 +30,17 @@ interface ComputopToComputopApiFacadeInterface
      *
      * @return \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer
      */
+    public function performEasyCreditAuthorizeRequest(
+        OrderTransfer $orderTransfer,
+        ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
+    );
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer
+     */
     public function performAuthorizationRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer

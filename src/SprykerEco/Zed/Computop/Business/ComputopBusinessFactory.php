@@ -41,6 +41,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLogg
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\AuthorizeHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\CaptureHandler;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\EasyCreditAuthorizeHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface as PostPlaceHandlerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\InquireHandler;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\RefundHandler;
@@ -294,7 +295,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createEasyCreditAuthorizeHandler(): PostPlaceHandlerInterface
     {
-        return new AuthorizeHandler(
+        return new EasyCreditAuthorizeHandler(
             $this->getComputopApiFacade(),
             $this->createAuthorizeSaver()
         );

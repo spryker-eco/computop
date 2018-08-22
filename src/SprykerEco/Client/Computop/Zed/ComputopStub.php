@@ -10,9 +10,29 @@ namespace SprykerEco\Client\Computop\Zed;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
+use Spryker\Client\ZedRequest\ZedRequestClientInterface;
+use SprykerEco\Client\Computop\ComputopConfig;
 
 class ComputopStub extends ZedRequestStub implements ComputopStubInterface
 {
+    /**
+     * @var \SprykerEco\Client\Computop\ComputopConfig
+     */
+    protected $config;
+
+    /**
+     * @param \Spryker\Client\ZedRequest\ZedRequestClientInterface $zedStub
+     * @param \SprykerEco\Client\Computop\ComputopConfig $config
+     */
+    public function __construct(
+        ZedRequestClientInterface $zedStub,
+        ComputopConfig $config
+    ) {
+        parent::__construct($zedStub);
+
+        $this->config = $config;
+    }
+
     /**
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseTransfer
      *
@@ -130,6 +150,10 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      */
     public function performCrifApiCall(QuoteTransfer $quoteTransfer)
     {
+        if (!$this->config->isCrifEnabled()) {
+            return $quoteTransfer;
+        }
+
         return $this->zedStub->call('/computop/gateway/perform-crif-api-call', $quoteTransfer);
     }
 }

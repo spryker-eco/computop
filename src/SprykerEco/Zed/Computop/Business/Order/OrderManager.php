@@ -51,6 +51,11 @@ class OrderManager implements OrderManagerInterface
     protected $config;
 
     /**
+     * @var string
+     */
+    protected $methodName;
+
+    /**
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
      */
     public function __construct(ComputopConfig $config)
@@ -96,6 +101,7 @@ class OrderManager implements OrderManagerInterface
             return;
         }
 
+        $this->methodName = $quoteTransfer->getPayment()->getPaymentMethod();
         $this->activeMapper = $this->getMethodMapper($quoteTransfer->getPayment()->getPaymentMethod());
         $this->computopTransfer = $this->activeMapper->getComputopTransfer($quoteTransfer->getPayment());
         $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($quoteTransfer->getPayment());
@@ -137,6 +143,10 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->setPayId($this->computopTransfer->getPayId());
         $paymentEntity->setReqId($this->computopTransfer->getReqId());
 
+        if ($this->isPaymentMethodEasyCredit()) {
+            $paymentEntity->setXId($this->computopResponseTransfer->getHeader()->getXId());
+        }
+
         $paymentEntity->save();
 
         return $paymentEntity;
@@ -154,6 +164,10 @@ class OrderManager implements OrderManagerInterface
 
         $paymentDetailEntity->fromArray($this->activeMapper->getPaymentDetailsArray($paymentTransfer));
         $paymentDetailEntity->setIdPaymentComputop($paymentEntity->getIdPaymentComputop());
+
+        if ($this->isPaymentMethodEasyCredit()) {
+            $paymentDetailEntity->fromArray($this->computopResponseTransfer->toArray());
+        }
 
         $paymentDetailEntity->save();
 
@@ -176,7 +190,19 @@ class OrderManager implements OrderManagerInterface
                 ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
             $paymentOrderItemEntity->setStatus($this->config->getOmsStatusNew());
 
+            if ($this->isPaymentMethodEasyCredit()) {
+                $paymentOrderItemEntity->setStatus($this->config->getOmsStatusInitialized());
+            }
+
             $paymentOrderItemEntity->save();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isPaymentMethodEasyCredit(): bool
+    {
+        return $this->methodName === ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT;
     }
 }

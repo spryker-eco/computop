@@ -20,7 +20,10 @@ class ComputopFactory extends AbstractFactory
      */
     public function createZedStub()
     {
-        return new ComputopStub($this->getZedRequestClient());
+        return new ComputopStub(
+            $this->getZedRequestClient(),
+            $this->getConfig()
+        );
     }
 
     /**

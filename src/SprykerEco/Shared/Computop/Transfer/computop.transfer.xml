@@ -424,6 +424,12 @@
         <property name="instruction" type="string" />
     </transfer>
 
+    <transfer name="ComputopApiEasyCreditStatusResponse">
+        <property name="decisionData" type="array" />
+        <property name="financingData" type="array" />
+        <property name="processData" type="array" />
+    </transfer>
+
     <transfer name="Payment">
         <property name="computopPayNow" type="ComputopPayNowPayment" />
         <property name="computopCreditCard" type="ComputopCreditCardPayment" />

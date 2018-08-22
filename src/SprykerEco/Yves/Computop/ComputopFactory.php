@@ -262,7 +262,8 @@ class ComputopFactory extends AbstractFactory
     {
         return new ComputopEasyCreditPaymentHandler(
             $this->createInitEasyCreditConverter(),
-            $this->getComputopClient()
+            $this->getComputopClient(),
+            $this->getCalculationClient()
         );
     }
 
@@ -368,6 +369,14 @@ class ComputopFactory extends AbstractFactory
     protected function getStore()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface
+     */
+    protected function getCalculationClient()
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_CALCULATION);
     }
 
     /**
