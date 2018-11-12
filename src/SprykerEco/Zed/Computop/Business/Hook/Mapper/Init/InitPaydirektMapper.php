@@ -80,6 +80,7 @@ class InitPaydirektMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
         $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $cardPaymentTransfer->getShippingAmount();
         $dataSubArray[ComputopApiConfig::SHOPPING_BASKET_AMOUNT] = $cardPaymentTransfer->getShoppingBasketAmount();
+        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
 
         return $dataSubArray;
     }

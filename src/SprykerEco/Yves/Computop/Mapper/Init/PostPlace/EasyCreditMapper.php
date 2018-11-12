@@ -87,6 +87,7 @@ class EasyCreditMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_INIT;
+        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
 
         return $dataSubArray;
     }

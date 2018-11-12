@@ -8,12 +8,13 @@
 namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-    const ETI_ID = '0.0.1';
+    const ETI_ID = 'Spryker – MV:%s';
     const OMS_STATUS_NEW = 'new';
     const OMS_STATUS_INITIALIZED = 'init';
     const OMS_STATUS_AUTHORIZED = 'authorized';
@@ -325,5 +326,13 @@ class ComputopConfig extends AbstractBundleConfig
     public function isCrifEnabled(): bool
     {
         return (bool)$this->get(ComputopConstants::CRIF_ENABLED);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEtiId(): string
+    {
+        return sprintf(static::ETI_ID, SharedComputopConfig::COMPUTOP_MODULE_VERSION);
     }
 }

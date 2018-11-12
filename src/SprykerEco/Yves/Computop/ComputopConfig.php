@@ -9,12 +9,13 @@ namespace SprykerEco\Yves\Computop;
 
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Yves\Kernel\AbstractBundleConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
-    public const ETI_ID = '0.0.1'; //Parameter is requested by Computop
+    public const ETI_ID = 'Spryker – MV:%s'; //Parameter is requested by Computop, Module version
     public const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
     public const RESPONSE_ENCRYPT_TYPE = 'encrypt';
 
@@ -170,5 +171,13 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getPayPalTxType(): string
     {
         return $this->get(ComputopConstants::PAY_PAL_TX_TYPE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEtiId(): string
+    {
+        return sprintf(static::ETI_ID, SharedComputopConfig::COMPUTOP_MODULE_VERSION);
     }
 }
