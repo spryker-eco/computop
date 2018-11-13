@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SofortSubForm extends AbstractSubForm
 {
-    const PAYMENT_METHOD = 'sofort';
+    public const PAYMENT_METHOD = 'sofort';
 
     /**
      * @return string

@@ -14,30 +14,30 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-    const ETI_ID = 'Spryker – MV:%s';
-    const OMS_STATUS_NEW = 'new';
-    const OMS_STATUS_INITIALIZED = 'init';
-    const OMS_STATUS_AUTHORIZED = 'authorized';
-    const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
-    const OMS_STATUS_CAPTURED = 'captured';
-    const OMS_STATUS_CAPTURING_FAILED = 'capture failed';
-    const OMS_STATUS_CANCELLED = 'cancelled';
-    const OMS_STATUS_REFUNDED = 'refunded';
+    public const ETI_ID = 'Spryker – MV:%s';
+    public const OMS_STATUS_NEW = 'new';
+    public const OMS_STATUS_INITIALIZED = 'init';
+    public const OMS_STATUS_AUTHORIZED = 'authorized';
+    public const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
+    public const OMS_STATUS_CAPTURED = 'captured';
+    public const OMS_STATUS_CAPTURING_FAILED = 'capture failed';
+    public const OMS_STATUS_CANCELLED = 'cancelled';
+    public const OMS_STATUS_REFUNDED = 'refunded';
 
-    const AUTHORIZE_METHOD = 'AUTHORIZE';
-    const CAPTURE_METHOD = 'CAPTURE';
-    const REVERSE_METHOD = 'REVERSE';
-    const INQUIRE_METHOD = 'INQUIRE';
-    const REFUND_METHOD = 'REFUND';
+    public const AUTHORIZE_METHOD = 'AUTHORIZE';
+    public const CAPTURE_METHOD = 'CAPTURE';
+    public const REVERSE_METHOD = 'REVERSE';
+    public const INQUIRE_METHOD = 'INQUIRE';
+    public const REFUND_METHOD = 'REFUND';
 
     //Events
-    const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
-    const COMPUTOP_OMS_EVENT_AUTHORIZE = 'authorize';
+    public const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
+    public const COMPUTOP_OMS_EVENT_AUTHORIZE = 'authorize';
 
     /**
      * Refund with shipment price
      */
-    const COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED = true;
+    public const COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED = true;
 
     /**
      * @return string

@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 

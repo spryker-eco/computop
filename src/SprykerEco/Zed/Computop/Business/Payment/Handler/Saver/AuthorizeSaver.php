@@ -16,7 +16,7 @@ class AuthorizeSaver extends AbstractSaver
 {
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'AUTHORIZE';
+    public const METHOD = 'AUTHORIZE';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer

@@ -18,11 +18,11 @@ use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
  */
 class CallbackController extends AbstractController
 {
-    const MESSAGE_PAYMENT_SUCCESS = 'Your order has been placed successfully! Thank you for shopping with us!';
+    public const MESSAGE_PAYMENT_SUCCESS = 'Your order has been placed successfully! Thank you for shopping with us!';
 
-    const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
+    public const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
 
-    const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
+    public const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
 
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

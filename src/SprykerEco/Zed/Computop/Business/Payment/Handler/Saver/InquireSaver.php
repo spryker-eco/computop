@@ -16,7 +16,7 @@ class InquireSaver extends AbstractSaver
 {
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'INQUIRE';
+    public const METHOD = 'INQUIRE';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer

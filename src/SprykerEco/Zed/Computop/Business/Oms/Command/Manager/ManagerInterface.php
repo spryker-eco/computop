@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 interface ManagerInterface
 {
     /**
-     * @param integer $idSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */

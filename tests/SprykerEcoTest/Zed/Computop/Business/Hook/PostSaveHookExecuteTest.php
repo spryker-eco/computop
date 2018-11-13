@@ -28,7 +28,7 @@ use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
  */
 class PostSaveHookExecuteTest extends AbstractSetUpTest
 {
-    const EXPECTED_REDIRECT_URL = 'https://www.computop-paygate.com/sofort.aspx?MerchantID=COMPUTOP%3AMERCHANT_ID&Data=f0957c5d3799a902211fb2e019cef4f459f29d4d908ffc66e6aa0fb839023c62be996fc15b44bcd681ce7bb5ff988c7132af0ed482e94bb18b7c51300761b20d36abc40b4150018f2288bff9340ac0cee2666374f2001af2ca46df7d5a263d3bf479f12682514dec3e232907943934372705bfcf7168e601f3077066797271ad3c48ea551d6158b0b75b385f33ced67648035196b21345712d61dc95be2cd949b5d6de1e41eb5aa2e145d311eaa4f26e0560555e8328acc670c804c6fe73f0a034890a5beb68dab008bd2da0ee23092add18b7250331a6b1c4d4d87f4623967b7930e436d7daa4d9&Len=224';
+    public const EXPECTED_REDIRECT_URL = 'https://www.computop-paygate.com/sofort.aspx?MerchantID=COMPUTOP%3AMERCHANT_ID&Data=f0957c5d3799a902211fb2e019cef4f459f29d4d908ffc66e6aa0fb839023c62be996fc15b44bcd681ce7bb5ff988c7132af0ed482e94bb18b7c51300761b20d36abc40b4150018f2288bff9340ac0cee2666374f2001af2ca46df7d5a263d3bf479f12682514dec3e232907943934372705bfcf7168e601f3077066797271ad3c48ea551d6158b0b75b385f33ced67648035196b21345712d61dc95be2cd949b5d6de1e41eb5aa2e145d311eaa4f26e0560555e8328acc670c804c6fe73f0a034890a5beb68dab008bd2da0ee23092add18b7250331a6b1c4d4d87f4623967b7930e436d7daa4d9&Len=224';
 
     /**
      * @return void
@@ -78,7 +78,7 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
     protected function createCheckoutResponse()
     {
         $checkoutResponse = new CheckoutResponseTransfer();
-        $checkoutResponse->setSaveOrder((new SaveOrderTransfer)->setOrderReference('DE--1'));
+        $checkoutResponse->setSaveOrder((new SaveOrderTransfer())->setOrderReference('DE--1'));
 
         return $checkoutResponse;
     }

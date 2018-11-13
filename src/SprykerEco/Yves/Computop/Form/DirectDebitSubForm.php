@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DirectDebitSubForm extends AbstractSubForm
 {
-    const PAYMENT_METHOD = 'direct_debit';
+    public const PAYMENT_METHOD = 'direct_debit';
 
     /**
      * @return string

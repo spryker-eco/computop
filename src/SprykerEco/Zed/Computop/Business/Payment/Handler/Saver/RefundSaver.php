@@ -16,7 +16,7 @@ class RefundSaver extends AbstractSaver
 {
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'REFUND';
+    public const METHOD = 'REFUND';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
