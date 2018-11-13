@@ -47,7 +47,7 @@
             </transition>
 
             <transition>
-                <source>new</source>
+                <source>authorized</source>
                 <target>capture failed</target>
                 <event>capture</event>
             </transition>

@@ -32,10 +32,6 @@
   },
   "repositories": [
     {
-      "type": "composer",
-      "url": "https://code.spryker.com/repo/private"
-    },
-    {
       "type": "git",
       "url": "git@github.com:spryker-eco/computop-api.git"
     }
