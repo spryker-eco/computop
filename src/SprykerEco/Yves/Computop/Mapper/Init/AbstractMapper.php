@@ -87,6 +87,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
+        $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
 
         return $computopPaymentTransfer;
     }
@@ -183,5 +184,19 @@ abstract class AbstractMapper implements MapperInterface
         $paymentMethodsCaptureTypes = $this->config->getPaymentMethodsCaptureTypes();
 
         return $paymentMethodsCaptureTypes[$method] ?? '';
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return string
+     */
+    protected function getZipCode(QuoteTransfer $quoteTransfer): string
+    {
+        if ($quoteTransfer->getBillingSameAsShipping()) {
+            return $quoteTransfer->getBillingAddress()->getZipCode();
+        }
+
+        return $quoteTransfer->getShippingAddress()->getZipCode();
     }
 }

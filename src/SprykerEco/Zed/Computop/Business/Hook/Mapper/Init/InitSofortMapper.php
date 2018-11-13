@@ -72,6 +72,8 @@ class InitSofortMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
 
         return $dataSubArray;
     }

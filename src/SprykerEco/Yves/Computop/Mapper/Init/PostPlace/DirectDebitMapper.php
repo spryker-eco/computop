@@ -101,6 +101,8 @@ class DirectDebitMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::MANDATE_ID] = $cardPaymentTransfer->getMandateId();
         $dataSubArray[ComputopApiConfig::DATE_OF_SIGNATURE_ID] = $this->getDateOfSignature();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
 
         return $dataSubArray;
     }
