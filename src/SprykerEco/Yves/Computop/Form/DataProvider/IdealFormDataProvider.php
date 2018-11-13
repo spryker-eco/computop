@@ -14,9 +14,9 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 class IdealFormDataProvider extends AbstractFormDataProvider
 {
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function getData(AbstractTransfer $quoteTransfer)
     {
@@ -30,8 +30,6 @@ class IdealFormDataProvider extends AbstractFormDataProvider
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopIdeal($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
-
-            //TODO: check save Quote to session
             $this->quoteClient->setQuote($quoteTransfer);
         }
 
