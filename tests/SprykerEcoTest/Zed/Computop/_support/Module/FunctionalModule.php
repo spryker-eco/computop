@@ -31,7 +31,6 @@ class FunctionalModule extends Module
     public $orderEntity;
 
     /**
-     * Module constructor.
      *
      * Requires module container (to provide access between modules of suite) and config.
      *

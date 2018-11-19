@@ -25,9 +25,9 @@ use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
 class OrderPaymentTestHelper extends Test
 {
-    const CURRENCY_VALUE = 'USD';
-    const DATA_VALUE = 'f0957c5d3799a902211fb2e019cef4f459f29d4d908ffc66e6aa0fb839023c62be996fc15b44bcd681ce7bb5ff988c7157707228fb13b961fd676abedef6aeed48817998d16a635e11943e70942b91751a5793ce85a43e6a38220eae6bdbb594f3dcfb398e2f8f9a1d9aa922a05821950ff5dbae45eaf9a5818fe75ad0a8e246df61165cf5fe6727b922edf08e6d7b4004746be1259a9c6d';
-    const LEN_VALUE = 152;
+    public const CURRENCY_VALUE = 'USD';
+    public const DATA_VALUE = 'f0957c5d3799a902211fb2e019cef4f459f29d4d908ffc66e6aa0fb839023c62be996fc15b44bcd681ce7bb5ff988c7157707228fb13b961fd676abedef6aeed48817998d16a635e11943e70942b91751a5793ce85a43e6a38220eae6bdbb594f3dcfb398e2f8f9a1d9aa922a05821950ff5dbae45eaf9a5818fe75ad0a8e246df61165cf5fe6727b922edf08e6d7b40008bd199d12331e44eea8f8191955d6e832653b596efee16';
+    public const LEN_VALUE = 165;
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory

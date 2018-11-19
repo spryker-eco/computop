@@ -26,10 +26,10 @@ use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
 
 abstract class AbstractPaymentTest extends AbstractSetUpTest
 {
-    const GRAND_TOTAL = 10;
-    const REFUND_TOTAL = 10;
-    const SUB_TOTAL = 8;
-    const DISCOUNT_TOTAL = 1;
+    public const GRAND_TOTAL = 10;
+    public const REFUND_TOTAL = 10;
+    public const SUB_TOTAL = 8;
+    public const DISCOUNT_TOTAL = 1;
 
     /**
      * @return string

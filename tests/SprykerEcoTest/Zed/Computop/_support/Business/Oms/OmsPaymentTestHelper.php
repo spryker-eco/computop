@@ -21,7 +21,7 @@ class OmsPaymentTestHelper extends Test
      */
     public function createConfig()
     {
-        return new ComputopConfig;
+        return new ComputopConfig();
     }
 
     /**

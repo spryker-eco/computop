@@ -71,6 +71,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * @api
+     *
      * @param int $orderItemId
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
@@ -83,6 +85,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * @api
+     *
      * @param int $idSalesOrder
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery

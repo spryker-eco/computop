@@ -12,17 +12,17 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
 class ComputopControllerProvider extends YvesControllerProvider
 {
-    const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
-    const PAY_NOW_SUCCESS = 'computop-paynow-success';
-    const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
-    const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
-    const IDEAL_SUCCESS = 'computop-ideal-success';
-    const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
-    const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
-    const SOFORT_SUCCESS = 'computop-sofort-success';
+    public const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
+    public const PAY_NOW_SUCCESS = 'computop-paynow-success';
+    public const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
+    public const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
+    public const IDEAL_SUCCESS = 'computop-ideal-success';
+    public const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+    public const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
+    public const SOFORT_SUCCESS = 'computop-sofort-success';
 
-    const FAILURE_PATH_NAME = 'computop-failure';
-    const NOTIFY_PATH_NAME = 'computop-notify';
+    public const FAILURE_PATH_NAME = 'computop-failure';
+    public const NOTIFY_PATH_NAME = 'computop-notify';
 
     /**
      * @var string

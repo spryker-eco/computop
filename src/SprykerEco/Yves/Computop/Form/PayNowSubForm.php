@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayNowSubForm extends AbstractSubForm
 {
-    const PAYMENT_METHOD = 'paynow';
+    public const PAYMENT_METHOD = 'paynow';
 
     /**
      * @return string

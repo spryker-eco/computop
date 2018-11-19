@@ -36,7 +36,7 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param integer $idSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */

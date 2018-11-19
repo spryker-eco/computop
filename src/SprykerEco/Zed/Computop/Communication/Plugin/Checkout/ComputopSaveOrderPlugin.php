@@ -19,6 +19,8 @@ use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPluginInterface;
 class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutPluginInterface
 {
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
      *

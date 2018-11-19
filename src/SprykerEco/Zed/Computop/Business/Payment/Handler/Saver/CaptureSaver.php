@@ -16,7 +16,7 @@ class CaptureSaver extends AbstractSaver
 {
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'CAPTURE';
+    public const METHOD = 'CAPTURE';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
