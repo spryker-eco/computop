@@ -30,12 +30,6 @@
     "sort-packages": true,
     "process-timeout": 600
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@github.com:spryker-eco/computop-api.git"
-    }
-  ],
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
