@@ -43,5 +43,5 @@ class ComputopConfig extends AbstractBundleConfig
     public const CRIF_LEGAL_FORM_COMPANY = 'COMPANY';
     public const CRIF_LEGAL_FORM_UNKNOWN = 'UNKNOWN';
 
-    public const COMPUTOP_MODULE_VERSION = '1.0.1';
+    public const COMPUTOP_MODULE_VERSION = 'Spryker – MV:1.0.1';
 }

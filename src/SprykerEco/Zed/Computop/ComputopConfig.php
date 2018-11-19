@@ -14,7 +14,6 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
-    public const ETI_ID = 'Spryker – MV:%s';
     public const OMS_STATUS_NEW = 'new';
     public const OMS_STATUS_INITIALIZED = 'init';
     public const OMS_STATUS_AUTHORIZED = 'authorized';
@@ -333,6 +332,6 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getEtiId(): string
     {
-        return sprintf(static::ETI_ID, SharedComputopConfig::COMPUTOP_MODULE_VERSION);
+        return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
     }
 }
