@@ -103,4 +103,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getPayPalTxType();
+
+    /**
+     * @return string
+     */
+    public function getEtiId(): string;
 }

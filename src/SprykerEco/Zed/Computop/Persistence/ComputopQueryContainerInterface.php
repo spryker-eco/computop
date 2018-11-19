@@ -46,6 +46,8 @@ interface ComputopQueryContainerInterface
     public function queryPaymentByTransactionId($idTransaction);
 
     /**
+     * @api
+     *
      * @param int $orderItemId
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
@@ -53,6 +55,8 @@ interface ComputopQueryContainerInterface
     public function queryPaymentItemByOrderItemId($orderItemId);
 
     /**
+     * @api
+     *
      * @param int $idSalesOrder
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery

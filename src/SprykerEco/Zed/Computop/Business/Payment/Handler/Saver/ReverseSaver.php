@@ -16,7 +16,7 @@ class ReverseSaver extends AbstractSaver
 {
     use DatabaseTransactionHandlerTrait;
 
-    const METHOD = 'REVERSE';
+    public const METHOD = 'REVERSE';
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer

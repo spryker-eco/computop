@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
@@ -98,8 +97,10 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = ComputopConfig::ETI_ID;
+        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::NO_SHIPPING] = ComputopSharedConfig::PAY_PAL_NO_SHIPPING;
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
 
         return $dataSubArray;
     }

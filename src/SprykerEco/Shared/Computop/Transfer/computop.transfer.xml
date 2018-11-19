@@ -36,6 +36,7 @@
         <property name="url" type="string" />
         <property name="clientIp" type="string" />
         <property name="finishAuth" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="payNowInitResponse" type="ComputopPayNowInitResponse"/>
     </transfer>
 
@@ -83,6 +84,7 @@
         <property name="url" type="string" />
         <property name="clientIp" type="string" />
         <property name="finishAuth" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="creditCardInitResponse" type="ComputopCreditCardInitResponse"/>
     </transfer>
 
@@ -107,6 +109,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="directDebitInitResponse" type="ComputopDirectDebitInitResponse"/>
     </transfer>
 
@@ -158,6 +161,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="payPalInitResponse" type="ComputopPayPalInitResponse"/>
     </transfer>
 
@@ -181,6 +185,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="sofortInitResponse" type="ComputopSofortInitResponse"/>
     </transfer>
 
@@ -243,6 +248,7 @@
         <property name="data" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="idealInitResponse" type="ComputopIdealInitResponse"/>
     </transfer>
 
@@ -267,6 +273,7 @@
         <property name="date" type="string" />
         <property name="len" type="int" />
         <property name="url" type="string" />
+        <property name="shippingZip" type="string" />
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
 

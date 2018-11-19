@@ -12,7 +12,7 @@ matrix:
 
 services:
   - postgresql
-  - redis
+  - redis-server
   - rabbitmq
 
 addons:

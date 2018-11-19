@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
 
@@ -98,9 +97,11 @@ class DirectDebitMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = ComputopConfig::ETI_ID;
+        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::MANDATE_ID] = $cardPaymentTransfer->getMandateId();
         $dataSubArray[ComputopApiConfig::DATE_OF_SIGNATURE_ID] = $this->getDateOfSignature();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
 
         return $dataSubArray;
     }

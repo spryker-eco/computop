@@ -20,14 +20,14 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
-    const FACADE_OMS = 'FACADE_OMS';
-    const FACADE_MONEY = 'FACADE_MONEY';
-    const FACADE_SALES = 'FACADE_SALES';
-    const FACADE_CALCULATION = 'FACADE_CALCULATION';
-    const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
-    const FACADE_COMPUTOP_API = 'FACADE_COMPUTOP_API';
-    const STORE = 'STORE';
+    public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+    public const FACADE_OMS = 'FACADE_OMS';
+    public const FACADE_MONEY = 'FACADE_MONEY';
+    public const FACADE_SALES = 'FACADE_SALES';
+    public const FACADE_CALCULATION = 'FACADE_CALCULATION';
+    public const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
+    public const FACADE_COMPUTOP_API = 'FACADE_COMPUTOP_API';
+    public const STORE = 'STORE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
-use SprykerEco\Zed\Computop\ComputopConfig as ZedComputopConfig;
 
 class InitPayNowMapper extends AbstractMapper
 {
@@ -62,7 +61,7 @@ class InitPayNowMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::REF_NR] = $cardPaymentTransfer->getRefNr();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = ZedComputopConfig::ETI_ID;
+        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
 
         return $dataSubArray;
     }
