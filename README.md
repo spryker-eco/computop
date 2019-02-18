@@ -1,4 +1,4 @@
-# Tideways Module
+# Computop Module
 
 [![Build Status](https://travis-ci.org/spryker-eco/computop.svg?branch=master)](https://travis-ci.org/spryker-eco/computop)
 [![License](https://img.shields.io/github/license/spryker-eco/computop.svg?b=master)](https://github.com/spryker-eco/computop)
