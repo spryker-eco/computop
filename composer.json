@@ -1,6 +1,6 @@
 {
   "name": "spryker-eco/computop",
-  "description": "Computop Module",
+  "description": "Computop module",
   "license": "MIT",
   "require": {
     "spryker/application": "^3.0.0",
