@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Generated\Shared\Transfer\ComputopApiRequestTransfer;
-use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Silex\Application;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -88,14 +87,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setUrlFailure(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
         );
-
-        $addressData = $this->getAddressData($quoteTransfer);
-
-        $computopPaymentTransfer->setShippingZip($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_ZIP]);
-        $computopPaymentTransfer->setShippingCity($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY]);
-        $computopPaymentTransfer->setShippingStreet($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET]);
-        $computopPaymentTransfer->setShippingStreetNumber($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER]);
-        $computopPaymentTransfer->setShippingCountryCode($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_COUNTRY_CODE]);
+        $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
 
         return $computopPaymentTransfer;
     }
@@ -197,18 +189,14 @@ abstract class AbstractMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return string
      */
-    protected function getAddressData(QuoteTransfer $quoteTransfer): array
+    protected function getZipCode(QuoteTransfer $quoteTransfer): string
     {
-        $addressTransfer = $quoteTransfer->getBillingSameAsShipping() ? $quoteTransfer->getBillingAddress() : $quoteTransfer->getShippingAddress();
+        if ($quoteTransfer->getBillingSameAsShipping()) {
+            return $quoteTransfer->getBillingAddress()->getZipCode();
+        }
 
-        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_ZIP] = $addressTransfer->getZipCode();
-        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY] = $addressTransfer->getCity();
-        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET] = $addressTransfer->getAddress1();
-        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER] = $addressTransfer->getAddress2();
-        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_COUNTRY_CODE] = $addressTransfer->getIso2Code();
-
-        return $addressData;
+        return $quoteTransfer->getShippingAddress()->getZipCode();
     }
 }
