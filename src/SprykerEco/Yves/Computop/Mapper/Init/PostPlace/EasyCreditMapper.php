@@ -90,6 +90,10 @@ class EasyCreditMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
+        $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
+        $dataSubArray[ComputopApiConfig::SHIPPING_STREET] = $cardPaymentTransfer->getShippingStreet();
+        $dataSubArray[ComputopApiConfig::SHIPPING_STREET_NUMBER] = $cardPaymentTransfer->getShippingStreetNumber();
 
         return $dataSubArray;
     }
