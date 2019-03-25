@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EasyCreditSubForm extends AbstractSubForm
 {
-    public const PAYMENT_METHOD = 'easy_credit';
+    public const PAYMENT_METHOD = 'easy-credit';
 
     /**
      * @return string
