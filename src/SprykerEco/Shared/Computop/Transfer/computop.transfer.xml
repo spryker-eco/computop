@@ -274,6 +274,10 @@
         <property name="len" type="int" />
         <property name="url" type="string" />
         <property name="shippingZip" type="string" />
+        <property name="shippingCity" type="string" />
+        <property name="shippingStreetNumber" type="string" />
+        <property name="shippingStreet" type="string" />
+        <property name="shippingCountryCode" type="string" />
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
 

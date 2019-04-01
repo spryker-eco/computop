@@ -25,6 +25,9 @@ class EasyCreditMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
+        $addressData = $this->getAdditionalAddressData($quoteTransfer);
+        $computopPaymentTransfer = $this->mapAddressDataToEasyCreditPayment($addressData, $computopPaymentTransfer);
+
         $computopPaymentTransfer->setUrlNotify(
             $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
         );
@@ -90,7 +93,47 @@ class EasyCreditMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
+        $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
+        $dataSubArray[ComputopApiConfig::SHIPPING_STREET] = $cardPaymentTransfer->getShippingStreet();
+        $dataSubArray[ComputopApiConfig::SHIPPING_STREET_NUMBER] = $cardPaymentTransfer->getShippingStreetNumber();
 
         return $dataSubArray;
+    }
+
+    /**
+     * @param array $addressData
+     * @param \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopEasyCreditPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
+     */
+    protected function mapAddressDataToEasyCreditPayment(
+        array $addressData,
+        ComputopEasyCreditPaymentTransfer $computopEasyCreditPaymentTransfer
+    ): ComputopEasyCreditPaymentTransfer {
+
+        $computopEasyCreditPaymentTransfer->setShippingCity($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY]);
+        $computopEasyCreditPaymentTransfer->setShippingStreet($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET]);
+        $computopEasyCreditPaymentTransfer->setShippingStreetNumber($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER]);
+        $computopEasyCreditPaymentTransfer->setShippingCountryCode($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_COUNTRY_CODE]);
+
+        return $computopEasyCreditPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return array
+     */
+    protected function getAdditionalAddressData(QuoteTransfer $quoteTransfer): array
+    {
+        $addressTransfer = $quoteTransfer->getBillingSameAsShipping() ? $quoteTransfer->getBillingAddress() : $quoteTransfer->getShippingAddress();
+
+        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY] = $addressTransfer->getCity();
+        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET] = $addressTransfer->getAddress1();
+        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER] = $addressTransfer->getAddress2();
+        $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_COUNTRY_CODE] = $addressTransfer->getIso2Code();
+
+        return $addressData;
     }
 }
