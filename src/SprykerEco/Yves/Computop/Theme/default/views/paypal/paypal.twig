@@ -1,1 +1,9 @@
-{{ form_widget(form.computopPayPal) }}
+{% extends model('template') %}
+
+{% define data = {
+    form: form
+} %}
+
+{% block body %}
+    {{ form_widget(data.form.computopPayPal) }}
+{% endblock %}
