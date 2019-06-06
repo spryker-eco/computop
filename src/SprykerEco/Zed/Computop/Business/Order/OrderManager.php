@@ -8,14 +8,13 @@
 namespace SprykerEco\Zed\Computop\Business\Order;
 
 use ArrayObject;
-use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
-use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
+use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
@@ -23,7 +22,7 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 
 class OrderManager implements OrderManagerInterface
 {
-    use DatabaseTransactionHandlerTrait;
+    use TransactionTrait;
 
     /**
      * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
@@ -91,11 +90,11 @@ class OrderManager implements OrderManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
      *
      * @return void
      */
-    public function saveOrderPayment(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer)
     {
         if ($quoteTransfer->getPayment()->getPaymentProvider() !== ComputopSharedConfig::PROVIDER_NAME) {
             return;
@@ -106,23 +105,24 @@ class OrderManager implements OrderManagerInterface
         $this->computopTransfer = $this->activeMapper->getComputopTransfer($quoteTransfer->getPayment());
         $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($quoteTransfer->getPayment());
 
-        $this->handleDatabaseTransaction(function () use ($quoteTransfer, $checkoutResponseTransfer) {
+        $this->getTransactionHandler()->handleTransaction(
+            function () use ($quoteTransfer, $saveOrderTransfer) {
+                $paymentEntity = $this->savePaymentForOrder(
+                    $quoteTransfer->getPayment(),
+                    $saveOrderTransfer
+                );
 
-            $paymentEntity = $this->savePaymentForOrder(
-                $quoteTransfer->getPayment(),
-                $checkoutResponseTransfer->getSaveOrder()
-            );
+                $this->savePaymentDetailForOrder(
+                    $quoteTransfer->getPayment(),
+                    $paymentEntity
+                );
 
-            $this->savePaymentDetailForOrder(
-                $quoteTransfer->getPayment(),
-                $paymentEntity
-            );
-
-            $this->savePaymentForOrderItems(
-                $checkoutResponseTransfer->getSaveOrder()->getOrderItems(),
-                $paymentEntity->getIdPaymentComputop()
-            );
-        });
+                $this->savePaymentForOrderItems(
+                    $saveOrderTransfer->getOrderItems(),
+                    $paymentEntity->getIdPaymentComputop()
+                );
+            }
+        );
     }
 
     /**

@@ -10,11 +10,11 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver;
 use Generated\Shared\Transfer\ComputopApiRefundResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
+use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 
 class RefundSaver extends AbstractSaver
 {
-    use DatabaseTransactionHandlerTrait;
+    use TransactionTrait;
 
     public const METHOD = 'REFUND';
 
@@ -26,9 +26,11 @@ class RefundSaver extends AbstractSaver
      */
     public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer)
     {
-        $this->handleDatabaseTransaction(function () use ($responseTransfer, $orderTransfer) {
-            $this->saveComputopDetails($responseTransfer, $orderTransfer);
-        });
+        $this->getTransactionHandler()->handleTransaction(
+            function () use ($responseTransfer, $orderTransfer) {
+                $this->saveComputopDetails($responseTransfer, $orderTransfer);
+            }
+        );
 
         return $responseTransfer;
     }

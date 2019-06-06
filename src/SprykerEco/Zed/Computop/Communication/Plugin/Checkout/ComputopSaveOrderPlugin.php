@@ -7,27 +7,30 @@
 
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Checkout;
 
-use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
+use Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutDoSaveOrderInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPluginInterface;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
-class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutPluginInterface
+class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutDoSaveOrderInterface
 {
     /**
+     * Specification:
+     * - Saves order payment method data according to quote and checkout response transfer data.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
      *
      * @return void
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function saveOrder(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer)
     {
-        $this->getFacade()->saveOrderPayment($quoteTransfer, $checkoutResponse);
+        $this->getFacade()->saveOrderPayment($quoteTransfer, $saveOrderTransfer);
     }
 }
