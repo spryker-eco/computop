@@ -334,4 +334,12 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
     }
+
+    /**
+     * @return string
+     */
+    public function getIdealIssuerId(): string
+    {
+        return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
+    }
 }

@@ -74,6 +74,7 @@ class InitIdealMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::ISSUER_ID] = $this->config->getIdealIssuerId();
 
         return $dataSubArray;
     }

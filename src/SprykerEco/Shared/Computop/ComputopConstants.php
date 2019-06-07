@@ -46,4 +46,6 @@ interface ComputopConstants
     public const CREDIT_CARD_TX_TYPE = 'COMPUTOP:CREDIT_CARD_TX_TYPE';
     public const PAY_NOW_TX_TYPE = 'COMPUTOP:PAY_NOW_TX_TYPE';
     public const PAY_PAL_TX_TYPE = 'COMPUTOP:PAY_PAL_TX_TYPE';
+
+    public const IDEAL_ISSUER_ID = 'COMPUTOP:IDEAL_ISSUER_ID';
 }

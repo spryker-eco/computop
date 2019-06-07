@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 
+use Generated\Shared\Transfer\CustomerTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -36,6 +37,10 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
             ->getFactory()
             ->getCalculationFacade()
             ->recalculateOrder($orderTransfer);
+
+        if ($orderTransfer->getCustomer() === null) {
+            $orderTransfer->setCustomer(new CustomerTransfer());
+        }
 
         return $orderTransfer;
     }

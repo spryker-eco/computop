@@ -135,4 +135,5 @@ interface ComputopApiConfig
     public const CUSTOMER_ID = 'CustomerID';
     public const LEGAL_FORM = 'LegalForm';
     public const IP_ADDRESS = 'IPAddr';
+    public const ISSUER_ID = 'IssuerID';
 }
