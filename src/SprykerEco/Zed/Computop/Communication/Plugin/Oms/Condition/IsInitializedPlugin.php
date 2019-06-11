@@ -15,6 +15,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
 class IsInitializedPlugin extends AbstractPlugin implements ConditionInterface
 {

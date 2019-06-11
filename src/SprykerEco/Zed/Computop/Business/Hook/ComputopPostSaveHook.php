@@ -69,6 +69,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
                 ->setData($computopPaymentTransfer->getData())
                 ->setLen($computopPaymentTransfer->getLen())
         );
+
         return $checkoutResponseTransfer;
     }
 

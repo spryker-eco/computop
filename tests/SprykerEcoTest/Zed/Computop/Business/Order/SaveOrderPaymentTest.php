@@ -7,7 +7,6 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
-use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use SprykerEco\Shared\Computop\ComputopConfig;

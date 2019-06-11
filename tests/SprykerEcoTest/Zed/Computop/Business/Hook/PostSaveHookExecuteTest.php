@@ -100,6 +100,7 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
         $totals->setGrandTotal(10);
         $quoteTransfer->setTotals($totals);
         $quoteTransfer->setCustomer(new CustomerTransfer());
+
         return $quoteTransfer;
     }
 }

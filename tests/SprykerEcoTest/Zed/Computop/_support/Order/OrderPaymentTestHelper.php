@@ -71,6 +71,7 @@ class OrderPaymentTestHelper extends Test
         $quoteTransfer->setPayment($paymentTransfer);
         $quoteTransfer->setTotals(new TotalsTransfer());
         $quoteTransfer->setCustomer(new CustomerTransfer());
+
         return $quoteTransfer;
     }
 
