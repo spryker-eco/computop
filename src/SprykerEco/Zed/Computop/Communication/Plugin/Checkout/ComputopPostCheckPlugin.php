@@ -21,8 +21,8 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPostSaveHookInterface
 {
     /**
-     * Specification:
-     *  - This plugin is called after the order is placed.
+     * {@inheritdoc}
+     *  - This plugin is called after the order is placed and does init API call.
      *
      * @api
      *
