@@ -12,7 +12,6 @@ namespace SprykerEco\Shared\Computop;
  */
 interface ComputopConstants
 {
-    public const HMAC_PASSWORD = 'COMPUTOP:HMAC_PASSWORD';
     public const PAYDIREKT_SHOP_KEY = 'COMPUTOP:PAYDIREKT_SHOP_KEY';
 
     public const PAY_NOW_INIT_ACTION = 'COMPUTOP:PAY_NOW_INIT_ACTION';

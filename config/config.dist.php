@@ -13,7 +13,6 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 /**
  * Add new options
  */
-$config[ComputopConstants::HMAC_PASSWORD] = 'COMPUTOP_HMAC_PASSWORD'; //Set up real data
 $config[ComputopConstants::PAYDIREKT_SHOP_KEY] = 'PAYDIREKT_SHOP_KEY'; //Set up real data
 
 $config[ComputopConstants::PAY_NOW_INIT_ACTION] = 'https://www.computop-paygate.com/paynow.aspx';
@@ -24,6 +23,8 @@ $config[ComputopConstants::SOFORT_INIT_ACTION] = 'https://www.computop-paygate.c
 $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
+
+$config[ComputopConstants::IDEAL_ISSUER_ID] = 'IDEAL_ISSUER_ID'; //Set up real data
 
 $config[ComputopApiConstants::CRIF_ACTION] = 'https://www.computop-paygate.com/deltavista.aspx';
 $config[ComputopApiConstants::CRIF_PRODUCT_NAME] = ComputopConfig::CRIF_PRODUCT_NAME_QUICK_CHECK_CONSUMER;
