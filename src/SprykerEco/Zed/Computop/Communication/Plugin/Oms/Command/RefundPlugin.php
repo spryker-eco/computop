@@ -17,8 +17,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
     /**
-     *
      * {@inheritdoc}
+     *  - Executes Refund command and performs Refund API call.
      *
      * @api
      *
