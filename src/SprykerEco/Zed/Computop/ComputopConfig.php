@@ -32,6 +32,8 @@ class ComputopConfig extends AbstractBundleConfig
     //Events
     public const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
     public const COMPUTOP_OMS_EVENT_AUTHORIZE = 'authorize';
+    
+    protected const COMPUTOP_EASY_CREDIT_EXPENSE_TYPE = 'COMPUTOP_EASY_CREDIT_EXPENSE_TYPE';
 
     /**
      * Refund with shipment price
@@ -147,7 +149,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function isRefundShipmentPriceEnabled()
     {
-        return self::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED;
+        return static::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED;
     }
 
     /**
@@ -180,7 +182,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusNew()
     {
-        return self::OMS_STATUS_NEW;
+        return static::OMS_STATUS_NEW;
     }
 
     /**
@@ -188,7 +190,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusInitialized()
     {
-        return self::OMS_STATUS_INITIALIZED;
+        return static::OMS_STATUS_INITIALIZED;
     }
 
     /**
@@ -196,7 +198,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusAuthorized()
     {
-        return self::OMS_STATUS_AUTHORIZED;
+        return static::OMS_STATUS_AUTHORIZED;
     }
 
     /**
@@ -204,7 +206,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusAuthorizationFailed()
     {
-        return self::OMS_STATUS_AUTHORIZATION_FAILED;
+        return static::OMS_STATUS_AUTHORIZATION_FAILED;
     }
 
     /**
@@ -212,7 +214,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusCaptured()
     {
-        return self::OMS_STATUS_CAPTURED;
+        return static::OMS_STATUS_CAPTURED;
     }
 
     /**
@@ -220,7 +222,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusCapturingFailed()
     {
-        return self::OMS_STATUS_CAPTURING_FAILED;
+        return static::OMS_STATUS_CAPTURING_FAILED;
     }
 
     /**
@@ -228,7 +230,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusCancelled()
     {
-        return self::OMS_STATUS_CANCELLED;
+        return static::OMS_STATUS_CANCELLED;
     }
 
     /**
@@ -236,7 +238,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsStatusRefunded()
     {
-        return self::OMS_STATUS_REFUNDED;
+        return static::OMS_STATUS_REFUNDED;
     }
 
     /**
@@ -244,7 +246,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getAuthorizeMethodName()
     {
-        return self::AUTHORIZE_METHOD;
+        return static::AUTHORIZE_METHOD;
     }
 
     /**
@@ -252,7 +254,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getCaptureMethodName()
     {
-        return self::CAPTURE_METHOD;
+        return static::CAPTURE_METHOD;
     }
 
     /**
@@ -260,7 +262,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getRefundMethodName()
     {
-        return self::REFUND_METHOD;
+        return static::REFUND_METHOD;
     }
 
     /**
@@ -268,7 +270,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getReverseMethodName()
     {
-        return self::REVERSE_METHOD;
+        return static::REVERSE_METHOD;
     }
 
     /**
@@ -276,7 +278,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getInquireMethodName()
     {
-        return self::INQUIRE_METHOD;
+        return static::INQUIRE_METHOD;
     }
 
     /**
@@ -284,7 +286,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsAuthorizeEventName()
     {
-        return self::COMPUTOP_OMS_EVENT_AUTHORIZE;
+        return static::COMPUTOP_OMS_EVENT_AUTHORIZE;
     }
 
     /**
@@ -292,7 +294,7 @@ class ComputopConfig extends AbstractBundleConfig
      */
     public function getOmsCaptureEventName()
     {
-        return self::COMPUTOP_OMS_EVENT_CAPTURE;
+        return static::COMPUTOP_OMS_EVENT_CAPTURE;
     }
 
     /**
@@ -341,5 +343,13 @@ class ComputopConfig extends AbstractBundleConfig
     public function getIdealIssuerId(): string
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
+    }
+
+    /**
+     * @return string
+     */
+    public function getComputopEasyCreditExpenseType(): string
+    {
+        return static::COMPUTOP_EASY_CREDIT_EXPENSE_TYPE;    
     }
 }

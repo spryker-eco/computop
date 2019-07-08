@@ -8,12 +8,14 @@
 namespace SprykerEco\Zed\Computop\Business\Order;
 
 use ArrayObject;
+use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
+use Orm\Zed\Sales\Persistence\SpySalesExpense;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
@@ -105,24 +107,22 @@ class OrderManager implements OrderManagerInterface
         $this->computopTransfer = $this->activeMapper->getComputopTransfer($quoteTransfer->getPayment());
         $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($quoteTransfer->getPayment());
 
-        $this->getTransactionHandler()->handleTransaction(
-            function () use ($quoteTransfer, $saveOrderTransfer) {
-                $paymentEntity = $this->savePaymentForOrder(
-                    $quoteTransfer->getPayment(),
-                    $saveOrderTransfer
-                );
-
-                $this->savePaymentDetailForOrder(
-                    $quoteTransfer->getPayment(),
-                    $paymentEntity
-                );
-
-                $this->savePaymentForOrderItems(
-                    $saveOrderTransfer->getOrderItems(),
-                    $paymentEntity->getIdPaymentComputop()
-                );
-            }
+        $paymentEntity = $this->savePaymentForOrder(
+            $quoteTransfer->getPayment(),
+            $saveOrderTransfer
         );
+
+        $this->savePaymentDetailForOrder(
+            $quoteTransfer->getPayment(),
+            $paymentEntity
+        );
+
+        $this->savePaymentForOrderItems(
+            $saveOrderTransfer->getOrderItems(),
+            $paymentEntity->getIdPaymentComputop()
+        );
+
+        $this->saveExpenses($quoteTransfer, $saveOrderTransfer);
     }
 
     /**
@@ -196,6 +196,81 @@ class OrderManager implements OrderManagerInterface
 
             $paymentOrderItemEntity->save();
         }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return void
+     */
+    protected function saveExpenses(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    {
+        foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
+            if ($expenseTransfer->getType() === $this->config->getComputopEasyCreditExpenseType()) {
+                $salesOrderExpenseEntity = $this->createExpenseEntity($expenseTransfer);
+                $salesOrderExpenseEntity = $this->expandExpenseWithPrices($salesOrderExpenseEntity, $expenseTransfer);
+
+                $salesOrderExpenseEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
+                $salesOrderExpenseEntity->save();
+
+                $saveOrderTransfer->addOrderExpense(
+                    $this->createOrderExpenseTransfer($expenseTransfer, $salesOrderExpenseEntity)
+                );
+            }
+        }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ExpenseTransfer $expenseTransfer
+     *
+     * @return \Orm\Zed\Sales\Persistence\SpySalesExpense
+     */
+    protected function createExpenseEntity(ExpenseTransfer $expenseTransfer): SpySalesExpense
+    {
+        $salesOrderExpenseEntity = new SpySalesExpense();
+        $salesOrderExpenseEntity->fromArray(
+            $expenseTransfer->toArray()
+        );
+
+        return $salesOrderExpenseEntity;
+    }
+
+    /**
+     * @param \Orm\Zed\Sales\Persistence\SpySalesExpense $salesOrderExpenseEntity
+     * @param \Generated\Shared\Transfer\ExpenseTransfer $expenseTransfer
+     *
+     * @return \Orm\Zed\Sales\Persistence\SpySalesExpense
+     */
+    protected function expandExpenseWithPrices(
+        SpySalesExpense $salesOrderExpenseEntity,
+        ExpenseTransfer $expenseTransfer
+    ): SpySalesExpense {
+        $salesOrderExpenseEntity->setGrossPrice($expenseTransfer->getSumGrossPrice());
+        $salesOrderExpenseEntity->setNetPrice($expenseTransfer->getSumNetPrice());
+        $salesOrderExpenseEntity->setPrice($expenseTransfer->getSumPrice());
+        $salesOrderExpenseEntity->setTaxAmount($expenseTransfer->getSumTaxAmount());
+        $salesOrderExpenseEntity->setDiscountAmountAggregation($expenseTransfer->getSumDiscountAmountAggregation());
+        $salesOrderExpenseEntity->setPriceToPayAggregation($expenseTransfer->getSumPriceToPayAggregation());
+
+        return $salesOrderExpenseEntity;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ExpenseTransfer $expenseTransfer
+     * @param \Orm\Zed\Sales\Persistence\SpySalesExpense $salesOrderExpenseEntity
+     *
+     * @return \Generated\Shared\Transfer\ExpenseTransfer
+     */
+    protected function createOrderExpenseTransfer(
+        ExpenseTransfer $expenseTransfer,
+        SpySalesExpense $salesOrderExpenseEntity
+    ): ExpenseTransfer {
+        $orderExpense = clone $expenseTransfer;
+        $orderExpense->setFkSalesOrder($salesOrderExpenseEntity->getFkSalesOrder());
+        $orderExpense->setIdSalesExpense($salesOrderExpenseEntity->getIdSalesExpense());
+
+        return $orderExpense;
     }
 
     /**
