@@ -32,8 +32,6 @@ class ComputopConfig extends AbstractBundleConfig
     //Events
     public const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
     public const COMPUTOP_OMS_EVENT_AUTHORIZE = 'authorize';
-    
-    protected const COMPUTOP_EASY_CREDIT_EXPENSE_TYPE = 'COMPUTOP_EASY_CREDIT_EXPENSE_TYPE';
 
     /**
      * Refund with shipment price
@@ -343,13 +341,5 @@ class ComputopConfig extends AbstractBundleConfig
     public function getIdealIssuerId(): string
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
-    }
-
-    /**
-     * @return string
-     */
-    public function getComputopEasyCreditExpenseType(): string
-    {
-        return static::COMPUTOP_EASY_CREDIT_EXPENSE_TYPE;    
     }
 }
