@@ -121,8 +121,6 @@ class OrderManager implements OrderManagerInterface
             $saveOrderTransfer->getOrderItems(),
             $paymentEntity->getIdPaymentComputop()
         );
-
-        $this->saveExpenses($quoteTransfer, $saveOrderTransfer);
     }
 
     /**
