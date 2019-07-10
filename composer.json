@@ -4,13 +4,20 @@
   "license": "MIT",
   "require": {
     "spryker/application": "^3.0.0",
-    "spryker/checkout": "^3.0.0 || ^4.0.0 || ^6.0.0",
+    "spryker/calculation": "^4.0.0",
+    "spryker/checkout-extension": "^1.0.0",
+    "spryker/config": "^3.0.0",
+    "spryker/kernel": "^3.0.0",
+    "spryker/messenger": "^3.0.0",
+    "spryker/money": "^2.0.0",
     "spryker/oms": "^7.0.0 || ^8.0.0 || ^10.0.0",
-    "spryker/step-engine": "^3.1.0",
+    "spryker/propel-orm": "^1.6.0",
     "spryker/quote": "^1.0.0 || ^2.0.0",
-    "spryker/transfer": "^3.0.0",
+    "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0",
+    "spryker/silex": "^2.0.0",
+    "spryker/step-engine": "^3.1.0",
+    "spryker/symfony": "^3.0.0",
     "spryker/zed-request": "^3.0.0",
-    "spryker/guzzle": "^2.2.0",
     "spryker-eco/computop-api": "^1.0.0"
   },
   "autoload": {
@@ -36,6 +43,18 @@
     }
   },
   "require-dev": {
-    "spryker/code-sniffer": "dev-master"
+    "spryker/checkout": "*",
+    "spryker/country": "*",
+    "spryker/customer": "*",
+    "spryker/guzzle": "*",
+    "spryker/payment": "*",
+    "spryker/propel": "*",
+    "spryker/testify": "*",
+    "spryker-shop/shop-application": "*"
+  },
+  "suggest": {
+    "spryker/checkout": "CheckoutPostSaveHookInterface is used.",
+    "spryker/payment": "If you want to use payment method filtering.",
+    "spryker-shop/shop-application": "Abstract Yves controller provider is used."
   }
 }

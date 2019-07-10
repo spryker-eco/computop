@@ -7,13 +7,13 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
-use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
+use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 abstract class AbstractManager implements ManagerInterface
 {
-    use DatabaseTransactionHandlerTrait;
+    use TransactionTrait;
 
     /**
      * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface

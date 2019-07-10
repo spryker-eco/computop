@@ -22,10 +22,12 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
         $responseTransfer = $quoteTransfer->getPayment()->getComputopDirectDebit()->getDirectDebitInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-                $this->savePaymentComputopEntity($responseTransfer);
-                $this->savePaymentComputopDetailEntity($responseTransfer);
-            });
+            $this->getTransactionHandler()->handleTransaction(
+                function () use ($responseTransfer) {
+                    $this->savePaymentComputopEntity($responseTransfer);
+                    $this->savePaymentComputopDetailEntity($responseTransfer);
+                }
+            );
         }
 
         return $quoteTransfer;

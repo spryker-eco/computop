@@ -22,12 +22,14 @@ class IdealResponseSaver extends AbstractResponseSaver
         $responseTransfer = $quoteTransfer->getPayment()->getComputopIdeal()->getIdealInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-                $this->savePaymentComputopEntity($responseTransfer);
-                $this->savePaymentComputopDetailEntity($responseTransfer);
-                $this->savePaymentComputopOrderItemsEntities();
-                $this->triggerEvent($this->getPaymentEntity());
-            });
+            $this->getTransactionHandler()->handleTransaction(
+                function () use ($responseTransfer) {
+                    $this->savePaymentComputopEntity($responseTransfer);
+                    $this->savePaymentComputopDetailEntity($responseTransfer);
+                    $this->savePaymentComputopOrderItemsEntities();
+                    $this->triggerEvent($this->getPaymentEntity());
+                }
+            );
         }
 
         return $quoteTransfer;

@@ -8,9 +8,9 @@
 namespace SprykerEco\Yves\Computop\Plugin\Provider;
 
 use Silex\Application;
-use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
+use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
-class ComputopControllerProvider extends YvesControllerProvider
+class ComputopControllerProvider extends AbstractYvesControllerProvider
 {
     public const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
     public const PAY_NOW_SUCCESS = 'computop-paynow-success';

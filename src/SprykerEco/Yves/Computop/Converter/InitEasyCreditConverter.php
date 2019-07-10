@@ -38,6 +38,7 @@ class InitEasyCreditConverter extends AbstractInitConverter
         if ($header->getStatus() === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
             $header->setIsSuccess(true);
         }
+
         return $header;
     }
 }

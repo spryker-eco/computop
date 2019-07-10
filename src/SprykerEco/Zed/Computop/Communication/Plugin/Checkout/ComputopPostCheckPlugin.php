@@ -9,17 +9,20 @@ namespace SprykerEco\Zed\Computop\Communication\Plugin\Checkout;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Zed\Checkout\Dependency\Plugin\CheckoutPostSaveHookInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPluginInterface;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
-class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPluginInterface
+class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPostSaveHookInterface
 {
     /**
-     * This plugin is called after the order is placed.
+     * {@inheritdoc}
+     *  - This plugin is called after the order is placed and does init API call.
      *
      * @api
      *
@@ -28,7 +31,7 @@ class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPluginIn
      *
      * @return void
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
         $this->getFacade()->postSaveHookExecute($quoteTransfer, $checkoutResponse);
     }

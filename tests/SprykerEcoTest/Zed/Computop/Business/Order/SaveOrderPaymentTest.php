@@ -7,7 +7,6 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
-use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -33,7 +32,7 @@ class SaveOrderPaymentTest extends AbstractSetUpTest
         $service->setFactory($this->orderHelper->createFactory());
         $service->saveOrderPayment(
             $this->orderHelper->createQuoteTransfer(),
-            $this->createCheckoutResponse()
+            $this->createSaveOrderTransfer()
         );
 
         $computopSavedData = $this->getComputopSavedData();
@@ -54,17 +53,6 @@ class SaveOrderPaymentTest extends AbstractSetUpTest
         $query = new SpyPaymentComputopQuery();
 
         return $query->find()->getFirst();
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    protected function createCheckoutResponse()
-    {
-        $checkoutResponceTransfer = new CheckoutResponseTransfer();
-        $checkoutResponceTransfer->setSaveOrder($this->createSaveOrderTransfer());
-
-        return $checkoutResponceTransfer;
     }
 
     /**

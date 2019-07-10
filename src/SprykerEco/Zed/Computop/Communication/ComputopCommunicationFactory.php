@@ -13,6 +13,7 @@ use SprykerEco\Zed\Computop\ComputopDependencyProvider;
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  */
 class ComputopCommunicationFactory extends AbstractCommunicationFactory
 {

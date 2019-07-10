@@ -17,8 +17,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
     /**
-     *
      * {@inheritdoc}
+     *  - Executes Authorize command and performs Authorize API call.
      *
      * @api
      *

@@ -22,11 +22,13 @@ class EasyCreditResponseSaver extends AbstractResponseSaver
         $responseTransfer = $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $this->handleDatabaseTransaction(function () use ($responseTransfer) {
-                $this->savePaymentComputopEntity($responseTransfer);
-                $this->savePaymentComputopDetailEntity($responseTransfer);
-                $this->savePaymentComputopOrderItemsEntities();
-            });
+            $this->getTransactionHandler()->handleTransaction(
+                function () use ($responseTransfer) {
+                    $this->savePaymentComputopEntity($responseTransfer);
+                    $this->savePaymentComputopDetailEntity($responseTransfer);
+                    $this->savePaymentComputopOrderItemsEntities();
+                }
+            );
         }
 
         return $quoteTransfer;

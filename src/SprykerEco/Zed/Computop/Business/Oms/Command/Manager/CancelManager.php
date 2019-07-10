@@ -20,11 +20,13 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      */
     public function changeComputopItemsStatus(array $orderItems)
     {
-        $this->handleDatabaseTransaction(function () use ($orderItems) {
-            foreach ($orderItems as $orderItem) {
-                $this->changeStatus($orderItem);
+        $this->getTransactionHandler()->handleTransaction(
+            function () use ($orderItems) {
+                foreach ($orderItems as $orderItem) {
+                    $this->changeStatus($orderItem);
+                }
             }
-        });
+        );
 
         return [];
     }

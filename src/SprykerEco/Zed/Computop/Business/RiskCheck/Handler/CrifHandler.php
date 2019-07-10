@@ -29,6 +29,7 @@ class CrifHandler extends AbstractHandler
             ->fromArray($responseTransfer->toArray(), true);
 
         $quoteTransfer->setComputopCrif($computopCrifTransfer);
+
         return $quoteTransfer;
     }
 }

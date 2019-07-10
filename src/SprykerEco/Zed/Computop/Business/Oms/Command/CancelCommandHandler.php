@@ -115,10 +115,12 @@ class CancelCommandHandler extends AbstractCommandHandler
         $computopResponseTransfer = $this->reversePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
             $this->setInfoMessage('Authorization was reverted');
+
             return $computopResponseTransfer;
         }
 
         $this->setErrorMessage('Authorization was not reverted. Please check logs');
+
         return $computopResponseTransfer;
     }
 
