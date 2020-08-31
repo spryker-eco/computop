@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
@@ -29,7 +30,7 @@ class EasyCreditMapper extends AbstractMapper
         $computopPaymentTransfer = $this->mapAddressDataToEasyCreditPayment($addressData, $computopPaymentTransfer);
 
         $computopPaymentTransfer->setUrlNotify(
-            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME)
+            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
@@ -69,7 +70,7 @@ class EasyCreditMapper extends AbstractMapper
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::EASY_CREDIT_SUCCESS)
+            $this->router->generate(ComputopRouteProviderPlugin::EASY_CREDIT_SUCCESS, [], Router::ABSOLUTE_URL)
         );
 
         return $computopPaymentTransfer;

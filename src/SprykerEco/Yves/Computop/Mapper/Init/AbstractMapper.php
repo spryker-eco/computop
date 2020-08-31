@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init;
 use Generated\Shared\Transfer\ComputopApiRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use Spryker\Yves\Router\Router\Router;
 use Spryker\Yves\Router\Router\RouterInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -85,7 +86,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
-            $this->router->generate(ComputopRouteProviderPlugin::FAILURE_PATH_NAME)
+            $this->router->generate(ComputopRouteProviderPlugin::FAILURE_PATH_NAME, [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
 
@@ -155,7 +156,11 @@ abstract class AbstractMapper implements MapperInterface
             ComputopApiConfig::MERCHANT_ID => $merchantId,
             ComputopApiConfig::DATA => $data,
             ComputopApiConfig::LENGTH => $length,
-            ComputopApiConfig::URL_BACK => $this->router->generate($this->config->getCallbackFailureRedirectPath()),
+            ComputopApiConfig::URL_BACK => $this->router->generate(
+                $this->config->getCallbackFailureRedirectPath(),
+                [],
+                Router::ABSOLUTE_URL
+            ),
         ];
     }
 
