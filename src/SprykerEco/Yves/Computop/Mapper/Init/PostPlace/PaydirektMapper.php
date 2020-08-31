@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PaydirektMapper extends AbstractMapper
 {
@@ -32,7 +32,7 @@ class PaydirektMapper extends AbstractMapper
             $this->getLimitedTransId($quoteTransfer, ComputopApiConfig::PAYDIRECT_TRANS_ID_LENGTH)
         );
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAYDIREKT_SUCCESS))
+            $this->router->generate(ComputopRouteProviderPlugin::PAYDIREKT_SUCCESS)
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())

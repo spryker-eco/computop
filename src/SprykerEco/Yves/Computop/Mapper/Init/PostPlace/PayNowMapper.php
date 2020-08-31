@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayNowMapper extends AbstractMapper
 {
@@ -27,7 +27,7 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
         $computopPaymentTransfer->setUrlNotify(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
+            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME)
         );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
@@ -57,7 +57,7 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType($this->config->getPayNowTxType());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_NOW_SUCCESS))
+            $this->router->generate(ComputopRouteProviderPlugin::PAY_NOW_SUCCESS)
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())

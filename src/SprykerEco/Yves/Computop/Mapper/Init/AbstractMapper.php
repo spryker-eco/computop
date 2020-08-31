@@ -9,14 +9,14 @@ namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Generated\Shared\Transfer\ComputopApiRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Silex\Application;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use Spryker\Yves\Router\Router\RouterInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\ComputopConfigInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 abstract class AbstractMapper implements MapperInterface
 {
@@ -26,9 +26,9 @@ abstract class AbstractMapper implements MapperInterface
     protected $computopApiService;
 
     /**
-     * @var \Silex\Application
+     * @var \Spryker\Yves\Router\Router\RouterInterface
      */
-    protected $application;
+    protected $router;
 
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
@@ -54,18 +54,18 @@ abstract class AbstractMapper implements MapperInterface
 
     /**
      * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
-     * @param \Silex\Application $application
+     * @param \Spryker\Yves\Router\Router\RouterInterface $router
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
      */
     public function __construct(
         ComputopApiServiceInterface $computopApiService,
-        Application $application,
+        RouterInterface $router,
         ComputopToStoreInterface $store,
         ComputopConfigInterface $config
     ) {
         $this->computopApiService = $computopApiService;
-        $this->application = $application;
+        $this->router = $router;
         $this->store = $store;
         $this->config = $config;
     }
@@ -85,7 +85,7 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::FAILURE_PATH_NAME))
+            $this->router->generate(ComputopRouteProviderPlugin::FAILURE_PATH_NAME)
         );
         $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
 
@@ -128,7 +128,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function getClientIp()
     {
-        return $this->application['request']->getClientIp();
+        return '127.0.0.1';//$this->application['request']->getClientIp();
     }
 
     /**
@@ -151,16 +151,12 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function getQueryParameters($merchantId, $data, $length)
     {
-        $queryData = [
+        return [
             ComputopApiConfig::MERCHANT_ID => $merchantId,
             ComputopApiConfig::DATA => $data,
             ComputopApiConfig::LENGTH => $length,
-            ComputopApiConfig::URL_BACK => $this->getAbsoluteUrl(
-                $this->application->path($this->config->getCallbackFailureRedirectPath())
-            ),
+            ComputopApiConfig::URL_BACK => $this->router->generate($this->config->getCallbackFailureRedirectPath()),
         ];
-
-        return $queryData;
     }
 
     /**

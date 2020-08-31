@@ -25,6 +25,11 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
 
     /**
+     * @uses \Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
+     */
+    public const SERVICE_ROUTER = 'routers';
+
+    /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
@@ -56,6 +61,22 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container[static::STORE] = function () {
             return new ComputopToStoreBridge(Store::getInstance());
         };
+
+        $container = $this->addRouter($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addRouter(Container $container): Container
+    {
+        $container->set(static::SERVICE_ROUTER, function (Container $container) {
+            return $container->getApplicationService(static::SERVICE_ROUTER);
+        });
 
         return $container;
     }

@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use Spryker\Yves\Router\Router\RouterInterface;
 use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
 use SprykerEco\Yves\Computop\Converter\InitEasyCreditConverter;
@@ -52,6 +53,7 @@ use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
+ * @method \SprykerEco\Client\Computop\ComputopClientInterface getClient()
  */
 class ComputopFactory extends AbstractFactory
 {
@@ -386,7 +388,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new CreditCardMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -399,7 +401,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new PayNowMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -412,7 +414,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new PayPalMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -425,7 +427,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new DirectDebitMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -438,7 +440,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new SofortMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -451,7 +453,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new PaydirektMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -464,7 +466,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new IdealMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
@@ -477,9 +479,17 @@ class ComputopFactory extends AbstractFactory
     {
         return new EasyCreditMapper(
             $this->getComputopApiService(),
-            $this->getApplication(),
+            $this->getRouter(),
             $this->getStore(),
             $this->getConfig()
         );
+    }
+
+    /**
+     * @return \Spryker\Yves\Router\Router\RouterInterface
+     */
+    public function getRouter(): RouterInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_ROUTER);
     }
 }

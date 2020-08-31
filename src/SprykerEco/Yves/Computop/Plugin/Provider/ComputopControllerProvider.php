@@ -10,6 +10,9 @@ namespace SprykerEco\Yves\Computop\Plugin\Provider;
 use Silex\Application;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
+/**
+ * @deprecated Use `{@link \SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin}` instead.
+ */
 class ComputopControllerProvider extends AbstractYvesControllerProvider
 {
     public const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';

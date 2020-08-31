@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayPalMapper extends AbstractMapper
 {
@@ -27,7 +27,7 @@ class PayPalMapper extends AbstractMapper
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
         $computopPaymentTransfer->setUrlNotify(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
+            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME)
         );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
@@ -71,7 +71,7 @@ class PayPalMapper extends AbstractMapper
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType($this->config->getPayPalTxType());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::PAY_PAL_SUCCESS))
+            $this->router->generate(ComputopRouteProviderPlugin::PAY_PAL_SUCCESS)
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
