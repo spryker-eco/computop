@@ -24,10 +24,17 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const STORE = 'STORE';
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
 
+    public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
+
     /**
      * @uses \Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
      */
     public const SERVICE_ROUTER = 'routers';
+
+    /**
+     * @uses \Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     */
+    public const SERVICE_REQUEST_STACK = 'request_stack';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -63,6 +70,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container = $this->addRouter($container);
+        $container = $this->addRequestStack($container);
 
         return $container;
     }
@@ -76,6 +84,29 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::SERVICE_ROUTER, function (Container $container) {
             return $container->getApplicationService(static::SERVICE_ROUTER);
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addRequestStack(Container $container): Container
+    {
+        $container->set(static::SERVICE_REQUEST_STACK, function (Container $container) {
+            return $container->getApplicationService(static::SERVICE_REQUEST_STACK);
+        });
+
+        return $container;
+    }
+
+    protected function addUtilEncodingService(Container $container): Container
+    {
+        $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
+            return $container->getLocator()->utilEncoding()->service();
         });
 
         return $container;

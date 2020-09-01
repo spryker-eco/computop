@@ -88,6 +88,12 @@ class PayNowMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
 
+        $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = base64_encode(json_encode([]));
+        $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = base64_encode(json_encode([]));
+        $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = base64_encode(json_encode([]));
+        $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = base64_encode(json_encode([]));
+        $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = base64_encode(json_encode([]));
+
         return $dataSubArray;
     }
 }
