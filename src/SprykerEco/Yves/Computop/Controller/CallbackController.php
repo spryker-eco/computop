@@ -12,6 +12,7 @@ use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
@@ -146,14 +147,16 @@ class CallbackController extends AbstractController
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function notifyAction()
+    public function notifyAction(Request $request)
     {
         $decryptedArray = $this
             ->getFactory()
             ->getComputopApiService()
-            ->decryptResponseHeader($this->responseArray, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
+            ->decryptResponseHeader($request->request->all(), Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
         $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
             $decryptedArray,
