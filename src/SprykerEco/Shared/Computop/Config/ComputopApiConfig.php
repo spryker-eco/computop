@@ -142,4 +142,7 @@ interface ComputopApiConfig
     public const SHIPPING_ADDRESS = 'shippingAddress';
     public const CREDENTIAL_ON_FILE = 'credentialOnFile';
     public const BROWSER_INFO = 'browserInfo';
+    public const MSG_VER = 'MsgVer';
+    public const PSD2_MSG_VERSION = '2.0';
+    public const UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION = 'CIT';
 }

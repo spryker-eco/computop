@@ -12,8 +12,10 @@ use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
+use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -23,6 +25,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
     public const STORE = 'STORE';
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
+    public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
 
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
@@ -71,6 +74,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         $container = $this->addRouter($container);
         $container = $this->addRequestStack($container);
+        $container = $this->addUtilEncodingService($container);
+        $container = $this->addCountryClient($container);
 
         return $container;
     }
@@ -103,10 +108,29 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
     protected function addUtilEncodingService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
-            return $container->getLocator()->utilEncoding()->service();
+            return new ComputopToUtilEncodingServiceBridge($container->getLocator()->utilEncoding()->service());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addCountryClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_COUNTRY, function (Container $container) {
+            return new ComputopToCountryClientBridge($container->getLocator()->country()->client());
         });
 
         return $container;

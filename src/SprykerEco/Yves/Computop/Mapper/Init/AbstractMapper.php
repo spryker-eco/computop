@@ -16,8 +16,11 @@ use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\ComputopConfigInterface;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
+use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
+use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractMapper implements MapperInterface
 {
@@ -42,6 +45,21 @@ abstract class AbstractMapper implements MapperInterface
     protected $config;
 
     /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
+    protected $request;
+
+    /**
+     * @var \SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface
+     */
+    protected $utilEncodingService;
+
+    /**
+     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface
+     */
+    protected $countryClient;
+
+    /**
      * @var array
      */
     protected $decryptedValues;
@@ -58,17 +76,26 @@ abstract class AbstractMapper implements MapperInterface
      * @param \Spryker\Yves\Router\Router\RouterInterface $router
      * @param \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface $store
      * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $config
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface $countryClient
      */
     public function __construct(
         ComputopApiServiceInterface $computopApiService,
         RouterInterface $router,
         ComputopToStoreInterface $store,
-        ComputopConfigInterface $config
+        ComputopConfigInterface $config,
+        Request $request,
+        ComputopToUtilEncodingServiceInterface $utilEncodingService,
+        ComputopToCountryClientInterface $countryClient
     ) {
         $this->computopApiService = $computopApiService;
         $this->router = $router;
         $this->store = $store;
         $this->config = $config;
+        $this->request = $request;
+        $this->utilEncodingService = $utilEncodingService;
+        $this->countryClient = $countryClient;
     }
 
     /**
@@ -129,7 +156,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function getClientIp()
     {
-        return '127.0.0.1';//$this->application['request']->getClientIp();
+        return $this->request->getClientIp();
     }
 
     /**
@@ -199,5 +226,35 @@ abstract class AbstractMapper implements MapperInterface
         }
 
         return $quoteTransfer->getShippingAddress()->getZipCode();
+    }
+
+    /**
+     * @param array $requestParameterData
+     *
+     * @return string
+     */
+    protected function encodeRequestParameterData(array $requestParameterData): string
+    {
+        $requestParameterData = $this->removeRedundantParams($requestParameterData);
+
+        return base64_encode($this->utilEncodingService->encodeJson($requestParameterData));
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function removeRedundantParams(array $data): array
+    {
+        $data = array_filter($data);
+
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->removeRedundantParams($value);
+            }
+        }
+
+        return $data;
     }
 }
