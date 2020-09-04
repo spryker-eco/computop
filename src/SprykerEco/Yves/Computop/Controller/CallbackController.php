@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Controller;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Spryker\Shared\Config\Config;
+use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
@@ -26,95 +27,69 @@ class CallbackController extends AbstractController
     public const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successCreditCardAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createCreditCardPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successPayNowAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createPayNowPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successPayPalAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createPayPalPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successDirectDebitAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createDirectDebitPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successEasyCreditAction()
-    {
-        return $this->processEasyCreditSuccessResponse($this->getFactory()->createEasyCreditPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successPaydirektAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createPaydirektPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successSofortAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createSofortPaymentHandler());
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function successIdealAction()
-    {
-        return $this->successPostPlaceAction($this->getFactory()->createIdealPaymentHandler());
-    }
-
-    /**
-     * @param \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface $handler
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function successPostPlaceAction(ComputopPrePostPaymentHandlerInterface $handler)
+    public function successCreditCardAction(Request $request)
     {
-        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer = $handler->handle($quoteTransfer, $this->responseArray);
-
-        if (!$quoteTransfer->getCustomer()) {
-            $this->addSuccessMessage(static::MESSAGE_PAYMENT_SUCCESS);
-        }
-
-        return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath());
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createPayNowPaymentHandler(),
+            $request->request->all()
+        );
     }
 
     /**
-     * @param \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface $handler
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function processEasyCreditSuccessResponse(ComputopPrePostPaymentHandlerInterface $handler)
+    public function successPayNowAction(Request $request)
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createPayNowPaymentHandler(),
+            $request->request->all()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successPayPalAction(Request $request)
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createPayPalPaymentHandler(),
+            $request->query->all()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successDirectDebitAction(Request $request)
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createDirectDebitPaymentHandler(),
+            $request->query->all()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successEasyCreditAction(Request $request)
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer = $handler->handle($quoteTransfer, $this->responseArray);
+        $quoteTransfer = $this->getFactory()
+            ->createEasyCreditPaymentHandler()
+            ->handle($quoteTransfer, $request->query->all());
+
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
         $statusResponse = $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse();
 
@@ -128,19 +103,80 @@ class CallbackController extends AbstractController
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function failureAction()
+    public function successPaydirektAction(Request $request)
     {
-        $decryptedArray = $this
-            ->getFactory()
-            ->getComputopApiService()
-            ->decryptResponseHeader($this->responseArray, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
-
-        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
-            $decryptedArray,
-            ComputopConfig::INIT_METHOD
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createPaydirektPaymentHandler(),
+            $request->query->all()
         );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successSofortAction(Request $request)
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createSofortPaymentHandler(),
+            $request->query->all()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successIdealAction(Request $request)
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createIdealPaymentHandler(),
+            $request->query->all()
+        );
+    }
+
+    /**
+     * @param \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface $handler
+     * @param array $responseArray
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected function executeSuccessPostPlaceAction(ComputopPrePostPaymentHandlerInterface $handler, array $responseArray)
+    {
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $quoteTransfer = $handler->handle($quoteTransfer, $responseArray);
+
+        if (!$quoteTransfer->getCustomer()) {
+            $this->addSuccessMessage(static::MESSAGE_PAYMENT_SUCCESS);
+        }
+
+        return $this->redirectResponseInternal(
+            $this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
+     */
+    public function failureAction(Request $request)
+    {
+        $decryptedArray = $this->getFactory()
+            ->getComputopApiService()
+            ->decryptResponseHeader($request->query->all(), Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
+
+        $responseHeaderTransfer = $this->getFactory()
+            ->getComputopApiService()
+            ->extractResponseHeader($decryptedArray, ComputopConfig::INIT_METHOD);
+
         $this->addErrorMessage($this->getErrorMessageText($responseHeaderTransfer));
 
         return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
@@ -153,15 +189,14 @@ class CallbackController extends AbstractController
      */
     public function notifyAction(Request $request)
     {
-        $decryptedArray = $this
-            ->getFactory()
+        $decryptedArray = $this->getFactory()
             ->getComputopApiService()
             ->decryptResponseHeader($request->request->all(), Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()->getComputopApiService()->extractResponseHeader(
-            $decryptedArray,
-            ComputopConfig::INIT_METHOD
-        );
+        $responseHeaderTransfer = $this->getFactory()
+            ->getComputopApiService()
+            ->extractResponseHeader($decryptedArray, ComputopConfig::INIT_METHOD);
+
         $this->addErrorMessage($this->getErrorMessageText($responseHeaderTransfer));
 
         return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());

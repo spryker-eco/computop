@@ -52,16 +52,7 @@ class CreditCardMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
         $computopPaymentTransfer->setLen($decryptedValues[ComputopApiConfig::LENGTH]);
-        $computopPaymentTransfer->setUrl(
-            $this->getActionUrl(
-                $this->config->getCreditCardInitActionUrl(),
-                $this->getQueryParameters(
-                    $computopPaymentTransfer->getMerchantId(),
-                    $decryptedValues[ComputopApiConfig::DATA],
-                    $decryptedValues[ComputopApiConfig::LENGTH]
-                )
-            )
-        );
+        $computopPaymentTransfer->setUrl($this->config->getCreditCardInitActionUrl());
 
         return $computopPaymentTransfer;
     }
@@ -82,6 +73,9 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer->setTxType($this->config->getCreditCardTxType());
         $computopPaymentTransfer->setUrlSuccess(
             $this->router->generate(ComputopRouteProviderPlugin::CREDIT_CARD_SUCCESS, [], Router::ABSOLUTE_URL)
+        );
+        $computopPaymentTransfer->setUrlBack(
+            $this->router->generate($this->config->getCallbackFailureRedirectPath(), [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
@@ -131,9 +125,9 @@ class CreditCardMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
             $cardPaymentTransfer->getShippingAddress()->toArray(true, true)
         );
-        /*$dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
+        $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
             $cardPaymentTransfer->getCredentialOnFile()->toArray(true, true)
-        );*/
+        );
 
         return $dataSubArray;
     }
@@ -172,7 +166,8 @@ class CreditCardMapper extends AbstractMapper
                     ->setFirstName($quoteTransfer->getShippingAddress()->getFirstName())
                     ->setLastName($quoteTransfer->getShippingAddress()->getLastName())
                     ->setSalutation($quoteTransfer->getShippingAddress()->getSalutation())
-            );
+            )
+            ->setEmail($quoteTransfer->getCustomer()->getEmail());
 
         $computopCreditCardPaymentTransfer->setShipToCustomer($computopCustomerInfoTransfer);
 
@@ -203,7 +198,8 @@ class CreditCardMapper extends AbstractMapper
                     ->setFirstName($quoteTransfer->getBillingAddress()->getFirstName())
                     ->setLastName($quoteTransfer->getBillingAddress()->getLastName())
                     ->setSalutation($quoteTransfer->getBillingAddress()->getSalutation())
-            );
+            )
+            ->setEmail($quoteTransfer->getCustomer()->getEmail());
 
         $computopCreditCardPaymentTransfer->setBillToCustomer($computopCustomerInfoTransfer);
 
