@@ -264,4 +264,16 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
     public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves push notification into DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return void
+     */
+    public function processNotification(ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer): void;
 }

@@ -557,5 +557,9 @@
         <property name="userAgent" type="string"/>
     </transfer>
 
+    <transfer name="ComputopApiResponseHeader">
+        <property name="type" type="string"/>
+        <property name="orderItemStatus" type="string"/>
+    </transfer>
 
 </transfers>

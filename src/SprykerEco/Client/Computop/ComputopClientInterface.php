@@ -157,4 +157,19 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Performs Zed call.
+     * - Saves push notification entity into DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    public function processNotification(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): ComputopApiResponseHeaderTransfer;
 }

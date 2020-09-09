@@ -17,6 +17,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory getFactory()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
  */
 class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 {
@@ -354,5 +355,19 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
         return $this->getFactory()
             ->createPaymentMethodFilter()
             ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return void
+     */
+    public function processNotification(ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer): void
+    {
+        $this->getFactory()->createNotificationProcessor()->processNotification($computopApiResponseHeaderTransfer);
     }
 }

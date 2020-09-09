@@ -183,4 +183,19 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     {
         return $this->getFactory()->createZedStub()->performCrifApiCall($quoteTransfer);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    public function processNotification(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): ComputopApiResponseHeaderTransfer {
+        return $this->getFactory()->createZedStub()->processNotification($computopApiResponseHeaderTransfer);
+    }
 }

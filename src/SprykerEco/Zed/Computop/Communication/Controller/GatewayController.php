@@ -135,4 +135,17 @@ class GatewayController extends AbstractGatewayController
     {
         return $this->getFacade()->performCrifApiCall($quoteTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    public function processNotificationAction(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): ComputopApiResponseHeaderTransfer {
+        $this->getFacade()->processNotification($computopApiResponseHeaderTransfer);
+
+        return $computopApiResponseHeaderTransfer;
+    }
 }

@@ -95,4 +95,13 @@ interface ComputopStubInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    public function processNotification(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): ComputopApiResponseHeaderTransfer;
 }

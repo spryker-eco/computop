@@ -189,4 +189,21 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
 
         return $quoteTransfer;
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    public function processNotification(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): ComputopApiResponseHeaderTransfer {
+        /** @var \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer */
+        $computopApiResponseHeaderTransfer = $this->zedStub->call(
+            '/computop/gateway/process-notification',
+            $computopApiResponseHeaderTransfer
+        );
+
+        return $computopApiResponseHeaderTransfer;
+    }
 }
