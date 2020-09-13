@@ -28,10 +28,6 @@ class EasyCreditMapper extends AbstractMapper
 
         $addressData = $this->getAdditionalAddressData($quoteTransfer);
         $computopPaymentTransfer = $this->mapAddressDataToEasyCreditPayment($addressData, $computopPaymentTransfer);
-
-        $computopPaymentTransfer->setUrlNotify(
-            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
-        );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer)
@@ -87,8 +83,8 @@ class EasyCreditMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_INIT;
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();

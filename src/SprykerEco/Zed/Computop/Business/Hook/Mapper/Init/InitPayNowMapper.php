@@ -44,23 +44,24 @@ class InitPayNowMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPayNowPaymentTransfer $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer)
     {
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::CAPTURE] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopApiConfig::REF_NR] = $cardPaymentTransfer->getRefNr();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayNowPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayNowPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayNowPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayNowPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayNowPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayNowPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::CAPTURE] = $computopPayNowPaymentTransfer->getCapture();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayNowPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopPayNowPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayNowPaymentTransfer->getTxType();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayNowPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopApiConfig::REF_NR] = $computopPayNowPaymentTransfer->getRefNr();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
 
         return $dataSubArray;

@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -362,12 +363,15 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return void
+     * @return ComputopNotificationTransfer
      */
-    public function processNotification(ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer): void
-    {
-        $this->getFactory()->createNotificationProcessor()->processNotification($computopApiResponseHeaderTransfer);
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer {
+        return $this->getFactory()
+            ->createNotificationProcessor()
+            ->processNotification($computopNotificationTransfer);
     }
 }

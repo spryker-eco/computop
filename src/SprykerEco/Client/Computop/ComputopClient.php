@@ -8,6 +8,7 @@
 namespace SprykerEco\Client\Computop;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
@@ -189,13 +190,13 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
      */
     public function processNotification(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): ComputopApiResponseHeaderTransfer {
-        return $this->getFactory()->createZedStub()->processNotification($computopApiResponseHeaderTransfer);
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer {
+        return $this->getFactory()->createZedStub()->processNotification($computopNotificationTransfer);
     }
 }

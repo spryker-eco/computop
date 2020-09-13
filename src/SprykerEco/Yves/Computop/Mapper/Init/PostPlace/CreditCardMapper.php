@@ -35,10 +35,6 @@ class CreditCardMapper extends AbstractMapper
     {
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
-
-        $computopPaymentTransfer->setUrlNotify(
-            'https://fcf90ba702c89604f349c6000a4f5101.m.pipedream.net'//$this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
-        );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer)
@@ -91,42 +87,42 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::CAPTURE] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopCreditCardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopCreditCardPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopCreditCardPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopCreditCardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopCreditCardPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopCreditCardPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::CAPTURE] = $computopCreditCardPaymentTransfer->getCapture();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopCreditCardPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopCreditCardPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopCreditCardPaymentTransfer->getTxType();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopCreditCardPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopCreditCardPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopCreditCardPaymentTransfer->getShippingZip();
 
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getBillToCustomer()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getBillToCustomer()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getShipToCustomer()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getShipToCustomer()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getBillingAddress()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getBillingAddress()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getShippingAddress()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getShippingAddress()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getCredentialOnFile()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getCredentialOnFile()->toArray(true, true)
         );
 
         return $dataSubArray;

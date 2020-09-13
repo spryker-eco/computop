@@ -28,7 +28,6 @@ class IdealMapper extends AbstractMapper
         $computopPaymentTransfer->setUrlSuccess(
             $this->router->generate(ComputopRouteProviderPlugin::IDEAL_SUCCESS, [], Router::ABSOLUTE_URL)
         );
-        //ToDo:update mapper
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );

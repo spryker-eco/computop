@@ -56,24 +56,25 @@ class InitIdealMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
+    protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer */
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopIdealPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopIdealPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopIdealPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopIdealPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopIdealPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopIdealPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopIdealPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopIdealPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopIdealPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopIdealPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopIdealPaymentTransfer->getShippingZip();
         $dataSubArray[ComputopApiConfig::ISSUER_ID] = $this->config->getIdealIssuerId();
 
         return $dataSubArray;

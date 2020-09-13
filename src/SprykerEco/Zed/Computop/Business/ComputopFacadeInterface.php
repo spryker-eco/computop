@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -268,12 +269,15 @@ interface ComputopFacadeInterface
     /**
      * Specification:
      * - Saves push notification into DB.
+     * - Updates related computop order items with payment confirmation status.
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
      */
-    public function processNotification(ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer): void;
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer;
 }

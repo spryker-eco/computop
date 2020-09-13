@@ -7,14 +7,16 @@
 
 namespace SprykerEco\Zed\Computop\Business\Processor;
 
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 
 interface NotificationProcessorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      */
-    public function processNotification(ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer): void;
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer;
 }

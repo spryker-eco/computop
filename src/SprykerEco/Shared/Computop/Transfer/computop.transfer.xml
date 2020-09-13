@@ -557,9 +557,15 @@
         <property name="userAgent" type="string"/>
     </transfer>
 
-    <transfer name="ComputopApiResponseHeader">
+    <transfer name="ComputopNotification">
+        <property name="payId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="xId" type="string"/>
+        <property name="code" type="string"/>
+        <property name="status" type="string"/>
+        <property name="description" type="string"/>
         <property name="type" type="string"/>
-        <property name="orderItemStatus" type="string"/>
+        <property name="isSuccess" type="bool"/>
     </transfer>
 
 </transfers>

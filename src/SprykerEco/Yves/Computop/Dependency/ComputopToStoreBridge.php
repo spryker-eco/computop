@@ -29,4 +29,12 @@ class ComputopToStoreBridge implements ComputopToStoreInterface
     {
         return $this->store->getCurrencyIsoCode();
     }
+
+    /**
+     * @return string
+     */
+    public function getCurrentLanguage()
+    {
+        return $this->store->getCurrentLanguage();
+    }
 }

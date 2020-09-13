@@ -18,7 +18,7 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      *
      * @return bool
      */
-    public function requireInput(AbstractTransfer $quoteTransfer)
+    public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
         if (
             !$quoteTransfer->getPayment()
@@ -27,6 +27,16 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return bool
+     */
+    public function postCondition(AbstractTransfer $quoteTransfer): bool
+    {
         return true;
     }
 
@@ -44,15 +54,5 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
             'merchantId' => $quoteTransfer->getPayment()->getComputopCreditCard()->getMerchantId(),
             'urlBack' => $quoteTransfer->getPayment()->getComputopCreditCard()->getUrlBack(),
         ];
-    }
-
-    /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
-    public function postCondition(AbstractTransfer $quoteTransfer)
-    {
-        return true;
     }
 }

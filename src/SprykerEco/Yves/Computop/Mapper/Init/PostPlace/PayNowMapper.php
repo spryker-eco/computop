@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopAddressLineTransfer;
 use Generated\Shared\Transfer\ComputopAddressTransfer;
+use Generated\Shared\Transfer\ComputopBrowserInfoTransfer;
 use Generated\Shared\Transfer\ComputopConsumerTransfer;
 use Generated\Shared\Transfer\ComputopCountryTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTransfer;
@@ -26,6 +27,9 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayNowMapper extends AbstractMapper
 {
+    protected const HEADER_USER_AGENT = 'User-Agent';
+    protected const HEADER_ACCEPT = 'Accept';
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -35,10 +39,6 @@ class PayNowMapper extends AbstractMapper
     {
         /** @var \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
-
-        $computopPaymentTransfer->setUrlNotify(
-            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
-        );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer)
@@ -78,6 +78,7 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer = $this->expandPayNowPaymentWithShippingAddress($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithBillingAddress($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithCredentialOnFIle($computopPaymentTransfer);
+        $computopPaymentTransfer = $this->expandPayNoPaymentWithBrowserInfo($computopPaymentTransfer);
 
         return $computopPaymentTransfer;
     }
@@ -93,6 +94,7 @@ class PayNowMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
         $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::CAPTURE] = $cardPaymentTransfer->getCapture();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
@@ -118,6 +120,9 @@ class PayNowMapper extends AbstractMapper
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
             $cardPaymentTransfer->getCredentialOnFile()->toArray(true, true)
+        );
+        $dataSubArray[ComputopApiConfig::BROWSER_INFO] = $this->encodeRequestParameterData(
+            $cardPaymentTransfer->getBrowserInfo()->toArray(true, true)
         );
 
         return $dataSubArray;
@@ -271,6 +276,27 @@ class PayNowMapper extends AbstractMapper
             ->setInitialPayment(false);
 
         $computopPayNowPaymentTransfer->setCredentialOnFile($computopCredentialOnFileTransfer);
+
+        return $computopPayNowPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
+     */
+    protected function expandPayNoPaymentWithBrowserInfo(
+        ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer
+    ): ComputopPayNowPaymentTransfer {
+        $computopBrowserInfoTransfer = (new ComputopBrowserInfoTransfer())
+            ->setAcceptHeaders($this->request->headers->get(static::HEADER_ACCEPT))
+            ->setIpAddress($this->request->getClientIp())
+            ->setUserAgent($this->request->headers->get(static::HEADER_USER_AGENT))
+            ->setJavaEnabled(false)
+            ->setJavaScriptEnabled(false)
+            ->setLanguage(mb_strtoupper($this->store->getCurrentLanguage()));
+
+        $computopPayNowPaymentTransfer->setBrowserInfo($computopBrowserInfoTransfer);
 
         return $computopPayNowPaymentTransfer;
     }

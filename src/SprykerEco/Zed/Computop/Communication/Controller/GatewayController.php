@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Communication\Controller;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
@@ -137,15 +138,13 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
      */
     public function processNotificationAction(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): ComputopApiResponseHeaderTransfer {
-        $this->getFacade()->processNotification($computopApiResponseHeaderTransfer);
-
-        return $computopApiResponseHeaderTransfer;
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer {
+        return $this->getFacade()->processNotification($computopNotificationTransfer);
     }
 }

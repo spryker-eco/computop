@@ -8,9 +8,11 @@
 namespace SprykerEco\Yves\Computop\Controller;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -197,9 +199,13 @@ class CallbackController extends AbstractController
 
         $responseHeaderTransfer = $this->getFactory()
             ->getComputopApiService()
-            ->extractResponseHeader($decryptedArray, ComputopConfig::INIT_METHOD);
+            ->extractResponseHeader($decryptedArray, '');
 
-        $this->getClient()->processNotification($responseHeaderTransfer);
+        $computopNotificationTransfer = (new ComputopNotificationTransfer())
+            ->fromArray($responseHeaderTransfer->toArray(), true)
+            ->setType($decryptedArray[ComputopApiConfig::NOTIFICATION_PARAMETER_PAYMENT_TYPE]);
+
+        $this->getClient()->processNotification($computopNotificationTransfer);
 
         //TODO Replace with `return new Response()`
         return new JsonResponse($decryptedArray);

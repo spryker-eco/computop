@@ -7,25 +7,23 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 
 interface ComputopEntityManagerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
      * @return void
      */
-    public function savePaymentComputopNotification(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): void;
+    public function savePaymentComputopNotification(ComputopNotificationTransfer $computopNotificationTransfer): void;
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
      * @return void
      */
-    public function updatePaymentComputopOrderItemNotificationStatus(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    public function updatePaymentComputopOrderItemPaymentConfirmation(
+        ComputopNotificationTransfer $computopNotificationTransfer
     ): void;
 }

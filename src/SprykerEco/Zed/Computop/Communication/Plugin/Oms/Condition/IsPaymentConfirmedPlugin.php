@@ -17,11 +17,11 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
-class IsInitializedPlugin extends AbstractPlugin implements ConditionInterface
+class IsPaymentConfirmedPlugin extends AbstractPlugin implements ConditionInterface
 {
     /**
      * {@inheritdoc}
-     *  - Checks if order item has initialized status.
+     * - Checks if notification with payment confirmation is received for order item.
      *
      * @api
      *
@@ -34,6 +34,6 @@ class IsInitializedPlugin extends AbstractPlugin implements ConditionInterface
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
 
-        return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusInitialized();
+        return $computopOrderItem->getIsPaymentConfirmed();
     }
 }

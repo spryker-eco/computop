@@ -1,0 +1,59 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    formAction: _view.formAction,
+    encryptedData: _view.encryptedData,
+    encryptedDataLength: _view.encryptedDataLength,
+    merchantId: _view.merchantId,
+    brandOptions: _view.brandOptions,
+    title: 'checkout.step.paynow.title' | trans,
+} %}
+
+{% block breadcrumb %}{% endblock %}
+
+{% block content %}
+    <div class="form box">
+        <form name="payNowInitForm" method="post" action="{{ data.formAction }}">
+            <div class="grid">
+                <div class="form__fields col col--sm-12 col--lg-6">
+                    <div class="form__field">
+                        <label for="payNowInitForm_brand" class="label label--required">{{ 'checkout.step.paynow.credit_card_brand' | trans }}</label>
+                        {% include atom('select') with {
+                            modifiers: ['expand'],
+                            data: {
+                                options: data.brandOptions,
+                            },
+                            attributes: {
+                                name: 'brand',
+                                id: 'payNowInitForm_brand',
+                            },
+                        } only %}
+                    </div>
+                    <div class="form__field">
+                        <label for="payNowInitForm_cardholder" class="label label--required">{{ 'checkout.step.paynow.cardholder' | trans }}</label>
+                        <input id="payNowInitForm_cardholder" class="input input--expand" type="text" name="cardholder" required="required" placeholder="{{ 'checkout.step.paynow.cardholder.placeholder' | trans }}">
+                    </div>
+                    <div class="form__field">
+                        <label for="payNowInitForm_number" class="label label--required">{{ 'checkout.step.paynow.credit_card_number' | trans }}</label>
+                        <input id="payNowInitForm_number" class="input input--expand" type="text" name="number" required="required" placeholder="{{ 'checkout.step.paynow.credit_card_number.placeholder' | trans }}">
+                    </div>
+                    <div class="form__field">
+                        <label for="payNowInitForm_expiryDate" class="label label--required">{{ 'checkout.step.paynow.credit_card_expiry' | trans }}</label>
+                        <input id="payNowInitForm_expiryDate" class="input input--expand" type="text" name="expiryDate" required="required" placeholder="{{ 'checkout.step.paynow.credit_card_expiry.placeholder' | trans }}">
+                    </div>
+                    <div class="form__field">
+                        <label for="payNowInitForm_securityCode" class="label label--required">{{ 'checkout.step.paynow.cvv' | trans }}</label>
+                        <input id="payNowInitForm_securityCode" class="input input--expand" type="text" name="securityCode" required="required" placeholder="{{ 'checkout.step.paynow.cvv.placeholder' | trans }}">
+                    </div>
+                    <input type="hidden" name="MerchantID" value="{{ data.merchantId }}">
+                    <input type="hidden" name="Data" value="{{ data.encryptedData }}">
+                    <input type="hidden" name="Len" value="{{ data.encryptedDataLength }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('payNowInitForm')}}">
+                    <div class="form__field">
+                        <button type="submit" class="button button--success button--expand">{{ 'checkout.step.paynow.pay_button_text'| trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

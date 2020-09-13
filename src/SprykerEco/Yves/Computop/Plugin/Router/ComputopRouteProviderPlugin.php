@@ -133,7 +133,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/paydirekt-success',
             'Computop',
             'Callback',
-            'successPaydirectAction'
+            'successPaydirektAction'
         );
         $routeCollection->add(static::PAYDIREKT_SUCCESS, $route);
 

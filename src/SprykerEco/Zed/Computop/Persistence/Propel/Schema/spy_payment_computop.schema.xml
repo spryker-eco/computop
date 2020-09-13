@@ -167,7 +167,7 @@
         <column name="fk_payment_computop" type="INTEGER" primaryKey="true"/>
         <column name="fk_sales_order_item" type="INTEGER" primaryKey="true"/>
         <column name="status" required="true" type="VARCHAR"/>
-        <column name="notification_status" required="false" type="VARCHAR"/>
+        <column name="is_payment_confirmed" required="true" type="BOOLEAN" default="false"/>
 
         <behavior name="timestampable"/>
 
@@ -189,7 +189,6 @@
         <column name="status" required="false" type="VARCHAR"/>
         <column name="description" required="false" type="VARCHAR"/>
         <column name="type" required="false" type="VARCHAR"/>
-        <column name="method" required="false" type="VARCHAR"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
 
         <index name="spy_payment_computop_notification-index-x_id">

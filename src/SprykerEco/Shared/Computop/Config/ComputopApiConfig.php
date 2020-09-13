@@ -145,4 +145,5 @@ interface ComputopApiConfig
     public const MSG_VER = 'MsgVer';
     public const PSD2_MSG_VERSION = '2.0';
     public const UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION = 'CIT';
+    public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
 }

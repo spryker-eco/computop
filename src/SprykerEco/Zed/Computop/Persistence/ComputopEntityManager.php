@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -16,44 +16,43 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 class ComputopEntityManager extends AbstractEntityManager implements ComputopEntityManagerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
      * @return void
      */
-    public function savePaymentComputopNotification(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): void {
+    public function savePaymentComputopNotification(ComputopNotificationTransfer $computopNotificationTransfer): void
+    {
         $paymentComputopNotificationEntity = $this->getFactory()
             ->createPaymentComputopNotificationQuery()
-            ->filterByPayId($computopApiResponseHeaderTransfer->getPayId())
-            ->filterByTransId($computopApiResponseHeaderTransfer->getTransId())
-            ->filterByXId($computopApiResponseHeaderTransfer->getXId())
+            ->filterByPayId($computopNotificationTransfer->getPayId())
+            ->filterByTransId($computopNotificationTransfer->getTransId())
+            ->filterByXId($computopNotificationTransfer->getXId())
             ->findOneOrCreate();
 
         $paymentComputopNotificationEntity->fromArray(
-            $computopApiResponseHeaderTransfer->modifiedToArray()
+            $computopNotificationTransfer->modifiedToArray()
         );
         $paymentComputopNotificationEntity->save();
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
      * @return void
      */
-    public function updatePaymentComputopOrderItemNotificationStatus(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    public function updatePaymentComputopOrderItemPaymentConfirmation(
+        ComputopNotificationTransfer $computopNotificationTransfer
     ): void {
         $paymentComputopOrderItemEntities = $this->getFactory()
             ->createPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
-                ->filterByTransId($computopApiResponseHeaderTransfer->getTransId())
-                ->filterByPayId($computopApiResponseHeaderTransfer->getPayId())
+                ->filterByTransId($computopNotificationTransfer->getTransId())
+                ->filterByPayId($computopNotificationTransfer->getPayId())
             ->endUse()
             ->find();
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $paymentComputopOrderItemEntity->setNotificationStatus($computopApiResponseHeaderTransfer->getOrderItemStatus());
+            $paymentComputopOrderItemEntity->setIsPaymentConfirmed($computopNotificationTransfer->getIsSuccess());
             $paymentComputopOrderItemEntity->save();
         }
     }

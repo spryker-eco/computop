@@ -8,6 +8,7 @@
 namespace SprykerEco\Client\Computop;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 /**
@@ -162,14 +163,15 @@ interface ComputopClientInterface
      * Specification:
      * - Performs Zed call.
      * - Saves push notification entity into DB.
+     * - Updates related computop order items with payment confirmation status.
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
      */
     public function processNotification(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): ComputopApiResponseHeaderTransfer;
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer;
 }
