@@ -116,7 +116,7 @@ abstract class AbstractMapper implements MapperInterface
             $this->router->generate(ComputopRouteProviderPlugin::FAILURE_PATH_NAME, [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setUrlNotify(
-            'https://fcf90ba702c89604f349c6000a4f5101.m.pipedream.net'//$this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
 

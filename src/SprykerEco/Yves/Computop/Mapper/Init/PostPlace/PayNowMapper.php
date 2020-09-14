@@ -29,6 +29,10 @@ class PayNowMapper extends AbstractMapper
 {
     protected const HEADER_USER_AGENT = 'User-Agent';
     protected const HEADER_ACCEPT = 'Accept';
+    protected const IFRAME_COLOR_DEPTH = 24;
+    protected const IFRAME_SCREEN_HEIGHT  = 723;
+    protected const IFRAME_SCREEN_WIDTH = 1536;
+    protected const IFRAME_TIME_ZONE_OFFSET = '300';
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -45,9 +49,14 @@ class PayNowMapper extends AbstractMapper
             )
         );
 
-        $computopPaymentTransfer->setUrl(
-            $this->config->getPayNowInitActionUrl()
+        $decryptedValues = $this->computopApiService->getEncryptedArray(
+            $this->getDataSubArray($computopPaymentTransfer),
+            $this->config->getBlowfishPassword()
         );
+
+        $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
+        $computopPaymentTransfer->setLen($decryptedValues[ComputopApiConfig::LENGTH]);
+        $computopPaymentTransfer->setUrl($this->config->getPayNowInitActionUrl());
 
         return $computopPaymentTransfer;
     }
@@ -78,51 +87,51 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer = $this->expandPayNowPaymentWithShippingAddress($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithBillingAddress($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithCredentialOnFIle($computopPaymentTransfer);
-        $computopPaymentTransfer = $this->expandPayNoPaymentWithBrowserInfo($computopPaymentTransfer);
+        $computopPaymentTransfer = $this->expandPayNowPaymentWithBrowserInfo($computopPaymentTransfer);
 
         return $computopPaymentTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPayNowPaymentTransfer $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer)
     {
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::CAPTURE] = $cardPaymentTransfer->getCapture();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::TX_TYPE] = $cardPaymentTransfer->getTxType();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayNowPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayNowPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayNowPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayNowPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayNowPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayNowPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::CAPTURE] = $computopPayNowPaymentTransfer->getCapture();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayNowPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopPayNowPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayNowPaymentTransfer->getTxType();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayNowPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayNowPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayNowPaymentTransfer->getShippingZip();
 
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getBillToCustomer()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getBillToCustomer()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getShipToCustomer()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getShipToCustomer()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getBillingAddress()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getBillingAddress()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getShippingAddress()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getShippingAddress()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getCredentialOnFile()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getCredentialOnFile()->toArray(true, true)
         );
         $dataSubArray[ComputopApiConfig::BROWSER_INFO] = $this->encodeRequestParameterData(
-            $cardPaymentTransfer->getBrowserInfo()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getBrowserInfo()->toArray(true, true)
         );
 
         return $dataSubArray;
@@ -273,7 +282,7 @@ class PayNowMapper extends AbstractMapper
                 (new ComputopCredentialOnFileTypeTransfer())
                     ->setUnscheduled(ComputopApiConfig::UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION)
             )
-            ->setInitialPayment(false);
+            ->setInitialPayment(true);
 
         $computopPayNowPaymentTransfer->setCredentialOnFile($computopCredentialOnFileTransfer);
 
@@ -285,7 +294,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    protected function expandPayNoPaymentWithBrowserInfo(
+    protected function expandPayNowPaymentWithBrowserInfo(
         ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer
     ): ComputopPayNowPaymentTransfer {
         $computopBrowserInfoTransfer = (new ComputopBrowserInfoTransfer())
@@ -293,7 +302,11 @@ class PayNowMapper extends AbstractMapper
             ->setIpAddress($this->request->getClientIp())
             ->setUserAgent($this->request->headers->get(static::HEADER_USER_AGENT))
             ->setJavaEnabled(false)
-            ->setJavaScriptEnabled(false)
+            ->setJavaScriptEnabled(true)
+            ->setColorDepth(static::IFRAME_COLOR_DEPTH)
+            ->setScreenHeight(static::IFRAME_SCREEN_HEIGHT)
+            ->setScreenWidth(static::IFRAME_SCREEN_WIDTH)
+            ->setTimeZoneOffset(static::IFRAME_TIME_ZONE_OFFSET)
             ->setLanguage(mb_strtoupper($this->store->getCurrentLanguage()));
 
         $computopPayNowPaymentTransfer->setBrowserInfo($computopBrowserInfoTransfer);

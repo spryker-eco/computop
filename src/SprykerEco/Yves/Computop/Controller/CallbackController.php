@@ -15,8 +15,8 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
@@ -173,9 +173,15 @@ class CallbackController extends AbstractController
      */
     public function failureAction(Request $request)
     {
+        $requestParameters = $request->query->all();
+
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $requestParameters = $request->request->all();
+        }
+
         $decryptedArray = $this->getFactory()
             ->getComputopApiService()
-            ->decryptResponseHeader($request->query->all(), Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
+            ->decryptResponseHeader($requestParameters, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
         $responseHeaderTransfer = $this->getFactory()
             ->getComputopApiService()
@@ -207,8 +213,7 @@ class CallbackController extends AbstractController
 
         $this->getClient()->processNotification($computopNotificationTransfer);
 
-        //TODO Replace with `return new Response()`
-        return new JsonResponse($decryptedArray);
+        return new Response();
     }
 
     /**
