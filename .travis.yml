@@ -39,6 +39,9 @@ addons:
         key_url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
       - sourceline: ppa:ondrej/php
     packages:
+      - redis-tools
+      - redis-server
+      - rabbitmq-server
       - graphviz
       - postgresql-12
       - postgresql-client-12
