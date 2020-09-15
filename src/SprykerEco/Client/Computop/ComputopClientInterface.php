@@ -77,7 +77,7 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

@@ -46,31 +46,31 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideDependencies(Container $container)
     {
-        $container[static::CLIENT_COMPUTOP] = function (Container $container) {
+        $container->set(static::CLIENT_COMPUTOP, function (Container $container) {
             return $container->getLocator()->computop()->client();
-        };
+        });
 
-        $container[static::SERVICE_COMPUTOP_API] = function () use ($container) {
+        $container->set(static::SERVICE_COMPUTOP_API, function () use ($container) {
             return $container->getLocator()->computopApi()->service();
-        };
+        });
 
-        $container[static::CLIENT_QUOTE] = function () use ($container) {
+        $container->set(static::CLIENT_QUOTE, function () use ($container) {
             return new ComputopToQuoteClientBridge($container->getLocator()->quote()->client());
-        };
+        });
 
-        $container[static::CLIENT_CALCULATION] = function () use ($container) {
+        $container->set(static::CLIENT_CALCULATION, function () use ($container) {
             return new ComputopToCalculationClientBridge($container->getLocator()->calculation()->client());
-        };
+        });
 
-        $container[static::PLUGIN_APPLICATION] = function () {
+        $container->set(static::PLUGIN_APPLICATION, function () {
             $pimplePlugin = new Pimple();
 
             return $pimplePlugin->getApplication();
-        };
+        });
 
-        $container[static::STORE] = function () {
+        $container->set(static::STORE, function () {
             return new ComputopToStoreBridge(Store::getInstance());
-        };
+        });
 
         $container = $this->addRouter($container);
         $container = $this->addRequestStack($container);

@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Dependency\Service;
 
-
 interface ComputopToUtilEncodingServiceInterface
 {
     /**

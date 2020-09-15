@@ -18,7 +18,7 @@ use Spryker\Client\Kernel\AbstractClient;
 class ComputopClient extends AbstractClient implements ComputopClientInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -32,7 +32,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -46,7 +46,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -60,7 +60,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -74,7 +74,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -88,7 +88,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -102,7 +102,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -116,7 +116,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -130,7 +130,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -144,7 +144,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -158,7 +158,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -172,7 +172,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

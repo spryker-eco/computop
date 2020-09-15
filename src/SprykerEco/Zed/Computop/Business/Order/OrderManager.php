@@ -8,14 +8,12 @@
 namespace SprykerEco\Zed\Computop\Business\Order;
 
 use ArrayObject;
-use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
-use Orm\Zed\Sales\Persistence\SpySalesExpense;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;

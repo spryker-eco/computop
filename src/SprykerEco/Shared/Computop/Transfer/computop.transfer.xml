@@ -28,7 +28,7 @@
         <property name="custom" type="string"/>
         <property name="expirationTime" type="string"/>
         <property name="orderDesc" type="string"/>
-        <property name="customField" type="array"/>
+        <property name="customField" type="array" singular="customField"/>
         <property name="paymentMethod" type="string"/>
         <property name="data" type="string"/>
         <property name="len" type="int"/>
@@ -82,7 +82,7 @@
         <property name="custom" type="string"/>
         <property name="expirationTime" type="string"/>
         <property name="orderDesc" type="string"/>
-        <property name="customField" type="array"/>
+        <property name="customField" type="array" singular="customField"/>
         <property name="paymentMethod" type="string"/>
         <property name="data" type="string"/>
         <property name="len" type="int"/>
@@ -135,7 +135,7 @@
         <property name="payPalMethod" type="string"/>
         <property name="rTF" type="string"/>
         <property name="orderDesc" type="string"/>
-        <property name="orderDescriptions" type="array"/>
+        <property name="orderDescriptions" type="array" singular="orderDescriptions"/>
         <property name="taxTotal" type="int"/>
         <property name="itemTotal" type="int"/>
         <property name="shAmount" type="int"/>
@@ -434,7 +434,7 @@
         <property name="refNr" type="string"/>
         <property name="userData" type="string"/>
         <property name="codeExt" type="string"/>
-        <property name="ErrorText" type="string"/>
+        <property name="errorText" type="string"/>
     </transfer>
 
     <transfer name="ComputopCrif">
@@ -447,9 +447,9 @@
     </transfer>
 
     <transfer name="ComputopApiEasyCreditStatusResponse">
-        <property name="decisionData" type="array"/>
-        <property name="financingData" type="array"/>
-        <property name="processData" type="array"/>
+        <property name="decisionData" type="array" singular="decisionData"/>
+        <property name="financingData" type="array" singular="financingData"/>
+        <property name="processData" type="array" singular="processData"/>
     </transfer>
 
     <transfer name="Payment">

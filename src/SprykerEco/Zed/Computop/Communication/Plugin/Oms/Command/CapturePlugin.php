@@ -17,7 +17,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *  - Executes Capture command and performs Capture API call.
      *
      * @api

@@ -30,7 +30,7 @@ class PayNowMapper extends AbstractMapper
     protected const HEADER_USER_AGENT = 'User-Agent';
     protected const HEADER_ACCEPT = 'Accept';
     protected const IFRAME_COLOR_DEPTH = 24;
-    protected const IFRAME_SCREEN_HEIGHT  = 723;
+    protected const IFRAME_SCREEN_HEIGHT = 723;
     protected const IFRAME_SCREEN_WIDTH = 1536;
     protected const IFRAME_TIME_ZONE_OFFSET = '300';
     protected const IFRAME_IS_JAVA_ENABLED = false;
