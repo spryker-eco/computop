@@ -33,6 +33,8 @@ class PayNowMapper extends AbstractMapper
     protected const IFRAME_SCREEN_HEIGHT  = 723;
     protected const IFRAME_SCREEN_WIDTH = 1536;
     protected const IFRAME_TIME_ZONE_OFFSET = '300';
+    protected const IFRAME_IS_JAVA_ENABLED = false;
+    protected const IFRAME_IS_JAVA_SCRIPT_ENABLED = true;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -86,7 +88,7 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer = $this->expandPayNowPaymentWithBillToCustomer($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithShippingAddress($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithBillingAddress($computopPaymentTransfer, $quoteTransfer);
-        $computopPaymentTransfer = $this->expandPayNowPaymentWithCredentialOnFIle($computopPaymentTransfer);
+        $computopPaymentTransfer = $this->expandPayNowPaymentWithCredentialOnFile($computopPaymentTransfer);
         $computopPaymentTransfer = $this->expandPayNowPaymentWithBrowserInfo($computopPaymentTransfer);
 
         return $computopPaymentTransfer;
@@ -274,7 +276,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    protected function expandPayNowPaymentWithCredentialOnFIle(
+    protected function expandPayNowPaymentWithCredentialOnFile(
         ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer
     ): ComputopPayNowPaymentTransfer {
         $computopCredentialOnFileTransfer = (new ComputopCredentialOnFileTransfer())
@@ -301,8 +303,8 @@ class PayNowMapper extends AbstractMapper
             ->setAcceptHeaders($this->request->headers->get(static::HEADER_ACCEPT))
             ->setIpAddress($this->request->getClientIp())
             ->setUserAgent($this->request->headers->get(static::HEADER_USER_AGENT))
-            ->setJavaEnabled(false)
-            ->setJavaScriptEnabled(true)
+            ->setJavaEnabled(static::IFRAME_IS_JAVA_ENABLED)
+            ->setJavaScriptEnabled(static::IFRAME_IS_JAVA_SCRIPT_ENABLED)
             ->setColorDepth(static::IFRAME_COLOR_DEPTH)
             ->setScreenHeight(static::IFRAME_SCREEN_HEIGHT)
             ->setScreenWidth(static::IFRAME_SCREEN_WIDTH)

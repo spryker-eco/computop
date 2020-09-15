@@ -81,7 +81,7 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer = $this->expandCreditCardPaymentWithBillToCustomer($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandCreditCardPaymentWithShippingAddress($computopPaymentTransfer, $quoteTransfer);
         $computopPaymentTransfer = $this->expandCreditCardPaymentWithBillingAddress($computopPaymentTransfer, $quoteTransfer);
-        $computopPaymentTransfer = $this->expandCreditCardPaymentWithCredentialOnFIle($computopPaymentTransfer);
+        $computopPaymentTransfer = $this->expandCreditCardPaymentWithCredentialOnFile($computopPaymentTransfer);
 
         return $computopPaymentTransfer;
     }
@@ -283,7 +283,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function expandCreditCardPaymentWithCredentialOnFIle(
+    protected function expandCreditCardPaymentWithCredentialOnFile(
         ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer
     ): ComputopCreditCardPaymentTransfer {
         $computopCredentialOnFileTransfer = (new ComputopCredentialOnFileTransfer())

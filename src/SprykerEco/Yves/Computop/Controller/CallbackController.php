@@ -15,6 +15,7 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,7 +39,7 @@ class CallbackController extends AbstractController
     public function successCreditCardAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
-            $this->getFactory()->createPayNowPaymentHandler(),
+            $this->getFactory()->createCreditCardPaymentHandler(),
             $request->request->all()
         );
     }
@@ -209,11 +210,11 @@ class CallbackController extends AbstractController
 
         $computopNotificationTransfer = (new ComputopNotificationTransfer())
             ->fromArray($responseHeaderTransfer->toArray(), true)
-            ->setType($decryptedArray[ComputopApiConfig::NOTIFICATION_PARAMETER_PAYMENT_TYPE]);
+            ->setType($decryptedArray[ComputopApiConfig::NOTIFICATION_PARAMETER_PAYMENT_TYPE] ?? '');
 
         $this->getClient()->processNotification($computopNotificationTransfer);
 
-        return new Response();
+        return new JsonResponse($decryptedArray);
     }
 
     /**
