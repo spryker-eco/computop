@@ -434,7 +434,7 @@
         <property name="refNr" type="string"/>
         <property name="userData" type="string"/>
         <property name="codeExt" type="string"/>
-        <property name="ErrorText" type="string"/>
+        <property name="errorText" type="string"/>
     </transfer>
 
     <transfer name="ComputopCrif">
