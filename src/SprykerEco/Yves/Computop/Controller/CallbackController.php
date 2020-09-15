@@ -215,7 +215,7 @@ class CallbackController extends AbstractController
 
         $this->getClient()->processNotification($computopNotificationTransfer);
 
-        return new JsonResponse($decryptedArray);
+        return new Response();
     }
 
     /**

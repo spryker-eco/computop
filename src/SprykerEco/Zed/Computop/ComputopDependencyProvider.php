@@ -16,6 +16,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToRefundFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -27,6 +28,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const FACADE_CALCULATION = 'FACADE_CALCULATION';
     public const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
     public const FACADE_COMPUTOP_API = 'FACADE_COMPUTOP_API';
+    public const FACADE_REFUND = 'FACADE_REFUND';
     public const STORE = 'STORE';
 
     /**
@@ -45,6 +47,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container->set(static::FACADE_CALCULATION, function (Container $container) {
             return new ComputopToCalculationFacadeBridge($container->getLocator()->calculation()->facade());
         });
+
+        $container = $this->addRefundFacade($container);
 
         return $container;
     }
@@ -80,6 +84,20 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 
         $container->set(static::FACADE_COMPUTOP_API, function (Container $container) {
             return new ComputopToComputopApiFacadeBridge($container->getLocator()->computopApi()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addRefundFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_REFUND, function (Container $container) {
+            return new ComputopToRefundFacadeBridge($container->getLocator()->refund()->facade());
         });
 
         return $container;
