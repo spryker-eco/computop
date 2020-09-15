@@ -54,6 +54,7 @@ addons:
 env:
   global:
     - APPLICATION_ENV=ci.pgsql
+    - SPRYKER_TESTING_ENABLED=1
     - APPLICATION_STORE=DE
     - MODULE_DIR=module
     - SHOP_DIR=current
