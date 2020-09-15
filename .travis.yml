@@ -55,7 +55,7 @@ env:
     - MODULE_DIR=module
     - SHOP_DIR=current
     - MODULE_NAME=computop
-    - POSTGRES_PORT=5432
+    - POSTGRES_PORT="5433"
 
 cache:
   directories:
