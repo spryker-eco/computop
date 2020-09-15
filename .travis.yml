@@ -27,11 +27,14 @@ services:
   - rabbitmq
 
 addons:
-  postgresql: 9.4
+  postgresql: "12"
 
   apt:
     packages:
       - graphviz
+      - postgresql-12
+      - postgresql-client-12
+      - postgresql-server-dev-12
 
   hosts:
     - zed.de.spryker.test
@@ -56,5 +59,5 @@ before_install:
   - phpenv config-rm xdebug.ini
 
 script:
-  - git clone -b 0.3.0 https://github.com/spryker-eco/eco-ci.git ecoci
+  - git clone -b feature/eco-2952-psd2-notify-url-build https://github.com/spryker-eco/eco-ci.git ecoci
   - ./ecoci/build/travis.sh
