@@ -13,6 +13,7 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)

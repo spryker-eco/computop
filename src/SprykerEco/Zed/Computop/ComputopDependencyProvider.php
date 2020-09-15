@@ -38,13 +38,13 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container[self::FACADE_SALES] = function (Container $container) {
+        $container->set(static::FACADE_SALES, function (Container $container) {
             return new ComputopToSalesFacadeBridge($container->getLocator()->sales()->facade());
-        };
+        });
 
-        $container[self::FACADE_CALCULATION] = function (Container $container) {
+        $container->set(static::FACADE_CALCULATION, function (Container $container) {
             return new ComputopToCalculationFacadeBridge($container->getLocator()->calculation()->facade());
-        };
+        });
 
         return $container;
     }
@@ -58,29 +58,29 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
-        $container[self::SERVICE_COMPUTOP_API] = function () use ($container) {
+        $container->set(static::SERVICE_COMPUTOP_API, function () use ($container) {
             return $container->getLocator()->computopApi()->service();
-        };
+        });
 
-        $container[self::FACADE_OMS] = function () use ($container) {
+        $container->set(static::FACADE_OMS, function () use ($container) {
             return new ComputopToOmsFacadeBridge($container->getLocator()->oms()->facade());
-        };
+        });
 
-        $container[self::STORE] = function () {
+        $container->set(static::STORE, function () {
             return new ComputopToStoreBridge(Store::getInstance());
-        };
+        });
 
-        $container[self::FACADE_FLASH_MESSENGER] = function (Container $container) {
+        $container->set(static::FACADE_FLASH_MESSENGER, function (Container $container) {
             return new ComputopToMessengerFacadeBridge($container->getLocator()->messenger()->facade());
-        };
+        });
 
-        $container[self::FACADE_MONEY] = function (Container $container) {
+        $container->set(static::FACADE_MONEY, function (Container $container) {
             return new ComputopToMoneyFacadeBridge($container->getLocator()->money()->facade());
-        };
+        });
 
-        $container[self::FACADE_COMPUTOP_API] = function (Container $container) {
+        $container->set(static::FACADE_COMPUTOP_API, function (Container $container) {
             return new ComputopToComputopApiFacadeBridge($container->getLocator()->computopApi()->facade());
-        };
+        });
 
         return $container;
     }

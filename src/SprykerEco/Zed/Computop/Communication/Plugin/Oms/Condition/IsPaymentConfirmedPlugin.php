@@ -20,7 +20,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
 class IsPaymentConfirmedPlugin extends AbstractPlugin implements ConditionInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * - Checks if notification with payment confirmation is received for order item.
      *
      * @api

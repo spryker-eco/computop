@@ -21,7 +21,7 @@ use Spryker\Zed\Payment\Dependency\Plugin\Payment\PaymentMethodFilterPluginInter
 class ComputopPaymentMethodFilterPlugin extends AbstractPlugin implements PaymentMethodFilterPluginInterface
 {
     /**
-     * {inheritdoc}
+     * {@inheritDoc}
      *  - Filters Computop payment methods accordingly to CRIF risk check response.
      *
      * @api

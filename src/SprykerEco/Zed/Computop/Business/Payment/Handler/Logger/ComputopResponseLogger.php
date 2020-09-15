@@ -13,7 +13,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 class ComputopResponseLogger implements ComputopResponseLoggerInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      * @param string $method

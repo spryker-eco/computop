@@ -17,7 +17,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class EasyCreditAuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *  - Executes Authorize command and performs Authorize API call for Easy Credit payment method.
      *
      * @api

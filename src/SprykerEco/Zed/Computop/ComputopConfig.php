@@ -39,6 +39,8 @@ class ComputopConfig extends AbstractBundleConfig
     public const COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED = true;
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getMerchantId()
@@ -47,6 +49,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBlowfishPass()
@@ -55,6 +59,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getAuthorizeAction()
@@ -63,6 +69,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCaptureAction()
@@ -71,6 +79,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getRefundAction()
@@ -79,6 +89,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getInquireAction()
@@ -87,6 +99,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getReverseAction()
@@ -95,6 +109,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getIdealInitAction()
@@ -103,6 +119,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPaydirektInitAction()
@@ -111,6 +129,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getSofortInitAction()
@@ -119,6 +139,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getEasyCreditStatusUrl()
@@ -127,6 +149,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getEasyCreditAuthorizeUrl()
@@ -135,6 +159,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPayNowInitActionUrl()
@@ -143,6 +169,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return bool
      */
     public function isRefundShipmentPriceEnabled()
@@ -151,6 +179,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return array
      */
     public function getBeforeCaptureStatuses()
@@ -164,6 +194,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return array
      */
     public function getBeforeRefundStatuses()
@@ -176,6 +208,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusNew()
@@ -184,6 +218,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusInitialized()
@@ -192,6 +228,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusAuthorized()
@@ -200,6 +238,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusAuthorizationFailed()
@@ -208,6 +248,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusCaptured()
@@ -216,6 +258,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusCapturingFailed()
@@ -224,6 +268,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusCancelled()
@@ -232,6 +278,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsStatusRefunded()
@@ -240,6 +288,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getAuthorizeMethodName()
@@ -248,6 +298,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCaptureMethodName()
@@ -256,6 +308,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getRefundMethodName()
@@ -264,6 +318,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getReverseMethodName()
@@ -272,6 +328,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getInquireMethodName()
@@ -280,6 +338,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsAuthorizeEventName()
@@ -288,6 +348,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getOmsCaptureEventName()
@@ -296,6 +358,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getCrifGreenPaymentMethods(): array
@@ -304,6 +368,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getCrifYellowPaymentMethods(): array
@@ -312,6 +378,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getCrifRedPaymentMethods(): array
@@ -320,6 +388,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return bool
      */
     public function isCrifEnabled(): bool
@@ -328,6 +398,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getEtiId(): string
@@ -336,6 +408,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getIdealIssuerId(): string

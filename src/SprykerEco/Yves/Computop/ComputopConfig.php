@@ -21,6 +21,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getEasyCreditSuccessAction(): string
@@ -29,6 +31,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCallbackSuccessOrderRedirectPath(): string
@@ -37,6 +41,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCallbackSuccessCaptureRedirectPath(): string
@@ -45,6 +51,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCallbackFailureRedirectPath(): string
@@ -53,6 +61,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getPaymentMethodsWithoutOrderCall(): array
@@ -61,6 +71,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBaseUrlSsl(): string
@@ -69,6 +81,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getMerchantId(): string
@@ -77,6 +91,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPaydirektShopKey(): string
@@ -85,6 +101,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBlowfishPassword(): string
@@ -93,6 +111,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPaypalInitActionUrl(): string
@@ -101,6 +121,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getDirectDebitInitActionUrl(): string
@@ -109,6 +131,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCreditCardInitActionUrl(): string
@@ -117,6 +141,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPayNowInitActionUrl(): string
@@ -125,6 +151,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getEasyCreditInitActionUrl(): string
@@ -133,6 +161,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return bool
      */
     public function getCreditCardTemplateEnabled(): bool
@@ -141,6 +171,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getPaymentMethodsCaptureTypes(): array
@@ -149,6 +181,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getCreditCardTxType(): string
@@ -157,6 +191,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPayNowTxType(): string
@@ -165,6 +201,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getPayPalTxType(): string
@@ -173,6 +211,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getEtiId(): string

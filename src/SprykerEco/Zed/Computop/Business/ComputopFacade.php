@@ -23,7 +23,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -40,7 +40,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -59,7 +59,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -76,8 +76,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -94,8 +93,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -112,8 +110,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -130,8 +127,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -148,7 +144,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -164,7 +160,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -180,7 +176,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -196,7 +192,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -212,7 +208,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -228,7 +224,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -244,7 +240,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -260,7 +256,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -276,7 +272,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -292,8 +288,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -310,7 +305,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -326,7 +321,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -342,7 +337,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -365,7 +360,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return ComputopNotificationTransfer
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
      */
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer

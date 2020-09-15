@@ -108,7 +108,6 @@ class EasyCreditMapper extends AbstractMapper
         array $addressData,
         ComputopEasyCreditPaymentTransfer $computopEasyCreditPaymentTransfer
     ): ComputopEasyCreditPaymentTransfer {
-
         $computopEasyCreditPaymentTransfer->setShippingCity($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY]);
         $computopEasyCreditPaymentTransfer->setShippingStreet($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET]);
         $computopEasyCreditPaymentTransfer->setShippingStreetNumber($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER]);
