@@ -50,7 +50,7 @@ addons:
 
 env:
   global:
-    - APPLICATION_ENV=devtest
+    - APPLICATION_ENV=ci.pgsql
     - APPLICATION_STORE=DE
     - MODULE_DIR=module
     - SHOP_DIR=current
