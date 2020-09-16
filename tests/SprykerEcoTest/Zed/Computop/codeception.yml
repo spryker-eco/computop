@@ -24,6 +24,8 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     coreNamespaces:
+                        - Spryker
+                        - SprykerShop
                         - SprykerEco
                 - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
                 - \SprykerTest\Zed\Testify\Helper\BusinessHelper
