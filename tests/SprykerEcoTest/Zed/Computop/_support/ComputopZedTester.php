@@ -99,6 +99,13 @@ class ComputopZedTester extends Actor
             ]
         );
         $this->setConfig('COMPUTOP:CRIF_ENABLED', true);
+
+        $this->setConfig(
+            'ACTIVE_PROCESSES',
+            [
+                static::TEST_STATE_MACHINE_NAME,
+            ]
+        );
     }
 
     /**
