@@ -9,9 +9,10 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class SofortMapper extends AbstractMapper
 {
@@ -29,7 +30,7 @@ class SofortMapper extends AbstractMapper
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))
+            $this->router->generate(ComputopRouteProviderPlugin::SOFORT_SUCCESS, [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())

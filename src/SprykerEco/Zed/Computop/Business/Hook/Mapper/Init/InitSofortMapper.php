@@ -56,24 +56,25 @@ class InitSofortMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $cardPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $cardPaymentTransfer)
+    protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $cardPaymentTransfer */
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $cardPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $cardPaymentTransfer->getOrderDesc();
+        /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer */
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopSofortPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopSofortPaymentTransfer->getAmount();
+        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopSofortPaymentTransfer->getCurrency();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopSofortPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopSofortPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopSofortPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopSofortPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::MAC] = $computopSofortPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopSofortPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopSofortPaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopSofortPaymentTransfer->getShippingZip();
 
         return $dataSubArray;
     }

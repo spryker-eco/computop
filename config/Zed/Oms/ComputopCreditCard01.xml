@@ -6,28 +6,29 @@
 
     <process name="ComputopCreditCard01" main="true">
         <states>
-            <state name="new" reserved="true" />
-            <state name="init" reserved="true" />
-            <state name="invalid" reserved="false" />
-            <state name="authorized" reserved="true" />
-            <state name="authorization failed" reserved="false" />
-            <state name="cancelled" reserved="false" />
-            <state name="captured" reserved="true" />
-            <state name="capture failed" reserved="false" />
-            <state name="shipped" reserved="true" />
-            <state name="refunded" reserved="false" />
-            <state name="refund failed" reserved="false" />
-            <state name="closed" reserved="false" />
+            <state name="new" reserved="true"/>
+            <state name="init" reserved="true"/>
+            <state name="authentication complete" reserved="true"/>
+            <state name="invalid" reserved="false"/>
+            <state name="authorized" reserved="true"/>
+            <state name="authorization failed" reserved="false"/>
+            <state name="cancelled" reserved="false"/>
+            <state name="captured" reserved="true"/>
+            <state name="capture failed" reserved="false"/>
+            <state name="shipped" reserved="true"/>
+            <state name="refunded" reserved="false"/>
+            <state name="refund failed" reserved="false"/>
+            <state name="closed" reserved="false"/>
         </states>
 
         <events>
-            <event name="invalidation" timeout="20min" />
-            <event name="authorize" onEnter="true" command="Computop/Authorize" />
-            <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days" />
-            <event name="capture" manual="true" command="Computop/Capture" />
-            <event name="ship" manual="true" />
-            <event name="refund" manual="true" command="Computop/Refund" />
-            <event name="close" manual="true" />
+            <event name="invalidation" timeout="20min"/>
+            <event name="authorize" onEnter="true" command="Computop/Authorize"/>
+            <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days"/>
+            <event name="capture" manual="true" command="Computop/Capture"/>
+            <event name="ship" manual="true"/>
+            <event name="refund" manual="true" command="Computop/Refund"/>
+            <event name="close" manual="true"/>
         </events>
 
         <transitions>
@@ -43,14 +44,25 @@
                 <event>invalidation</event>
             </transition>
 
-            <transition condition="Computop/IsAuthorized" happy="true">
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
                 <source>init</source>
+                <target>authentication complete</target>
+            </transition>
+
+            <transition>
+                <source>init</source>
+                <target>invalid</target>
+                <event>invalidation</event>
+            </transition>
+
+            <transition condition="Computop/IsAuthorized" happy="true">
+                <source>authentication complete</source>
                 <target>authorized</target>
                 <event>authorize</event>
             </transition>
 
             <transition>
-                <source>init</source>
+                <source>authentication complete</source>
                 <target>authorization failed</target>
                 <event>authorize</event>
             </transition>

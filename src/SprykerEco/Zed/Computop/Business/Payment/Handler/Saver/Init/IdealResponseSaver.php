@@ -27,7 +27,6 @@ class IdealResponseSaver extends AbstractResponseSaver
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
-                    $this->triggerEvent($this->getPaymentEntity());
                 }
             );
         }
@@ -80,24 +79,5 @@ class IdealResponseSaver extends AbstractResponseSaver
             $item->setStatus($this->config->getOmsStatusCaptured());
             $item->save();
         }
-    }
-
-    /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity $paymentEntity
-     *
-     * @return void
-     */
-    protected function triggerEvent($paymentEntity)
-    {
-        $orderItems = $this
-                ->queryContainer
-                ->getSpySalesOrderItemsById($paymentEntity->getFkSalesOrder())
-                ->find();
-
-        $this->omsFacade->triggerEvent(
-            $this->config->getOmsCaptureEventName(),
-            $orderItems,
-            []
-        );
     }
 }

@@ -4,366 +4,377 @@
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="ComputopInitPayment">
-        <property name="data" type="string" />
-        <property name="len" type="int" />
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
     </transfer>
 
     <transfer name="ComputopPayNowPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="mac" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="urlBack" type="string" />
-        <property name="response" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="userData" type="string" />
-        <property name="capture" type="string" />
-        <property name="reqId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
-        <property name="expirationTime" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="customField" type="array" />
-        <property name="paymentMethod" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="txType" type="string" />
-        <property name="url" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="finishAuth" type="string" />
-        <property name="shippingZip" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="urlBack" type="string"/>
+        <property name="response" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="expirationTime" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="customField" type="array" singular="customField"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="txType" type="string"/>
+        <property name="url" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="finishAuth" type="string"/>
+        <property name="shippingZip" type="string"/>
         <property name="payNowInitResponse" type="ComputopPayNowInitResponse"/>
+        <property name="billToCustomer" type="ComputopCustomerInfo"/>
+        <property name="shipToCustomer" type="ComputopCustomerInfo"/>
+        <property name="billingAddress" type="ComputopAddress"/>
+        <property name="shippingAddress" type="ComputopAddress"/>
+        <property name="credentialOnFile" type="ComputopCredentialOnFile"/>
+        <property name="browserInfo" type="ComputopBrowserInfo"/>
     </transfer>
 
     <transfer name="ComputopPayNowInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="userData" type="string" />
-        <property name="pcNr" type="string" />
-        <property name="creditCardExpiry" type="string" />
-        <property name="creditCardBrand" type="string" />
-        <property name="maskedPan" type="string" />
-        <property name="cavv" type="string" />
-        <property name="eci" type="string" />
-        <property name="ddd" type="string" />
-        <property name="acsxid" type="string" />
-        <property name="type" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
+        <property name="userData" type="string"/>
+        <property name="pcNr" type="string"/>
+        <property name="creditCardExpiry" type="string"/>
+        <property name="creditCardBrand" type="string"/>
+        <property name="maskedPan" type="string"/>
+        <property name="cavv" type="string"/>
+        <property name="eci" type="string"/>
+        <property name="ddd" type="string"/>
+        <property name="acsxid" type="string"/>
+        <property name="type" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
     </transfer>
 
     <transfer name="ComputopCreditCardPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="mac" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="urlBack" type="string" />
-        <property name="response" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="userData" type="string" />
-        <property name="capture" type="string" />
-        <property name="reqId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
-        <property name="expirationTime" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="customField" type="array" />
-        <property name="paymentMethod" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="txType" type="string" />
-        <property name="url" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="finishAuth" type="string" />
-        <property name="shippingZip" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="urlBack" type="string"/>
+        <property name="response" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="expirationTime" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="customField" type="array" singular="customField"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="txType" type="string"/>
+        <property name="url" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="finishAuth" type="string"/>
+        <property name="shippingZip" type="string"/>
         <property name="creditCardInitResponse" type="ComputopCreditCardInitResponse"/>
+        <property name="billToCustomer" type="ComputopCustomerInfo"/>
+        <property name="shipToCustomer" type="ComputopCustomerInfo"/>
+        <property name="billingAddress" type="ComputopAddress"/>
+        <property name="shippingAddress" type="ComputopAddress"/>
+        <property name="credentialOnFile" type="ComputopCredentialOnFile"/>
     </transfer>
 
     <transfer name="ComputopDirectDebitPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="capture" type="string" />
-        <property name="reqId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="txType" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="response" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="mandateId" type="string" />
-        <property name="mac" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
-        <property name="shippingZip" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="txType" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="response" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="mandateId" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
+        <property name="shippingZip" type="string"/>
         <property name="directDebitInitResponse" type="ComputopDirectDebitInitResponse"/>
     </transfer>
 
     <transfer name="ComputopPayPalPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="capture" type="string" />
-        <property name="txType" type="string" />
-        <property name="payPalMethod" type="string" />
-        <property name="rTF" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="orderDescriptions" type="array" />
-        <property name="taxTotal" type="int" />
-        <property name="itemTotal" type="int" />
-        <property name="shAmount" type="int" />
-        <property name="mac" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="response" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="reqId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="account" type="string" />
-        <property name="brandName" type="string" />
-        <property name="bgColor" type="string" />
-        <property name="bgImage" type="string" />
-        <property name="headerLogo" type="string" />
-        <property name="landingPage" type="string" />
-        <property name="pageStyle" type="string" />
-        <property name="fundingSource" type="string" />
-        <property name="language" type="string" />
-        <property name="firstName" type="string" />
-        <property name="lastName" type="string" />
-        <property name="addressStreet" type="string" />
-        <property name="addressStreet2" type="string" />
-        <property name="addressCity" type="string" />
-        <property name="addressState" type="string" />
-        <property name="addressZip" type="string" />
-        <property name="addressCountryCode" type="string" />
-        <property name="phone" type="string" />
-        <property name="noShipping" type="string" />
-        <property name="allowNote" type="string" />
-        <property name="uI" type="string" />
-        <property name="buyerEmail" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
-        <property name="shippingZip" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="txType" type="string"/>
+        <property name="payPalMethod" type="string"/>
+        <property name="rTF" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="orderDescriptions" type="array" singular="orderDescriptions"/>
+        <property name="taxTotal" type="int"/>
+        <property name="itemTotal" type="int"/>
+        <property name="shAmount" type="int"/>
+        <property name="mac" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="response" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="account" type="string"/>
+        <property name="brandName" type="string"/>
+        <property name="bgColor" type="string"/>
+        <property name="bgImage" type="string"/>
+        <property name="headerLogo" type="string"/>
+        <property name="landingPage" type="string"/>
+        <property name="pageStyle" type="string"/>
+        <property name="fundingSource" type="string"/>
+        <property name="language" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="addressStreet" type="string"/>
+        <property name="addressStreet2" type="string"/>
+        <property name="addressCity" type="string"/>
+        <property name="addressState" type="string"/>
+        <property name="addressZip" type="string"/>
+        <property name="addressCountryCode" type="string"/>
+        <property name="phone" type="string"/>
+        <property name="noShipping" type="string"/>
+        <property name="allowNote" type="string"/>
+        <property name="uI" type="string"/>
+        <property name="buyerEmail" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
+        <property name="shippingZip" type="string"/>
         <property name="payPalInitResponse" type="ComputopPayPalInitResponse"/>
     </transfer>
 
     <transfer name="ComputopSofortPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="capture" type="string" />
-        <property name="reqId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="txType" type="string" />
-        <property name="response" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="mac" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
-        <property name="shippingZip" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="txType" type="string"/>
+        <property name="response" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
+        <property name="shippingZip" type="string"/>
         <property name="sofortInitResponse" type="ComputopSofortInitResponse"/>
     </transfer>
 
     <transfer name="ComputopPaydirektPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="mac" type="string" />
-        <property name="userData" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="response" type="string" />
-        <property name="reqId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="capture" type="string" />
-        <property name="shopApiKey" type="string" />
-        <property name="shippingAmount" type="string" />
-        <property name="shippingFirstName" type="string" />
-        <property name="shippingLastName" type="string" />
-        <property name="shippingZip" type="string" />
-        <property name="shippingCity" type="string" />
-        <property name="shippingCountryCode" type="string" />
-        <property name="shoppingBasketAmount" type="string" />
-        <property name="articleList" type="string" />
-        <property name="email" type="string" />
-        <property name="minAge" type="string" />
-        <property name="shoppingBasketCategory" type="string" />
-        <property name="note" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="response" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="shopApiKey" type="string"/>
+        <property name="shippingAmount" type="string"/>
+        <property name="shippingFirstName" type="string"/>
+        <property name="shippingLastName" type="string"/>
+        <property name="shippingZip" type="string"/>
+        <property name="shippingCity" type="string"/>
+        <property name="shippingCountryCode" type="string"/>
+        <property name="shoppingBasketAmount" type="string"/>
+        <property name="articleList" type="string"/>
+        <property name="email" type="string"/>
+        <property name="minAge" type="string"/>
+        <property name="shoppingBasketCategory" type="string"/>
+        <property name="note" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
         <property name="paydirektInitResponse" type="ComputopPaydirektInitResponse"/>
     </transfer>
 
     <transfer name="ComputopIdealPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="orderDesc" type="string" />
-        <property name="mac" type="string" />
-        <property name="userData" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="response" type="string" />
-        <property name="reqId" type="string" />
-        <property name="bic" type="string" />
-        <property name="issuerId" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="data" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
-        <property name="shippingZip" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="response" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="bic" type="string"/>
+        <property name="issuerId" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
+        <property name="shippingZip" type="string"/>
         <property name="idealInitResponse" type="ComputopIdealInitResponse"/>
     </transfer>
 
     <transfer name="ComputopEasyCreditPayment">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="reqId" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="mac" type="string" />
-        <property name="term" type="string" />
-        <property name="eventToken" type="string" />
-        <property name="urlSuccess" type="string" />
-        <property name="urlFailure" type="string" />
-        <property name="urlNotify" type="string" />
-        <property name="response" type="string" />
-        <property name="userData" type="string" />
-        <property name="clientIp" type="string" />
-        <property name="data" type="string" />
-        <property name="date" type="string" />
-        <property name="len" type="int" />
-        <property name="url" type="string" />
-        <property name="shippingZip" type="string" />
-        <property name="shippingCity" type="string" />
-        <property name="shippingStreetNumber" type="string" />
-        <property name="shippingStreet" type="string" />
-        <property name="shippingCountryCode" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="term" type="string"/>
+        <property name="eventToken" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="response" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="data" type="string"/>
+        <property name="date" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
+        <property name="shippingZip" type="string"/>
+        <property name="shippingCity" type="string"/>
+        <property name="shippingStreetNumber" type="string"/>
+        <property name="shippingStreet" type="string"/>
+        <property name="shippingCountryCode" type="string"/>
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
 
     </transfer>
 
     <transfer name="ComputopEasyCreditStatus">
-        <property name="payId" type="string" />
-        <property name="merchantId" type="string" />
-        <property name="transId" type="string" />
-        <property name="refNr" type="string" />
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="mac" type="string" />
-        <property name="eventToken" type="string" />
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="eventToken" type="string"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
     </transfer>
 
     <transfer name="ComputopCreditCardInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="userData" type="string" />
-        <property name="pcNr" type="string" />
-        <property name="creditCardExpiry" type="string" />
-        <property name="creditCardBrand" type="string" />
-        <property name="maskedPan" type="string" />
-        <property name="cavv" type="string" />
-        <property name="eci" type="string" />
-        <property name="ddd" type="string" />
-        <property name="acsxid" type="string" />
-        <property name="type" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
+        <property name="userData" type="string"/>
+        <property name="pcNr" type="string"/>
+        <property name="creditCardExpiry" type="string"/>
+        <property name="creditCardBrand" type="string"/>
+        <property name="maskedPan" type="string"/>
+        <property name="cavv" type="string"/>
+        <property name="eci" type="string"/>
+        <property name="ddd" type="string"/>
+        <property name="acsxid" type="string"/>
+        <property name="type" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
     </transfer>
 
     <transfer name="ComputopDirectDebitInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="type" type="string" />
-        <property name="bankAccountIban" type="string" />
-        <property name="bankAccountBic" type="string" />
-        <property name="accountOwner" type="string" />
-        <property name="accountBank" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
-        <property name="mandateId" type="string" />
-        <property name="dateOfSignature" type="string" />
-        <property name="mdtSeqType" type="string" />
-        <property name="bankAccountPban" type="string" />
+        <property name="type" type="string"/>
+        <property name="bankAccountIban" type="string"/>
+        <property name="bankAccountBic" type="string"/>
+        <property name="accountOwner" type="string"/>
+        <property name="accountBank" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="mandateId" type="string"/>
+        <property name="dateOfSignature" type="string"/>
+        <property name="mdtSeqType" type="string"/>
+        <property name="bankAccountPban" type="string"/>
     </transfer>
 
     <transfer name="ComputopPayPalInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="userData" type="string" />
-        <property name="name" type="string" />
-        <property name="firstName" type="string" />
-        <property name="lastName" type="string" />
-        <property name="email" type="string" />
-        <property name="addressStreet" type="string" />
-        <property name="addressStreet2" type="string" />
-        <property name="addressCity" type="string" />
-        <property name="addressState" type="string" />
-        <property name="addressZip" type="string" />
-        <property name="addressCountryCode" type="string" />
-        <property name="phone" type="string" />
-        <property name="billingAgreementId" type="string" />
-        <property name="billingName" type="string" />
-        <property name="billingAddressStreet" type="string" />
-        <property name="billingAddressStreet2" type="string" />
-        <property name="billingAddressCity" type="string" />
-        <property name="billingAddressState" type="string" />
-        <property name="billingAddressZip" type="string" />
-        <property name="billingAddressCountryCode" type="string" />
-        <property name="transactionId" type="string" />
-        <property name="infoText" type="string" />
-        <property name="payerId" type="string" />
-        <property name="isFinancing" type="bool" />
-        <property name="financingFeeAmount" type="string" />
-        <property name="financingMonthlyPayment" type="string" />
-        <property name="financingTerm" type="string" />
-        <property name="financingTotalCost" type="string" />
-        <property name="grossAmount" type="string" />
-        <property name="feeAmount" type="string" />
-        <property name="settleAmount" type="string" />
-        <property name="taxAmount" type="string" />
-        <property name="exchangeRate" type="string" />
-        <property name="mcFee" type="string" />
-        <property name="mcGross" type="string" />
+        <property name="refNr" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="name" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="email" type="string"/>
+        <property name="addressStreet" type="string"/>
+        <property name="addressStreet2" type="string"/>
+        <property name="addressCity" type="string"/>
+        <property name="addressState" type="string"/>
+        <property name="addressZip" type="string"/>
+        <property name="addressCountryCode" type="string"/>
+        <property name="phone" type="string"/>
+        <property name="billingAgreementId" type="string"/>
+        <property name="billingName" type="string"/>
+        <property name="billingAddressStreet" type="string"/>
+        <property name="billingAddressStreet2" type="string"/>
+        <property name="billingAddressCity" type="string"/>
+        <property name="billingAddressState" type="string"/>
+        <property name="billingAddressZip" type="string"/>
+        <property name="billingAddressCountryCode" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="infoText" type="string"/>
+        <property name="payerId" type="string"/>
+        <property name="isFinancing" type="bool"/>
+        <property name="financingFeeAmount" type="string"/>
+        <property name="financingMonthlyPayment" type="string"/>
+        <property name="financingTerm" type="string"/>
+        <property name="financingTotalCost" type="string"/>
+        <property name="grossAmount" type="string"/>
+        <property name="feeAmount" type="string"/>
+        <property name="settleAmount" type="string"/>
+        <property name="taxAmount" type="string"/>
+        <property name="exchangeRate" type="string"/>
+        <property name="mcFee" type="string"/>
+        <property name="mcGross" type="string"/>
     </transfer>
 
     <transfer name="ComputopSofortInitResponse">
@@ -372,104 +383,189 @@
         <property name="accountBank" type="string"/>
         <property name="bankAccountBic" type="string"/>
         <property name="bankAccountIban" type="string"/>
-        <property name="firstName" type="string" />
-        <property name="lastName" type="string" />
-        <property name="addressStreet" type="string" />
-        <property name="addressCity" type="string" />
-        <property name="addressZip" type="string" />
-        <property name="birthday" type="string" />
-        <property name="age" type="string" />
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="addressStreet" type="string"/>
+        <property name="addressCity" type="string"/>
+        <property name="addressZip" type="string"/>
+        <property name="birthday" type="string"/>
+        <property name="age" type="string"/>
     </transfer>
 
     <transfer name="ComputopPaydirektInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="userData" type="string" />
-        <property name="customerTransactionId" type="string" />
-        <property name="reference" type="string" />
-        <property name="transactionId" type="string" />
-        <property name="shoppingBasketCategory" type="string" />
-        <property name="shippingFirstName" type="string" />
-        <property name="shippingLastName" type="string" />
-        <property name="shippingCompany" type="string" />
-        <property name="shippingAddressAddition" type="string" />
-        <property name="shippingStreet" type="string" />
-        <property name="shippingStreetNumber" type="string" />
-        <property name="shippingZip" type="string" />
-        <property name="shippingCity" type="string" />
-        <property name="shippingCountryCode" type="string" />
-        <property name="shippingEmail" type="string" />
-        <property name="ageAccepted" type="string" />
+        <property name="refNr" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="customerTransactionId" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="shoppingBasketCategory" type="string"/>
+        <property name="shippingFirstName" type="string"/>
+        <property name="shippingLastName" type="string"/>
+        <property name="shippingCompany" type="string"/>
+        <property name="shippingAddressAddition" type="string"/>
+        <property name="shippingStreet" type="string"/>
+        <property name="shippingStreetNumber" type="string"/>
+        <property name="shippingZip" type="string"/>
+        <property name="shippingCity" type="string"/>
+        <property name="shippingCountryCode" type="string"/>
+        <property name="shippingEmail" type="string"/>
+        <property name="ageAccepted" type="string"/>
     </transfer>
 
     <transfer name="ComputopIdealInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="userData" type="string" />
-        <property name="accountBank" type="string" />
-        <property name="accountOwner" type="string" />
-        <property name="bankAccountIban" type="string" />
-        <property name="bankAccountBic" type="string" />
-        <property name="paymentPurpose" type="string" />
-        <property name="paymentGuarantee" type="string" />
-        <property name="errorText" type="string" />
-        <property name="transactionID" type="string" />
-        <property name="plain" type="string" />
-        <property name="custom" type="string" />
+        <property name="refNr" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="accountBank" type="string"/>
+        <property name="accountOwner" type="string"/>
+        <property name="bankAccountIban" type="string"/>
+        <property name="bankAccountBic" type="string"/>
+        <property name="paymentPurpose" type="string"/>
+        <property name="paymentGuarantee" type="string"/>
+        <property name="errorText" type="string"/>
+        <property name="transactionID" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
     </transfer>
 
     <transfer name="ComputopEasyCreditInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="refNr" type="string" />
-        <property name="userData" type="string" />
-        <property name="codeExt" type="string" />
-        <property name="ErrorText" type="string" />
+        <property name="refNr" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="codeExt" type="string"/>
+        <property name="errorText" type="string"/>
     </transfer>
 
     <transfer name="ComputopCrif">
-        <property name="status" type="string" />
-        <property name="description" type="string" />
-        <property name="code" type="string" />
-        <property name="result" type="string" />
-        <property name="limit" type="int" />
-        <property name="instruction" type="string" />
+        <property name="status" type="string"/>
+        <property name="description" type="string"/>
+        <property name="code" type="string"/>
+        <property name="result" type="string"/>
+        <property name="limit" type="int"/>
+        <property name="instruction" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiEasyCreditStatusResponse">
-        <property name="decisionData" type="array" />
-        <property name="financingData" type="array" />
-        <property name="processData" type="array" />
+        <property name="decisionData" type="array" singular="decisionData"/>
+        <property name="financingData" type="array" singular="financingData"/>
+        <property name="processData" type="array" singular="processData"/>
     </transfer>
 
     <transfer name="Payment">
-        <property name="computopPayNow" type="ComputopPayNowPayment" />
-        <property name="computopCreditCard" type="ComputopCreditCardPayment" />
-        <property name="computopPayPal" type="ComputopPayPalPayment" />
-        <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
-        <property name="computopSofort" type="ComputopSofortPayment" />
-        <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
-        <property name="computopIdeal" type="ComputopIdealPayment" />
-        <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
-        <property name="isComputopPaymentExist" type="bool" />
+        <property name="computopPayNow" type="ComputopPayNowPayment"/>
+        <property name="computopCreditCard" type="ComputopCreditCardPayment"/>
+        <property name="computopPayPal" type="ComputopPayPalPayment"/>
+        <property name="computopDirectDebit" type="ComputopDirectDebitPayment"/>
+        <property name="computopSofort" type="ComputopSofortPayment"/>
+        <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
+        <property name="computopIdeal" type="ComputopIdealPayment"/>
+        <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
+        <property name="isComputopPaymentExist" type="bool"/>
     </transfer>
 
     <transfer name="Order">
-        <property name="computopPayNow" type="ComputopPayNowPayment" />
-        <property name="computopCreditCard" type="ComputopCreditCardPayment" />
-        <property name="computopPayPal" type="ComputopPayPalPayment" />
-        <property name="computopDirectDebit" type="ComputopDirectDebitPayment" />
-        <property name="computopSofort" type="ComputopSofortPayment" />
-        <property name="computopPaydirekt" type="ComputopPaydirektPayment" />
-        <property name="computopIdeal" type="ComputopIdealPayment" />
-        <property name="computopEasyCredit" type="ComputopEasyCreditPayment" />
+        <property name="computopPayNow" type="ComputopPayNowPayment"/>
+        <property name="computopCreditCard" type="ComputopCreditCardPayment"/>
+        <property name="computopPayPal" type="ComputopPayPalPayment"/>
+        <property name="computopDirectDebit" type="ComputopDirectDebitPayment"/>
+        <property name="computopSofort" type="ComputopSofortPayment"/>
+        <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
+        <property name="computopIdeal" type="ComputopIdealPayment"/>
+        <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
     </transfer>
 
     <transfer name="Quote">
-        <property name="computopCrif" type="ComputopCrif" />
+        <property name="computopCrif" type="ComputopCrif"/>
     </transfer>
 
     <transfer name="CheckoutResponse">
-        <property name="computopInitPayment" type="ComputopInitPayment" />
+        <property name="computopInitPayment" type="ComputopInitPayment"/>
+    </transfer>
+
+    <transfer name="ComputopCustomerInfo">
+        <property name="consumer" type="ComputopConsumer"/>
+        <property name="business" type="ComputopBusiness"/>
+        <property name="phone" type="ComputopPhone"/>
+        <property name="mobilePhone" type="ComputopPhone"/>
+        <property name="email" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopConsumer">
+        <property name="salutation" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="birthDate" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopBusiness">
+        <property name="legalName" type="string"/>
+        <property name="dbaName" type="string"/>
+        <property name="registrationNumber" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopPhone">
+        <property name="countryCode" type="string"/>
+        <property name="subscriberNumber" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopAddress">
+        <property name="city" type="string"/>
+        <property name="country" type="ComputopCountry"/>
+        <property name="addressLine1" type="ComputopAddressLine"/>
+        <property name="addressLine2" type="string"/>
+        <property name="addressLine3" type="string"/>
+        <property name="postalCode" type="string"/>
+        <property name="state" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopCountry">
+        <property name="countryA3" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopAddressLine">
+        <property name="street" type="string"/>
+        <property name="streetNumber" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopCredentialOnFile">
+        <property name="type" type="ComputopCredentialOnFileType"/>
+        <property name="initialPayment" type="bool"/>
+    </transfer>
+
+    <transfer name="ComputopCredentialOnFileType">
+        <property name="recurring" type="ComputopRecurring"/>
+        <property name="unscheduled" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopRecurring">
+        <property name="recurringFrequency" type="int"/>
+        <property name="recurringStartDate" type="string"/>
+        <property name="recurringExpiryDate" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopBrowserInfo">
+        <property name="acceptHeaders" type="string"/>
+        <property name="ipAddress" type="string"/>
+        <property name="javaEnabled" type="bool"/>
+        <property name="javaScriptEnabled" type="bool"/>
+        <property name="language" type="string"/>
+        <property name="colorDepth" type="int"/>
+        <property name="screenHeight" type="int"/>
+        <property name="screenWidth" type="int"/>
+        <property name="timeZoneOffset" type="string"/>
+        <property name="userAgent" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopNotification">
+        <property name="payId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="xId" type="string"/>
+        <property name="code" type="string"/>
+        <property name="status" type="string"/>
+        <property name="description" type="string"/>
+        <property name="type" type="string"/>
+        <property name="isSuccess" type="bool"/>
     </transfer>
 
 </transfers>

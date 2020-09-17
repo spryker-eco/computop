@@ -1,0 +1,32 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'easy-credit-summary'
+} %}
+
+{% define data = {
+    additionalData: null
+} %}
+
+{% block body %}
+    {% if data.additionalData is defined and data.additionalData is not null %}
+        <div class="box">
+            <h6>{{ 'computop.easycredit.intallment_plan' | trans }}</h6>
+            <hr/>
+            {% for key, value in data.additionalData.installmentPlanMoney %}
+                <div class="grid">
+                    <span class="col col--sm-8">{{ key }}</span>
+                    <span class="col col--sm-4 text-right">{{ value | money }}</span>
+                </div>
+            {% endfor %}
+            {% for key, value in data.additionalData.installmentPlanTax %}
+                <div class="grid">
+                    <span class="col col--sm-8">{{ key }}</span>
+                    <span class="col col--sm-4 text-right">{{ value }}%</span>
+                </div>
+            {% endfor %}
+            <p>{{ data.additionalData.installmentText }}</p>
+            <a href="{{ data.additionalData.installmentLink }}">{{ 'computop.easycredit.installment_link_text' | trans }}</a>
+        </div>
+    {% endif %}
+{% endblock %}

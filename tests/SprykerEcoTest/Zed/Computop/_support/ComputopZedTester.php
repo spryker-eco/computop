@@ -9,10 +9,15 @@ namespace SprykerEcoTest\Zed\Computop;
 
 use Codeception\Actor;
 use Codeception\Scenario;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use SprykerEco\Shared\Computop\ComputopConfig;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -23,12 +28,26 @@ use SprykerEco\Shared\Computop\ComputopConfig;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade($moduleName = null)
  *
  * @SuppressWarnings(PHPMD)
  */
 class ComputopZedTester extends Actor
 {
     use _generated\ComputopZedTesterActions;
+
+    protected const TEST_STATE_MACHINE_NAME = 'Test01';
+    protected const TRANS_ID_VALUE = 'f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7';
+    protected const PAY_ID_VALUE = 'e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8';
+    protected const X_ID_VALUE = 'b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5';
+    protected const REQ_ID_VALUE = 'a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4';
+    protected const CLIENT_IP = '127.0.0.1';
+    protected const TEST_PAYMENT_METHOD = 'computopCreditCard';
+    protected const ORDER_ITEM_STATUS = 'test';
+    protected const NOTIFICATION_CODE = '000000';
+    protected const NOTIFICATION_STATUS = '000000';
+    protected const NOTIFICATION_DESCRIPTION = 'Authentication completed correctly.';
+    protected const NOTIFICATION_TYPE = 'SSL';
 
     /**
      * @param \Codeception\Scenario $scenario
@@ -80,5 +99,59 @@ class ComputopZedTester extends Actor
             ]
         );
         $this->setConfig('COMPUTOP:CRIF_ENABLED', true);
+
+        $this->setConfig(
+            'ACTIVE_PROCESSES',
+            [
+                static::TEST_STATE_MACHINE_NAME,
+            ]
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function createPaymentComputop(): void
+    {
+        $saveOrderTransfer = $this->haveOrder([], static::TEST_STATE_MACHINE_NAME);
+
+        $spyPaymentComputop = (new SpyPaymentComputop())
+            ->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder())
+            ->setClientIp(static::CLIENT_IP)
+            ->setPaymentMethod(static::TEST_PAYMENT_METHOD)
+            ->setReference($saveOrderTransfer->getOrderReference())
+            ->setTransId(static::TRANS_ID_VALUE)
+            ->setPayId(static::PAY_ID_VALUE)
+            ->setXId(static::X_ID_VALUE)
+            ->setReqId(static::REQ_ID_VALUE);
+        $spyPaymentComputop->save();
+
+        $spyPaymentComputopDetails = (new SpyPaymentComputopDetail())
+            ->setIdPaymentComputop($spyPaymentComputop->getIdPaymentComputop());
+        $spyPaymentComputopDetails->save();
+
+        foreach ($saveOrderTransfer->getOrderItems() as $itemTransfer) {
+            $computopOrderItem = (new SpyPaymentComputopOrderItem())
+                ->setFkPaymentComputop($spyPaymentComputop->getIdPaymentComputop())
+                ->setFkSalesOrderItem($itemTransfer->getIdSalesOrderItem())
+                ->setStatus(static::ORDER_ITEM_STATUS);
+            $computopOrderItem->save();
+        }
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
+     */
+    public function createComputopNotificationTransfer(): ComputopNotificationTransfer
+    {
+        return (new ComputopNotificationTransfer())
+            ->setTransId(static::TRANS_ID_VALUE)
+            ->setPayId(static::PAY_ID_VALUE)
+            ->setXId(static::X_ID_VALUE)
+            ->setCode(static::NOTIFICATION_CODE)
+            ->setStatus(static::NOTIFICATION_STATUS)
+            ->setDescription(static::NOTIFICATION_DESCRIPTION)
+            ->setType(static::NOTIFICATION_TYPE)
+            ->setIsSuccess(true);
     }
 }

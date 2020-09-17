@@ -17,7 +17,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *  - Executes Cancel command and performs Reverse API call.
      *
      * @api

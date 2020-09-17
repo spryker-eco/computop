@@ -27,7 +27,6 @@ class PaydirektResponseSaver extends AbstractResponseSaver
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
-                    $this->triggerEvent($this->getPaymentEntity());
                 }
             );
         }
@@ -70,24 +69,5 @@ class PaydirektResponseSaver extends AbstractResponseSaver
             $item->setStatus($this->config->getOmsStatusAuthorized());
             $item->save();
         }
-    }
-
-    /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity $paymentEntity
-     *
-     * @return void
-     */
-    protected function triggerEvent($paymentEntity)
-    {
-        $orderItems = $this
-            ->queryContainer
-            ->getSpySalesOrderItemsById($paymentEntity->getFkSalesOrder())
-            ->find();
-
-        $this->omsFacade->triggerEvent(
-            $this->config->getOmsAuthorizeEventName(),
-            $orderItems,
-            []
-        );
     }
 }

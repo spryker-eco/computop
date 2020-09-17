@@ -136,4 +136,14 @@ interface ComputopApiConfig
     public const LEGAL_FORM = 'LegalForm';
     public const IP_ADDRESS = 'IPAddr';
     public const ISSUER_ID = 'IssuerID';
+    public const BILL_TO_CUSTOMER = 'billToCustomer';
+    public const SHIP_TO_CUSTOMER = 'shipToCustomer';
+    public const BILLING_ADDRESS = 'billingAddress';
+    public const SHIPPING_ADDRESS = 'shippingAddress';
+    public const CREDENTIAL_ON_FILE = 'credentialOnFile';
+    public const BROWSER_INFO = 'browserInfo';
+    public const MSG_VER = 'MsgVer';
+    public const PSD2_MSG_VERSION = '2.0';
+    public const UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION = 'CIT';
+    public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
 }

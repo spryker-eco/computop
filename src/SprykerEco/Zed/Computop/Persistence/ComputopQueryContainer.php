@@ -15,6 +15,8 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQueryContainerInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idPayment
@@ -29,6 +31,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idOrder
@@ -43,6 +47,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param string $idPay
@@ -57,6 +63,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param string $idTransaction
@@ -71,6 +79,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $orderItemId
@@ -85,6 +95,8 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idSalesOrder

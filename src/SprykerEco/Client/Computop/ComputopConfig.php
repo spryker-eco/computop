@@ -13,6 +13,8 @@ use SprykerEco\Shared\Computop\ComputopConstants;
 class ComputopConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @return bool
      */
     public function isCrifEnabled(): bool

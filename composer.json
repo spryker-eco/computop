@@ -1,25 +1,47 @@
 {
   "name": "spryker-eco/computop",
+  "type": "library",
   "description": "Computop module",
   "license": "MIT",
   "require": {
     "php": ">=7.2",
+    "spryker-eco/computop-api": "^1.0.0",
+    "spryker-shop/checkout-page": "^3.0.0",
     "spryker/application": "^3.0.0",
     "spryker/calculation": "^4.0.0",
     "spryker/checkout-extension": "^1.0.0",
     "spryker/config": "^3.0.0",
-    "spryker/kernel": "^3.0.0",
+    "spryker/country": "^3.2.0",
+    "spryker/kernel": "^3.30.0",
     "spryker/messenger": "^3.0.0",
     "spryker/money": "^2.0.0",
     "spryker/oms": "^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
     "spryker/propel-orm": "^1.6.0",
     "spryker/quote": "^1.0.0 || ^2.0.0",
+    "spryker/refund": "^5.0.0",
+    "spryker/router": "^1.6.0",
     "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
-    "spryker/silex": "^2.0.0",
     "spryker/step-engine": "^3.1.0",
     "spryker/symfony": "^3.0.0",
-    "spryker/zed-request": "^3.0.0",
-    "spryker-eco/computop-api": "^1.0.0"
+    "spryker/util-encoding": "^2.0.0",
+    "spryker/zed-request": "^3.0.0"
+  },
+  "require-dev": {
+    "spryker-shop/shop-application": "*",
+    "spryker/checkout": "*",
+    "spryker/code-sniffer": "*",
+    "spryker/customer": "*",
+    "spryker/guzzle": "*",
+    "spryker/payment": "*",
+    "spryker/propel": "*",
+    "spryker/silex": "*",
+    "spryker/testify": "*"
+  },
+  "suggest": {
+    "spryker-shop/shop-application": "Abstract Yves controller provider is used.",
+    "spryker/checkout": "CheckoutPostSaveHookInterface is used.",
+    "spryker/payment": "If you want to use payment method filtering.",
+    "spryker/silex": "Use this module when using plugins that need Silex dependencies."
   },
   "autoload": {
     "psr-4": {
@@ -33,29 +55,18 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "process-timeout": 600
+  "scripts": {
+    "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/",
+    "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
   },
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     }
   },
-  "require-dev": {
-    "spryker/checkout": "*",
-    "spryker/country": "*",
-    "spryker/customer": "*",
-    "spryker/guzzle": "*",
-    "spryker/payment": "*",
-    "spryker/propel": "*",
-    "spryker/testify": "*",
-    "spryker-shop/shop-application": "*"
-  },
-  "suggest": {
-    "spryker/checkout": "CheckoutPostSaveHookInterface is used.",
-    "spryker/payment": "If you want to use payment method filtering.",
-    "spryker-shop/shop-application": "Abstract Yves controller provider is used."
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "process-timeout": 600
   }
 }

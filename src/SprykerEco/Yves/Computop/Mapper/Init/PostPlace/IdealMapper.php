@@ -9,8 +9,9 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class IdealMapper extends AbstractMapper
 {
@@ -25,9 +26,8 @@ class IdealMapper extends AbstractMapper
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::SOFORT_SUCCESS))
+            $this->router->generate(ComputopRouteProviderPlugin::IDEAL_SUCCESS, [], Router::ABSOLUTE_URL)
         );
-        //ToDo:update mapper
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );

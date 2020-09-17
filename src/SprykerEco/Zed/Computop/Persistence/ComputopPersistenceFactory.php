@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopNotificationQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
@@ -15,6 +16,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
  */
 class ComputopPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -40,5 +42,13 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     public function createSpySalesOrderItemQuery()
     {
         return SpySalesOrderItemQuery::create();
+    }
+
+    /**
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopNotificationQuery
+     */
+    public function createPaymentComputopNotificationQuery(): SpyPaymentComputopNotificationQuery
+    {
+        return SpyPaymentComputopNotificationQuery::create();
     }
 }

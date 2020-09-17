@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -17,11 +18,12 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory getFactory()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
  */
 class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -38,7 +40,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -57,7 +59,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -74,8 +76,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -92,8 +93,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -110,8 +110,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -128,8 +127,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -146,7 +144,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -162,7 +160,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -178,7 +176,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -194,7 +192,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -210,7 +208,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -226,7 +224,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -242,7 +240,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -258,7 +256,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -274,7 +272,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -290,8 +288,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -308,7 +305,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -324,7 +321,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -340,7 +337,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -354,5 +351,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
         return $this->getFactory()
             ->createPaymentMethodFilter()
             ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
+     */
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer {
+        return $this->getFactory()
+            ->createNotificationProcessor()
+            ->processNotification($computopNotificationTransfer);
     }
 }

@@ -8,6 +8,7 @@
 namespace SprykerEco\Client\Computop;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
@@ -17,7 +18,7 @@ use Spryker\Client\Kernel\AbstractClient;
 class ComputopClient extends AbstractClient implements ComputopClientInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -31,7 +32,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -45,7 +46,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -59,7 +60,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -73,7 +74,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -87,7 +88,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -101,7 +102,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -115,7 +116,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -129,7 +130,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -143,7 +144,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -157,7 +158,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -171,7 +172,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -182,5 +183,20 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     public function performCrifApiCall(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()->createZedStub()->performCrifApiCall($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
+     */
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer {
+        return $this->getFactory()->createZedStub()->processNotification($computopNotificationTransfer);
     }
 }

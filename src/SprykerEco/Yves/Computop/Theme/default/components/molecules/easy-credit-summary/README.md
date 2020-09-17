@@ -1,0 +1,1 @@
+Adds EasyCredit fee information.

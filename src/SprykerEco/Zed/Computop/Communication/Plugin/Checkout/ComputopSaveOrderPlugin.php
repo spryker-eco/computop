@@ -21,7 +21,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutDoSaveOrderInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *  - Saves order payment method data according to quote and checkout response transfer data.
      *
      * @api

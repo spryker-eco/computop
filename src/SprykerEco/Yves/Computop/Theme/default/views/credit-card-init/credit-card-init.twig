@@ -1,0 +1,30 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    formAction: _view.formAction,
+    encryptedData: _view.encryptedData,
+    encryptedDataLength: _view.encryptedDataLength,
+    merchantId: _view.merchantId,
+    urlBack: _view.urlBack,
+} %}
+
+{% block breadcrumb %}{% endblock %}
+
+{% block content %}
+    <div class="form box">
+        <b>Please wait, you will be redirected soon...</b>
+        <form name="creditCardInitForm" method="post" action="{{ data.formAction }}">
+            <input type="hidden" name="Data" value="{{ data.encryptedData }}">
+            <input type="hidden" name="Len" value="{{ data.encryptedDataLength }}">
+            <input type="hidden" name="MerchantID" value="{{ data.merchantId }}">
+            <input type="hidden" name="URLBack" value="{{ data.urlBack }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('creditCardInitForm')}}">
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.forms['creditCardInitForm'].submit();
+        });
+    </script>
+{% endblock %}

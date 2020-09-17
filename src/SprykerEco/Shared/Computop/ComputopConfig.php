@@ -7,9 +7,9 @@
 
 namespace SprykerEco\Shared\Computop;
 
-use Spryker\Shared\Kernel\AbstractBundleConfig;
+use Spryker\Shared\Kernel\AbstractSharedConfig;
 
-class ComputopConfig extends AbstractBundleConfig
+class ComputopConfig extends AbstractSharedConfig
 {
     public const PROVIDER_NAME = 'Computop';
     public const PAYMENT_METHOD_PAY_NOW = 'computopPayNow';

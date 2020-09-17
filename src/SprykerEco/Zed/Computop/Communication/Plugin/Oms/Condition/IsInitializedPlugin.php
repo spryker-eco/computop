@@ -20,7 +20,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
 class IsInitializedPlugin extends AbstractPlugin implements ConditionInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *  - Checks if order item has initialized status.
      *
      * @api

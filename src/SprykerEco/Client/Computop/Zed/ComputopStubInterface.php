@@ -8,6 +8,7 @@
 namespace SprykerEco\Client\Computop\Zed;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopStubInterface
@@ -95,4 +96,13 @@ interface ComputopStubInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
+     */
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer;
 }

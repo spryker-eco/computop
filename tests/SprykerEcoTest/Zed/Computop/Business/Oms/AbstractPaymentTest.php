@@ -20,6 +20,7 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig as SprykerComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
@@ -44,7 +45,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     /**
      * @return \PHPUnit\Framework\MockObject\Builder\InvocationMocker|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
-    abstract protected function createComputopApiFacade();
+    abstract protected function createComputopApiFacade(): ComputopToComputopApiFacadeBridge;
 
     /**
      * Set up DB data

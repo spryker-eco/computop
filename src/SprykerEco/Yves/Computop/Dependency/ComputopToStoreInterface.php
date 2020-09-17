@@ -13,4 +13,9 @@ interface ComputopToStoreInterface
      * @return string
      */
     public function getCurrencyIsoCode();
+
+    /**
+     * @return string
+     */
+    public function getCurrentLanguage();
 }

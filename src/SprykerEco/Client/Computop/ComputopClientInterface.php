@@ -8,6 +8,7 @@
 namespace SprykerEco\Client\Computop;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 /**
@@ -76,7 +77,7 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -157,4 +158,20 @@ interface ComputopClientInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Performs Zed call.
+     * - Saves push notification entity into DB.
+     * - Updates related computop order items with payment confirmation status.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
+     */
+    public function processNotification(
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): ComputopNotificationTransfer;
 }

@@ -13,7 +13,7 @@ use SprykerTest\Shared\Testify\Helper\Environment;
 class EnvironmentModule extends Environment
 {
     /**
-     * @inheritdoc
+     * {@inheritDoc}
      *
      * @param \Codeception\Lib\ModuleContainer $moduleContainer
      * @param array|null $config

@@ -9,11 +9,13 @@ namespace SprykerEco\Zed\Computop\Communication;
 
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use SprykerEco\Zed\Computop\ComputopDependencyProvider;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToRefundFacadeInterface;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
  */
 class ComputopCommunicationFactory extends AbstractCommunicationFactory
 {
@@ -35,5 +37,13 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(
             ComputopDependencyProvider::FACADE_CALCULATION
         );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToRefundFacadeInterface
+     */
+    public function getRefundFacade(): ComputopToRefundFacadeInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_REFUND);
     }
 }

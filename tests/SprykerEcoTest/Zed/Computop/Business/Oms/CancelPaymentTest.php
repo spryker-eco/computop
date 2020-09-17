@@ -80,7 +80,7 @@ class CancelPaymentTest extends AbstractPaymentTest
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge
      */
-    protected function createComputopApiFacade()
+    protected function createComputopApiFacade(): ComputopToComputopApiFacadeBridge
     {
         $stub = $this
             ->createPartialMock(

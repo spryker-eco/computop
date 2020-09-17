@@ -9,9 +9,10 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
-use SprykerEco\Yves\Computop\Plugin\Provider\ComputopControllerProvider;
+use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class EasyCreditMapper extends AbstractMapper
 {
@@ -27,10 +28,6 @@ class EasyCreditMapper extends AbstractMapper
 
         $addressData = $this->getAdditionalAddressData($quoteTransfer);
         $computopPaymentTransfer = $this->mapAddressDataToEasyCreditPayment($addressData, $computopPaymentTransfer);
-
-        $computopPaymentTransfer->setUrlNotify(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::NOTIFY_PATH_NAME))
-        );
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer)
@@ -69,7 +66,7 @@ class EasyCreditMapper extends AbstractMapper
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->getAbsoluteUrl($this->application->path(ComputopControllerProvider::EASY_CREDIT_SUCCESS))
+            $this->router->generate(ComputopRouteProviderPlugin::EASY_CREDIT_SUCCESS, [], Router::ABSOLUTE_URL)
         );
 
         return $computopPaymentTransfer;
@@ -86,8 +83,8 @@ class EasyCreditMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
         $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_INIT;
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
@@ -111,7 +108,6 @@ class EasyCreditMapper extends AbstractMapper
         array $addressData,
         ComputopEasyCreditPaymentTransfer $computopEasyCreditPaymentTransfer
     ): ComputopEasyCreditPaymentTransfer {
-
         $computopEasyCreditPaymentTransfer->setShippingCity($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY]);
         $computopEasyCreditPaymentTransfer->setShippingStreet($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET]);
         $computopEasyCreditPaymentTransfer->setShippingStreetNumber($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER]);
