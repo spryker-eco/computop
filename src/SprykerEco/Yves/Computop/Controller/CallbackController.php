@@ -213,9 +213,13 @@ class CallbackController extends AbstractController
             ->fromArray($responseHeaderTransfer->toArray(), true)
             ->setType($decryptedArray[ComputopApiConfig::NOTIFICATION_PARAMETER_PAYMENT_TYPE] ?? '');
 
-        $this->getClient()->processNotification($computopNotificationTransfer);
+        $computopNotificationTransfer = $this->getClient()->processNotification($computopNotificationTransfer);
 
-        return new Response();
+        if ($computopNotificationTransfer->getIsProcessed()) {
+            return new Response();
+        }
+
+        return new Response('', Response::HTTP_NOT_ACCEPTABLE);
     }
 
     /**

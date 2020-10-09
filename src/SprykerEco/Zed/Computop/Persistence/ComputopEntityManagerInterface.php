@@ -21,9 +21,9 @@ interface ComputopEntityManagerInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return void
+     * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
         ComputopNotificationTransfer $computopNotificationTransfer
-    ): void;
+    ): bool;
 }
