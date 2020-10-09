@@ -37,7 +37,7 @@ class NotificationProcessor implements NotificationProcessorInterface
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer {
         return $this->getTransactionHandler()->handleTransaction(
-            function () use ($computopNotificationTransfer): void {
+            function () use ($computopNotificationTransfer): ComputopNotificationTransfer {
                 return $this->executeSaveComputopNotificationTransaction($computopNotificationTransfer);
             }
         );
