@@ -566,6 +566,7 @@
         <property name="description" type="string"/>
         <property name="type" type="string"/>
         <property name="isSuccess" type="bool"/>
+        <property name="isProcessed" type="bool"/>
     </transfer>
 
 </transfers>

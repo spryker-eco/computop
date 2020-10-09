@@ -38,11 +38,11 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return void
+     * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
         ComputopNotificationTransfer $computopNotificationTransfer
-    ): void {
+    ): bool {
         $paymentComputopOrderItemEntities = $this->getFactory()
             ->createPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
@@ -51,9 +51,15 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->endUse()
             ->find();
 
+        if (!$paymentComputopOrderItemEntities->count()) {
+            return false;
+        }
+
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
             $paymentComputopOrderItemEntity->setIsPaymentConfirmed($computopNotificationTransfer->getIsSuccess());
             $paymentComputopOrderItemEntity->save();
         }
+
+        return true;
     }
 }
