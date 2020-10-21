@@ -89,7 +89,7 @@ class PayPalMapper extends AbstractMapper
         QuoteTransfer $quoteTransfer,
         ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer
     ): ComputopPayPalPaymentTransfer {
-        $addressTransfer = $quoteTransfer->getBillingSameAsShipping() ? $quoteTransfer->getBillingAddress() : $quoteTransfer->getShippingAddress();;
+        $addressTransfer = $quoteTransfer->getBillingSameAsShipping() ? $quoteTransfer->getBillingAddress() : $quoteTransfer->getShippingAddress();
 
         if (!$addressTransfer) {
             return $computopPayPalPaymentTransfer;
