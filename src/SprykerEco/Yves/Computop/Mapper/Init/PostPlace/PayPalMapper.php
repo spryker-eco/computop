@@ -74,7 +74,39 @@ class PayPalMapper extends AbstractMapper
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
+        $this->mapAddressFromQuoteToComputopPayPalPayment($quoteTransfer, $computopPaymentTransfer);
+
         return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     */
+    protected function mapAddressFromQuoteToComputopPayPalPayment(
+        QuoteTransfer $quoteTransfer,
+        ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer
+    ): ComputopPayPalPaymentTransfer {
+        $addressTransfer = $quoteTransfer->getBillingSameAsShipping() ? $quoteTransfer->getBillingAddress() : $quoteTransfer->getShippingAddress();
+
+        if (!$addressTransfer) {
+            return $computopPayPalPaymentTransfer;
+        }
+
+        $computopPayPalPaymentTransfer
+            ->setFirstName($addressTransfer->getFirstName())
+            ->setLastName($addressTransfer->getLastName())
+            ->setAddressStreet($addressTransfer->getAddress1())
+            ->setAddressStreet2($addressTransfer->getAddress2())
+            ->setAddressCity($addressTransfer->getCity())
+            ->setAddressState($addressTransfer->getState())
+            ->setAddressZip($addressTransfer->getZipCode())
+            ->setAddressCountryCode($addressTransfer->getIso2Code())
+            ->setPhone($addressTransfer->getPhone());
+
+        return $computopPayPalPaymentTransfer;
     }
 
     /**
@@ -96,9 +128,31 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayPalPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::NO_SHIPPING] = ComputopSharedConfig::PAY_PAL_NO_SHIPPING;
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayPalPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayPalPaymentTransfer->getShippingZip();
+
+        if (!$computopPayPalPaymentTransfer->getAddressStreet()) {
+            $dataSubArray[ComputopApiConfig::NO_SHIPPING] = ComputopSharedConfig::PAY_PAL_NO_SHIPPING;
+
+            return $dataSubArray;
+        }
+
+        $dataSubArray[ComputopApiConfig::FIRST_NAME] = $computopPayPalPaymentTransfer->getFirstName();
+        $dataSubArray[ComputopApiConfig::LAST_NAME] = $computopPayPalPaymentTransfer->getLastName();
+        $dataSubArray[ComputopApiConfig::ADDRESS_STREET] = $computopPayPalPaymentTransfer->getAddressStreet();
+        $dataSubArray[ComputopApiConfig::ADDRESS_STREET2] = $computopPayPalPaymentTransfer->getAddressStreet2();
+        $dataSubArray[ComputopApiConfig::ADDRESS_CITY] = $computopPayPalPaymentTransfer->getAddressCity();
+
+        if ($computopPayPalPaymentTransfer->getAddressState()) {
+            $dataSubArray[ComputopApiConfig::ADDRESS_STATE] = $computopPayPalPaymentTransfer->getAddressState();
+        }
+
+        $dataSubArray[ComputopApiConfig::ADDRESS_ZIP] = $computopPayPalPaymentTransfer->getAddressZip();
+        $dataSubArray[ComputopApiConfig::ADDRESS_COUNTRY_CODE] = $computopPayPalPaymentTransfer->getAddressCountryCode();
+
+        if ($computopPayPalPaymentTransfer->getPhone()) {
+            $dataSubArray[ComputopApiConfig::PHONE] = $computopPayPalPaymentTransfer->getPhone();
+        }
 
         return $dataSubArray;
     }
