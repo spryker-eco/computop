@@ -38,6 +38,14 @@ interface ComputopConstants
 
     /**
      * Specification:
+     *  - Init API call endpoint for PayU CEE Single payment method.
+     *
+     * @api
+     */
+    public const PAYU_CEE_SINGLE_INIT_ACTION = 'COMPUTOP:PAYU_CEE_SINGLE_INIT_ACTION';
+
+    /**
+     * Specification:
      *  - Init API call endpoint for PayPal payment method.
      *
      * @api

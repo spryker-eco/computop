@@ -23,6 +23,7 @@ $config[ComputopConstants::SOFORT_INIT_ACTION] = 'https://www.computop-paygate.c
 $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
+$config[ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION] = 'https://www.computop-paygate.com/payu.aspx';
 
 $config[ComputopConstants::IDEAL_ISSUER_ID] = 'IDEAL_ISSUER_ID'; //Set up real data
 

@@ -163,6 +163,16 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @api
      *
+     * @return string
+     */
+    public function getPayUCEESingleInitActionUrl(): string
+    {
+        return $this->get(ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION);
+    }
+
+    /**
+     * @api
+     *
      * @return bool
      */
     public function getCreditCardTemplateEnabled(): bool

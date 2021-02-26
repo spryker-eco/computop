@@ -294,6 +294,62 @@
 
     </transfer>
 
+    <transfer name="ComputopPayUCEESinglePayment">
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="response" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="orderDesc2" type="string"/>
+        <property name="articleList" type="string"/>
+        <property name="payType" type="string"/>
+        <property name="authCode" type="string"/>
+        <property name="timeout" type="string"/>
+        <property name="language" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="email" type="string"/>
+        <property name="phone" type="string"/>
+        <property name="socialSecurityNumber" type="string"/>
+
+        <property name="sdName" type="string"/>
+        <property name="sdStreet" type="string"/>
+        <property name="sdAddressAddition" type="string"/>
+        <property name="sdZIP" type="string"/>
+        <property name="sdCity" type="string"/>
+        <property name="sdCountryCode" type="string"/>
+        <property name="sdState" type="string"/>
+        <property name="sdEmail" type="string"/>
+        <property name="sdPhone" type="string"/>
+        <property name="sdPOBox" type="string"/>
+        <property name="shippingData" type="string"/>
+
+        <property name="bdName" type="string"/>
+        <property name="bdStreet" type="string"/>
+        <property name="bdAddressAddition" type="string"/>
+        <property name="bdZIP" type="string"/>
+        <property name="bdCity" type="string"/>
+        <property name="bdCountryCode" type="string"/>
+        <property name="bdState" type="string"/>
+        <property name="bdEmail" type="string"/>
+        <property name="bdPhone" type="string"/>
+        <property name="bdPOBox" type="string"/>
+        <property name="taxNumber" type="string"/>
+        <property name="invoiceFlag" type="string"/>
+    </transfer>
+
     <transfer name="ComputopEasyCreditStatus">
         <property name="payId" type="string"/>
         <property name="merchantId" type="string"/>
@@ -437,6 +493,14 @@
         <property name="errorText" type="string"/>
     </transfer>
 
+    <transfer name="ComputopPayUCEESingleInitResponse">
+        <property name="header" type="ComputopResponseHeader"/>
+        <property name="refNr" type="string" />
+        <property name="userData" type="string" />
+        <property name="codeExt" type="string" />
+        <property name="ErrorText" type="string" />
+    </transfer>
+
     <transfer name="ComputopCrif">
         <property name="status" type="string"/>
         <property name="description" type="string"/>
@@ -461,6 +525,7 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
+        <property name="computopPayUCEESingle" type="ComputopPayUCEESinglePayment"/>
         <property name="isComputopPaymentExist" type="bool"/>
     </transfer>
 
@@ -473,6 +538,7 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
+        <property name="computopPayUCEESingle" type="ComputopPayUCEESinglePayment"/>
     </transfer>
 
     <transfer name="Quote">
