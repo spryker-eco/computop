@@ -80,7 +80,7 @@ $config[OmsConstants::PROCESS_LOCATION] = [
 $config[OmsConstants::ACTIVE_PROCESSES] = [
     //...
     //Add needed payment types
-    'ComputopPayNowd01',
+    'ComputopPayNow01',
     'ComputopCreditCard01',
     'ComputopDirectDebit01',
     'ComputopPaydirekt01',

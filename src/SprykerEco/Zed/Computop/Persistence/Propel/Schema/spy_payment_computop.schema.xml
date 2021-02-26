@@ -150,7 +150,7 @@
         <column name="status" required="false" type="VARCHAR"/>
         <column name="description" required="false" type="VARCHAR"/>
         <column name="code" required="false" type="VARCHAR"/>
-        <column name="result" required="true" type="VARCHAR"/>
+        <column name="result" required="false" type="VARCHAR"/>
         <column name="limit" required="false" type="INTEGER"/>
         <column name="instruction" required="false" type="VARCHAR"/>
 
