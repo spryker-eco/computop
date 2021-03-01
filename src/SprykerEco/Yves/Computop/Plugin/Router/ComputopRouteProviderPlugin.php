@@ -20,6 +20,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     public const PAY_NOW_SUCCESS = 'computop-paynow-success';
     public const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
     public const SOFORT_SUCCESS = 'computop-sofort-success';
+    public const PAYU_CEE_SINGLE_SUCCESS = 'computop-payu-cee-single-success';
 
     public const FAILURE_PATH_NAME = 'computop-failure';
     public const NOTIFY_PATH_NAME = 'computop-notify';

@@ -23,6 +23,7 @@ use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\EasyCreditFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\IdealFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PaydirektFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayNowFormDataProvider;
@@ -30,6 +31,7 @@ use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Computop\Form\EasyCreditSubForm;
+use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
 use SprykerEco\Yves\Computop\Form\IdealSubForm;
 use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayNowSubForm;
@@ -47,6 +49,7 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayUCeeSingleMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayNowMapper;
@@ -141,6 +144,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createPayUCeeSingleForm()
+    {
+        return new PayUCeeSingleSubForm();
+    }
+
+    /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createCreditCardFormDataProvider()
@@ -202,6 +213,14 @@ class ComputopFactory extends AbstractFactory
     public function createEasyCreditFormDataProvider()
     {
         return new EasyCreditFormDataProvider($this->getQuoteClient(), $this->createOrderEasyCreditMapper());
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    public function createPayUCeeSingleFormDataProvider()
+    {
+        return new PayuCeeSingleFormDataProvider($this->getQuoteClient(), $this->createOrderPayUCeeSingleMapper());
     }
 
     /**
@@ -502,6 +521,22 @@ class ComputopFactory extends AbstractFactory
     protected function createOrderEasyCreditMapper()
     {
         return new EasyCreditMapper(
+            $this->getComputopApiService(),
+            $this->getRouter(),
+            $this->getStore(),
+            $this->getConfig(),
+            $this->getRequestStack()->getCurrentRequest(),
+            $this->getUtilEncodingService(),
+            $this->getCountryClient()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    private function createOrderPayUCeeSingleMapper()
+    {
+        return new PayUCeeSingleMapper(
             $this->getComputopApiService(),
             $this->getRouter(),
             $this->getStore(),

@@ -294,7 +294,7 @@
 
     </transfer>
 
-    <transfer name="ComputopPayUCEESinglePayment">
+    <transfer name="ComputopPayuCeeSinglePayment">
         <property name="merchantId" type="string"/>
         <property name="transId" type="string"/>
         <property name="refNr" type="string"/>
@@ -317,6 +317,8 @@
         <property name="language" type="string"/>
         <property name="plain" type="string"/>
         <property name="custom" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="shippingZip" type="string"/>
 
         <property name="firstName" type="string"/>
         <property name="lastName" type="string"/>
@@ -493,7 +495,7 @@
         <property name="errorText" type="string"/>
     </transfer>
 
-    <transfer name="ComputopPayUCEESingleInitResponse">
+    <transfer name="ComputopPayuCeeSingleInitResponse">
         <property name="header" type="ComputopResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
@@ -525,7 +527,7 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
-        <property name="computopPayUCEESingle" type="ComputopPayUCEESinglePayment"/>
+        <property name="computopPayuCeeSingle" type="ComputopPayuCeeSinglePayment"/>
         <property name="isComputopPaymentExist" type="bool"/>
     </transfer>
 
@@ -538,7 +540,7 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
-        <property name="computopPayUCEESingle" type="ComputopPayUCEESinglePayment"/>
+        <property name="computopPayuCeeSingle" type="ComputopPayuCeeSinglePayment"/>
     </transfer>
 
     <transfer name="Quote">
