@@ -47,6 +47,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
         $routeCollection = $this->addSofortSuccessRoute($routeCollection);
         $routeCollection = $this->addFailureRoute($routeCollection);
         $routeCollection = $this->addNotifyRoute($routeCollection);
+        $routeCollection = $this->addPayuCeeSingleSuccessRoute($routeCollection);
 
         return $routeCollection;
     }
@@ -191,6 +192,24 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             'successSofortAction'
         );
         $routeCollection->add(static::SOFORT_SUCCESS, $route);
+
+        return $routeCollection;
+    }
+
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    protected function addPayuCeeSingleSuccessRoute(RouteCollection $routeCollection): RouteCollection
+    {
+        $route = $this->buildRoute(
+            '/computop/payu-cee-single-success',
+            'Computop',
+            'Callback',
+            'successPauCeeSingleAction'
+        );
+        $routeCollection->add(static::PAYU_CEE_SINGLE_SUCCESS, $route);
 
         return $routeCollection;
     }
