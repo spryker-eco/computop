@@ -15,6 +15,7 @@ use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\IdealMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayNowMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayPalMapper;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayuCeeSingleMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\SofortMapper;
 
 /**
@@ -85,5 +86,13 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     public function createInitEasyCreditMapper()
     {
         return new EasyCreditMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createInitPayuCeeSingleMapper()
+    {
+        return new PayuCeeSingleMapper();
     }
 }

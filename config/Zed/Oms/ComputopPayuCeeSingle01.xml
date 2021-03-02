@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns="spryker:oms-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+
+    <process name="ComputopPayuCeeSingle01" main="true">
+        <states>
+            <state name="new" reserved="true"/>
+            <state name="invalid" reserved="false"/>
+            <state name="money transfer confirmed" reserved="true"/>
+            <state name="shipped" reserved="true"/>
+            <state name="refunded" reserved="false"/>
+            <state name="refund failed" reserved="false"/>
+            <state name="closed" reserved="false"/>
+        </states>
+
+        <events>
+            <event name="invalidation" timeout="20min"/>
+            <event name="ship" manual="true"/>
+            <event name="refund" manual="true" command="Computop/Refund"/>
+            <event name="close" manual="true"/>
+        </events>
+
+        <transitions>
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
+                <source>new</source>
+                <target>money transfer confirmed</target>
+            </transition>
+
+            <transition>
+                <source>new</source>
+                <target>invalid</target>
+                <event>invalidation</event>
+            </transition>
+
+            <transition condition="Computop/IsRefunded">
+                <source>money transfer confirmed</source>
+                <target>refunded</target>
+                <event>refund</event>
+            </transition>
+
+            <transition>
+                <source>money transfer confirmed</source>
+                <target>refund failed</target>
+                <event>refund</event>
+            </transition>
+
+            <transition happy="true">
+                <source>money transfer confirmed</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>close</event>
+            </transition>
+        </transitions>
+    </process>
+
+</statemachine>

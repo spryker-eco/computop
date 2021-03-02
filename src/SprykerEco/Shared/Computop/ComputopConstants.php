@@ -46,6 +46,14 @@ interface ComputopConstants
 
     /**
      * Specification:
+     *  - Redirect endpoint for PayU CEE Single payment method.
+     *
+     * @api
+     */
+    public const PAYU_CEE_SINGLE_REDIRECT_ACTION = 'COMPUTOP:PAYU_CEE_SINGLE_REDIRECT_ACTION';
+
+    /**
+     * Specification:
      *  - Init API call endpoint for PayPal payment method.
      *
      * @api

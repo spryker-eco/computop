@@ -350,6 +350,9 @@
         <property name="bdPOBox" type="string"/>
         <property name="taxNumber" type="string"/>
         <property name="invoiceFlag" type="string"/>
+
+        <property name="payuCeeSingleInitResponse" type="ComputopPayuCeeSingleInitResponse"/>
+        <property name="payuCeeSingleStatusResponse" type="ComputopApiPayuCeeSingleStatusResponse"/>
     </transfer>
 
     <transfer name="ComputopEasyCreditStatus">
@@ -496,7 +499,7 @@
     </transfer>
 
     <transfer name="ComputopPayuCeeSingleInitResponse">
-        <property name="header" type="ComputopResponseHeader"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="refNr" type="string" />
         <property name="userData" type="string" />
         <property name="codeExt" type="string" />

@@ -133,6 +133,16 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
+    public function getPayuCeeSingleInitAction()
+    {
+        return $this->get(ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION);
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
     public function getSofortInitAction()
     {
         return $this->get(ComputopConstants::SOFORT_INIT_ACTION);

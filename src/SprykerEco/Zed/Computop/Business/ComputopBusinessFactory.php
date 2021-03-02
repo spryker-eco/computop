@@ -19,6 +19,7 @@ use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPaydirektMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPayNowMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPayPalMapper;
+use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitPayuCeeSingleMapper;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitSofortMapper;
 use SprykerEco\Zed\Computop\Business\Logger\ComputopResponseLogger as ComputopLogger;
 use SprykerEco\Zed\Computop\Business\Logger\LoggerInterface;
@@ -102,6 +103,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $orderSaver->registerMapper($this->createOrderFactory()->createInitPaydirektMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitIdealMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitEasyCreditMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createInitPayuCeeSingleMapper());
 
         return $orderSaver;
     }
@@ -120,6 +122,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSavePayPal());
         $postSaveHook->registerMapper($this->createPostSaveDirectDebit());
         $postSaveHook->registerMapper($this->createPostSaveEasyCredit());
+        $postSaveHook->registerMapper($this->createPostSavePayuCeeSingle());
 
         return $postSaveHook;
     }
@@ -525,6 +528,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPostSaveEasyCredit(): InitMapperInterface
     {
         return new InitEasyCreditMapper($this->getConfig(), $this->getComputopApiService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    public function createPostSavePayuCeeSingle(): InitMapperInterface
+    {
+        return new InitPayuCeeSingleMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**

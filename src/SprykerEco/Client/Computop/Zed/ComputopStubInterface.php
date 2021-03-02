@@ -39,6 +39,13 @@ interface ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 
     /**

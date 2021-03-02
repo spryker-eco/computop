@@ -16,6 +16,7 @@ use SprykerEco\Yves\Computop\Converter\InitIdealConverter;
 use SprykerEco\Yves\Computop\Converter\InitPaydirektConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayNowConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
+use SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
@@ -45,6 +46,7 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayNowPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayuCeeSinglePaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
@@ -294,6 +296,17 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
+    public function createPayuCeeSinglePaymentHandler()
+    {
+        return new ComputopPayuCeeSinglePaymentHandler(
+            $this->createInitPayuCeeSingleConverter(),
+            $this->getComputopClient()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
+     */
     public function createPaydirektPaymentHandler()
     {
         return new ComputopPaydirektPaymentHandler($this->createInitPaydirektConverter(), $this->getComputopClient());
@@ -353,6 +366,14 @@ class ComputopFactory extends AbstractFactory
     protected function createInitEasyCreditConverter()
     {
         return new InitEasyCreditConverter($this->getComputopApiService(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    protected function createInitPayuCeeSingleConverter()
+    {
+        return new InitPayuCeeSingleConverter($this->getComputopApiService(), $this->getConfig());
     }
 
     /**

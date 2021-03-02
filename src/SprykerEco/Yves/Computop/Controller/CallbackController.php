@@ -112,6 +112,19 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successPayuCeeSingleAction(Request $request)
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createPayuCeeSinglePaymentHandler(),
+            $request->query->all()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function successPaydirektAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
