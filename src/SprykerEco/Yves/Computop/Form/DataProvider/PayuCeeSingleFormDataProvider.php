@@ -2,7 +2,6 @@
 
 namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
-use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -33,7 +32,7 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
-            /** @var ComputopPayuCeeSinglePaymentTransfer $computopTransfer */
+            /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopPayuCeeSingle($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);

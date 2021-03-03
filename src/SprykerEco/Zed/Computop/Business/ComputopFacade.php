@@ -278,6 +278,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()
+            ->createPaydirektResponseSaver()
+            ->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)

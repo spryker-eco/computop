@@ -21,7 +21,9 @@ use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
@@ -132,6 +134,22 @@ class FacadeDBActionTest extends AbstractSetUpTest
      * @return void
      */
     public function testSavePaydirektInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->savePaydirektInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testSavePayuCeeSingleInitResponse()
     {
         $this->setUpDB();
         $service = new ComputopFacade();
@@ -313,6 +331,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_IDEAL));
         $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_DIRECT_DEBIT));
         $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT));
+        $methods->append((new PaymentMethodTransfer())->setMethodName(ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE));
 
         return (new PaymentMethodsTransfer())->setMethods($methods);
     }
@@ -347,6 +366,11 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopPaydirektInitTransfer->setHeader($computopHeader);
         $computopPaydirektTransfer = new ComputopPaydirektPaymentTransfer();
         $computopPaydirektTransfer->setPaydirektInitResponse($computopPaydirektInitTransfer);
+
+        $computopPayuCeeSingleInitTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
+        $computopPayuCeeSingleInitTransfer->setHeader($computopHeader);
+        $computopPayuCeeSingleTransfer = new ComputopPayuCeeSinglePaymentTransfer();
+        $computopPayuCeeSingleTransfer->setPayuCeeSingleInitResponse($computopPayuCeeSingleInitTransfer);
 
         $computopCredicCardInitTransfer = new ComputopCreditCardInitResponseTransfer();
         $computopCredicCardInitTransfer->setHeader($computopHeader);
@@ -390,6 +414,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
         $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
         $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
+        $paymentTransfer->setComputopPayuCeeSingle($computopPayuCeeSingleTransfer);
         $paymentTransfer->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW);
 
         $quoteTransfer = new QuoteTransfer();

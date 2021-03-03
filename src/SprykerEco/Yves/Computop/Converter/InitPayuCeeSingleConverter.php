@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitPayuCeeSingleConverter extends AbstractInitConverter
 {
@@ -24,6 +25,21 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
         $responseTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($this->updateResponseHeader($header));
+
+        $arrayMap = [
+            'refNr' => ComputopApiConfig::REF_NR,
+            'codeExt' => ComputopApiConfig::CODE_EXT,
+            'errorText' => ComputopApiConfig::ERROR_TEXT,
+            'userData' => ComputopApiConfig::USER_DATA,
+            'plain' => ComputopApiConfig::PLAIN,
+            'custom' => ComputopApiConfig::CUSTOM,
+            'customerTransactionId' => ComputopApiConfig::TRANSACTION_ID,
+            'amountAuth' => ComputopApiConfig::AMOUNT_AUTH,
+            'amountCap' => ComputopApiConfig::AMOUNT_CAP,
+            'amountCred' => ComputopApiConfig::AMOUNT_CRED,
+        ];
+
+        $responseTransfer->fromArray($this->getApiResponseValues($decryptedArray, $arrayMap), true);
 
         return $responseTransfer;
     }
@@ -40,5 +56,21 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
         }
 
         return $header;
+    }
+
+    /**
+     * @param $decryptedArray
+     * @param $keysMap
+     *
+     * @return array
+     */
+    private function getApiResponseValues($decryptedArray, $keysMap)
+    {
+        $out = [];
+        foreach ($keysMap as $key => $value) {
+            $out[$key] = $this->computopApiService->getResponseValue($decryptedArray, $value);
+        }
+
+        return $out;
     }
 }

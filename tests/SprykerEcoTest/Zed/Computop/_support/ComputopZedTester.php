@@ -69,7 +69,12 @@ class ComputopZedTester extends Actor
         $this->setConfig('COMPUTOPAPI:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
         $this->setConfig('COMPUTOPAPI:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
         $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
-        $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['computopSofort', 'computopPaydirekt', 'computopIdeal']);
+        $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', [
+            'computopSofort',
+            'computopPaydirekt',
+            'computopIdeal',
+            'computopPayuCeeSingle',
+        ]);
         $this->setConfig('COMPUTOP:SOFORT_INIT_ACTION', 'https://www.computop-paygate.com/sofort.aspx');
         $this->setConfig(
             'COMPUTOP:CRIF_GREEN_AVAILABLE_PAYMENT_METHODS',
@@ -82,6 +87,7 @@ class ComputopZedTester extends Actor
                 ComputopConfig::PAYMENT_METHOD_PAY_PAL,
                 ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
                 ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
+                ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
             ]
         );
         $this->setConfig(

@@ -60,6 +60,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PaydirektRespons
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PayNowResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PayPalResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\SofortResponseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\PayuCeeSingleResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\RefundSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\ReverseSaver;
@@ -189,6 +190,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createEasyCreditResponseSaver(): InitResponseSaverInterface
     {
         return new EasyCreditResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\InitResponseSaverInterface
+     */
+    public function createPayuCeeSingleResponseSaver(): InitResponseSaverInterface
+    {
+        return new PayuCeeSingleResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**
@@ -544,6 +553,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPostSavePaydirektMapper(): InitMapperInterface
     {
         return new InitPaydirektMapper($this->getConfig(), $this->getComputopApiService());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     */
+    public function createPostSavePayuCeeSingleMapper(): InitMapperInterface
+    {
+        return new InitPayuCeeSingleMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**

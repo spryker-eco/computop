@@ -206,6 +206,18 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Saves PayU CEE Single Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Makes Easy Credit Status API call
      *
      * @api
