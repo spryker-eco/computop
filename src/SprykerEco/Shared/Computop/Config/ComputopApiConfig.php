@@ -147,4 +147,5 @@ interface ComputopApiConfig
     public const UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION = 'CIT';
     public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
     public const USER_DATA = 'userData';
+    public const PAY_TYPE = 'payType';
 }

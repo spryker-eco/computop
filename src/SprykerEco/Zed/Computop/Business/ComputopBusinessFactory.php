@@ -123,7 +123,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSavePayPal());
         $postSaveHook->registerMapper($this->createPostSaveDirectDebit());
         $postSaveHook->registerMapper($this->createPostSaveEasyCredit());
-        $postSaveHook->registerMapper($this->createPostSavePayuCeeSingle());
+        $postSaveHook->registerMapper($this->createPostSavePayuCeeSingleMapper());
 
         return $postSaveHook;
     }

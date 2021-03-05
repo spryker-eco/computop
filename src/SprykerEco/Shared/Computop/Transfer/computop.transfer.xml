@@ -295,6 +295,7 @@
     </transfer>
 
     <transfer name="ComputopPayuCeeSinglePayment">
+        <property name="payId" type="string"/>
         <property name="merchantId" type="string"/>
         <property name="transId" type="string"/>
         <property name="refNr" type="string"/>

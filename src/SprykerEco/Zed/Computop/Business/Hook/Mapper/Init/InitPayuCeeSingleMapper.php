@@ -71,18 +71,22 @@ class InitPayuCeeSingleMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $computopPayuCeeSinglePaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayuCeeSinglePaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::MERCHANT_ID] = $computopPayuCeeSinglePaymentTransfer->getMerchantId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayuCeeSinglePaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayuCeeSinglePaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayuCeeSinglePaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayuCeeSinglePaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayuCeeSinglePaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayuCeeSinglePaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayuCeeSinglePaymentTransfer->getClientIp();
+        $dataSubArray[ComputopApiConfig::REQ_ID] = $computopPayuCeeSinglePaymentTransfer->getReqId();
+        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayuCeeSinglePaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayuCeeSinglePaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayuCeeSinglePaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayuCeeSinglePaymentTransfer->getShippingZip();
+
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayuCeeSinglePaymentTransfer->getUrlSuccess();
         $dataSubArray[ComputopApiConfig::MAC] = $computopPayuCeeSinglePaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayuCeeSinglePaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayuCeeSinglePaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayuCeeSinglePaymentTransfer->getShippingZip();
+        $dataSubArray[ComputopApiConfig::PAY_TYPE] = 'c'; //$computopPayuCeeSinglePaymentTransfer->getPayType();
 
         return $dataSubArray;
     }

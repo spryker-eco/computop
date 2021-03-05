@@ -32,6 +32,8 @@ class PayUCeeSingleMapper extends AbstractMapper
             $this->computopApiService->generateEncryptedMac($this->createRequestTransfer($computopPaymentTransfer))
         );
 
+        $computopPaymentTransfer->setPayType('c');
+
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
