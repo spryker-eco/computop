@@ -54,24 +54,32 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
+        $payment = $quoteTransfer->getPayment();
+
+        if ($payment->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
+            return $checkoutResponseTransfer;
+        }
+
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
         if (
-            $quoteTransfer->getPayment()->getPaymentSelection() !== ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW
-            && $quoteTransfer->getPayment()->getPaymentSelection() !== ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT
-            && $quoteTransfer->getPayment()->getPaymentSelection() !== ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD
+            in_array($payment->getPaymentSelection(), [
+            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+            ])
         ) {
-            return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
+            $checkoutResponseTransfer->setComputopInitPayment(
+                (new ComputopInitPaymentTransfer())
+                    ->setData($computopPaymentTransfer->getData())
+                    ->setLen($computopPaymentTransfer->getLen())
+            );
+
+            return $checkoutResponseTransfer;
         }
 
-        $checkoutResponseTransfer->setComputopInitPayment(
-            (new ComputopInitPaymentTransfer())
-                ->setData($computopPaymentTransfer->getData())
-                ->setLen($computopPaymentTransfer->getLen())
-        );
-
-        return $checkoutResponseTransfer;
+        return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
     }
 
     /**
@@ -92,14 +100,12 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     /**
      * @param string $methodName
      *
-     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
-     *
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface|null
      */
     protected function getMethodMapper($methodName)
     {
         if (isset($this->methodMappers[$methodName]) === false) {
-            throw new ComputopMethodMapperException('The method mapper is not registered.');
+            return null;
         }
 
         return $this->methodMappers[$methodName];
@@ -125,7 +131,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
-        $computopPaymentTransfer = $this->getMethodMapper($paymentSelection)->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+        if ($methodMapper = $this->getMethodMapper($paymentSelection)) {
+            $computopPaymentTransfer = $methodMapper->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+        }
 
         return $computopPaymentTransfer;
     }
