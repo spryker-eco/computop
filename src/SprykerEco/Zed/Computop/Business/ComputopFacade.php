@@ -280,7 +280,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()
             ->createPayuCeeSingleResponseSaver()

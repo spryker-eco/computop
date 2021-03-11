@@ -75,7 +75,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-payu-cee-single-init-response', $quoteTransfer);

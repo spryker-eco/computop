@@ -52,7 +52,7 @@ class SaveOrderPaymentTest extends AbstractSetUpTest
     {
         $query = new SpyPaymentComputopQuery();
 
-        return $query->find()->getFirst();
+        return $query->find()->getLast();
     }
 
     /**

@@ -214,7 +214,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer);
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:

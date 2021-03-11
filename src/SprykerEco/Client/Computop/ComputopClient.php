@@ -68,7 +68,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
          return $this->getFactory()->createZedStub()->savePayuCeeSingleInitResponse($quoteTransfer);
     }

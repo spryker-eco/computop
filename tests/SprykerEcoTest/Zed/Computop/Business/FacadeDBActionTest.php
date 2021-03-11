@@ -43,7 +43,6 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
-use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
@@ -82,6 +81,11 @@ class FacadeDBActionTest extends AbstractSetUpTest
     protected $salesOrderItemId;
 
     /**
+     * @var \SprykerEcoTest\Zed\Computop\ComputopZedTester
+     */
+    protected $tester;
+
+    /**
      * @return void
      */
     protected function setUp(): void
@@ -104,14 +108,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSaveSofortInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->saveSofortInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->saveSofortInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -120,14 +124,13 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSaveIdealInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->saveIdealInitResponse($this->getQuoteTrasfer());
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        $facade->saveIdealInitResponse($this->getQuoteTrasfer());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -136,14 +139,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSavePaydirektInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->savePaydirektInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->savePaydirektInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -152,14 +155,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSavePayuCeeSingleInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->savePaydirektInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->savePayuCeeSingleInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -168,14 +171,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSaveCreditCardInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->saveCreditCardInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->saveCreditCardInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -184,14 +187,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSavePayNowInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->savePayNowInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->savePayNowInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -200,14 +203,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSavePayPalInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->savePayPalInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->savePayPalInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -216,14 +219,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSaveDirectDebitInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->saveDirectDebitInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->saveDirectDebitInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -232,14 +235,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testSaveEasyCreditInitResponse()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->saveEasyCreditInitResponse($this->getQuoteTrasfer());
 
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
 
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $facade->saveEasyCreditInitResponse($this->getQuoteTrasfer());
+
+        $this->checkSavedSpyPaymentMethod();
     }
 
     /**
@@ -248,9 +251,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testEasyCreditStatusApiCall()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $quote = $service->easyCreditStatusApiCall($this->getQuoteTrasfer());
+
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
+
+        $quote = $facade->easyCreditStatusApiCall($this->getQuoteTrasfer());
         $response = $quote->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse();
         $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
         $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
@@ -262,9 +268,12 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testIsComputopPaymentExistSuccess()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $response = $service->isComputopPaymentExist($this->getQuoteTrasfer());
+
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
+
+        $response = $facade->isComputopPaymentExist($this->getQuoteTrasfer());
 
         $this->assertTrue($response->getPayment()->getIsComputopPaymentExist());
     }
@@ -275,11 +284,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testIsComputopPaymentExistFailure()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
+
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
+
         $quoteTransfer = $this->getQuoteTrasfer();
         $quoteTransfer->getPayment()->getComputopPayNow()->setTransId('FAILURE_TRANS_VALUE');
-        $response = $service->isComputopPaymentExist($quoteTransfer);
+        $response = $facade->isComputopPaymentExist($quoteTransfer);
 
         $this->assertNotTrue($response->getPayment()->getIsComputopPaymentExist());
     }
@@ -290,10 +302,13 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testPerformCrifApiCall()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
+
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
+
         $quoteTransfer = $this->getQuoteTrasfer();
-        $response = $service->performCrifApiCall($quoteTransfer);
+        $response = $facade->performCrifApiCall($quoteTransfer);
 
         $this->assertInstanceOf(ComputopCrifTransfer::class, $response->getComputopCrif());
         $this->assertNotEmpty($response->getComputopCrif()->getResult());
@@ -308,10 +323,13 @@ class FacadeDBActionTest extends AbstractSetUpTest
     public function testFilterPaymentMethods()
     {
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
+
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $facade */
+        $facade = $this->tester->getFacade();
+        $facade->setFactory($this->createFactory());
+
         $quoteTransfer = $this->getQuoteTrasfer();
-        $response = $service->filterPaymentMethods($this->getPaymentMethodsTransfer(), $quoteTransfer);
+        $response = $facade->filterPaymentMethods($this->getPaymentMethodsTransfer(), $quoteTransfer);
 
         $this->assertInstanceOf(PaymentMethodsTransfer::class, $response);
         $this->assertGreaterThanOrEqual(1, $response->getMethods()->count());
@@ -570,5 +588,27 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->setResult(static::CRIF_GREEN_RESULT)
             ->setStatus(static::STATUS_VALUE)
             ->setDescription(static::STATUS_VALUE_SUCCESS);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    private function getSpyPaymentComputopByID($id): SpyPaymentComputop
+    {
+        return SpyPaymentComputopQuery::create()->findByTransId($id)->getFirst();
+    }
+
+    /**
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    private function checkSavedSpyPaymentMethod(): SpyPaymentComputop
+    {
+        $spyPayment = $this->getSpyPaymentComputopByID(self::TRANS_ID_VALUE);
+        $this->assertSame(self::PAY_ID_VALUE, $spyPayment->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $spyPayment->getXId());
+
+        return $spyPayment;
     }
 }

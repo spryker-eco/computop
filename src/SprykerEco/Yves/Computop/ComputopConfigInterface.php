@@ -80,9 +80,9 @@ interface ComputopConfigInterface
     public function getEasyCreditInitActionUrl();
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPayUCEESingleInitActionUrl();
+    public function getPayUCEESingleInitActionUrl(): ?string;
 
     /**
      * @return bool

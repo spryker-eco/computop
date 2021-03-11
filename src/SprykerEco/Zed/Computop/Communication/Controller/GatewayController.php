@@ -112,7 +112,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayuCeeSingleInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function savePayuCeeSingleInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->savePayuCeeSingleInitResponse($quoteTransfer);
     }

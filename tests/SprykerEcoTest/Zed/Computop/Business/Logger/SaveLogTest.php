@@ -79,7 +79,7 @@ class SaveLogTest extends AbstractSetUpTest
     {
         $query = new SpyPaymentComputopApiLogQuery();
 
-        return $query->find()->getFirst();
+        return $query->find()->getLast();
     }
 
     /**
