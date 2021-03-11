@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
@@ -90,6 +94,8 @@ class PayUCeeSingleMapper extends AbstractMapper
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $paymentTransfer
      * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
+     *
+     * @return void
      */
     private function addShippingData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, AddressTransfer $addressTransfer)
     {
@@ -117,7 +123,7 @@ class PayUCeeSingleMapper extends AbstractMapper
             $out[] = implode(',', [
                 str_replace([',', '+'], ' ', $item->getName()),
                 $item->getUnitPrice(),
-                $item->getQuantity()
+                $item->getQuantity(),
             ]);
         }
 
@@ -127,6 +133,8 @@ class PayUCeeSingleMapper extends AbstractMapper
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $paymentTransfer
      * @param \Generated\Shared\Transfer\CustomerTransfer $customer
+     *
+     * @return void
      */
     private function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer)
     {

@@ -24,19 +24,19 @@ use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\EasyCreditFormDataProvider;
-use SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\IdealFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PaydirektFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayNowFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Computop\Form\EasyCreditSubForm;
-use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
 use SprykerEco\Yves\Computop\Form\IdealSubForm;
 use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayNowSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
+use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
@@ -51,11 +51,11 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
-use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayUCeeSingleMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayNowMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayUCeeSingleMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -555,7 +555,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    private function createOrderPayUCeeSingleMapper()
+    protected function createOrderPayUCeeSingleMapper()
     {
         return new PayUCeeSingleMapper(
             $this->getComputopApiService(),

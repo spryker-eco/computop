@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
@@ -19,7 +24,7 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer|AbstractTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer|\Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
