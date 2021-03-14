@@ -504,11 +504,11 @@
 
     <transfer name="ComputopPayuCeeSingleInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
-        <property name="refNr" type="string" />
+        <property name="refNr" type="string"/>
         <property name="codeExt" type="string"/>
         <property name="errorText" type="string"/>
-        <property name="userData" type="string" />
-        <property name="plain" type="string" />
+        <property name="userData" type="string"/>
+        <property name="plain" type="string"/>
         <property name="custom" type="string"/>
         <property name="customerTransactionId" type="string"/>
         <property name="amountAuth" type="string"/>
