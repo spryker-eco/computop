@@ -18,9 +18,9 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer
      */
-    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header): ComputopPayuCeeSingleInitResponseTransfer
     {
         $responseTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
@@ -49,7 +49,7 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      *
      * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    protected function updateResponseHeader(ComputopApiResponseHeaderTransfer $header)
+    protected function updateResponseHeader(ComputopApiResponseHeaderTransfer $header): ComputopApiResponseHeaderTransfer
     {
         if ($header->getStatus() === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
             $header->setIsSuccess(true);
@@ -62,9 +62,9 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      * @param $decryptedArray
      * @param $keysMap
      *
-     * @return array
+     * @return string[]
      */
-    private function getApiResponseValues($decryptedArray, $keysMap)
+    private function getApiResponseValues($decryptedArray, $keysMap): array
     {
         $out = [];
         foreach ($keysMap as $key => $value) {

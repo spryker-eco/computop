@@ -15,6 +15,7 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -111,7 +112,7 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successPayuCeeSingleAction(Request $request)
+    public function successPayuCeeSingleAction(Request $request): RedirectResponse
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPayuCeeSinglePaymentHandler(),

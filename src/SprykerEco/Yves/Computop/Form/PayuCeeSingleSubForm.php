@@ -35,9 +35,9 @@ class PayuCeeSingleSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    protected function getTemplatePath()
+    protected function getTemplatePath(): string
     {
-        return ComputopConfig::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, self::PAYMENT_METHOD);
     }
 
     /**

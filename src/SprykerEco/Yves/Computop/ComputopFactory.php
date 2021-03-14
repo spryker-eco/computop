@@ -146,9 +146,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     * @return \SprykerEco\Yves\Computop\Form\PayUCeeSingleSubForm
      */
-    public function createPayUCeeSingleForm()
+    public function createPayUCeeSingleForm(): PayUCeeSingleSubForm
     {
         return new PayUCeeSingleSubForm();
     }
@@ -218,9 +218,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider
      */
-    public function createPayUCeeSingleFormDataProvider()
+    public function createPayUCeeSingleFormDataProvider(): PayuCeeSingleFormDataProvider
     {
         return new PayuCeeSingleFormDataProvider($this->getQuoteClient(), $this->createOrderPayUCeeSingleMapper());
     }
@@ -294,9 +294,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayuCeeSinglePaymentHandler
      */
-    public function createPayuCeeSinglePaymentHandler()
+    public function createPayuCeeSinglePaymentHandler(): ComputopPayuCeeSinglePaymentHandler
     {
         return new ComputopPayuCeeSinglePaymentHandler(
             $this->createInitPayuCeeSingleConverter(),
@@ -369,9 +369,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     * @return \SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter
      */
-    protected function createInitPayuCeeSingleConverter()
+    protected function createInitPayuCeeSingleConverter(): InitPayuCeeSingleConverter
     {
         return new InitPayuCeeSingleConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -553,9 +553,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayUCeeSingleMapper
      */
-    protected function createOrderPayUCeeSingleMapper()
+    protected function createOrderPayUCeeSingleMapper(): PayUCeeSingleMapper
     {
         return new PayUCeeSingleMapper(
             $this->getComputopApiService(),

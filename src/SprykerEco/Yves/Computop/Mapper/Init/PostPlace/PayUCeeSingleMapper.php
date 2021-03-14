@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
+use SprykerEco\Shared\ComputopApi\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
@@ -23,20 +24,20 @@ class PayUCeeSingleMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayuCeeSinglePaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
-        if ($shippingAddress = $this->getShippingAddress($quoteTransfer)) {
-            $this->addShippingData($computopPaymentTransfer, $shippingAddress);
+        if ($this->getShippingAddress($quoteTransfer)) {
+            $this->addShippingData($computopPaymentTransfer, $this->getShippingAddress($quoteTransfer));
         }
 
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac($this->createRequestTransfer($computopPaymentTransfer))
         );
 
-        $computopPaymentTransfer->setPayType('c');
+        $computopPaymentTransfer->setPayType(ComputopApiConfig::PAYU_CEE_DEFAULT_PAY_TYPE);
 
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
@@ -46,8 +47,8 @@ class PayUCeeSingleMapper extends AbstractMapper
             $computopPaymentTransfer->setArticleList($this->getArticleList($quoteTransfer->getItems()));
         }
 
-        if ($customer = $quoteTransfer->getCustomer()) {
-            $this->setCustomerData($computopPaymentTransfer, $customer);
+        if ($quoteTransfer->getCustomer()) {
+            $this->setCustomerData($computopPaymentTransfer, $quoteTransfer->getCustomer());
         }
 
         $computopPaymentTransfer->setCapture(
@@ -62,7 +63,7 @@ class PayUCeeSingleMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayuCeeSinglePaymentTransfer
     {
         $computopPaymentTransfer = new ComputopPayuCeeSinglePaymentTransfer();
 
@@ -116,7 +117,7 @@ class PayUCeeSingleMapper extends AbstractMapper
      *
      * @return string
      */
-    private function getArticleList($items)
+    private function getArticleList($items): string
     {
         $out = [];
         foreach ($items as $item) {

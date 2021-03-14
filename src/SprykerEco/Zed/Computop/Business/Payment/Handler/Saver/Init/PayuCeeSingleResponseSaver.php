@@ -17,7 +17,7 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function save(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());

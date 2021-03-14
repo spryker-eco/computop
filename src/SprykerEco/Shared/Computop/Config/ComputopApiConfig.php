@@ -148,4 +148,5 @@ interface ComputopApiConfig
     public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
     public const USER_DATA = 'userData';
     public const PAY_TYPE = 'payType';
+    public const PAYU_CEE_DEFAULT_PAY_TYPE = 'c';
 }

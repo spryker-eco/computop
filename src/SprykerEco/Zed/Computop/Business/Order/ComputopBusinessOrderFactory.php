@@ -89,9 +89,9 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayuCeeSingleMapper
      */
-    public function createInitPayuCeeSingleMapper()
+    public function createInitPayuCeeSingleMapper(): PayuCeeSingleMapper
     {
         return new PayuCeeSingleMapper();
     }

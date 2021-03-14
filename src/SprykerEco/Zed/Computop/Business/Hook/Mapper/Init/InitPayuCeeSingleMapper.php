@@ -17,7 +17,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE;
     }
@@ -28,8 +28,10 @@ class InitPayuCeeSingleMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
-    {
+    public function updateComputopPaymentTransfer(
+        QuoteTransfer $quoteTransfer,
+        TransferInterface $computopPaymentTransfer
+    ): TransferInterface {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -45,20 +47,22 @@ class InitPayuCeeSingleMapper extends AbstractMapper
             $this->config->getBlowfishPass()
         );
 
-        $length = $decryptedValues[ComputopApiConfig::LENGTH];
-        $data = $decryptedValues[ComputopApiConfig::DATA];
+        if (isset($decryptedValues[ComputopApiConfig::LENGTH], $decryptedValues[ComputopApiConfig::DATA])) {
+            $length = $decryptedValues[ComputopApiConfig::LENGTH];
+            $data = $decryptedValues[ComputopApiConfig::DATA];
 
-        $computopPaymentTransfer->setData($data);
-        $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+            $computopPaymentTransfer->setData($data);
+            $computopPaymentTransfer->setLen($length);
+            $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+        }
 
         return $computopPaymentTransfer;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected function getActionUrl()
+    protected function getActionUrl(): ?string
     {
         return $this->config->getPayuCeeSingleInitAction();
     }
@@ -68,7 +72,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopPayuCeeSinglePaymentTransfer)
+    protected function getDataSubArray(TransferInterface $computopPayuCeeSinglePaymentTransfer): array
     {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
         $dataSubArray[ComputopApiConfig::MERCHANT_ID] = $computopPayuCeeSinglePaymentTransfer->getMerchantId();
@@ -86,7 +90,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::MAC] = $computopPayuCeeSinglePaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayuCeeSinglePaymentTransfer->getOrderDesc();
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::PAY_TYPE] = 'c'; //$computopPayuCeeSinglePaymentTransfer->getPayType();
+        $dataSubArray[ComputopApiConfig::PAY_TYPE] = ComputopApiConfig::PAYU_CEE_DEFAULT_PAY_TYPE;
 
         return $dataSubArray;
     }

@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
+use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
@@ -16,7 +18,7 @@ class PayuCeeSingleMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE;
     }
@@ -24,9 +26,9 @@ class PayuCeeSingleMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer|null
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ?ComputopPayuCeeSinglePaymentTransfer
     {
         return $paymentTransfer->getComputopPayuCeeSingle();
     }
@@ -34,9 +36,9 @@ class PayuCeeSingleMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ?ComputopPayuCeeSingleInitResponseTransfer
     {
         return $this->getComputopTransfer($paymentTransfer)->getPayuCeeSingleInitResponse();
     }
@@ -46,7 +48,7 @@ class PayuCeeSingleMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
     {
         return [];
     }

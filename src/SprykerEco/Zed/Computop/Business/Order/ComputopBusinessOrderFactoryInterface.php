@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order;
 
+use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayuCeeSingleMapper;
+
 interface ComputopBusinessOrderFactoryInterface
 {
     /**
@@ -50,7 +52,7 @@ interface ComputopBusinessOrderFactoryInterface
     public function createInitEasyCreditMapper();
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayuCeeSingleMapper
      */
-    public function createInitPayuCeeSingleMapper();
+    public function createInitPayuCeeSingleMapper(): PayuCeeSingleMapper;
 }
