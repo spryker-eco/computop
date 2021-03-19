@@ -35,19 +35,19 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
             $quoteTransfer->setPayment(new PaymentTransfer());
         }
 
-        if (!$this->isValidPayment($quoteTransfer)) {
-            $this->setDefaultPayment($quoteTransfer);
+        if ($this->isValidPayment($quoteTransfer)) {
+            return $quoteTransfer;
         }
 
-        return $quoteTransfer;
+        return $this->setDefaultPayment($quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    private function setDefaultPayment(QuoteTransfer $quoteTransfer)
+    protected function setDefaultPayment(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopTransfer */
         $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
@@ -57,5 +57,7 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
 
         $quoteTransfer->setPayment($paymentTransfer);
         $this->quoteClient->setQuote($quoteTransfer);
+
+        return $quoteTransfer;
     }
 }

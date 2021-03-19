@@ -68,30 +68,31 @@ class InitPayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPayuCeeSinglePaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer
      *
      * @return array
      */
     protected function getDataSubArray(TransferInterface $computopPayuCeeSinglePaymentTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
-        $dataSubArray[ComputopApiConfig::MERCHANT_ID] = $computopPayuCeeSinglePaymentTransfer->getMerchantId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayuCeeSinglePaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayuCeeSinglePaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayuCeeSinglePaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayuCeeSinglePaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::REQ_ID] = $computopPayuCeeSinglePaymentTransfer->getReqId();
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayuCeeSinglePaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayuCeeSinglePaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayuCeeSinglePaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayuCeeSinglePaymentTransfer->getShippingZip();
-
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayuCeeSinglePaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::MAC] = $computopPayuCeeSinglePaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayuCeeSinglePaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::PAY_TYPE] = ComputopApiConfig::PAYU_CEE_DEFAULT_PAY_TYPE;
-
-        return $dataSubArray;
+        return [
+            ComputopApiConfig::MERCHANT_ID => $computopPayuCeeSinglePaymentTransfer->getMerchantId(),
+            ComputopApiConfig::TRANS_ID => $computopPayuCeeSinglePaymentTransfer->getTransId(),
+            ComputopApiConfig::REF_NR => $computopPayuCeeSinglePaymentTransfer->getRefNr(),
+            ComputopApiConfig::AMOUNT => $computopPayuCeeSinglePaymentTransfer->getAmount(),
+            ComputopApiConfig::CURRENCY => $computopPayuCeeSinglePaymentTransfer->getCurrency(),
+            ComputopApiConfig::MAC => $computopPayuCeeSinglePaymentTransfer->getMac(),
+            ComputopApiConfig::URL_SUCCESS => $computopPayuCeeSinglePaymentTransfer->getUrlSuccess(),
+            ComputopApiConfig::URL_FAILURE => $computopPayuCeeSinglePaymentTransfer->getUrlFailure(),
+            ComputopApiConfig::RESPONSE => $computopPayuCeeSinglePaymentTransfer->getResponse(),
+            ComputopApiConfig::URL_NOTIFY => $computopPayuCeeSinglePaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::REQ_ID => $computopPayuCeeSinglePaymentTransfer->getReqId(),
+            ComputopApiConfig::CAPTURE => $computopPayuCeeSinglePaymentTransfer->getCapture(),
+            ComputopApiConfig::ORDER_DESC => $computopPayuCeeSinglePaymentTransfer->getOrderDesc(),
+            ComputopApiConfig::ARTICLE_LIST => $computopPayuCeeSinglePaymentTransfer->getArticleList(),
+            ComputopApiConfig::FIRST_NAME => $computopPayuCeeSinglePaymentTransfer->getFirstName(),
+            ComputopApiConfig::LAST_NAME => $computopPayuCeeSinglePaymentTransfer->getLastName(),
+            ComputopApiConfig::EMAIL_ADDRESS => $computopPayuCeeSinglePaymentTransfer->getEmail(),
+            ComputopApiConfig::LANGUAGE => $computopPayuCeeSinglePaymentTransfer->getLanguage(),
+        ];
     }
 }

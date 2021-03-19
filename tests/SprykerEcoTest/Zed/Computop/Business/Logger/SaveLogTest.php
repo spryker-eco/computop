@@ -83,9 +83,9 @@ class SaveLogTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Business\ComputopBusinessFactory
      */
-    protected function createFactory()
+    protected function createFactory(): ComputopBusinessFactory
     {
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(

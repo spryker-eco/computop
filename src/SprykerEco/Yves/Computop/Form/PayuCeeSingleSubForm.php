@@ -19,7 +19,7 @@ class PayuCeeSingleSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::COMPUTOP_PAYU_CEE_SINGLE;
     }
@@ -27,7 +27,7 @@ class PayuCeeSingleSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::COMPUTOP_PAYU_CEE_SINGLE;
     }
@@ -45,7 +45,7 @@ class PayuCeeSingleSubForm extends AbstractSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ComputopPayuCeeSinglePaymentTransfer::class,

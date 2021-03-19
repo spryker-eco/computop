@@ -57,6 +57,7 @@ interface ComputopApiConfig
     public const LENGTH = 'Len';
     public const NO_SHIPPING = 'NoShipping';
     public const EMAIL = 'e-mail';
+    public const EMAIL_ADDRESS = 'Email';
     public const FIRST_NAME = 'firstname';
     public const LAST_NAME = 'lastname';
     public const CUSTOM = 'Custom';
@@ -148,5 +149,6 @@ interface ComputopApiConfig
     public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
     public const USER_DATA = 'userData';
     public const PAY_TYPE = 'payType';
-    public const PAYU_CEE_DEFAULT_PAY_TYPE = 'c';
+    public const ARTICLE_LIST = 'ArticleList';
+    public const LANGUAGE = 'Language';
 }

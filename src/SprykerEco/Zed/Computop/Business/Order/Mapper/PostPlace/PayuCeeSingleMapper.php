@@ -7,9 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
-use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
@@ -28,7 +27,7 @@ class PayuCeeSingleMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer|null
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ?ComputopPayuCeeSinglePaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ?TransferInterface
     {
         return $paymentTransfer->getComputopPayuCeeSingle();
     }
@@ -38,7 +37,7 @@ class PayuCeeSingleMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ?ComputopPayuCeeSingleInitResponseTransfer
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ?TransferInterface
     {
         return $this->getComputopTransfer($paymentTransfer)->getPayuCeeSingleInitResponse();
     }

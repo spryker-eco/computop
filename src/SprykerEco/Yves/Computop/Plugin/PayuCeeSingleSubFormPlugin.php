@@ -9,6 +9,8 @@ namespace SprykerEco\Yves\Computop\Plugin;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider;
+use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopFactory getFactory()
@@ -16,17 +18,17 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayuCeeSingleSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     * @return \SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm
      */
-    public function createSubForm()
+    public function createSubForm(): PayuCeeSingleSubForm
     {
         return $this->getFactory()->createPayUCeeSingleForm();
     }
 
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider
      */
-    public function createSubFormDataProvider()
+    public function createSubFormDataProvider(): PayuCeeSingleFormDataProvider
     {
         return $this->getFactory()->createPayUCeeSingleFormDataProvider();
     }

@@ -23,15 +23,15 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
     {
         $payment = $quoteTransfer->getPayment();
 
-        if ($payment) {
-            if ($payment->getComputopPayuCeeSingle() === null) {
-                $payment->setComputopPayuCeeSingle(new ComputopPayuCeeSinglePaymentTransfer());
-            }
-
-            $payment->getComputopPayuCeeSingle()->setPayuCeeSingleInitResponse(
-                $responseTransfer
-            );
+        if (!$payment) {
+            return $quoteTransfer;
         }
+
+        if ($payment->getComputopPayuCeeSingle() === null) {
+            $payment->setComputopPayuCeeSingle(new ComputopPayuCeeSinglePaymentTransfer());
+        }
+
+        $payment->getComputopPayuCeeSingle()->setPayuCeeSingleInitResponse($responseTransfer);
 
         return $quoteTransfer;
     }
@@ -41,7 +41,7 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->computopClient->savePayuCeeSingleInitResponse($quoteTransfer);
     }

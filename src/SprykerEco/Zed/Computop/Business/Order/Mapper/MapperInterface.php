@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
 
-use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 
 interface MapperInterface
@@ -16,26 +14,26 @@ interface MapperInterface
     /**
      * @return string
      */
-    public function getMethodName(): string;
+    public function getMethodName();
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer|null
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer|null
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ?ComputopPayuCeeSinglePaymentTransfer;
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ?ComputopPayuCeeSingleInitResponseTransfer;
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array;
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer);
 }

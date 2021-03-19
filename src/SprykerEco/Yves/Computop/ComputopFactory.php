@@ -146,11 +146,11 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\PayUCeeSingleSubForm
+     * @return \SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm
      */
-    public function createPayUCeeSingleForm(): PayUCeeSingleSubForm
+    public function createPayUCeeSingleForm(): PayuCeeSingleSubForm
     {
-        return new PayUCeeSingleSubForm();
+        return new PayuCeeSingleSubForm();
     }
 
     /**

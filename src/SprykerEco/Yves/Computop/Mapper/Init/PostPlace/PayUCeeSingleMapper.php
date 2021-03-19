@@ -7,13 +7,11 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
-use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
-use SprykerEco\Shared\ComputopApi\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
@@ -29,15 +27,9 @@ class PayUCeeSingleMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
-        if ($this->getShippingAddress($quoteTransfer)) {
-            $this->addShippingData($computopPaymentTransfer, $this->getShippingAddress($quoteTransfer));
-        }
-
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac($this->createRequestTransfer($computopPaymentTransfer))
         );
-
-        $computopPaymentTransfer->setPayType(ComputopApiConfig::PAYU_CEE_DEFAULT_PAY_TYPE);
 
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
@@ -54,6 +46,8 @@ class PayUCeeSingleMapper extends AbstractMapper
         $computopPaymentTransfer->setCapture(
             $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE)
         );
+
+        $computopPaymentTransfer->setLanguage(mb_strtoupper($this->store->getCurrentLanguage()));
 
         return $computopPaymentTransfer;
     }
@@ -73,43 +67,6 @@ class PayUCeeSingleMapper extends AbstractMapper
         );
 
         return $computopPaymentTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer|null
-     */
-    private function getShippingAddress(QuoteTransfer $quoteTransfer): ?AddressTransfer
-    {
-        if ($quoteTransfer->getBillingSameAsShipping()) {
-            $address = $quoteTransfer->getBillingAddress();
-        } elseif ($quoteTransfer->getItems()->count()) {
-            $item = current($quoteTransfer->getItems());
-            $address = $item->getShipment()->getShippingAddress();
-        }
-
-        return $address ?? null;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $paymentTransfer
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     *
-     * @return void
-     */
-    private function addShippingData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, AddressTransfer $addressTransfer)
-    {
-        $paymentTransfer->setSdName($addressTransfer->getFirstName() . ' ' . $addressTransfer->getLastName());
-        $paymentTransfer->setSdEmail($addressTransfer->getEmail());
-        $paymentTransfer->setSdPhone($addressTransfer->getPhone());
-        $paymentTransfer->setSdZIP($addressTransfer->getZipCode());
-        $paymentTransfer->setSdCountryCode($addressTransfer->getIso2Code());
-        $paymentTransfer->setSdState($addressTransfer->getState());
-        $paymentTransfer->setSdCity($addressTransfer->getCity());
-        $paymentTransfer->setSdStreet($addressTransfer->getAddress1());
-        $paymentTransfer->setSdAddressAddition($addressTransfer->getAddress2());
-        $paymentTransfer->setSdPOBox($addressTransfer->getPoBox());
     }
 
     /**
@@ -137,7 +94,7 @@ class PayUCeeSingleMapper extends AbstractMapper
      *
      * @return void
      */
-    private function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer)
+    private function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer): void
     {
         $paymentTransfer->setFirstName($customer->getFirstName());
         $paymentTransfer->setLastName($customer->getLastName());
