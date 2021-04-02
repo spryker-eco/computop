@@ -42,13 +42,13 @@ interface ComputopEntityManagerInterface
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentEntityDetails
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      *
      * @return void
      */
     public function savePaymentDetailEntity(
         ChildSpyPaymentComputopDetail $paymentEntityDetails,
-        ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+        TransferInterface $responseTransfer
     ): void;
 
     /**

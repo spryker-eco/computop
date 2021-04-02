@@ -44,6 +44,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     protected function createComputopHeaderPayment(OrderTransfer $orderTransfer)
     {
         $headerPayment = new ComputopApiHeaderPaymentTransfer();
+        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $savedComputopEntity */
         $savedComputopEntity = $this->manager->getSavedComputopEntity($orderTransfer->getIdSalesOrder());
         $headerPayment->fromArray($savedComputopEntity->toArray(), true);
         $headerPayment->setAmount($this->getAmount($orderTransfer));

@@ -9,6 +9,9 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
+/**
+ * @property \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager $manager
+ */
 class RefundCommandHandler extends AbstractCommandHandler
 {
     /**

@@ -70,7 +70,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|\Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      *
      * @return void
      */
@@ -78,6 +78,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         SpyPaymentComputop $paymentEntity,
         TransferInterface $responseTransfer
     ): void {
+        /** @var \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer */
         $paymentEntity
             ->setPayId($responseTransfer->getHeader()->getPayId())
             ->setXId($responseTransfer->getHeader()->getXId())
@@ -90,14 +91,15 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentEntityDetails
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      *
      * @return void
      */
     public function savePaymentDetailEntity(
         ChildSpyPaymentComputopDetail $paymentEntityDetails,
-        ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+        TransferInterface $responseTransfer
     ): void {
+        /** @var \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer */
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
         $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
         $paymentEntityDetails->save();

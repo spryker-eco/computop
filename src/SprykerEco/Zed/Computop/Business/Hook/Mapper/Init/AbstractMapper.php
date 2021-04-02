@@ -46,6 +46,7 @@ abstract class AbstractMapper implements InitMapperInterface
      */
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer->setRefNr($quoteTransfer->getOrderReference());
 
         return $computopPaymentTransfer;
@@ -61,10 +62,10 @@ abstract class AbstractMapper implements InitMapperInterface
     protected function getUrlToComputop($merchantId, $data, $length)
     {
         return $this->getActionUrl() . '?' . http_build_query([
-                ComputopApiConfig::MERCHANT_ID => $merchantId,
-                ComputopApiConfig::DATA => $data,
-                ComputopApiConfig::LENGTH => $length,
-            ]);
+            ComputopApiConfig::MERCHANT_ID => $merchantId,
+            ComputopApiConfig::DATA => $data,
+            ComputopApiConfig::LENGTH => $length,
+        ]);
     }
 
     /**
@@ -76,5 +77,13 @@ abstract class AbstractMapper implements InitMapperInterface
     {
         return (new ComputopApiRequestTransfer())
             ->fromArray($computopPaymentTransfer->toArray(), true);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getActionUrl()
+    {
+        return '';
     }
 }

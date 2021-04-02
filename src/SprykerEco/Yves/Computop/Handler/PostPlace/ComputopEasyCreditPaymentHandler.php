@@ -43,6 +43,7 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
      */
     public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
     {
+        /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
 

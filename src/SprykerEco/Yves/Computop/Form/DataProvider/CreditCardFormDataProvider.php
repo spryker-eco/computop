@@ -39,7 +39,7 @@ class CreditCardFormDataProvider extends AbstractFormDataProvider
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {

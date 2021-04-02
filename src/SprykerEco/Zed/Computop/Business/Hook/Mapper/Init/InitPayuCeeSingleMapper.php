@@ -74,12 +74,13 @@ class InitPayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPayuCeeSinglePaymentTransfer
      *
      * @return array
      */
     protected function getDataSubArray(TransferInterface $computopPayuCeeSinglePaymentTransfer): array
     {
+        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
         return [
             ComputopApiConfig::MERCHANT_ID => $computopPayuCeeSinglePaymentTransfer->getMerchantId(),
             ComputopApiConfig::TRANS_ID => $computopPayuCeeSinglePaymentTransfer->getTransId(),
