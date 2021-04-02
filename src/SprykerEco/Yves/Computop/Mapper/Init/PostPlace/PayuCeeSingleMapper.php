@@ -74,7 +74,7 @@ class PayuCeeSingleMapper extends AbstractMapper
      *
      * @return string
      */
-    private function getArticleList($items): string
+    protected function getArticleList($items): string
     {
         $out = [];
         foreach ($items as $item) {
@@ -94,7 +94,7 @@ class PayuCeeSingleMapper extends AbstractMapper
      *
      * @return void
      */
-    private function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer): void
+    protected function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer): void
     {
         $paymentTransfer->setFirstName($customer->getFirstName());
         $paymentTransfer->setLastName($customer->getLastName());
