@@ -197,7 +197,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createPayuCeeSingleResponseSaver(): InitResponseSaverInterface
     {
-        return new PayuCeeSingleResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new PayuCeeSingleResponseSaver(
+            $this->getQueryContainer(),
+            $this->getOmsFacade(),
+            $this->getConfig(),
+            $this->getEntityManager()
+        );
     }
 
     /**

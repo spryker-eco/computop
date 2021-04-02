@@ -47,6 +47,7 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
+use SprykerEco\Zed\Computop\Persistence\ComputopEntityManager;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
@@ -461,6 +462,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getConfig',
                 'getMoneyFacade',
                 'getComputopApiFacade',
+                'getEntityManager',
             ]
         );
 
@@ -475,6 +477,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->willReturn($moneyFacadeStub);
         $stub->method('getComputopApiFacade')
             ->willReturn($this->createComputopApiFacade());
+        $stub->method('getEntityManager')
+            ->willReturn(new ComputopEntityManager());
 
         return $stub;
     }

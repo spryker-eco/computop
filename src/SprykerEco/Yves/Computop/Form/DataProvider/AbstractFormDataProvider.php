@@ -28,7 +28,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|null
      */
     abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer);
 

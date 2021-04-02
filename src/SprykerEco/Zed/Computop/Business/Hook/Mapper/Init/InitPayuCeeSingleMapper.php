@@ -34,27 +34,33 @@ class InitPayuCeeSingleMapper extends AbstractMapper
     ): TransferInterface {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
-        $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $computopPaymentTransfer->setMac(
-            $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
-        );
+        $computopPaymentTransfer
+            ->setMerchantId($this->config->getMerchantId())
+            ->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+
+        $requestTransfer = $this->createRequestTransfer($computopPaymentTransfer);
+        $encryptedMac = $this->computopApiService->generateEncryptedMac($requestTransfer);
+        $computopPaymentTransfer->setMac($encryptedMac);
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
             $this->config->getBlowfishPass()
         );
 
-        if (isset($decryptedValues[ComputopApiConfig::LENGTH], $decryptedValues[ComputopApiConfig::DATA])) {
-            $length = $decryptedValues[ComputopApiConfig::LENGTH];
-            $data = $decryptedValues[ComputopApiConfig::DATA];
-
-            $computopPaymentTransfer->setData($data);
-            $computopPaymentTransfer->setLen($length);
-            $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+        if (!isset($decryptedValues[ComputopApiConfig::LENGTH], $decryptedValues[ComputopApiConfig::DATA])) {
+            return $computopPaymentTransfer;
         }
+
+        $urlToComputop = $this->getUrlToComputop(
+            $computopPaymentTransfer->getMerchantId(),
+            $decryptedValues[ComputopApiConfig::DATA],
+            $decryptedValues[ComputopApiConfig::LENGTH]
+        );
+
+        $computopPaymentTransfer
+            ->setData($decryptedValues[ComputopApiConfig::DATA])
+            ->setLen($decryptedValues[ComputopApiConfig::LENGTH])
+            ->setUrl($urlToComputop);
 
         return $computopPaymentTransfer;
     }

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as ConputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
@@ -425,5 +426,22 @@ class ComputopConfig extends AbstractBundleConfig
     public function getIdealIssuerId(): string
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
+    }
+
+    /**
+     * Specification:
+     * - Get COMPUTOP payment methods with computop init payment transfer
+     *
+     * @api
+     *
+     * @return string[]
+     */
+    public function getPaymentMethodsWithInitPaymentTransfer(): array
+    {
+        return [
+            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+        ];
     }
 }

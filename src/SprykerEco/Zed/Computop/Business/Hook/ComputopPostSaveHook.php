@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ConputopSharedConfig;
+use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -63,13 +64,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
-        if (
-            in_array($payment->getPaymentSelection(), [
-            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
-            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
-            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
-            ])
-        ) {
+        if (in_array($payment->getPaymentSelection(), $this->config->getPaymentMethodsWithInitPaymentTransfer())) {
             $checkoutResponseTransfer->setComputopInitPayment(
                 (new ComputopInitPaymentTransfer())
                     ->setData($computopPaymentTransfer->getData())
@@ -100,12 +95,14 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     /**
      * @param string $methodName
      *
+     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
+     *
      * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface|null
      */
     protected function getMethodMapper($methodName)
     {
         if (isset($this->methodMappers[$methodName]) === false) {
-            return null;
+            throw new ComputopMethodMapperException('The method mapper is not registered.');
         }
 
         return $this->methodMappers[$methodName];
@@ -116,7 +113,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
     protected function getPaymentTransfer(QuoteTransfer $quoteTransfer)
     {

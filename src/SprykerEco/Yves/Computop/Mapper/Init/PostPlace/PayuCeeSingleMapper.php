@@ -15,7 +15,7 @@ use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
-class PayUCeeSingleMapper extends AbstractMapper
+class PayuCeeSingleMapper extends AbstractMapper
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

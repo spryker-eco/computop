@@ -22,16 +22,16 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         $payment = $quoteTransfer->getPayment();
-
         if (!$payment) {
             return $quoteTransfer;
         }
 
-        if ($payment->getComputopPayuCeeSingle() === null) {
+        if (!$payment->getComputopPayuCeeSingle()) {
             $payment->setComputopPayuCeeSingle(new ComputopPayuCeeSinglePaymentTransfer());
         }
 
         $payment->getComputopPayuCeeSingle()->setPayuCeeSingleInitResponse($responseTransfer);
+        $quoteTransfer->setPayment($payment);
 
         return $quoteTransfer;
     }

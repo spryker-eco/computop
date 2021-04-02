@@ -1,0 +1,4 @@
+parameters:
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Call to method (computop|quote|calculation|utilEncoding|country|computopApi)\(\) on an unknown class .+AutoCompletion#'

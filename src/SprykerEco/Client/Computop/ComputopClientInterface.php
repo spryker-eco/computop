@@ -54,7 +54,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayU CEE Single response to DB
+     * - Saves PayU CEE Single response to the database.
      *
      * @api
      *

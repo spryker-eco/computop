@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Order;
 
 use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
+use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\CreditCardMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\DirectDebitMapper;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\EasyCreditMapper;
@@ -91,7 +92,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayuCeeSingleMapper
      */
-    public function createInitPayuCeeSingleMapper(): PayuCeeSingleMapper
+    public function createInitPayuCeeSingleMapper(): MapperInterface
     {
         return new PayuCeeSingleMapper();
     }
