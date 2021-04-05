@@ -86,6 +86,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      */
     protected function setRedirect(TransferInterface $computopPaymentTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());
