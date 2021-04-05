@@ -35,7 +35,7 @@ class OrderManager implements OrderManagerInterface
     protected $activeMapper;
 
     /**
-     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
     protected $computopTransfer;
 

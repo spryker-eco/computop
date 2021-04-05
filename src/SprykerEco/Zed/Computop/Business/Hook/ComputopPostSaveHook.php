@@ -62,6 +62,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
         if (in_array($payment->getPaymentSelection(), $this->config->getPaymentMethodsWithInitPaymentTransfer())) {
