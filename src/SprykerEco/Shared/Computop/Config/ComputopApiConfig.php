@@ -146,4 +146,6 @@ interface ComputopApiConfig
     public const PSD2_MSG_VERSION = '2.0';
     public const UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION = 'CIT';
     public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
+    public const TAX_TOTAL = 'TaxTotal';
+    public const ITEM_TOTAL = 'ItemTotal';
 }

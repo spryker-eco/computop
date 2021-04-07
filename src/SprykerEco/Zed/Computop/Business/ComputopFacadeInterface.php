@@ -212,7 +212,7 @@ interface ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
 
@@ -237,7 +237,7 @@ interface ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 

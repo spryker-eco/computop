@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
@@ -31,6 +32,17 @@ class PayPalMapper extends AbstractMapper
                 $this->createRequestTransfer($computopPaymentTransfer)
             )
         );
+
+        $taxTotal = 0;
+        foreach ($quoteTransfer->getItems() as $item) {
+            $computopPaymentTransfer->addOrderDescriptions($this->getItemOrderDescription($item));
+            $taxTotal += $item->getQuantity() * $item->getUnitTaxAmount();
+        }
+
+        $totals = $quoteTransfer->getTotals();
+        $computopPaymentTransfer->setTaxTotal($taxTotal);
+        $computopPaymentTransfer->setShAmount($totals->getShipmentTotal());
+        $computopPaymentTransfer->setItemTotal($totals->getGrandTotal() - $totals->getShipmentTotal() - $taxTotal);
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
@@ -119,14 +131,24 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayPalPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayPalPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayPalPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayPalPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayPalPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayPalPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::CAPTURE] = $computopPayPalPaymentTransfer->getCapture();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayPalPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $computopPayPalPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayPalPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
+        foreach ($computopPayPalPaymentTransfer->getOrderDescriptions() as $key => $orderDesc) {
+            $dataSubArray[ComputopApiConfig::ORDER_DESC . ($key + 2)] = $orderDesc;
+        }
+
+        $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
+        $dataSubArray[ComputopApiConfig::ITEM_TOTAL] = $computopPayPalPaymentTransfer->getItemTotal();
+        $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $computopPayPalPaymentTransfer->getShAmount();
+
+        $dataSubArray[ComputopApiConfig::MAC] = $computopPayPalPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayPalPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayPalPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayPalPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayPalPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::REQ_ID] = $computopPayPalPaymentTransfer->getReqId();
+
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayPalPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayPalPaymentTransfer->getShippingZip();
@@ -155,5 +177,22 @@ class PayPalMapper extends AbstractMapper
         }
 
         return $dataSubArray;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer $item
+     *
+     * @return string
+     */
+    protected function getItemOrderDescription(ItemTransfer $item): string
+    {
+        return implode(',', [
+            $item->getName(),
+            $item->getUnitGrossPrice() - $item->getUnitTaxAmount(),
+            $item->getSku(),
+            $item->getQuantity(),
+            '',
+            $item->getUnitTaxAmount(),
+        ]);
     }
 }

@@ -15,7 +15,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -168,8 +167,6 @@ class CallbackController extends AbstractController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
