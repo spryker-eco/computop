@@ -108,4 +108,14 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getEtiId(): string;
+
+    /**
+     * Specification:
+     * - Max items for orderDesc(n) field for PayPal payment page.
+     *
+     * @api
+     *
+     * @return int
+     */
+    public function getMaxOrderDescItemsForPayPalPaymentPage(): int;
 }

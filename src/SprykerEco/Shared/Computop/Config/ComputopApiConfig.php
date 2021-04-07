@@ -146,6 +146,19 @@ interface ComputopApiConfig
     public const PSD2_MSG_VERSION = '2.0';
     public const UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION = 'CIT';
     public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
+    /**
+     * Specification:
+     * - PayPal payment method field for total taxes.
+     *
+     * @api
+     */
     public const TAX_TOTAL = 'TaxTotal';
+
+    /**
+     * Specification:
+     * - PayPal payment method field for summary (without taxes and shipping).
+     *
+     * @api
+     */
     public const ITEM_TOTAL = 'ItemTotal';
 }

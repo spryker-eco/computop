@@ -219,4 +219,16 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     {
         return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
     }
+
+    /**
+     * @inheriDoc
+     *
+     * @api
+     *
+     * @return int
+     */
+    public function getMaxOrderDescItemsForPayPalPaymentPage(): int
+    {
+        return 98;
+    }
 }

@@ -18,7 +18,7 @@ interface ComputopClientInterface
 {
     /**
      * Specification:
-     * - Saves response log to DB
+     * - Persists response log to the database.
      *
      * @api
      *
@@ -30,7 +30,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Sofort response to DB
+     * - Persists Sofort response to the database.
      *
      * @api
      *
@@ -42,7 +42,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Ideal response to DB
+     * - Persists Ideal response to the database.
      *
      * @api
      *
@@ -54,7 +54,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Paydirekt response to DB
+     * - Persists Paydirekt response to the database.
      *
      * @api
      *
@@ -66,7 +66,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves CreditCard response to DB
+     * - Persists CreditCard response to the database.
      *
      * @api
      *
@@ -78,7 +78,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayNow response to DB
+     * - Persists PayNow response to the database.
      *
      * @api
      *
@@ -90,7 +90,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayPal response to DB
+     * - Persists PayPal response to the database.
      *
      * @api
      *
@@ -102,7 +102,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves DirectDebit response to DB
+     * - Persists DirectDebit response to the database.
      *
      * @api
      *
@@ -114,7 +114,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves EasyCredit response to DB
+     * - Persists EasyCredit response to the database.
      *
      * @api
      *
@@ -163,7 +163,7 @@ interface ComputopClientInterface
     /**
      * Specification:
      * - Performs Zed call.
-     * - Saves push notification entity into DB.
+     * - Persists push notification entity into the database.
      * - Updates related computop order items with payment confirmation status.
      *
      * @api

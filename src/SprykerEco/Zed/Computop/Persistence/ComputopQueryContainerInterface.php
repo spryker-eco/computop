@@ -11,7 +11,7 @@ interface ComputopQueryContainerInterface
 {
     /**
      * Specification:
-     * - Returns SpyPaymentComputopQuery filtered by ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by ID.
      *
      * @api
      *
@@ -23,7 +23,7 @@ interface ComputopQueryContainerInterface
 
     /**
      * Specification:
-     * - Returns SpyPaymentComputopQuery filtered by order ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by order ID.
      *
      * @api
      *
@@ -35,7 +35,7 @@ interface ComputopQueryContainerInterface
 
     /**
      * Specification:
-     * - Returns SpyPaymentComputopQuery filtered by pay ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by pay ID.
      *
      * @api
      *
@@ -47,7 +47,7 @@ interface ComputopQueryContainerInterface
 
     /**
      *  Specification:
-     * - Returns SpyPaymentComputopQuery filtered by transaction ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by transaction ID.
      *
      * @api
      *
@@ -59,7 +59,7 @@ interface ComputopQueryContainerInterface
 
     /**
      *  Specification:
-     * - Returns SpyPaymentComputopQuery filtered by order item ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by order item ID.
      *
      * @api
      *
@@ -71,7 +71,7 @@ interface ComputopQueryContainerInterface
 
     /**
      *  Specification:
-     * - Returns SpySalesOrderItemQuery filtered by order ID.
+     * - Returns `SpySalesOrderItemQuery` filtered by order ID.
      *
      * @api
      *

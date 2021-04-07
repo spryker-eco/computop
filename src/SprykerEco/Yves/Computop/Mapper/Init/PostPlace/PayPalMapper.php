@@ -7,9 +7,11 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
+use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -33,16 +35,7 @@ class PayPalMapper extends AbstractMapper
             )
         );
 
-        $taxTotal = 0;
-        foreach ($quoteTransfer->getItems() as $item) {
-            $computopPaymentTransfer->addOrderDescriptions($this->getItemOrderDescription($item));
-            $taxTotal += $item->getQuantity() * $item->getUnitTaxAmount();
-        }
-
-        $totals = $quoteTransfer->getTotals();
-        $computopPaymentTransfer->setTaxTotal($taxTotal);
-        $computopPaymentTransfer->setShAmount($totals->getShipmentTotal());
-        $computopPaymentTransfer->setItemTotal($totals->getGrandTotal() - $totals->getShipmentTotal() - $taxTotal);
+        $this->addOrderItemsDetails($computopPaymentTransfer, $quoteTransfer->getItems(), $quoteTransfer->getTotals());
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
@@ -135,7 +128,7 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayPalPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
         foreach ($computopPayPalPaymentTransfer->getOrderDescriptions() as $key => $orderDesc) {
-            $dataSubArray[ComputopApiConfig::ORDER_DESC . ($key + 2)] = $orderDesc;
+            $dataSubArray[$this->getOrderItemDescKey($key)] = $orderDesc;
         }
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
@@ -194,5 +187,44 @@ class PayPalMapper extends AbstractMapper
             '',
             $item->getUnitTaxAmount(),
         ]);
+    }
+
+    /**
+     * Order item description for items should start from OrderDesc2 to OrderDesc99
+     *
+     * @param int $key
+     *
+     * @return string
+     */
+    protected function getOrderItemDescKey(int $key): string
+    {
+        return ComputopApiConfig::ORDER_DESC . ($key + 2);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer
+     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $items
+     * @param \Generated\Shared\Transfer\TotalsTransfer $totals
+     *
+     * @return void
+     */
+    protected function addOrderItemsDetails(
+        ComputopPayPalPaymentTransfer $computopPaymentTransfer,
+        ArrayObject $items,
+        TotalsTransfer $totals
+    ): void {
+        if ($items->count() > $this->config->getMaxOrderDescItemsForPayPalPaymentPage()) {
+            return;
+        }
+
+        $taxTotal = 0;
+        foreach ($items as $item) {
+            $computopPaymentTransfer->addOrderDescriptions($this->getItemOrderDescription($item));
+            $taxTotal += $item->getQuantity() * $item->getUnitTaxAmount();
+        }
+
+        $computopPaymentTransfer->setTaxTotal($taxTotal);
+        $computopPaymentTransfer->setShAmount($totals->getShipmentTotal());
+        $computopPaymentTransfer->setItemTotal($totals->getGrandTotal() - $totals->getShipmentTotal() - $taxTotal);
     }
 }
