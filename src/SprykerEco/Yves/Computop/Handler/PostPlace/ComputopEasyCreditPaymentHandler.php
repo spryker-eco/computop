@@ -61,7 +61,7 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

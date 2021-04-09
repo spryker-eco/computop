@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
+use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
@@ -21,8 +22,6 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     protected $computopEntityManager;
 
     /**
-     * @inheriDoc
-     *
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
      * @param \SprykerEco\Zed\Computop\ComputopConfig $config
@@ -46,16 +45,25 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return $quoteTransfer;
         }
 
+        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
-            $this->computopEntityManager->savePaymentEntity($this->getPaymentEntity(), $responseTransfer);
+            $this->executeSavePaymentResponseTransaction($responseTransfer);
         });
 
         return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    protected function executeSavePaymentResponseTransaction(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
+    {
+        $this->computopEntityManager->savePaymentResponse($responseTransfer);
     }
 }

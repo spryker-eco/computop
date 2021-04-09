@@ -217,13 +217,13 @@
         <property name="refNr" type="string"/>
         <property name="capture" type="string"/>
         <property name="shopApiKey" type="string"/>
-        <property name="shippingAmount" type="string"/>
+        <property name="shippingAmount" type="int"/>
         <property name="shippingFirstName" type="string"/>
         <property name="shippingLastName" type="string"/>
         <property name="shippingZip" type="string"/>
         <property name="shippingCity" type="string"/>
         <property name="shippingCountryCode" type="string"/>
-        <property name="shoppingBasketAmount" type="string"/>
+        <property name="shoppingBasketAmount" type="int"/>
         <property name="articleList" type="string"/>
         <property name="email" type="string"/>
         <property name="minAge" type="string"/>

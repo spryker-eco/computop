@@ -82,7 +82,7 @@ interface ComputopConfigInterface
     /**
      * @return string|null
      */
-    public function getPayuCeeSingleInitAction(): ?string;
+    public function getPayuCeeSingleInitActionUrl(): ?string;
 
     /**
      * @return bool

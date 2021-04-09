@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
-use SprykerEco\Shared\Computop\ComputopConfig as ConputopSharedConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
@@ -430,18 +430,18 @@ class ComputopConfig extends AbstractBundleConfig
 
     /**
      * Specification:
-     * - Get COMPUTOP payment methods with computop init payment transfer
+     * - Returns COMPUTOP payment methods with an external redirect.
      *
      * @api
      *
      * @return string[]
      */
-    public function getPaymentMethodsWithInitPaymentTransfer(): array
+    public function getPaymentMethodsWithExternalRedirect(): array
     {
         return [
-            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
-            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
-            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+            ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
         ];
     }
 }

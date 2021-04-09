@@ -34,7 +34,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return array|\Propel\Runtime\Collection\ObjectCollection
      */
     public function getCanceledItems(OrderTransfer $orderTransfer)
     {

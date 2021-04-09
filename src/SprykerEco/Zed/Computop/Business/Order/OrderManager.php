@@ -25,12 +25,12 @@ class OrderManager implements OrderManagerInterface
     use TransactionTrait;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface[]
      */
     protected $mappers;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface|\SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     protected $activeMapper;
 
@@ -40,7 +40,7 @@ class OrderManager implements OrderManagerInterface
     protected $computopTransfer;
 
     /**
-     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @var \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer
      */
     protected $computopResponseTransfer;
 
@@ -172,6 +172,7 @@ class OrderManager implements OrderManagerInterface
 
     /**
      * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
+     * @phpstan-param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $orderItemTransfers
      * @param int $idPayment
      *
      * @return void

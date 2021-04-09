@@ -46,7 +46,7 @@ class InitPayPalConverter extends AbstractInitConverter
         $responseTransfer->setBillingAddressZip($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_ADDRESS_ZIP));
         $responseTransfer->setBillingName($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_NAME));
         $responseTransfer->setPayerId($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PAYER_ID));
-        $responseTransfer->setIsFinancing($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::IS_FINANCING));
+        $responseTransfer->setIsFinancing((bool)$this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::IS_FINANCING));
         $responseTransfer->setFinancingFeeAmount($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::FINANCING_FEE_AMOUNT));
         $responseTransfer->setFinancingMonthlyPayment($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::FINANCING_MONTHLY_PAYMENT));
         $responseTransfer->setFinancingTerm($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::FINANCING_TERM));

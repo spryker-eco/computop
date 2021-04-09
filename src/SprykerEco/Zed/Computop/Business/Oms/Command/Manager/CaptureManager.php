@@ -14,7 +14,7 @@ class CaptureManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
     public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer)
     {
@@ -22,9 +22,7 @@ class CaptureManager extends AbstractManager
             ->queryContainer
             ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
             ->useStateQuery()
-            ->filterByName_In(
-                (array)$this->config->getBeforeCaptureStatuses()
-            )
+            ->filterByName_In((array)$this->config->getBeforeCaptureStatuses())
             ->endUse()
             ->find();
     }
@@ -32,7 +30,7 @@ class CaptureManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
     public function getAllItems(OrderTransfer $orderTransfer)
     {

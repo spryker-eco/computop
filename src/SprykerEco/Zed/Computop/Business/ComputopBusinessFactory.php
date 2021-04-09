@@ -279,7 +279,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\EasyCreditStatusHandler
      */
     public function createEasyCreditStatusHandler(): PrePlaceHandlerInterface
     {

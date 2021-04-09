@@ -71,6 +71,7 @@ class PayuCeeSingleMapper extends AbstractMapper
 
     /**
      * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $items
+     * @phpstan-param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $items
      *
      * @return string
      */
@@ -79,7 +80,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         $out = [];
         foreach ($items as $item) {
             $out[] = implode(',', [
-                str_replace([',', '+'], ' ', $item->getName()),
+                $this->replaceForbiddenCharacters($item->getName()),
                 $item->getUnitPrice(),
                 $item->getQuantity(),
             ]);
@@ -92,13 +93,27 @@ class PayuCeeSingleMapper extends AbstractMapper
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $paymentTransfer
      * @param \Generated\Shared\Transfer\CustomerTransfer $customer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
      */
-    protected function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer): void
-    {
+    protected function setCustomerData(
+        ComputopPayuCeeSinglePaymentTransfer $paymentTransfer,
+        CustomerTransfer $customer
+    ): ComputopPayuCeeSinglePaymentTransfer {
         $paymentTransfer->setFirstName($customer->getFirstName());
         $paymentTransfer->setLastName($customer->getLastName());
         $paymentTransfer->setEmail($customer->getEmail());
         $paymentTransfer->setPhone($customer->getPhone());
+
+        return $paymentTransfer;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function replaceForbiddenCharacters(string $name): string
+    {
+        return str_replace([',', '+'], ' ', $name);
     }
 }

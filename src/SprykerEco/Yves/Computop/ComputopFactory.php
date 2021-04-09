@@ -220,7 +220,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider
      */
-    public function createPayUCeeSingleFormDataProvider(): PayuCeeSingleFormDataProvider
+    public function createPayuCeeSingleFormDataProvider(): PayuCeeSingleFormDataProvider
     {
         return new PayuCeeSingleFormDataProvider($this->getQuoteClient(), $this->createOrderPayuCeeSingleMapper());
     }

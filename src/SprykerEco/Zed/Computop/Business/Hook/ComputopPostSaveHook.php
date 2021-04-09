@@ -65,17 +65,17 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
-        if (in_array($payment->getPaymentSelection(), $this->config->getPaymentMethodsWithInitPaymentTransfer())) {
-            $checkoutResponseTransfer->setComputopInitPayment(
-                (new ComputopInitPaymentTransfer())
-                    ->setData($computopPaymentTransfer->getData())
-                    ->setLen($computopPaymentTransfer->getLen())
-            );
-
-            return $checkoutResponseTransfer;
+        if (!in_array($payment->getPaymentSelection(), $this->config->getPaymentMethodsWithExternalRedirect())) {
+            return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
         }
 
-        return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
+        $checkoutResponseTransfer->setComputopInitPayment(
+            (new ComputopInitPaymentTransfer())
+                ->setData($computopPaymentTransfer->getData())
+                ->setLen($computopPaymentTransfer->getLen())
+        );
+
+        return $checkoutResponseTransfer;
     }
 
     /**
@@ -99,7 +99,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface|null
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
     protected function getMethodMapper($methodName)
     {

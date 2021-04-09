@@ -19,7 +19,7 @@ class PayuCeeSingleSubFormPlugin extends AbstractPlugin implements SubFormPlugin
 {
     /**
      * {@inheritDoc}
-     * - Create and return PayuCeeSingleSubForm
+     * - Returns the `PayuCeeSingleSubForm` form.
      *
      * @api
      *
@@ -32,7 +32,7 @@ class PayuCeeSingleSubFormPlugin extends AbstractPlugin implements SubFormPlugin
 
     /**
      * {@inheritDoc}
-     * - Create and return PayuCeeSingleFormDataProvider
+     * - Returns the `PayuCeeSingleFormDataProvider` data provider.
      *
      * @api
      *
@@ -40,6 +40,6 @@ class PayuCeeSingleSubFormPlugin extends AbstractPlugin implements SubFormPlugin
      */
     public function createSubFormDataProvider(): PayuCeeSingleFormDataProvider
     {
-        return $this->getFactory()->createPayUCeeSingleFormDataProvider();
+        return $this->getFactory()->createPayuCeeSingleFormDataProvider();
     }
 }

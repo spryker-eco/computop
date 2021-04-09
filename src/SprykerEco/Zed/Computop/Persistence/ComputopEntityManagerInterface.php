@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail as ChildSpyPaymentComputopDetail;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -32,12 +31,11 @@ interface ComputopEntityManagerInterface
     ): bool;
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|\Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
      *
      * @return void
      */
-    public function savePaymentEntity(SpyPaymentComputop $paymentEntity, TransferInterface $responseTransfer): void;
+    public function savePaymentResponse(TransferInterface $responseTransfer): void;
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentEntityDetails

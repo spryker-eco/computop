@@ -56,7 +56,7 @@ class InitPaydirektMapper extends AbstractMapper
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer
      *
      * @return array
      */

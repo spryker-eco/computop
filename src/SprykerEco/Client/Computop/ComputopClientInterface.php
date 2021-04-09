@@ -18,7 +18,7 @@ interface ComputopClientInterface
 {
     /**
      * Specification:
-     * - Saves response log to DB
+     * - Saves response log the database.
      *
      * @api
      *
@@ -30,7 +30,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Sofort response to DB
+     * - Saves Sofort response the database.
      *
      * @api
      *
@@ -42,7 +42,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Ideal response to DB
+     * - Saves Ideal response the database.
      *
      * @api
      *
@@ -54,7 +54,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayU CEE Single response to the database.
+     * - Saves PayU CEE Single response the database.
      *
      * @api
      *
@@ -66,7 +66,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Paydirekt response to DB
+     * - Saves Paydirekt response the database.
      *
      * @api
      *
@@ -78,7 +78,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves CreditCard response to DB
+     * - Saves CreditCard response the database.
      *
      * @api
      *
@@ -90,7 +90,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayNow response to DB
+     * - Saves PayNow response the database.
      *
      * @api
      *
@@ -102,7 +102,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayPal response to DB
+     * - Saves PayPal response the database.
      *
      * @api
      *
@@ -114,7 +114,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves DirectDebit response to DB
+     * - Saves DirectDebit response the database.
      *
      * @api
      *
@@ -126,7 +126,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves EasyCredit response to DB
+     * - Saves EasyCredit response the database.
      *
      * @api
      *
@@ -175,7 +175,7 @@ interface ComputopClientInterface
     /**
      * Specification:
      * - Performs Zed call.
-     * - Saves push notification entity into DB.
+     * - Saves push notification entity into the database.
      * - Updates related computop order items with payment confirmation status.
      *
      * @api
