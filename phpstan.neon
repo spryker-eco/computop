@@ -1,5 +1,3 @@
 parameters:
     checkMissingIterableValueType: false
-    ignoreErrors:
-        - '#Call to method (computop|quote|calculation|utilEncoding|country|computopApi|sales|oms|messenger|money|refund)\(\) on an unknown class .+AutoCompletion#'
-        - '#Call to an undefined method .+LocatorLocatorInterface::.+\(\)#'
+

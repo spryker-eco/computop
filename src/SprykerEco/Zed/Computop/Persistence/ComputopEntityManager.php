@@ -81,8 +81,8 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->requireXid();
 
         $paymentEntity = $this->getFactory()
-            ->getQueryContainer()
-            ->queryPaymentByTransactionId($header->getTransId())
+            ->createPaymentComputopQuery()
+            ->filterByTransId($header->getTransId())
             ->findOne();
 
         $paymentEntity

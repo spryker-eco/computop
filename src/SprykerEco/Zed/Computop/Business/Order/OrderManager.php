@@ -171,8 +171,9 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
      * @phpstan-param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $orderItemTransfers
+     *
+     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
      * @param int $idPayment
      *
      * @return void

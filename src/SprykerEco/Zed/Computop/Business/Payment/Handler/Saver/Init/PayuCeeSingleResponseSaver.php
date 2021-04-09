@@ -49,7 +49,6 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
             return $quoteTransfer;
         }
 
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
             $this->executeSavePaymentResponseTransaction($responseTransfer);
         });

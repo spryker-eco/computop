@@ -70,8 +70,9 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $items
      * @phpstan-param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $items
+     *
+     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $items
      *
      * @return string
      */
