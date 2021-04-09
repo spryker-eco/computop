@@ -221,7 +221,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
-     * @inheriDoc
+     * {@inheriDoc}
      *
      * @api
      *
