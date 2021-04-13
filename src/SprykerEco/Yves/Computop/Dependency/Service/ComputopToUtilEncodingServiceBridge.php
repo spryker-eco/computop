@@ -17,7 +17,7 @@ class ComputopToUtilEncodingServiceBridge implements ComputopToUtilEncodingServi
     /**
      * @param \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService
      */
-    public function __construct(\Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService)
+    public function __construct($utilEncodingService)
     {
         $this->utilEncodingService = $utilEncodingService;
     }

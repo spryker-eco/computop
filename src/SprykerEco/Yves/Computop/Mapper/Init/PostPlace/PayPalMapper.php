@@ -11,7 +11,6 @@ use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Shared\Transfer\TotalsTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -68,7 +67,7 @@ class PayPalMapper extends AbstractMapper
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return int
      */
@@ -151,8 +150,9 @@ class PayPalMapper extends AbstractMapper
 
         $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
         foreach ($orderDescriptions as $key => $orderDesc) {
-            if ($key < 2)
-            $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDesc;
+            if ($key < 2) {
+                $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDesc;
+            }
         }
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
@@ -228,9 +228,8 @@ class PayPalMapper extends AbstractMapper
     /**
      * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer
      * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $itemTransfers
-     * @param \Generated\Shared\Transfer\TotalsTransfer $totals
      *
-     * @return ComputopPayPalPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
     protected function addOrderDescriptions(
         ComputopPayPalPaymentTransfer $computopPaymentTransfer,

@@ -21,7 +21,6 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
     protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
 
-
     /**
      * @api
      *

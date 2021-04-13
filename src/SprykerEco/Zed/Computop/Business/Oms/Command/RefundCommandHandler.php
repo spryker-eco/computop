@@ -9,6 +9,9 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
+/**
+ * @property \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager $manager
+ */
 class RefundCommandHandler extends AbstractCommandHandler
 {
     /**
@@ -31,9 +34,6 @@ class RefundCommandHandler extends AbstractCommandHandler
      */
     protected function getAmount(OrderTransfer $orderTransfer)
     {
-        /** @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager $refundManager */
-        $refundManager = $this->manager;
-
-        return $refundManager->getAmount($orderTransfer);
+        return $this->manager->getAmount($orderTransfer);
     }
 }
