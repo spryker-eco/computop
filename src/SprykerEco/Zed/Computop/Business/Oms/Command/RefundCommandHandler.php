@@ -31,6 +31,9 @@ class RefundCommandHandler extends AbstractCommandHandler
      */
     protected function getAmount(OrderTransfer $orderTransfer)
     {
-        return $this->manager->getAmount($orderTransfer);
+        /** @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager $refundManager */
+        $refundManager = $this->manager;
+
+        return $refundManager->getAmount($orderTransfer);
     }
 }

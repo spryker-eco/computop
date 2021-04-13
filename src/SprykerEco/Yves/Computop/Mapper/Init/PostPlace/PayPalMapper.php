@@ -37,9 +37,14 @@ class PayPalMapper extends AbstractMapper
 
         $computopPaymentTransfer = $this->addOrderDescriptions(
             $computopPaymentTransfer,
-            $quoteTransfer->getItems(),
-            $quoteTransfer->getTotals()
+            $quoteTransfer->getItems()
         );
+
+        $computopPaymentTransfer->setTaxTotal($quoteTransfer->getTotals()->getTaxTotal()->getAmount());
+        $computopPaymentTransfer->setShAmount($quoteTransfer->getTotals()->getShipmentTotal());
+
+        $itemTotal = $this->calculateItemTotal($quoteTransfer);
+        $computopPaymentTransfer->setItemTotal($itemTotal);
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
@@ -60,6 +65,18 @@ class PayPalMapper extends AbstractMapper
         );
 
         return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return int
+     */
+    protected function calculateItemTotal(QuoteTransfer $quoteTransfer): int
+    {
+        return $quoteTransfer->getTotals()->getGrandTotal() -
+            $quoteTransfer->getTotals()->getShipmentTotal() -
+            $quoteTransfer->getTotals()->getTaxTotal()->getAmount();
     }
 
     /**
@@ -217,22 +234,15 @@ class PayPalMapper extends AbstractMapper
      */
     protected function addOrderDescriptions(
         ComputopPayPalPaymentTransfer $computopPaymentTransfer,
-        ArrayObject $itemTransfers,
-        TotalsTransfer $totals
+        ArrayObject $itemTransfers
     ): ComputopPayPalPaymentTransfer {
         if ($itemTransfers->count() > $this->config->getMaxOrderDescriptionItemsForPayPalPaymentPage()) {
             return $computopPaymentTransfer;
         }
 
-        $taxTotal = $totals->getTaxTotal()->getAmount();
         foreach ($itemTransfers as $item) {
             $computopPaymentTransfer->addOrderDescriptions($this->getItemOrderDescription($item));
-            $taxTotal += $item->getQuantity() * $item->getUnitTaxAmount();
         }
-
-        $computopPaymentTransfer->setTaxTotal($taxTotal);
-        $computopPaymentTransfer->setShAmount($totals->getShipmentTotal());
-        $computopPaymentTransfer->setItemTotal($totals->getGrandTotal() - $totals->getShipmentTotal() - $taxTotal);
 
         return $computopPaymentTransfer;
     }

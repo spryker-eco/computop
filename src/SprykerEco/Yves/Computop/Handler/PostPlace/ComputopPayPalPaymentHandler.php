@@ -26,6 +26,7 @@ class ComputopPayPalPaymentHandler extends AbstractPostPlacePaymentHandler
             $quoteTransfer->getPayment()->setComputopPayPal($computopTransfer);
         }
 
+        /** @var \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPayPal()->setPayPalInitResponse(
             $responseTransfer
         );

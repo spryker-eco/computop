@@ -28,6 +28,7 @@ class PayPalFormDataProvider extends AbstractFormDataProvider
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
+            /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopTransfer */
             $paymentTransfer->setComputopPayPal($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
             $this->quoteClient->setQuote($quoteTransfer);

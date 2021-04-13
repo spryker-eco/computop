@@ -14,7 +14,7 @@ class CaptureManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return iterable
      */
     public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer)
     {
@@ -32,7 +32,7 @@ class CaptureManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return iterable
      */
     public function getAllItems(OrderTransfer $orderTransfer)
     {
