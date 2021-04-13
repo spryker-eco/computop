@@ -35,7 +35,11 @@ class PayPalMapper extends AbstractMapper
             )
         );
 
-        $this->addOrderItemsDetails($computopPaymentTransfer, $quoteTransfer->getItems(), $quoteTransfer->getTotals());
+        $computopPaymentTransfer = $this->addOrderDescriptions(
+            $computopPaymentTransfer,
+            $quoteTransfer->getItems(),
+            $quoteTransfer->getTotals()
+        );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
@@ -127,8 +131,11 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::CAPTURE] = $computopPayPalPaymentTransfer->getCapture();
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayPalPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
-        foreach ($computopPayPalPaymentTransfer->getOrderDescriptions() as $key => $orderDesc) {
-            $dataSubArray[$this->getOrderItemDescKey($key)] = $orderDesc;
+
+        $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
+        foreach ($orderDescriptions as $key => $orderDesc) {
+            if ($key < 2)
+            $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDesc;
         }
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
@@ -173,20 +180,20 @@ class PayPalMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $item
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
      * @return string
      */
-    protected function getItemOrderDescription(ItemTransfer $item): string
+    protected function getItemOrderDescription(ItemTransfer $itemTransfer): string
     {
-        return implode(',', [
-            $item->getName(),
-            $item->getUnitGrossPrice() - $item->getUnitTaxAmount(),
-            $item->getSku(),
-            $item->getQuantity(),
-            '',
-            $item->getUnitTaxAmount(),
-        ]);
+        return sprintf(
+            '%s,%f,%s,%d,,%f',
+            $itemTransfer->getName(),
+            $itemTransfer->getSumPrice(),
+            $itemTransfer->getSku(),
+            $itemTransfer->getQuantity(),
+            $itemTransfer->getUnitTaxAmount()
+        );
     }
 
     /**
@@ -196,29 +203,29 @@ class PayPalMapper extends AbstractMapper
      *
      * @return string
      */
-    protected function getOrderItemDescKey(int $key): string
+    protected function getOrderItemDescriptionKey(int $key): string
     {
-        return ComputopApiConfig::ORDER_DESC . ($key + 2);
+        return ComputopApiConfig::ORDER_DESC . $key;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer
-     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $items
+     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $itemTransfers
      * @param \Generated\Shared\Transfer\TotalsTransfer $totals
      *
-     * @return void
+     * @return ComputopPayPalPaymentTransfer
      */
-    protected function addOrderItemsDetails(
+    protected function addOrderDescriptions(
         ComputopPayPalPaymentTransfer $computopPaymentTransfer,
-        ArrayObject $items,
+        ArrayObject $itemTransfers,
         TotalsTransfer $totals
-    ): void {
-        if ($items->count() > $this->config->getMaxOrderDescItemsForPayPalPaymentPage()) {
-            return;
+    ): ComputopPayPalPaymentTransfer {
+        if ($itemTransfers->count() > $this->config->getMaxOrderDescriptionItemsForPayPalPaymentPage()) {
+            return $computopPaymentTransfer;
         }
 
-        $taxTotal = 0;
-        foreach ($items as $item) {
+        $taxTotal = $totals->getTaxTotal()->getAmount();
+        foreach ($itemTransfers as $item) {
             $computopPaymentTransfer->addOrderDescriptions($this->getItemOrderDescription($item));
             $taxTotal += $item->getQuantity() * $item->getUnitTaxAmount();
         }
@@ -226,5 +233,7 @@ class PayPalMapper extends AbstractMapper
         $computopPaymentTransfer->setTaxTotal($taxTotal);
         $computopPaymentTransfer->setShAmount($totals->getShipmentTotal());
         $computopPaymentTransfer->setItemTotal($totals->getGrandTotal() - $totals->getShipmentTotal() - $taxTotal);
+
+        return $computopPaymentTransfer;
     }
 }

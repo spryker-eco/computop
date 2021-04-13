@@ -19,6 +19,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public const RESPONSE_ENCRYPT_TYPE = 'encrypt';
 
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
+    protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
+
 
     /**
      * @api
@@ -227,8 +229,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      *
      * @return int
      */
-    public function getMaxOrderDescItemsForPayPalPaymentPage(): int
+    public function getMaxOrderDescriptionItemsForPayPalPaymentPage(): int
     {
-        return 98;
+        return static::PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS;
     }
 }

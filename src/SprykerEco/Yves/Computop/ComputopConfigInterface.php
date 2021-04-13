@@ -111,11 +111,11 @@ interface ComputopConfigInterface
 
     /**
      * Specification:
-     * - Max items for orderDesc(n) field for PayPal payment page.
+     * - Max items for `orderDesc(n)` field for PayPal payment page.
      *
      * @api
      *
      * @return int
      */
-    public function getMaxOrderDescItemsForPayPalPaymentPage(): int;
+    public function getMaxOrderDescriptionItemsForPayPalPaymentPage(): int;
 }

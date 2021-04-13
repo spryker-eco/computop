@@ -11,7 +11,7 @@ interface ComputopQueryContainerInterface
 {
     /**
      * Specification:
-     * - Returns `SpyPaymentComputopQuery` filtered by ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by payment ID.
      *
      * @api
      *
