@@ -20,6 +20,7 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 class PayPalMapper extends AbstractMapper
 {
     protected const PAYPAL_ITEM_DESCRIPTION_OFFSET = 2;
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -152,7 +153,7 @@ class PayPalMapper extends AbstractMapper
         $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
 
         $orderDescriptionsCount = count($orderDescriptions);
-        for ($key = static::PAYPAL_ITEM_DESCRIPTION_OFFSET; $key < $orderDescriptionsCount; $key++){
+        for ($key = static::PAYPAL_ITEM_DESCRIPTION_OFFSET; $key < $orderDescriptionsCount; $key++) {
             $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDescriptions[$key];
         }
 

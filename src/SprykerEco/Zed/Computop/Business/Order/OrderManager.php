@@ -35,7 +35,7 @@ class OrderManager implements OrderManagerInterface
     protected $activeMapper;
 
     /**
-     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
+     * @var \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     protected $computopTransfer;
 
@@ -131,16 +131,18 @@ class OrderManager implements OrderManagerInterface
     {
         $paymentEntity = new SpyPaymentComputop();
 
-        $paymentEntity->setClientIp($this->computopTransfer->getClientIp());
-        $paymentEntity->setPaymentMethod($paymentTransfer->getPaymentMethod());
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopTransfer */
+        $computopTransfer = $this->computopTransfer;
+        $paymentEntity->setClientIp($computopTransfer->getClientIp());
+        $paymentEntity->setPaymentMethod($computopTransfer->getPaymentMethod());
         $paymentEntity->setReference($saveOrderTransfer->getOrderReference());
         $paymentEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
-        $paymentEntity->setTransId($this->computopTransfer->getTransId());
-        $paymentEntity->setPayId($this->computopTransfer->getPayId());
-        $paymentEntity->setReqId($this->computopTransfer->getReqId());
+        $paymentEntity->setTransId($computopTransfer->getTransId());
+        $paymentEntity->setPayId($computopTransfer->getPayId());
+        $paymentEntity->setReqId($computopTransfer->getReqId());
 
         if ($this->isPaymentMethodEasyCredit()) {
-            $paymentEntity->setXId($this->computopResponseTransfer->getHeader()->getXId());
+            $paymentEntity->setXId($computopTransfer->getHeader()->getXId());
         }
 
         $paymentEntity->save();

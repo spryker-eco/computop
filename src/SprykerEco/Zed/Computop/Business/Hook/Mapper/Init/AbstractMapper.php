@@ -14,6 +14,9 @@ use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
+/**
+ * @method string getActionUrl()
+ */
 abstract class AbstractMapper implements InitMapperInterface
 {
     /**
@@ -67,11 +70,6 @@ abstract class AbstractMapper implements InitMapperInterface
                 ComputopApiConfig::LENGTH => $length,
             ]);
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getActionUrl(): string;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
