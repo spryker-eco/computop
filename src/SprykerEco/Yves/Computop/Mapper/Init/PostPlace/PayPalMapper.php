@@ -19,6 +19,7 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayPalMapper extends AbstractMapper
 {
+    protected const PAYPAL_ITEM_DESCRIPTION_OFFSET = 2;
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -139,7 +140,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer)
+    protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer): array
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayPalPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayPalPaymentTransfer->getAmount();
@@ -149,10 +150,10 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
 
         $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
-        foreach ($orderDescriptions as $key => $orderDesc) {
-            if ($key < 2) {
-                $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDesc;
-            }
+
+        $orderDescriptionsCount = count($orderDescriptions);
+        for ($key = static::PAYPAL_ITEM_DESCRIPTION_OFFSET; $key < $orderDescriptionsCount; $key++){
+            $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDescriptions[$key];
         }
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();

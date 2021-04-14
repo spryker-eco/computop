@@ -46,6 +46,7 @@ abstract class AbstractMapper implements InitMapperInterface
      */
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer->setRefNr($quoteTransfer->getOrderReference());
 
         return $computopPaymentTransfer;
@@ -66,6 +67,11 @@ abstract class AbstractMapper implements InitMapperInterface
                 ComputopApiConfig::LENGTH => $length,
             ]);
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getActionUrl(): string;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
