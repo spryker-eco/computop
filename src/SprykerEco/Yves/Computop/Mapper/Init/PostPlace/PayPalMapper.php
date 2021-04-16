@@ -152,9 +152,10 @@ class PayPalMapper extends AbstractMapper
 
         $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
 
-        $orderDescriptionsCount = count($orderDescriptions);
-        for ($key = static::PAYPAL_ITEM_DESCRIPTION_OFFSET; $key < $orderDescriptionsCount; $key++) {
-            $dataSubArray[$this->getOrderItemDescriptionKey($key)] = $orderDescriptions[$key];
+        foreach ($orderDescriptions as $key => $orderDescription) {
+            $orderDescriptionIndex = static::PAYPAL_ITEM_DESCRIPTION_OFFSET + $key;
+            $orderDescriptionKey = $this->getOrderItemDescriptionKey($orderDescriptionIndex);
+            $dataSubArray[$orderDescriptionKey] = $orderDescription;
         }
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();

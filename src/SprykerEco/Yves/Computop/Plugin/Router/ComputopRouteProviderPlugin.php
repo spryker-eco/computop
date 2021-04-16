@@ -28,6 +28,8 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
      * Specification:
      * - Adds Routes to the RouteCollection.
      *
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
