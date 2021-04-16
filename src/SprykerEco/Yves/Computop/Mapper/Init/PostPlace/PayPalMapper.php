@@ -203,7 +203,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return string
      */
-    protected function getItemOrderDescription(ItemTransfer $itemTransfer): string
+    protected function getOrderItemDescription(ItemTransfer $itemTransfer): string
     {
         return sprintf(
             '%s,%f,%s,%d,,%f',
@@ -216,7 +216,7 @@ class PayPalMapper extends AbstractMapper
     }
 
     /**
-     * Order item description for items should start from OrderDesc2 to OrderDesc99
+     * Order item description for items should start from OrderDesc2 to OrderDesc99.
      *
      * @param int $key
      *
@@ -241,8 +241,9 @@ class PayPalMapper extends AbstractMapper
             return $computopPaymentTransfer;
         }
 
-        foreach ($itemTransfers as $item) {
-            $computopPaymentTransfer->addOrderDescriptions($this->getItemOrderDescription($item));
+        foreach ($itemTransfers as $itemTransfer) {
+            $orderDescription = $this->getOrderItemDescription($itemTransfer);
+            $computopPaymentTransfer->addOrderDescriptions($orderDescription);
         }
 
         return $computopPaymentTransfer;
