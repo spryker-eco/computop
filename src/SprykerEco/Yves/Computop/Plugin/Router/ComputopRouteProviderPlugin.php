@@ -207,7 +207,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/payu-cee-single-success',
             'Computop',
             'Callback',
-            'successPauCeeSingleAction'
+            'successPayuCeeSingleAction'
         );
         $routeCollection->add(static::PAYU_CEE_SINGLE_SUCCESS, $route);
 

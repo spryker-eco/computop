@@ -92,7 +92,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
             ComputopApiConfig::FIRST_NAME => $computopPayuCeeSinglePaymentTransfer->getFirstName(),
             ComputopApiConfig::LAST_NAME => $computopPayuCeeSinglePaymentTransfer->getLastName(),
             ComputopApiConfig::EMAIL_ADDRESS => $computopPayuCeeSinglePaymentTransfer->getEmail(),
-            ComputopApiConfig::LANGUAGE => $computopPayuCeeSinglePaymentTransfer->getLanguage(),
+            ComputopApiConfig::LANGUAGE => strtolower($computopPayuCeeSinglePaymentTransfer->getLanguage()),
         ];
     }
 }
