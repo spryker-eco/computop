@@ -20,10 +20,8 @@ class ComputopPayNowInitStep extends AbstractBaseStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
-        if (
-            !$quoteTransfer->getPayment()
-            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_PAY_NOW
-        ) {
+        $payment = $quoteTransfer->getPayment();
+        if (!$payment || $payment->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_PAY_NOW) {
             return false;
         }
 

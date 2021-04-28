@@ -63,13 +63,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
-        if (
-            in_array($payment->getPaymentSelection(), [
-            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
-            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
-            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
-            ])
-        ) {
+        if ($this->isPaymentInitRequired($payment)) {
             $checkoutResponseTransfer->setComputopInitPayment(
                 (new ComputopInitPaymentTransfer())
                     ->setData($computopPaymentTransfer->getData())
@@ -137,5 +131,19 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         return $methodMapper->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentTransfer $payment
+     *
+     * @return bool
+     */
+    protected function isPaymentInitRequired(PaymentTransfer $payment): bool
+    {
+        return in_array($payment->getPaymentSelection(), [
+            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+        ]);
     }
 }
