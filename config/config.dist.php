@@ -18,6 +18,8 @@ $config[ComputopConstants::PAYDIREKT_SHOP_KEY] = 'PAYDIREKT_SHOP_KEY'; //Set up 
 $config[ComputopConstants::PAY_NOW_INIT_ACTION] = 'https://www.computop-paygate.com/paynow.aspx';
 $config[ComputopConstants::CREDIT_CARD_INIT_ACTION] = 'https://www.computop-paygate.com/payssl.aspx';
 $config[ComputopConstants::PAYPAL_INIT_ACTION] = 'https://www.computop-paygate.com/paypal.aspx';
+$config[ComputopConstants::PAYPAL_EXPRESS_INIT_ACTION] = 'https://www.computop-paygate.com/ExternalServices/paypalorders.aspx';
+$config[ComputopConstants::PAYPAL_EXPRESS_COMPLETE_ACTION] = 'https://www.computop-paygate.com/paypalComplete.aspx';
 $config[ComputopConstants::DIRECT_DEBIT_INIT_ACTION] = 'https://www.computop-paygate.com/paysdd.aspx';
 $config[ComputopConstants::SOFORT_INIT_ACTION] = 'https://www.computop-paygate.com/sofort.aspx';
 $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
@@ -58,6 +60,7 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_PAY_NOW,
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
     ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS,
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
     ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
 ];
@@ -67,6 +70,7 @@ $config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
     ComputopApiConfig::PAYMENT_METHOD_CREDIT_CARD => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_PAY_NOW => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_PAY_PAL => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_DIRECT_DEBIT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
 ];
 

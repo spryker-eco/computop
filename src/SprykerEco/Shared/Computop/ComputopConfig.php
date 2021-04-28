@@ -18,6 +18,7 @@ class ComputopConfig extends AbstractSharedConfig
     public const PAYMENT_METHOD_IDEAL = 'computopIdeal';
     public const PAYMENT_METHOD_PAYDIREKT = 'computopPaydirekt';
     public const PAYMENT_METHOD_PAY_PAL = 'computopPayPal';
+    public const PAYMENT_METHOD_PAY_PAL_EXPRESS = 'computopPayPalExpress';
     public const PAYMENT_METHOD_SOFORT = 'computopSofort';
     public const PAYMENT_METHOD_EASY_CREDIT = 'computopEasyCredit';
 
