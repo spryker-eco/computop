@@ -244,4 +244,9 @@ interface ComputopConstants
      * @api
      */
     public const IDEAL_ISSUER_ID = 'COMPUTOP:IDEAL_ISSUER_ID';
+
+    /**
+     *
+     */
+    public const PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID = 'COMPUTOP:PAYPAL_EXPRESS:DEFAULT_SHIPMENT_METHOD_ID';
 }

@@ -33,4 +33,13 @@ class ComputopFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_ZED_REQUEST);
     }
+
+    /**
+     * @return \Spryker\Client\Shipment\ShipmentClientInterface
+     */
+    public function getShipmentClient(): \Spryker\Client\Shipment\ShipmentClientInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_SHIPMENT);
+    }
+
 }

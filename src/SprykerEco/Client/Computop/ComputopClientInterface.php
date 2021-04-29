@@ -101,6 +101,30 @@ interface ComputopClientInterface
 
     /**
      * Specification:
+     * - Saves PayPal Express init response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves PayPal Express complete response to DB
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Saves DirectDebit response to DB
      *
      * @api

@@ -21,4 +21,12 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return (bool)$this->get(ComputopConstants::CRIF_ENABLED);
     }
+
+    /**
+     * @return int
+     */
+    public function getDefaultShipmentMethodId(): int
+    {
+        return (int)$this->get(ComputopConstants::PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID);
+    }
 }

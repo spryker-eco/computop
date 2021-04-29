@@ -89,6 +89,7 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
     'ComputopDirectDebit01',
     'ComputopPaydirekt01',
     'ComputopPayPal01',
+    'ComputopPayPalExpress01',
     'ComputopSofort01',
     'ComputopIdeal01',
 ];
@@ -100,6 +101,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT => 'ComputopDirectDebit01',
     ComputopConfig::PAYMENT_METHOD_PAYDIREKT => 'ComputopPaydirekt01',
     ComputopConfig::PAYMENT_METHOD_PAY_PAL => 'ComputopPayPal01',
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS => 'ComputopPayPalExpress01',
     ComputopConfig::PAYMENT_METHOD_SOFORT => 'ComputopSofort01',
     ComputopConfig::PAYMENT_METHOD_IDEAL => 'ComputopIdeal01',
 ];
@@ -112,6 +114,7 @@ $config[ComputopConstants::CRIF_GREEN_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
     ComputopConfig::PAYMENT_METHOD_PAY_NOW,
     ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS,
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
     ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
 ];
@@ -119,7 +122,10 @@ $config[ComputopConstants::CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
     ComputopConfig::PAYMENT_METHOD_PAY_NOW,
     ComputopConfig::PAYMENT_METHOD_PAY_PAL,
+    ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS,
 ];
 $config[ComputopConstants::CRIF_RED_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
 ];
+
+$config[ComputopConstants::PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID] = 1;
