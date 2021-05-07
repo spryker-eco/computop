@@ -34,6 +34,8 @@ class ComputopConfig extends AbstractSharedConfig
     public const TX_TYPE_AUTH = 'Auth';
     public const TX_TYPE_BAID = 'BAID';
 
+    public const PAY_PAL_EXPRESS_PAYPAL_METHOD = 'shortcut';
+
     public const CRIF_PRODUCT_NAME_IDENT_CHECK_CONSUMER = 'IdentCheckConsumer';
     public const CRIF_PRODUCT_NAME_QUICK_CHECK_CONSUMER = 'QuickCheckConsumer';
     public const CRIF_PRODUCT_NAME_CREDIT_CHECK_CONSUMER = 'CreditCheckConsumer';

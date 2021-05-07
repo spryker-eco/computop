@@ -219,4 +219,9 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     {
         return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
     }
+
+    public function getPayPalMethod():string
+    {
+        return $this->get(ComputopConstants::PAY_PAL_EXPRESS_PAYPAL_METHOD);
+    }
 }

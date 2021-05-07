@@ -52,6 +52,7 @@ $config[ComputopConstants::CREDIT_CARD_TEMPLATE_ENABLED] = false;
 $config[ComputopConstants::CREDIT_CARD_TX_TYPE] = '';
 $config[ComputopConstants::PAY_NOW_TX_TYPE] = '';
 $config[ComputopConstants::PAY_PAL_TX_TYPE] = ComputopConfig::TX_TYPE_AUTH;
+$config[ComputopConstants::PAY_PAL_EXPRESS_PAYPAL_METHOD] = ComputopConfig::PAY_PAL_EXPRESS_PAYPAL_METHOD;
 
 $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_SOFORT,

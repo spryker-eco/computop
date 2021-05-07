@@ -108,4 +108,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getEtiId(): string;
+
+    /**
+     * @return string
+     */
+    public function getPayPalMethod(): string;
 }

@@ -246,7 +246,18 @@ interface ComputopConstants
     public const IDEAL_ISSUER_ID = 'COMPUTOP:IDEAL_ISSUER_ID';
 
     /**
+     * Specification:
+     *  - Shipment method ID for cart default shipment.
      *
+     * @api
      */
     public const PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID = 'COMPUTOP:PAYPAL_EXPRESS:DEFAULT_SHIPMENT_METHOD_ID';
+
+    /**
+     * Specification:
+     *  - Issuer ID for Ideal payment method.
+     *
+     * @api
+     */
+    public const PAY_PAL_EXPRESS_PAYPAL_METHOD = 'COMPUTOP:PAYPAL_EXPRESS:PAYPAL_METHOD';
 }
