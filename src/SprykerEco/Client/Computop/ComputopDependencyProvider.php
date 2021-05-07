@@ -49,7 +49,6 @@ class ComputopDependencyProvider extends AbstractDependencyProvider
      */
     protected function addShipmentClient(Container $container): Container
     {
-        //@todo bridge
         $container->set(static::CLIENT_SHIPMENT, function (Container $container) {
             return $container->getLocator()->shipment()->client();
         });
