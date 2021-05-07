@@ -15,7 +15,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -68,6 +67,23 @@ class CallbackController extends AbstractController
             $this->getFactory()->createPayPalPaymentHandler(),
             $request->query->all()
         );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function placeOrderPayPalExpressAction(Request $request)
+    {
+        $request = $this->mockRequest();
+
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $handler = $this->getFactory()->createPayPalExpressPaymentHandler();
+        $handler->handle($quoteTransfer, $request->query->all());
+
+
+        return $this->redirectResponseInternal('/place-order');
     }
 
     /**
@@ -171,7 +187,6 @@ class CallbackController extends AbstractController
      *
      * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function failureAction(Request $request)
     {
@@ -234,5 +249,34 @@ class CallbackController extends AbstractController
         $errorMessageText = sprintf(static::MESSAGE_RESPONSE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
+    }
+
+    private function mockRequest(): Request
+    {
+        $request = new Request();
+
+        $data = [
+            ComputopApiConfig::MERCHANT_ID_SHORT => 'spryker_test',
+            ComputopApiConfig::PAY_ID => 123,
+            ComputopApiConfig::MAC => '299BEB7656F5B1ED2FDE6D50C8F2CA38196F8658F853CE6471730726CB8FD0F9',
+            ComputopApiConfig::TRANS_ID => 12355,
+            ComputopApiConfig::CODE => 0,
+
+
+            ComputopApiConfig::STATUS => 'AUTHORIZE_REQUEST',
+            ComputopApiConfig::FIRST_NAME => 'Kos',
+            ComputopApiConfig::LAST_NAME => 'Spryker',
+            ComputopApiConfig::EMAIL => 'kos@spryker.local',
+            ComputopApiConfig::ADDRESS_STREET => 'test street',
+            ComputopApiConfig::BILLING_ADDRESS_STREET => 'test billing street',
+        ];
+
+        $encrData = $this->getFactory()->getComputopApiService()
+            ->getEncryptedArray($data, $this->getFactory()->getConfig()->getBlowfishPassword());
+
+        $request->query->set('Data', $encrData['Data']);
+        $request->query->set('Len', $encrData['Len']);
+
+        return $request;
     }
 }
