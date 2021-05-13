@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Handler\PrePlace;
+namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -18,7 +18,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 
-class ComputopPayPalExpressInitHandler implements ComputopPrePostPaymentHandlerInterface
+class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandlerInterface
 {
     /**
      * @var QuoteClientInterface

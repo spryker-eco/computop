@@ -27,6 +27,11 @@ interface ComputopBusinessOrderFactoryInterface
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
+    public function createInitPayPalExpressMapper();
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
     public function createInitDirectDebitMapper();
 
     /**

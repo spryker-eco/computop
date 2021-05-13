@@ -19,6 +19,7 @@ use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalExpressConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
+use SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
@@ -38,16 +39,17 @@ use SprykerEco\Yves\Computop\Form\PayNowSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandler;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandler;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopEasyCreditPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayNowPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalExpressPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\PrePlace\ComputopPayPalExpressInitHandler;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
@@ -267,7 +269,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandlerInterface
      */
     public function createPayPalExpressInitHandler()
     {
@@ -275,6 +277,20 @@ class ComputopFactory extends AbstractFactory
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
             $this->createPayPalExpressToQuoteMapper()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandlerInterface
+     */
+    public function createPayPalExpressPrepareHandler(): ComputopPayPalExpressPrepareHandlerInterface
+    {
+        return new ComputopPayPalExpressPrepareHandler(
+            $this->getQuoteClient(),
+            $this->createPayPalExpressFormDataProvider(),
+            $this->getHttpClient(),
+            $this->getComputopApiService(),
+            $this->getComputopConfig()
         );
     }
 
@@ -416,6 +432,14 @@ class ComputopFactory extends AbstractFactory
     protected function getCalculationClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_CALCULATION);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientInterface
+     */
+    protected function getHttpClient(): ComputopToGuzzleHttpClientInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_HTTP);
     }
 
     /**

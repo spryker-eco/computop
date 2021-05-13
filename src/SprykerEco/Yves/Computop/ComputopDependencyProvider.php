@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop;
 
+use GuzzleHttp\Client as GuzzleHttpClient;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
@@ -15,6 +16,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
+use SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientAdapter;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -26,6 +28,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const STORE = 'STORE';
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
+    public const CLIENT_HTTP = 'CLIENT_HTTP';
 
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
@@ -76,6 +79,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addRequestStack($container);
         $container = $this->addUtilEncodingService($container);
         $container = $this->addCountryClient($container);
+        $container = $this->addHttpClient($container);
 
         return $container;
     }
@@ -131,6 +135,22 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::CLIENT_COUNTRY, function (Container $container) {
             return new ComputopToCountryClientBridge($container->getLocator()->country()->client());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addHttpClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_HTTP, function () {
+            return new ComputopToGuzzleHttpClientAdapter(
+                new GuzzleHttpClient()
+            );
         });
 
         return $container;

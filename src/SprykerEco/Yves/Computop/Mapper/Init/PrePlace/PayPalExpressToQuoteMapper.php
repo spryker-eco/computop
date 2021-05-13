@@ -4,8 +4,10 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
+use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
 {
@@ -21,6 +23,10 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     ): QuoteTransfer
     {
         $shippingAddressTransfer = new AddressTransfer();
+
+        $countryTransfer = new CountryTransfer();
+        $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
+
         $shippingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
         $shippingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
         $shippingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getAddressStreet());
@@ -29,6 +35,7 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $shippingAddressTransfer->setState($computopPayPalExpressInitResponseTransfer->getAddressState());
         $shippingAddressTransfer->setZipCode($computopPayPalExpressInitResponseTransfer->getAddressZip());
         $shippingAddressTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
+        $shippingAddressTransfer->setCountry($countryTransfer);
         $shippingAddressTransfer->setPhone($computopPayPalExpressInitResponseTransfer->getPhone());
 
         foreach ($quoteTransfer->getItems() as $item) {
@@ -56,14 +63,22 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     ): QuoteTransfer
     {
         $billingAddressTransfer = new AddressTransfer();
+
+        $countryTransfer = new CountryTransfer();
+        $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
+
         $billingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
         $billingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
         $billingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet());
         $billingAddressTransfer->setAddress2($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet2());
+        $billingAddressTransfer->setZipCode($computopPayPalExpressInitResponseTransfer->getBillingAddressZip());
         $billingAddressTransfer->setCity($computopPayPalExpressInitResponseTransfer->getBillingAddressCity());
         $billingAddressTransfer->setState($computopPayPalExpressInitResponseTransfer->getBillingAddressState());
         $billingAddressTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getBillingAddressCountryCode());
+        $billingAddressTransfer->setCountry($countryTransfer);
         $billingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getBillingName());
+        $billingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
+
         $quoteTransfer->setBillingAddress($billingAddressTransfer);
 
         return $quoteTransfer;

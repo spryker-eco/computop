@@ -61,7 +61,7 @@ class PayPalExpressMapper extends AbstractMapper
         $computopPaymentTransfer->setTxType($this->config->getPayPalTxType());
 
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::PAY_PAL_EXPRESS_PLACE_ORDER, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::ROUTE_NAME_PAY_PAL_EXPRESS_PLACE_ORDER, [], Router::ABSOLUTE_URL)
         );
         $computopPaymentTransfer->setOrderDesc(
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())

@@ -33,12 +33,13 @@ class InitPayPalExpressConverter extends AbstractInitConverter
         $responseTransfer->setInfoText($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::INFO_TEXT));
         $responseTransfer->setBillingAgreementId($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_AGREEMENT_ID));
         $responseTransfer->setPhone($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PHONE));
+        $responseTransfer->setAddressCountryCode($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_COUNTRY_CODE));
         $responseTransfer->setAddressStreet($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_STREET));
         $responseTransfer->setAddressStreet2($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_STREET2));
         $responseTransfer->setAddressCity($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_CITY));
         $responseTransfer->setAddressState($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_STATE));
         $responseTransfer->setAddressZip($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::ADDRESS_ZIP));
-        $responseTransfer->setBillingAddressCity($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_AGREEMENT_ID));
+        $responseTransfer->setBillingAddressCity($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_ADDRESS_CITY));
         $responseTransfer->setBillingAddressCountryCode($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_ADDRESS_COUNTRY_CODE));
         $responseTransfer->setBillingAddressState($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_ADDRESS_STATE));
         $responseTransfer->setBillingAddressStreet($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_ADDRESS_STREET));
