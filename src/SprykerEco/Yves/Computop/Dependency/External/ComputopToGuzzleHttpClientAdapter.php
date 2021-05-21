@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Computop\Dependency\External;
 
 use GuzzleHttp\ClientInterface;
@@ -27,7 +32,9 @@ class ComputopToGuzzleHttpClientAdapter implements ComputopToGuzzleHttpClientInt
      * @param string $uri
      * @param array $options
      *
-     * @return ResponseInterface
+     * @throws \Spryker\Yves\Computop\Http\Exception\ComputopHttpRequestException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function request(string $method, string $uri, array $options = []): ResponseInterface
     {

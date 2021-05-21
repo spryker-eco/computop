@@ -51,6 +51,8 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\EasyCreditStatusHa
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\AuthorizeSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\CaptureSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\CompleteResponseSaverInterface;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\PayPalExpressCompleteResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\CreditCardResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\DirectDebitResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\EasyCreditResponseSaver;
@@ -177,11 +179,19 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return InitResponseSaverInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\InitResponseSaverInterface
      */
     public function createPayPalExpressResponseSaver(): InitResponseSaverInterface
     {
         return new PayPalExpressResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\CompleteResponseSaverInterface
+     */
+    public function createPayPalExpressCompleteResponseSaver(): CompleteResponseSaverInterface
+    {
+        return new PayPalExpressCompleteResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
     }
 
     /**

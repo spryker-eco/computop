@@ -9,12 +9,12 @@ namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface ComputopPayPalExpressPrepareHandlerInterface
+interface ComputopPayPalExpressCompleteHandlerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): array;
+    public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

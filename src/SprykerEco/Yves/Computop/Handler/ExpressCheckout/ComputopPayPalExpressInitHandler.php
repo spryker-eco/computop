@@ -7,65 +7,81 @@
 
 namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
+use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Client\Quote\QuoteClientInterface;
+use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
+use SprykerEco\Client\Computop\ComputopClientInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\ComputopFactory;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
-use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 
 class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandlerInterface
 {
     /**
-     * @var QuoteClientInterface
+     * @var \Spryker\Client\Quote\QuoteClientInterface
      */
     protected $quoteClient;
 
     /**
-     * @var PayPalExpressToQuoteMapperInterface
+     * @var \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
      */
-    private $payPalExpressToQuoteMapper;
+    protected $payPalExpressToQuoteMapper;
 
     /**
-     * @var ConverterInterface
+     * @var \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    private $converter;
+    protected $converter;
 
+    /**
+     * @var \Spryker\Client\Shipment\ShipmentClientInterface
+     */
+    protected $shipmentClient;
+
+    /**
+     * @var ComputopClientInterface
+     */
+    protected $computopClient;
+
+    /**
+     * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
+     * @param ComputopClientInterface $computopClient
+     * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
+     * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
+     */
     public function __construct(
         ConverterInterface $converter,
         ComputopToQuoteClientInterface $quoteClient,
+        ComputopClientInterface $computopClient,
+        ShipmentClientInterface $shipmentClient,
         PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
-    )
-    {
-        $this->quoteClient = $quoteClient;
-        $this->payPalExpressToQuoteMapper = $payPalExpressToQuoteMapper;
+    ) {
         $this->converter = $converter;
+        $this->quoteClient = $quoteClient;
+        $this->computopClient = $computopClient;
+        $this->shipmentClient = $shipmentClient;
+        $this->payPalExpressToQuoteMapper = $payPalExpressToQuoteMapper;
     }
 
-    public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param array $responseArray
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function handle(QuoteTransfer $quoteTransfer, array $responseArray): QuoteTransfer
     {
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
         $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
-        //fill the quote
-        //fill address
+        $quoteTransfer = $this->handlePaymentSelection($quoteTransfer);
         $quoteTransfer = $this->handleShippingAddress($quoteTransfer);
         $quoteTransfer = $this->handleBillingAddress($quoteTransfer);
-        //fill customer
         $quoteTransfer = $this->handleCustomer($quoteTransfer);
-        //fill payment
-        $quoteTransfer = $this->handlePaymentSelection($quoteTransfer);
-
         $quoteTransfer->setCheckoutConfirmed(true);
-
-
-        //place order
-
-
-        //confirm order
 
         $this->quoteClient->setQuote($quoteTransfer);
 
@@ -85,6 +101,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
             $quoteTransfer->getPayment()->setComputopPayPalExpress($computopTransfer);
         }
 
+        /** @var ComputopPayPalExpressInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
             $responseTransfer
         );
@@ -93,9 +110,9 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function handleShippingAddress(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
@@ -104,20 +121,19 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
             return $quoteTransfer;
         }
 
-        $quoteTransfer = (new \SprykerEco\Client\Computop\ComputopFactory())->getShipmentClient()->expandQuoteWithShipmentGroups($quoteTransfer);
+        $quoteTransfer = $this->shipmentClient->expandQuoteWithShipmentGroups($quoteTransfer);
 
         return $this->payPalExpressToQuoteMapper->mapAddressTransfer($quoteTransfer, $payPalInitResponseTransfer);
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function handleBillingAddress(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $payPalInitResponseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
-
         if ($payPalInitResponseTransfer->getBillingAddressStreet() === null) {
             return $quoteTransfer;
         }
@@ -126,9 +142,9 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer|null
      */
     protected function handleCustomer(QuoteTransfer $quoteTransfer): ?QuoteTransfer
     {
@@ -141,10 +157,14 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
         return $this->payPalExpressToQuoteMapper->mapCustomerTransfer($quoteTransfer, $payPalInitResponseTransfer);
     }
 
-    protected function handlePaymentSelection(QuoteTransfer $quoteTransfer)
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function handlePaymentSelection(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $quoteTransfer->getPayment()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
-
         $handler = (new ComputopFactory())->createComputopPaymentHandler();
 
         return $handler->addPaymentToQuote($quoteTransfer);

@@ -121,7 +121,6 @@ class PayPalExpressMapper extends AbstractMapper
 //        $dataSubArray[ComputopApiConfig::ITEM_TOTAL] = $computopPayPalPaymentTransfer->getItemTotal();
 
 
-
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayPalPaymentTransfer->getUrlSuccess();
         $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayPalPaymentTransfer->getUrlNotify();
         $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayPalPaymentTransfer->getUrlFailure();

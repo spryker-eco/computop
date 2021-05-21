@@ -135,7 +135,6 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
         return $quoteTransfer;
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -144,7 +143,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        $quoteTransfer = $this->zedStub->call('/computop/gateway/save-pay-pal-express-sucess-response', $quoteTransfer);
+        $quoteTransfer = $this->zedStub->call('/computop/gateway/save-pay-pal-express-complete-response', $quoteTransfer);
 
         return $quoteTransfer;
     }

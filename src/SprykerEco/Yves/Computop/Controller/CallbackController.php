@@ -167,9 +167,6 @@ class CallbackController extends AbstractController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
-     *
      */
     public function failureAction(Request $request)
     {

@@ -213,17 +213,15 @@
         <property name="addressCountryCode" type="string"/>
         <property name="phone" type="string"/>
         <property name="noShipping" type="string"/>
-
-
-        <property name="allowNote" type="string"/>
-        <property name="uI" type="string"/>
-        <property name="buyerEmail" type="string"/>
         <property name="clientIp" type="string"/>
         <property name="data" type="string"/>
         <property name="len" type="int"/>
         <property name="url" type="string"/>
         <property name="shippingZip" type="string"/>
         <property name="payPalExpressInitResponse" type="ComputopPayPalExpressInitResponse"/>
+        <property name="payPalExpressPrepareResponse" type="ComputopPayPalExpressPrepareResponse"/>
+        <property name="payPalExpressCompleteResponse" type="ComputopPayPalExpressCompleteResponse"/>
+
     </transfer>
 
     <transfer name="ComputopSofortPayment">
@@ -475,6 +473,20 @@
         <property name="mcGross" type="string"/>
     </transfer>
 
+    <transfer name="ComputopPayPalExpressPrepareResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="merchantId" type="string"/>
+        <property name="payId" type="string"/>
+        <property name="xId" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="orderId" type="string"/>
+        <property name="payPalUrl" type="string"/>
+        <property name="token" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+    </transfer>
+
     <transfer name="ComputopSofortInitResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
         <property name="accountOwner" type="string"/>
@@ -550,7 +562,7 @@
         <property name="processData" type="array" singular="processData"/>
     </transfer>
 
-    <transfer name="ComputopPayPalExpressCompleteRequest">
+    <transfer name="ComputopPayPalExpressComplete">
         <property name="merchantId" type="string"/>
         <property name="payId" type="string"/>
         <property name="transactionId" type="string"/>
@@ -568,19 +580,22 @@
         <property name="addressZip" type="string"/>
         <property name="addressCountryCode" type="string"/>
         <property name="phone" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="payPalExpressCompleteResponse" type="ComputopPayPalExpressCompleteResponse"/>
     </transfer>
 
     <transfer name="ComputopPayPalExpressCompleteResponse">
         <property name="header" type="ComputopApiResponseHeader"/>
         <property name="merchantId" type="string"/>
-        <property name="merchantId" type="string"/>
         <property name="payId" type="string"/>
-        <property name="transactionId" type="string"/>
+        <property name="transId" type="string"/>
         <property name="status" type="string"/>
         <property name="description" type="string"/>
         <property name="code" type="string"/>
         <property name="refNr" type="string"/>
         <property name="codeExt" type="string"/>
+        <property name="isSuccess" type="bool"/>
     </transfer>
 
     <transfer name="Payment">

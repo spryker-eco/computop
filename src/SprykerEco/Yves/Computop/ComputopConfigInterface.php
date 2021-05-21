@@ -62,6 +62,11 @@ interface ComputopConfigInterface
     /**
      * @return string
      */
+    public function getPaypalExpressInitActionUrl(): string;
+
+    /**
+     * @return string
+     */
     public function getDirectDebitInitActionUrl();
 
     /**
@@ -113,4 +118,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getPayPalMethod(): string;
+
+    /**
+     * @return string
+     */
+    public function getPaypalExpressCompleteActionUrl(): string;
 }

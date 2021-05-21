@@ -1,6 +1,11 @@
 <?php
 
-namespace SprykerEco\Zed\Computop\Communication\Plugin\Quote;
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+namespace SprykerEco\Client\Computop\Quote\Dependency\Plugin;
 
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -15,8 +20,13 @@ use Spryker\Client\Quote\Dependency\Plugin\QuoteTransferExpanderPluginInterface;
 class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransferExpanderPluginInterface
 {
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return QuoteTransfer
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function expandQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
@@ -37,10 +47,10 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param ShipmentTransfer $shipmentTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ShipmentTransfer $shipmentTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function addShipmentToQuoteItems(QuoteTransfer $quoteTransfer, ShipmentTransfer $shipmentTransfer): QuoteTransfer
     {
@@ -52,9 +62,9 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function expandQuoteWithShipmentGroups(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
@@ -62,7 +72,7 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return bool
      */
@@ -80,10 +90,10 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param int $idShipmentMethod
      *
-     * @return ShipmentMethodTransfer
+     * @return \Generated\Shared\Transfer\ShipmentMethodTransfer
      */
     protected function getDefaultShipmentMethod(QuoteTransfer $quoteTransfer, int $idShipmentMethod): ShipmentMethodTransfer
     {
@@ -105,7 +115,7 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
     /**
      * @param int $defaultShipmentId
      *
-     * @return ShipmentTransfer
+     * @return \Generated\Shared\Transfer\ShipmentTransfer
      */
     protected function initItemShipment(int $defaultShipmentId): ShipmentTransfer
     {

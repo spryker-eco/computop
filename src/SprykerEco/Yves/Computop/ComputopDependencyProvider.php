@@ -29,6 +29,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
     public const CLIENT_HTTP = 'CLIENT_HTTP';
+    public const CLIENT_SHIPMENT = 'CLIENT_SHIPMENT';
 
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
@@ -80,6 +81,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addUtilEncodingService($container);
         $container = $this->addCountryClient($container);
         $container = $this->addHttpClient($container);
+        $container = $this->addShipmentClient($container);
 
         return $container;
     }
@@ -151,6 +153,20 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return new ComputopToGuzzleHttpClientAdapter(
                 new GuzzleHttpClient()
             );
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addShipmentClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_SHIPMENT, function () use ($container) {
+            return $container->getLocator()->shipment()->client();
         });
 
         return $container;

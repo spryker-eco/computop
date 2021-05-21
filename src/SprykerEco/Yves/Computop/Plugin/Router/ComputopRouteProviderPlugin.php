@@ -23,7 +23,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
 
     public const ROUTE_NAME_CHECKOUT_COMPUTOP_PAY_PAL_EXPRESS_PREPARE = 'computop-pay-pal-express-prepare';
     public const ROUTE_NAME_PAY_PAL_EXPRESS_PLACE_ORDER = 'computop-pay-pal-express-place-order';
-    public const ROUTE_NAME_PAY_PAL_EXPRESS_SUCCESS = 'computop-pay-pal-express-success';
+    public const ROUTE_NAME_PAY_PAL_EXPRESS_COMPLETE = 'computop-pay-pal-express-complete';
 
     public const FAILURE_PATH_NAME = 'computop-failure';
     public const NOTIFY_PATH_NAME = 'computop-notify';
@@ -52,7 +52,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
         $routeCollection = $this->addNotifyRoute($routeCollection);
         $routeCollection = $this->addPayPalExpressPrepareRoute($routeCollection);
         $routeCollection = $this->addPayPalExpressPlaceOrderRoute($routeCollection);
-        $routeCollection = $this->addPayPalExpressSuccessRoute($routeCollection);
+        $routeCollection = $this->addPayPalExpressCompleteRoute($routeCollection);
 
         return $routeCollection;
     }
@@ -242,15 +242,15 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
-    protected function addPayPalExpressSuccessRoute(RouteCollection $routeCollection): RouteCollection
+    protected function addPayPalExpressCompleteRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute(
-            '/computop/pay-pal-express-success',
+            '/computop/pay-pal-express-complete',
             'Computop',
             'ExpressCheckout',
-            'successAction'
+            'completeOrderPayPalExpressAction'
         );
-        $routeCollection->add(static::ROUTE_NAME_PAY_PAL_EXPRESS_SUCCESS, $route);
+        $routeCollection->add(static::ROUTE_NAME_PAY_PAL_EXPRESS_COMPLETE, $route);
 
         return $routeCollection;
     }

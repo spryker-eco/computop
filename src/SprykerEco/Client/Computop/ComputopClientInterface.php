@@ -198,4 +198,6 @@ interface ComputopClientInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
+
+
 }

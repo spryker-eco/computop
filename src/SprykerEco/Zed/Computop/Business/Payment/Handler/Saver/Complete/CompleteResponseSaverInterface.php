@@ -5,16 +5,16 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
+namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface ComputopPayPalExpressPrepareHandlerInterface
+interface CompleteResponseSaverInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): array;
+    public function save(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

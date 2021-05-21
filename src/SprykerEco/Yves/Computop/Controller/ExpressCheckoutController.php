@@ -1,11 +1,17 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Computop\Controller;
 
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -14,25 +20,31 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ExpressCheckoutController extends AbstractController
 {
-    /** @see CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_PLACE_ORDER */
+    /**
+     * @see CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_PLACE_ORDER
+     */
     protected const ROUTE_NAME_CHECKOUT_PLACE_ORDER = 'checkout-place-order';
 
     /**
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @see CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUCCESS
+     */
+    protected const ROUTE_NAME_CHECKOUT_SUCCESS = 'checkout-success';
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function preparePayPalExpressAction(): JsonResponse
     {
-        $handler = $this->getFactory()->createPayPalExpressPrepareHandler();
-        $decryptedArray = $handler->handle();
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $payPalExpressPrepareHandler = $this->getFactory()->createPayPalExpressPrepareHandler();
+        $decryptedArray = $payPalExpressPrepareHandler->handle($quoteTransfer);
 
         return new JsonResponse(['id' => $decryptedArray['token']]);
     }
 
-
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function placeOrderPayPalExpressAction(Request $request)
@@ -40,20 +52,25 @@ class ExpressCheckoutController extends AbstractController
         $request1 = $this->mockRequest();
 
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $handler = (new ComputopFactory())->createPayPalExpressInitHandler();
+        $payPalExpressInitHandler = $this->getFactory()->createPayPalExpressInitHandler();
 
-        $quoteTransfer = $handler->handle($quoteTransfer, $request1->query->all());
+        $payPalExpressInitHandler->handle($quoteTransfer, $request1->query->all());
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_PLACE_ORDER);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function completeOrderPayPalExpressAction(Request $request): RedirectResponse
+    {
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $payPalExpressCompleteHandler = $this->getFactory()->createPayPalExpressCompleteHandler();
 
+        $payPalExpressCompleteHandler->handle($quoteTransfer);
 
-
-
-
-
-
+        return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_SUCCESS);
+    }
 
 
 
@@ -64,8 +81,8 @@ class ExpressCheckoutController extends AbstractController
         $data = [
             ComputopApiConfig::MERCHANT_ID_SHORT => 'spryker_test',
             ComputopApiConfig::PAY_ID => 123,
-            ComputopApiConfig::MAC => '299BEB7656F5B1ED2FDE6D50C8F2CA38196F8658F853CE6471730726CB8FD0F9',
-            ComputopApiConfig::TRANS_ID => 12355,
+            ComputopApiConfig::MAC => '00FAE23A97B13EB2A5C701B0AD4EB69641802B9C8BE1B0714E4F13F232A19393',
+            ComputopApiConfig::TRANS_ID => '4787e38abec06282a826ec76cbdfb95e',
             ComputopApiConfig::CODE => 0,
 
             ComputopApiConfig::STATUS => 'AUTHORIZE_REQUEST',
@@ -73,12 +90,10 @@ class ExpressCheckoutController extends AbstractController
             ComputopApiConfig::LAST_NAME => 'Spryker',
             ComputopApiConfig::EMAIL => 'kos@spryker.local',
 
-
-//            ComputopApiConfig::ADDRESS_STREET => 'test street',
+            ComputopApiConfig::ADDRESS_STREET => 'test street',
             ComputopApiConfig::ADDRESS_COUNTRY_CODE => 'UA',
             ComputopApiConfig::ADDRESS_CITY => 'Odessa1',
             ComputopApiConfig::ADDR_ZIP => 65001,
-
 
             ComputopApiConfig::BILLING_NAME => 'KosBilling',
             ComputopApiConfig::BILLING_ADDRESS_STREET => 'test billing street',

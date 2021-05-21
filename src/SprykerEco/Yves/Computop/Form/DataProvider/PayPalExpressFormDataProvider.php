@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
-use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -28,7 +27,7 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
-            /** @var ComputopPayPalExpressPaymentTransfer $computopTransfer */
+            /** @var \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopPayPalExpress($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Computop\Mapper\Init\PrePlace;
 
 use Generated\Shared\Transfer\AddressTransfer;
@@ -7,26 +12,22 @@ use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
 {
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function mapAddressTransfer(
         QuoteTransfer $quoteTransfer,
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
-    ): QuoteTransfer
-    {
+    ): QuoteTransfer {
         $shippingAddressTransfer = new AddressTransfer();
-
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
-
         $shippingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
         $shippingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
         $shippingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getAddressStreet());
@@ -52,21 +53,18 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function mapBillingTransfer(
         QuoteTransfer $quoteTransfer,
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
-    ): QuoteTransfer
-    {
+    ): QuoteTransfer {
         $billingAddressTransfer = new AddressTransfer();
-
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
-
         $billingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
         $billingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
         $billingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet());
@@ -85,24 +83,21 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function mapCustomerTransfer(
         QuoteTransfer $quoteTransfer,
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
-    ): QuoteTransfer
-    {
+    ): QuoteTransfer {
         $customerTransfer = new CustomerTransfer();
-
         $customerTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
         $customerTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
         $customerTransfer->setEmail($computopPayPalExpressInitResponseTransfer->getEmail());
         $customerTransfer->setIsGuest(true);
         $quoteTransfer->setAcceptTermsAndConditions(true);
-
         $quoteTransfer->setCustomer($customerTransfer);
 
         return $quoteTransfer;

@@ -23,6 +23,8 @@ class ComputopConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return int
      */
     public function getDefaultShipmentMethodId(): int

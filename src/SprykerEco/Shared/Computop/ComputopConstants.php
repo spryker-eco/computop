@@ -52,7 +52,6 @@ interface ComputopConstants
      */
     public const PAYPAL_EXPRESS_INIT_ACTION = 'COMPUTOP:PAYPAL_EXPRESS_INIT_ACTION';
 
-
     /**
      * Specification:
      *  - Complete payment API call endpoint for PayPal Express payment method.
