@@ -54,7 +54,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
          return $this->getFactory()->createZedStub()->saveIdealInitResponse($quoteTransfer);
     }
