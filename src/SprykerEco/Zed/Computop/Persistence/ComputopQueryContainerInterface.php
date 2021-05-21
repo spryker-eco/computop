@@ -7,6 +7,10 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
+use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
+
 interface ComputopQueryContainerInterface
 {
     /**
@@ -19,7 +23,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentById($idPayment);
+    public function queryPaymentById(int $idPayment): SpyPaymentComputopQuery;
 
     /**
      * Specification:
@@ -31,7 +35,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByOrderId($idOrder);
+    public function queryPaymentByOrderId(int $idOrder): SpyPaymentComputopQuery;
 
     /**
      * Specification:
@@ -43,7 +47,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByPayId($idPay);
+    public function queryPaymentByPayId(string $idPay): SpyPaymentComputopQuery;
 
     /**
      *  Specification:
@@ -55,7 +59,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByTransactionId($idTransaction);
+    public function queryPaymentByTransactionId(string $idTransaction): SpyPaymentComputopQuery;
 
     /**
      *  Specification:
@@ -67,7 +71,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    public function queryPaymentItemByOrderItemId($orderItemId);
+    public function queryPaymentItemByOrderItemId(int $orderItemId): SpyPaymentComputopOrderItemQuery;
 
     /**
      *  Specification:
@@ -79,5 +83,5 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function getSpySalesOrderItemsById($idSalesOrder);
+    public function getSpySalesOrderItemsById(int $idSalesOrder): SpySalesOrderItemQuery;
 }

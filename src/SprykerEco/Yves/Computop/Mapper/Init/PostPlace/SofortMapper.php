@@ -21,7 +21,7 @@ class SofortMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopSofortPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopSofortPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopSofortPaymentTransfer();
 

@@ -24,10 +24,10 @@ class ReverseSaver extends AbstractSaver
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer)
+    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer): TransferInterface
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer, $orderTransfer) {
+            function () use ($responseTransfer, $orderTransfer): void {
                 /** @var \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer $responseTransfer */
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
             }
@@ -42,7 +42,7 @@ class ReverseSaver extends AbstractSaver
      *
      * @return void
      */
-    public function saveComputopDetails(ComputopApiReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
+    public function saveComputopDetails(ComputopApiReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 

@@ -44,7 +44,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    public function provideDependencies(Container $container)
+    public function provideDependencies(Container $container): Container
     {
         $container->set(static::CLIENT_COMPUTOP, function (Container $container) {
             return $container->getLocator()->computop()->client();

@@ -16,5 +16,5 @@ interface ComputopPaymentReaderInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

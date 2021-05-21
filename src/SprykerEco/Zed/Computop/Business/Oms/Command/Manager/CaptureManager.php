@@ -16,7 +16,7 @@ class CaptureManager extends AbstractManager
      *
      * @return iterable
      */
-    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer)
+    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer): iterable
     {
         return $this
             ->queryContainer
@@ -34,7 +34,7 @@ class CaptureManager extends AbstractManager
      *
      * @return iterable
      */
-    public function getAllItems(OrderTransfer $orderTransfer)
+    public function getAllItems(OrderTransfer $orderTransfer): iterable
     {
         return $this
             ->queryContainer

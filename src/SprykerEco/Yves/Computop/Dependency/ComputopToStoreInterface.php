@@ -12,10 +12,10 @@ interface ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrencyIsoCode();
+    public function getCurrencyIsoCode(): string;
 
     /**
      * @return string
      */
-    public function getCurrentLanguage();
+    public function getCurrentLanguage(): string;
 }

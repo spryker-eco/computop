@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface MapperInterface
 {
@@ -16,5 +17,5 @@ interface MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer);
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface;
 }

@@ -16,5 +16,5 @@ interface ComputopToCalculationFacadeInterface
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function recalculateOrder(OrderTransfer $orderTransfer);
+    public function recalculateOrder(OrderTransfer $orderTransfer): OrderTransfer;
 }

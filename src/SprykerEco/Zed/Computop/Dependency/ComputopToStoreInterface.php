@@ -12,5 +12,5 @@ interface ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrencyIsoCode();
+    public function getCurrencyIsoCode(): string;
 }

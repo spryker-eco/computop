@@ -17,92 +17,92 @@ interface ComputopConfigInterface
     /**
      * @return string
      */
-    public function getCallbackSuccessOrderRedirectPath();
+    public function getCallbackSuccessOrderRedirectPath(): string;
 
     /**
      * @return string
      */
-    public function getCallbackSuccessCaptureRedirectPath();
+    public function getCallbackSuccessCaptureRedirectPath(): string;
 
     /**
      * @return string
      */
-    public function getCallbackFailureRedirectPath();
+    public function getCallbackFailureRedirectPath(): string;
 
     /**
      * @return array
      */
-    public function getPaymentMethodsWithoutOrderCall();
+    public function getPaymentMethodsWithoutOrderCall(): array;
 
     /**
      * @return string
      */
-    public function getBaseUrlSsl();
+    public function getBaseUrlSsl(): string;
 
     /**
      * @return string
      */
-    public function getMerchantId();
+    public function getMerchantId(): string;
 
     /**
      * @return string
      */
-    public function getPaydirektShopKey();
+    public function getPaydirektShopKey(): string;
 
     /**
      * @return string
      */
-    public function getBlowfishPassword();
+    public function getBlowfishPassword(): string;
 
     /**
      * @return string
      */
-    public function getPaypalInitActionUrl();
+    public function getPaypalInitActionUrl(): string;
 
     /**
      * @return string
      */
-    public function getDirectDebitInitActionUrl();
+    public function getDirectDebitInitActionUrl(): string;
 
     /**
      * @return string
      */
-    public function getCreditCardInitActionUrl();
+    public function getCreditCardInitActionUrl(): string;
 
     /**
      * @return string
      */
-    public function getPayNowInitActionUrl();
+    public function getPayNowInitActionUrl(): string;
 
     /**
      * @return string
      */
-    public function getEasyCreditInitActionUrl();
+    public function getEasyCreditInitActionUrl(): string;
 
     /**
      * @return bool
      */
-    public function getCreditCardTemplateEnabled();
+    public function getCreditCardTemplateEnabled(): bool;
 
     /**
      * @return string[]
      */
-    public function getPaymentMethodsCaptureTypes();
+    public function getPaymentMethodsCaptureTypes(): array;
 
     /**
      * @return string
      */
-    public function getCreditCardTxType();
+    public function getCreditCardTxType(): string;
 
     /**
      * @return string
      */
-    public function getPayNowTxType();
+    public function getPayNowTxType(): string;
 
     /**
      * @return string
      */
-    public function getPayPalTxType();
+    public function getPayPalTxType(): string;
 
     /**
      * @return string

@@ -8,7 +8,9 @@
 namespace SprykerEco\Client\Computop;
 
 use Spryker\Client\Kernel\AbstractFactory;
+use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 use SprykerEco\Client\Computop\Zed\ComputopStub;
+use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 
 /**
  * @method \SprykerEco\Client\Computop\ComputopConfig getConfig()
@@ -18,7 +20,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Client\Computop\Zed\ComputopStubInterface
      */
-    public function createZedStub()
+    public function createZedStub(): ComputopStubInterface
     {
         return new ComputopStub(
             $this->getZedRequestClient(),
@@ -29,7 +31,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\ZedRequest\ZedRequestClientInterface
      */
-    protected function getZedRequestClient()
+    protected function getZedRequestClient(): ZedRequestClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_ZED_REQUEST);
     }

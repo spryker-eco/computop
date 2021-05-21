@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class AuthorizeCommandHandler extends AbstractCommandHandler
 {
@@ -17,7 +18,7 @@ class AuthorizeCommandHandler extends AbstractCommandHandler
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function handle(array $orderItems, OrderTransfer $orderTransfer)
+    public function handle(array $orderItems, OrderTransfer $orderTransfer): TransferInterface
     {
         $computopHeaderPayment = $this->createComputopHeaderPayment($orderTransfer);
 

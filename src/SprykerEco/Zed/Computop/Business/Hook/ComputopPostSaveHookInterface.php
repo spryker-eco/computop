@@ -18,7 +18,7 @@ interface ComputopPostSaveHookInterface
      *
      * @return void
      */
-    public function registerMapper(InitMapperInterface $paymentMethod);
+    public function registerMapper(InitMapperInterface $paymentMethod): void;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -26,5 +26,8 @@ interface ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
+    public function execute(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponseTransfer
+    ): CheckoutResponseTransfer;
 }

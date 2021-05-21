@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopFacadeInterface
 {
@@ -28,7 +29,7 @@ interface ComputopFacadeInterface
      *
      * @return void
      */
-    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer);
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
 
     /**
      * Specification:
@@ -41,7 +42,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, $method);
+    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, string $method): ComputopApiResponseHeaderTransfer;
 
     /**
      * Specification:
@@ -54,7 +55,10 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function postSaveHookExecute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
+    public function postSaveHookExecute(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponseTransfer
+    ): CheckoutResponseTransfer;
 
     /**
      * Specification:
@@ -67,7 +71,7 @@ interface ComputopFacadeInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+    public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer): TransferInterface;
 
     /**
      * Specification:
@@ -80,7 +84,7 @@ interface ComputopFacadeInterface
      *
      * @return array
      */
-    public function cancelCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+    public function cancelCommandHandle(array $orderItems, OrderTransfer $orderTransfer): array;
 
     /**
      * Specification:
@@ -93,7 +97,7 @@ interface ComputopFacadeInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+    public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer): TransferInterface;
 
     /**
      * Specification:
@@ -106,7 +110,7 @@ interface ComputopFacadeInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function refundCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+    public function refundCommandHandle(array $orderItems, OrderTransfer $orderTransfer): TransferInterface;
 
     /**
      * Specification:
@@ -118,7 +122,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -130,7 +134,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -142,7 +146,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -154,7 +158,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -166,7 +170,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -178,7 +182,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -190,7 +194,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -202,7 +206,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -214,7 +218,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -227,7 +231,7 @@ interface ComputopFacadeInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
+    public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer): TransferInterface;
 
     /**
      * Specification:
@@ -239,7 +243,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -251,7 +255,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
@@ -264,7 +268,10 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
-    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer);
+    public function filterPaymentMethods(
+        PaymentMethodsTransfer $paymentMethodsTransfer,
+        QuoteTransfer $quoteTransfer
+    ): PaymentMethodsTransfer;
 
     /**
      * Specification:
