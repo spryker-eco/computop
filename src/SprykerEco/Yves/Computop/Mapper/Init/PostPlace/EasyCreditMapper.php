@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
@@ -21,7 +22,7 @@ class EasyCreditMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopEasyCreditPaymentTransfer
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -60,7 +61,7 @@ class EasyCreditMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopEasyCreditPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface
     {
         $computopPaymentTransfer = new ComputopEasyCreditPaymentTransfer();
 

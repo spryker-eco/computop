@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -22,7 +23,7 @@ class PaydirektMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPaydirektPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface
     {
         $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
 

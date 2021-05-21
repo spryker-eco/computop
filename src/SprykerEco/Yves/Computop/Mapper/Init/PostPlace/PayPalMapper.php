@@ -11,6 +11,7 @@ use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -26,7 +27,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayPalPaymentTransfer
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
         /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -85,7 +86,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayPalPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface
     {
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
