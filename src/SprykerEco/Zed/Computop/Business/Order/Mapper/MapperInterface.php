@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 
 /**
  * MIT License
@@ -22,14 +23,14 @@ interface MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): TransferInterface;
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface;
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer

@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Form\DataProvider;
 
-use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -31,7 +30,8 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      *
      * @return \Generated\Shared\Transfer\PaymentTransfer
      */
-    abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer): PaymentTransfer;
+    //phpcs:ignore
+    abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient

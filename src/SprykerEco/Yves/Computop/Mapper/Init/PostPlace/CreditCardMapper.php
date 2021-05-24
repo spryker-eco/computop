@@ -18,7 +18,6 @@ use Generated\Shared\Transfer\ComputopCustomerInfoTransfer;
 use Generated\Shared\Transfer\CountryCollectionTransfer;
 use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -32,7 +31,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopCreditCardPaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -59,7 +58,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopCreditCardPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 

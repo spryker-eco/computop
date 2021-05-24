@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface PrePlaceHandlerInterface
 {
@@ -17,5 +16,6 @@ interface PrePlaceHandlerInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function handle(QuoteTransfer $quoteTransfer): TransferInterface;
+    //phpcs:ignore
+    public function handle(QuoteTransfer $quoteTransfer);
 }

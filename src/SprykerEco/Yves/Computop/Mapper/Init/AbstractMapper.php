@@ -69,7 +69,8 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    abstract protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface;
+    //phpcs:ignore
+    abstract protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
@@ -103,7 +104,8 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
+    //phpcs:ignore
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
@@ -241,7 +243,7 @@ abstract class AbstractMapper implements MapperInterface
     {
         $requestParameterData = $this->removeRedundantParams($requestParameterData);
 
-        return base64_encode($this->utilEncodingService->encodeJson($requestParameterData));
+        return base64_encode((string)$this->utilEncodingService->encodeJson($requestParameterData));
     }
 
     /**

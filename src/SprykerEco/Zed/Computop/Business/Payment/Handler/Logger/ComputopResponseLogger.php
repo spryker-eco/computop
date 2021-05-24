@@ -20,7 +20,7 @@ class ComputopResponseLogger implements ComputopResponseLoggerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    public function log(ComputopApiResponseHeaderTransfer $header, $method)
+    public function log(ComputopApiResponseHeaderTransfer $header, $method): SpyPaymentComputopApiLog
     {
         $logEntity = new SpyPaymentComputopApiLog();
         $logEntity->fromArray($header->toArray());

@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
@@ -21,7 +20,7 @@ class IdealMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopIdealPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopIdealPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopIdealPaymentTransfer();
 

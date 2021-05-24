@@ -19,7 +19,6 @@ use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\CountryCollectionTransfer;
 use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
@@ -42,7 +41,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayNowPaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -69,7 +68,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): TransferInterface
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayNowPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopPayNowPaymentTransfer();
 
