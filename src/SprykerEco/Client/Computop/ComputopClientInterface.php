@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -26,7 +27,7 @@ interface ComputopClientInterface
      *
      * @return void
      */
-    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer): void;
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer);
 
     /**
      * Specification:
@@ -38,7 +39,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -50,7 +51,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -62,7 +63,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -74,7 +75,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -86,7 +87,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -98,7 +99,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -110,7 +111,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -122,7 +123,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -134,7 +135,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -146,7 +147,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -158,7 +159,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function performCrifApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:

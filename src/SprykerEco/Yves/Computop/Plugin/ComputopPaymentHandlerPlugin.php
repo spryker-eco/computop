@@ -20,6 +20,8 @@ class ComputopPaymentHandlerPlugin extends AbstractPlugin implements StepHandler
     /**
      * {@inheritDoc}
      *
+     * @api
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer|\Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *

@@ -18,6 +18,8 @@ class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
     /**
      * {@inheritDoc}
      *
+     * @api
+     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createSubForm()

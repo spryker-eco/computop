@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -43,7 +44,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getMerchantId(): string
+    public function getMerchantId()
     {
         return $this->get(ComputopApiConstants::MERCHANT_ID);
     }
@@ -53,7 +54,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getBlowfishPass(): string
+    public function getBlowfishPass()
     {
         return $this->get(ComputopApiConstants::BLOWFISH_PASSWORD);
     }
@@ -63,7 +64,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getAuthorizeAction(): string
+    public function getAuthorizeAction()
     {
         return $this->get(ComputopConstants::AUTHORIZE_ACTION);
     }
@@ -73,7 +74,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getCaptureAction(): string
+    public function getCaptureAction()
     {
         return $this->get(ComputopConstants::CAPTURE_ACTION);
     }
@@ -83,7 +84,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getRefundAction(): string
+    public function getRefundAction()
     {
         return $this->get(ComputopConstants::REFUND_ACTION);
     }
@@ -93,7 +94,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getInquireAction(): string
+    public function getInquireAction()
     {
         return $this->get(ComputopConstants::INQUIRE_ACTION);
     }
@@ -103,7 +104,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getReverseAction(): string
+    public function getReverseAction()
     {
         return $this->get(ComputopConstants::REVERSE_ACTION);
     }
@@ -113,7 +114,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getIdealInitAction(): string
+    public function getIdealInitAction()
     {
         return $this->get(ComputopConstants::IDEAL_INIT_ACTION);
     }
@@ -123,7 +124,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getPaydirektInitAction(): string
+    public function getPaydirektInitAction()
     {
         return $this->get(ComputopConstants::PAYDIREKT_INIT_ACTION);
     }
@@ -133,7 +134,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getSofortInitAction(): string
+    public function getSofortInitAction()
     {
         return $this->get(ComputopConstants::SOFORT_INIT_ACTION);
     }
@@ -143,7 +144,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getEasyCreditStatusUrl(): string
+    public function getEasyCreditStatusUrl()
     {
         return $this->get(ComputopConstants::EASY_CREDIT_STATUS_ACTION);
     }
@@ -153,7 +154,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getEasyCreditAuthorizeUrl(): string
+    public function getEasyCreditAuthorizeUrl()
     {
         return $this->get(ComputopConstants::EASY_CREDIT_AUTHORIZE_ACTION);
     }
@@ -163,7 +164,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getPayNowInitActionUrl(): string
+    public function getPayNowInitActionUrl()
     {
         return $this->get(ComputopConstants::PAY_NOW_INIT_ACTION);
     }
@@ -173,7 +174,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return bool
      */
-    public function isRefundShipmentPriceEnabled(): bool
+    public function isRefundShipmentPriceEnabled()
     {
         return static::COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED;
     }
@@ -183,7 +184,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array
      */
-    public function getBeforeCaptureStatuses(): array
+    public function getBeforeCaptureStatuses()
     {
         return [
             $this->getOmsStatusNew(),
@@ -198,7 +199,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array
      */
-    public function getBeforeRefundStatuses(): array
+    public function getBeforeRefundStatuses()
     {
         return [
             $this->getOmsStatusNew(),
@@ -212,7 +213,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusNew(): string
+    public function getOmsStatusNew()
     {
         return static::OMS_STATUS_NEW;
     }
@@ -222,7 +223,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusInitialized(): string
+    public function getOmsStatusInitialized()
     {
         return static::OMS_STATUS_INITIALIZED;
     }
@@ -232,7 +233,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusAuthorized(): string
+    public function getOmsStatusAuthorized()
     {
         return static::OMS_STATUS_AUTHORIZED;
     }
@@ -242,7 +243,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusAuthorizationFailed(): string
+    public function getOmsStatusAuthorizationFailed()
     {
         return static::OMS_STATUS_AUTHORIZATION_FAILED;
     }
@@ -252,7 +253,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusCaptured(): string
+    public function getOmsStatusCaptured()
     {
         return static::OMS_STATUS_CAPTURED;
     }
@@ -262,7 +263,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusCapturingFailed(): string
+    public function getOmsStatusCapturingFailed()
     {
         return static::OMS_STATUS_CAPTURING_FAILED;
     }
@@ -272,7 +273,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusCancelled(): string
+    public function getOmsStatusCancelled()
     {
         return static::OMS_STATUS_CANCELLED;
     }
@@ -282,7 +283,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusRefunded(): string
+    public function getOmsStatusRefunded()
     {
         return static::OMS_STATUS_REFUNDED;
     }
@@ -292,7 +293,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getAuthorizeMethodName(): string
+    public function getAuthorizeMethodName()
     {
         return static::AUTHORIZE_METHOD;
     }
@@ -302,7 +303,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getCaptureMethodName(): string
+    public function getCaptureMethodName()
     {
         return static::CAPTURE_METHOD;
     }
@@ -312,7 +313,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getRefundMethodName(): string
+    public function getRefundMethodName()
     {
         return static::REFUND_METHOD;
     }
@@ -322,7 +323,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getReverseMethodName(): string
+    public function getReverseMethodName()
     {
         return static::REVERSE_METHOD;
     }
@@ -332,7 +333,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getInquireMethodName(): string
+    public function getInquireMethodName()
     {
         return static::INQUIRE_METHOD;
     }
@@ -342,7 +343,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsAuthorizeEventName(): string
+    public function getOmsAuthorizeEventName()
     {
         return static::COMPUTOP_OMS_EVENT_AUTHORIZE;
     }
@@ -352,7 +353,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsCaptureEventName(): string
+    public function getOmsCaptureEventName()
     {
         return static::COMPUTOP_OMS_EVENT_CAPTURE;
     }

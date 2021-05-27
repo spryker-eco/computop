@@ -16,5 +16,6 @@ interface ComputopToCalculationClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function recalculate(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    //phpcs:ignore
+    public function recalculate(QuoteTransfer $quoteTransfer);
 }
