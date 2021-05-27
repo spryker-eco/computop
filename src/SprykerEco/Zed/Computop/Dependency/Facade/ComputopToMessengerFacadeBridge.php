@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -29,7 +30,7 @@ class ComputopToMessengerFacadeBridge implements ComputopToMessengerFacadeInterf
      *
      * @return void
      */
-    public function addErrorMessage(MessageTransfer $message): void
+    public function addErrorMessage(MessageTransfer $message)
     {
         $this->messengerFacade->addErrorMessage($message);
     }
@@ -39,7 +40,7 @@ class ComputopToMessengerFacadeBridge implements ComputopToMessengerFacadeInterf
      *
      * @return void
      */
-    public function addInfoMessage(MessageTransfer $message): void
+    public function addInfoMessage(MessageTransfer $message)
     {
         $this->messengerFacade->addInfoMessage($message);
     }

@@ -43,7 +43,7 @@ interface ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, string $method);
+    public function logResponseHeader(ComputopApiResponseHeaderTransfer $header, $method);
 
     /**
      * Specification:

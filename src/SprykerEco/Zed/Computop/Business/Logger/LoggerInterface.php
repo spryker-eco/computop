@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -8,7 +9,6 @@
 namespace SprykerEco\Zed\Computop\Business\Logger;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 
 interface LoggerInterface
 {
@@ -18,5 +18,5 @@ interface LoggerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    public function log(ComputopApiResponseHeaderTransfer $header, string $method): SpyPaymentComputopApiLog;
+    public function log(ComputopApiResponseHeaderTransfer $header, $method);
 }

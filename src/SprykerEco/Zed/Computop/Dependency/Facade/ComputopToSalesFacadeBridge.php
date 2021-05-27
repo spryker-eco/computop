@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-use Generated\Shared\Transfer\OrderTransfer;
-
 class ComputopToSalesFacadeBridge implements ComputopToSalesFacadeInterface
 {
     /**
@@ -29,7 +27,8 @@ class ComputopToSalesFacadeBridge implements ComputopToSalesFacadeInterface
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function getOrderByIdSalesOrder(int $idSalesOrder): OrderTransfer
+    //phpcs:ignore
+    public function getOrderByIdSalesOrder($idSalesOrder)
     {
         return $this
             ->salesFacade

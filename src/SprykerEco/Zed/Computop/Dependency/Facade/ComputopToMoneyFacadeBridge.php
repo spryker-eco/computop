@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -27,7 +28,7 @@ class ComputopToMoneyFacadeBridge implements ComputopToMoneyFacadeInterface
      *
      * @return float
      */
-    public function convertIntegerToDecimal(int $value): float
+    public function convertIntegerToDecimal($value)
     {
         return $this->moneyFacade->convertIntegerToDecimal($value);
     }
@@ -37,7 +38,7 @@ class ComputopToMoneyFacadeBridge implements ComputopToMoneyFacadeInterface
      *
      * @return int
      */
-    public function convertDecimalToInteger(float $value): int
+    public function convertDecimalToInteger($value)
     {
         return $this->moneyFacade->convertDecimalToInteger($value);
     }

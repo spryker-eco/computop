@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -16,5 +17,5 @@ interface ComputopToUtilEncodingServiceInterface
      *
      * @return string|null
      */
-    public function encodeJson(array $value, ?int $options = null, ?int $depth = null): ?string;
+    public function encodeJson($value, $options = null, $depth = null);
 }

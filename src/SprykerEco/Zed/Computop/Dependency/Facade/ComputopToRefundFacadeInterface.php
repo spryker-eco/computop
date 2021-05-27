@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -18,12 +19,12 @@ interface ComputopToRefundFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
-    public function calculateRefund(array $salesOrderItems, SpySalesOrder $salesOrderEntity): RefundTransfer;
+    public function calculateRefund(array $salesOrderItems, SpySalesOrder $salesOrderEntity);
 
     /**
      * @param \Generated\Shared\Transfer\RefundTransfer $refundTransfer
      *
      * @return bool
      */
-    public function saveRefund(RefundTransfer $refundTransfer): bool;
+    public function saveRefund(RefundTransfer $refundTransfer);
 }

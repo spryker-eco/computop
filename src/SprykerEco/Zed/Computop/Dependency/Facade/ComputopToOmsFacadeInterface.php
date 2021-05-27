@@ -19,5 +19,6 @@ interface ComputopToOmsFacadeInterface
      *
      * @return array
      */
-    public function triggerEvent(string $eventId, ObjectCollection $orderItems, array $logContext, array $data = []): array;
+    //phpcs:ignore
+    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []);
 }

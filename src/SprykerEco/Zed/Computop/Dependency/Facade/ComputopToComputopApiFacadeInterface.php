@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -7,14 +8,7 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
-use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
-use Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer;
-use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
-use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
-use Generated\Shared\Transfer\ComputopApiInquireResponseTransfer;
-use Generated\Shared\Transfer\ComputopApiRefundResponseTransfer;
-use Generated\Shared\Transfer\ComputopApiReverseResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -29,7 +23,7 @@ interface ComputopToComputopApiFacadeInterface
     public function performEasyCreditStatusRequest(
         QuoteTransfer $quoteTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiEasyCreditStatusResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -40,7 +34,7 @@ interface ComputopToComputopApiFacadeInterface
     public function performEasyCreditAuthorizeRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiAuthorizeResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -51,7 +45,7 @@ interface ComputopToComputopApiFacadeInterface
     public function performAuthorizationRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiAuthorizeResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -62,7 +56,7 @@ interface ComputopToComputopApiFacadeInterface
     public function performCaptureRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiCaptureResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -73,7 +67,7 @@ interface ComputopToComputopApiFacadeInterface
     public function performInquireRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiInquireResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -84,7 +78,7 @@ interface ComputopToComputopApiFacadeInterface
     public function performRefundRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiRefundResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -95,12 +89,12 @@ interface ComputopToComputopApiFacadeInterface
     public function performReverseRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ): ComputopApiReverseResponseTransfer;
+    );
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopApiCrifResponseTransfer
      */
-    public function performCrifApiCall(QuoteTransfer $quoteTransfer): ComputopApiCrifResponseTransfer;
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
 }

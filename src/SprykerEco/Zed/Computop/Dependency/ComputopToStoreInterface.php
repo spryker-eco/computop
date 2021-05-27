@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -12,5 +13,5 @@ interface ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrencyIsoCode(): string;
+    public function getCurrencyIsoCode();
 }

@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -16,12 +17,12 @@ interface ComputopToMessengerFacadeInterface
      *
      * @return void
      */
-    public function addErrorMessage(MessageTransfer $message): void;
+    public function addErrorMessage(MessageTransfer $message);
 
     /**
      * @param \Generated\Shared\Transfer\MessageTransfer $message
      *
      * @return void
      */
-    public function addInfoMessage(MessageTransfer $message): void;
+    public function addInfoMessage(MessageTransfer $message);
 }

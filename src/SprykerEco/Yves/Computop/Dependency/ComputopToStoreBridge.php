@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -25,7 +26,7 @@ class ComputopToStoreBridge implements ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrencyIsoCode(): string
+    public function getCurrencyIsoCode()
     {
         return $this->store->getCurrencyIsoCode();
     }
@@ -33,7 +34,7 @@ class ComputopToStoreBridge implements ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrentLanguage(): string
+    public function getCurrentLanguage()
     {
         return $this->store->getCurrentLanguage();
     }

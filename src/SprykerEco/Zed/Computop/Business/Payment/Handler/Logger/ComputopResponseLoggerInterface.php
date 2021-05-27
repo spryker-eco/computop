@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -18,5 +19,5 @@ interface ComputopResponseLoggerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    public function log(ComputopApiResponseHeaderTransfer $header, string $method): SpyPaymentComputopApiLog;
+    public function log(ComputopApiResponseHeaderTransfer $header, $method);
 }

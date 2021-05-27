@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -31,7 +32,7 @@ class ComputopToRefundFacadeBridge implements ComputopToRefundFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
-    public function calculateRefund(array $salesOrderItems, SpySalesOrder $salesOrderEntity): RefundTransfer
+    public function calculateRefund(array $salesOrderItems, SpySalesOrder $salesOrderEntity)
     {
         return $this->refundFacade->calculateRefund($salesOrderItems, $salesOrderEntity);
     }
@@ -41,7 +42,7 @@ class ComputopToRefundFacadeBridge implements ComputopToRefundFacadeInterface
      *
      * @return bool
      */
-    public function saveRefund(RefundTransfer $refundTransfer): bool
+    public function saveRefund(RefundTransfer $refundTransfer)
     {
         return $this->refundFacade->saveRefund($refundTransfer);
     }

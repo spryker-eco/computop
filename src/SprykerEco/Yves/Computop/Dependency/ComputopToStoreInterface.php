@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -12,10 +13,10 @@ interface ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrencyIsoCode(): string;
+    public function getCurrencyIsoCode();
 
     /**
      * @return string
      */
-    public function getCurrentLanguage(): string;
+    public function getCurrentLanguage();
 }

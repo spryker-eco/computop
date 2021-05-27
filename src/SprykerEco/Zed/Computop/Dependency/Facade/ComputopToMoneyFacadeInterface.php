@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -14,12 +15,12 @@ interface ComputopToMoneyFacadeInterface
      *
      * @return float
      */
-    public function convertIntegerToDecimal(int $value): float;
+    public function convertIntegerToDecimal($value);
 
     /**
      * @param float $value
      *
      * @return int
      */
-    public function convertDecimalToInteger(float $value): int;
+    public function convertDecimalToInteger($value);
 }
