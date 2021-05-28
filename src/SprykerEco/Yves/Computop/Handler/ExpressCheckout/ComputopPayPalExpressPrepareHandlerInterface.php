@@ -7,14 +7,16 @@
 
 namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
+use Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopPayPalExpressPrepareHandlerInterface
 {
+
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return ComputopApiPayPalExpressPrepareResponseTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): array;
+    public function handle(QuoteTransfer $quoteTransfer): ComputopApiPayPalExpressPrepareResponseTransfer;
 }

@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop;
 
-use Dependency\Client\ComputopToQuoteClientInterface;
 use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\Router\Router\RouterInterface;
@@ -20,8 +19,8 @@ use SprykerEco\Yves\Computop\Converter\InitPayNowConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalExpressConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
-use SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
@@ -54,8 +53,6 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayNowPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
-use SprykerEco\Yves\Computop\Mapper\Complete\PayPalExpressCompeteMapper;
-use SprykerEco\Yves\Computop\Mapper\Complete\PayPalExpressCompeteMapperInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
@@ -304,7 +301,7 @@ class ComputopFactory extends AbstractFactory
         return new ComputopPayPalExpressPrepareHandler(
             $this->getQuoteClient(),
             $this->createPayPalExpressFormDataProvider(),
-            $this->getHttpClient(),
+            $this->getComputopApiClient(),
             $this->getComputopApiService(),
             $this->getComputopConfig()
         );
@@ -316,10 +313,8 @@ class ComputopFactory extends AbstractFactory
     public function createPayPalExpressCompleteHandler(): ComputopPayPalExpressCompleteHandlerInterface
     {
         return new ComputopPayPalExpressCompleteHandler(
-            $this->getComputopConfig(),
-            $this->getHttpClient(),
-            $this->getComputopClient(),
-            $this->createPayPalExpressCompeteMapper()
+            $this->getComputopApiClient(),
+            $this->getComputopClient()
         );
     }
 
@@ -464,11 +459,11 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientInterface
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface
      */
-    protected function getHttpClient(): ComputopToGuzzleHttpClientInterface
+    protected function getComputopApiClient(): ComputopToComputopApiClientInterface
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_HTTP);
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP_API);
     }
 
     /**
@@ -653,16 +648,5 @@ class ComputopFactory extends AbstractFactory
     protected function createPayPalExpressToQuoteMapper(): PayPalExpressToQuoteMapper
     {
         return new PayPalExpressToQuoteMapper();
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Complete\PayPalExpressCompeteMapperInterface
-     */
-    protected function createPayPalExpressCompeteMapper(): PayPalExpressCompeteMapperInterface
-    {
-        return new PayPalExpressCompeteMapper(
-            $this->getComputopApiService(),
-            $this->getComputopConfig()
-        );
     }
 }

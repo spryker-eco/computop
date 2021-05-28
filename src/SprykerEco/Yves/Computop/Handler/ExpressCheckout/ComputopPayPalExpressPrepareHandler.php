@@ -8,15 +8,14 @@
 namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
 use Generated\Shared\Transfer\AddressTransfer;
+use Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
-use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Yves\Computop\ComputopConfigInterface;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
-use SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepareHandlerInterface
 {
@@ -31,9 +30,9 @@ class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepar
     protected $stepEngineFormDataProvider;
 
     /**
-     * @var \SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientInterface
+     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface
      */
-    protected $computopToGuzzleHttpClient;
+    protected $computopApiClient;
 
     /**
      * @var \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
@@ -48,26 +47,43 @@ class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepar
     public function __construct(
         ComputopToQuoteClientInterface $quoteClient,
         StepEngineFormDataProviderInterface $stepEngineFormDataProvider,
-        ComputopToGuzzleHttpClientInterface $computopToGuzzleHttpClient,
+        ComputopToComputopApiClientInterface $computopApiClient,
         ComputopApiServiceInterface $computopApiService,
         ComputopConfigInterface $computopConfig
     ) {
         $this->quoteClient = $quoteClient;
         $this->stepEngineFormDataProvider = $stepEngineFormDataProvider;
-        $this->computopToGuzzleHttpClient = $computopToGuzzleHttpClient;
+        $this->computopApiClient = $computopApiClient;
         $this->computopApiService = $computopApiService;
         $this->computopConfig = $computopConfig;
     }
 
+
     /**
      * @param QuoteTransfer $quoteTransfer
-     * @return array
-     * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
-     * @throws \Spryker\Yves\Computop\Http\Exception\ComputopHttpRequestException
+     *
+     * @return \Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): array
+    public function handle(QuoteTransfer $quoteTransfer): ComputopApiPayPalExpressPrepareResponseTransfer
     {
-//        Customer kostyl
+        $quoteTransfer = $this->fillQuoteWithDummyData($quoteTransfer);
+        $quoteTransfer = $this->stepEngineFormDataProvider->getData($quoteTransfer);
+
+        $quoteTransfer = $this->computopApiClient->sendPayPalExpressPrepareRequest($quoteTransfer);
+
+        $this->quoteClient->setQuote($quoteTransfer);
+
+        return $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressPrepareResponse();
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return QuoteTransfer
+     */
+    protected function fillQuoteWithDummyData(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        //        Customer kostyl
         $customer = new CustomerTransfer();
         $customer->setCustomerReference('123');
         $customer->setIsGuest(true);
@@ -77,31 +93,5 @@ class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepar
         $address = new AddressTransfer();
         $address->setZipCode(65000);
         $quoteTransfer->setShippingAddress($address);
-
-        $quote = $this->stepEngineFormDataProvider->getData($quoteTransfer);
-
-        $payment = $quote->getPayment()->getComputopPayPalExpress();
-
-        $response = $this->computopToGuzzleHttpClient->request(
-            Request::METHOD_POST,
-            $this->computopConfig->getPaypalExpressInitActionUrl(),
-            [
-                'query' => [
-                    ComputopApiConfig::MERCHANT_ID => $payment->getMerchantId(),
-                    ComputopApiConfig::DATA => $payment->getData(),
-                    ComputopApiConfig::LENGTH => $payment->getLen(),
-                ],
-            ]
-        );
-
-        $responseContents = $response->getBody()->getContents();
-
-        $respData = [];
-        parse_str($responseContents, $respData);
-
-        $this->quoteClient->setQuote($quote);
-
-        // move to trasnfer object
-        return $this->computopApiService->decryptResponseHeader($respData, $this->computopConfig->getBlowfishPassword());
     }
 }

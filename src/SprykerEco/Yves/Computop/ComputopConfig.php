@@ -125,26 +125,6 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      *
      * @return string
      */
-    public function getPaypalExpressInitActionUrl(): string
-    {
-        return $this->get(ComputopConstants::PAYPAL_EXPRESS_INIT_ACTION);
-    }
-
-    /**
-     * @api
-     *
-     * @return string
-     */
-    public function getPaypalExpressCompleteActionUrl(): string
-    {
-        return $this->get(ComputopConstants::PAYPAL_EXPRESS_COMPLETE_ACTION);
-    }
-
-    /**
-     * @api
-     *
-     * @return string
-     */
     public function getDirectDebitInitActionUrl(): string
     {
         return $this->get(ComputopConstants::DIRECT_DEBIT_INIT_ACTION);

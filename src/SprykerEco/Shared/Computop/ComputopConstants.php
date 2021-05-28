@@ -46,22 +46,6 @@ interface ComputopConstants
 
     /**
      * Specification:
-     *  - Init payment API call endpoint for PayPal Express payment method.
-     *
-     * @api
-     */
-    public const PAYPAL_EXPRESS_INIT_ACTION = 'COMPUTOP:PAYPAL_EXPRESS_INIT_ACTION';
-
-    /**
-     * Specification:
-     *  - Complete payment API call endpoint for PayPal Express payment method.
-     *
-     * @api
-     */
-    public const PAYPAL_EXPRESS_COMPLETE_ACTION = 'COMPUTOP:PAYPAL_EXPRESS_COMPLETE_ACTION';
-
-    /**
-     * Specification:
      *  - Init API call endpoint for Direct Debit payment method.
      *
      * @api

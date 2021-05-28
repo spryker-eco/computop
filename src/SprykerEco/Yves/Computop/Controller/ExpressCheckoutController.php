@@ -37,9 +37,9 @@ class ExpressCheckoutController extends AbstractController
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $payPalExpressPrepareHandler = $this->getFactory()->createPayPalExpressPrepareHandler();
-        $decryptedArray = $payPalExpressPrepareHandler->handle($quoteTransfer);
+        $computopApiPayPalExpressPrepareResponseTransfer = $payPalExpressPrepareHandler->handle($quoteTransfer);
 
-        return new JsonResponse(['id' => $decryptedArray['token']]);
+        return new JsonResponse(['id' => $computopApiPayPalExpressPrepareResponseTransfer->getToken()]);
     }
 
     /**
@@ -71,7 +71,6 @@ class ExpressCheckoutController extends AbstractController
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_SUCCESS);
     }
-
 
 
     private function mockRequest(): Request

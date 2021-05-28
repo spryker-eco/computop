@@ -7,16 +7,15 @@
 
 namespace SprykerEco\Yves\Computop;
 
-use GuzzleHttp\Client as GuzzleHttpClient;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
-use SprykerEco\Yves\Computop\Dependency\External\ComputopToGuzzleHttpClientAdapter;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -28,7 +27,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const STORE = 'STORE';
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
-    public const CLIENT_HTTP = 'CLIENT_HTTP';
+    public const CLIENT_COMPUTOP_API = 'CLIENT_COMPUTOP_API';
     public const CLIENT_SHIPMENT = 'CLIENT_SHIPMENT';
 
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
@@ -80,7 +79,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addRequestStack($container);
         $container = $this->addUtilEncodingService($container);
         $container = $this->addCountryClient($container);
-        $container = $this->addHttpClient($container);
+        $container = $this->addComputopApiClient($container);
         $container = $this->addShipmentClient($container);
 
         return $container;
@@ -147,12 +146,10 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addHttpClient(Container $container): Container
+    protected function addComputopApiClient(Container $container): Container
     {
-        $container->set(static::CLIENT_HTTP, function () {
-            return new ComputopToGuzzleHttpClientAdapter(
-                new GuzzleHttpClient()
-            );
+        $container->set(static::CLIENT_COMPUTOP_API, function (Container $container) {
+            return new ComputopToComputopApiClientBridge($container->getLocator()->computopApi()->client());
         });
 
         return $container;
