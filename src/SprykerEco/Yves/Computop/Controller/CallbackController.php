@@ -15,7 +15,6 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,7 +35,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successCreditCardAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successCreditCardAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createCreditCardPaymentHandler(),
@@ -49,7 +49,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successPayNowAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successPayNowAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPayNowPaymentHandler(),
@@ -62,7 +63,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successPayPalAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successPayPalAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPayPalPaymentHandler(),
@@ -75,7 +77,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successDirectDebitAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successDirectDebitAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createDirectDebitPaymentHandler(),
@@ -88,7 +91,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successEasyCreditAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successEasyCreditAction(Request $request)
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $quoteTransfer = $this->getFactory()
@@ -112,7 +116,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successPaydirektAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successPaydirektAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPaydirektPaymentHandler(),
@@ -125,7 +130,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successSofortAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successSofortAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createSofortPaymentHandler(),
@@ -138,7 +144,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successIdealAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function successIdealAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createIdealPaymentHandler(),
@@ -152,10 +159,9 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function executeSuccessPostPlaceAction(
-        ComputopPrePostPaymentHandlerInterface $handler,
-        array $responseArray
-    ): RedirectResponse {
+    //phpcs:ignore
+    protected function executeSuccessPostPlaceAction(ComputopPrePostPaymentHandlerInterface $handler, array $responseArray)
+    {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $quoteTransfer = $handler->handle($quoteTransfer, $responseArray);
 
@@ -173,7 +179,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function failureAction(Request $request): RedirectResponse
+    //phpcs:ignore
+    public function failureAction(Request $request)
     {
         $requestParameters = $request->query->all();
 
@@ -199,7 +206,8 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function notifyAction(Request $request): Response
+    //phpcs:ignore
+    public function notifyAction(Request $request)
     {
         $decryptedArray = $this->getFactory()
             ->getComputopApiService()
@@ -227,7 +235,8 @@ class CallbackController extends AbstractController
      *
      * @return string
      */
-    protected function getErrorMessageText(ComputopApiResponseHeaderTransfer $responseHeaderTransfer): string
+    //phpcs:ignore
+    protected function getErrorMessageText(ComputopApiResponseHeaderTransfer $responseHeaderTransfer)
     {
         $errorText = $responseHeaderTransfer->getDescription();
         $errorCode = $responseHeaderTransfer->getCode();
