@@ -16,6 +16,9 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
+     * Specification:
+     * - Creates PayPal subform.
+     *
      * {@inheritDoc}
      *
      * @api
@@ -30,6 +33,9 @@ class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
     }
 
     /**
+     * Specification:
+     * - Creates PayPal subform DataProvider.
+     *
      * {@inheritDoc}
      *
      * @api

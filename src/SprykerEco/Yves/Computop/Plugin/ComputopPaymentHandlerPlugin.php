@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ComputopPaymentHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInterface
 {
     /**
+     * Specification:
+     * - Adds ComputopPayment to the Quote.
+     *
      * {@inheritDoc}
      *
      * @api

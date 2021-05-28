@@ -16,6 +16,9 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PaydirektSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
+     * Specification:
+     * - Creates Paydirekt subform.
+     *
      * {@inheritDoc}
      *
      * @api
@@ -30,6 +33,9 @@ class PaydirektSubFormPlugin extends AbstractPlugin implements SubFormPluginInte
     }
 
     /**
+     * Specification:
+     * - Creates Paydirekt subform DataProvider.
+     *
      * {@inheritDoc}
      *
      * @api

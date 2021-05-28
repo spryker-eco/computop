@@ -31,7 +31,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\ZedRequest\ZedRequestClientInterface
      */
-    protected function getZedRequestClient(): ZedRequestClientInterface
+    public function getZedRequestClient(): ZedRequestClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_ZED_REQUEST);
     }
