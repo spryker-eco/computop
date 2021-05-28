@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
-use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
@@ -66,32 +64,11 @@ class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepar
      */
     public function handle(QuoteTransfer $quoteTransfer): ComputopApiPayPalExpressPrepareResponseTransfer
     {
-        $quoteTransfer = $this->fillQuoteWithDummyData($quoteTransfer);
         $quoteTransfer = $this->stepEngineFormDataProvider->getData($quoteTransfer);
-
         $quoteTransfer = $this->computopApiClient->sendPayPalExpressPrepareRequest($quoteTransfer);
 
         $this->quoteClient->setQuote($quoteTransfer);
 
         return $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressPrepareResponse();
-    }
-
-    /**
-     * @param QuoteTransfer $quoteTransfer
-     *
-     * @return QuoteTransfer
-     */
-    protected function fillQuoteWithDummyData(QuoteTransfer $quoteTransfer): QuoteTransfer
-    {
-        //        Customer kostyl
-        $customer = new CustomerTransfer();
-        $customer->setCustomerReference('123');
-        $customer->setIsGuest(true);
-        $quoteTransfer->setCustomer($customer);
-
-        //zip kostyl
-        $address = new AddressTransfer();
-        $address->setZipCode(65000);
-        $quoteTransfer->setShippingAddress($address);
     }
 }
