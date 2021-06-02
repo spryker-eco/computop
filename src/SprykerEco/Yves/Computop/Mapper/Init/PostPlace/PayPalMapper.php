@@ -151,12 +151,7 @@ class PayPalMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
 
         $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
-
-        foreach ($orderDescriptions as $key => $orderDescription) {
-            $orderDescriptionIndex = static::PAYPAL_ITEM_DESCRIPTION_OFFSET + $key;
-            $orderDescriptionKey = $this->getOrderItemDescriptionKey($orderDescriptionIndex);
-            $dataSubArray[$orderDescriptionKey] = $orderDescription;
-        }
+        $dataSubArray = $this->addOrderItemDescriptions($dataSubArray, $orderDescriptions);
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
         $dataSubArray[ComputopApiConfig::ITEM_TOTAL] = $computopPayPalPaymentTransfer->getItemTotal();
@@ -248,5 +243,22 @@ class PayPalMapper extends AbstractMapper
         }
 
         return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param array $dataSubArray
+     * @param array $orderDescriptions
+     *
+     * @return array
+     */
+    protected function addOrderItemDescriptions(array $dataSubArray, array $orderDescriptions): array
+    {
+        foreach ($orderDescriptions as $key => $orderDescription) {
+            $orderDescriptionIndex = static::PAYPAL_ITEM_DESCRIPTION_OFFSET + $key;
+            $orderDescriptionKey = $this->getOrderItemDescriptionKey($orderDescriptionIndex);
+            $dataSubArray[$orderDescriptionKey] = $orderDescription;
+        }
+
+        return $dataSubArray;
     }
 }
