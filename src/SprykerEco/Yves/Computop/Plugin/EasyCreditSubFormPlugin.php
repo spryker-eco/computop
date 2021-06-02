@@ -16,10 +16,10 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class EasyCreditSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * Specification:
-     * - Creates EasyCredit subform.
-     *
      * {@inheritDoc}
+     *
+     * Specification:
+     * - Creates `EasyCredit` subform.
      *
      * @api
      *
@@ -33,10 +33,10 @@ class EasyCreditSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
     }
 
     /**
-     * Specification:
-     * - Creates EasyCredit subform DataProvider.
-     *
      * {@inheritDoc}
+     *
+     * Specification:
+     * - Creates EasyCredit subform data provider.
      *
      * @api
      *

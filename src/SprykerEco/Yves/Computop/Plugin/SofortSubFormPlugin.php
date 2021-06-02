@@ -16,10 +16,10 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class SofortSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * Specification:
-     * - Creates Sofort subform.
-     *
      * {@inheritDoc}
+     *
+     * Specification:
+     * - Creates `Sofort` subform.
      *
      * @api
      *
@@ -33,10 +33,10 @@ class SofortSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
     }
 
     /**
-     * Specification:
-     * - Creates Sofort subform DataProvider.
-     *
      * {@inheritDoc}
+     *
+     * Specification:
+     * - Creates `Sofort` subform data provider.
      *
      * @api
      *

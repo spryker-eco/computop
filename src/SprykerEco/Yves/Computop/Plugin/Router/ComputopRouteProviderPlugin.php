@@ -25,10 +25,10 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     public const NOTIFY_PATH_NAME = 'computop-notify';
 
     /**
+     * {@inheritDoc}
+     *
      * Specification:
      * - Adds Routes to the RouteCollection.
-     *
-     * {@inheritDoc}
      *
      * @api
      *
