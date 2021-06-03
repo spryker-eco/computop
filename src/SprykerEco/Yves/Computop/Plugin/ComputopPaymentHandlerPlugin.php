@@ -19,8 +19,6 @@ class ComputopPaymentHandlerPlugin extends AbstractPlugin implements StepHandler
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Adds `ComputopPayment` to `Quote`.
      *
      * @api

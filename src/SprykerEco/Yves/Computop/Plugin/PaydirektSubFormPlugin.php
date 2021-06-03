@@ -17,8 +17,6 @@ class PaydirektSubFormPlugin extends AbstractPlugin implements SubFormPluginInte
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `Paydirekt` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class PaydirektSubFormPlugin extends AbstractPlugin implements SubFormPluginInte
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `Paydirekt` subform data provider.
      *
      * @api

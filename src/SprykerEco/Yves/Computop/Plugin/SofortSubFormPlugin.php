@@ -17,8 +17,6 @@ class SofortSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `Sofort` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class SofortSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `Sofort` subform data provider.
      *
      * @api

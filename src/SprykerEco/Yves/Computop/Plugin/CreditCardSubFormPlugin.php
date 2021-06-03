@@ -17,8 +17,6 @@ class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `CreditCard` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `CreditCard` subform data provider.
      *
      * @api

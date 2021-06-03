@@ -17,8 +17,6 @@ class DirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPluginIn
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `DirectDebit` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class DirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPluginIn
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `DirectDebit` subform data provider.
      *
      * @api

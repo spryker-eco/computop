@@ -26,8 +26,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Adds Routes to the RouteCollection.
      *
      * @api

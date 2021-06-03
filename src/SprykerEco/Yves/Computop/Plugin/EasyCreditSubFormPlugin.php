@@ -17,8 +17,6 @@ class EasyCreditSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `EasyCredit` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class EasyCreditSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates EasyCredit subform data provider.
      *
      * @api

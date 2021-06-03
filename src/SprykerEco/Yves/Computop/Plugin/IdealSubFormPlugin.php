@@ -17,8 +17,6 @@ class IdealSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfac
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `Ideal` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class IdealSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfac
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `Ideal` subform data provider.
      *
      * @api

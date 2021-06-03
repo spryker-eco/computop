@@ -17,8 +17,6 @@ class PayNowSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `PayNow` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class PayNowSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `PayNow` subform data provider.
      *
      * @api

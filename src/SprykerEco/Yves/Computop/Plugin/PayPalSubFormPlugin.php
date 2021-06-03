@@ -17,8 +17,6 @@ class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
 {
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `PayPal` subform.
      *
      * @api
@@ -34,8 +32,6 @@ class PayPalSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
 
     /**
      * {@inheritDoc}
-     *
-     * Specification:
      * - Creates `PayPal` subform data provider.
      *
      * @api
