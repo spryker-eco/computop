@@ -10,6 +10,7 @@ namespace SprykerEcoTest\Zed\Computop\Business;
 use ArrayObject;
 use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
@@ -24,6 +25,8 @@ use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
@@ -185,6 +188,22 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
         $service->savePayPalInitResponse($this->getQuoteTrasfer());
+
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+
+        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testSavePayPalExpressInitResponse()
+    {
+        $this->setUpDB();
+        $service = new ComputopFacade();
+        $service->setFactory($this->createFactory());
+        $service->savePayPalExpressInitResponse($this->getQuoteTrasfer());
 
         $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
 
@@ -364,6 +383,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopPayPalTransfer = new ComputopPayPalPaymentTransfer();
         $computopPayPalTransfer->setPayPalInitResponse($computopPayPalInitTransfer);
 
+        $computopPayPalExpressInitTransfer = new ComputopPayPalExpressInitResponseTransfer();
+        $computopPayPalExpressInitTransfer->setHeader($computopHeader);
+        $computopPayPalExpressTransfer = new ComputopPayPalExpressPaymentTransfer();
+        $computopPayPalExpressTransfer->setPayPalExpressInitResponse($computopPayPalExpressInitTransfer);
+        $computopApiPayPalExpressCompleteResponseTransfer = new ComputopApiPayPalExpressCompleteResponseTransfer();
+        $computopApiPayPalExpressCompleteResponseTransfer->setHeader($computopHeader);
+        $computopPayPalExpressTransfer->setPayPalExpressCompleteResponse($computopApiPayPalExpressCompleteResponseTransfer);
+
         $computopDirectDebitInitTransfer = new ComputopDirectDebitInitResponseTransfer();
         $computopDirectDebitInitTransfer->setHeader($computopHeader);
         $computopDirectDebitTransfer = new ComputopDirectDebitPaymentTransfer();
@@ -388,6 +415,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopCreditCard($computopCredicCardTransfer);
         $paymentTransfer->setComputopPayNow($computopPayNowTransfer);
         $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
+        $paymentTransfer->setComputopPayPalExpress($computopPayPalExpressTransfer);
         $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
         $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
         $paymentTransfer->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW);

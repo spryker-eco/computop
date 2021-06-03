@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete;
 
-use Generated\Shared\Transfer\ComputopPayPalExpressCompleteResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
@@ -63,11 +63,14 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressCompleteResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
+        $payPalExpressCompleteResponseTransfer = $quoteTransfer
+            ->getPayment()
+            ->getComputopPayPalExpress()
+            ->getPayPalExpressCompleteResponse();
+        $this->setPaymentEntity($payPalExpressCompleteResponseTransfer->getHeader()->getTransId());
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer) {
-                $this->savePaymentComputopOrderItemsEntities($responseTransfer);
+            function () use ($payPalExpressCompleteResponseTransfer) {
+                $this->savePaymentComputopOrderItemsEntities($payPalExpressCompleteResponseTransfer);
             }
         );
 
@@ -110,7 +113,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(ComputopPayPalExpressInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopDetailEntity(ComputopPayPalExpressInitResponseTransfer $responseTransfer): void
     {
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
@@ -120,7 +123,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
     /**
      * @return void
      */
-    protected function savePaymentComputopOrderItemsEntities(ComputopPayPalExpressCompleteResponseTransfer $completeResponseTransfer)
+    protected function savePaymentComputopOrderItemsEntities(ComputopApiPayPalExpressCompleteResponseTransfer $completeResponseTransfer): void
     {
         $orderItems = $this
             ->queryContainer
@@ -133,7 +136,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
                     continue;
                 }
                 $item->setStatus($this->config->getOmsStatusInitialized());
-                $item->setIsPaymentConfirmed($completeResponseTransfer->getIsSuccess());
+                $item->setIsPaymentConfirmed($completeResponseTransfer->getHeader()->getIsSuccess());
                 $item->save();
             }
         }

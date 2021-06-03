@@ -39,12 +39,12 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $shippingAddressTransfer->setCountry($countryTransfer);
         $shippingAddressTransfer->setPhone($computopPayPalExpressInitResponseTransfer->getPhone());
 
-        foreach ($quoteTransfer->getItems() as $item) {
-            $item->getShipment()->setShippingAddress($shippingAddressTransfer);
+        foreach ($quoteTransfer->getItems() as $itemTransfer) {
+            $itemTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
         }
 
-        foreach ($quoteTransfer->getExpenses() as $expense) {
-            $expense->getShipment()->setShippingAddress($shippingAddressTransfer);
+        foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
+            $expenseTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
         }
 
         $quoteTransfer->setShippingAddress($shippingAddressTransfer);

@@ -21,6 +21,7 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
 {
     /**
      * {@inheritDoc}
+     * - Expands provided `QuoteTransfer` with default shipping method.
      *
      * @api
      *
