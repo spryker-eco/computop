@@ -14,7 +14,7 @@ interface NotificationProcessorInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @return \Generated\Shared\Transfer\ComputopNotificationTransfer
      */
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer

@@ -21,7 +21,7 @@ class EasyCreditMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopEasyCreditPaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -60,7 +60,7 @@ class EasyCreditMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopEasyCreditPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopEasyCreditPaymentTransfer();
 
@@ -77,7 +77,7 @@ class EasyCreditMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopEasyCreditPaymentTransfer $cardPaymentTransfer)
+    protected function getDataSubArray(ComputopEasyCreditPaymentTransfer $cardPaymentTransfer): array
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();

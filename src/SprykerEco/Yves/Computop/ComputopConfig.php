@@ -19,6 +19,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public const RESPONSE_ENCRYPT_TYPE = 'encrypt';
 
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
+    protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
 
     /**
      * @api
@@ -218,5 +219,17 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getEtiId(): string
     {
         return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
+    }
+
+    /**
+     * {@inheriDoc}
+     *
+     * @api
+     *
+     * @return int
+     */
+    public function getMaxOrderDescriptionItemsForPayPalPaymentPage(): int
+    {
+        return static::PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS;
     }
 }

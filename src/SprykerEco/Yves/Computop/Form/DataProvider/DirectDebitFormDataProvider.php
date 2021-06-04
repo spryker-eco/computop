@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class DirectDebitFormDataProvider extends AbstractFormDataProvider
 {
@@ -18,7 +19,7 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
@@ -27,6 +28,7 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
+            /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopDirectDebit($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
@@ -41,7 +43,7 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getComputopPayment(QuoteTransfer $quoteTransfer)
+    protected function getComputopPayment(QuoteTransfer $quoteTransfer): TransferInterface
     {
         return $quoteTransfer->getPayment()->getComputopDirectDebit();
     }

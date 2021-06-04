@@ -18,10 +18,10 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return array
      */
-    public function changeComputopItemsStatus(array $orderItems)
+    public function changeComputopItemsStatus(array $orderItems): array
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($orderItems) {
+            function () use ($orderItems): void {
                 foreach ($orderItems as $orderItem) {
                     $this->changeStatus($orderItem);
                 }
@@ -36,7 +36,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return array
      */
-    public function getCanceledItems(OrderTransfer $orderTransfer)
+    public function getCanceledItems(OrderTransfer $orderTransfer): array
     {
         return $this
             ->queryContainer
@@ -55,7 +55,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return void
      */
-    protected function changeStatus(SpySalesOrderItem $orderItem)
+    protected function changeStatus(SpySalesOrderItem $orderItem): void
     {
         $computopOrderItem = $this
             ->queryContainer

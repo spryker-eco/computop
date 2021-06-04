@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Oms\Command;
 
 use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -24,7 +25,7 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    protected function getOrderTransfer(SpySalesOrder $orderEntity, array $salesOrderItems = [])
+    protected function getOrderTransfer(SpySalesOrder $orderEntity, array $salesOrderItems = []): OrderTransfer
     {
         $orderTransfer = $this
             ->getFactory()

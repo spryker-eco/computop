@@ -19,13 +19,14 @@ class ComputopPaydirektPaymentHandler extends AbstractPostPlacePaymentHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
+    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPayment()->getComputopPaydirekt() === null) {
             $computopTransfer = new ComputopPaydirektPaymentTransfer();
             $quoteTransfer->getPayment()->setComputopPaydirekt($computopTransfer);
         }
 
+        /** @var \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPaydirekt()->setPaydirektInitResponse(
             $responseTransfer
         );
@@ -38,7 +39,7 @@ class ComputopPaydirektPaymentHandler extends AbstractPostPlacePaymentHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->computopClient->savePaydirektInitResponse($quoteTransfer);
     }

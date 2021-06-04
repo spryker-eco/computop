@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
+use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
@@ -16,7 +18,7 @@ class PaydirektMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAYDIREKT;
     }
@@ -26,7 +28,7 @@ class PaydirektMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopPaydirektPaymentTransfer
     {
         return $paymentTransfer->getComputopPaydirekt();
     }
@@ -36,7 +38,7 @@ class PaydirektMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface
     {
         return $this->getComputopTransfer($paymentTransfer)->getPaydirektInitResponse();
     }
@@ -46,7 +48,7 @@ class PaydirektMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
     {
         return [];
     }

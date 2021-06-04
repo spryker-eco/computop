@@ -278,7 +278,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
@@ -311,7 +311,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
     {
