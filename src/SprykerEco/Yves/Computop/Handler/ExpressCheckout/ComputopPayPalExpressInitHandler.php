@@ -45,7 +45,6 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      */
     protected $payPalExpressToQuoteMapper;
 
-
     /**
      * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
