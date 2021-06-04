@@ -8,8 +8,8 @@
 namespace SprykerEco\Client\Computop;
 
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 use Spryker\Client\Shipment\ShipmentClientInterface;
+use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 use SprykerEco\Client\Computop\Zed\ComputopStub;
 use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 

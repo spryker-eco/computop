@@ -110,7 +110,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()->createZedStub()->savePayPalInitResponse($quoteTransfer);
     }
@@ -124,7 +124,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()->createZedStub()->savePayPalExpressInitResponse($quoteTransfer);
     }
@@ -138,7 +138,7 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer)
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()->createZedStub()->savePayPalExpressCompleteResponse($quoteTransfer);
     }

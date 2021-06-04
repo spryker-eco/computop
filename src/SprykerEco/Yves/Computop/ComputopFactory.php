@@ -53,6 +53,7 @@ use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteHandler;
 use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandler;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandler;
 use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
@@ -190,7 +191,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createPayPalExpressFormDataProvider()
+    public function createPayPalExpressFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new PayPalExpressFormDataProvider($this->getQuoteClient(), $this->createOrderPayPalExpressMapper());
     }
@@ -294,7 +295,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandlerInterface
      */
-    public function createPayPalExpressInitHandler()
+    public function createPayPalExpressInitHandler(): ComputopPayPalExpressInitHandlerInterface
     {
         return new ComputopPayPalExpressInitHandler(
             $this->createInitPayPalExpressConverter(),
@@ -401,7 +402,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    protected function createInitPayPalExpressConverter()
+    protected function createInitPayPalExpressConverter(): ConverterInterface
     {
         return new InitPayPalExpressConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -529,7 +530,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    protected function createOrderPayPalExpressMapper()
+    protected function createOrderPayPalExpressMapper(): MapperInterface
     {
         return new PayPalExpressMapper(
             $this->getComputopApiService(),

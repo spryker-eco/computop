@@ -13,21 +13,21 @@ use SprykerShop\Yves\CheckoutPage\Process\Steps\AbstractBaseStep;
 class ComputopPayPalExpressCompleteStep extends AbstractBaseStep
 {
     /**
-     * @param AbstractTransfer $quoteTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
      * @return false
      */
-    public function requireInput(AbstractTransfer $quoteTransfer)
+    public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
         return false;
     }
 
     /**
-     * @param AbstractTransfer $quoteTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
      * @return bool
      */
-    public function postCondition(AbstractTransfer $quoteTransfer)
+    public function postCondition(AbstractTransfer $quoteTransfer): bool
     {
         return true;
     }

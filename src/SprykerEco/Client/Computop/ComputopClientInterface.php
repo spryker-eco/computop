@@ -103,7 +103,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayPal Express init response to DB
+     * - Persists `PayPal Express init` response to the database.
      *
      * @api
      *
@@ -111,11 +111,11 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer);
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:
-     * - Saves PayPal Express complete response to DB
+     * - Persists `PayPal Express complete` response to the database.
      *
      * @api
      *
@@ -123,7 +123,7 @@ interface ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer);
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * Specification:

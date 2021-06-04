@@ -49,8 +49,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
         ComputopQueryContainerInterface $queryContainer,
         ComputopToOmsFacadeInterface $omsFacade,
         ComputopConfig $config
-    )
-    {
+    ) {
         $this->queryContainer = $queryContainer;
         $this->omsFacade = $omsFacade;
         $this->config = $config;
@@ -69,7 +68,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
             ->getPayPalExpressCompleteResponse();
         $this->setPaymentEntity($payPalExpressCompleteResponseTransfer->getHeader()->getTransId());
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($payPalExpressCompleteResponseTransfer) {
+            function () use ($payPalExpressCompleteResponseTransfer): void {
                 $this->savePaymentComputopOrderItemsEntities($payPalExpressCompleteResponseTransfer);
             }
         );
@@ -121,6 +120,8 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $completeResponseTransfer
+     *
      * @return void
      */
     protected function savePaymentComputopOrderItemsEntities(ComputopApiPayPalExpressCompleteResponseTransfer $completeResponseTransfer): void

@@ -18,6 +18,7 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    //phpcs:ignore
     public function getData(AbstractTransfer $quoteTransfer)
     {
         if ($quoteTransfer->getPayment() === null) {
@@ -42,6 +43,7 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
+    //phpcs:ignore
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
         return $quoteTransfer->getPayment()->getComputopPayPalExpress();

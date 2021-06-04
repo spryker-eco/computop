@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-/* @TODO remove?? */
+
 class ComputopPayPalExpressPaymentHandler extends AbstractPostPlacePaymentHandler
 {
     /**
@@ -19,13 +19,13 @@ class ComputopPayPalExpressPaymentHandler extends AbstractPostPlacePaymentHandle
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
+    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPayment()->getComputopPayPalExpress() === null) {
             $computopTransfer = new ComputopPayPalExpressPaymentTransfer();
             $quoteTransfer->getPayment()->setComputopPayPalExpress($computopTransfer);
         }
-
+        /** @var \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
             $responseTransfer
         );
@@ -38,7 +38,7 @@ class ComputopPayPalExpressPaymentHandler extends AbstractPostPlacePaymentHandle
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->computopClient->savePayPalExpressInitResponse($quoteTransfer);
     }

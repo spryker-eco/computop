@@ -17,13 +17,13 @@ class PayPalExpressResponseSaver extends AbstractResponseSaver
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function save(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer) {
+                function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
@@ -39,7 +39,7 @@ class PayPalExpressResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopEntity(ComputopPayPalExpressInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopPayPalExpressInitResponseTransfer $responseTransfer): void
     {
         $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
@@ -52,7 +52,7 @@ class PayPalExpressResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(ComputopPayPalExpressInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopDetailEntity(ComputopPayPalExpressInitResponseTransfer $responseTransfer): void
     {
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
@@ -62,7 +62,7 @@ class PayPalExpressResponseSaver extends AbstractResponseSaver
     /**
      * @return void
      */
-    protected function savePaymentComputopOrderItemsEntities()
+    protected function savePaymentComputopOrderItemsEntities(): void
     {
         $orderItems = $this
             ->queryContainer

@@ -14,7 +14,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterf
 class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompleteHandlerInterface
 {
     /**
-     * @var ComputopToComputopApiClientInterface
+     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface
      */
     protected $computopApiClient;
 
@@ -23,10 +23,9 @@ class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompl
      */
     protected $computopClient;
 
-
     /**
-     * @param ComputopToComputopApiClientInterface $computopApiClient
-     * @param ComputopClientInterface $computopClient
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface $computopApiClient
+     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
      */
     public function __construct(
         ComputopToComputopApiClientInterface $computopApiClient,
@@ -38,6 +37,8 @@ class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompl
 
     /**
      * @inheritDoc
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer
     {

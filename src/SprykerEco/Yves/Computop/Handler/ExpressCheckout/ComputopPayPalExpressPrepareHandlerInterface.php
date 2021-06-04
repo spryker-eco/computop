@@ -12,11 +12,10 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ComputopPayPalExpressPrepareHandlerInterface
 {
-
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return ComputopApiPayPalExpressPrepareResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer
      */
     public function handle(QuoteTransfer $quoteTransfer): ComputopApiPayPalExpressPrepareResponseTransfer;
 }

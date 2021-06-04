@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
-use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Shipment\ShipmentClientInterface;
@@ -22,19 +21,19 @@ use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInte
 class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandlerInterface
 {
     /**
-     * @var \Spryker\Client\Quote\QuoteClientInterface
+     * @var \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    protected $converter;
+
+    /**
+     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface
      */
     protected $quoteClient;
 
     /**
-     * @var \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
+     * @var \SprykerEco\Client\Computop\ComputopClientInterface
      */
-    protected $payPalExpressToQuoteMapper;
-
-    /**
-     * @var \SprykerEco\Yves\Computop\Converter\ConverterInterface
-     */
-    protected $converter;
+    protected $computopClient;
 
     /**
      * @var \Spryker\Client\Shipment\ShipmentClientInterface
@@ -42,14 +41,15 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
     protected $shipmentClient;
 
     /**
-     * @var ComputopClientInterface
+     * @var \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
      */
-    protected $computopClient;
+    protected $payPalExpressToQuoteMapper;
+
 
     /**
      * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
-     * @param ComputopClientInterface $computopClient
+     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
      * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
      */
@@ -101,7 +101,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
             $quoteTransfer->getPayment()->setComputopPayPalExpress($computopTransfer);
         }
 
-        /** @var ComputopPayPalExpressInitResponseTransfer $responseTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
             $responseTransfer
         );

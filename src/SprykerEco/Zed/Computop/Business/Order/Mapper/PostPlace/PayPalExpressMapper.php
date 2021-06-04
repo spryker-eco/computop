@@ -16,7 +16,7 @@ class PayPalExpressMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS;
     }
@@ -26,6 +26,7 @@ class PayPalExpressMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer
      */
+    //phpcs:ignore
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopPayPalExpress();
@@ -36,6 +37,7 @@ class PayPalExpressMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
+    //phpcs:ignore
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getPayPalExpressInitResponse();
@@ -46,7 +48,7 @@ class PayPalExpressMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
     {
         return [];
     }

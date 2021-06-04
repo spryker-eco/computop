@@ -18,7 +18,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepareHandlerInterface
 {
     /**
-     * @var \Spryker\Client\Quote\QuoteClientInterface
+     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface
      */
     protected $quoteClient;
 
@@ -42,6 +42,13 @@ class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepar
      */
     protected $computopConfig;
 
+    /**
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
+     * @param \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface $stepEngineFormDataProvider
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface $computopApiClient
+     * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
+     * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $computopConfig
+     */
     public function __construct(
         ComputopToQuoteClientInterface $quoteClient,
         StepEngineFormDataProviderInterface $stepEngineFormDataProvider,
@@ -56,9 +63,8 @@ class ComputopPayPalExpressPrepareHandler implements ComputopPayPalExpressPrepar
         $this->computopConfig = $computopConfig;
     }
 
-
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer
      */

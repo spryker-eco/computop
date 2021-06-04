@@ -22,6 +22,7 @@ class PayPalExpressMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer
      */
+    //phpcs:ignore
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopPaymentTransfer */
