@@ -16,7 +16,7 @@ class CaptureManager extends AbstractManager
      *
      * @return array
      */
-    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer)
+    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer): array
     {
         return $this
             ->queryContainer
@@ -34,7 +34,7 @@ class CaptureManager extends AbstractManager
      *
      * @return array
      */
-    public function getAllItems(OrderTransfer $orderTransfer)
+    public function getAllItems(OrderTransfer $orderTransfer): array
     {
         return $this
             ->queryContainer

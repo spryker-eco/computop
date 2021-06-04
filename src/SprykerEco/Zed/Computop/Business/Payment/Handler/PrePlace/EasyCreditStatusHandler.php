@@ -132,7 +132,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return array
      */
-    protected function parseStatusExplanation($status)
+    protected function parseStatusExplanation(string $status): array
     {
         return json_decode(base64_decode($status), true);
     }
@@ -142,7 +142,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return bool
      */
-    protected function parseStatusValue($decision): bool
+    protected function parseStatusValue(array $decision): bool
     {
         if (isset($decision[static::DECISION][static::DECISION_RESULT])) {
             return $decision[static::DECISION][static::DECISION_RESULT] === static::DECISION_RESULT_GREEN;
@@ -156,7 +156,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return int
      */
-    protected function parsePaymentAmount($financing): int
+    protected function parsePaymentAmount(array $financing): int
     {
         if (!isset($financing[static::PLAN][static::TOTAL])) {
             return 0;

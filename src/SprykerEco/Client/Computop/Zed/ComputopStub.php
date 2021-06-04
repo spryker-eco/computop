@@ -39,7 +39,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return void
      */
-    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer)
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer): void
     {
         $this->zedStub->call('/computop/gateway/log-response', $responseTransfer);
     }
@@ -49,7 +49,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer)
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-sofort-init-response', $quoteTransfer);
@@ -62,7 +62,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer)
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-ideal-init-response', $quoteTransfer);
@@ -75,7 +75,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-paydirekt-init-response', $quoteTransfer);
@@ -88,7 +88,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer)
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-credit-card-init-response', $quoteTransfer);
@@ -101,7 +101,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-pay-now-init-response', $quoteTransfer);
@@ -114,7 +114,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer)
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-pay-pal-init-response', $quoteTransfer);
@@ -153,7 +153,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-direct-debit-init-response', $quoteTransfer);
@@ -166,7 +166,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer)
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/save-easy-credit-init-response', $quoteTransfer);
@@ -179,7 +179,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/easy-credit-status-api-call', $quoteTransfer);
@@ -192,7 +192,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         $quoteTransfer = $this->zedStub->call('/computop/gateway/is-computop-payment-exist', $quoteTransfer);
@@ -205,7 +205,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function performCrifApiCall(QuoteTransfer $quoteTransfer)
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         if (!$this->config->isCrifEnabled()) {
             return $quoteTransfer;

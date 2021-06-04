@@ -28,8 +28,9 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\PaymentTransfer
      */
+    //phpcs:ignore
     abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer);
 
     /**
@@ -47,7 +48,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [];
     }
@@ -57,7 +58,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      *
      * @return bool
      */
-    protected function isValidPayment(QuoteTransfer $quoteTransfer)
+    protected function isValidPayment(QuoteTransfer $quoteTransfer): bool
     {
         if ($this->getComputopPayment($quoteTransfer) === null) {
             return false;

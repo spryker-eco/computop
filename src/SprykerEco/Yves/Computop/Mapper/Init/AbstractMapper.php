@@ -70,6 +70,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
+    //phpcs:ignore
     abstract protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer);
 
     /**
@@ -104,8 +105,10 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
+    //phpcs:ignore
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
@@ -132,7 +135,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return string
      */
-    protected function generateTransId(QuoteTransfer $quoteTransfer)
+    protected function generateTransId(QuoteTransfer $quoteTransfer): string
     {
         return $this->computopApiService->generateTransId($quoteTransfer);
     }
@@ -143,7 +146,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return string
      */
-    protected function getLimitedTransId(QuoteTransfer $quoteTransfer, $limit)
+    protected function getLimitedTransId(QuoteTransfer $quoteTransfer, int $limit): string
     {
         return substr($this->generateTransId($quoteTransfer), 0, $limit);
     }
@@ -153,7 +156,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return string
      */
-    protected function getAbsoluteUrl($path)
+    protected function getAbsoluteUrl(string $path): string
     {
         return $this->config->getBaseUrlSsl() . $path;
     }
@@ -161,7 +164,7 @@ abstract class AbstractMapper implements MapperInterface
     /**
      * @return string
      */
-    protected function getClientIp()
+    protected function getClientIp(): string
     {
         return $this->request->getClientIp();
     }
@@ -172,7 +175,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return string
      */
-    protected function getActionUrl($url, $queryData)
+    protected function getActionUrl(string $url, array $queryData): string
     {
         return $url . '?' . http_build_query($queryData);
     }
@@ -184,7 +187,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return array
      */
-    protected function getQueryParameters($merchantId, $data, $length)
+    protected function getQueryParameters(string $merchantId, string $data, int $length): array
     {
         return [
             ComputopApiConfig::MERCHANT_ID => $merchantId,
@@ -203,7 +206,7 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopApiRequestTransfer
      */
-    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer)
+    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer): ComputopApiRequestTransfer
     {
         return (new ComputopApiRequestTransfer())
             ->fromArray($computopPaymentTransfer->toArray(), true);
@@ -244,7 +247,7 @@ abstract class AbstractMapper implements MapperInterface
     {
         $requestParameterData = $this->removeRedundantParams($requestParameterData);
 
-        return base64_encode($this->utilEncodingService->encodeJson($requestParameterData));
+        return base64_encode((string)$this->utilEncodingService->encodeJson($requestParameterData));
     }
 
     /**

@@ -7,22 +7,24 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order;
 
+use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
+
 interface ComputopBusinessOrderFactoryInterface
 {
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitCreditCardMapper();
+    public function createInitCreditCardMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPayNowMapper();
+    public function createInitPayNowMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPayPalMapper();
+    public function createInitPayPalMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
@@ -32,25 +34,25 @@ interface ComputopBusinessOrderFactoryInterface
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitDirectDebitMapper();
+    public function createInitDirectDebitMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitSofortMapper();
+    public function createInitSofortMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPaydirektMapper();
+    public function createInitPaydirektMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitIdealMapper();
+    public function createInitIdealMapper(): MapperInterface;
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitEasyCreditMapper();
+    public function createInitEasyCreditMapper(): MapperInterface;
 }

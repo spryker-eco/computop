@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class PaydirektFormDataProvider extends AbstractFormDataProvider
 {
@@ -18,7 +19,7 @@ class PaydirektFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
@@ -28,6 +29,7 @@ class PaydirektFormDataProvider extends AbstractFormDataProvider
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
+            /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopTransfer */
             $paymentTransfer->setComputopPaydirekt($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
             $this->quoteClient->setQuote($quoteTransfer);
@@ -41,7 +43,7 @@ class PaydirektFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getComputopPayment(QuoteTransfer $quoteTransfer)
+    protected function getComputopPayment(QuoteTransfer $quoteTransfer): TransferInterface
     {
         return $quoteTransfer->getPayment()->getComputopPaydirekt();
     }

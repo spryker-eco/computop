@@ -16,12 +16,12 @@ interface CancelManagerInterface
      *
      * @return array
      */
-    public function changeComputopItemsStatus(array $orderItems);
+    public function changeComputopItemsStatus(array $orderItems): array;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return array
      */
-    public function getCanceledItems(OrderTransfer $orderTransfer);
+    public function getCanceledItems(OrderTransfer $orderTransfer): array;
 }

@@ -16,5 +16,6 @@ interface PrePlaceHandlerInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
+    //phpcs:ignore
     public function handle(QuoteTransfer $quoteTransfer);
 }

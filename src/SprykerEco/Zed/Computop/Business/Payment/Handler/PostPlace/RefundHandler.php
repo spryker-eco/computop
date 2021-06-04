@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace;
 
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
+use Generated\Shared\Transfer\ComputopApiRefundResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
 class RefundHandler extends AbstractHandler
@@ -18,8 +19,10 @@ class RefundHandler extends AbstractHandler
      *
      * @return \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer
      */
-    public function handle(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment)
-    {
+    public function handle(
+        OrderTransfer $orderTransfer,
+        ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
+    ): ComputopApiRefundResponseTransfer {
         $responseTransfer = $this
             ->computopApiFacade
             ->performRefundRequest($orderTransfer, $computopApiHeaderPayment);

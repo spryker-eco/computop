@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Dependency\Service;
 class ComputopToUtilEncodingServiceBridge implements ComputopToUtilEncodingServiceInterface
 {
     /**
-     * @var \Spryker\Client\Calculation\CalculationClientInterface
+     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
      */
     protected $utilEncodingService;
 
@@ -29,6 +29,7 @@ class ComputopToUtilEncodingServiceBridge implements ComputopToUtilEncodingServi
      *
      * @return string|null
      */
+    //phpcs:ignore
     public function encodeJson($value, $options = null, $depth = null)
     {
         return $this->utilEncodingService->encodeJson($value, $options, $depth);

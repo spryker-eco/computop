@@ -16,5 +16,6 @@ interface ComputopToCalculationFacadeInterface
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
+    //phpcs:ignore
     public function recalculateOrder(OrderTransfer $orderTransfer);
 }

@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace;
 
+use Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
@@ -18,8 +19,10 @@ class CaptureHandler extends AbstractHandler
      *
      * @return \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer
      */
-    public function handle(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment)
-    {
+    public function handle(
+        OrderTransfer $orderTransfer,
+        ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
+    ): ComputopApiCaptureResponseTransfer {
         $responseTransfer = $this
             ->computopApiFacade
             ->performCaptureRequest($orderTransfer, $computopApiHeaderPayment);

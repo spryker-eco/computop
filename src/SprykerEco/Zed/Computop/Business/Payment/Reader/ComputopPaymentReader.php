@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 class ComputopPaymentReader implements ComputopPaymentReaderInterface
@@ -30,8 +31,9 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $paymentTransfer */
         $paymentTransfer = $this->getPaymentTransfer($quoteTransfer);
         $paymentEntity = $this->queryContainer->queryPaymentByTransactionId($paymentTransfer->getTransId())->findOne();
         if (isset($paymentEntity)) {
@@ -46,7 +48,7 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer)
+    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
         $method = 'get' . ucfirst($paymentSelection);
