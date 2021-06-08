@@ -1,5 +1,4 @@
 <?php
-:ignoreFile
 
 /**
  * MIT License
