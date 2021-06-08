@@ -43,7 +43,7 @@ class SofortFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getComputopPayment(QuoteTransfer $quoteTransfer): TransferInterface
+    protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
         return $quoteTransfer->getPayment()->getComputopSofort();
     }

@@ -572,6 +572,7 @@
 
     <transfer name="Quote">
         <property name="computopCrif" type="ComputopCrif"/>
+        <property name="defaultShipmentSelected" type="bool"/>
     </transfer>
 
     <transfer name="CheckoutResponse">

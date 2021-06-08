@@ -28,7 +28,7 @@ class CreditCardMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopCreditCardPaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopCreditCard();
     }
@@ -38,7 +38,7 @@ class CreditCardMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getCreditCardInitResponse();
     }

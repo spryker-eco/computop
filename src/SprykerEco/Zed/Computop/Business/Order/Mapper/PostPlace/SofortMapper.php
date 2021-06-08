@@ -28,7 +28,7 @@ class SofortMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopSofortPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopSofortPaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopSofort();
     }
@@ -38,7 +38,7 @@ class SofortMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getSofortInitResponse();
     }

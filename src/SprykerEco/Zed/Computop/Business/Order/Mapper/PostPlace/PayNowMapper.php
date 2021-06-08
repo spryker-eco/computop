@@ -28,7 +28,7 @@ class PayNowMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopPayNowPaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopPayNow();
     }
@@ -38,7 +38,7 @@ class PayNowMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ComputopPayNowInitResponseTransfer
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getPayNowInitResponse();
     }

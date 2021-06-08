@@ -35,6 +35,7 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
             return $quoteTransfer;
         }
 
+        $quoteTransfer->setDefaultShipmentSelected(true);
         $defaultShipmentId = $this->getFactory()->getConfig()->getDefaultShipmentMethodId();
         $itemShipmentTransfer = $this->initItemShipment($defaultShipmentId);
         $this->addShipmentToQuoteItems($quoteTransfer, $itemShipmentTransfer);
