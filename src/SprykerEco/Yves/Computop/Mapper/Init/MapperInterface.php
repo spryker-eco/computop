@@ -16,6 +16,5 @@ interface MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    //phpcs:ignore
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer);
 }

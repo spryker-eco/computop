@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
-use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;

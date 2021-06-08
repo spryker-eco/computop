@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class DirectDebitFormDataProvider extends AbstractFormDataProvider
 {
