@@ -38,6 +38,8 @@ class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompl
     /**
      * {@inheritDoc}
      *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer

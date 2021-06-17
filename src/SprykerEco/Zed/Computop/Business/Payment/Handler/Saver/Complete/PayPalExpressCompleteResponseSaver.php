@@ -38,21 +38,21 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
-    protected $config;
+    protected $computopConfig;
 
     /**
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
-     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $computopConfig
      */
     public function __construct(
         ComputopQueryContainerInterface $queryContainer,
         ComputopToOmsFacadeInterface $omsFacade,
-        ComputopConfig $config
+        ComputopConfig $computopConfig
     ) {
         $this->queryContainer = $queryContainer;
         $this->omsFacade = $omsFacade;
-        $this->config = $config;
+        $this->computopConfig = $computopConfig;
     }
 
     /**
@@ -136,7 +136,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
                 if ($item->getFkSalesOrderItem() !== $selectedItem->getIdSalesOrderItem()) {
                     continue;
                 }
-                $item->setStatus($this->config->getOmsStatusInitialized());
+                $item->setStatus($this->computopConfig->getOmsStatusInitialized());
                 $item->setIsPaymentConfirmed($completeResponseTransfer->getHeader()->getIsSuccess());
                 $item->save();
             }

@@ -1,22 +1,26 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Client\Computop\Dependency\Client;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodsCollectionTransfer;
-use Spryker\Client\Shipment\ShipmentClientInterface;
 
 class ComputopToShipmentClientBridge implements ComputopToShipmentClientInterface
 {
     /**
-     * @var ShipmentClientInterface
+     * @var \Spryker\Client\Shipment\ShipmentClientInterface
      */
     protected $shipmentClient;
 
     /**
-     * @param ShipmentClientInterface $shipmentClient
+     * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
      */
-    public function __construct(ShipmentClientInterface $shipmentClient)
+    public function __construct($shipmentClient)
     {
         $this->shipmentClient = $shipmentClient;
     }
@@ -32,14 +36,12 @@ class ComputopToShipmentClientBridge implements ComputopToShipmentClientInterfac
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return ShipmentMethodsCollectionTransfer
+     * @return \Generated\Shared\Transfer\ShipmentMethodsCollectionTransfer
      */
     public function getAvailableMethodsByShipment(QuoteTransfer $quoteTransfer): ShipmentMethodsCollectionTransfer
     {
         return $this->shipmentClient->getAvailableMethodsByShipment($quoteTransfer);
     }
-
-
 }

@@ -19,13 +19,13 @@ suites:
         modules:
             enabled:
                 - Asserts
-#                - \SprykerEcoTest\Zed\Computop\Module\EnvironmentModule
-#                - \SprykerEcoTest\Zed\Computop\Module\FunctionalModule
-#                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
-#                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
-#                    coreNamespaces:
-#                        - Spryker
-#                        - SprykerShop
-#                        - SprykerEco
-#                - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
-#                - \SprykerTest\Zed\Testify\Helper\BusinessHelper
+                - \SprykerEcoTest\Zed\Computop\Module\EnvironmentModule
+                - \SprykerEcoTest\Zed\Computop\Module\FunctionalModule
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                    coreNamespaces:
+                        - Spryker
+                        - SprykerShop
+                        - SprykerEco
+                - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
+                - \SprykerTest\Zed\Testify\Helper\BusinessHelper

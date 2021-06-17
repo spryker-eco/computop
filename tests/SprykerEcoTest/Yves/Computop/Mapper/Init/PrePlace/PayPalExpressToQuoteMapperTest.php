@@ -1,24 +1,26 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEcoTest\Yves\Computop\Mapper\Init\PrePlace;
 
 use Codeception\TestCase\Test;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapper;
 use SprykerEcoTest\Yves\Computop\Mapper\PayPalExpressToQuoteMapperTestConstants;
-use SprykerEcoTest\Yves\Computop\Mapper\PayPalExpressToQuoteMapperTestHelper;
 
 class PayPalExpressToQuoteMapperTest extends Test
 {
     /**
-     * @var PayPalExpressToQuoteMapperTestHelper
+     * @var \SprykerEcoTest\Yves\Computop\ComputopYvesTester
      */
-    protected $helper;
+    protected $tester;
 
-    protected function _inject(PayPalExpressToQuoteMapperTestHelper $helper): void
-    {
-        $this->helper = $helper;
-    }
-
+    /**
+     * @return void
+     */
     public function testMapAddressTransfer(): void
     {
         //Arrange
@@ -26,8 +28,8 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Act
         $quoteTransfer = $mapper->mapAddressTransfer(
-            $this->helper->createQuoteTransfer(),
-            $this->helper->createComputopPayPalExpressInitResponseTransfer()
+            $this->tester->createQuoteTransfer(),
+            $this->tester->createComputopPayPalExpressInitResponseTransfer()
         );
 
         //Assert
@@ -57,6 +59,9 @@ class PayPalExpressToQuoteMapperTest extends Test
         }
     }
 
+    /**
+     * @return void
+     */
     public function testMapBillingTransfer(): void
     {
         //Arrange
@@ -64,8 +69,8 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Act
         $quoteTransfer = $mapper->mapBillingTransfer(
-            $this->helper->createQuoteTransfer(),
-            $this->helper->createComputopPayPalExpressInitResponseTransfer()
+            $this->tester->createQuoteTransfer(),
+            $this->tester->createComputopPayPalExpressInitResponseTransfer()
         );
 
         //Assert
@@ -81,6 +86,9 @@ class PayPalExpressToQuoteMapperTest extends Test
         );
     }
 
+    /**
+     * @return void
+     */
     public function testMapCustomerTransfer(): void
     {
         //Arrange
@@ -88,8 +96,8 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Act
         $quoteTransfer = $mapper->mapCustomerTransfer(
-            $this->helper->createQuoteTransfer(),
-            $this->helper->createComputopPayPalExpressInitResponseTransfer()
+            $this->tester->createQuoteTransfer(),
+            $this->tester->createComputopPayPalExpressInitResponseTransfer()
         );
 
         //Assert
@@ -112,7 +120,7 @@ class PayPalExpressToQuoteMapperTest extends Test
     }
 
     /**
-     * @return PayPalExpressToQuoteMapper
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapper
      */
     protected function createPayPalExpressToQuoteMapper(): PayPalExpressToQuoteMapper
     {

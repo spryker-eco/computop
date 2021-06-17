@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop;
 
-use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\Router\Router\RouterInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -263,7 +262,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return ComputopToShipmentClientInterface
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface
      */
     public function getShipmentClient(): ComputopToShipmentClientInterface
     {
