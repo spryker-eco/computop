@@ -9,6 +9,7 @@ namespace SprykerEco\Client\Computop;
 
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
+use SprykerEco\Client\Computop\Dependency\Client\ComputopToShipmentClientBridge;
 
 class ComputopDependencyProvider extends AbstractDependencyProvider
 {
@@ -50,7 +51,7 @@ class ComputopDependencyProvider extends AbstractDependencyProvider
     protected function addShipmentClient(Container $container): Container
     {
         $container->set(static::CLIENT_SHIPMENT, function (Container $container) {
-            return $container->getLocator()->shipment()->client();
+            return new ComputopToShipmentClientBridge($container->getLocator()->shipment()->client());
         });
 
         return $container;

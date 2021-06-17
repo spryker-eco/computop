@@ -26,13 +26,13 @@ abstract class AbstractInitConverter implements ConverterInterface
     protected $config;
 
     /**
-     * @param array $decryptedArray
+     * @param array $responseParamsArray
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     abstract protected function createResponseTransfer(
-        array $decryptedArray,
+        array $responseParamsArray,
         ComputopApiResponseHeaderTransfer $header
     ): TransferInterface;
 

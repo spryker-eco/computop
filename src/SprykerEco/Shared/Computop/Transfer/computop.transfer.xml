@@ -187,7 +187,7 @@
         <property name="payPalMethod" type="string"/>
         <property name="rTF" type="string"/>
         <property name="orderDesc" type="string"/>
-        <property name="orderDescriptions" type="array" singular="orderDescriptions"/>
+        <property name="orderDescriptions" type="string[]" singular="orderDescriptions"/>
         <property name="taxTotal" type="int"/>
         <property name="itemTotal" type="int"/>
         <property name="shAmount" type="int"/>

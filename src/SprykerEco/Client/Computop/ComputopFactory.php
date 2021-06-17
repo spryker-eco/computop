@@ -10,6 +10,7 @@ namespace SprykerEco\Client\Computop;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
+use SprykerEco\Client\Computop\Dependency\Client\ComputopToShipmentClientInterface;
 use SprykerEco\Client\Computop\Zed\ComputopStub;
 use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 
@@ -38,9 +39,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Shipment\ShipmentClientInterface
+     * @return ComputopToShipmentClientInterface
      */
-    public function getShipmentClient(): ShipmentClientInterface
+    public function getShipmentClient(): ComputopToShipmentClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_SHIPMENT);
     }

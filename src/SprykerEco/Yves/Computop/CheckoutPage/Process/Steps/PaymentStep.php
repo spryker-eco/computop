@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\CheckoutPage\Process\Steps;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Kernel\Transfer\Exception\NullValueException;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep as SprykerShopPaymentStep;
@@ -20,12 +21,8 @@ class PaymentStep extends SprykerShopPaymentStep
      */
     public function isBreadcrumbItemHidden(AbstractTransfer $quoteTransfer): bool
     {
-        try {
-            $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpressOrFail();
-
-            return true;
-        } catch (NullValueException $exception) {
-            return false;
-        }
+        /** @var QuoteTransfer $quoteTransfer */
+        return $quoteTransfer->getPayment() !== null
+            && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null;
     }
 }

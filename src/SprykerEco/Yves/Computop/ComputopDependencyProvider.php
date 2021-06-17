@@ -15,6 +15,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
@@ -163,7 +164,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     protected function addShipmentClient(Container $container): Container
     {
         $container->set(static::CLIENT_SHIPMENT, function () use ($container) {
-            return $container->getLocator()->shipment()->client();
+            return new ComputopToShipmentClientBridge($container->getLocator()->shipment()->client());
         });
 
         return $container;

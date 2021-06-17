@@ -19,12 +19,12 @@ use Symfony\Component\HttpFoundation\Request;
 class ExpressCheckoutController extends AbstractController
 {
     /**
-     * @see CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_PLACE_ORDER
+     * @uses CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_PLACE_ORDER
      */
     protected const ROUTE_NAME_CHECKOUT_PLACE_ORDER = 'checkout-place-order';
 
     /**
-     * @see CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUCCESS
+     * @uses CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUCCESS
      */
     protected const ROUTE_NAME_CHECKOUT_SUCCESS = 'checkout-success';
 
@@ -34,10 +34,10 @@ class ExpressCheckoutController extends AbstractController
     public function preparePayPalExpressAction(): JsonResponse
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payPalExpressPrepareHandler = $this->getFactory()->createPayPalExpressPrepareHandler();
+        $payPalExpressPrepareHandler = $this->getFactory()->createComputopPayPalExpressPrepareHandler();
         $computopApiPayPalExpressPrepareResponseTransfer = $payPalExpressPrepareHandler->handle($quoteTransfer);
 
-        return new JsonResponse(['id' => $computopApiPayPalExpressPrepareResponseTransfer->getToken()]);
+        return new JsonResponse(['id' => $computopApiPayPalExpressPrepareResponseTransfer->getOrderId()]);
     }
 
     /**
@@ -48,7 +48,7 @@ class ExpressCheckoutController extends AbstractController
     public function placeOrderPayPalExpressAction(Request $request): RedirectResponse
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payPalExpressInitHandler = $this->getFactory()->createPayPalExpressInitHandler();
+        $payPalExpressInitHandler = $this->getFactory()->createComputopPayPalExpressInitHandler();
         $payPalExpressInitHandler->handle($quoteTransfer, $request->query->all());
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_PLACE_ORDER);
@@ -62,7 +62,7 @@ class ExpressCheckoutController extends AbstractController
     public function completeOrderPayPalExpressAction(Request $request): RedirectResponse
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payPalExpressCompleteHandler = $this->getFactory()->createPayPalExpressCompleteHandler();
+        $payPalExpressCompleteHandler = $this->getFactory()->createComputopPayPalExpressCompleteHandler();
 
         $payPalExpressCompleteHandler->handle($quoteTransfer);
 

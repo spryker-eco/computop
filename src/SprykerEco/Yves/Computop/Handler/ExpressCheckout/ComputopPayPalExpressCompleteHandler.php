@@ -36,7 +36,7 @@ class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompl
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
