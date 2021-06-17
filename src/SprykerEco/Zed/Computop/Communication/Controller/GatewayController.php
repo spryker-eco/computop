@@ -167,4 +167,14 @@ class GatewayController extends AbstractGatewayController
     ): ComputopNotificationTransfer {
         return $this->getFacade()->processNotification($computopNotificationTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function expandQuoteWithDefaultShippingMethodAction(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFacade()->expandQuoteWithDefaultShippingMethod($quoteTransfer);
+    }
 }

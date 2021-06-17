@@ -198,7 +198,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testSavePayPalExpressInitResponse()
+    public function testSavePayPalExpressInitResponse(): void
     {
         $this->setUpDB();
         $service = new ComputopFacade();

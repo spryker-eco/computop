@@ -52,7 +52,7 @@ class ComputopBusinessOrderFactory extends ComputopBusinessFactory implements Co
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPayPalExpressMapper(): MapperInterface
+    public function createPayPalExpressMapper(): MapperInterface
     {
         return new PayPalExpressMapper();
     }

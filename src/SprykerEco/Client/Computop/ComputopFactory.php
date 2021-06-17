@@ -44,4 +44,12 @@ class ComputopFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_SHIPMENT);
     }
+
+    /**
+     * @return \SprykerEco\Client\Computop\ComputopQuoteDefaultShipmentExpanderInterface
+     */
+    public function createComputopQuoteDefaultShipmentExpander(): ComputopQuoteDefaultShipmentExpanderInterface
+    {
+        return new ComputopQuoteDefaultShipmentExpander($this->getContainer()->getLocator()->computop()->client());
+    }
 }

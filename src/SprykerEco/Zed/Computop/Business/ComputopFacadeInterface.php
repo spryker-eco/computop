@@ -184,7 +184,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves PayPal Express Complete Response and changes item's oms status.
+     * - Saves PayPal Express Complete Response and changes items' OMS status.
      *
      * @api
      *
@@ -306,4 +306,16 @@ interface ComputopFacadeInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
+
+    /**
+     * Specification:
+     * - Expands `QuoteTransfer` with default shipping method from config.
+     *
+     * @api
+     *
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return QuoteTransfer
+     */
+    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

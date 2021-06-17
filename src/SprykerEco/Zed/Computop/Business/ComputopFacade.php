@@ -401,4 +401,20 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
             ->createNotificationProcessor()
             ->processNotification($computopNotificationTransfer);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+            ->createQuoteDefaultShippingMethodExpander()
+            ->expandQuoteWithDefaultShippingMethod($quoteTransfer);
+    }
 }

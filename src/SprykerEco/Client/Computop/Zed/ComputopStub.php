@@ -233,4 +233,17 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
 
         return $computopNotificationTransfer;
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        $quoteTransfer = $this->zedStub->call('/computop/gateway/expand-quote-with-default-shipping-method', $quoteTransfer);
+
+        return $quoteTransfer;
+    }
 }

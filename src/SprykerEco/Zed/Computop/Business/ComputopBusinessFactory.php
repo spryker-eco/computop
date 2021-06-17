@@ -9,6 +9,8 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
+use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShippingMethodExpander;
+use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShippingMethodExpanderInterface;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHookInterface;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitCreditCardMapper;
@@ -101,7 +103,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $orderSaver->registerMapper($this->createOrderFactory()->createInitCreditCardMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitPayNowMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitPayPalMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createInitPayPalExpressMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createPayPalExpressMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitDirectDebitMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitSofortMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitPaydirektMapper());
@@ -627,5 +629,16 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function getComputopApiFacade(): ComputopToComputopApiFacadeInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_COMPUTOP_API);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShippingMethodExpanderInterface
+     */
+    public function createQuoteDefaultShippingMethodExpander(): QuoteDefaultShippingMethodExpanderInterface
+    {
+        return new QuoteDefaultShippingMethodExpander(
+            $this->getConfig(),
+            $this->getProvidedDependency(ComputopDependencyProvider::FACADE_SHIPMENT)
+        );
     }
 }
