@@ -12,6 +12,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
+use SprykerEco\Zed\Computop\Persistence\Propel\Mapper\ComputopMapper;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
@@ -50,5 +51,13 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     public function createPaymentComputopNotificationQuery(): SpyPaymentComputopNotificationQuery
     {
         return SpyPaymentComputopNotificationQuery::create();
+    }
+
+    /**
+     * @return ComputopMapper
+     */
+    public function createComputopEntityMapper(): ComputopMapper
+    {
+        return new ComputopMapper();
     }
 }

@@ -12,24 +12,26 @@ use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapAddressTransfer(
-        QuoteTransfer $quoteTransfer,
-        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
-    ): QuoteTransfer {
-        $shippingAddressTransfer = new AddressTransfer();
+    public function mapAddressFromComputopPayPalExpressInitResponseToQuote(
+        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
+        QuoteTransfer $quoteTransfer
+    ): QuoteTransfer
+    {
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
-        $shippingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
-        $shippingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
+
+        $shippingAddressTransfer = new AddressTransfer();
+        $shippingAddressTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
         $shippingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getAddressStreet());
         $shippingAddressTransfer->setAddress2($computopPayPalExpressInitResponseTransfer->getAddressStreet2());
         $shippingAddressTransfer->setCity($computopPayPalExpressInitResponseTransfer->getAddressCity());
@@ -37,7 +39,6 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $shippingAddressTransfer->setZipCode($computopPayPalExpressInitResponseTransfer->getAddressZip());
         $shippingAddressTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
         $shippingAddressTransfer->setCountry($countryTransfer);
-        $shippingAddressTransfer->setPhone($computopPayPalExpressInitResponseTransfer->getPhone());
 
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
             $itemTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
@@ -53,20 +54,21 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapBillingTransfer(
-        QuoteTransfer $quoteTransfer,
-        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
-    ): QuoteTransfer {
-        $billingAddressTransfer = new AddressTransfer();
+    public function mapBillingAddressFromComputopPayPalExpressInitResponseToQuote(
+        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
+        QuoteTransfer $quoteTransfer
+    ): QuoteTransfer
+    {
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
-        $billingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
-        $billingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
+
+        $billingAddressTransfer = new AddressTransfer();
+        $billingAddressTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
         $billingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet());
         $billingAddressTransfer->setAddress2($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet2());
         $billingAddressTransfer->setZipCode($computopPayPalExpressInitResponseTransfer->getBillingAddressZip());
@@ -83,19 +85,18 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapCustomerTransfer(
-        QuoteTransfer $quoteTransfer,
-        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
-    ): QuoteTransfer {
+    public function mapCustomerFromComputopPayPalExpressInitResponseToQuote(
+        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
+        QuoteTransfer $quoteTransfer
+    ): QuoteTransfer
+    {
         $customerTransfer = new CustomerTransfer();
-        $customerTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getFirstName());
-        $customerTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
-        $customerTransfer->setEmail($computopPayPalExpressInitResponseTransfer->getEmail());
+        $customerTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
         $customerTransfer->setIsGuest(true);
         $quoteTransfer->setAcceptTermsAndConditions(true);
         $quoteTransfer->setCustomer($customerTransfer);

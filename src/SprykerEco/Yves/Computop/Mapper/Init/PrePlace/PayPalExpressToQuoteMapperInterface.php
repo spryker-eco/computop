@@ -13,35 +13,35 @@ use Generated\Shared\Transfer\QuoteTransfer;
 interface PayPalExpressToQuoteMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapAddressTransfer(
-        QuoteTransfer $quoteTransfer,
-        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+    public function mapAddressFromComputopPayPalExpressInitResponseToQuote(
+        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
+        QuoteTransfer $quoteTransfer
     ): QuoteTransfer;
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapBillingTransfer(
-        QuoteTransfer $quoteTransfer,
-        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+    public function mapBillingAddressFromComputopPayPalExpressInitResponseToQuote(
+        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
+        QuoteTransfer $quoteTransfer
     ): QuoteTransfer;
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapCustomerTransfer(
-        QuoteTransfer $quoteTransfer,
-        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
+    public function mapCustomerFromComputopPayPalExpressInitResponseToQuote(
+        ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
+        QuoteTransfer $quoteTransfer
     ): QuoteTransfer;
 }

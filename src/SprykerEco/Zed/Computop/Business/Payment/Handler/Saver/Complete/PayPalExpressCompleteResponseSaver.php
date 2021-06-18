@@ -14,7 +14,9 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface;
 
 class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterface
 {
@@ -41,18 +43,32 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
     protected $computopConfig;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @var ComputopEntityManagerInterface
+     */
+    protected $computopEntityManager;
+
+    /**
+     * @var ComputopRepositoryInterface
+     */
+    protected $computopRepository;
+
+    /**
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
      * @param \SprykerEco\Zed\Computop\ComputopConfig $computopConfig
+     * @param ComputopEntityManagerInterface $computopEntityManager
+     * @param ComputopRepositoryInterface $computopRepository
      */
     public function __construct(
-        ComputopQueryContainerInterface $queryContainer,
         ComputopToOmsFacadeInterface $omsFacade,
-        ComputopConfig $computopConfig
-    ) {
-        $this->queryContainer = $queryContainer;
+        ComputopConfig $computopConfig,
+        ComputopEntityManagerInterface $computopEntityManager,
+        ComputopRepositoryInterface $computopRepository
+    )
+    {
         $this->omsFacade = $omsFacade;
         $this->computopConfig = $computopConfig;
+        $this->computopEntityManager = $computopEntityManager;
+        $this->computopRepository = $computopRepository;
     }
 
     /**
@@ -66,10 +82,18 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
             ->getPayment()
             ->getComputopPayPalExpress()
             ->getPayPalExpressCompleteResponse();
+
+        $computopPaymentTransfer = $this->
+        computopRepository
+            ->getComputopPaymentByComputopTransId($payPalExpressCompleteResponseTransfer->getHeader()->getTransId());
+
+
         $this->setPaymentEntity($payPalExpressCompleteResponseTransfer->getHeader()->getTransId());
+
+
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($payPalExpressCompleteResponseTransfer): void {
-                $this->savePaymentComputopOrderItemsEntities($payPalExpressCompleteResponseTransfer);
+            function () use ($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer): void {
+                $this->savePaymentComputopOrderItemsEntities($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer);
             }
         );
 

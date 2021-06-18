@@ -665,4 +665,121 @@
         <property name="isProcessed" type="bool"/>
     </transfer>
 
+    <transfer name="ComputopPaymentComputop">
+        <property name="idPaymentComputop" type="int"/>
+        <property name="fKSalesOrder" type="int"/>
+        <property name="clientIp" type="string"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="xId" type="string"/>
+        <property name="payId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="ReqId" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopPaymentComputopDetail">
+        <property name="pcNr" type="string"/>
+        <property name="creditCardBrand" type="string"/>
+        <property name="creditCardExpiry" type="string"/>
+        <property name="maskedPan" type="string"/>
+        <property name="cavv" type="string"/>
+        <property name="eci" type="string"/>
+        <property name="ddd" type="string"/>
+        <property name="acsxid" type="string"/>
+        <property name="type" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="aId" type="string"/>
+        <property name="amount" type="string"/>
+        <property name="codeExt" type="string"/>
+        <property name="errorText" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="amountAuth" type="string"/>
+        <property name="amountCap" type="string"/>
+        <property name="amountCred" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="name" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="email" type="string"/>
+        <property name="addressStreet" type="string"/>
+        <property name="addressStreet2" type="string"/>
+        <property name="addressCity" type="string"/>
+        <property name="addressState" type="string"/>
+        <property name="addressZip" type="string"/>
+        <property name="addressCountryCode" type="string"/>
+        <property name="phone" type="string"/>
+        <property name="billingAgreementId" type="string"/>
+        <property name="billingName" type="string"/>
+        <property name="billingAddressStreet" type="string"/>
+        <property name="billingAddressStreet2" type="string"/>
+        <property name="billingAddressCity" type="string"/>
+        <property name="billingAddressState" type="string"/>
+        <property name="billingAddressZip" type="string"/>
+        <property name="billingAddressCountryCode" type="string"/>
+        <property name="infoText" type="string"/>
+        <property name="payerId" type="string"/>
+        <property name="isFinancing" type="string"/>
+        <property name="financingFeeAmount" type="string"/>
+        <property name="financingMonthlyPayment" type="string"/>
+        <property name="financingTerm" type="string"/>
+        <property name="financingTotalCost" type="string"/>
+        <property name="grossAmount" type="string"/>
+        <property name="feeAmount" type="string"/>
+        <property name="settleAmount" type="string"/>
+        <property name="taxAmount" type="string"/>
+        <property name="exchangeRate" type="string"/>
+        <property name="mcFee" type="string"/>
+        <property name="mcGross" type="string"/>
+        <property name="bankAccountIban" type="string"/>
+        <property name="bankAccountBic" type="string"/>
+        <property name="accountOwner" type="string"/>
+        <property name="accountBank" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="mandateId" type="string"/>
+        <property name="dateOfSignature" type="string"/>
+        <property name="mdtSeqType" type="string"/>
+        <property name="bankAccountPban" type="string"/>
+        <property name="birthday" type="string"/>
+        <property name="age" type="int"/>
+        <property name="customerTransactionId" type="int"/>
+        <property name="shoppingBasketCategory" type="string"/>
+        <property name="shippingFirstName" type="string"/>
+        <property name="shippingLastName" type="string"/>
+        <property name="shippingCompany" type="string"/>
+        <property name="shippingAddressAddition" type="string"/>
+        <property name="shippingStreet" type="string"/>
+        <property name="shippingStreetNumber" type="string"/>
+        <property name="shippingZip" type="string"/>
+        <property name="shippingCity" type="string"/>
+        <property name="shippingCountryCode" type="string"/>
+        <property name="shippingEmail" type="string"/>
+        <property name="ageAccepted" type="string"/>
+        <property name="paymentPurpose" type="string"/>
+        <property name="paymentGuarantee" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopPaymentComputopDetailCollection">
+        <property name="computopPaymentComputopDetails" type="ComputopPaymentComputopDetail[]"
+                  singular="computopPaymentComputopDetail"/>
+    </transfer>
+
+    <transfer name="ComputopPaymentComputopOrderItem">
+        <property name="status" type="string"/>
+        <property name="isPaymentConfirmed" type="bool"/>
+    </transfer>
+
+    <transfer name="ComputopPaymentComputopOrderItemCollection">
+        <property name="computopPaymentComputopOrderItems" type="ComputopPaymentComputopOrderItem[]"
+                  singular="computopPaymentComputopOrderItem"/>
+    </transfer>
+
+    <transfer name="ComputopSalesOrderItem">
+        <property name="idSalesOrderItem" type="int"/>
+    </transfer>
+
+    <transfer name="ComputopSalesOrderItemCollection">
+        <property name="computopSalesOrderItems" type="ComputopSalesOrderItem[]"
+                  singular="computopSalesOrderItem"/>
+    </transfer>
 </transfers>

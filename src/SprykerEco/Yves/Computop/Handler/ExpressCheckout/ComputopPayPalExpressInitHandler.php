@@ -124,7 +124,9 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
 
         $quoteTransfer = $this->shipmentClient->expandQuoteWithShipmentGroups($quoteTransfer);
 
-        return $this->payPalExpressToQuoteMapper->mapAddressTransfer($quoteTransfer, $payPalInitResponseTransfer);
+        return $this
+            ->payPalExpressToQuoteMapper
+            ->mapAddressFromComputopPayPalExpressInitResponseToQuote($payPalInitResponseTransfer, $quoteTransfer);
     }
 
     /**
@@ -139,7 +141,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
             return $quoteTransfer;
         }
 
-        return $this->payPalExpressToQuoteMapper->mapBillingTransfer($quoteTransfer, $payPalInitResponseTransfer);
+        return $this->payPalExpressToQuoteMapper->mapBillingAddressFromComputopPayPalExpressInitResponseToQuote($quoteTransfer, $payPalInitResponseTransfer);
     }
 
     /**
@@ -158,7 +160,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
             ->getComputopPayPalExpress()
             ->getPayPalExpressInitResponse();
 
-        return $this->payPalExpressToQuoteMapper->mapCustomerTransfer($quoteTransfer, $payPalInitResponseTransfer);
+        return $this->payPalExpressToQuoteMapper->mapCustomerFromComputopPayPalExpressInitResponseToQuote($quoteTransfer, $payPalInitResponseTransfer);
     }
 
     /**
