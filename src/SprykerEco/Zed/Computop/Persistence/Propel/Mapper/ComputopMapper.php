@@ -1,70 +1,137 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Computop\Persistence\Propel\Mapper;
 
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Propel\Runtime\Collection\Collection;
 
 class ComputopMapper
 {
     /**
-     * @param SpyPaymentComputop $computopPaymentEntity
-     * @param ComputopPaymentComputopTransfer $computopPaymentTransfer
-     * @return ComputopPaymentComputopTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $computopPaymentEntity
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopTransfer
      */
     public function mapComputopPaymentEntityToComputopPaymentTransfer(
         SpyPaymentComputop $computopPaymentEntity,
         ComputopPaymentComputopTransfer $computopPaymentTransfer
-    ): ComputopPaymentComputopTransfer
-    {
+    ): ComputopPaymentComputopTransfer {
         $computopPaymentTransfer->fromArray($computopPaymentEntity->toArray(), true);
 
         return $computopPaymentTransfer;
     }
 
     /**
-     * @param Collection $salesOrderItemsCollection
-     * @param ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $computopPaymentEntity
      *
-     * @return ComputopSalesOrderItemCollectionTransfer[]
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     */
+    public function mapComputopPaymentTransferToComputopPaymentEntity(
+        ComputopPaymentComputopTransfer $computopPaymentTransfer,
+        SpyPaymentComputop $computopPaymentEntity
+    ): SpyPaymentComputop {
+        $computopPaymentEntity->fromArray($computopPaymentTransfer->toArray());
+
+        return $computopPaymentEntity;
+    }
+
+    /**
+     * @param \Propel\Runtime\Collection\Collection $salesOrderItemsCollection
+     * @param \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer
      */
     public function mapSalesOrderItemsCollectionToComputopSalesOrderItemCollectionTransfer(
         Collection $salesOrderItemsCollection,
         ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
-    ): array
-    {
-        $computopSalesOrderItemCollectionTransfers = [];
+    ): ComputopSalesOrderItemCollectionTransfer {
         foreach ($salesOrderItemsCollection as $salesOrderItem) {
             $computopSalesOrderItemTransfer = $this->
             mapSalesOrderItemToComputopSalesOrderItemTransfer($salesOrderItem, new ComputopSalesOrderItemTransfer());
-            $computopSalesOrderItemCollectionTransfers[] = $computopSalesOrderItemTransfer;
+            $computopSalesOrderItemCollectionTransfer->addComputopSalesOrderItem($computopSalesOrderItemTransfer);
         }
 
-        return $computopSalesOrderItemCollectionTransfers;
+        return $computopSalesOrderItemCollectionTransfer;
     }
 
     /**
-     * @param SpySalesOrderItem $salesOrderItem
-     * @param ComputopSalesOrderItemTransfer $computopSalesOrderItemTransfer
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $salesOrderItem
+     * @param \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer $computopSalesOrderItemTransfer
      *
-     * @return ComputopSalesOrderItemTransfer
+     * @return \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer
      */
     public function mapSalesOrderItemToComputopSalesOrderItemTransfer(
         SpySalesOrderItem $salesOrderItem,
         ComputopSalesOrderItemTransfer $computopSalesOrderItemTransfer
-    ): ComputopSalesOrderItemTransfer
-    {
+    ): ComputopSalesOrderItemTransfer {
         $computopSalesOrderItemTransfer->fromArray($salesOrderItem->toArray(), true);
 
         return $computopSalesOrderItemTransfer;
     }
 
-    public function map()
-    {
+    /**
+     * @param \Propel\Runtime\Collection\Collection $paymentComputopOrderItemsCollection
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer
+     */
+    public function mapPaymentComputopOrderItemEntityCollectionToComputopPaymentComputopOrderItemTransferCollection(
+        Collection $paymentComputopOrderItemsCollection,
+        ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
+    ): ComputopPaymentComputopOrderItemCollectionTransfer {
+        foreach ($paymentComputopOrderItemsCollection as $paymentComputopOrderItem) {
+            $computopPaymentOrderItemTransfer = $this->
+            mapPaymentComputopOrderItemEntityToComputopPaymentComputopOrderItemTransfer(
+                $paymentComputopOrderItem,
+                new ComputopPaymentComputopOrderItemTransfer()
+            );
+            $computopPaymentComputopOrderItemCollectionTransfer->addComputopPaymentComputopOrderItem($computopPaymentOrderItemTransfer);
+        }
 
+        return $computopPaymentComputopOrderItemCollectionTransfer;
+    }
+
+    /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer
+     */
+    public function mapPaymentComputopOrderItemEntityToComputopPaymentComputopOrderItemTransfer(
+        SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem,
+        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+    ): ComputopPaymentComputopOrderItemTransfer {
+        $computopPaymentComputopOrderItemTransfer->fromArray($spyPaymentComputopOrderItem->toArray(), true);
+
+        return $computopPaymentComputopOrderItemTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem
+     */
+    public function mapComputopPaymentComputopOrderItemTransferToPaymentComputopOrderItemEntity(
+        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer,
+        SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem
+    ): SpyPaymentComputopOrderItem {
+        $spyPaymentComputopOrderItem->fromArray($computopPaymentComputopOrderItemTransfer->toArray());
+
+        return $spyPaymentComputopOrderItem;
     }
 }

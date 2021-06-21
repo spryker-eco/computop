@@ -28,8 +28,8 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Act
         $quoteTransfer = $mapper->mapAddressFromComputopPayPalExpressInitResponseToQuote(
-            $this->tester->createQuoteTransfer(),
-            $this->tester->createComputopPayPalExpressInitResponseTransfer()
+            $this->tester->createComputopPayPalExpressInitResponseTransfer(),
+            $this->tester->createQuoteTransfer()
         );
 
         //Assert
@@ -69,8 +69,8 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Act
         $quoteTransfer = $mapper->mapBillingAddressFromComputopPayPalExpressInitResponseToQuote(
-            $this->tester->createQuoteTransfer(),
-            $this->tester->createComputopPayPalExpressInitResponseTransfer()
+            $this->tester->createComputopPayPalExpressInitResponseTransfer(),
+            $this->tester->createQuoteTransfer()
         );
 
         //Assert
@@ -96,8 +96,8 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Act
         $quoteTransfer = $mapper->mapCustomerFromComputopPayPalExpressInitResponseToQuote(
-            $this->tester->createQuoteTransfer(),
-            $this->tester->createComputopPayPalExpressInitResponseTransfer()
+            $this->tester->createComputopPayPalExpressInitResponseTransfer(),
+            $this->tester->createQuoteTransfer()
         );
 
         //Assert

@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
 class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
 {
@@ -25,8 +24,7 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     public function mapAddressFromComputopPayPalExpressInitResponseToQuote(
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
         QuoteTransfer $quoteTransfer
-    ): QuoteTransfer
-    {
+    ): QuoteTransfer {
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
 
@@ -62,8 +60,7 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     public function mapBillingAddressFromComputopPayPalExpressInitResponseToQuote(
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
         QuoteTransfer $quoteTransfer
-    ): QuoteTransfer
-    {
+    ): QuoteTransfer {
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
 
@@ -93,8 +90,7 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
     public function mapCustomerFromComputopPayPalExpressInitResponseToQuote(
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer,
         QuoteTransfer $quoteTransfer
-    ): QuoteTransfer
-    {
+    ): QuoteTransfer {
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
         $customerTransfer->setIsGuest(true);

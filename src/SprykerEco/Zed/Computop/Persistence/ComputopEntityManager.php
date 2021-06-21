@@ -7,7 +7,12 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -46,8 +51,8 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         $paymentComputopOrderItemEntities = $this->getFactory()
             ->createPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
-                ->filterByTransId($computopNotificationTransfer->getTransId())
-                ->filterByPayId($computopNotificationTransfer->getPayId())
+            ->filterByTransId($computopNotificationTransfer->getTransId())
+            ->filterByPayId($computopNotificationTransfer->getPayId())
             ->endUse()
             ->find();
 
@@ -62,5 +67,69 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         return true;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentDetail(
+        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+    ): void {
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->createComputopEntityMapper()
+            ->mapComputopPaymentTransferToComputopPaymentEntity(
+                $computopPaymentComputopTransfer,
+                new SpyPaymentComputop()
+            );
+
+        $spyPaymentEntityDetails = $computopPaymentComputopEntity->getSpyPaymentComputopDetail();
+        $spyPaymentEntityDetails->fromArray($computopApiPayPalExpressCompleteResponseTransfer->toArray());
+
+        $spyPaymentEntityDetails->save();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPayment(
+        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+    ): void {
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->createComputopEntityMapper()
+            ->mapComputopPaymentTransferToComputopPaymentEntity(
+                $computopPaymentComputopTransfer,
+                new SpyPaymentComputop()
+            );
+
+        $computopPaymentComputopEntity->setPayId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getPayId());
+        $computopPaymentComputopEntity->setXId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getXId());
+
+        $computopPaymentComputopEntity->save();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentComputopOrderItem(
+        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+    ): void {
+        $paymentComputopOrderItemEntity = $this->getFactory()
+            ->createComputopEntityMapper()
+            ->mapComputopPaymentComputopOrderItemTransferToPaymentComputopOrderItemEntity(
+                $computopPaymentComputopOrderItemTransfer,
+                new SpyPaymentComputopOrderItem(),
+            );
+
+        $paymentComputopOrderItemEntity->save();
     }
 }

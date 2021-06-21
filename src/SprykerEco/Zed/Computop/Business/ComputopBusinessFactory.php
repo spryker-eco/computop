@@ -90,6 +90,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
  */
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {
@@ -193,7 +194,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createPayPalExpressCompleteResponseSaver(): CompleteResponseSaverInterface
     {
-        return new PayPalExpressCompleteResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new PayPalExpressCompleteResponseSaver(
+            $this->getOmsFacade(),
+            $this->getConfig(),
+            $this->getEntityManager(),
+            $this->getRepository()
+        );
     }
 
     /**

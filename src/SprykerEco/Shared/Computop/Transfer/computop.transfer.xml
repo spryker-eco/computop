@@ -765,6 +765,8 @@
     </transfer>
 
     <transfer name="ComputopPaymentComputopOrderItem">
+        <property name="fkPaymentComputop" type="int"/>
+        <property name="fkSalesOrderItem" type="int"/>
         <property name="status" type="string"/>
         <property name="isPaymentConfirmed" type="bool"/>
     </transfer>

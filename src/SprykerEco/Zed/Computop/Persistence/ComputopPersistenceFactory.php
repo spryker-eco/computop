@@ -18,6 +18,7 @@ use SprykerEco\Zed\Computop\Persistence\Propel\Mapper\ComputopMapper;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
  */
 class ComputopPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -54,7 +55,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     }
 
     /**
-     * @return ComputopMapper
+     * @return \SprykerEco\Zed\Computop\Persistence\Propel\Mapper\ComputopMapper
      */
     public function createComputopEntityMapper(): ComputopMapper
     {
