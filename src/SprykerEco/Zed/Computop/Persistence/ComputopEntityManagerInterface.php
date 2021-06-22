@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
-use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 
@@ -31,26 +31,20 @@ interface ComputopEntityManagerInterface
     ): bool;
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
-     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
      *
      * @return void
      */
-    public function updateComputopPaymentDetail(
-        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
-        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+    public function saveComputopPaymentDetail(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
     ): void;
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
      * @return void
      */
-    public function updateComputopPayment(
-        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
-        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
-    ): void;
+    public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void;
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer

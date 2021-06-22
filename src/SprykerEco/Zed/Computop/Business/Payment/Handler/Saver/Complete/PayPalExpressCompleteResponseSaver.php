@@ -104,16 +104,19 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
      * @return void
      */
     protected function savePaymentComputop(
-        ComputopApiPayPalExpressCompleteResponseTransfer $responseTransfer,
+        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $this->computopEntityManager->updateComputopPayment($responseTransfer, $computopPaymentComputopTransfer);
+        $computopPaymentComputopTransfer->setPayId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getPayId());
+        $computopPaymentComputopTransfer->setXId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getXId());
+
+        $this->computopEntityManager->saveComputopPayment($computopPaymentComputopTransfer);
     }
 
     /**
@@ -126,7 +129,13 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
         ComputopApiPayPalExpressCompleteResponseTransfer $payPalExpressCompleteResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $this->computopEntityManager->updateComputopPaymentDetail($payPalExpressCompleteResponseTransfer, $computopPaymentComputopTransfer);
+        $computopPaymentComputopDetailTransfer = $this
+            ->computopRepository
+            ->getComputopPaymentDetail($computopPaymentComputopTransfer);
+
+        $computopPaymentComputopDetailTransfer->fromArray($payPalExpressCompleteResponseTransfer->toArray(), true);
+
+        $this->computopEntityManager->saveComputopPaymentDetail($computopPaymentComputopDetailTransfer);
     }
 
     /**

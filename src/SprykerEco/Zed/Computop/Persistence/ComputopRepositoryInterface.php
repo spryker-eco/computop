@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer;
@@ -37,4 +38,13 @@ interface ComputopRepositoryInterface
     public function getComputopPaymentComputopOrderItemsCollection(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopPaymentComputopOrderItemCollectionTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer
+     */
+    public function getComputopPaymentDetail(
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+    ): ComputopPaymentComputopDetailTransfer;
 }

@@ -678,6 +678,7 @@
     </transfer>
 
     <transfer name="ComputopPaymentComputopDetail">
+        <property name="idPaymentComputop" type="int"/>
         <property name="pcNr" type="string"/>
         <property name="creditCardBrand" type="string"/>
         <property name="creditCardExpiry" type="string"/>

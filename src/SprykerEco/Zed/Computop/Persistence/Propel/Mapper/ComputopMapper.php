@@ -7,12 +7,14 @@
 
 namespace SprykerEco\Zed\Computop\Persistence\Propel\Mapper;
 
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Propel\Runtime\Collection\Collection;
@@ -44,7 +46,8 @@ class ComputopMapper
         ComputopPaymentComputopTransfer $computopPaymentTransfer,
         SpyPaymentComputop $computopPaymentEntity
     ): SpyPaymentComputop {
-        $computopPaymentEntity->fromArray($computopPaymentTransfer->toArray());
+        $computopPaymentEntity->fromArray($computopPaymentTransfer->modifiedToArray());
+        $computopPaymentEntity->setIdPaymentComputop($computopPaymentTransfer->getIdPaymentComputop());
 
         return $computopPaymentEntity;
     }
@@ -133,5 +136,35 @@ class ComputopMapper
         $spyPaymentComputopOrderItem->fromArray($computopPaymentComputopOrderItemTransfer->toArray());
 
         return $spyPaymentComputopOrderItem;
+    }
+
+    /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentComputopDetailEntity
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer
+     */
+    public function mapPaymentComputopDetailEntityToComputopPaymentComputopDetailTransfer(
+        SpyPaymentComputopDetail $paymentComputopDetailEntity,
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
+    ): ComputopPaymentComputopDetailTransfer {
+        $computopPaymentComputopDetailTransfer->fromArray($paymentComputopDetailEntity->toArray(), true);
+
+        return $computopPaymentComputopDetailTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentComputopDetailEntity
+     *
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail
+     */
+    public function mapComputopPaymentComputopDetailTransferToPaymentComputopDetailEntity(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopTransfer,
+        SpyPaymentComputopDetail $paymentComputopDetailEntity
+    ): SpyPaymentComputopDetail {
+        $paymentComputopDetailEntity->fromArray($computopPaymentComputopTransfer->toArray());
+
+        return $paymentComputopDetailEntity;
     }
 }

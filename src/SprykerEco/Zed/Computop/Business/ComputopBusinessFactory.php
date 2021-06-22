@@ -186,7 +186,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createPayPalExpressResponseSaver(): InitResponseSaverInterface
     {
-        return new PayPalExpressResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new PayPalExpressResponseSaver(
+            $this->getOmsFacade(),
+            $this->getConfig(),
+            $this->getRepository(),
+            $this->getEntityManager()
+        );
     }
 
     /**

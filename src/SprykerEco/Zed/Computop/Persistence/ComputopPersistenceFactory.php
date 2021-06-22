@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetailQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopNotificationQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
@@ -28,6 +29,14 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     public function createPaymentComputopQuery(): SpyPaymentComputopQuery
     {
         return SpyPaymentComputopQuery::create();
+    }
+
+    /**
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetailQuery
+     */
+    public function createPaymentComputopDetailQuery(): SpyPaymentComputopDetailQuery
+    {
+        return SpyPaymentComputopDetailQuery::create();
     }
 
     /**

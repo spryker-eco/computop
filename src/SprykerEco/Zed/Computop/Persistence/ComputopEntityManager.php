@@ -7,11 +7,10 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
-use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -70,47 +69,45 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
-     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
      *
      * @return void
      */
-    public function updateComputopPaymentDetail(
-        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
-        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+    public function saveComputopPaymentDetail(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
     ): void {
-        $computopPaymentComputopEntity = $this->getFactory()
+        $computopPaymentComputopDetailEntity = $this->getFactory()
+            ->createPaymentComputopDetailQuery()
+            ->filterByIdPaymentComputop($computopPaymentComputopDetailTransfer->getIdPaymentComputop())
+            ->findOne();
+
+        $computopPaymentComputopDetailEntity = $this->getFactory()
             ->createComputopEntityMapper()
-            ->mapComputopPaymentTransferToComputopPaymentEntity(
-                $computopPaymentComputopTransfer,
-                new SpyPaymentComputop()
+            ->mapComputopPaymentComputopDetailTransferToPaymentComputopDetailEntity(
+                $computopPaymentComputopDetailTransfer,
+                $computopPaymentComputopDetailEntity
             );
 
-        $spyPaymentEntityDetails = $computopPaymentComputopEntity->getSpyPaymentComputopDetail();
-        $spyPaymentEntityDetails->fromArray($computopApiPayPalExpressCompleteResponseTransfer->toArray());
-
-        $spyPaymentEntityDetails->save();
+        $computopPaymentComputopDetailEntity->save();
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
      * @return void
      */
-    public function updateComputopPayment(
-        ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
-        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
-    ): void {
+    public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void
+    {
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->createPaymentComputopQuery()
+            ->filterByTransId($computopPaymentComputopTransfer->getTransId())->findOne();
+
         $computopPaymentComputopEntity = $this->getFactory()
             ->createComputopEntityMapper()
             ->mapComputopPaymentTransferToComputopPaymentEntity(
                 $computopPaymentComputopTransfer,
-                new SpyPaymentComputop()
+                $computopPaymentComputopEntity
             );
-
-        $computopPaymentComputopEntity->setPayId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getPayId());
-        $computopPaymentComputopEntity->setXId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getXId());
 
         $computopPaymentComputopEntity->save();
     }
