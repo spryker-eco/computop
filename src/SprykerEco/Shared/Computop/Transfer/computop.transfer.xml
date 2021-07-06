@@ -761,8 +761,7 @@
     </transfer>
 
     <transfer name="ComputopPaymentComputopDetailCollection">
-        <property name="computopPaymentComputopDetails" type="ComputopPaymentComputopDetail[]"
-                  singular="computopPaymentComputopDetail"/>
+        <property name="computopPaymentComputopDetails" type="ComputopPaymentComputopDetail[]" singular="computopPaymentComputopDetail"/>
     </transfer>
 
     <transfer name="ComputopPaymentComputopOrderItem">
@@ -773,8 +772,7 @@
     </transfer>
 
     <transfer name="ComputopPaymentComputopOrderItemCollection">
-        <property name="computopPaymentComputopOrderItems" type="ComputopPaymentComputopOrderItem[]"
-                  singular="computopPaymentComputopOrderItem"/>
+        <property name="computopPaymentComputopOrderItems" type="ComputopPaymentComputopOrderItem[]" singular="computopPaymentComputopOrderItem"/>
     </transfer>
 
     <transfer name="ComputopSalesOrderItem">
@@ -782,7 +780,6 @@
     </transfer>
 
     <transfer name="ComputopSalesOrderItemCollection">
-        <property name="computopSalesOrderItems" type="ComputopSalesOrderItem[]"
-                  singular="computopSalesOrderItem"/>
+        <property name="computopSalesOrderItems" type="ComputopSalesOrderItem[]" singular="computopSalesOrderItem"/>
     </transfer>
 </transfers>
