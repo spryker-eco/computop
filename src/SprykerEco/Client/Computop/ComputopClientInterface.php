@@ -199,17 +199,4 @@ interface ComputopClientInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
-
-    /**
-     * Specification:
-     * - Performs Zed call.
-     * - Expands `QuoteTransfer` with default shipping method from config.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

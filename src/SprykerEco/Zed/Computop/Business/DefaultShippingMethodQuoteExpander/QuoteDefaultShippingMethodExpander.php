@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander;
 
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentMethodsTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -45,13 +46,13 @@ class QuoteDefaultShippingMethodExpander implements QuoteDefaultShippingMethodEx
     {
         $quoteTransfer->setDefaultShipmentSelected(true);
         $defaultShipmentId = $this->computopConfig->getDefaultShipmentMethodId();
-        $itemShipmentTransfer = $this->initItemShipment($defaultShipmentId);
+        $itemShipmentTransfer = $this->createShipmentTransfer($defaultShipmentId);
         $this->addShipmentToQuoteItems($quoteTransfer, $itemShipmentTransfer);
         $defaultShipmentMethodTransfer = $this->getDefaultShipmentMethod($quoteTransfer, $defaultShipmentId);
         $itemShipmentTransfer->setMethod($defaultShipmentMethodTransfer);
 
         $quoteTransfer = $this->addShipmentToQuoteItems($quoteTransfer, $itemShipmentTransfer);
-        $quoteTransfer = $this->expandQuoteWithShipmentGroups($quoteTransfer);
+        $quoteTransfer = $this->shipmentFacade->expandQuoteWithShipmentGroups($quoteTransfer);
 
         return $quoteTransfer;
     }
@@ -73,30 +74,21 @@ class QuoteDefaultShippingMethodExpander implements QuoteDefaultShippingMethodEx
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function expandQuoteWithShipmentGroups(QuoteTransfer $quoteTransfer): QuoteTransfer
-    {
-        return $this->shipmentFacade->expandQuoteWithShipmentGroups($quoteTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param int $idShipmentMethod
      *
      * @return \Generated\Shared\Transfer\ShipmentMethodTransfer
      */
     protected function getDefaultShipmentMethod(QuoteTransfer $quoteTransfer, int $idShipmentMethod): ShipmentMethodTransfer
     {
-        $availableMethods = $this->shipmentFacade
+        $shipmentMethods = $this->shipmentFacade
             ->getAvailableMethodsByShipment($quoteTransfer)
             ->getShipmentMethods();
-        foreach ($availableMethods as $availableMethod) {
-            foreach ($availableMethod->getMethods() as $method) {
-                if ($method->getIdShipmentMethod() === $idShipmentMethod) {
-                    return $method;
-                }
+
+        foreach ($shipmentMethods as $shipmentMethodsTransfer) {
+            $shipmentMethodTransfer = $this->findShipmentMethodById($shipmentMethodsTransfer, $idShipmentMethod);
+
+            if ($shipmentMethodTransfer !== null) {
+                return $shipmentMethodTransfer;
             }
         }
 
@@ -108,12 +100,29 @@ class QuoteDefaultShippingMethodExpander implements QuoteDefaultShippingMethodEx
      *
      * @return \Generated\Shared\Transfer\ShipmentTransfer
      */
-    protected function initItemShipment(int $defaultShipmentId): ShipmentTransfer
+    protected function createShipmentTransfer(int $defaultShipmentId): ShipmentTransfer
     {
         $itemShipmentTransfer = new ShipmentTransfer();
         $itemShipmentTransfer->setShipmentSelection($defaultShipmentId);
         $itemShipmentTransfer->setShippingAddress(new AddressTransfer());
 
         return $itemShipmentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ShipmentMethodsTransfer $shipmentMethodsTransfer
+     * @param int $idShipmentMethod
+     *
+     * @return \Generated\Shared\Transfer\ShipmentMethodTransfer|null
+     */
+    protected function findShipmentMethodById(ShipmentMethodsTransfer $shipmentMethodsTransfer, int $idShipmentMethod): ?ShipmentMethodTransfer
+    {
+        foreach ($shipmentMethodsTransfer->getMethods() as $shipmentMethodTransfer) {
+            if ($shipmentMethodTransfer->getIdShipmentMethod() === $idShipmentMethod) {
+                return $shipmentMethodTransfer;
+            }
+        }
+
+        return null;
     }
 }

@@ -50,8 +50,8 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         $paymentComputopOrderItemEntities = $this->getFactory()
             ->createPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
-            ->filterByTransId($computopNotificationTransfer->getTransId())
-            ->filterByPayId($computopNotificationTransfer->getPayId())
+                ->filterByTransId($computopNotificationTransfer->getTransId())
+                ->filterByPayId($computopNotificationTransfer->getPayId())
             ->endUse()
             ->find();
 

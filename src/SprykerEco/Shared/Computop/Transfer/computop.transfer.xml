@@ -674,7 +674,7 @@
         <property name="xId" type="string"/>
         <property name="payId" type="string"/>
         <property name="transId" type="string"/>
-        <property name="ReqId" type="string"/>
+        <property name="reqId" type="string"/>
     </transfer>
 
     <transfer name="ComputopPaymentComputopDetail">

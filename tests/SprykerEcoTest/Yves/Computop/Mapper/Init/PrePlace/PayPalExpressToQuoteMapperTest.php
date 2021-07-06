@@ -45,7 +45,7 @@ class PayPalExpressToQuoteMapperTest extends Test
         );
 
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $this->assertEquals(
+            $this->assertSame(
                 PayPalExpressToQuoteMapperTestConstants::ADDRESS_CITY_VALUE,
                 $itemTransfer->getShipment()->getShippingAddress()->getCity()
             );

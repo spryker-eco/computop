@@ -7,9 +7,10 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete;
 
-use Closure;
 use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
+use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -70,17 +71,19 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
             ->getComputopPayPalExpress()
             ->getPayPalExpressCompleteResponse();
 
-        $computopPaymentTransfer = $this->
-        computopRepository
+        $computopPaymentTransfer = $this
+            ->computopRepository
             ->getComputopPaymentByComputopTransId(
                 $payPalExpressCompleteResponseTransfer->getHeader()->getTransId()
             );
 
         $this->getTransactionHandler()->handleTransaction(
-            $this->executeSavePaymentComputopDataTransaction(
-                $payPalExpressCompleteResponseTransfer,
-                $computopPaymentTransfer
-            )
+            function () use ($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer) {
+                $this->executeSavePaymentComputopDataTransaction(
+                    $payPalExpressCompleteResponseTransfer,
+                    $computopPaymentTransfer
+                );
+            }
         );
 
         return $quoteTransfer;
@@ -90,17 +93,15 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
      * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $payPalExpressCompleteResponseTransfer
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentTransfer
      *
-     * @return \Closure
+     * @return void
      */
     protected function executeSavePaymentComputopDataTransaction(
         ComputopApiPayPalExpressCompleteResponseTransfer $payPalExpressCompleteResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentTransfer
-    ): Closure {
-        return function () use ($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer) {
+    ): void {
             $this->savePaymentComputopDetail($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer);
             $this->savePaymentComputop($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer);
             $this->savePaymentComputopOrderItems($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer);
-        };
     }
 
     /**
@@ -155,15 +156,34 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
             ->getComputopPaymentComputopOrderItemsCollection($computopPaymentComputopTransfer);
 
         foreach ($salesOrderItemsCollection->getComputopSalesOrderItems() as $computopSalesOrderItemTransfer) {
-            foreach ($computopPaymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItemTransfer) {
-                if ($computopPaymentComputopOrderItemTransfer->getFkSalesOrderItem() !== $computopSalesOrderItemTransfer->getIdSalesOrderItem()) {
-                    continue;
-                }
-                $computopPaymentComputopOrderItemTransfer->setStatus($this->computopConfig->getOmsStatusInitialized());
-                $computopPaymentComputopOrderItemTransfer->setIsPaymentConfirmed($completeResponseTransfer->getHeader()->getIsSuccess());
+            $this->updatePaymentComputopOrderItem(
+                $computopPaymentComputopOrderItemsCollection,
+                $computopSalesOrderItemTransfer,
+                $completeResponseTransfer
+            );
+        }
+    }
 
-                $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItemTransfer);
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection
+     * @param \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer $computopSalesOrderItemTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer $completeResponseTransfer
+     *
+     * @return void
+     */
+    protected function updatePaymentComputopOrderItem(
+        ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection,
+        ComputopSalesOrderItemTransfer $computopSalesOrderItemTransfer,
+        ComputopApiPayPalExpressCompleteResponseTransfer $completeResponseTransfer
+    ): void {
+        foreach ($computopPaymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItemTransfer) {
+            if ($computopPaymentComputopOrderItemTransfer->getFkSalesOrderItem() !== $computopSalesOrderItemTransfer->getIdSalesOrderItem()) {
+                continue;
             }
+            $computopPaymentComputopOrderItemTransfer->setStatus($this->computopConfig->getOmsStatusInitialized());
+            $computopPaymentComputopOrderItemTransfer->setIsPaymentConfirmed($completeResponseTransfer->getHeader()->getIsSuccess());
+
+            $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItemTransfer);
         }
     }
 }

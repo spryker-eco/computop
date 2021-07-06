@@ -8,20 +8,21 @@
 namespace SprykerEco\Client\Computop;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 
 class ComputopQuoteDefaultShipmentExpander implements ComputopQuoteDefaultShipmentExpanderInterface
 {
     /**
-     * @var \SprykerEco\Client\Computop\ComputopClientInterface
+     * @var \SprykerEco\Client\Computop\Zed\ComputopStubInterface $computopStub
      */
-    protected $computopClient;
+    protected $computopStub;
 
     /**
-     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
+     * @param \SprykerEco\Client\Computop\Zed\ComputopStubInterface $computopStub
      */
-    public function __construct(ComputopClientInterface $computopClient)
+    public function __construct(ComputopStubInterface $computopStub)
     {
-        $this->computopClient = $computopClient;
+        $this->computopStub = $computopStub;
     }
 
     /**
@@ -31,11 +32,11 @@ class ComputopQuoteDefaultShipmentExpander implements ComputopQuoteDefaultShipme
      */
     public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        if (count($quoteTransfer->getItems()) === 0 || $this->quoteAlreadyHasShipment($quoteTransfer)) {
+        if ($quoteTransfer->getItems()->count() === 0 || $this->isQuoteHasShipment($quoteTransfer)) {
             return $quoteTransfer;
         }
 
-        return $this->computopClient->expandQuoteWithDefaultShippingMethod($quoteTransfer);
+        return $this->computopStub->expandQuoteWithDefaultShippingMethod($quoteTransfer);
     }
 
     /**
@@ -43,7 +44,7 @@ class ComputopQuoteDefaultShipmentExpander implements ComputopQuoteDefaultShipme
      *
      * @return bool
      */
-    protected function quoteAlreadyHasShipment(QuoteTransfer $quoteTransfer): bool
+    protected function isQuoteHasShipment(QuoteTransfer $quoteTransfer): bool
     {
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
             $itemShipmentTransfer = $itemTransfer->getShipment();

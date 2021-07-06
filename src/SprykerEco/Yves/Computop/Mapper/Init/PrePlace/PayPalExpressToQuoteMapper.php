@@ -38,13 +38,8 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $shippingAddressTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
         $shippingAddressTransfer->setCountry($countryTransfer);
 
-        foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $itemTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
-        }
-
-        foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
-            $expenseTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
-        }
+        $this->mapShippingAddressToQuoteItems($shippingAddressTransfer, $quoteTransfer);
+        $this->mapShippingAddressToQuoteExpenses($shippingAddressTransfer, $quoteTransfer);
 
         $quoteTransfer->setShippingAddress($shippingAddressTransfer);
 
@@ -96,6 +91,36 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $customerTransfer->setIsGuest(true);
         $quoteTransfer->setAcceptTermsAndConditions(true);
         $quoteTransfer->setCustomer($customerTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $shippingAddressTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function mapShippingAddressToQuoteItems(AddressTransfer $shippingAddressTransfer, QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        foreach ($quoteTransfer->getItems() as $itemTransfer) {
+            $itemTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
+        }
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $shippingAddressTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function mapShippingAddressToQuoteExpenses(AddressTransfer $shippingAddressTransfer, QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
+            $expenseTransfer->getShipment()->setShippingAddress($shippingAddressTransfer);
+        }
 
         return $quoteTransfer;
     }

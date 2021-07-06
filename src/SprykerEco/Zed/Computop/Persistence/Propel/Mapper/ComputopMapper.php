@@ -47,7 +47,6 @@ class ComputopMapper
         SpyPaymentComputop $computopPaymentEntity
     ): SpyPaymentComputop {
         $computopPaymentEntity->fromArray($computopPaymentTransfer->modifiedToArray());
-        $computopPaymentEntity->setIdPaymentComputop($computopPaymentTransfer->getIdPaymentComputop());
 
         return $computopPaymentEntity;
     }
@@ -63,8 +62,8 @@ class ComputopMapper
         ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
     ): ComputopSalesOrderItemCollectionTransfer {
         foreach ($salesOrderItemsCollection as $salesOrderItem) {
-            $computopSalesOrderItemTransfer = $this->
-            mapSalesOrderItemToComputopSalesOrderItemTransfer($salesOrderItem, new ComputopSalesOrderItemTransfer());
+            $computopSalesOrderItemTransfer = $this
+                ->mapSalesOrderItemToComputopSalesOrderItemTransfer($salesOrderItem, new ComputopSalesOrderItemTransfer());
             $computopSalesOrderItemCollectionTransfer->addComputopSalesOrderItem($computopSalesOrderItemTransfer);
         }
 
@@ -97,11 +96,11 @@ class ComputopMapper
         ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
     ): ComputopPaymentComputopOrderItemCollectionTransfer {
         foreach ($paymentComputopOrderItemsCollection as $paymentComputopOrderItem) {
-            $computopPaymentOrderItemTransfer = $this->
-            mapPaymentComputopOrderItemEntityToComputopPaymentComputopOrderItemTransfer(
-                $paymentComputopOrderItem,
-                new ComputopPaymentComputopOrderItemTransfer()
-            );
+            $computopPaymentOrderItemTransfer = $this
+                ->mapPaymentComputopOrderItemEntityToComputopPaymentComputopOrderItemTransfer(
+                    $paymentComputopOrderItem,
+                    new ComputopPaymentComputopOrderItemTransfer()
+                );
             $computopPaymentComputopOrderItemCollectionTransfer->addComputopPaymentComputopOrderItem($computopPaymentOrderItemTransfer);
         }
 
