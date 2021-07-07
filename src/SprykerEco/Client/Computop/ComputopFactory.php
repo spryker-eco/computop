@@ -41,6 +41,6 @@ class ComputopFactory extends AbstractFactory
      */
     public function createComputopQuoteDefaultShipmentExpander(): ComputopQuoteDefaultShipmentExpanderInterface
     {
-        return new ComputopQuoteDefaultShipmentExpander($this->getContainer()->getLocator()->computop()->client());
+        return new ComputopQuoteDefaultShipmentExpander($this->createZedStub());
     }
 }
