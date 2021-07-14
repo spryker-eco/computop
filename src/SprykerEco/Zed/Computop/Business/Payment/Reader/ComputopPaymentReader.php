@@ -32,6 +32,7 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $paymentTransfer */
         $paymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
         $transactionId = $paymentTransfer->getTransId();

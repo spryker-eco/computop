@@ -34,7 +34,7 @@ class PayNowMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer|null
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {

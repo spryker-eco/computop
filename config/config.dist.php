@@ -90,6 +90,7 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
     'ComputopPayPal01',
     'ComputopSofort01',
     'ComputopIdeal01',
+    'ComputopPayuCeeSingle01',
 ];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     //...

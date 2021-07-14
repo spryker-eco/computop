@@ -16,7 +16,7 @@ use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
-class PayUCeeSingleMapper extends AbstractMapper
+class PayuCeeSingleMapper extends AbstractMapper
 {
     protected const SHIPMENT_ARTICLE_NAME = 'Shipment';
     protected const ONE_ITEM_AMOUNT = 1;
@@ -81,7 +81,7 @@ class PayUCeeSingleMapper extends AbstractMapper
      *
      * @return string
      */
-    private function getArticleList($items, $expenseList): string
+    protected function getArticleList($items, $expenseList): string
     {
         $out = [];
 

@@ -26,7 +26,7 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($this->updateResponseHeader($header));
 
-        $arrayMap = [
+        $fieldMap = [
             'refNr' => ComputopApiConfig::REF_NR,
             'codeExt' => ComputopApiConfig::CODE_EXT,
             'errorText' => ComputopApiConfig::ERROR_TEXT,
@@ -39,7 +39,7 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
             'amountCred' => ComputopApiConfig::AMOUNT_CRED,
         ];
 
-        $responseTransfer->fromArray($this->getApiResponseValues($decryptedArray, $arrayMap), true);
+        $responseTransfer->fromArray($this->getApiResponseValues($decryptedArray, $fieldMap), true);
 
         return $responseTransfer;
     }

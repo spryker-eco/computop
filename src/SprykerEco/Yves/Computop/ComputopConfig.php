@@ -161,11 +161,14 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * Specification:
+     * - Get PayU CEE Single init action URL
+     *
      * @api
      *
      * @return string|null
      */
-    public function getPayUCEESingleInitActionUrl(): ?string
+    public function getPayuCeeSingleInitActionUrl(): ?string
     {
         return $this->get(ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION);
     }

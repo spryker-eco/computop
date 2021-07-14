@@ -55,7 +55,7 @@ use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayNowMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
-use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayUCeeSingleMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayuCeeSingleMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -148,7 +148,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm
      */
-    public function createPayUCeeSingleForm(): PayuCeeSingleSubForm
+    public function createPayuCeeSingleSubForm(): PayuCeeSingleSubForm
     {
         return new PayuCeeSingleSubForm();
     }
@@ -220,9 +220,9 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider
      */
-    public function createPayUCeeSingleFormDataProvider(): PayuCeeSingleFormDataProvider
+    public function createPayuCeeSingleFormDataProvider(): PayuCeeSingleFormDataProvider
     {
-        return new PayuCeeSingleFormDataProvider($this->getQuoteClient(), $this->createOrderPayUCeeSingleMapper());
+        return new PayuCeeSingleFormDataProvider($this->getQuoteClient(), $this->createOrderPayuCeeSingleMapper());
     }
 
     /**
@@ -553,11 +553,11 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayUCeeSingleMapper
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayuCeeSingleMapper
      */
-    protected function createOrderPayUCeeSingleMapper(): PayUCeeSingleMapper
+    protected function createOrderPayuCeeSingleMapper(): PayuCeeSingleMapper
     {
-        return new PayUCeeSingleMapper(
+        return new PayuCeeSingleMapper(
             $this->getComputopApiService(),
             $this->getRouter(),
             $this->getStore(),

@@ -35,6 +35,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::logResponseAction()
+     *
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $responseTransfer
      *
      * @return void
@@ -45,6 +47,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::saveSofortInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -58,6 +62,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::saveIdealInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -71,6 +77,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayuCeeSingleInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -84,6 +92,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePaydirektInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -97,6 +107,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::saveEasyCreditInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -110,6 +122,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayNowInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -123,6 +137,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayPalInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -136,6 +152,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::saveDirectDebitInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -149,6 +167,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::saveEasyCreditInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -162,6 +182,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::easyCreditStatusApiCallAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -175,6 +197,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::isComputopPaymentExistAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -188,6 +212,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::performCrifApiCallAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -205,6 +231,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::processNotificationAction()
+     *
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopNotificationTransfer

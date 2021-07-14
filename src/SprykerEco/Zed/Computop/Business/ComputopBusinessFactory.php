@@ -197,7 +197,12 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createPayuCeeSingleResponseSaver(): InitResponseSaverInterface
     {
-        return new PayuCeeSingleResponseSaver($this->getQueryContainer(), $this->getOmsFacade(), $this->getConfig());
+        return new PayuCeeSingleResponseSaver(
+            $this->getQueryContainer(),
+            $this->getOmsFacade(),
+            $this->getConfig(),
+            $this->getEntityManager()
+        );
     }
 
     /**
@@ -274,7 +279,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\EasyCreditStatusHandler
      */
     public function createEasyCreditStatusHandler(): PrePlaceHandlerInterface
     {

@@ -95,6 +95,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      */
     protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
+        /** @var \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer $responseTransfer */
         $responseTransfer = $this->inquirePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
 
         if ($responseTransfer->getIsAuthLast()) {
@@ -112,6 +113,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      */
     protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
+        /** @var \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer $computopResponseTransfer */
         $computopResponseTransfer = $this->reversePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
             $this->setInfoMessage('Authorization was reverted');

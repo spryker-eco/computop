@@ -105,10 +105,14 @@ abstract class AbstractMapper implements MapperInterface
      */
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
+        if ($quoteTransfer->getCurrency() && $quoteTransfer->getCurrency()->getCode() !== $computopPaymentTransfer->getCurrency()) {
+            $computopPaymentTransfer->setCurrency($quoteTransfer->getCurrency()->getCode());
+        }
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));

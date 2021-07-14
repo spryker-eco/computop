@@ -8,6 +8,9 @@
 namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
+use Propel\Runtime\Collection\ObjectCollection;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -62,5 +65,62 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         return true;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function savePaymentResponse(TransferInterface $responseTransfer): void
+    {
+        $header = $responseTransfer->requireHeader()->getHeader();
+        $header
+            ->requireTransId()
+            ->requirePayId()
+            ->requireXid();
+
+        $paymentEntity = $this->getFactory()
+            ->createPaymentComputopQuery()
+            ->filterByTransId($header->getTransId())
+            ->findOne();
+
+        $paymentEntity
+            ->setPayId($header->getPayId())
+            ->setXId($header->getXId())
+            ->save();
+
+        $this->savePaymentDetailEntity($paymentEntity->getSpyPaymentComputopDetail(), $responseTransfer);
+
+        $this->saveAuthorizedPaymentOrderItems($paymentEntity->getSpyPaymentComputopOrderItems());
+    }
+
+    /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentEntityDetails
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     *
+     * @return void
+     */
+    public function savePaymentDetailEntity(
+        SpyPaymentComputopDetail $paymentEntityDetails,
+        TransferInterface $responseTransfer
+    ): void {
+        $paymentEntityDetails->fromArray($responseTransfer->toArray());
+        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
+        $paymentEntityDetails->save();
+    }
+
+    /**
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItems
+     *
+     * @return void
+     */
+    public function saveAuthorizedPaymentOrderItems(ObjectCollection $paymentComputopOrderItems): void
+    {
+        $authorizedStatus = $this->getFactory()->getConfig()->getOmsStatusAuthorized();
+        foreach ($paymentComputopOrderItems as $paymentComputopOrderItem) {
+            $paymentComputopOrderItem->setStatus($authorizedStatus);
+            $paymentComputopOrderItem->save();
+        }
     }
 }
