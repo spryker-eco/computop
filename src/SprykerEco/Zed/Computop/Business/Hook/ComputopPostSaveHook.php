@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ConputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
@@ -63,20 +64,19 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
 
-        if (!in_array($payment->getPaymentSelection(), $this->config->getPaymentMethodsWithExternalRedirect())) {
-            return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
+        if ($this->isPaymentInitRequired($payment)) {
+            $checkoutResponseTransfer->setComputopInitPayment(
+                (new ComputopInitPaymentTransfer())
+                    ->setData($computopPaymentTransfer->getData())
+                    ->setLen($computopPaymentTransfer->getLen())
+            );
+
+            return $checkoutResponseTransfer;
         }
 
-        $checkoutResponseTransfer->setComputopInitPayment(
-            (new ComputopInitPaymentTransfer())
-                ->setData($computopPaymentTransfer->getData())
-                ->setLen($computopPaymentTransfer->getLen())
-        );
-
-        return $checkoutResponseTransfer;
+        return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
     }
 
     /**
@@ -137,5 +137,19 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         return $methodMapper->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentTransfer $payment
+     *
+     * @return bool
+     */
+    protected function isPaymentInitRequired(PaymentTransfer $payment): bool
+    {
+        return in_array($payment->getPaymentSelection(), [
+            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+        ]);
     }
 }
