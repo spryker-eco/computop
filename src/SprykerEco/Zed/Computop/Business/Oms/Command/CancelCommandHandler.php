@@ -95,7 +95,6 @@ class CancelCommandHandler extends AbstractCommandHandler
      */
     protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
-        /** @var \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer $responseTransfer */
         $responseTransfer = $this->inquirePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
 
         if ($responseTransfer->getIsAuthLast()) {

@@ -46,7 +46,6 @@ abstract class AbstractMapper implements InitMapperInterface
      */
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer->setRefNr($quoteTransfer->getOrderReference());
 
         return $computopPaymentTransfer;

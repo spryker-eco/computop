@@ -2,7 +2,6 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
     ignoreErrors:
-        - '#Return type \(Spryker\\Shared\\Kernel\\Transfer\\TransferInterface\) of method SprykerEco\\Zed\\Computop\\Communication\\Plugin\\Oms\\Command\\.*Plugin::run\(\) should be compatible with return type \(array\) of method Spryker\\Zed\\Oms\\Dependency\\Plugin\\Command\\CommandByOrderInterface::run\(\)#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getTransId\(\)#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getHeader\(\)#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getReqId\(\)#'
@@ -23,4 +22,5 @@ parameters:
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setUrlNotify\(\)#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setShippingZip\(\)#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getAmount\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getCurrency\(\)#'
         - '#Return type \(iterable<Orm\\Zed\Oms\\Persistence\\SpyOmsEventTimeout|Orm\\Zed\\Oms\\Persistence\\SpyOmsOrderItemStateHistory|Orm\\Zed\\Sales\\Persistence\\SpySalesOrderItem>&Propel\\Runtime\\Collection\\ObjectCollection\) of method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\CancelManager::getCanceledItems\(\) should be compatible with return type \(array\) of method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\CancelManagerInterface::getCanceledItems\(\)#'

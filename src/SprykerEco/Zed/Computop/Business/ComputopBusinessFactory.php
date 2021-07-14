@@ -201,7 +201,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $this->getQueryContainer(),
             $this->getOmsFacade(),
             $this->getConfig(),
-            $this->getEntityManager()
         );
     }
 

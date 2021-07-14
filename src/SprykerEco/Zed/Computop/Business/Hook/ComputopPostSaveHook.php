@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ConputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
@@ -87,7 +86,6 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      */
     protected function setRedirect(TransferInterface $computopPaymentTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());
@@ -100,7 +98,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface|null
      */
     protected function getMethodMapper($methodName)
     {

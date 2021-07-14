@@ -106,7 +106,11 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         TransferInterface $responseTransfer
     ): void {
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
-        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
+        $customerTransactionId = $responseTransfer->getCustomerTransactionId();
+        if ($customerTransactionId) {
+            $paymentEntityDetails->setCustomerTransactionId((int)$customerTransactionId);
+        }
+
         $paymentEntityDetails->save();
     }
 
