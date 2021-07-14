@@ -27,6 +27,7 @@ class PaydirektFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
+            /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopPaydirekt($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);
@@ -39,7 +40,7 @@ class PaydirektFormDataProvider extends AbstractFormDataProvider
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|null
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {

@@ -56,7 +56,12 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     {
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
-        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
+
+        $customerTransactionId = $responseTransfer->getCustomerTransactionId();
+        if ($customerTransactionId) {
+            $paymentEntityDetails->setCustomerTransactionId((int)$customerTransactionId);
+        }
+
         $paymentEntityDetails->save();
     }
 

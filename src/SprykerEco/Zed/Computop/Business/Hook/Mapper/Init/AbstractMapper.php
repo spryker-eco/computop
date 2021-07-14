@@ -52,15 +52,16 @@ abstract class AbstractMapper implements InitMapperInterface
     }
 
     /**
+     * @param string $actionUrl
      * @param string $merchantId
      * @param string $data
      * @param int $length
      *
      * @return string
      */
-    protected function getUrlToComputop($merchantId, $data, $length)
+    protected function getUrlToComputop(string $actionUrl, string $merchantId, string $data, int $length)
     {
-        return $this->getActionUrl() . '?' . http_build_query([
+        return $actionUrl . '?' . http_build_query([
                 ComputopApiConfig::MERCHANT_ID => $merchantId,
                 ComputopApiConfig::DATA => $data,
                 ComputopApiConfig::LENGTH => $length,

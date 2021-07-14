@@ -1,0 +1,26 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Return type \(Spryker\\Shared\\Kernel\\Transfer\\TransferInterface\) of method SprykerEco\\Zed\\Computop\\Communication\\Plugin\\Oms\\Command\\.*Plugin::run\(\) should be compatible with return type \(array\) of method Spryker\\Zed\\Oms\\Dependency\\Plugin\\Command\\CommandByOrderInterface::run\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getTransId\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getHeader\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getReqId\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getPayId\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getClientIp\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getIsAuthLast\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setRefNr\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getData\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getLen\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getUrl\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setMerchantId\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setAmount\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setCurrency\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setResponse\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setClientIp\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setReqId\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setUrlFailure\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setUrlNotify\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::setShippingZip\(\)#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\TransferInterface::getAmount\(\)#'
+        - '#Return type \(iterable<Orm\\Zed\Oms\\Persistence\\SpyOmsEventTimeout|Orm\\Zed\\Oms\\Persistence\\SpyOmsOrderItemStateHistory|Orm\\Zed\\Sales\\Persistence\\SpySalesOrderItem>&Propel\\Runtime\\Collection\\ObjectCollection\) of method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\CancelManager::getCanceledItems\(\) should be compatible with return type \(array\) of method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\CancelManagerInterface::getCanceledItems\(\)#'

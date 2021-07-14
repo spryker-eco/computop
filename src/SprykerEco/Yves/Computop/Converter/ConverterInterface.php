@@ -12,7 +12,7 @@ interface ConverterInterface
     /**
      * @param array $decryptedArray
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     public function getResponseTransfer(array $decryptedArray);
 }

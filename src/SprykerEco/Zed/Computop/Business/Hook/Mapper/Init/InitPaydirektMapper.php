@@ -50,7 +50,8 @@ class InitPaydirektMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), $computopPaymentTransfer->getMerchantId(), $data, $length);
+        $computopPaymentTransfer->setUrl($urlToComputop);
 
         return $computopPaymentTransfer;
     }

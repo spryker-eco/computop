@@ -36,7 +36,8 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
         /** @var \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $responseTransfer */
         $responseTransfer = $this->getFacade()->refundCommandHandle($orderItems, $orderTransfer);
 
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        $computopApiResponseHeaderTransfer = $responseTransfer->getHeader();
+        if ($computopApiResponseHeaderTransfer && $computopApiResponseHeaderTransfer->getIsSuccess()) {
             $refundTransfer = $this->getFactory()->getRefundFacade()->calculateRefund($orderItems, $orderEntity);
             $this->getFactory()->getRefundFacade()->saveRefund($refundTransfer);
         }

@@ -17,7 +17,7 @@ class InitEasyCreditConverter extends AbstractInitConverter
      * @param array $decryptedArray
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
     {

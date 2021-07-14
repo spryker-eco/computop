@@ -16,7 +16,7 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
@@ -33,6 +33,8 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
         }
 
         $payment->getComputopPayuCeeSingle()->setPayuCeeSingleInitResponse($responseTransfer);
+
+        $quoteTransfer->setPayment($payment);
 
         return $quoteTransfer;
     }

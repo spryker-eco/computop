@@ -76,8 +76,8 @@ class PayUCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer[] $items
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[] $expenseList
+     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $items
+     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseList
      *
      * @return string
      */
@@ -103,7 +103,7 @@ class PayUCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[] $expenseList
+     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseList
      *
      * @return int
      */

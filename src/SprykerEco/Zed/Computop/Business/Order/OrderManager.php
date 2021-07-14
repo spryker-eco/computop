@@ -30,7 +30,7 @@ class OrderManager implements OrderManagerInterface
     protected $mappers;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     protected $activeMapper;
 
