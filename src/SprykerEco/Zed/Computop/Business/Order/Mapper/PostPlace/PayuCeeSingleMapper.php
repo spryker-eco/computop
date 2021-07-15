@@ -39,7 +39,10 @@ class PayuCeeSingleMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ?TransferInterface
     {
-        return $this->getComputopTransfer($paymentTransfer)->getPayuCeeSingleInitResponse();
+        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
+        $computopPayuCeeSinglePaymentTransfer = $this->getComputopTransfer($paymentTransfer);
+
+        return $computopPayuCeeSinglePaymentTransfer->getPayuCeeSingleInitResponse();
     }
 
     /**

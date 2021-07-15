@@ -28,7 +28,7 @@
         </events>
 
         <transitions>
-            <transition condition="Computop/IsPaymentConfirmed" happy="true">
+            <transition condition="Computop/IsAuthorized" happy="true">
                 <source>new</source>
                 <target>authorized</target>
             </transition>

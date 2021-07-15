@@ -68,7 +68,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      *
      * @return void
      */
