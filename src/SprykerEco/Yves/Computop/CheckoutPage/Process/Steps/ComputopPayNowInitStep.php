@@ -20,10 +20,9 @@ class ComputopPayNowInitStep extends AbstractBaseStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
-        if (
-            !$quoteTransfer->getPayment()
-            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_PAY_NOW
-        ) {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        $payment = $quoteTransfer->getPayment();
+        if (!$payment || $payment->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_PAY_NOW) {
             return false;
         }
 
@@ -47,6 +46,7 @@ class ComputopPayNowInitStep extends AbstractBaseStep
      */
     public function getTemplateVariables(AbstractTransfer $quoteTransfer): array
     {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         return [
             'formAction' => $quoteTransfer->getPayment()->getComputopPayNow()->getUrl(),
             'encryptedData' => $quoteTransfer->getPayment()->getComputopPayNow()->getData(),

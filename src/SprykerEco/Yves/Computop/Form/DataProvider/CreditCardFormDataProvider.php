@@ -20,6 +20,7 @@ class CreditCardFormDataProvider extends AbstractFormDataProvider
      */
     public function getData(AbstractTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $quoteTransfer->setPayment($paymentTransfer);
@@ -40,7 +41,7 @@ class CreditCardFormDataProvider extends AbstractFormDataProvider
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|\Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|null
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {

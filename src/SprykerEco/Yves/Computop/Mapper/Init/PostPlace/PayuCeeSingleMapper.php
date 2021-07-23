@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
@@ -17,6 +18,9 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayuCeeSingleMapper extends AbstractMapper
 {
+    protected const SHIPMENT_ARTICLE_NAME = 'Shipment';
+    protected const ONE_ITEM_AMOUNT = 1;
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -36,7 +40,9 @@ class PayuCeeSingleMapper extends AbstractMapper
         );
 
         if ($quoteTransfer->getItems()->count()) {
-            $computopPaymentTransfer->setArticleList($this->getArticleList($quoteTransfer->getItems()));
+            $computopPaymentTransfer->setArticleList(
+                $this->getArticleList($quoteTransfer->getItems(), $quoteTransfer->getExpenses())
+            );
         }
 
         if ($quoteTransfer->getCustomer()) {
@@ -70,51 +76,59 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @phpstan-param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $items
-     *
-     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $items
+     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $items
+     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseList
      *
      * @return string
      */
-    protected function getArticleList($items): string
+    protected function getArticleList($items, $expenseList): string
     {
         $out = [];
+
         foreach ($items as $item) {
             $out[] = implode(',', [
-                $this->replaceForbiddenCharacters($item->getName()),
+                str_replace([',', '+', '-'], ' ', $item->getName()),
                 $item->getUnitPrice(),
                 $item->getQuantity(),
             ]);
         }
 
+        $out[] = implode(',', [
+            static::SHIPMENT_ARTICLE_NAME,
+            $this->getDeliveryCosts($expenseList),
+            static::ONE_ITEM_AMOUNT,
+        ]);
+
         return implode('+', $out);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseList
+     *
+     * @return int
+     */
+    protected function getDeliveryCosts($expenseList): int
+    {
+        foreach ($expenseList as $expense) {
+            if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
+                return $expense->getSumGrossPrice();
+            }
+        }
+
+        return 0;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $paymentTransfer
      * @param \Generated\Shared\Transfer\CustomerTransfer $customer
      *
-     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
+     * @return void
      */
-    protected function setCustomerData(
-        ComputopPayuCeeSinglePaymentTransfer $paymentTransfer,
-        CustomerTransfer $customer
-    ): ComputopPayuCeeSinglePaymentTransfer {
+    private function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer): void
+    {
         $paymentTransfer->setFirstName($customer->getFirstName());
         $paymentTransfer->setLastName($customer->getLastName());
         $paymentTransfer->setEmail($customer->getEmail());
         $paymentTransfer->setPhone($customer->getPhone());
-
-        return $paymentTransfer;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function replaceForbiddenCharacters(string $name): string
-    {
-        return str_replace([',', '+'], ' ', $name);
     }
 }

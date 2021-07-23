@@ -30,7 +30,7 @@ class ComputopToOmsFacadeBridge implements ComputopToOmsFacadeInterface
      * @param array $logContext
      * @param array $data
      *
-     * @return array
+     * @return array|null
      */
     public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = [])
     {

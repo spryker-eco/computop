@@ -48,7 +48,7 @@ abstract class AbstractSaver implements SaverInterface
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $headerTransfer
      * @param string $method
      *
-     * @return \Orm\Zed\Computop\Persistence\Base\SpyPaymentComputopApiLog
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
     protected function logHeader(ComputopApiResponseHeaderTransfer $headerTransfer, $method)
     {

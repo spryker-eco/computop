@@ -442,6 +442,7 @@ class ComputopConfig extends AbstractBundleConfig
             ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
             ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
             ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+            ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
         ];
     }
 }

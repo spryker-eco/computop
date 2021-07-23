@@ -25,7 +25,7 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

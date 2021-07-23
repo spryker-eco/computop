@@ -26,7 +26,7 @@ interface MapperInterface
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer);
 

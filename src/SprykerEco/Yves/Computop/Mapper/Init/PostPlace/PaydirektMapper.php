@@ -40,8 +40,15 @@ class PaydirektMapper extends AbstractMapper
         );
 
         $computopPaymentTransfer->setShopApiKey($this->config->getPaydirektShopKey());
-        $computopPaymentTransfer->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal());
-        $computopPaymentTransfer->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal());
+        $shippingAmount = $quoteTransfer->getTotals()->getExpenseTotal();
+        if ($shippingAmount) {
+            $computopPaymentTransfer->setShippingAmount((string)$shippingAmount);
+        }
+        $shoppingBasketAmount = $quoteTransfer->getTotals()->getSubtotal();
+        if ($shoppingBasketAmount) {
+            $computopPaymentTransfer->setShoppingBasketAmount((string)$shoppingBasketAmount);
+        }
+
         $computopPaymentTransfer->setShippingFirstName($quoteTransfer->getShippingAddress()->getFirstName());
         $computopPaymentTransfer->setShippingLastName($quoteTransfer->getShippingAddress()->getLastName());
         $computopPaymentTransfer->setShippingZip($quoteTransfer->getShippingAddress()->getZipCode());

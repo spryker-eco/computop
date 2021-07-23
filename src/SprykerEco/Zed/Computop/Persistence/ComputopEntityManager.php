@@ -60,7 +60,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $paymentComputopOrderItemEntity->setIsPaymentConfirmed($computopNotificationTransfer->getIsSuccess());
+            $paymentComputopOrderItemEntity->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess());
             $paymentComputopOrderItemEntity->save();
         }
 
@@ -68,7 +68,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
      *
      * @return void
      */
@@ -106,7 +106,11 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         TransferInterface $responseTransfer
     ): void {
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
-        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
+        $customerTransactionId = $responseTransfer->getCustomerTransactionId();
+        if ($customerTransactionId) {
+            $paymentEntityDetails->setCustomerTransactionId((int)$customerTransactionId);
+        }
+
         $paymentEntityDetails->save();
     }
 

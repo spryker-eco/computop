@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -50,7 +51,8 @@ class InitPaydirektMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
+        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), $computopPaymentTransfer->getMerchantId(), $data, $length);
+        $computopPaymentTransfer->setUrl($urlToComputop);
 
         return $computopPaymentTransfer;
     }
@@ -60,7 +62,7 @@ class InitPaydirektMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopPaydirectPaymentTransfer)
+    protected function getDataSubArray(ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer)
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaydirectPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaydirectPaymentTransfer->getAmount();

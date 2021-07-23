@@ -15,6 +15,11 @@ use Generated\Shared\Transfer\OrderTransfer;
 class RefundCommandHandler extends AbstractCommandHandler
 {
     /**
+     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager
+     */
+    protected $manager;
+
+    /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *

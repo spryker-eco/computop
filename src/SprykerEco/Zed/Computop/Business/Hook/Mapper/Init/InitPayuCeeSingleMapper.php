@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -52,6 +53,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         }
 
         $urlToComputop = $this->getUrlToComputop(
+            $this->getActionUrl(),
             $computopPaymentTransfer->getMerchantId(),
             $decryptedValues[ComputopApiConfig::DATA],
             $decryptedValues[ComputopApiConfig::LENGTH]
@@ -78,7 +80,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopPayuCeeSinglePaymentTransfer): array
+    protected function getDataSubArray(ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer): array
     {
         return [
             ComputopApiConfig::MERCHANT_ID => $computopPayuCeeSinglePaymentTransfer->getMerchantId(),
@@ -98,7 +100,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
             ComputopApiConfig::FIRST_NAME => $computopPayuCeeSinglePaymentTransfer->getFirstName(),
             ComputopApiConfig::LAST_NAME => $computopPayuCeeSinglePaymentTransfer->getLastName(),
             ComputopApiConfig::EMAIL_ADDRESS => $computopPayuCeeSinglePaymentTransfer->getEmail(),
-            ComputopApiConfig::LANGUAGE => $computopPayuCeeSinglePaymentTransfer->getLanguage(),
+            ComputopApiConfig::LANGUAGE => strtolower($computopPayuCeeSinglePaymentTransfer->getLanguage()),
         ];
     }
 }

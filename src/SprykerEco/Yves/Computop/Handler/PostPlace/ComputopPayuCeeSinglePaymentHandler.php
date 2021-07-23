@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Handler\PostPlace;
 
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 
@@ -23,7 +24,7 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
     {
         $payment = $quoteTransfer->getPayment();
         if (!$payment) {
-            return $quoteTransfer;
+            $payment = new PaymentTransfer();
         }
 
         if (!$payment->getComputopPayuCeeSingle()) {
@@ -31,6 +32,8 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
         }
 
         $payment->getComputopPayuCeeSingle()->setPayuCeeSingleInitResponse($responseTransfer);
+        $quoteTransfer->setPayment($payment);
+
         $quoteTransfer->setPayment($payment);
 
         return $quoteTransfer;
