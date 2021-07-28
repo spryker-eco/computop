@@ -58,7 +58,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     {
         $payment = $quoteTransfer->getPayment();
 
-        if ($payment->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
+        if (!$payment || $payment->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
             return $checkoutResponseTransfer;
         }
 
@@ -98,7 +98,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface|null
+     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
     protected function getMethodMapper($methodName)
     {

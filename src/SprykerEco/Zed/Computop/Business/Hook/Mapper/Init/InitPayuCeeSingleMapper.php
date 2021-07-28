@@ -36,6 +36,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer
+            ->setRefNr($quoteTransfer->getOrderReference() . '-' . date('Y-m-d H:i:s'))
             ->setMerchantId($this->config->getMerchantId())
             ->setAmount($quoteTransfer->getTotals()->getGrandTotal());
 

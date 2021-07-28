@@ -19,16 +19,20 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
+        if (!$quoteTransfer->getPayment() ||
+            !$quoteTransfer->getPayment()->getComputopPayuCeeSingle() ||
+            !$quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse()
+        ) {
+            return $quoteTransfer;
+        }
+
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer) {
-                    $this->savePaymentComputopEntity($responseTransfer);
-                    $this->savePaymentComputopDetailEntity($responseTransfer);
-                    $this->savePaymentComputopOrderItemsEntities();
-                }
-            );
+            $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
+
+            $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
+                $this->executeSavePaymentResponseTransaction($responseTransfer);
+            });
         }
 
         return $quoteTransfer;
@@ -57,9 +61,8 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
 
-        $customerTransactionId = $responseTransfer->getCustomerTransactionId();
-        if ($customerTransactionId) {
-            $paymentEntityDetails->setCustomerTransactionId((int)$customerTransactionId);
+        if ($responseTransfer->getCustomerTransactionId()) {
+            $paymentEntityDetails->setCustomerTransactionId((int)$responseTransfer->getCustomerTransactionId());
         }
 
         $paymentEntityDetails->save();
@@ -74,5 +77,15 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
             $item->setStatus($this->config->getOmsStatusAuthorized());
             $item->save();
         }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     */
+    protected function executeSavePaymentResponseTransaction(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
+    {
+        $this->savePaymentComputopEntity($responseTransfer);
+        $this->savePaymentComputopDetailEntity($responseTransfer);
+        $this->savePaymentComputopOrderItemsEntities();
     }
 }
