@@ -202,6 +202,11 @@ class CallbackController extends AbstractController
 
         $this->addErrorMessage($this->getErrorMessageText($responseHeaderTransfer));
 
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $quoteTransfer->setIsOrderPlacedSuccessfully(null);
+        $quoteTransfer->setOrderReference(null);
+        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
+
         return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
     }
 

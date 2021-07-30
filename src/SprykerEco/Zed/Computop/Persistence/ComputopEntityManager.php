@@ -12,6 +12,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
+use SprykerEco\Zed\Computop\ComputopConfig;
 
 /**
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopPersistenceFactory getFactory()
@@ -61,6 +62,25 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
             $paymentComputopOrderItemEntity->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess());
+
+            if (
+                $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_NEW &&
+                $computopNotificationTransfer->getAmountauth() > 0
+            ) {
+                $paymentComputopOrderItemEntity->setStatus(
+                    $this->getFactory()->getConfig()->getOmsStatusAuthorized()
+                );
+            }
+
+            if (
+                $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_AUTHORIZED &&
+                $computopNotificationTransfer->getAmountcap() === $computopNotificationTransfer->getAmountauth()
+            ) {
+                $paymentComputopOrderItemEntity->setStatus(
+                    $this->getFactory()->getConfig()->getOmsStatusCaptured()
+                );
+            }
+
             $paymentComputopOrderItemEntity->save();
         }
 

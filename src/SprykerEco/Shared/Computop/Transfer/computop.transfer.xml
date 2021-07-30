@@ -613,6 +613,9 @@
         <property name="type" type="string"/>
         <property name="isSuccess" type="bool"/>
         <property name="isProcessed" type="bool"/>
+        <property name="amountauth" type="int"/>
+        <property name="amountcap" type="int"/>
+        <property name="amountcred" type="int"/>
     </transfer>
 
 </transfers>

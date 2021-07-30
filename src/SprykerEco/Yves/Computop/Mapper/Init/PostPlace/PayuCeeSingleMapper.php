@@ -137,7 +137,7 @@ class PayuCeeSingleMapper extends AbstractMapper
     /**
      * @param string|null $name
      *
-     * @return array|string|string[]|null
+     * @return string|string[]
      */
     protected function replaceForbiddenCharacters(?string $name): string
     {

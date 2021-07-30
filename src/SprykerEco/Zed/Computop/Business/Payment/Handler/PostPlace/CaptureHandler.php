@@ -29,16 +29,15 @@ class CaptureHandler extends AbstractHandler
     }
 
     /**
-     * @param OrderTransfer $orderTransfer
-     * @param ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
      *
-     * @return ComputopApiCaptureResponseTransfer
+     * @return \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer
      */
     protected function performRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
-    ): ComputopApiCaptureResponseTransfer
-    {
+    ): ComputopApiCaptureResponseTransfer {
         $responseTransfer = $this->computopApiFacade->performInquireRequest($orderTransfer, $computopApiHeaderPayment);
         if ($responseTransfer->getIsCapLast() && $responseTransfer->getAmountCap() === $responseTransfer->getAmountAuth()) {
             return (new ComputopApiCaptureResponseTransfer())

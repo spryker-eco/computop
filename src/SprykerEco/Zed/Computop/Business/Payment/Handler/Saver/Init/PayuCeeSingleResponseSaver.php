@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEco\Shared\Computop\ComputopConfig;
 
 class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 {
@@ -19,7 +20,8 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        if (!$quoteTransfer->getPayment() ||
+        if (
+            !$quoteTransfer->getPayment() ||
             !$quoteTransfer->getPayment()->getComputopPayuCeeSingle() ||
             !$quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse()
         ) {
@@ -71,21 +73,44 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     /**
      * @return void
      */
-    protected function savePaymentComputopOrderItemsEntities()
+    protected function savePaymentComputopOrderItemsEntities(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
     {
+        $status = $this->getPaymentStatus($responseTransfer);
+
         foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
-            $item->setStatus($this->config->getOmsStatusAuthorized());
+            $item->setStatus($status);
             $item->save();
         }
     }
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     *
+     * @return void
      */
     protected function executeSavePaymentResponseTransaction(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
     {
         $this->savePaymentComputopEntity($responseTransfer);
         $this->savePaymentComputopDetailEntity($responseTransfer);
-        $this->savePaymentComputopOrderItemsEntities();
+        $this->savePaymentComputopOrderItemsEntities($responseTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     *
+     * @return string
+     */
+    protected function getPaymentStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
+    {
+        if (
+            $responseTransfer &&
+            $responseTransfer->getHeader()->getIsSuccess() &&
+            $responseTransfer->getHeader()->getStatus() === ComputopConfig::SUCCESS_OK &&
+            $responseTransfer->getHeader()->getDescription() === ComputopConfig::SUCCESS_STATUS
+        ) {
+            return $this->config->getOmsStatusAuthorized();
+        }
+
+        return $this->config->getOmsStatusNew();
     }
 }
