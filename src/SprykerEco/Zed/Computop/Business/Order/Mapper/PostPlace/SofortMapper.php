@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
+use Generated\Shared\Transfer\ComputopSofortPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
@@ -16,7 +18,7 @@ class SofortMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_SOFORT;
     }
@@ -26,7 +28,7 @@ class SofortMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopSofortPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopSofortPaymentTransfer
     {
         return $paymentTransfer->getComputopSofort();
     }
@@ -36,7 +38,7 @@ class SofortMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface
     {
         return $this->getComputopTransfer($paymentTransfer)->getSofortInitResponse();
     }
@@ -46,7 +48,7 @@ class SofortMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
     {
         return [];
     }

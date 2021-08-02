@@ -17,13 +17,13 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function save(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopDirectDebit()->getDirectDebitInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer) {
+                function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
                 }
@@ -38,7 +38,7 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer): void
     {
         $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
@@ -51,7 +51,7 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopDetailEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer): void
     {
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());

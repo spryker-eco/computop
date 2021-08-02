@@ -18,7 +18,7 @@ class InitPaydirektMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAYDIREKT;
     }
@@ -29,8 +29,10 @@ class InitPaydirektMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
-    {
+    public function updateComputopPaymentTransfer(
+        QuoteTransfer $quoteTransfer,
+        TransferInterface $computopPaymentTransfer
+    ): TransferInterface {
         /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -92,7 +94,7 @@ class InitPaydirektMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getActionUrl()
+    protected function getActionUrl(): string
     {
         return $this->config->getPaydirektInitAction();
     }

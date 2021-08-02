@@ -14,12 +14,12 @@ interface MapperInterface
     /**
      * @return string
      */
-    public function getMethodName();
+    public function getMethodName(): string;
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer|null
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer);
 
@@ -35,5 +35,5 @@ interface MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer);
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array;
 }

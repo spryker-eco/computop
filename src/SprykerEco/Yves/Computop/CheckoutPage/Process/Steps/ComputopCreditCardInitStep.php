@@ -20,9 +20,10 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        $payment = $quoteTransfer->getPayment();
-        if (!$payment || $payment->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_CREDIT_CARD) {
+        if (
+            !$quoteTransfer->getPayment()
+            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_CREDIT_CARD
+        ) {
             return false;
         }
 
@@ -46,7 +47,6 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      */
     public function getTemplateVariables(AbstractTransfer $quoteTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         return [
             'formAction' => $quoteTransfer->getPayment()->getComputopCreditCard()->getUrl(),
             'encryptedData' => $quoteTransfer->getPayment()->getComputopCreditCard()->getData(),

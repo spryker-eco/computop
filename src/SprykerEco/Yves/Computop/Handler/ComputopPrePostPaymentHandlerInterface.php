@@ -17,5 +17,5 @@ interface ComputopPrePostPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer, array $responseArray);
+    public function handle(QuoteTransfer $quoteTransfer, array $responseArray): QuoteTransfer;
 }

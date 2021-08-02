@@ -24,10 +24,10 @@ class AuthorizeSaver extends AbstractSaver
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer)
+    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer): TransferInterface
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer, $orderTransfer) {
+            function () use ($responseTransfer, $orderTransfer): void {
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
             }
         );
@@ -41,7 +41,7 @@ class AuthorizeSaver extends AbstractSaver
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopApiAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
+    protected function saveComputopDetails(ComputopApiAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 

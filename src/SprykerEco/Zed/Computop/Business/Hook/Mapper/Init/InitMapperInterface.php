@@ -15,13 +15,13 @@ interface InitMapperInterface
     /**
      * @return string
      */
-    public function getMethodName();
+    public function getMethodName(): string;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
     public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer);
 }

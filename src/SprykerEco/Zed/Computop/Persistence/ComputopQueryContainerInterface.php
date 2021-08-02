@@ -11,7 +11,7 @@ interface ComputopQueryContainerInterface
 {
     /**
      * Specification:
-     * - Returns SpyPaymentComputopQuery filtered by ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by payment ID.
      *
      * @api
      *
@@ -19,11 +19,11 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentById($idPayment);
+    public function queryPaymentById(int $idPayment);
 
     /**
      * Specification:
-     * - Returns SpyPaymentComputopQuery filtered by order ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by order ID.
      *
      * @api
      *
@@ -31,11 +31,11 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByOrderId($idOrder);
+    public function queryPaymentByOrderId(int $idOrder);
 
     /**
      * Specification:
-     * - Returns SpyPaymentComputopQuery filtered by pay ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by pay ID.
      *
      * @api
      *
@@ -43,11 +43,11 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByPayId($idPay);
+    public function queryPaymentByPayId(string $idPay);
 
     /**
      *  Specification:
-     * - Returns SpyPaymentComputopQuery filtered by transaction ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by transaction ID.
      *
      * @api
      *
@@ -55,11 +55,11 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByTransactionId($idTransaction);
+    public function queryPaymentByTransactionId(string $idTransaction);
 
     /**
      *  Specification:
-     * - Returns SpyPaymentComputopQuery filtered by order item ID.
+     * - Returns `SpyPaymentComputopQuery` filtered by order item ID.
      *
      * @api
      *
@@ -67,11 +67,11 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    public function queryPaymentItemByOrderItemId($orderItemId);
+    public function queryPaymentItemByOrderItemId(int $orderItemId);
 
     /**
      *  Specification:
-     * - Returns SpySalesOrderItemQuery filtered by order ID.
+     * - Returns `SpySalesOrderItemQuery` filtered by order ID.
      *
      * @api
      *
@@ -79,5 +79,5 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function getSpySalesOrderItemsById($idSalesOrder);
+    public function getSpySalesOrderItemsById(int $idSalesOrder);
 }

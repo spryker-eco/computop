@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
@@ -56,7 +57,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
      *
      * @return void
      */
-    protected function setPaymentEntity($transactionId)
+    protected function setPaymentEntity(string $transactionId): void
     {
         $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
     }
@@ -64,7 +65,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
-    protected function getPaymentEntity()
+    protected function getPaymentEntity(): SpyPaymentComputop
     {
         return $this->paymentEntity;
     }

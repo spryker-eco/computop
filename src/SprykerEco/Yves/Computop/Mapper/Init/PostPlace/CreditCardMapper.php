@@ -31,7 +31,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopCreditCardPaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -58,7 +58,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopCreditCardPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
@@ -91,7 +91,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
+    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer): array
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopCreditCardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopCreditCardPaymentTransfer->getAmount();
@@ -135,7 +135,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getQueryParameters($merchantId, $data, $length)
+    protected function getQueryParameters(string $merchantId, string $data, int $length): array
     {
         $queryData = parent::getQueryParameters($merchantId, $data, $length);
 

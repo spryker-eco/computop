@@ -37,7 +37,7 @@ class RefundCommandHandler extends AbstractCommandHandler
      *
      * @return int
      */
-    protected function getAmount(OrderTransfer $orderTransfer)
+    protected function getAmount(OrderTransfer $orderTransfer): int
     {
         return $this->manager->getAmount($orderTransfer);
     }

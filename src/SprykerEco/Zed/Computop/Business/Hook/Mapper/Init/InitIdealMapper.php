@@ -17,7 +17,7 @@ class InitIdealMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_IDEAL;
     }
@@ -28,8 +28,10 @@ class InitIdealMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
-    {
+    public function updateComputopPaymentTransfer(
+        QuoteTransfer $quoteTransfer,
+        TransferInterface $computopPaymentTransfer
+    ): TransferInterface {
         /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -61,7 +63,7 @@ class InitIdealMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer)
+    protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer): array
     {
         /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopIdealPaymentTransfer->getTransId();
@@ -84,7 +86,7 @@ class InitIdealMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getActionUrl()
+    protected function getActionUrl(): string
     {
         return $this->config->getIdealInitAction();
     }

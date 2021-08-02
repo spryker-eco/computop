@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\CheckoutPage\Process\Steps;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\StepWithExternalRedirectInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -36,15 +37,16 @@ class ComputopEasyCreditInitStep extends AbstractBaseStep implements StepWithExt
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function execute(Request $request, AbstractTransfer $quoteTransfer)
+    public function execute(Request $request, AbstractTransfer $quoteTransfer): QuoteTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        $payment = $quoteTransfer->getPayment();
-        if (!$payment || $payment->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_EASY_CREDIT) {
+        if (
+            !$quoteTransfer->getPayment()
+            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
+        ) {
             return $quoteTransfer;
         }
 
-        $this->redirectUrl = $payment->getComputopEasyCredit()->getUrl();
+        $this->redirectUrl = $quoteTransfer->getPayment()->getComputopEasyCredit()->getUrl();
 
         return $quoteTransfer;
     }

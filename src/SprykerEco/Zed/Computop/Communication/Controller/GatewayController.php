@@ -22,7 +22,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    public function logResponseAction(ComputopApiResponseHeaderTransfer $headerTransfer)
+    public function logResponseAction(ComputopApiResponseHeaderTransfer $headerTransfer): ComputopApiResponseHeaderTransfer
     {
         return $this->getFacade()->logResponseHeader($headerTransfer, $headerTransfer->getMethod());
     }
@@ -32,7 +32,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveSofortInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->saveSofortInitResponse($quoteTransfer);
     }
@@ -42,7 +42,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveIdealInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->saveIdealInitResponse($quoteTransfer);
     }
@@ -52,7 +52,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveCreditCardInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveCreditCardInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->saveCreditCardInitResponse($quoteTransfer);
     }
@@ -62,7 +62,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayNowInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function savePayNowInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->savePayNowInitResponse($quoteTransfer);
     }
@@ -72,7 +72,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function savePayPalInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->savePayPalInitResponse($quoteTransfer);
     }
@@ -82,7 +82,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveDirectDebitInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveDirectDebitInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->saveDirectDebitInitResponse($quoteTransfer);
     }
@@ -92,7 +92,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveEasyCreditInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function saveEasyCreditInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->saveEasyCreditInitResponse($quoteTransfer);
     }
@@ -102,7 +102,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektInitResponseAction(QuoteTransfer $quoteTransfer)
+    public function savePaydirektInitResponseAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->savePaydirektInitResponse($quoteTransfer);
     }
@@ -122,7 +122,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer)
+    public function easyCreditStatusApiCallAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->easyCreditStatusApiCall($quoteTransfer);
     }
@@ -132,7 +132,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExistAction(QuoteTransfer $quoteTransfer)
+    public function isComputopPaymentExistAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->isComputopPaymentExist($quoteTransfer);
     }
@@ -142,7 +142,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function performCrifApiCallAction(QuoteTransfer $quoteTransfer)
+    public function performCrifApiCallAction(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFacade()->performCrifApiCall($quoteTransfer);
     }

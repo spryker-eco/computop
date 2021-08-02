@@ -7,12 +7,14 @@
 
 namespace SprykerEco\Yves\Computop\Converter;
 
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
+
 interface ConverterInterface
 {
     /**
      * @param array $decryptedArray
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getResponseTransfer(array $decryptedArray);
+    public function getResponseTransfer(array $decryptedArray): TransferInterface;
 }

@@ -67,7 +67,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    public function registerMapper(MapperInterface $mapper)
+    public function registerMapper(MapperInterface $mapper): void
     {
         $this->mappers[$mapper->getMethodName()] = $mapper;
     }
@@ -79,7 +79,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    protected function getMethodMapper($methodName)
+    protected function getMethodMapper(string $methodName): MapperInterface
     {
         if (isset($this->mappers[$methodName]) === false) {
             throw new ComputopMethodMapperException('The method mapper is not registered.');
@@ -94,7 +94,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer)
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
     {
         if ($quoteTransfer->getPayment()->getPaymentProvider() !== ComputopSharedConfig::PROVIDER_NAME) {
             return;
@@ -127,8 +127,10 @@ class OrderManager implements OrderManagerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
-    protected function savePaymentForOrder(PaymentTransfer $paymentTransfer, SaveOrderTransfer $saveOrderTransfer)
-    {
+    protected function savePaymentForOrder(
+        PaymentTransfer $paymentTransfer,
+        SaveOrderTransfer $saveOrderTransfer
+    ): SpyPaymentComputop {
         $paymentEntity = new SpyPaymentComputop();
 
         $paymentEntity->setClientIp($this->computopTransfer->getClientIp());
@@ -154,8 +156,10 @@ class OrderManager implements OrderManagerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail
      */
-    protected function savePaymentDetailForOrder(PaymentTransfer $paymentTransfer, SpyPaymentComputop $paymentEntity)
-    {
+    protected function savePaymentDetailForOrder(
+        PaymentTransfer $paymentTransfer,
+        SpyPaymentComputop $paymentEntity
+    ): SpyPaymentComputopDetail {
         $paymentDetailEntity = new SpyPaymentComputopDetail();
 
         $paymentDetailEntity->fromArray($this->activeMapper->getPaymentDetailsArray($paymentTransfer));
@@ -176,7 +180,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    protected function savePaymentForOrderItems(ArrayObject $orderItemTransfers, $idPayment)
+    protected function savePaymentForOrderItems(ArrayObject $orderItemTransfers, int $idPayment): void
     {
         foreach ($orderItemTransfers as $orderItemTransfer) {
             $paymentOrderItemEntity = new SpyPaymentComputopOrderItem();

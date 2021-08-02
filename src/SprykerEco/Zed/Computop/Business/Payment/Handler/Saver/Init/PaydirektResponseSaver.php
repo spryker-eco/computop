@@ -17,13 +17,13 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function save(QuoteTransfer $quoteTransfer)
+    public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPaydirekt()->getPaydirektInitResponse();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer) {
+                function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
@@ -39,7 +39,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopEntity(ComputopPaydirektInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopEntity(ComputopPaydirektInitResponseTransfer $responseTransfer): void
     {
         $paymentEntity = $this->getPaymentEntity();
         $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
@@ -52,7 +52,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(ComputopPaydirektInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopDetailEntity(ComputopPaydirektInitResponseTransfer $responseTransfer): void
     {
         $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());
@@ -67,7 +67,7 @@ class PaydirektResponseSaver extends AbstractResponseSaver
     /**
      * @return void
      */
-    protected function savePaymentComputopOrderItemsEntities()
+    protected function savePaymentComputopOrderItemsEntities(): void
     {
         foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
             $item->setStatus($this->config->getOmsStatusAuthorized());

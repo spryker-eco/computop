@@ -16,7 +16,7 @@ class RefundManager extends AbstractManager
      *
      * @return int
      */
-    public function getAmount(OrderTransfer $orderTransfer)
+    public function getAmount(OrderTransfer $orderTransfer): int
     {
         if ($this->config->isRefundShipmentPriceEnabled() && $this->isShipmentRefundNeeded($orderTransfer)) {
             return $orderTransfer->getTotals()->getRefundTotal();
@@ -32,7 +32,7 @@ class RefundManager extends AbstractManager
      *
      * @return bool
      */
-    protected function isShipmentRefundNeeded(OrderTransfer $orderTransfer)
+    protected function isShipmentRefundNeeded(OrderTransfer $orderTransfer): bool
     {
         $itemsBeforeRefundState = count($this->getItemsBeforeRefundState($orderTransfer));
 
@@ -46,7 +46,7 @@ class RefundManager extends AbstractManager
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItem[]|\Orm\Zed\Oms\Persistence\SpyOmsOrderItemStateHistory[]|\Orm\Zed\Oms\Persistence\SpyOmsEventTimeout[]|\Propel\Runtime\Collection\ObjectCollection
      */
-    protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer)
+    protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer): array
     {
         return $this
             ->queryContainer

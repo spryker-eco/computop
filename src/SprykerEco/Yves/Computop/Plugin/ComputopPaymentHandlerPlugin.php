@@ -18,6 +18,11 @@ use Symfony\Component\HttpFoundation\Request;
 class ComputopPaymentHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInterface
 {
     /**
+     * {@inheritDoc}
+     * - Adds `ComputopPayment` to `Quote`.
+     *
+     * @api
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

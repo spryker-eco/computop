@@ -93,7 +93,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
             ComputopApiConfig::URL_SUCCESS => $computopPayuCeeSinglePaymentTransfer->getUrlSuccess(),
             ComputopApiConfig::URL_FAILURE => $computopPayuCeeSinglePaymentTransfer->getUrlFailure(),
             ComputopApiConfig::RESPONSE => $computopPayuCeeSinglePaymentTransfer->getResponse(),
-            ComputopApiConfig::URL_NOTIFY => $computopPayuCeeSinglePaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::URL_NOTIFY => 'https://2d7d1d863dd5.ngrok.io/en/computop/notify',  // $computopPayuCeeSinglePaymentTransfer->getUrlNotify(),
             ComputopApiConfig::REQ_ID => $computopPayuCeeSinglePaymentTransfer->getReqId(),
             ComputopApiConfig::CAPTURE => $computopPayuCeeSinglePaymentTransfer->getCapture(),
             ComputopApiConfig::ORDER_DESC => $computopPayuCeeSinglePaymentTransfer->getOrderDesc(),

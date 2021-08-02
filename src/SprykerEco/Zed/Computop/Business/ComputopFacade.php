@@ -83,7 +83,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
@@ -117,7 +117,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
@@ -134,7 +134,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function refundCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
@@ -311,7 +311,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
