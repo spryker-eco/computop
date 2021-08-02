@@ -19,7 +19,7 @@
         </states>
 
         <events>
-            <event name="invalidation" timeout="20min"/>
+            <event name="invalidation" timeout="20min" command="Computop/Cancel" />
             <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days"/>
             <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true"/>
