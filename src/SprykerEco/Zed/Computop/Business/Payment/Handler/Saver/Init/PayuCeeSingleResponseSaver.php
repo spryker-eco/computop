@@ -104,14 +104,18 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     protected function getPaymentStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
     {
-        $responseState = $this->getResponseStatus($responseTransfer);
-
-        if ($responseState === ComputopConfig::SUCCESS_STATUS) {
-            return $this->config->getOmsStatusAuthorized();
+        $responseStatus = $this->getResponseStatus($responseTransfer);
+        if (!$responseTransfer) {
+            return $this->config->getOmsStatusNew();
         }
 
-        if ($responseState === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
+        if ($responseStatus === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
             return $this->config->getOmsStatusAuthorizeRequest();
+        }
+
+        $responseDescription = $responseTransfer->getHeader()->getDescription();
+        if ($responseStatus === ComputopConfig::SUCCESS_OK && $responseDescription === ComputopConfig::SUCCESS_STATUS) {
+            return $this->config->getOmsStatusAuthorized();
         }
 
         return $this->config->getOmsStatusNew();
@@ -124,12 +128,8 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     protected function getResponseStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): ?string
     {
-        if (
-            $responseTransfer &&
-            $responseTransfer->getHeader()->getIsSuccess() &&
-            $responseTransfer->getHeader()->getStatus() === ComputopConfig::SUCCESS_OK
-        ) {
-            return $responseTransfer->getHeader()->getDescription();
+        if ($responseTransfer && $responseTransfer->getHeader()) {
+            return $responseTransfer->getHeader()->getStatus();
         }
 
         return null;
