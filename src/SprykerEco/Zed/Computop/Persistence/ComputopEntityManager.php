@@ -65,7 +65,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
             if (
                 $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_NEW &&
-                $computopNotificationTransfer->getAmountauth() > 0
+                (int)$computopNotificationTransfer->getAmountauth() > 0
             ) {
                 $paymentComputopOrderItemEntity->setStatus(
                     $this->getFactory()->getConfig()->getOmsStatusAuthorized()
@@ -74,7 +74,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
             if (
                 $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_AUTHORIZED &&
-                $computopNotificationTransfer->getAmountcap() === $computopNotificationTransfer->getAmountauth()
+                (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth()
             ) {
                 $paymentComputopOrderItemEntity->setStatus(
                     $this->getFactory()->getConfig()->getOmsStatusCaptured()

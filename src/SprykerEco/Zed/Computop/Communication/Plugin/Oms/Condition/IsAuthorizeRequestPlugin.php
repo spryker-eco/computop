@@ -17,11 +17,11 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
-class IsAuthorizedPlugin extends AbstractPlugin implements ConditionInterface
+class IsAuthorizeRequestPlugin extends AbstractPlugin implements ConditionInterface
 {
     /**
      * {@inheritDoc}
-     *  - Checks if order item has authorized status.
+     *  - Checks if order item has authorize request status.
      *
      * @api
      *
@@ -34,9 +34,6 @@ class IsAuthorizedPlugin extends AbstractPlugin implements ConditionInterface
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
 
-        return in_array($computopOrderItem->getStatus(), [
-            $this->getConfig()->getOmsStatusAuthorized(),
-            $this->getConfig()->getOmsStatusCaptured(),
-        ]);
+        return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusAuthorizeRequest();
     }
 }

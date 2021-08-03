@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
@@ -20,7 +21,7 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer
      */
-    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header): ComputopPayuCeeSingleInitResponseTransfer
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header): TransferInterface
     {
         $responseTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);

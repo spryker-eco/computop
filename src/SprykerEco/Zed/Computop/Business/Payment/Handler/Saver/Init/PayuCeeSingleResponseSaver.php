@@ -71,9 +71,11 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     *
      * @return void
      */
-    protected function savePaymentComputopOrderItemsEntities(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
+    protected function savePaymentComputopOrderItemsEntities(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
     {
         $status = $this->getPaymentStatus($responseTransfer);
 
@@ -102,15 +104,34 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     protected function getPaymentStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
     {
-        if (
-            $responseTransfer &&
-            $responseTransfer->getHeader()->getIsSuccess() &&
-            $responseTransfer->getHeader()->getStatus() === ComputopConfig::SUCCESS_OK &&
-            $responseTransfer->getHeader()->getDescription() === ComputopConfig::SUCCESS_STATUS
-        ) {
+        $responseState = $this->getResponseStatus($responseTransfer);
+
+        if ($responseState === ComputopConfig::SUCCESS_STATUS) {
             return $this->config->getOmsStatusAuthorized();
         }
 
+        if ($responseState === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
+            return $this->config->getOmsStatusAuthorizeRequest();
+        }
+
         return $this->config->getOmsStatusNew();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     *
+     * @return string|null
+     */
+    protected function getResponseStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): ?string
+    {
+        if (
+            $responseTransfer &&
+            $responseTransfer->getHeader()->getIsSuccess() &&
+            $responseTransfer->getHeader()->getStatus() === ComputopConfig::SUCCESS_OK
+        ) {
+            return $responseTransfer->getHeader()->getDescription();
+        }
+
+        return null;
     }
 }

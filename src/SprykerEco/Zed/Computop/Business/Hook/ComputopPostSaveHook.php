@@ -134,9 +134,6 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
 
         $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
         $methodMapper = $this->getMethodMapper($paymentSelection);
-        if (!$methodMapper) {
-            return $computopPaymentTransfer;
-        }
 
         return $methodMapper->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
     }

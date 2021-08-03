@@ -8,6 +8,7 @@
         <states>
             <state name="new" reserved="true"/>
             <state name="invalid" reserved="false"/>
+            <state name="authorize request" reserved="true"/>
             <state name="authorized" reserved="true"/>
             <state name="cancelled" reserved="false"/>
             <state name="captured" reserved="true"/>
@@ -19,7 +20,8 @@
         </states>
 
         <events>
-            <event name="invalidation" timeout="20min" command="Computop/Cancel" />
+            <event name="invalidation" timeout="20min" />
+            <event name="wait for payment" timeout="3days" command="Computop/Refund" />
             <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days"/>
             <event name="capture" manual="true" command="Computop/Capture"/>
             <event name="ship" manual="true"/>
@@ -31,6 +33,22 @@
             <transition condition="Computop/IsAuthorized" happy="true">
                 <source>new</source>
                 <target>authorized</target>
+            </transition>
+
+            <transition condition="Computop/IsAuthorizeRequest" happy="true">
+                <source>new</source>
+                <target>authorize request</target>
+            </transition>
+
+            <transition condition="Computop/IsAuthorized" happy="true">
+                <source>authorize request</source>
+                <target>authorized</target>
+            </transition>
+
+            <transition happy="false" >
+                <source>authorize request</source>
+                <target>invalid</target>
+                <event>wait for payment</event>
             </transition>
 
             <transition>

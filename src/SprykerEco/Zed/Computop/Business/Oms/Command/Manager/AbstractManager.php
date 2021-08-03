@@ -39,7 +39,7 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * @param int $idSalesOrder
      *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
      */
     public function getSavedComputopEntity(int $idSalesOrder): ActiveRecordInterface
     {

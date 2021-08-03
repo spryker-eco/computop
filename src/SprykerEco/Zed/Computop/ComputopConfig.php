@@ -18,6 +18,7 @@ class ComputopConfig extends AbstractBundleConfig
     public const OMS_STATUS_NEW = 'new';
     public const OMS_STATUS_INITIALIZED = 'init';
     public const OMS_STATUS_AUTHORIZED = 'authorized';
+    public const OMS_STATUS_AUTHORIZE_REQUEST = 'authorize request';
     public const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
     public const OMS_STATUS_CAPTURED = 'captured';
     public const OMS_STATUS_CAPTURING_FAILED = 'capture failed';
@@ -246,6 +247,16 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsStatusAuthorized()
     {
         return static::OMS_STATUS_AUTHORIZED;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getOmsStatusAuthorizeRequest()
+    {
+        return static::OMS_STATUS_AUTHORIZE_REQUEST;
     }
 
     /**

@@ -60,8 +60,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     protected function isValidPayment(QuoteTransfer $quoteTransfer): bool
     {
         $computopPaymentTransfer = $this->getComputopPayment($quoteTransfer);
-
-        if (!$computopPaymentTransfer) {
+        if ($computopPaymentTransfer === null) {
             return false;
         }
 
