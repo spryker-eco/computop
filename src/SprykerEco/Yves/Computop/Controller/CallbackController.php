@@ -192,20 +192,17 @@ class CallbackController extends AbstractController
             $requestParameters = $request->request->all();
         }
 
-        $decryptedArray = $this->getFactory()
-            ->getComputopApiService()
+        $computopApiService = $this->getFactory()->getComputopApiService();
+
+        $decryptedArray = $computopApiService
             ->decryptResponseHeader($requestParameters, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()
-            ->getComputopApiService()
+        $responseHeaderTransfer = $computopApiService
             ->extractResponseHeader($decryptedArray, ComputopConfig::INIT_METHOD);
 
         $this->addErrorMessage($this->getErrorMessageText($responseHeaderTransfer));
 
-        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer->setIsOrderPlacedSuccessfully(null);
-        $quoteTransfer->setOrderReference(null);
-        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
+        $this->resetQuoteAfterFail();
 
         return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
     }
@@ -250,5 +247,17 @@ class CallbackController extends AbstractController
         $errorMessageText = sprintf(static::MESSAGE_RESPONSE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
+    }
+
+    /**
+     * @return void
+     */
+    protected function resetQuoteAfterFail(): void
+    {
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $quoteTransfer->setIsOrderPlacedSuccessfully(null);
+        $quoteTransfer->setOrderReference(null);
+        $quoteTransfer->setPayment();
+        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
     }
 }
