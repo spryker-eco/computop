@@ -3,7 +3,17 @@ parameters:
     checkMissingIterableValueType: false
 
     ignoreErrors:
+        - '#Call to method .+\(\) on an unknown class Generated\\Zed\\Ide\\AutoCompletion#'
+        - '#Call to static method create\(\) on an unknown class .+Query.#'
+        - '#Call to method .+\(\) on an unknown class Orm\\.+#'
+        - '#Return typehint of method .+ has invalid type Orm\\.+#'
+        - '#Parameter \$.+ of method .+ has invalid typehint type Orm\\.+#'
         - '#Parameter \#5 \$request of class.+\|null given.#'
+        - '#Call to method.+on an unknown class.+AutoCompletion#'
         - '#.+Transfer.+#'
         - '#.+but returns.+null.#'
         - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
+        - '#Instantiated class Orm\\.+not found.#'
+        - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'
+        - '#Call to an undefined method Propel\\Runtime\\ActiveRecord\\ActiveRecordInterface.+#'
+        - '#Property.+has unknown class Orm\\Zed\\Computop\\Persistence.+#'
