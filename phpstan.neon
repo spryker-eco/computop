@@ -9,6 +9,4 @@ parameters:
         - '#Call to an undefined method .+LocatorLocatorInterface::.+\(\)#'
         - '#Parameter .+of method|function .+expects int, int\|null given.#'
         - '#Parameter .+of method|function .+expects string, string\|null given.#'
-
-    excludePaths:
-        - src/SprykerEco/Zed/Computop/Persistence/Propel
+        - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
