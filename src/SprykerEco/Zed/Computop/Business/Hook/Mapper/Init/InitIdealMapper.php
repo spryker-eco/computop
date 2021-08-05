@@ -52,7 +52,7 @@ class InitIdealMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), $computopPaymentTransfer->getMerchantId(), $data, $length);
+        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), (string)$computopPaymentTransfer->getMerchantId(), $data, $length);
         $computopPaymentTransfer->setUrl($urlToComputop);
 
         return $computopPaymentTransfer;

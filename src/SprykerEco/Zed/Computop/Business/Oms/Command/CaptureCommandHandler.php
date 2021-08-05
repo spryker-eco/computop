@@ -23,7 +23,7 @@ class CaptureCommandHandler extends AbstractCommandHandler
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function handle(array $orderItems, OrderTransfer $orderTransfer)
     {

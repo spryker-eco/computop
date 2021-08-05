@@ -122,7 +122,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      */
     protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
-        $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
+        $paymentSelection = (string)$quoteTransfer->getPayment()->getPaymentSelection();
 
         $paymentMethod = ucfirst($paymentSelection);
         $method = 'get' . $paymentMethod;

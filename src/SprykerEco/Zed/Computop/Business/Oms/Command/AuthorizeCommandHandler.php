@@ -18,7 +18,7 @@ class AuthorizeCommandHandler extends AbstractCommandHandler
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function handle(array $orderItems, OrderTransfer $orderTransfer): TransferInterface
+    public function handle(array $orderItems, OrderTransfer $orderTransfer)
     {
         $computopHeaderPayment = $this->createComputopHeaderPayment($orderTransfer);
 

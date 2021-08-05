@@ -54,8 +54,8 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         }
 
         $urlToComputop = $this->getUrlToComputop(
-            $this->getActionUrl(),
-            $computopPaymentTransfer->getMerchantId(),
+            (string)$this->getActionUrl(),
+            (string)$computopPaymentTransfer->getMerchantId(),
             $decryptedValues[ComputopApiConfig::DATA],
             $decryptedValues[ComputopApiConfig::LENGTH]
         );
@@ -93,7 +93,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
             ComputopApiConfig::URL_SUCCESS => $computopPayuCeeSinglePaymentTransfer->getUrlSuccess(),
             ComputopApiConfig::URL_FAILURE => $computopPayuCeeSinglePaymentTransfer->getUrlFailure(),
             ComputopApiConfig::RESPONSE => $computopPayuCeeSinglePaymentTransfer->getResponse(),
-            ComputopApiConfig::URL_NOTIFY => $computopPayuCeeSinglePaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::URL_NOTIFY => 'https://fb42099b1b05.ngrok.io/en/computop/notify',  // $computopPayuCeeSinglePaymentTransfer->getUrlNotify(),
             ComputopApiConfig::REQ_ID => $computopPayuCeeSinglePaymentTransfer->getReqId(),
             ComputopApiConfig::CAPTURE => $computopPayuCeeSinglePaymentTransfer->getCapture(),
             ComputopApiConfig::ORDER_DESC => $computopPayuCeeSinglePaymentTransfer->getOrderDesc(),
@@ -101,7 +101,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
             ComputopApiConfig::FIRST_NAME => $computopPayuCeeSinglePaymentTransfer->getFirstName(),
             ComputopApiConfig::LAST_NAME => $computopPayuCeeSinglePaymentTransfer->getLastName(),
             ComputopApiConfig::EMAIL_ADDRESS => $computopPayuCeeSinglePaymentTransfer->getEmail(),
-            ComputopApiConfig::LANGUAGE => strtolower($computopPayuCeeSinglePaymentTransfer->getLanguage()),
+            ComputopApiConfig::LANGUAGE => strtolower((string)$computopPayuCeeSinglePaymentTransfer->getLanguage()),
         ];
     }
 }

@@ -51,7 +51,7 @@ class RefundManager extends AbstractManager
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName_In(
                 (array)$this->config->getBeforeRefundStatuses()

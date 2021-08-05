@@ -141,6 +141,6 @@ class PayuCeeSingleMapper extends AbstractMapper
      */
     protected function replaceForbiddenCharacters(?string $name): string
     {
-        return str_replace([',', '+', '-'], ' ', $name);
+        return $name ? str_replace([',', '+', '-'], ' ', $name) : '';
     }
 }

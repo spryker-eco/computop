@@ -100,7 +100,7 @@ class OrderManager implements OrderManagerInterface
             return;
         }
 
-        $this->methodName = $quoteTransfer->getPayment()->getPaymentMethod();
+        $this->methodName = (string)$quoteTransfer->getPayment()->getPaymentMethod();
         $this->activeMapper = $this->getMethodMapper($quoteTransfer->getPayment()->getPaymentMethod());
         $this->computopTransfer = $this->activeMapper->getComputopTransfer($quoteTransfer->getPayment());
         $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($quoteTransfer->getPayment());
@@ -133,10 +133,10 @@ class OrderManager implements OrderManagerInterface
     ): SpyPaymentComputop {
         $paymentEntity = new SpyPaymentComputop();
 
-        $paymentEntity->setClientIp($this->computopTransfer->getClientIp());
-        $paymentEntity->setPaymentMethod($paymentTransfer->getPaymentMethod());
-        $paymentEntity->setReference($saveOrderTransfer->getOrderReference());
-        $paymentEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
+        $paymentEntity->setClientIp((string)$this->computopTransfer->getClientIp());
+        $paymentEntity->setPaymentMethod((string)$paymentTransfer->getPaymentMethod());
+        $paymentEntity->setReference((string)$saveOrderTransfer->getOrderReference());
+        $paymentEntity->setFkSalesOrder((int)$saveOrderTransfer->getIdSalesOrder());
         $paymentEntity->setTransId($this->computopTransfer->getTransId());
         $paymentEntity->setPayId($this->computopTransfer->getPayId());
         $paymentEntity->setReqId($this->computopTransfer->getReqId());
@@ -187,7 +187,7 @@ class OrderManager implements OrderManagerInterface
 
             $paymentOrderItemEntity
                 ->setFkPaymentComputop($idPayment)
-                ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
+                ->setFkSalesOrderItem((int)$orderItemTransfer->getIdSalesOrderItem());
             $paymentOrderItemEntity->setStatus($this->config->getOmsStatusNew());
 
             if ($this->isPaymentMethodEasyCredit()) {

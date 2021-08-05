@@ -129,13 +129,13 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * @param string $merchantId
+     * @param string|null $merchantId
      * @param string $data
      * @param int $length
      *
      * @return array
      */
-    protected function getQueryParameters(string $merchantId, string $data, int $length): array
+    protected function getQueryParameters(?string $merchantId, string $data, int $length): array
     {
         $queryData = parent::getQueryParameters($merchantId, $data, $length);
 

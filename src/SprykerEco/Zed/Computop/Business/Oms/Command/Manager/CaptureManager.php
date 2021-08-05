@@ -21,7 +21,7 @@ class CaptureManager extends AbstractManager
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName_In((array)$this->config->getBeforeCaptureStatuses())
             ->endUse()
@@ -37,7 +37,7 @@ class CaptureManager extends AbstractManager
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
             ->useStateQuery()
             ->endUse()
             ->find();

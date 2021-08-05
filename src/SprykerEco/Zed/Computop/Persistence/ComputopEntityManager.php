@@ -105,6 +105,10 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->filterByTransId($header->getTransId())
             ->findOne();
 
+        if (!$paymentEntity) {
+            return;
+        }
+
         $paymentEntity
             ->setPayId($header->getPayId())
             ->setXId($header->getXId())

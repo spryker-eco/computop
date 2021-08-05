@@ -47,23 +47,18 @@ abstract class AbstractInitConverter implements ConverterInterface
     }
 
     /**
-     * @param array $responseHeader
+     * @param array $decryptedArray
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getResponseTransfer(array $responseHeader): TransferInterface
+    public function getResponseTransfer(array $decryptedArray): TransferInterface
     {
-        $decryptedArray = $this
-            ->computopApiService
-            ->decryptResponseHeader($responseHeader, $this->config->getBlowfishPassword());
+        $decryptedResponseHeader = $this->computopApiService
+            ->decryptResponseHeader($decryptedArray, $this->config->getBlowfishPassword());
 
-        $responseHeaderTransfer = $this
-            ->computopApiService
-            ->extractResponseHeader(
-                $decryptedArray,
-                ComputopConfig::INIT_METHOD
-            );
+        $responseHeaderTransfer = $this->computopApiService
+            ->extractResponseHeader($decryptedResponseHeader,ComputopConfig::INIT_METHOD);
 
-        return $this->createResponseTransfer($decryptedArray, $responseHeaderTransfer);
+        return $this->createResponseTransfer($decryptedResponseHeader, $responseHeaderTransfer);
     }
 }

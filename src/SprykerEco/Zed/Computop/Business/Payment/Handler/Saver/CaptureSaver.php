@@ -52,7 +52,7 @@ class CaptureSaver extends AbstractSaver
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
+            ->queryPaymentByPayId((string)$responseTransfer->getHeader()->getPayId())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {

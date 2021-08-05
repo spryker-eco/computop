@@ -65,9 +65,9 @@ class EasyCreditStatusHandler extends AbstractHandler
             ->performEasyCreditStatusRequest($quoteTransfer, $computopHeaderPayment);
 
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
-            $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
-            $process = $this->parseStatusExplanation($responseTransfer->getProcess());
+            $decision = $this->parseStatusExplanation((string)$responseTransfer->getDecision());
+            $financing = $this->parseStatusExplanation((string)$responseTransfer->getFinancing());
+            $process = $this->parseStatusExplanation((string)$responseTransfer->getProcess());
 
             $responseTransfer->setDecisionData($decision);
             $responseTransfer->setFinancingData($financing);
@@ -78,7 +78,7 @@ class EasyCreditStatusHandler extends AbstractHandler
 
         $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditStatusResponse($responseTransfer);
 
-        $this->logger->log($responseTransfer->getHeader(), $responseTransfer->getHeader()->getMethod());
+        $this->logger->log($responseTransfer->getHeader(), (string)$responseTransfer->getHeader()->getMethod());
 
         return $quoteTransfer;
     }

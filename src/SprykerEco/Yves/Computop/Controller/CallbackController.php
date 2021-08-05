@@ -99,7 +99,7 @@ class CallbackController extends AbstractController
         $statusResponse = $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse();
 
         if (!$statusResponse->getHeader()->getIsSuccess()) {
-            $this->addErrorMessage($statusResponse->getErrorText());
+            $this->addErrorMessage((string)$statusResponse->getErrorText());
 
             return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
         }

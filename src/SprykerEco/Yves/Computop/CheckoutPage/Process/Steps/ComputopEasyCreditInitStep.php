@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ComputopEasyCreditInitStep extends AbstractBaseStep implements StepWithExternalRedirectInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $redirectUrl = '';
 
