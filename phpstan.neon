@@ -14,5 +14,4 @@ parameters:
         - '#.+but returns.+null.#'
         - '#Instantiated class Orm\\.+not found.#'
         - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'
-        - '#Call to an undefined method Propel\\Runtime\\ActiveRecord\\ActiveRecordInterface.+#'
         - '#Property.+has unknown class Orm\\Zed\\Computop\\Persistence.+#'
