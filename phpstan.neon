@@ -6,7 +6,4 @@ parameters:
         - '#Parameter \#5 \$request of class.+\|null given.#'
         - '#.+Transfer.+#'
         - '#.+but returns.+null.#'
-        - '#Call to an undefined method .+LocatorLocatorInterface::.+\(\)#'
-        - '#Parameter .+of method|function .+expects int, int\|null given.#'
-        - '#Parameter .+of method|function .+expects string, string\|null given.#'
         - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
