@@ -7,14 +7,14 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
-use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 
 interface ManagerInterface
 {
     /**
      * @param int $idSalesOrder
      *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null
      */
-    public function getSavedComputopEntity(int $idSalesOrder): ActiveRecordInterface;
+    public function getSavedComputopEntity(int $idSalesOrder): ?SpyPaymentComputop;
 }
