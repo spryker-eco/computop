@@ -57,7 +57,7 @@ abstract class AbstractInitConverter implements ConverterInterface
             ->decryptResponseHeader($decryptedArray, $this->config->getBlowfishPassword());
 
         $responseHeaderTransfer = $this->computopApiService
-            ->extractResponseHeader($decryptedResponseHeader,ComputopConfig::INIT_METHOD);
+            ->extractResponseHeader($decryptedResponseHeader, ComputopConfig::INIT_METHOD);
 
         return $this->createResponseTransfer($decryptedResponseHeader, $responseHeaderTransfer);
     }

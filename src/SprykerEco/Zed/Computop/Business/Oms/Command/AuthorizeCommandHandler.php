@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class AuthorizeCommandHandler extends AbstractCommandHandler
 {
