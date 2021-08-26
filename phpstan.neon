@@ -10,7 +10,6 @@ parameters:
         - '#Parameter \$.+ of method .+ has invalid typehint type Orm\\.+#'
         - '#Parameter \#5 \$request of class.+\|null given.#'
         - '#Call to method.+on an unknown class.+AutoCompletion#'
-        - '#.+Transfer.+#'
         - '#.+but returns.+null.#'
         - '#Instantiated class Orm\\.+not found.#'
         - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'

@@ -162,7 +162,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
 
     /**
      * Specification:
-     * - Get PayU CEE Single init action URL
+     * - Return PayU CEE Single init action URL.
      *
      * @api
      *

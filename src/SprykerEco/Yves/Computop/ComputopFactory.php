@@ -306,9 +306,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayuCeeSinglePaymentHandler
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createPayuCeeSinglePaymentHandler(): ComputopPayuCeeSinglePaymentHandler
+    public function createPayuCeeSinglePaymentHandler(): ComputopPrePostPaymentHandlerInterface
     {
         return new ComputopPayuCeeSinglePaymentHandler(
             $this->createInitPayuCeeSingleConverter(),
@@ -383,7 +383,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter
      */
-    protected function createInitPayuCeeSingleConverter(): InitPayuCeeSingleConverter
+    public function createInitPayuCeeSingleConverter(): InitPayuCeeSingleConverter
     {
         return new InitPayuCeeSingleConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -567,7 +567,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayuCeeSingleMapper
      */
-    protected function createOrderPayuCeeSingleMapper(): PayuCeeSingleMapper
+    public function createOrderPayuCeeSingleMapper(): MapperInterface
     {
         return new PayuCeeSingleMapper(
             $this->getComputopApiService(),
