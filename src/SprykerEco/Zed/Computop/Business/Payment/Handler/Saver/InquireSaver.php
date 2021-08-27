@@ -24,10 +24,10 @@ class InquireSaver extends AbstractSaver
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer): TransferInterface
+    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer, $orderTransfer): void {
+            function () use ($responseTransfer, $orderTransfer) {
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
             }
         );
@@ -41,7 +41,7 @@ class InquireSaver extends AbstractSaver
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopApiInquireResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
+    protected function saveComputopDetails(ComputopApiInquireResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 

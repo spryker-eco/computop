@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
-use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
@@ -18,7 +16,7 @@ class EasyCreditMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_EASY_CREDIT;
     }
@@ -28,7 +26,7 @@ class EasyCreditMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopEasyCreditPaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopEasyCredit();
     }
@@ -38,7 +36,7 @@ class EasyCreditMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getEasyCreditInitResponse();
     }
@@ -48,7 +46,7 @@ class EasyCreditMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
     {
         return [];
     }

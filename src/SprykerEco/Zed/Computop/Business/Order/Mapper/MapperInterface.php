@@ -14,7 +14,7 @@ interface MapperInterface
     /**
      * @return string
      */
-    public function getMethodName(): string;
+    public function getMethodName();
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
@@ -35,5 +35,5 @@ interface MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array;
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer);
 }

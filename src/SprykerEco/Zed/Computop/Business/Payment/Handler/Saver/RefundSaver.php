@@ -24,10 +24,10 @@ class RefundSaver extends AbstractSaver
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer): TransferInterface
+    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer, $orderTransfer): void {
+            function () use ($responseTransfer, $orderTransfer) {
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
             }
         );
@@ -41,7 +41,7 @@ class RefundSaver extends AbstractSaver
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopApiRefundResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
+    protected function saveComputopDetails(ComputopApiRefundResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 

@@ -18,5 +18,5 @@ interface RiskCheckSaverInterface
      *
      * @return void
      */
-    public function save(ComputopApiCrifResponseTransfer $responseTransfer, QuoteTransfer $quoteTransfer): void;
+    public function save(ComputopApiCrifResponseTransfer $responseTransfer, QuoteTransfer $quoteTransfer);
 }

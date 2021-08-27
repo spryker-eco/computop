@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Propel\Runtime\Collection\ObjectCollection;
 
 class RefundManager extends AbstractManager
 {
@@ -17,7 +16,7 @@ class RefundManager extends AbstractManager
      *
      * @return int
      */
-    public function getAmount(OrderTransfer $orderTransfer): int
+    public function getAmount(OrderTransfer $orderTransfer)
     {
         if ($this->config->isRefundShipmentPriceEnabled() && $this->isShipmentRefundNeeded($orderTransfer)) {
             return $orderTransfer->getTotals()->getRefundTotal();
@@ -33,7 +32,7 @@ class RefundManager extends AbstractManager
      *
      * @return bool
      */
-    protected function isShipmentRefundNeeded(OrderTransfer $orderTransfer): bool
+    protected function isShipmentRefundNeeded(OrderTransfer $orderTransfer)
     {
         $itemsBeforeRefundState = count($this->getItemsBeforeRefundState($orderTransfer));
 
@@ -45,13 +44,13 @@ class RefundManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItem[]|\Orm\Zed\Oms\Persistence\SpyOmsOrderItemStateHistory[]|\Orm\Zed\Oms\Persistence\SpyOmsEventTimeout[]|\Propel\Runtime\Collection\ObjectCollection
+     * @return array
      */
-    protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer): ObjectCollection
+    protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer)
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName_In(
                 (array)$this->config->getBeforeRefundStatuses()

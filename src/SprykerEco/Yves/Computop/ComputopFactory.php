@@ -9,11 +9,6 @@ namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\Router\Router\RouterInterface;
-use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
-use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Client\Computop\ComputopClientInterface;
-use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
-use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
 use SprykerEco\Yves\Computop\Converter\InitEasyCreditConverter;
@@ -23,10 +18,7 @@ use SprykerEco\Yves\Computop\Converter\InitPayNowConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
-use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
@@ -47,7 +39,6 @@ use SprykerEco\Yves\Computop\Form\PayPalSubForm;
 use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
-use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler;
@@ -69,7 +60,6 @@ use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayuCeeSingleMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
@@ -80,7 +70,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\ComputopConfigInterface
      */
-    public function getComputopConfig(): ComputopConfigInterface
+    public function getComputopConfig()
     {
         return $this->getConfig();
     }
@@ -88,7 +78,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
      */
-    public function createComputopPaymentHandler(): ComputopPaymentHandlerInterface
+    public function createComputopPaymentHandler()
     {
         return new ComputopPaymentHandler($this->getConfig());
     }
@@ -96,7 +86,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createCreditCardForm(): SubFormInterface
+    public function createCreditCardForm()
     {
         return new CreditCardSubForm();
     }
@@ -104,7 +94,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createPayNowForm(): SubFormInterface
+    public function createPayNowForm()
     {
         return new PayNowSubForm();
     }
@@ -112,7 +102,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createPayPalForm(): SubFormInterface
+    public function createPayPalForm()
     {
         return new PayPalSubForm();
     }
@@ -120,7 +110,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createSofortForm(): SubFormInterface
+    public function createSofortForm()
     {
         return new SofortSubForm();
     }
@@ -128,7 +118,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createDirectDebitForm(): SubFormInterface
+    public function createDirectDebitForm()
     {
         return new DirectDebitSubForm();
     }
@@ -136,7 +126,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createPaydirektForm(): SubFormInterface
+    public function createPaydirektForm()
     {
         return new PaydirektSubForm();
     }
@@ -144,7 +134,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createIdealForm(): SubFormInterface
+    public function createIdealForm()
     {
         return new IdealSubForm();
     }
@@ -152,7 +142,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createEasyCreditForm(): SubFormInterface
+    public function createEasyCreditForm()
     {
         return new EasyCreditSubForm();
     }
@@ -168,7 +158,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createCreditCardFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createCreditCardFormDataProvider()
     {
         return new CreditCardFormDataProvider($this->getQuoteClient(), $this->createOrderCreditCardMapper());
     }
@@ -176,7 +166,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createPayNowFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createPayNowFormDataProvider()
     {
         return new PayNowFormDataProvider($this->getQuoteClient(), $this->createOrderPayNowMapper());
     }
@@ -184,7 +174,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createPayPalFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createPayPalFormDataProvider()
     {
         return new PayPalFormDataProvider($this->getQuoteClient(), $this->createOrderPayPalMapper());
     }
@@ -192,7 +182,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSofortFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSofortFormDataProvider()
     {
         return new SofortFormDataProvider($this->getQuoteClient(), $this->createOrderSofortMapper());
     }
@@ -200,7 +190,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createDirectDebitFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createDirectDebitFormDataProvider()
     {
         return new DirectDebitFormDataProvider($this->getQuoteClient(), $this->createOrderDirectDebitMapper());
     }
@@ -208,7 +198,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createPaydirektFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createPaydirektFormDataProvider()
     {
         return new PaydirektFormDataProvider($this->getQuoteClient(), $this->createOrderPaydirektMapper());
     }
@@ -216,7 +206,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createIdealFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createIdealFormDataProvider()
     {
         return new IdealFormDataProvider($this->getQuoteClient(), $this->createOrderIdealMapper());
     }
@@ -224,7 +214,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createEasyCreditFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createEasyCreditFormDataProvider()
     {
         return new EasyCreditFormDataProvider($this->getQuoteClient(), $this->createOrderEasyCreditMapper());
     }
@@ -240,7 +230,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface
      */
-    public function getComputopApiService(): ComputopApiServiceInterface
+    public function getComputopApiService()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::SERVICE_COMPUTOP_API);
     }
@@ -248,7 +238,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Symfony\Component\HttpKernel\HttpKernelInterface
      */
-    public function getApplication(): HttpKernelInterface
+    public function getApplication()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::PLUGIN_APPLICATION);
     }
@@ -256,7 +246,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface
      */
-    public function getQuoteClient(): ComputopToQuoteClientInterface
+    public function getQuoteClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_QUOTE);
     }
@@ -264,7 +254,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createCreditCardPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createCreditCardPaymentHandler()
     {
         return new ComputopCreditCardPaymentHandler($this->createInitCreditCardConverter(), $this->getComputopClient());
     }
@@ -272,7 +262,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createPayNowPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createPayNowPaymentHandler()
     {
         return new ComputopPayNowPaymentHandler($this->createInitPayNowConverter(), $this->getComputopClient());
     }
@@ -280,7 +270,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createPayPalPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createPayPalPaymentHandler()
     {
         return new ComputopPayPalPaymentHandler($this->createInitPayPalConverter(), $this->getComputopClient());
     }
@@ -288,7 +278,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createDirectDebitPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createDirectDebitPaymentHandler()
     {
         return new ComputopDirectDebitPaymentHandler($this->createInitDirectDebitConverter(), $this->getComputopClient());
     }
@@ -296,7 +286,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createEasyCreditPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createEasyCreditPaymentHandler()
     {
         return new ComputopEasyCreditPaymentHandler(
             $this->createInitEasyCreditConverter(),
@@ -319,7 +309,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createPaydirektPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createPaydirektPaymentHandler()
     {
         return new ComputopPaydirektPaymentHandler($this->createInitPaydirektConverter(), $this->getComputopClient());
     }
@@ -327,7 +317,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createSofortPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createSofortPaymentHandler()
     {
         return new ComputopSofortPaymentHandler($this->createInitSofortConverter(), $this->getComputopClient());
     }
@@ -335,7 +325,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
-    public function createIdealPaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    public function createIdealPaymentHandler()
     {
         return new ComputopIdealPaymentHandler($this->createInitIdealConverter(), $this->getComputopClient());
     }
@@ -343,7 +333,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitCreditCardConverter(): ConverterInterface
+    protected function createInitCreditCardConverter()
     {
         return new InitCreditCardConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -351,7 +341,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitPayNowConverter(): ConverterInterface
+    protected function createInitPayNowConverter()
     {
         return new InitPayNowConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -359,7 +349,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitPayPalConverter(): ConverterInterface
+    protected function createInitPayPalConverter()
     {
         return new InitPayPalConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -367,7 +357,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitDirectDebitConverter(): ConverterInterface
+    protected function createInitDirectDebitConverter()
     {
         return new InitDirectDebitConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -375,7 +365,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitEasyCreditConverter(): ConverterInterface
+    protected function createInitEasyCreditConverter()
     {
         return new InitEasyCreditConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -391,7 +381,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitPaydirektConverter(): ConverterInterface
+    protected function createInitPaydirektConverter()
     {
         return new InitPaydirektConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -399,7 +389,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitSofortConverter(): ConverterInterface
+    protected function createInitSofortConverter()
     {
         return new InitSofortConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -407,7 +397,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitIdealConverter(): ConverterInterface
+    protected function createInitIdealConverter()
     {
         return new InitIdealConverter($this->getComputopApiService(), $this->getConfig());
     }
@@ -415,7 +405,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Client\Computop\ComputopClientInterface
      */
-    public function getComputopClient(): ComputopClientInterface
+    protected function getComputopClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP);
     }
@@ -423,7 +413,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface
      */
-    public function getStore(): ComputopToStoreInterface
+    protected function getStore()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::STORE);
     }
@@ -431,7 +421,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface
      */
-    public function getCalculationClient(): ComputopToCalculationClientInterface
+    protected function getCalculationClient()
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_CALCULATION);
     }
@@ -439,7 +429,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderCreditCardMapper(): MapperInterface
+    protected function createOrderCreditCardMapper()
     {
         return new CreditCardMapper(
             $this->getComputopApiService(),
@@ -455,7 +445,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderPayNowMapper(): MapperInterface
+    protected function createOrderPayNowMapper()
     {
         return new PayNowMapper(
             $this->getComputopApiService(),
@@ -471,7 +461,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderPayPalMapper(): MapperInterface
+    protected function createOrderPayPalMapper()
     {
         return new PayPalMapper(
             $this->getComputopApiService(),
@@ -487,7 +477,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderDirectDebitMapper(): MapperInterface
+    protected function createOrderDirectDebitMapper()
     {
         return new DirectDebitMapper(
             $this->getComputopApiService(),
@@ -503,7 +493,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderSofortMapper(): MapperInterface
+    protected function createOrderSofortMapper()
     {
         return new SofortMapper(
             $this->getComputopApiService(),
@@ -519,7 +509,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderPaydirektMapper(): MapperInterface
+    protected function createOrderPaydirektMapper()
     {
         return new PaydirektMapper(
             $this->getComputopApiService(),
@@ -535,7 +525,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderIdealMapper(): MapperInterface
+    protected function createOrderIdealMapper()
     {
         return new IdealMapper(
             $this->getComputopApiService(),
@@ -551,7 +541,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    public function createOrderEasyCreditMapper(): MapperInterface
+    protected function createOrderEasyCreditMapper()
     {
         return new EasyCreditMapper(
             $this->getComputopApiService(),

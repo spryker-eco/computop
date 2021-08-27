@@ -22,7 +22,7 @@ class PaydirektMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPaydirektPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
 
@@ -40,15 +40,8 @@ class PaydirektMapper extends AbstractMapper
         );
 
         $computopPaymentTransfer->setShopApiKey($this->config->getPaydirektShopKey());
-        $shippingAmount = $quoteTransfer->getTotals()->getExpenseTotal();
-        if ($shippingAmount) {
-            $computopPaymentTransfer->setShippingAmount((string)$shippingAmount);
-        }
-        $shoppingBasketAmount = $quoteTransfer->getTotals()->getSubtotal();
-        if ($shoppingBasketAmount) {
-            $computopPaymentTransfer->setShoppingBasketAmount((string)$shoppingBasketAmount);
-        }
-
+        $computopPaymentTransfer->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal());
+        $computopPaymentTransfer->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal());
         $computopPaymentTransfer->setShippingFirstName($quoteTransfer->getShippingAddress()->getFirstName());
         $computopPaymentTransfer->setShippingLastName($quoteTransfer->getShippingAddress()->getLastName());
         $computopPaymentTransfer->setShippingZip($quoteTransfer->getShippingAddress()->getZipCode());

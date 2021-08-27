@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace;
 
-use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
@@ -19,10 +18,8 @@ class AuthorizeHandler extends AbstractHandler
      *
      * @return \Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer
      */
-    public function handle(
-        OrderTransfer $orderTransfer,
-        ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment
-    ): ComputopApiAuthorizeResponseTransfer {
+    public function handle(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopApiHeaderPayment)
+    {
         $responseTransfer = $this
             ->computopApiFacade
             ->performAuthorizationRequest($orderTransfer, $computopApiHeaderPayment);

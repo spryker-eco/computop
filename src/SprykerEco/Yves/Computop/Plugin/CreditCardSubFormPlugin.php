@@ -16,11 +16,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * {@inheritDoc}
-     * - Creates `CreditCard` subform.
-     *
-     * @api
-     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createSubForm()
@@ -31,11 +26,6 @@ class CreditCardSubFormPlugin extends AbstractPlugin implements SubFormPluginInt
     }
 
     /**
-     * {@inheritDoc}
-     * - Creates `CreditCard` subform data provider.
-     *
-     * @api
-     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()

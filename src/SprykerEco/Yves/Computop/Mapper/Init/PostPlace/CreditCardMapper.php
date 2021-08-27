@@ -31,7 +31,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopCreditCardPaymentTransfer
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -58,7 +58,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopCreditCardPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
@@ -91,7 +91,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer): array
+    protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopCreditCardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopCreditCardPaymentTransfer->getAmount();
@@ -129,13 +129,13 @@ class CreditCardMapper extends AbstractMapper
     }
 
     /**
-     * @param string|null $merchantId
+     * @param string $merchantId
      * @param string $data
      * @param int $length
      *
      * @return array
      */
-    protected function getQueryParameters(?string $merchantId, string $data, int $length): array
+    protected function getQueryParameters($merchantId, $data, $length)
     {
         $queryData = parent::getQueryParameters($merchantId, $data, $length);
 

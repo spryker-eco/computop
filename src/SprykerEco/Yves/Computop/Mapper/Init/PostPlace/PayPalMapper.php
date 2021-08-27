@@ -22,7 +22,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayPalPaymentTransfer
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -58,7 +58,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayPalPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
@@ -114,7 +114,7 @@ class PayPalMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer): array
+    protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer)
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayPalPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayPalPaymentTransfer->getAmount();

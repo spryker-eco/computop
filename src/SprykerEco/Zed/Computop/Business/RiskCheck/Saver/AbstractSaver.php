@@ -51,7 +51,7 @@ abstract class AbstractSaver implements RiskCheckSaverInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    protected function logHeader(ComputopApiResponseHeaderTransfer $headerTransfer, string $method): SpyPaymentComputopApiLog
+    protected function logHeader(ComputopApiResponseHeaderTransfer $headerTransfer, $method): SpyPaymentComputopApiLog
     {
         return $this->logger->log($headerTransfer, $method);
     }

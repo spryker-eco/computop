@@ -16,11 +16,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class DirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * {@inheritDoc}
-     * - Creates `DirectDebit` subform.
-     *
-     * @api
-     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createSubForm()
@@ -31,11 +26,6 @@ class DirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPluginIn
     }
 
     /**
-     * {@inheritDoc}
-     * - Creates `DirectDebit` subform data provider.
-     *
-     * @api
-     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()

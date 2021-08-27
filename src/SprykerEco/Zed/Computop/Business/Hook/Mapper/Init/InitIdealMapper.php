@@ -17,7 +17,7 @@ class InitIdealMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_IDEAL;
     }
@@ -28,10 +28,8 @@ class InitIdealMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(
-        QuoteTransfer $quoteTransfer,
-        TransferInterface $computopPaymentTransfer
-    ): TransferInterface {
+    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
+    {
         /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -52,8 +50,7 @@ class InitIdealMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), (string)$computopPaymentTransfer->getMerchantId(), $data, $length);
-        $computopPaymentTransfer->setUrl($urlToComputop);
+        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
 
         return $computopPaymentTransfer;
     }
@@ -63,7 +60,7 @@ class InitIdealMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer): array
+    protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopIdealPaymentTransfer->getTransId();
@@ -86,7 +83,7 @@ class InitIdealMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getActionUrl(): string
+    protected function getActionUrl()
     {
         return $this->config->getIdealInitAction();
     }

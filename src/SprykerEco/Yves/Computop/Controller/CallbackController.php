@@ -99,7 +99,7 @@ class CallbackController extends AbstractController
         $statusResponse = $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse();
 
         if (!$statusResponse->getHeader()->getIsSuccess()) {
-            $this->addErrorMessage((string)$statusResponse->getErrorText());
+            $this->addErrorMessage($statusResponse->getErrorText());
 
             return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
         }
@@ -181,6 +181,8 @@ class CallbackController extends AbstractController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

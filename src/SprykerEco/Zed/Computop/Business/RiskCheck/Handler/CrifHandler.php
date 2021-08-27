@@ -17,7 +17,7 @@ class CrifHandler extends AbstractHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function handle(QuoteTransfer $quoteTransfer)
     {
         if (!$this->config->isCrifEnabled()) {
             return $quoteTransfer;

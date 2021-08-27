@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Computop\CheckoutPage\Process\Steps;
 
-use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\StepWithExternalRedirectInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -17,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ComputopEasyCreditInitStep extends AbstractBaseStep implements StepWithExternalRedirectInterface
 {
     /**
-     * @var string|null
+     * @var string
      */
     protected $redirectUrl = '';
 
@@ -37,7 +36,7 @@ class ComputopEasyCreditInitStep extends AbstractBaseStep implements StepWithExt
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function execute(Request $request, AbstractTransfer $quoteTransfer): QuoteTransfer
+    public function execute(Request $request, AbstractTransfer $quoteTransfer)
     {
         if (
             !$quoteTransfer->getPayment()

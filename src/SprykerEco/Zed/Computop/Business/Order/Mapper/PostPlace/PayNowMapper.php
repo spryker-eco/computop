@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
-use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
@@ -18,7 +16,7 @@ class PayNowMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_PAY_NOW;
     }
@@ -28,7 +26,7 @@ class PayNowMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopPayNowPaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopPayNow();
     }
@@ -38,7 +36,7 @@ class PayNowMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): ComputopPayNowInitResponseTransfer
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getPayNowInitResponse();
     }
@@ -48,7 +46,7 @@ class PayNowMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
     {
         return [];
     }

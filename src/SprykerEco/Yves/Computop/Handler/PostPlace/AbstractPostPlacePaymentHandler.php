@@ -19,14 +19,14 @@ abstract class AbstractPostPlacePaymentHandler extends AbstractPrePostPaymentHan
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    abstract protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer;
+    abstract protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    abstract protected function saveInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    abstract protected function saveInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -34,7 +34,7 @@ abstract class AbstractPostPlacePaymentHandler extends AbstractPrePostPaymentHan
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer, array $responseArray): QuoteTransfer
+    public function handle(QuoteTransfer $quoteTransfer, array $responseArray)
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);

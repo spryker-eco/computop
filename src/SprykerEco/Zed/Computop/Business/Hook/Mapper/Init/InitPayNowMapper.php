@@ -14,7 +14,7 @@ class InitPayNowMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_PAY_NOW;
     }

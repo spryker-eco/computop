@@ -23,7 +23,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function createPaymentComputopQuery(): SpyPaymentComputopQuery
+    public function createPaymentComputopQuery()
     {
         return SpyPaymentComputopQuery::create();
     }
@@ -31,7 +31,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    public function createPaymentComputopOrderItemQuery(): SpyPaymentComputopOrderItemQuery
+    public function createPaymentComputopOrderItemQuery()
     {
         return SpyPaymentComputopOrderItemQuery::create();
     }
@@ -39,7 +39,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function createSpySalesOrderItemQuery(): SpySalesOrderItemQuery
+    public function createSpySalesOrderItemQuery()
     {
         return SpySalesOrderItemQuery::create();
     }

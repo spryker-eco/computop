@@ -53,8 +53,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successCreditCardAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -73,8 +71,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successDirectDebitAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -93,8 +89,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successEasyCreditAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -113,8 +107,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successIdealAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -133,8 +125,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successPaydirektAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -153,8 +143,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successPayNowAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -173,8 +161,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successPayPalAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -193,8 +179,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successSofortAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
@@ -253,8 +237,6 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::notifyAction()
-     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection

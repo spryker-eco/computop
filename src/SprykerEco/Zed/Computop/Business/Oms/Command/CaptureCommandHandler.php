@@ -37,7 +37,7 @@ class CaptureCommandHandler extends AbstractCommandHandler
      *
      * @return int
      */
-    protected function getAmount(OrderTransfer $orderTransfer): int
+    protected function getAmount(OrderTransfer $orderTransfer)
     {
         if ($this->isFirstCapture($orderTransfer)) {
             return $orderTransfer->getTotals()->getGrandTotal();
@@ -51,7 +51,7 @@ class CaptureCommandHandler extends AbstractCommandHandler
      *
      * @return bool
      */
-    protected function isFirstCapture(OrderTransfer $orderTransfer): bool
+    protected function isFirstCapture(OrderTransfer $orderTransfer)
     {
         $itemsBeforeCaptureStateCount = count($this->manager->getItemsBeforeCaptureState($orderTransfer));
         $allItemsCount = count($this->manager->getAllItems($orderTransfer));

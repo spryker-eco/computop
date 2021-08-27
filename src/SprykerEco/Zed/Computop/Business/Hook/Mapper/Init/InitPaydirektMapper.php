@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
-use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -18,7 +17,7 @@ class InitPaydirektMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_PAYDIREKT;
     }
@@ -29,10 +28,8 @@ class InitPaydirektMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(
-        QuoteTransfer $quoteTransfer,
-        TransferInterface $computopPaymentTransfer
-    ): TransferInterface {
+    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
+    {
         /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -53,19 +50,19 @@ class InitPaydirektMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), (string)$computopPaymentTransfer->getMerchantId(), $data, $length);
-        $computopPaymentTransfer->setUrl($urlToComputop);
+        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
 
         return $computopPaymentTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaydirectPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer)
+    protected function getDataSubArray(TransferInterface $computopPaydirectPaymentTransfer)
     {
+        /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaydirectPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaydirectPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaydirectPaymentTransfer->getCurrency();
@@ -94,7 +91,7 @@ class InitPaydirektMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getActionUrl(): string
+    protected function getActionUrl()
     {
         return $this->config->getPaydirektInitAction();
     }

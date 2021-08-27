@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class SofortFormDataProvider extends AbstractFormDataProvider
 {
@@ -19,7 +18,7 @@ class SofortFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
+    public function getData(AbstractTransfer $quoteTransfer)
     {
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
@@ -41,9 +40,9 @@ class SofortFormDataProvider extends AbstractFormDataProvider
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|null
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getComputopPayment(QuoteTransfer $quoteTransfer): ?TransferInterface
+    protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
         return $quoteTransfer->getPayment()->getComputopSofort();
     }

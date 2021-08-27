@@ -24,10 +24,10 @@ class AuthorizeSaver extends AbstractSaver
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer): TransferInterface
+    public function save(TransferInterface $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer, $orderTransfer): void {
+            function () use ($responseTransfer, $orderTransfer) {
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
             }
         );
@@ -41,7 +41,7 @@ class AuthorizeSaver extends AbstractSaver
      *
      * @return void
      */
-    protected function saveComputopDetails(ComputopApiAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
+    protected function saveComputopDetails(ComputopApiAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer)
     {
         $this->logHeader($responseTransfer->getHeader(), self::METHOD);
 
@@ -52,7 +52,7 @@ class AuthorizeSaver extends AbstractSaver
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId((string)$responseTransfer->getHeader()->getPayId())
+            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {

@@ -20,7 +20,7 @@ class IdealMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopIdealPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopIdealPaymentTransfer
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
     {
         $computopPaymentTransfer = new ComputopIdealPaymentTransfer();
 

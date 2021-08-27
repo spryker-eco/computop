@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Computop\Dependency\Service;
 class ComputopToUtilEncodingServiceBridge implements ComputopToUtilEncodingServiceInterface
 {
     /**
-     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
+     * @var \Spryker\Client\Calculation\CalculationClientInterface
      */
     protected $utilEncodingService;
 

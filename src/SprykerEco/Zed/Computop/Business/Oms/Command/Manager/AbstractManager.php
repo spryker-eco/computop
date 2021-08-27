@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -39,9 +38,9 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * @param int $idSalesOrder
      *
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null
+     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */
-    public function getSavedComputopEntity(int $idSalesOrder): ?SpyPaymentComputop
+    public function getSavedComputopEntity($idSalesOrder)
     {
         return $this
             ->queryContainer

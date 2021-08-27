@@ -41,7 +41,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function addPaymentToQuote(QuoteTransfer $quoteTransfer)
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
         if ($paymentSelection) {
@@ -58,7 +58,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer, string $paymentSelection): QuoteTransfer
+    protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
         $quoteTransfer
             ->getPayment()
@@ -75,7 +75,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function setComputopPayment(QuoteTransfer $quoteTransfer, string $paymentSelection): QuoteTransfer
+    protected function setComputopPayment(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
         $computopPaymentTransfer = $this->getComputopPaymentTransfer($quoteTransfer, $paymentSelection);
 
@@ -90,7 +90,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    protected function getComputopPaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection): AbstractTransfer
+    protected function getComputopPaymentTransfer(QuoteTransfer $quoteTransfer, $paymentSelection)
     {
         $paymentMethod = ucfirst($paymentSelection);
         $method = 'get' . $paymentMethod;
@@ -113,11 +113,8 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function setComputopPaymentToQuote(
-        QuoteTransfer $quoteTransfer,
-        string $paymentSelection,
-        AbstractTransfer $computopPaymentTransfer
-    ): QuoteTransfer {
+    protected function setComputopPaymentToQuote(QuoteTransfer $quoteTransfer, $paymentSelection, AbstractTransfer $computopPaymentTransfer)
+    {
         $paymentMethod = ucfirst($paymentSelection);
         $method = 'set' . $paymentMethod;
         $paymentTransfer = $quoteTransfer->getPayment();

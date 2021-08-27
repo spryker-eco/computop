@@ -43,7 +43,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return void
      */
-    public function registerMapper(InitMapperInterface $paymentMethod): void
+    public function registerMapper(InitMapperInterface $paymentMethod)
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
@@ -54,12 +54,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function execute(
-        QuoteTransfer $quoteTransfer,
-        CheckoutResponseTransfer $checkoutResponseTransfer
-    ): CheckoutResponseTransfer {
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    {
         $payment = $quoteTransfer->getPayment();
-
         if (!$payment || $payment->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
             return $checkoutResponseTransfer;
         }
@@ -81,15 +78,13 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     * @param \Generated\Shared\Transfer\PaymentTransfer $computopPaymentTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    protected function setRedirect(
-        TransferInterface $computopPaymentTransfer,
-        CheckoutResponseTransfer $checkoutResponseTransfer
-    ): CheckoutResponseTransfer {
+    protected function setRedirect(TransferInterface $computopPaymentTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    {
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());
@@ -104,7 +99,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
-    protected function getMethodMapper(string $methodName): InitMapperInterface
+    protected function getMethodMapper($methodName)
     {
         if (isset($this->methodMappers[$methodName]) === false) {
             throw new ComputopMethodMapperException('The method mapper is not registered.');
@@ -120,9 +115,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
+    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
-        $paymentSelection = (string)$quoteTransfer->getPayment()->getPaymentSelection();
+        $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
         $paymentMethod = ucfirst($paymentSelection);
         $method = 'get' . $paymentMethod;

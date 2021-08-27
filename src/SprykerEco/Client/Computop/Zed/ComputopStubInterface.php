@@ -18,21 +18,21 @@ interface ComputopStubInterface
      *
      * @return void
      */
-    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer): void;
+    public function logResponse(ComputopApiResponseHeaderTransfer $responseTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveSofortInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveIdealInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -46,63 +46,63 @@ interface ComputopStubInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function savePaydirektInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function savePayNowInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function savePayPalInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function saveEasyCreditInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function performCrifApiCall(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function performCrifApiCall(QuoteTransfer $quoteTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer

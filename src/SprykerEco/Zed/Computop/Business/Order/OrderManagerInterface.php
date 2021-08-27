@@ -18,7 +18,7 @@ interface OrderManagerInterface
      *
      * @return void
      */
-    public function registerMapper(MapperInterface $mapper): void;
+    public function registerMapper(MapperInterface $mapper);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -26,5 +26,5 @@ interface OrderManagerInterface
      *
      * @return void
      */
-    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer);
 }

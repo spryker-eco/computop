@@ -15,7 +15,7 @@ interface InitMapperInterface
     /**
      * @return string
      */
-    public function getMethodName(): string;
+    public function getMethodName();
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

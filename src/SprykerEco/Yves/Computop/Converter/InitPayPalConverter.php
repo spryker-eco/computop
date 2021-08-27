@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitPayPalConverter extends AbstractInitConverter
@@ -20,10 +19,8 @@ class InitPayPalConverter extends AbstractInitConverter
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function createResponseTransfer(
-        array $decryptedArray,
-        ComputopApiResponseHeaderTransfer $header
-    ): TransferInterface {
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
+    {
         $responseTransfer = new ComputopPayPalInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);
@@ -49,7 +46,7 @@ class InitPayPalConverter extends AbstractInitConverter
         $responseTransfer->setBillingAddressZip($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_ADDRESS_ZIP));
         $responseTransfer->setBillingName($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::BILLING_NAME));
         $responseTransfer->setPayerId($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::PAYER_ID));
-        $responseTransfer->setIsFinancing((bool)$this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::IS_FINANCING));
+        $responseTransfer->setIsFinancing($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::IS_FINANCING));
         $responseTransfer->setFinancingFeeAmount($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::FINANCING_FEE_AMOUNT));
         $responseTransfer->setFinancingMonthlyPayment($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::FINANCING_MONTHLY_PAYMENT));
         $responseTransfer->setFinancingTerm($this->computopApiService->getResponseValue($decryptedArray, ComputopApiConfig::FINANCING_TERM));

@@ -8,10 +8,8 @@
 namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Yves\Computop\ComputopConfig as YvesComputopConfig;
 
 abstract class AbstractInitConverter implements ConverterInterface
 {
@@ -31,34 +29,36 @@ abstract class AbstractInitConverter implements ConverterInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    abstract protected function createResponseTransfer(
-        array $decryptedArray,
-        ComputopApiResponseHeaderTransfer $header
-    ): TransferInterface;
+    abstract protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header);
 
     /**
      * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
      * @param \SprykerEco\Yves\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopApiServiceInterface $computopApiService, YvesComputopConfig $config)
+    public function __construct(ComputopApiServiceInterface $computopApiService, $config)
     {
         $this->computopApiService = $computopApiService;
         $this->config = $config;
     }
 
     /**
-     * @param array $decryptedArray
+     * @param array $responseHeader
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getResponseTransfer(array $decryptedArray): TransferInterface
+    public function getResponseTransfer(array $responseHeader)
     {
-        $decryptedResponseHeader = $this->computopApiService
-            ->decryptResponseHeader($decryptedArray, $this->config->getBlowfishPassword());
+        $decryptedArray = $this
+            ->computopApiService
+            ->decryptResponseHeader($responseHeader, $this->config->getBlowfishPassword());
 
-        $responseHeaderTransfer = $this->computopApiService
-            ->extractResponseHeader($decryptedResponseHeader, ComputopConfig::INIT_METHOD);
+        $responseHeaderTransfer = $this
+            ->computopApiService
+            ->extractResponseHeader(
+                $decryptedArray,
+                ComputopConfig::INIT_METHOD
+            );
 
-        return $this->createResponseTransfer($decryptedResponseHeader, $responseHeaderTransfer);
+        return $this->createResponseTransfer($decryptedArray, $responseHeaderTransfer);
     }
 }

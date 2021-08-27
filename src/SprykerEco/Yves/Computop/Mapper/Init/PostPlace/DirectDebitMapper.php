@@ -23,7 +23,7 @@ class DirectDebitMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopDirectDebitPaymentTransfer
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -83,7 +83,7 @@ class DirectDebitMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopDirectDebitPaymentTransfer $computopDirectDebitPaymentTransfer): array
+    protected function getDataSubArray(ComputopDirectDebitPaymentTransfer $computopDirectDebitPaymentTransfer)
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopDirectDebitPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopDirectDebitPaymentTransfer->getAmount();
@@ -107,7 +107,7 @@ class DirectDebitMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getDateOfSignature(): string
+    protected function getDateOfSignature()
     {
         $now = new DateTime();
 

@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeInterface;
@@ -78,7 +77,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      *
      * @return bool
      */
-    protected function isAllOrderCancellation(array $orderItemsToCancel, OrderTransfer $orderTransfer): bool
+    protected function isAllOrderCancellation(array $orderItemsToCancel, OrderTransfer $orderTransfer)
     {
         $allOrderItemsCount = count($orderTransfer->getItems());
         $cancelledOrderItemsCount = count($this->manager->getCanceledItems($orderTransfer));
@@ -111,10 +110,8 @@ class CancelCommandHandler extends AbstractCommandHandler
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function reverseOrderAuthorizationRequest(
-        OrderTransfer $orderTransfer,
-        ComputopApiHeaderPaymentTransfer $computopHeaderPayment
-    ): TransferInterface {
+    protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
+    {
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $computopResponseTransfer */
         $computopResponseTransfer = $this->reversePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
@@ -133,7 +130,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      *
      * @return array
      */
-    protected function cancelOrderItems(array $orderItems): array
+    protected function cancelOrderItems(array $orderItems)
     {
         $this->manager->changeComputopItemsStatus($orderItems);
 
@@ -147,7 +144,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      *
      * @return void
      */
-    protected function setInfoMessage(string $messageValue): void
+    protected function setInfoMessage($messageValue)
     {
         $message = $this->getMessageTransfer($messageValue);
 
@@ -161,7 +158,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      *
      * @return void
      */
-    protected function setErrorMessage(string $messageValue): void
+    protected function setErrorMessage($messageValue)
     {
         $messageTransfer = $this->getMessageTransfer($messageValue);
 
@@ -175,7 +172,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      *
      * @return \Generated\Shared\Transfer\MessageTransfer
      */
-    protected function getMessageTransfer(string $messageValue): MessageTransfer
+    protected function getMessageTransfer($messageValue)
     {
         $messageTransfer = new MessageTransfer();
         $messageTransfer->setValue($messageValue);

@@ -14,7 +14,7 @@ class InitDirectDebitMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT;
     }

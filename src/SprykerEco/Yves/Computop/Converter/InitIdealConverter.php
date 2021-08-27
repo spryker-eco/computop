@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopIdealInitResponseTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 
 class InitIdealConverter extends AbstractInitConverter
@@ -20,10 +19,8 @@ class InitIdealConverter extends AbstractInitConverter
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function createResponseTransfer(
-        array $decryptedArray,
-        ComputopApiResponseHeaderTransfer $header
-    ): TransferInterface {
+    protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header)
+    {
         $responseTransfer = new ComputopIdealInitResponseTransfer();
         $responseTransfer->fromArray($decryptedArray, true);
         $responseTransfer->setHeader($header);

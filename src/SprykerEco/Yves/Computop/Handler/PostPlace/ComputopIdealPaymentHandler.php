@@ -19,7 +19,7 @@ class ComputopIdealPaymentHandler extends AbstractPostPlacePaymentHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
+    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer)
     {
         if ($quoteTransfer->getPayment()->getComputopIdeal() === null) {
             $computopTransfer = new ComputopIdealPaymentTransfer();
@@ -38,7 +38,7 @@ class ComputopIdealPaymentHandler extends AbstractPostPlacePaymentHandler
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function saveInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    protected function saveInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->computopClient->saveIdealInitResponse($quoteTransfer);
     }

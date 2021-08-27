@@ -66,7 +66,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Paydirekt response the database.
+     * - Saves Paydirekt response to DB
      *
      * @api
      *

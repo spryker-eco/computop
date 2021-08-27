@@ -438,22 +438,4 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
     }
-
-    /**
-     * Specification:
-     * - Returns COMPUTOP payment methods with an external redirect.
-     *
-     * @api
-     *
-     * @return string[]
-     */
-    public function getPaymentMethodsWithExternalRedirect(): array
-    {
-        return [
-            ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
-            ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
-            ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
-            ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
-        ];
-    }
 }

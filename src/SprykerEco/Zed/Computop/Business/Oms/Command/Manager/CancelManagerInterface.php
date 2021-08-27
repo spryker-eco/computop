@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Propel\Runtime\Collection\ObjectCollection;
 
 interface CancelManagerInterface
 {
@@ -17,12 +16,12 @@ interface CancelManagerInterface
      *
      * @return array
      */
-    public function changeComputopItemsStatus(array $orderItems): array;
+    public function changeComputopItemsStatus(array $orderItems);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Propel\Runtime\Collection\ObjectCollection
+     * @return array
      */
-    public function getCanceledItems(OrderTransfer $orderTransfer): ObjectCollection;
+    public function getCanceledItems(OrderTransfer $orderTransfer);
 }

@@ -278,7 +278,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\EasyCreditStatusHandler
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface
      */
     public function createEasyCreditStatusHandler(): PrePlaceHandlerInterface
     {
@@ -541,14 +541,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPostSaveEasyCredit(): InitMapperInterface
     {
         return new InitEasyCreditMapper($this->getConfig(), $this->getComputopApiService());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
-     */
-    public function createPostSavePayuCeeSingle(): InitMapperInterface
-    {
-        return new InitPayuCeeSingleMapper($this->getConfig(), $this->getComputopApiService());
     }
 
     /**

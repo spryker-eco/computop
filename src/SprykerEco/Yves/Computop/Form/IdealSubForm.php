@@ -19,7 +19,7 @@ class IdealSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return PaymentTransfer::COMPUTOP_IDEAL;
     }
@@ -27,7 +27,7 @@ class IdealSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    public function getPropertyPath(): string
+    public function getPropertyPath()
     {
         return PaymentTransfer::COMPUTOP_IDEAL;
     }
@@ -35,7 +35,7 @@ class IdealSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    public function getTemplatePath(): string
+    public function getTemplatePath()
     {
         return ComputopConfig::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
     }
@@ -45,7 +45,7 @@ class IdealSubForm extends AbstractSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => ComputopIdealPaymentTransfer::class,

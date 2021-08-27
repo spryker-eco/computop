@@ -16,5 +16,5 @@ interface ComputopPaymentHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function addPaymentToQuote(QuoteTransfer $quoteTransfer);
 }

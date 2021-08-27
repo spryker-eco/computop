@@ -16,11 +16,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayNowSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * {@inheritDoc}
-     * - Creates `PayNow` subform.
-     *
-     * @api
-     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createSubForm()
@@ -31,11 +26,6 @@ class PayNowSubFormPlugin extends AbstractPlugin implements SubFormPluginInterfa
     }
 
     /**
-     * {@inheritDoc}
-     * - Creates `PayNow` subform data provider.
-     *
-     * @api
-     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()

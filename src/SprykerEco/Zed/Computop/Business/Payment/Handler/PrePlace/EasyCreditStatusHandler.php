@@ -65,9 +65,9 @@ class EasyCreditStatusHandler extends AbstractHandler
             ->performEasyCreditStatusRequest($quoteTransfer, $computopHeaderPayment);
 
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $decision = $this->parseStatusExplanation((string)$responseTransfer->getDecision());
-            $financing = $this->parseStatusExplanation((string)$responseTransfer->getFinancing());
-            $process = $this->parseStatusExplanation((string)$responseTransfer->getProcess());
+            $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
+            $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
+            $process = $this->parseStatusExplanation($responseTransfer->getProcess());
 
             $responseTransfer->setDecisionData($decision);
             $responseTransfer->setFinancingData($financing);
@@ -78,7 +78,7 @@ class EasyCreditStatusHandler extends AbstractHandler
 
         $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditStatusResponse($responseTransfer);
 
-        $this->logger->log($responseTransfer->getHeader(), (string)$responseTransfer->getHeader()->getMethod());
+        $this->logger->log($responseTransfer->getHeader(), $responseTransfer->getHeader()->getMethod());
 
         return $quoteTransfer;
     }
@@ -132,7 +132,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return array
      */
-    protected function parseStatusExplanation(string $status): array
+    protected function parseStatusExplanation($status)
     {
         return json_decode(base64_decode($status), true);
     }
@@ -142,7 +142,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return bool
      */
-    protected function parseStatusValue(array $decision): bool
+    protected function parseStatusValue($decision): bool
     {
         if (isset($decision[static::DECISION][static::DECISION_RESULT])) {
             return $decision[static::DECISION][static::DECISION_RESULT] === static::DECISION_RESULT_GREEN;
@@ -156,7 +156,7 @@ class EasyCreditStatusHandler extends AbstractHandler
      *
      * @return int
      */
-    protected function parsePaymentAmount(array $financing): int
+    protected function parsePaymentAmount($financing): int
     {
         if (!isset($financing[static::PLAN][static::TOTAL])) {
             return 0;

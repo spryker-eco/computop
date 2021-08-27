@@ -17,7 +17,7 @@ class InitSofortMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName(): string
+    public function getMethodName()
     {
         return ComputopConfig::PAYMENT_METHOD_SOFORT;
     }
@@ -28,10 +28,8 @@ class InitSofortMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(
-        QuoteTransfer $quoteTransfer,
-        TransferInterface $computopPaymentTransfer
-    ): TransferInterface {
+    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
+    {
         /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -52,8 +50,7 @@ class InitSofortMapper extends AbstractMapper
 
         $computopPaymentTransfer->setData($data);
         $computopPaymentTransfer->setLen($length);
-        $urlToComputop = $this->getUrlToComputop($this->getActionUrl(), (string)$computopPaymentTransfer->getMerchantId(), $data, $length);
-        $computopPaymentTransfer->setUrl($urlToComputop);
+        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
 
         return $computopPaymentTransfer;
     }
@@ -63,7 +60,7 @@ class InitSofortMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer): array
+    protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopSofortPaymentTransfer->getTransId();
@@ -85,7 +82,7 @@ class InitSofortMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getActionUrl(): string
+    protected function getActionUrl()
     {
         return $this->config->getSofortInitAction();
     }

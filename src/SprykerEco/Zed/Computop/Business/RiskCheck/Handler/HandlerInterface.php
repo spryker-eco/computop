@@ -16,5 +16,5 @@ interface HandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function handle(QuoteTransfer $quoteTransfer);
 }

@@ -27,7 +27,7 @@ class CrifSaver extends AbstractSaver
     public function save(ComputopApiCrifResponseTransfer $responseTransfer, QuoteTransfer $quoteTransfer): void
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($responseTransfer): void {
+            function () use ($responseTransfer) {
                 $this->saveComputopDetails($responseTransfer);
             }
         );

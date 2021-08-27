@@ -54,7 +54,6 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         }
 
         $urlToComputop = $this->getUrlToComputop(
-            (string)$this->getActionUrl(),
             (string)$computopPaymentTransfer->getMerchantId(),
             $decryptedValues[ComputopApiConfig::DATA],
             $decryptedValues[ComputopApiConfig::LENGTH]

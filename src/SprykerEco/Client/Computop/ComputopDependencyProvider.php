@@ -19,7 +19,7 @@ class ComputopDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    public function provideServiceLayerDependencies(Container $container): Container
+    public function provideServiceLayerDependencies(Container $container)
     {
         $container = $this->addZedRequestClient($container);
 
@@ -31,7 +31,7 @@ class ComputopDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    protected function addZedRequestClient(Container $container): Container
+    protected function addZedRequestClient(Container $container)
     {
         $container->set(static::CLIENT_ZED_REQUEST, function (Container $container) {
             return $container->getLocator()->zedRequest()->client();

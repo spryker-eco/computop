@@ -8,22 +8,23 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Propel\Runtime\Collection\ObjectCollection;
 
 class CaptureManager extends AbstractManager
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItem[]|\Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Oms\Persistence\SpyOmsEventTimeout[]|\Orm\Zed\Oms\Persistence\SpyOmsOrderItemStateHistory[]
+     * @return array
      */
-    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer): ObjectCollection
+    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer)
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
             ->useStateQuery()
-            ->filterByName_In((array)$this->config->getBeforeCaptureStatuses())
+            ->filterByName_In(
+                (array)$this->config->getBeforeCaptureStatuses()
+            )
             ->endUse()
             ->find();
     }
@@ -31,13 +32,13 @@ class CaptureManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItem[]|\Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Oms\Persistence\SpyOmsEventTimeout[]|\Orm\Zed\Oms\Persistence\SpyOmsOrderItemStateHistory[]
+     * @return array
      */
-    public function getAllItems(OrderTransfer $orderTransfer): ObjectCollection
+    public function getAllItems(OrderTransfer $orderTransfer)
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
             ->useStateQuery()
             ->endUse()
             ->find();

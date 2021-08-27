@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Propel\Runtime\ActiveQuery\Criteria;
-use Propel\Runtime\Collection\ObjectCollection;
 
 class CancelManager extends AbstractManager implements CancelManagerInterface
 {
@@ -19,10 +18,10 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return array
      */
-    public function changeComputopItemsStatus(array $orderItems): array
+    public function changeComputopItemsStatus(array $orderItems)
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($orderItems): void {
+            function () use ($orderItems) {
                 foreach ($orderItems as $orderItem) {
                     $this->changeStatus($orderItem);
                 }
@@ -35,13 +34,13 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItem[]|\Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Oms\Persistence\SpyOmsEventTimeout[]|\Orm\Zed\Oms\Persistence\SpyOmsOrderItemStateHistory[]
+     * @return array
      */
-    public function getCanceledItems(OrderTransfer $orderTransfer): ObjectCollection
+    public function getCanceledItems(OrderTransfer $orderTransfer)
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById((int)$orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
             ->useStateQuery()
             ->filterByName(
                 $this->config->getOmsStatusCancelled(),
@@ -56,7 +55,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return void
      */
-    protected function changeStatus(SpySalesOrderItem $orderItem): void
+    protected function changeStatus(SpySalesOrderItem $orderItem)
     {
         $computopOrderItem = $this
             ->queryContainer

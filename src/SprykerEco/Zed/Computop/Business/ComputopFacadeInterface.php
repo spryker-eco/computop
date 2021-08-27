@@ -110,7 +110,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves Sofort init response to the database.
+     * - Saves Sofort Response to DB.
      *
      * @api
      *
@@ -122,7 +122,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves IDeal init response to the database.
+     * - Saves IDeal Response to DB.
      *
      * @api
      *
@@ -134,7 +134,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves CreditCard init response to the database.
+     * - Saves CreditCard Response to DB.
      *
      * @api
      *
@@ -146,7 +146,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves PayNow init response to the database.
+     * - Saves PayNow Response to DB.
      *
      * @api
      *
@@ -158,7 +158,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves PayPal init response to the database.
+     * - Saves PayPal Response to DB.
      *
      * @api
      *
@@ -170,7 +170,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves DirectDebit init response to the database.
+     * - Saves DirectDebit Response to DB.
      *
      * @api
      *
@@ -182,7 +182,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves EasyCredit init response to the database.
+     * - Saves EasyCredit Response to DB.
      *
      * @api
      *
@@ -194,7 +194,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves Paydirekt init response to the database.
+     * - Saves Paydirekt Response to DB.
      *
      * @api
      *

@@ -21,5 +21,5 @@ interface SaverInterface
     public function save(
         TransferInterface $responseTransfer,
         OrderTransfer $orderTransfer
-    ): TransferInterface;
+    );
 }

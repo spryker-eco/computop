@@ -14,42 +14,42 @@ interface ComputopBusinessOrderFactoryInterface
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitCreditCardMapper(): MapperInterface;
+    public function createInitCreditCardMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPayNowMapper(): MapperInterface;
+    public function createInitPayNowMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPayPalMapper(): MapperInterface;
+    public function createInitPayPalMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitDirectDebitMapper(): MapperInterface;
+    public function createInitDirectDebitMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitSofortMapper(): MapperInterface;
+    public function createInitSofortMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitPaydirektMapper(): MapperInterface;
+    public function createInitPaydirektMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitIdealMapper(): MapperInterface;
+    public function createInitIdealMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
-    public function createInitEasyCreditMapper(): MapperInterface;
+    public function createInitEasyCreditMapper();
 
     /**
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace\PayuCeeSingleMapper
