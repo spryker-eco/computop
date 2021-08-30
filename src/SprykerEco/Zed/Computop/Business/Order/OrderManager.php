@@ -75,9 +75,9 @@ class OrderManager implements OrderManagerInterface
     /**
      * @param string $methodName
      *
-     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
-     *
      * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
+     *
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     protected function getMethodMapper($methodName)
     {
