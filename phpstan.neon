@@ -19,6 +19,5 @@ parameters:
         - '#Return typehint of method .+ has invalid type .+Transfer#'
         - '#PHPDoc tag @var for variable.+contains unknown class Generated\\Shared\\Transfer\\.+Transfer#'
         - '#Parameter .+ .+ of method .+ expects Spryker\\Shared\\Kernel\\Transfer\\TransferInterface.+, Generated\\Shared\\Transfer\\.+Transfer given\.#'
-        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\AbstractTransfer::.+()#'
         - '#Method .+ should return Generated\\Shared\\Transfer\\QuoteTransfer but returns Spryker\\Shared\\Kernel\\Transfer\\AbstractTransfer.#'
         - '#PHPDoc tag @param for parameter \$quoteTransfer with type Generated\\Shared\\Transfer\\QuoteTransfer is not subtype of native type Spryker\\Shared\\Kernel\\Transfer\\AbstractTransfer.#'
