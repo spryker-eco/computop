@@ -22,11 +22,11 @@ parameters:
         - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'
         - '#PHPDoc tag @var for variable.+contains unknown class Generated\\Shared\\Transfer\\.+Transfer#'
         - '#PHPDoc tag @param for parameter .+ with type Generated\\Shared\\Transfer\\.+ is not subtype of native type Spryker\\Shared\\Kernel\\Transfer\\.+.#'
-        - '#PHPDoc tag @return with type Generated\\Shared\\Transfer\\.+Transfer.+ is not subtype of native type Spryker\\Shared\\Kernel\\Transfer\\.+.#'
+        - '#PHPDoc tag @return with type Generated\\Shared\\Transfer\\.+Transfer.+is not subtype of native type Spryker\\Shared\\Kernel\\Transfer\\.+#'
         - '#Method .+ should return Generated\\Shared\\Transfer\\.+Transfer but returns.+Spryker\\Shared\\Kernel\\Transfer\\.+#'
         - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Generated\\Shared\\Transfer\\.+Transfer.#'
         - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Spryker\\Shared\\Kernel\\Transfer\\.+.#'
         - '#Access to constant .+ on an unknown class Generated\\Shared\\Transfer\\.+Transfer.#'
         - '#Class Generated\\Shared\\Transfer\\.+Transfer not found.#'
-        - '#Parameter .+ of function base64_encode expects string, string|null given.#'
+        - '#Return typehint of anonymous function has invalid type Generated\\Shared\\Transfer\\ComputopNotificationTransfer.#'
 

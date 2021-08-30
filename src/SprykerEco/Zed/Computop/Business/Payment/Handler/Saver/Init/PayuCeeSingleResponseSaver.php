@@ -92,7 +92,7 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     protected function getPaymentStatus(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
     {
         $responseStatus = $this->getResponseStatus($responseTransfer);
-        if ($responseTransfer === null) {
+        if ($responseStatus === null) {
             return $this->config->getOmsStatusNew();
         }
 
