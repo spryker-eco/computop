@@ -30,4 +30,3 @@ parameters:
         - '#Class Generated\\Shared\\Transfer\\.+Transfer not found.#'
         - '#Return typehint of anonymous function has invalid type Generated\\Shared\\Transfer\\ComputopNotificationTransfer.#'
         - '#Parameter .+ of function base64_encode expects string, string\|null given.#'
-
