@@ -115,7 +115,7 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     protected function getResponseStatus(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): ?string
     {
-        if ($responseTransfer && $responseTransfer->getHeader()) {
+        if ($responseTransfer->getHeader()) {
             return $responseTransfer->getHeader()->getStatus();
         }
 
