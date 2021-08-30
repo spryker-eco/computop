@@ -14,3 +14,6 @@ parameters:
         - '#Instantiated class Orm\\.+not found.#'
         - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'
         - '#Property.+has unknown class Orm\\Zed\\Computop\\Persistence.+#'
+        - '#Parameter .+ of method .+ has invalid typehint type .+Transfer#'
+        - '#Return typehint of method .+ has invalid type .+Transfer#'
+        - '#PHPDoc tag @var for variable.+contains unknown class Generated\\Shared\\Transfer\\.+Transfer#'
