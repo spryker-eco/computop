@@ -26,5 +26,5 @@ parameters:
         - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\TransferInterface but returns Generated\\Shared\\Transfer\\.+Transfer.#'
         - '#Access to constant .+ on an unknown class Generated\\Shared\\Transfer\\.+Transfer.#'
         - '#Class Generated\\Shared\\Transfer\\.+Transfer not found.#'
-        - '#Parameter #1 $str of function base64_encode expects string, string|null given.#'
+        - '#Parameter .+ \$str of function base64_encode expects string, string|null given.#'
 
