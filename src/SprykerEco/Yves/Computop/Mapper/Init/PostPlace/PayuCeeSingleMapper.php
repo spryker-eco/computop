@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
+use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -15,7 +16,6 @@ use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
-use ArrayObject;
 
 class PayuCeeSingleMapper extends AbstractMapper
 {
@@ -119,8 +119,10 @@ class PayuCeeSingleMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
      */
-    protected function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer, CustomerTransfer $customerTransfer): ComputopPayuCeeSinglePaymentTransfer
-    {
+    protected function setCustomerData(
+        ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer,
+        CustomerTransfer $customerTransfer
+    ): ComputopPayuCeeSinglePaymentTransfer {
         return $computopPayuCeeSinglePaymentTransfer
             ->setFirstName($customerTransfer->getFirstName())
             ->setLastName($customerTransfer->getLastName())
@@ -129,7 +131,7 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param string|null $name
+     * @param string $name
      *
      * @return string
      */

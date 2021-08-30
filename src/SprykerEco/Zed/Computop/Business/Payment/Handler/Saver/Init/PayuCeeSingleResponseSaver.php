@@ -63,6 +63,8 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     *
+     * @return void
      */
     protected function handleSaveTransaction(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
     {

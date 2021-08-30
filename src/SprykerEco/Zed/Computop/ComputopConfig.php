@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Computop;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
-use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Shared\Computop\ComputopConstants;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;

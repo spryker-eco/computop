@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order;
 
-use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
 interface ComputopBusinessOrderFactoryInterface
