@@ -9,13 +9,10 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-/**
- * @property \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CaptureManager $manager
- */
 class CaptureCommandHandler extends AbstractCommandHandler
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CaptureManager
      */
     protected $manager;
 

@@ -25,12 +25,12 @@ class OrderManager implements OrderManagerInterface
     use TransactionTrait;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface[]
      */
     protected $mappers;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Order\OrderManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     protected $activeMapper;
 
@@ -74,8 +74,6 @@ class OrderManager implements OrderManagerInterface
 
     /**
      * @param string $methodName
-     *
-     * @throws \SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException
      *
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */

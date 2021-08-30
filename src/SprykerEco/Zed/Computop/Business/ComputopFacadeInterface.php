@@ -65,7 +65,7 @@ interface ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 
@@ -91,7 +91,7 @@ interface ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 
@@ -237,7 +237,7 @@ interface ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 

@@ -31,7 +31,7 @@ class IsAuthorizedPlugin extends AbstractPlugin implements ConditionInterface
      */
     public function check(SpySalesOrderItem $orderItem)
     {
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
+        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem|null $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
         if ($computopOrderItem === null) {
             return false;
