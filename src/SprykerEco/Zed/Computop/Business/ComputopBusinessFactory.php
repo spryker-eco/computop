@@ -104,7 +104,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $orderSaver->registerMapper($this->createOrderFactory()->createInitPaydirektMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitIdealMapper());
         $orderSaver->registerMapper($this->createOrderFactory()->createInitEasyCreditMapper());
-        $orderSaver->registerMapper($this->createOrderFactory()->createInitPayuCeeSingleMapper());
+        $orderSaver->registerMapper($this->createOrderFactory()->createPayuCeeSinglePostPlaceMapper());
 
         return $orderSaver;
     }
@@ -123,7 +123,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSavePayPal());
         $postSaveHook->registerMapper($this->createPostSaveDirectDebit());
         $postSaveHook->registerMapper($this->createPostSaveEasyCredit());
-        $postSaveHook->registerMapper($this->createPostSavePayuCeeSingleMapper());
+        $postSaveHook->registerMapper($this->createInitPayuCeeSingleMapper());
 
         return $postSaveHook;
     }
@@ -201,6 +201,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $this->getQueryContainer(),
             $this->getOmsFacade(),
             $this->getConfig(),
+            $this->getEntityManager()
         );
     }
 
@@ -554,7 +555,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
-    public function createPostSavePayuCeeSingleMapper(): InitMapperInterface
+    public function createInitPayuCeeSingleMapper(): InitMapperInterface
     {
         return new InitPayuCeeSingleMapper($this->getConfig(), $this->getComputopApiService());
     }

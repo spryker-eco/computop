@@ -254,7 +254,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getOmsStatusAuthorizeRequest()
+    public function getAuthorizeRequestOmsStatus()
     {
         return static::OMS_STATUS_AUTHORIZE_REQUEST;
     }

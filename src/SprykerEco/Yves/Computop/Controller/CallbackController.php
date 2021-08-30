@@ -259,7 +259,7 @@ class CallbackController extends AbstractController
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $quoteTransfer->setIsOrderPlacedSuccessfully(null);
         $quoteTransfer->setOrderReference(null);
-        $quoteTransfer->setPayment();
+        $quoteTransfer->setPayment(null);
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
     }
 }

@@ -25,46 +25,49 @@ class InitPayuCeeSingleMapper extends AbstractMapper
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPayuCeeSinglePaymentTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
     public function updateComputopPaymentTransfer(
         QuoteTransfer $quoteTransfer,
-        TransferInterface $computopPaymentTransfer
+        TransferInterface $computopPayuCeeSinglePaymentTransfer
     ): TransferInterface {
-        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
-        $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
-        $computopPaymentTransfer
+        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
+        $computopPayuCeeSinglePaymentTransfer = parent::updateComputopPaymentTransfer(
+            $quoteTransfer,
+            $computopPayuCeeSinglePaymentTransfer
+        );
+        $computopPayuCeeSinglePaymentTransfer
             ->setRefNr($quoteTransfer->getOrderReference() . '-' . date('Y-m-d H:i:s'))
             ->setMerchantId($this->config->getMerchantId())
             ->setAmount($quoteTransfer->getTotals()->getGrandTotal());
 
-        $requestTransfer = $this->createRequestTransfer($computopPaymentTransfer);
+        $requestTransfer = $this->createRequestTransfer($computopPayuCeeSinglePaymentTransfer);
         $encryptedMac = $this->computopApiService->generateEncryptedMac($requestTransfer);
-        $computopPaymentTransfer->setMac($encryptedMac);
+        $computopPayuCeeSinglePaymentTransfer->setMac($encryptedMac);
 
-        $decryptedValues = $this->computopApiService->getEncryptedArray(
-            $this->getDataSubArray($computopPaymentTransfer),
+        $encryptedValues = $this->computopApiService->getEncryptedArray(
+            $this->getDataSubArray($computopPayuCeeSinglePaymentTransfer),
             $this->config->getBlowfishPass()
         );
 
-        if (!isset($decryptedValues[ComputopApiConfig::LENGTH], $decryptedValues[ComputopApiConfig::DATA])) {
-            return $computopPaymentTransfer;
+        if (!isset($encryptedValues[ComputopApiConfig::LENGTH], $encryptedValues[ComputopApiConfig::DATA])) {
+            return $computopPayuCeeSinglePaymentTransfer;
         }
 
         $urlToComputop = $this->getUrlToComputop(
-            (string)$computopPaymentTransfer->getMerchantId(),
-            $decryptedValues[ComputopApiConfig::DATA],
-            $decryptedValues[ComputopApiConfig::LENGTH]
+            (string)$computopPayuCeeSinglePaymentTransfer->getMerchantId(),
+            $encryptedValues[ComputopApiConfig::DATA],
+            $encryptedValues[ComputopApiConfig::LENGTH]
         );
 
-        $computopPaymentTransfer
-            ->setData($decryptedValues[ComputopApiConfig::DATA])
-            ->setLen($decryptedValues[ComputopApiConfig::LENGTH])
+        $computopPayuCeeSinglePaymentTransfer
+            ->setData($encryptedValues[ComputopApiConfig::DATA])
+            ->setLen($encryptedValues[ComputopApiConfig::LENGTH])
             ->setUrl($urlToComputop);
 
-        return $computopPaymentTransfer;
+        return $computopPayuCeeSinglePaymentTransfer;
     }
 
     /**

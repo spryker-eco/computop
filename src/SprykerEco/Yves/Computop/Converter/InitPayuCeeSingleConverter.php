@@ -60,16 +60,16 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
     }
 
     /**
-     * @param array $decryptedArray
-     * @param string[] $keysMap
+     * @param string[] $decryptedResponse
+     * @param string[] $responseFieldsMap
      *
      * @return array
      */
-    private function getApiResponseValues(array $decryptedArray, array $keysMap): array
+    protected function getApiResponseValues(array $decryptedResponse, array $responseFieldsMap): array
     {
         $out = [];
-        foreach ($keysMap as $key => $value) {
-            $out[$key] = $this->computopApiService->getResponseValue($decryptedArray, $value);
+        foreach ($responseFieldsMap as $transferKey => $responseKey) {
+            $out[$transferKey] = $this->computopApiService->getResponseValue($decryptedResponse, $responseKey);
         }
 
         return $out;

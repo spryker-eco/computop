@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Plugin\CheckoutPage;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider;
 use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
@@ -19,20 +20,20 @@ class PayuCeeSingleSubFormPlugin extends AbstractPlugin implements SubFormPlugin
 {
     /**
      * {@inheritDoc}
-     * - Returns the `PayuCeeSingleSubForm` form.
+     * - Returns a sub form for `PayU CEE Single` payment method.
      *
      * @api
      *
-     * @return \SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createSubForm(): PayuCeeSingleSubForm
+    public function createSubForm(): SubFormInterface
     {
         return $this->getFactory()->createPayuCeeSingleSubForm();
     }
 
     /**
      * {@inheritDoc}
-     * - Returns the `PayuCeeSingleFormDataProvider` data provider.
+     * - Returns data provider for `PayU CEE Single` payment method form.
      *
      * @api
      *

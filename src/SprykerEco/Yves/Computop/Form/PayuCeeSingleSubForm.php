@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayuCeeSingleSubForm extends AbstractSubForm
 {
-    public const PAYMENT_METHOD = 'payu-cee-single';
+    protected const PAYMENT_METHOD = 'payu-cee-single';
 
     /**
      * @return string
@@ -33,14 +33,6 @@ class PayuCeeSingleSubForm extends AbstractSubForm
     }
 
     /**
-     * @return string
-     */
-    protected function getTemplatePath(): string
-    {
-        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, self::PAYMENT_METHOD);
-    }
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
@@ -49,6 +41,14 @@ class PayuCeeSingleSubForm extends AbstractSubForm
     {
         $resolver->setDefaults([
             'data_class' => ComputopPayuCeeSinglePaymentTransfer::class,
-        ])->setRequired(self::OPTIONS_FIELD_NAME);
+        ])->setRequired(static::OPTIONS_FIELD_NAME);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTemplatePath(): string
+    {
+        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
     }
 }

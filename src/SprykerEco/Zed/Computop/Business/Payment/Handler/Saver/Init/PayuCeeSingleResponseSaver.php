@@ -9,10 +9,35 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
+use SprykerEco\Zed\Computop\ComputopConfig;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
 
 class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 {
+    /**
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface
+     */
+    protected $computopEntityManager;
+
+    /**
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface $computopEntityManager
+     */
+    public function __construct(
+        ComputopQueryContainerInterface $queryContainer,
+        ComputopToOmsFacadeInterface $omsFacade,
+        ComputopConfig $config,
+        ComputopEntityManagerInterface $computopEntityManager
+    ) {
+        parent::__construct($queryContainer, $omsFacade, $config);
+        $this->computopEntityManager = $computopEntityManager;
+    }
+
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -30,11 +55,7 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 
         $responseTransfer = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
         if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-
-            $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
-                $this->executeSavePaymentResponseTransaction($responseTransfer);
-            });
+            $this->handleSaveTransaction($responseTransfer);
         }
 
         return $quoteTransfer;
@@ -42,15 +63,12 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
-     *
-     * @return void
      */
-    protected function savePaymentComputopEntity(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
+    protected function handleSaveTransaction(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
-        $paymentEntity->save();
+        $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
+            $this->executeSavePaymentResponseTransaction($responseTransfer);
+        });
     }
 
     /**
@@ -58,63 +76,30 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
+    protected function executeSavePaymentResponseTransaction(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->fromArray($responseTransfer->toArray());
-
-        if ($responseTransfer->getCustomerTransactionId()) {
-            $paymentEntityDetails->setCustomerTransactionId((int)$responseTransfer->getCustomerTransactionId());
-        }
-
-        $paymentEntityDetails->save();
+        $paymentStatus = $this->getPaymentStatus($responseTransfer);
+        $this->computopEntityManager->savePaymentResponse($responseTransfer, $paymentStatus);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
-     *
-     * @return void
-     */
-    protected function savePaymentComputopOrderItemsEntities(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
-    {
-        $status = $this->getPaymentStatus($responseTransfer);
-
-        foreach ($this->getPaymentEntity()->getSpyPaymentComputopOrderItems() as $item) {
-            $item->setStatus($status);
-            $item->save();
-        }
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
-     *
-     * @return void
-     */
-    protected function executeSavePaymentResponseTransaction(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer)
-    {
-        $this->savePaymentComputopEntity($responseTransfer);
-        $this->savePaymentComputopDetailEntity($responseTransfer);
-        $this->savePaymentComputopOrderItemsEntities($responseTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
      *
      * @return string
      */
-    protected function getPaymentStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
+    protected function getPaymentStatus(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
     {
         $responseStatus = $this->getResponseStatus($responseTransfer);
         if (!$responseTransfer) {
             return $this->config->getOmsStatusNew();
         }
 
-        if ($responseStatus === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
-            return $this->config->getOmsStatusAuthorizeRequest();
+        if ($responseStatus === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
+            return $this->config->getAuthorizeRequestOmsStatus();
         }
 
         $responseDescription = $responseTransfer->getHeader()->getDescription();
-        if ($responseStatus === ComputopConfig::SUCCESS_OK && $responseDescription === ComputopConfig::SUCCESS_STATUS) {
+        if ($responseStatus === SharedComputopConfig::SUCCESS_OK && $responseDescription === SharedComputopConfig::SUCCESS_STATUS) {
             return $this->config->getOmsStatusAuthorized();
         }
 
@@ -122,11 +107,11 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer|null $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
      *
      * @return string|null
      */
-    protected function getResponseStatus(?ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): ?string
+    protected function getResponseStatus(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): ?string
     {
         if ($responseTransfer && $responseTransfer->getHeader()) {
             return $responseTransfer->getHeader()->getStatus();

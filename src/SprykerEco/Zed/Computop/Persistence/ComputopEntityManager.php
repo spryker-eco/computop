@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
@@ -61,27 +62,11 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $paymentComputopOrderItemEntity->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess());
-
-            if (
-                $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_NEW &&
-                (int)$computopNotificationTransfer->getAmountauth() > 0
-            ) {
-                $paymentComputopOrderItemEntity->setStatus(
-                    $this->getFactory()->getConfig()->getOmsStatusAuthorized()
-                );
-            }
-
-            if (
-                $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_AUTHORIZED &&
-                (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth()
-            ) {
-                $paymentComputopOrderItemEntity->setStatus(
-                    $this->getFactory()->getConfig()->getOmsStatusCaptured()
-                );
-            }
-
-            $paymentComputopOrderItemEntity->save();
+            $orderItemEntityStatus = $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer, $paymentComputopOrderItemEntity);
+            $paymentComputopOrderItemEntity
+                ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess())
+                ->setStatus($orderItemEntityStatus)
+                ->save();
         }
 
         return true;
@@ -89,16 +74,17 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param string|null $paymentStatus
      *
      * @return void
      */
-    public function savePaymentResponse(TransferInterface $responseTransfer): void
+    public function savePaymentResponse(TransferInterface $responseTransfer, ?string $paymentStatus = null): void
     {
-        $header = $responseTransfer->requireHeader()->getHeader();
-        $header
-            ->requireTransId()
-            ->requirePayId()
-            ->requireXid();
+        $header = $responseTransfer->requireHeader()
+            ->getHeader()
+                ->requireTransId()
+                ->requirePayId()
+                ->requireXid();
 
         $paymentEntity = $this->getFactory()
             ->createPaymentComputopQuery()
@@ -116,7 +102,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
         $this->savePaymentDetailEntity($paymentEntity->getSpyPaymentComputopDetail(), $responseTransfer);
 
-        $this->saveAuthorizedPaymentOrderItems($paymentEntity->getSpyPaymentComputopOrderItems());
+        $this->saveAuthorizedPaymentOrderItems($paymentEntity->getSpyPaymentComputopOrderItems(), $paymentStatus);
     }
 
     /**
@@ -140,15 +126,43 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItems
+     * @param string|null $paymentStatus
      *
      * @return void
      */
-    public function saveAuthorizedPaymentOrderItems(ObjectCollection $paymentComputopOrderItems): void
+    public function saveAuthorizedPaymentOrderItems(ObjectCollection $paymentComputopOrderItems, ?string $paymentStatus = null): void
     {
-        $authorizedStatus = $this->getFactory()->getConfig()->getOmsStatusAuthorized();
+        $paymentStatus = $paymentStatus ?? $this->getFactory()->getConfig()->getOmsStatusAuthorized();
         foreach ($paymentComputopOrderItems as $paymentComputopOrderItem) {
-            $paymentComputopOrderItem->setStatus($authorizedStatus);
+            $paymentComputopOrderItem->setStatus($paymentStatus);
             $paymentComputopOrderItem->save();
         }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $paymentComputopOrderItemEntity
+     *
+     * @return string
+     */
+    protected function getCurrentOrderItemEntityStatus(
+        ComputopNotificationTransfer $computopNotificationTransfer,
+        SpyPaymentComputopOrderItem $paymentComputopOrderItemEntity
+    ): string {
+        if (
+            $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_NEW &&
+            (int)$computopNotificationTransfer->getAmountauth() > 0
+        ) {
+            return $this->getFactory()->getConfig()->getOmsStatusAuthorized();
+        }
+
+        if (
+            $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_AUTHORIZED &&
+            (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth()
+        ) {
+            return $this->getFactory()->getConfig()->getOmsStatusCaptured();
+        }
+
+        return $paymentComputopOrderItemEntity->getStatus();
     }
 }

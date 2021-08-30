@@ -15,11 +15,13 @@ use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
 use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
+use ArrayObject;
 
 class PayuCeeSingleMapper extends AbstractMapper
 {
     protected const SHIPMENT_ARTICLE_NAME = 'Shipment';
     protected const ONE_ITEM_AMOUNT = 1;
+    protected const ARTICLE_LIST_DELIMITER = ',';
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -31,13 +33,15 @@ class PayuCeeSingleMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
-        $computopPaymentTransfer->setMac(
-            $this->computopApiService->generateEncryptedMac($this->createRequestTransfer($computopPaymentTransfer))
+        $encryptedMac = $this->computopApiService->generateEncryptedMac(
+            $this->createRequestTransfer($computopPaymentTransfer)
         );
 
-        $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
-        );
+        $computopPaymentTransfer
+            ->setMac($encryptedMac)
+            ->setOrderDesc($this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()))
+            ->setCapture($this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE))
+            ->setLanguage(mb_strtoupper($this->store->getCurrentLanguage()));
 
         if ($quoteTransfer->getItems()->count()) {
             $computopPaymentTransfer->setArticleList(
@@ -49,12 +53,6 @@ class PayuCeeSingleMapper extends AbstractMapper
             $this->setCustomerData($computopPaymentTransfer, $quoteTransfer->getCustomer());
         }
 
-        $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE)
-        );
-
-        $computopPaymentTransfer->setLanguage(mb_strtoupper($this->store->getCurrentLanguage()));
-
         return $computopPaymentTransfer;
     }
 
@@ -65,51 +63,48 @@ class PayuCeeSingleMapper extends AbstractMapper
      */
     protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayuCeeSinglePaymentTransfer
     {
-        $computopPaymentTransfer = new ComputopPayuCeeSinglePaymentTransfer();
+        $urlSuccess = $this->router->generate(ComputopRouteProviderPlugin::PAYU_CEE_SINGLE_SUCCESS, [], Router::ABSOLUTE_URL);
 
-        $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
-        $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::PAYU_CEE_SINGLE_SUCCESS, [], Router::ABSOLUTE_URL)
-        );
-
-        return $computopPaymentTransfer;
+        return (new ComputopPayuCeeSinglePaymentTransfer())
+            ->setTransId($this->generateTransId($quoteTransfer))
+            ->setUrlSuccess($urlSuccess);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $items
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseList
+     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $itemTransfers
+     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseTransfers
      *
      * @return string
      */
-    protected function getArticleList($items, $expenseList): string
+    protected function getArticleList(ArrayObject $itemTransfers, ArrayObject $expenseTransfers): string
     {
-        $out = [];
+        $articlesList = [];
 
-        foreach ($items as $item) {
-            $out[] = implode(',', [
-                $this->replaceForbiddenCharacters($item->getName()),
+        foreach ($itemTransfers as $item) {
+            $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
+                $item->getName() ? $this->replaceForbiddenCharacters($item->getName()) : '',
                 $item->getUnitPrice(),
                 $item->getQuantity(),
             ]);
         }
 
-        $out[] = implode(',', [
+        $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
             static::SHIPMENT_ARTICLE_NAME,
-            $this->getDeliveryCosts($expenseList),
+            $this->getDeliveryCosts($expenseTransfers),
             static::ONE_ITEM_AMOUNT,
         ]);
 
-        return implode('+', $out);
+        return implode('+', $articlesList);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseList
+     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseTransfers
      *
      * @return int
      */
-    protected function getDeliveryCosts($expenseList): int
+    protected function getDeliveryCosts(ArrayObject $expenseTransfers): int
     {
-        foreach ($expenseList as $expense) {
+        foreach ($expenseTransfers as $expense) {
             if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
                 return $expense->getSumGrossPrice();
             }
@@ -119,19 +114,18 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $paymentTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer
+     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
      */
-    protected function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $paymentTransfer, CustomerTransfer $customer): ComputopPayuCeeSinglePaymentTransfer
+    protected function setCustomerData(ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer, CustomerTransfer $customerTransfer): ComputopPayuCeeSinglePaymentTransfer
     {
-        $paymentTransfer->setFirstName($customer->getFirstName());
-        $paymentTransfer->setLastName($customer->getLastName());
-        $paymentTransfer->setEmail($customer->getEmail());
-        $paymentTransfer->setPhone($customer->getPhone());
-
-        return $paymentTransfer;
+        return $computopPayuCeeSinglePaymentTransfer
+            ->setFirstName($customerTransfer->getFirstName())
+            ->setLastName($customerTransfer->getLastName())
+            ->setEmail($customerTransfer->getEmail())
+            ->setPhone($customerTransfer->getPhone());
     }
 
     /**
@@ -139,8 +133,8 @@ class PayuCeeSingleMapper extends AbstractMapper
      *
      * @return string
      */
-    protected function replaceForbiddenCharacters(?string $name): string
+    protected function replaceForbiddenCharacters(string $name): string
     {
-        return $name ? str_replace([',', '+', '-'], ' ', $name) : '';
+        return str_replace([',', '+', '-'], ' ', $name);
     }
 }

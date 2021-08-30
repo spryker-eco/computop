@@ -17,6 +17,27 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
+    {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        if ($quoteTransfer->getPayment() === null) {
+            $quoteTransfer->setPayment(new PaymentTransfer());
+
+            return $quoteTransfer;
+        }
+
+        if ($this->isValidPayment($quoteTransfer)) {
+            return $quoteTransfer;
+        }
+
+        return $this->setDefaultPaymentToQuote($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer|null
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer): ?ComputopPayuCeeSinglePaymentTransfer
@@ -29,26 +50,7 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
-    {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
-            $quoteTransfer->setPayment(new PaymentTransfer());
-        }
-
-        if ($this->isValidPayment($quoteTransfer)) {
-            return $quoteTransfer;
-        }
-
-        return $this->setDefaultPayment($quoteTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function setDefaultPayment(QuoteTransfer $quoteTransfer): QuoteTransfer
+    protected function setDefaultPaymentToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopTransfer */
         $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);

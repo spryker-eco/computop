@@ -17,7 +17,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  */
-class IsAuthorizeRequestPlugin extends AbstractPlugin implements ConditionInterface
+class IsAuthorizeRequestConditionPlugin extends AbstractPlugin implements ConditionInterface
 {
     /**
      * {@inheritDoc}
@@ -29,11 +29,14 @@ class IsAuthorizeRequestPlugin extends AbstractPlugin implements ConditionInterf
      *
      * @return bool
      */
-    public function check(SpySalesOrderItem $orderItem)
+    public function check(SpySalesOrderItem $orderItem): bool
     {
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
-        $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
+        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem|null $paymentComputopOrderItemEntity */
+        $paymentComputopOrderItemEntity = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
+        if ($paymentComputopOrderItemEntity === null) {
+            return false;
+        }
 
-        return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusAuthorizeRequest();
+        return $paymentComputopOrderItemEntity->getStatus() === $this->getConfig()->getAuthorizeRequestOmsStatus();
     }
 }

@@ -32,10 +32,11 @@ interface ComputopEntityManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param string|null $paymentStatus
      *
      * @return void
      */
-    public function savePaymentResponse(TransferInterface $responseTransfer): void;
+    public function savePaymentResponse(TransferInterface $responseTransfer, ?string $paymentStatus = null): void;
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentEntityDetails

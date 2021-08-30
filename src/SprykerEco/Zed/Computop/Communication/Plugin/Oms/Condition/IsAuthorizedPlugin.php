@@ -33,10 +33,13 @@ class IsAuthorizedPlugin extends AbstractPlugin implements ConditionInterface
     {
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
+        if ($computopOrderItem === null) {
+            return false;
+        }
 
         return in_array($computopOrderItem->getStatus(), [
             $this->getConfig()->getOmsStatusAuthorized(),
             $this->getConfig()->getOmsStatusCaptured(),
-        ]);
+        ], true);
     }
 }
