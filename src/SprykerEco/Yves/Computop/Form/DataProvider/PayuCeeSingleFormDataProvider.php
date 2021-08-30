@@ -21,7 +21,6 @@ class PayuCeeSingleFormDataProvider extends AbstractFormDataProvider
      */
     public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
             $quoteTransfer->setPayment(new PaymentTransfer());
 

@@ -28,7 +28,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\PaymentTransfer
+     * @return \Generated\Shared\Transfer\PaymentTransfer|null
      */
     abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer);
 
