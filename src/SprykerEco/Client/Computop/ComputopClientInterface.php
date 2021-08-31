@@ -18,7 +18,7 @@ interface ComputopClientInterface
 {
     /**
      * Specification:
-     * - Persists response log to the database.
+     * - Saves response log to DB
      *
      * @api
      *
@@ -30,7 +30,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists Sofort response to the database.
+     * - Saves Sofort response to DB
      *
      * @api
      *
@@ -42,7 +42,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists Ideal response to the database.
+     * - Saves Ideal response to DB
      *
      * @api
      *
@@ -54,7 +54,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists PayU CEE Single response to the database.
+     * - Saves PayU CEE Single response the database.
      *
      * @api
      *
@@ -78,7 +78,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists CreditCard response to the database.
+     * - Saves CreditCard response to DB
      *
      * @api
      *
@@ -89,8 +89,7 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * Specification:
-     * - Persists PayNow response to the database.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -102,7 +101,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists PayPal response to the database.
+     * - Saves PayPal response to DB
      *
      * @api
      *
@@ -114,7 +113,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists DirectDebit response to the database.
+     * - Saves DirectDebit response to DB
      *
      * @api
      *
@@ -126,7 +125,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists EasyCredit response to the database.
+     * - Saves EasyCredit response to DB
      *
      * @api
      *
@@ -175,7 +174,7 @@ interface ComputopClientInterface
     /**
      * Specification:
      * - Performs Zed call.
-     * - Persists push notification entity into the database.
+     * - Saves push notification entity into DB.
      * - Updates related computop order items with payment confirmation status.
      *
      * @api
