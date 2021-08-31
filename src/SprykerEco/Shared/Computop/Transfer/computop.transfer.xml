@@ -223,7 +223,7 @@
         <property name="shippingZip" type="string"/>
         <property name="shippingCity" type="string"/>
         <property name="shippingCountryCode" type="string"/>
-        <property name="shoppingBasketAmount" type="int"/>
+        <property name="shoppingBasketAmount" type="string"/>
         <property name="articleList" type="string"/>
         <property name="email" type="string"/>
         <property name="minAge" type="string"/>
