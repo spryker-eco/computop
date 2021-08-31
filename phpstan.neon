@@ -9,6 +9,7 @@ parameters:
         - '#Call to static method create\(\) on an unknown class .+Query.#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\.+#'
         - '#Call to an undefined method Propel\\.+#'
+        - '#Call to an undefined method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\ManagerInterface.+#'
         - '#Class Generated\\Shared\\Transfer\\.+Transfer not found.#'
         - '#Return typehint of method .+ has invalid type Orm\\.+#'
         - '#Parameter \$.+ of method .+ has invalid typehint type Orm\\.+#'
