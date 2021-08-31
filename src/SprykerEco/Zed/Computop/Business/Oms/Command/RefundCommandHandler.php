@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 class RefundCommandHandler extends AbstractCommandHandler
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager
+     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
     protected $manager;
 

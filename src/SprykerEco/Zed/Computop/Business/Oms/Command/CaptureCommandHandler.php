@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 class CaptureCommandHandler extends AbstractCommandHandler
 {
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CaptureManager
+     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
     protected $manager;
 

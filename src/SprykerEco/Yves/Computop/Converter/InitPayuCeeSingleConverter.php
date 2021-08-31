@@ -67,11 +67,11 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      */
     protected function getApiResponseValues(array $decryptedResponse, array $responseFieldsMap): array
     {
-        $out = [];
+        $apiResponseValues = [];
         foreach ($responseFieldsMap as $transferKey => $responseKey) {
-            $out[$transferKey] = $this->computopApiService->getResponseValue($decryptedResponse, $responseKey);
+            $apiResponseValues[$transferKey] = $this->computopApiService->getResponseValue($decryptedResponse, $responseKey);
         }
 
-        return $out;
+        return $apiResponseValues;
     }
 }
