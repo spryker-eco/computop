@@ -9,6 +9,8 @@ namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\Router\Router\RouterInterface;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
 use SprykerEco\Yves\Computop\Converter\InitEasyCreditConverter;
@@ -20,6 +22,7 @@ use SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
+use SprykerEco\Yves\Computop\Form\AbstractSubForm;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;
@@ -148,9 +151,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createPayuCeeSingleSubForm(): PayuCeeSingleSubForm
+    public function createPayuCeeSingleSubForm(): SubFormInterface
     {
         return new PayuCeeSingleSubForm();
     }
@@ -371,9 +374,9 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
-    public function createInitPayuCeeSingleConverter(): InitPayuCeeSingleConverter
+    public function createInitPayuCeeSingleConverter(): ConverterInterface
     {
         return new InitPayuCeeSingleConverter($this->getComputopApiService(), $this->getConfig());
     }

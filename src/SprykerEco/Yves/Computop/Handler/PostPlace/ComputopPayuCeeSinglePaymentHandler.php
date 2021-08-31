@@ -34,8 +34,6 @@ class ComputopPayuCeeSinglePaymentHandler extends AbstractPostPlacePaymentHandle
         $paymentTransfer->getComputopPayuCeeSingle()->setPayuCeeSingleInitResponse($responseTransfer);
         $quoteTransfer->setPayment($paymentTransfer);
 
-        $quoteTransfer->setPayment($paymentTransfer);
-
         return $quoteTransfer;
     }
 

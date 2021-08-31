@@ -132,9 +132,9 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return string|null
+     * @return string
      */
-    public function getPayuCeeSingleInitAction(): ?string
+    public function getPayuCeeSingleInitAction(): string
     {
         return $this->get(ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION);
     }
@@ -253,7 +253,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getAuthorizeRequestOmsStatus()
+    public function getAuthorizeRequestOmsStatus(): string
     {
         return static::OMS_STATUS_AUTHORIZE_REQUEST;
     }

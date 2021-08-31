@@ -53,72 +53,33 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
             return $quoteTransfer;
         }
 
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $this->handleSaveTransaction($responseTransfer);
+        $computopPayuCeeSingleInitResponse = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
+        if ($computopPayuCeeSingleInitResponse->getHeader()->getIsSuccess()) {
+            $this->handleSaveTransaction($computopPayuCeeSingleInitResponse);
         }
 
         return $quoteTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
      *
      * @return void
      */
-    protected function handleSaveTransaction(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
+    protected function handleSaveTransaction(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void
     {
-        $this->getTransactionHandler()->handleTransaction(function () use ($responseTransfer) {
-            $this->executeSavePaymentResponseTransaction($responseTransfer);
+        $this->getTransactionHandler()->handleTransaction(function () use ($computopPayuCeeSingleInitResponseTransfer) {
+            $this->executeSavePaymentResponseTransaction($computopPayuCeeSingleInitResponseTransfer);
         });
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
      *
      * @return void
      */
-    protected function executeSavePaymentResponseTransaction(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): void
+    protected function executeSavePaymentResponseTransaction(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void
     {
-        $paymentStatus = $this->getPaymentStatus($responseTransfer);
-        $this->computopEntityManager->savePaymentResponse($responseTransfer, $paymentStatus);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
-     *
-     * @return string
-     */
-    protected function getPaymentStatus(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): string
-    {
-        $responseStatus = $this->getResponseStatus($responseTransfer);
-        if ($responseStatus === null) {
-            return $this->config->getOmsStatusNew();
-        }
-
-        if ($responseStatus === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
-            return $this->config->getAuthorizeRequestOmsStatus();
-        }
-
-        $responseDescription = $responseTransfer->getHeader()->getDescription();
-        if ($responseStatus === SharedComputopConfig::SUCCESS_OK && $responseDescription === SharedComputopConfig::SUCCESS_STATUS) {
-            return $this->config->getOmsStatusAuthorized();
-        }
-
-        return $this->config->getOmsStatusNew();
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $responseTransfer
-     *
-     * @return string|null
-     */
-    protected function getResponseStatus(ComputopPayuCeeSingleInitResponseTransfer $responseTransfer): ?string
-    {
-        if ($responseTransfer->getHeader()) {
-            return $responseTransfer->getHeader()->getStatus();
-        }
-
-        return null;
+        $this->computopEntityManager->saveComputopPayuCeeSingleInitResponse($computopPayuCeeSingleInitResponseTransfer);
     }
 }

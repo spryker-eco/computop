@@ -30,30 +30,30 @@ class PayuCeeSingleMapper extends AbstractMapper
      */
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayuCeeSinglePaymentTransfer
     {
-        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPaymentTransfer */
-        $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
+        /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
+        $computopPayuCeeSinglePaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
         $encryptedMac = $this->computopApiService->generateEncryptedMac(
-            $this->createRequestTransfer($computopPaymentTransfer)
+            $this->createRequestTransfer($computopPayuCeeSinglePaymentTransfer)
         );
 
-        $computopPaymentTransfer
+        $computopPayuCeeSinglePaymentTransfer
             ->setMac($encryptedMac)
             ->setOrderDesc($this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()))
             ->setCapture($this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE))
             ->setLanguage(mb_strtoupper($this->store->getCurrentLanguage()));
 
         if ($quoteTransfer->getItems()->count()) {
-            $computopPaymentTransfer->setArticleList(
+            $computopPayuCeeSinglePaymentTransfer->setArticleList(
                 $this->getArticleList($quoteTransfer->getItems(), $quoteTransfer->getExpenses())
             );
         }
 
         if ($quoteTransfer->getCustomer()) {
-            $this->setCustomerData($computopPaymentTransfer, $quoteTransfer->getCustomer());
+            $computopPayuCeeSinglePaymentTransfer->fromArray($quoteTransfer->getCustomer()->toArray());
         }
 
-        return $computopPaymentTransfer;
+        return $computopPayuCeeSinglePaymentTransfer;
     }
 
     /**
@@ -104,9 +104,9 @@ class PayuCeeSingleMapper extends AbstractMapper
      */
     protected function getDeliveryCosts(ArrayObject $expenseTransfers): int
     {
-        foreach ($expenseTransfers as $expense) {
-            if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumGrossPrice();
+        foreach ($expenseTransfers as $expenseTransfer) {
+            if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
+                return $expenseTransfer->getSumGrossPrice();
             }
         }
 

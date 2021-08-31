@@ -217,7 +217,7 @@
         <property name="refNr" type="string"/>
         <property name="capture" type="string"/>
         <property name="shopApiKey" type="string"/>
-        <property name="shippingAmount" type="int"/>
+        <property name="shippingAmount" type="string"/>
         <property name="shippingFirstName" type="string"/>
         <property name="shippingLastName" type="string"/>
         <property name="shippingZip" type="string"/>

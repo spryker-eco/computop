@@ -255,9 +255,11 @@ class CallbackController extends AbstractController
     protected function resetQuoteAfterFail(): void
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $quoteTransfer->setIsOrderPlacedSuccessfully(null);
-        $quoteTransfer->setOrderReference(null);
-        $quoteTransfer->setPayment(null);
+        $quoteTransfer
+            ->setIsOrderPlacedSuccessfully(null)
+            ->setOrderReference(null)
+            ->setPayment(null);
+
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
     }
 }

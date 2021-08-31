@@ -23,9 +23,9 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      */
     protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header): TransferInterface
     {
-        $responseTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
-        $responseTransfer->fromArray($decryptedArray, true);
-        $responseTransfer->setHeader($this->updateResponseHeader($header));
+        $computopPayuCeeSingleInitResponseTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
+        $computopPayuCeeSingleInitResponseTransfer->fromArray($decryptedArray, true);
+        $computopPayuCeeSingleInitResponseTransfer->setHeader($this->updateResponseHeader($header));
 
         $fieldMap = [
             'refNr' => ComputopApiConfig::REF_NR,
@@ -40,23 +40,24 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
             'amountCred' => ComputopApiConfig::AMOUNT_CRED,
         ];
 
-        $responseTransfer->fromArray($this->getApiResponseValues($decryptedArray, $fieldMap), true);
-
-        return $responseTransfer;
+        return $computopPayuCeeSingleInitResponseTransfer->fromArray(
+            $this->getApiResponseValues($decryptedArray, $fieldMap)
+            , true
+        );
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
      */
-    protected function updateResponseHeader(ComputopApiResponseHeaderTransfer $header): ComputopApiResponseHeaderTransfer
+    protected function updateResponseHeader(ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer): ComputopApiResponseHeaderTransfer
     {
-        if ($header->getStatus() === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
-            $header->setIsSuccess(true);
+        if ($computopApiResponseHeaderTransfer->getStatus() === ComputopConfig::AUTHORIZE_REQUEST_STATUS) {
+            $computopApiResponseHeaderTransfer->setIsSuccess(true);
         }
 
-        return $header;
+        return $computopApiResponseHeaderTransfer;
     }
 
     /**
