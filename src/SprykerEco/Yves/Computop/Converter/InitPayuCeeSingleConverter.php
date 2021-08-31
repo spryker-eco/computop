@@ -41,8 +41,8 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
         ];
 
         return $computopPayuCeeSingleInitResponseTransfer->fromArray(
-            $this->getApiResponseValues($decryptedArray, $fieldMap)
-            , true
+            $this->getApiResponseValues($decryptedArray, $fieldMap),
+            true
         );
     }
 

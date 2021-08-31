@@ -9,9 +9,6 @@ namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail as ChildSpyPaymentComputopDetail;
-use Propel\Runtime\Collection\ObjectCollection;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopEntityManagerInterface
 {

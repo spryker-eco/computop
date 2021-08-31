@@ -22,7 +22,6 @@ use SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
-use SprykerEco\Yves\Computop\Form\AbstractSubForm;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\DirectDebitFormDataProvider;

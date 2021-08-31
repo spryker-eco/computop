@@ -89,7 +89,8 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * {@inheritDoc}
+     * Specification:
+     * - Persists PayNow response to the database.
      *
      * @api
      *

@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Propel\Runtime\Collection\ObjectCollection;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -79,7 +78,8 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
      *
      * @return void
      */
-    public function saveComputopPayuCeeSingleInitResponse(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void {
+    public function saveComputopPayuCeeSingleInitResponse(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void
+    {
         $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->requireHeader()
             ->getHeader()
                 ->requireTransId()
@@ -132,7 +132,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities
-     * @param string|null $paymentStatus
+     * @param string $paymentStatus
      *
      * @return void
      */

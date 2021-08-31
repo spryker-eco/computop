@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
