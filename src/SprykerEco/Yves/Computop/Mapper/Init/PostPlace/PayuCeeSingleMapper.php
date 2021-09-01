@@ -50,7 +50,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         }
 
         if ($quoteTransfer->getCustomer()) {
-            $computopPayuCeeSinglePaymentTransfer->fromArray($quoteTransfer->getCustomer()->toArray());
+            $computopPayuCeeSinglePaymentTransfer->fromArray($quoteTransfer->getCustomer()->toArray(), true);
         }
 
         return $computopPayuCeeSinglePaymentTransfer;
