@@ -151,16 +151,15 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      */
     protected function addCustomerToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        if (!$quoteTransfer->getCustomer()->getIsGuest()) {
+        if ($quoteTransfer->getCustomer()->getIsGuest() !== null && !$quoteTransfer->getCustomer()->getIsGuest() ) {
             return $quoteTransfer;
         }
 
-        $payPalInitResponseTransfer = $quoteTransfer
-            ->getPayment()
+        $payPalInitResponseTransfer = $quoteTransfer->getPayment()
             ->getComputopPayPalExpress()
             ->getPayPalExpressInitResponse();
 
-        return $this->payPalExpressToQuoteMapper->mapCustomerFromComputopPayPalExpressInitResponseToQuote($quoteTransfer, $payPalInitResponseTransfer);
+        return $this->payPalExpressToQuoteMapper->mapCustomerFromComputopPayPalExpressInitResponseToQuote($payPalInitResponseTransfer, $quoteTransfer);
     }
 
     /**
