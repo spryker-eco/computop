@@ -69,8 +69,8 @@ export default class PayPalExpressButton extends Component {
                 return orderData.orderId;
             },
             onApprove: function (data) {
-                var rd = "MerchantId=" + orderData.merchantId + "&PayId=" + orderData.payId + "&OrderId=" + orderData.orderId;
-                window.location.href = "https://www.computop-paygate.com/cbPayPal.aspx?rd=" + window.btoa(rd);
+                const rd = `MerchantId=${orderData.merchantId}&PayId=${orderData.payId}&OrderId=${orderData.orderId}`;
+                window.location.href = `https://www.computop-paygate.com/cbPayPal.aspx?rd=${window.btoa(rd)}`;
             }
         }).render(this);
     }
