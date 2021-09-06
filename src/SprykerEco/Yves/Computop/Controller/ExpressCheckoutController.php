@@ -47,8 +47,6 @@ class ExpressCheckoutController extends AbstractController
             'orderId' => '1MB40413MG869772K',
             'merchantId' => 'spryker_test',
             'payId' => 'f3a0268fd98e4989938903c9c0e8760e',
-            'clientId' => 'test',
-            'currency' => 'EUR'
         ]);
     }
 
