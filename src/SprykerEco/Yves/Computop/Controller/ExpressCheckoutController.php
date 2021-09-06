@@ -37,16 +37,10 @@ class ExpressCheckoutController extends AbstractController
         $payPalExpressPrepareHandler = $this->getFactory()->createComputopPayPalExpressPrepareHandler();
         $computopApiPayPalExpressPrepareResponseTransfer = $payPalExpressPrepareHandler->handle($quoteTransfer);
 
-//        return new JsonResponse([
-//            'orderId' => $computopApiPayPalExpressPrepareResponseTransfer->getOrderId(),
-//            'merchantId' => $computopApiPayPalExpressPrepareResponseTransfer->getMid(),
-//            'payId' => $computopApiPayPalExpressPrepareResponseTransfer->getPayID()
-//        ]);
-
         return new JsonResponse([
-            'orderId' => '1MB40413MG869772K',
-            'merchantId' => 'spryker_test',
-            'payId' => 'f3a0268fd98e4989938903c9c0e8760e',
+            'orderId' => $computopApiPayPalExpressPrepareResponseTransfer->getOrderId(),
+            'merchantId' => $computopApiPayPalExpressPrepareResponseTransfer->getMid(),
+            'payId' => $computopApiPayPalExpressPrepareResponseTransfer->getPayID()
         ]);
     }
 

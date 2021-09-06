@@ -25,23 +25,10 @@ export default class PaypalButtons extends Component {
         this.buttonsContainer = <HTMLElement>Array.from(this.getElementsByClassName(`${this.jsName}__buttons-container`))[0];
 
         this.mapEvents();
-        this.fetchOrderData();
     }
 
     protected mapEvents(): void {
         this.scriptLoader.addEventListener('scriptload', () => this.onPaypalScriptLoad(), { once: true });
-    }
-
-    protected fetchOrderData(): void {
-        fetch(this.url, { method: 'post' })
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                this.orderData = parsedResponse;
-                this.dispatchCustomEvent(EVENT_ORDER_DATA_LOAD);
-            })
-            .catch(() => {
-                error('Can not get order data.');
-            });
     }
 
     protected onPaypalScriptLoad(): void {
