@@ -49,13 +49,28 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     public function updatePaymentComputopOrderItemPaymentConfirmation(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): bool {
+        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null $paymentComputopEntity */
+        $paymentComputopEntity = $this->getFactory()
+            ->createPaymentComputopQuery()
+            ->filterByTransId($computopNotificationTransfer->getTransId())
+            ->findOne();
+
+        if ($paymentComputopEntity === null) {
+            return false;
+        }
+
+        $paymentComputopEntity
+            ->setPayId($computopNotificationTransfer->getPayId())
+            ->setXId($computopNotificationTransfer->getXId());
+
+        if ($paymentComputopEntity->isModified()) {
+            $paymentComputopEntity->save();
+        }
+
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities */
         $paymentComputopOrderItemEntities = $this->getFactory()
             ->createPaymentComputopOrderItemQuery()
-            ->useSpyPaymentComputopQuery()
-                ->filterByTransId($computopNotificationTransfer->getTransId())
-                ->filterByPayId($computopNotificationTransfer->getPayId())
-            ->endUse()
+            ->filterByFkPaymentComputop($paymentComputopEntity->getIdPaymentComputop())
             ->find();
 
         if (!$paymentComputopOrderItemEntities->count()) {

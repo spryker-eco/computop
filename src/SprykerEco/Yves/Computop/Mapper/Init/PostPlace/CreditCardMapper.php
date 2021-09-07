@@ -93,11 +93,13 @@ class CreditCardMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer)
     {
+        $dataSubArray[ComputopApiConfig::MERCHANT_ID] = $computopCreditCardPaymentTransfer->getMerchantId();
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopCreditCardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::REF_NR] = $computopCreditCardPaymentTransfer->getRefNr();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopCreditCardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopCreditCardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopCreditCardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopCreditCardPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = 'https://7c59-194-44-96-141.ngrok.io/computop/notify'; // $computopCreditCardPaymentTransfer->getUrlNotify();
         $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopCreditCardPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::CAPTURE] = $computopCreditCardPaymentTransfer->getCapture();
         $dataSubArray[ComputopApiConfig::RESPONSE] = $computopCreditCardPaymentTransfer->getResponse();
