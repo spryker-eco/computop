@@ -46,7 +46,7 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
     ): ComputopSalesOrderItemCollectionTransfer {
         $salesOrderItemsCollection = $this
             ->getFactory()->createSpySalesOrderItemQuery()
-            ->filterByIdSalesOrderItem($computopPaymentComputopTransfer->getFKSalesOrder())
+            ->filterByFkSalesOrder($computopPaymentComputopTransfer->getFKSalesOrder())
             ->find();
 
         if (empty($salesOrderItemsCollection)) {

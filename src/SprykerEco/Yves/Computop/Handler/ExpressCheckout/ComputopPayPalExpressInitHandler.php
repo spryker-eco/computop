@@ -136,12 +136,17 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      */
     protected function addBillingAddressToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $payPalInitResponseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
+        $payPalInitResponseTransfer = $quoteTransfer
+            ->getPaymentOrFail()
+            ->getComputopPayPalExpressOrFail()->getPayPalExpressInitResponseOrFail();
+
         if ($payPalInitResponseTransfer->getBillingAddressStreet() === null) {
-            return $quoteTransfer;
+            $quoteTransfer->setBillingAddress($quoteTransfer->getShippingAddress());
+
+            return $quoteTransfer->setBillingSameAsShipping(true);
         }
 
-        return $this->payPalExpressToQuoteMapper->mapBillingAddressFromComputopPayPalExpressInitResponseToQuote($quoteTransfer, $payPalInitResponseTransfer);
+        return $this->payPalExpressToQuoteMapper->mapBillingAddressFromComputopPayPalExpressInitResponseToQuote($payPalInitResponseTransfer, $quoteTransfer);
     }
 
     /**

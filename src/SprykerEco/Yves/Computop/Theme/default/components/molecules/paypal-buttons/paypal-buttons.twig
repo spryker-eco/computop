@@ -24,4 +24,9 @@
             src: data.scriptSrc,
         },
     } only %}
+
+    {% include molecule('ajax-loader') with {
+        class: config.jsName ~ '__ajax-loader',
+        modifiers: ['big'],
+    } only %}
 {% endblock %}

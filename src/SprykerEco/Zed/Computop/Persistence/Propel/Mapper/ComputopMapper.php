@@ -32,6 +32,7 @@ class ComputopMapper
         ComputopPaymentComputopTransfer $computopPaymentTransfer
     ): ComputopPaymentComputopTransfer {
         $computopPaymentTransfer->fromArray($computopPaymentEntity->toArray(), true);
+        $computopPaymentTransfer->setFKSalesOrder($computopPaymentEntity->getFkSalesOrder());
 
         return $computopPaymentTransfer;
     }
@@ -118,6 +119,8 @@ class ComputopMapper
         ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
     ): ComputopPaymentComputopOrderItemTransfer {
         $computopPaymentComputopOrderItemTransfer->fromArray($spyPaymentComputopOrderItem->toArray(), true);
+        $computopPaymentComputopOrderItemTransfer->setPrimaryKey($spyPaymentComputopOrderItem->getPrimaryKey());
+        $computopPaymentComputopOrderItemTransfer->setIsNew($spyPaymentComputopOrderItem->isNew());
 
         return $computopPaymentComputopOrderItemTransfer;
     }
@@ -133,6 +136,8 @@ class ComputopMapper
         SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem
     ): SpyPaymentComputopOrderItem {
         $spyPaymentComputopOrderItem->fromArray($computopPaymentComputopOrderItemTransfer->toArray());
+        $spyPaymentComputopOrderItem->setNew($computopPaymentComputopOrderItemTransfer->getIsNew());
+        $spyPaymentComputopOrderItem->setPrimaryKey($computopPaymentComputopOrderItemTransfer->getPrimaryKey());
 
         return $spyPaymentComputopOrderItem;
     }
