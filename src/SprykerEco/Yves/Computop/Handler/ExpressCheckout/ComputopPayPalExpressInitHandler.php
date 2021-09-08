@@ -16,10 +16,16 @@ use SprykerEco\Yves\Computop\ComputopFactory;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface;
+use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 
 class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandlerInterface
 {
+    /**
+     * @var ComputopPaymentHandlerInterface
+     */
+    protected $computopPaymentHandler;
+
     /**
      * @var \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
@@ -46,19 +52,22 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
     protected $payPalExpressToQuoteMapper;
 
     /**
-     * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
-     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface $shipmentClient
-     * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
+     * @param ComputopPaymentHandlerInterface $computopPaymentHandler
+     * @param ConverterInterface $converter
+     * @param ComputopToQuoteClientInterface $quoteClient
+     * @param ComputopClientInterface $computopClient
+     * @param ComputopToShipmentClientInterface $shipmentClient
+     * @param PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
      */
     public function __construct(
+        ComputopPaymentHandlerInterface $computopPaymentHandler,
         ConverterInterface $converter,
         ComputopToQuoteClientInterface $quoteClient,
         ComputopClientInterface $computopClient,
         ComputopToShipmentClientInterface $shipmentClient,
         PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
     ) {
+        $this->computopPaymentHandler = $computopPaymentHandler;
         $this->converter = $converter;
         $this->quoteClient = $quoteClient;
         $this->computopClient = $computopClient;
@@ -175,8 +184,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
     protected function addPaymentSelectionToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $quoteTransfer->getPayment()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
-        $handler = (new ComputopFactory())->createComputopPaymentHandler();
 
-        return $handler->addPaymentToQuote($quoteTransfer);
+        return $this->computopPaymentHandler->addPaymentToQuote($quoteTransfer);
     }
 }

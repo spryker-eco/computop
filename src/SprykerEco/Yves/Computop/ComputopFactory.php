@@ -299,6 +299,7 @@ class ComputopFactory extends AbstractFactory
     public function createComputopPayPalExpressInitHandler(): ComputopPayPalExpressInitHandlerInterface
     {
         return new ComputopPayPalExpressInitHandler(
+            $this->createComputopPaymentHandler(),
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
             $this->getComputopClient(),
