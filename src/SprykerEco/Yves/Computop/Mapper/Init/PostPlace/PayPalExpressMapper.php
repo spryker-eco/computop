@@ -25,7 +25,9 @@ class PayPalExpressMapper extends AbstractMapper
      */
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
-        $quoteTransfer->setCustomer(new CustomerTransfer());
+        if ($quoteTransfer->getCustomer() === null) {
+            $quoteTransfer->setCustomer(new CustomerTransfer());
+        }
         /** @var \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
