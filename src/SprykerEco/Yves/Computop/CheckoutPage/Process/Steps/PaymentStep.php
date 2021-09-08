@@ -25,14 +25,16 @@ class PaymentStep extends SprykerShopPaymentStep
     }
 
     /**
-     * @param AbstractTransfer $quoteTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
      * @return bool
      */
     public function requireInput(AbstractTransfer $quoteTransfer)
     {
-        if ($quoteTransfer->getPayment() !== null
-            && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null) {
+        if (
+            $quoteTransfer->getPayment() !== null
+            && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null
+        ) {
             return false;
         }
 

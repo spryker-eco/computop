@@ -33,9 +33,6 @@ class IsCapturedPlugin extends AbstractPlugin implements ConditionInterface
     {
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItemsJoinSpyPaymentComputop()->getLast();
-        if ($computopOrderItem === null) {
-            return false;
-        }
 
         return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusCaptured();
     }

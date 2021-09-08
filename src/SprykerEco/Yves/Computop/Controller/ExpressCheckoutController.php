@@ -40,7 +40,7 @@ class ExpressCheckoutController extends AbstractController
         return new JsonResponse([
             'orderId' => $computopApiPayPalExpressPrepareResponseTransfer->getOrderId(),
             'merchantId' => $computopApiPayPalExpressPrepareResponseTransfer->getMid(),
-            'payId' => $computopApiPayPalExpressPrepareResponseTransfer->getPayID()
+            'payId' => $computopApiPayPalExpressPrepareResponseTransfer->getPayID(),
         ]);
     }
 
