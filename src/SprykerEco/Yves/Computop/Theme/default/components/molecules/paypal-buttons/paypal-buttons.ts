@@ -47,7 +47,7 @@ export default class PaypalButtons extends Component {
                     })
             ),
             onApprove: (data, actions) => {
-                this.ajaxLoader.onFetching();
+                this.ajaxLoader.classList.remove('is-invisible');
                 const requestData = `MerchantId=${this.orderData.merchantId}&PayId=${this.orderData.payId}&OrderId=${this.orderData.orderId}`;
                 window.location.href = `https://www.computop-paygate.com/cbPayPal.aspx?rd=${window.btoa(requestData)}`;
             }
