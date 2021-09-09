@@ -195,13 +195,13 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array
      */
-    public function getBeforeCaptureStatuses()
+    public function getBeforeAuthorizeStatuses(): array
     {
         return [
             $this->getOmsStatusNew(),
-            $this->getOmsStatusAuthorized(),
+            $this->getOmsStatusInitialized(),
+            $this->getAuthorizeRequestOmsStatus(),
             $this->getOmsStatusAuthorizationFailed(),
-            $this->getOmsStatusCancelled(),
         ];
     }
 
@@ -210,13 +210,26 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array
      */
-    public function getBeforeRefundStatuses()
+    public function getBeforeCaptureStatuses(): array
     {
-        return [
-            $this->getOmsStatusNew(),
-            $this->getOmsStatusAuthorized(),
-            $this->getOmsStatusCaptured(),
-        ];
+        $statusesBeforeAuthorize = $this->getBeforeAuthorizeStatuses();
+        $statusesBeforeAuthorize[] = $this->getOmsStatusAuthorized();
+        $statusesBeforeAuthorize[] = $this->getOmsStatusCancelled();
+
+        return $statusesBeforeAuthorize;
+    }
+
+    /**
+     * @api
+     *
+     * @return array
+     */
+    public function getBeforeRefundStatuses(): array
+    {
+        $statusesBeforeCaptured = $this->getBeforeCaptureStatuses();
+        $statusesBeforeCaptured[] = $this->getOmsStatusCaptured();
+
+        return $statusesBeforeCaptured;
     }
 
     /**

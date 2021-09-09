@@ -14,7 +14,6 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
-use SprykerEco\Zed\Computop\ComputopConfig;
 
 /**
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopPersistenceFactory getFactory()
@@ -169,18 +168,20 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         ComputopNotificationTransfer $computopNotificationTransfer,
         SpyPaymentComputopOrderItem $paymentComputopOrderItemEntity
     ): string {
+        $computopConfig = $this->getFactory()->getConfig();
+
         if (
-            $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_NEW &&
-            (int)$computopNotificationTransfer->getAmountauth() > 0
+            (int)$computopNotificationTransfer->getAmountauth() > 0 &&
+            in_array($paymentComputopOrderItemEntity->getStatus(), $computopConfig->getBeforeAuthorizeStatuses())
         ) {
-            return $this->getFactory()->getConfig()->getOmsStatusAuthorized();
+            return $computopConfig->getOmsStatusAuthorized();
         }
 
         if (
-            $paymentComputopOrderItemEntity->getStatus() === ComputopConfig::OMS_STATUS_AUTHORIZED &&
-            (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth()
+            (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth() &&
+            in_array($paymentComputopOrderItemEntity->getStatus(), $computopConfig->getBeforeCaptureStatuses())
         ) {
-            return $this->getFactory()->getConfig()->getOmsStatusCaptured();
+            return $computopConfig->getOmsStatusCaptured();
         }
 
         return $paymentComputopOrderItemEntity->getStatus();
