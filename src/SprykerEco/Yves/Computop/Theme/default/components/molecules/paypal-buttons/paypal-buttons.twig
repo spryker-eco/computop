@@ -18,15 +18,20 @@
 {% block body %}
     <div class="{{ config.jsName }}__buttons-container"></div>
 
-    {% include molecule('script-loader') with {
-        class: config.jsName ~ '__script-loader',
-        attributes: {
-            src: data.scriptSrc,
-        },
-    } only %}
+    {% block scriptLoader %}
+        {% include molecule('script-loader') with {
+            class: config.jsName ~ '__script-loader',
+            attributes: {
+                src: data.scriptSrc,
+            },
+        } only %}
+    {% endblock %}
 
-    {% include molecule('ajax-loader') with {
-        class: config.jsName ~ '__ajax-loader',
-        modifiers: ['big'],
-    } only %}
+    {% set ajaxLoaderModifiers = ['big'] %}
+    {% block ajaxLoader %}
+        {% include molecule('ajax-loader') with {
+            class: config.jsName ~ '__ajax-loader',
+            modifiers: ajaxLoaderModifiers,
+        } only %}
+    {% endblock %}
 {% endblock %}

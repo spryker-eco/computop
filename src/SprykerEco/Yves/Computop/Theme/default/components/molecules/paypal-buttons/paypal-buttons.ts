@@ -1,18 +1,16 @@
 /* tslint:disable: no-any */
 declare const paypal: any;
+/* tslint:enable */
 
 import Component from 'ShopUi/models/component';
 import ScriptLoader from 'ShopUi/components/molecules/script-loader/script-loader';
 import AjaxLoader from 'ShopUi/components/molecules/ajax-loader/ajax-loader';
-import { debug, error } from 'ShopUi/app/logger';
 
 interface OrderData {
     orderId: string;
     merchantId: string;
     payId: string;
 }
-
-const EVENT_ORDER_DATA_LOAD = 'orderDataLoad';
 
 export default class PaypalButtons extends Component {
     protected scriptLoader: ScriptLoader;
@@ -40,18 +38,18 @@ export default class PaypalButtons extends Component {
 
     protected initPaypaluttons(): void {
         paypal.Buttons({
-            createOrder: (data, actions) => {
-                return fetch(this.url, { method: 'post' })
+            createOrder: (data, actions) => (
+                fetch(this.url, { method: 'post' })
                     .then((response) => response.json())
                     .then((parsedResponse) => {
                         this.orderData = parsedResponse;
                         return this.orderData.orderId;
-                    });
-            },
+                    })
+            ),
             onApprove: (data, actions) => {
                 this.ajaxLoader.onFetching();
-                const rd = `MerchantId=${this.orderData.merchantId}&PayId=${this.orderData.payId}&OrderId=${this.orderData.orderId}`;
-                window.location.href = `https://www.computop-paygate.com/cbPayPal.aspx?rd=${window.btoa(rd)}`;
+                const requestData = `MerchantId=${this.orderData.merchantId}&PayId=${this.orderData.payId}&OrderId=${this.orderData.orderId}`;
+                window.location.href = `https://www.computop-paygate.com/cbPayPal.aspx?rd=${window.btoa(requestData)}`;
             }
         }).render(this.buttonsContainer);
     }
