@@ -1,1 +1,1 @@
-Adds 'PayPal' and 'Debit or Credit Cards' buttons.
+Renders 'PayPal' and 'Debit or Credit Cards' buttons.
