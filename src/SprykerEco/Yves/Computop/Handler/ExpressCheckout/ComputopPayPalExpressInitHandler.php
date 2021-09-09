@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Client\Computop\ComputopClientInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
-use SprykerEco\Yves\Computop\ComputopFactory;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface;
@@ -22,7 +21,7 @@ use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInte
 class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandlerInterface
 {
     /**
-     * @var ComputopPaymentHandlerInterface
+     * @var \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
      */
     protected $computopPaymentHandler;
 
@@ -52,12 +51,12 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
     protected $payPalExpressToQuoteMapper;
 
     /**
-     * @param ComputopPaymentHandlerInterface $computopPaymentHandler
-     * @param ConverterInterface $converter
-     * @param ComputopToQuoteClientInterface $quoteClient
-     * @param ComputopClientInterface $computopClient
-     * @param ComputopToShipmentClientInterface $shipmentClient
-     * @param PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
+     * @param \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface $computopPaymentHandler
+     * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
+     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
+     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface $shipmentClient
+     * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
      */
     public function __construct(
         ComputopPaymentHandlerInterface $computopPaymentHandler,

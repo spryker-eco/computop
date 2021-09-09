@@ -35,7 +35,7 @@ interface ComputopEntityManagerInterface
      *
      * @return void
      */
-    public function saveComputopPaymentDetail(
+    public function updateComputopPaymentDetail(
         ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
     ): void;
 

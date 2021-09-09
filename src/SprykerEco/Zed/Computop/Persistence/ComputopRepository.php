@@ -25,8 +25,11 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
      */
     public function getComputopPaymentByComputopTransId(string $transactionId): ComputopPaymentComputopTransfer
     {
-        $paymentComputopQuery = $this->getFactory()->createPaymentComputopQuery();
-        $computopPaymentEntity = $paymentComputopQuery->filterByTransId($transactionId)->findOne();
+        $computopPaymentEntity = $this->getFactory()
+            ->createPaymentComputopQuery()
+            ->filterByTransId($transactionId)
+            ->findOne();
+
         if ($computopPaymentEntity === null) {
             return new ComputopPaymentComputopTransfer();
         }
@@ -44,8 +47,8 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
     public function getComputopSalesOrderItemsCollection(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopSalesOrderItemCollectionTransfer {
-        $salesOrderItemsCollection = $this
-            ->getFactory()->createSpySalesOrderItemQuery()
+        $salesOrderItemsCollection = $this->getFactory()
+            ->createSpySalesOrderItemQuery()
             ->filterByFkSalesOrder($computopPaymentComputopTransfer->getFKSalesOrder())
             ->find();
 
@@ -102,6 +105,10 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
             ->createPaymentComputopDetailQuery()
             ->filterByIdPaymentComputop($computopPaymentComputopTransfer->getIdPaymentComputop())
             ->findOne();
+
+        if ($paymentComputopDetailEntity === null) {
+            return new ComputopPaymentComputopDetailTransfer();
+        }
 
         return $this->getFactory()
             ->createComputopEntityMapper()

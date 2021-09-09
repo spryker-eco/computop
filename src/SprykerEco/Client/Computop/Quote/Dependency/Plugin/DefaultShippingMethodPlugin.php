@@ -20,6 +20,7 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
      * {@inheritDoc}
      * - Expands provided `QuoteTransfer` with default shipping method if any item
      *   in the quote does not have shipping method.
+     *  - Makes Zed request.
      *
      * @api
      *

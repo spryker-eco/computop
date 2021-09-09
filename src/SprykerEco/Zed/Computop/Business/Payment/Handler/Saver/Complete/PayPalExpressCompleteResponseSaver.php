@@ -136,7 +136,7 @@ class PayPalExpressCompleteResponseSaver implements CompleteResponseSaverInterfa
 
         $computopPaymentComputopDetailTransfer->fromArray($payPalExpressCompleteResponseTransfer->toArray(), true);
 
-        $this->computopEntityManager->saveComputopPaymentDetail($computopPaymentComputopDetailTransfer);
+        $this->computopEntityManager->updateComputopPaymentDetail($computopPaymentComputopDetailTransfer);
     }
 
     /**

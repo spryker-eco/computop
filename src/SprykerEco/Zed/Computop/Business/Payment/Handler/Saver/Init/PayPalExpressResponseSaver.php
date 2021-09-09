@@ -133,7 +133,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
 
         $computopPaymentComputopDetailTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
 
-        $this->computopEntityManager->saveComputopPaymentDetail($computopPaymentComputopDetailTransfer);
+        $this->computopEntityManager->updateComputopPaymentDetail($computopPaymentComputopDetailTransfer);
     }
 
     /**

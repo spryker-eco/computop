@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\CheckoutPage\Process\Steps;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep as SprykerShopPaymentStep;
 
@@ -20,8 +21,7 @@ class PaymentStep extends SprykerShopPaymentStep
     public function isBreadcrumbItemHidden(AbstractTransfer $quoteTransfer): bool
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        return $quoteTransfer->getPayment() !== null
-            && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null;
+        return $this->quoteContainsPayPalExpressPayment($quoteTransfer);
     }
 
     /**
@@ -31,13 +31,21 @@ class PaymentStep extends SprykerShopPaymentStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer)
     {
-        if (
-            $quoteTransfer->getPayment() !== null
-            && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null
-        ) {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        if ($this->quoteContainsPayPalExpressPayment($quoteTransfer)) {
             return false;
         }
 
         return parent::requireInput($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return bool
+     */
+    public function quoteContainsPayPalExpressPayment(QuoteTransfer $quoteTransfer): bool
+    {
+        return $quoteTransfer->getPayment() !== null && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null;
     }
 }

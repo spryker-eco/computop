@@ -103,6 +103,7 @@ interface ComputopClientInterface
     /**
      * Specification:
      * - Persists `PayPal Express init` response to the database.
+     * - Makes Zed request.
      *
      * @api
      *
@@ -115,6 +116,7 @@ interface ComputopClientInterface
     /**
      * Specification:
      * - Persists `PayPal Express complete` response to the database.
+     * - Makes Zed request.
      *
      * @api
      *
