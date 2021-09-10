@@ -28,15 +28,15 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
 
-        $shippingAddressTransfer = new AddressTransfer();
-        $shippingAddressTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
-        $shippingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getAddressStreet());
-        $shippingAddressTransfer->setAddress2($computopPayPalExpressInitResponseTransfer->getAddressStreet2());
-        $shippingAddressTransfer->setCity($computopPayPalExpressInitResponseTransfer->getAddressCity());
-        $shippingAddressTransfer->setState($computopPayPalExpressInitResponseTransfer->getAddressState());
-        $shippingAddressTransfer->setZipCode($computopPayPalExpressInitResponseTransfer->getAddressZip());
-        $shippingAddressTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
-        $shippingAddressTransfer->setCountry($countryTransfer);
+        $shippingAddressTransfer = (new AddressTransfer())
+            ->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true)
+            ->setAddress1($computopPayPalExpressInitResponseTransfer->getAddressStreet())
+            ->setAddress2($computopPayPalExpressInitResponseTransfer->getAddressStreet2())
+            ->setCity($computopPayPalExpressInitResponseTransfer->getAddressCity())
+            ->setState($computopPayPalExpressInitResponseTransfer->getAddressState())
+            ->setZipCode($computopPayPalExpressInitResponseTransfer->getAddressZip())
+            ->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode())
+            ->setCountry($countryTransfer);
 
         $this->mapShippingAddressToQuoteItems($shippingAddressTransfer, $quoteTransfer);
         $this->mapShippingAddressToQuoteExpenses($shippingAddressTransfer, $quoteTransfer);
@@ -59,17 +59,17 @@ class PayPalExpressToQuoteMapper implements PayPalExpressToQuoteMapperInterface
         $countryTransfer = new CountryTransfer();
         $countryTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getAddressCountryCode());
 
-        $billingAddressTransfer = new AddressTransfer();
-        $billingAddressTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
-        $billingAddressTransfer->setAddress1($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet());
-        $billingAddressTransfer->setAddress2($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet2());
-        $billingAddressTransfer->setZipCode($computopPayPalExpressInitResponseTransfer->getBillingAddressZip());
-        $billingAddressTransfer->setCity($computopPayPalExpressInitResponseTransfer->getBillingAddressCity());
-        $billingAddressTransfer->setState($computopPayPalExpressInitResponseTransfer->getBillingAddressState());
-        $billingAddressTransfer->setIso2Code($computopPayPalExpressInitResponseTransfer->getBillingAddressCountryCode());
-        $billingAddressTransfer->setCountry($countryTransfer);
-        $billingAddressTransfer->setFirstName($computopPayPalExpressInitResponseTransfer->getBillingName());
-        $billingAddressTransfer->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
+        $billingAddressTransfer = (new AddressTransfer())
+            ->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true)
+            ->setAddress1($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet())
+            ->setAddress2($computopPayPalExpressInitResponseTransfer->getBillingAddressStreet2())
+            ->setZipCode($computopPayPalExpressInitResponseTransfer->getBillingAddressZip())
+            ->setCity($computopPayPalExpressInitResponseTransfer->getBillingAddressCity())
+            ->setState($computopPayPalExpressInitResponseTransfer->getBillingAddressState())
+            ->setIso2Code($computopPayPalExpressInitResponseTransfer->getBillingAddressCountryCode())
+            ->setCountry($countryTransfer)
+            ->setFirstName($computopPayPalExpressInitResponseTransfer->getBillingName())
+            ->setLastName($computopPayPalExpressInitResponseTransfer->getLastName());
 
         $quoteTransfer->setBillingAddress($billingAddressTransfer);
 
