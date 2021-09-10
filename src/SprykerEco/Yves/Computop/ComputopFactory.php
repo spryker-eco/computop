@@ -24,6 +24,7 @@ use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalExpressConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCheckoutClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
@@ -267,6 +268,14 @@ class ComputopFactory extends AbstractFactory
     public function getShipmentClient(): ComputopToShipmentClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_SHIPMENT);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToCheckoutClientInterface
+     */
+    public function getCheckoutClient(): ComputopToCheckoutClientInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_CHECKOUT);
     }
 
     /**

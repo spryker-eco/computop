@@ -12,6 +12,7 @@ use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCheckoutClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
@@ -30,6 +31,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
     public const CLIENT_COMPUTOP_API = 'CLIENT_COMPUTOP_API';
     public const CLIENT_SHIPMENT = 'CLIENT_SHIPMENT';
+    public const CLIENT_CHECKOUT = 'CLIENT_CHECKOUT';
 
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
@@ -82,6 +84,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addCountryClient($container);
         $container = $this->addComputopApiClient($container);
         $container = $this->addShipmentClient($container);
+        $container = $this->addCheckoutClient($container);
 
         return $container;
     }
@@ -165,6 +168,20 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::CLIENT_SHIPMENT, function () use ($container) {
             return new ComputopToShipmentClientBridge($container->getLocator()->shipment()->client());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addCheckoutClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_CHECKOUT, function () use ($container) {
+            return new ComputopToCheckoutClientBridge($container->getLocator()->checkout()->client());
         });
 
         return $container;

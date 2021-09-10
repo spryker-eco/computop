@@ -243,4 +243,12 @@ interface ComputopConstants
      * @api
      */
     public const PAY_PAL_EXPRESS_PAYPAL_METHOD = 'COMPUTOP:PAYPAL_EXPRESS:PAYPAL_METHOD';
+
+    /**
+     * Specification:
+     *  - Issuer ID for Ideal payment method.
+     *
+     * @api
+     */
+    public const PAY_PAL_CLIENT_ID = 'COMPUTOP:PAYPAL:CLIENT_ID';
 }
