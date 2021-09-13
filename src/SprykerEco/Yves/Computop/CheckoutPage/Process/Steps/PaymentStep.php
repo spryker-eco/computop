@@ -44,7 +44,7 @@ class PaymentStep extends SprykerShopPaymentStep
      *
      * @return bool
      */
-    public function quoteContainsPayPalExpressPayment(QuoteTransfer $quoteTransfer): bool
+    public function isQuoteContainsPayPalExpressPayment(QuoteTransfer $quoteTransfer): bool
     {
         return $quoteTransfer->getPayment() !== null && $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() !== null;
     }
