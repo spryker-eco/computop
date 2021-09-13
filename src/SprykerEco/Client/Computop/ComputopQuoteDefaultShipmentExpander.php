@@ -54,6 +54,7 @@ class ComputopQuoteDefaultShipmentExpander implements ComputopQuoteDefaultShipme
             }
         }
 
-        return false;
+        //check quote-level shipment
+        return $quoteTransfer->getShipment() !== null;
     }
 }
