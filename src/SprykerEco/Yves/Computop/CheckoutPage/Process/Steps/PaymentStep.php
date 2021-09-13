@@ -21,7 +21,7 @@ class PaymentStep extends SprykerShopPaymentStep
     public function isBreadcrumbItemHidden(AbstractTransfer $quoteTransfer): bool
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        return $this->quoteContainsPayPalExpressPayment($quoteTransfer);
+        return $this->isQuoteContainsPayPalExpressPayment($quoteTransfer);
     }
 
     /**
@@ -32,7 +32,7 @@ class PaymentStep extends SprykerShopPaymentStep
     public function requireInput(AbstractTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($this->quoteContainsPayPalExpressPayment($quoteTransfer)) {
+        if ($this->isQuoteContainsPayPalExpressPayment($quoteTransfer)) {
             return false;
         }
 
