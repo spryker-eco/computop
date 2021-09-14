@@ -83,7 +83,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         foreach ($itemTransfers as $item) {
             $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
                 $item->getName() ? $this->replaceForbiddenCharacters($item->getName()) : '',
-                $item->getUnitPrice(),
+                $item->getSumSubtotalAggregation(),
                 $item->getQuantity(),
             ]);
         }
