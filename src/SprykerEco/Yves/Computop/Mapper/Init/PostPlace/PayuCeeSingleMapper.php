@@ -104,13 +104,14 @@ class PayuCeeSingleMapper extends AbstractMapper
      */
     protected function getDeliveryCosts(ArrayObject $expenseTransfers): int
     {
+        $deliveryCosts = 0;
         foreach ($expenseTransfers as $expenseTransfer) {
             if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                return $expenseTransfer->getSumGrossPrice();
+                $deliveryCosts += $expenseTransfer->getSumGrossPrice();
             }
         }
 
-        return 0;
+        return $deliveryCosts;
     }
 
     /**
