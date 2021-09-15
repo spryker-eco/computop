@@ -1,5 +1,5 @@
 {
     "include": {
-        "spryker/transfer": "Required for get*OrFail()."
+        "spryker/transfer": "Provides transfer objects definition."
     }
 }
