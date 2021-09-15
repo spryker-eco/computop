@@ -276,9 +276,9 @@ abstract class AbstractMapper implements MapperInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\AddressTransfer|null
+     * @return \Generated\Shared\Transfer\AddressTransfer
      */
-    protected function getShippingAddressFromQuote(QuoteTransfer $quoteTransfer): ?AddressTransfer
+    protected function getShippingAddressFromQuote(QuoteTransfer $quoteTransfer): AddressTransfer
     {
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
             if ($itemTransfer->getShipment() && $itemTransfer->getShipment()->getShippingAddress()) {
@@ -286,7 +286,7 @@ abstract class AbstractMapper implements MapperInterface
             }
         }
 
-        return $quoteTransfer->getShippingAddress();
+        return $quoteTransfer->getShippingAddressOrFail();
     }
 
     /**
