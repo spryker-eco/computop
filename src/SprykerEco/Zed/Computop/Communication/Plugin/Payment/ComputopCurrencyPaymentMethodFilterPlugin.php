@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Computop\Communication\Plugin\Payment;
 
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
@@ -16,7 +21,7 @@ use Spryker\Zed\PaymentExtension\Dependency\Plugin\PaymentMethodFilterPluginInte
 class ComputopCurrencyPaymentMethodFilterPlugin extends AbstractPlugin implements PaymentMethodFilterPluginInterface
 {
     /**
-     * * {@inheritDoc}
+     * {@inheritDoc}
      *  - Filters Computop payment methods accordingly to selected currency.
      *
      * @api

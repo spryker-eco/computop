@@ -98,7 +98,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
+     * @return \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createFactory()
     {

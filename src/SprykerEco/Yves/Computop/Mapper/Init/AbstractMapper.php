@@ -289,7 +289,6 @@ abstract class AbstractMapper implements MapperInterface
         return $quoteTransfer->getShippingAddressOrFail();
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
      *
