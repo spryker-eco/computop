@@ -374,6 +374,23 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @api
      *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethodsByCurrency(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer
+    {
+        return $this->getFactory()
+            ->createPaymentMethodByCurrencyFilter()
+            ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopNotificationTransfer

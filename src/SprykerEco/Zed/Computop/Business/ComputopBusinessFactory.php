@@ -65,6 +65,7 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\InquireSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\RefundSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\ReverseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\SaverInterface;
+use SprykerEco\Zed\Computop\Business\Payment\PaymentMethodByCurrencyFilter;
 use SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Reader\ComputopPaymentReader;
@@ -574,6 +575,14 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPaymentMethodFilter(): PaymentMethodFilterInterface
     {
         return new PaymentMethodFilter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Payment\PaymentMethodFilterInterface
+     */
+    public function createPaymentMethodByCurrencyFilter(): PaymentMethodFilterInterface
+    {
+        return new PaymentMethodByCurrencyFilter($this->getConfig());
     }
 
     /**
