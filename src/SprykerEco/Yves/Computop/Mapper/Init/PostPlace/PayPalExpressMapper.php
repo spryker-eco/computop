@@ -71,7 +71,7 @@ class PayPalExpressMapper extends AbstractMapper
             $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
         );
 
-        $this->mapAddressFromQuoteToComputopPayPalPayment($quoteTransfer, $computopPaymentTransfer);
+        $this->mapAddressFromQuoteTransferToComputopPayPalExpressPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
 
         return $computopPaymentTransfer;
     }
@@ -82,7 +82,7 @@ class PayPalExpressMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    protected function mapAddressFromQuoteToComputopPayPalPayment(
+    protected function mapAddressFromQuoteTransferToComputopPayPalExpressPaymentTransfer(
         QuoteTransfer $quoteTransfer,
         ComputopPayPalExpressPaymentTransfer $computopPayPalPaymentTransfer
     ): ComputopPayPalExpressPaymentTransfer {

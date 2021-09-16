@@ -126,7 +126,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         $postSaveHook->registerMapper($this->createPostSaveCreditCart());
         $postSaveHook->registerMapper($this->createPostSavePayNowMapper());
         $postSaveHook->registerMapper($this->createPostSavePayPal());
-        $postSaveHook->registerMapper($this->createPostSavePayPalExpress());
+        $postSaveHook->registerMapper($this->createPostSavePayPalExpressMapper());
         $postSaveHook->registerMapper($this->createPostSaveDirectDebit());
         $postSaveHook->registerMapper($this->createPostSaveEasyCredit());
 
@@ -549,7 +549,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
-    public function createPostSavePayPalExpress(): InitMapperInterface
+    public function createPostSavePayPalExpressMapper(): InitMapperInterface
     {
         return new InitPayPalExpressMapper($this->getConfig(), $this->getComputopApiService());
     }

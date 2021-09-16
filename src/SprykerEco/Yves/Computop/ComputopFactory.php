@@ -485,7 +485,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface
      */
-    protected function getComputopApiClient(): ComputopToComputopApiClientInterface
+    public function getComputopApiClient(): ComputopToComputopApiClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP_API);
     }
@@ -541,7 +541,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
-    protected function createPayPalExpressMapper(): MapperInterface
+    public function createPayPalExpressMapper(): MapperInterface
     {
         return new PayPalExpressMapper(
             $this->getComputopApiService(),
@@ -669,7 +669,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
      */
-    protected function createPayPalExpressToQuoteMapper(): PayPalExpressToQuoteMapperInterface
+    public function createPayPalExpressToQuoteMapper(): PayPalExpressToQuoteMapperInterface
     {
         return new PayPalExpressToQuoteMapper();
     }
