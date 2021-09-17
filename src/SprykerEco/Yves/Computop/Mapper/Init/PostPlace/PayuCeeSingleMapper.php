@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Yves\Router\Router\Router;
