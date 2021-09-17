@@ -280,6 +280,19 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Filters available payment methods by gift card black list
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethodsByCurrency(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
+
+    /**
+     * Specification:
      * - Saves push notification into DB.
      * - Updates related computop order items with payment confirmation status.
      *

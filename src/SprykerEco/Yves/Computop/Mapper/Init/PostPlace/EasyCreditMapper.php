@@ -123,7 +123,9 @@ class EasyCreditMapper extends AbstractMapper
      */
     protected function getAdditionalAddressData(QuoteTransfer $quoteTransfer): array
     {
-        $addressTransfer = $quoteTransfer->getBillingSameAsShipping() ? $quoteTransfer->getBillingAddress() : $quoteTransfer->getShippingAddress();
+        $addressTransfer = $quoteTransfer->getBillingSameAsShipping()
+            ? $quoteTransfer->getBillingAddress()
+            : $this->getShippingAddressFromQuote($quoteTransfer);
 
         $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY] = $addressTransfer->getCity();
         $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET] = $addressTransfer->getAddress1();

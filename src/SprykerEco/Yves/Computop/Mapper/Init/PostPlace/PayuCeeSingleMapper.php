@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Yves\Router\Router\Router;
@@ -83,7 +82,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         foreach ($itemTransfers as $item) {
             $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
                 $item->getName() ? $this->replaceForbiddenCharacters($item->getName()) : '',
-                $item->getUnitPrice(),
+                $item->getSumSubtotalAggregation(),
                 $item->getQuantity(),
             ]);
         }
@@ -104,30 +103,14 @@ class PayuCeeSingleMapper extends AbstractMapper
      */
     protected function getDeliveryCosts(ArrayObject $expenseTransfers): int
     {
+        $deliveryCosts = 0;
         foreach ($expenseTransfers as $expenseTransfer) {
             if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                return $expenseTransfer->getSumGrossPrice();
+                $deliveryCosts += $expenseTransfer->getSumGrossPrice();
             }
         }
 
-        return 0;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
-     */
-    protected function setCustomerData(
-        ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer,
-        CustomerTransfer $customerTransfer
-    ): ComputopPayuCeeSinglePaymentTransfer {
-        return $computopPayuCeeSinglePaymentTransfer
-            ->setFirstName($customerTransfer->getFirstName())
-            ->setLastName($customerTransfer->getLastName())
-            ->setEmail($customerTransfer->getEmail())
-            ->setPhone($customerTransfer->getPhone());
+        return $deliveryCosts;
     }
 
     /**

@@ -451,4 +451,22 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
     }
+
+    /**
+     * Specification:
+     * - Get Available currency for specific payment methods.
+     *
+     * @api
+     *
+     * @return array
+     */
+    public function getComputopPaymentMethodCurrencyFilterMap(): array
+    {
+        return [
+            SharedComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE => [
+                'PLN',
+                'CZK',
+            ],
+        ];
+    }
 }
