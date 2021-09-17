@@ -115,23 +115,6 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer
-     */
-    protected function setCustomerData(
-        ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer,
-        CustomerTransfer $customerTransfer
-    ): ComputopPayuCeeSinglePaymentTransfer {
-        return $computopPayuCeeSinglePaymentTransfer
-            ->setFirstName($customerTransfer->getFirstName())
-            ->setLastName($customerTransfer->getLastName())
-            ->setEmail($customerTransfer->getEmail())
-            ->setPhone($customerTransfer->getPhone());
-    }
-
-    /**
      * @param string $name
      *
      * @return string
