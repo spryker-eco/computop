@@ -53,8 +53,8 @@ use SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\EasyCreditStatusHa
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PrePlace\PrePlaceHandlerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\AuthorizeSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\CaptureSaver;
-use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\CompleteResponseSaverInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\PayPalExpressCompleteResponseSaver;
+use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\PayPalExpressCompleteResponseSaverInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\CreditCardResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\DirectDebitResponseSaver;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init\EasyCreditResponseSaver;
@@ -187,7 +187,6 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPayPalExpressResponseSaver(): InitResponseSaverInterface
     {
         return new PayPalExpressResponseSaver(
-            $this->getOmsFacade(),
             $this->getConfig(),
             $this->getRepository(),
             $this->getEntityManager()
@@ -195,12 +194,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\CompleteResponseSaverInterface
+     * @return \SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete\PayPalExpressCompleteResponseSaverInterface
      */
-    public function createPayPalExpressCompleteResponseSaver(): CompleteResponseSaverInterface
+    public function createPayPalExpressCompleteResponseSaver(): PayPalExpressCompleteResponseSaverInterface
     {
         return new PayPalExpressCompleteResponseSaver(
-            $this->getOmsFacade(),
             $this->getConfig(),
             $this->getEntityManager(),
             $this->getRepository()

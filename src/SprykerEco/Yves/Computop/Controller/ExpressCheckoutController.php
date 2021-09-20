@@ -20,11 +20,13 @@ class ExpressCheckoutController extends AbstractController
 {
     /**
      * @uses CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_PLACE_ORDER
+     * @var string
      */
     protected const ROUTE_NAME_CHECKOUT_PLACE_ORDER = 'checkout-place-order';
 
     /**
      * @uses CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUCCESS
+     * @var string
      */
     protected const ROUTE_NAME_CHECKOUT_SUCCESS = 'checkout-success';
 

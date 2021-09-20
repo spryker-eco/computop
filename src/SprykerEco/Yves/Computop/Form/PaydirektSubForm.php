@@ -14,6 +14,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PaydirektSubForm extends AbstractSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'paydirekt';
 
     /**

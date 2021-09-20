@@ -123,6 +123,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayPalExpressInitResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -136,6 +138,8 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayPalExpressCompleteResponseAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer

@@ -35,11 +35,11 @@ class PayPalExpressToQuoteMapperTest extends Test
         //Assert
         $this->assertNotNull($quoteTransfer->getShippingAddress());
         $this->assertNotNull($quoteTransfer->getShippingAddress()->getCountry());
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::ADDRESS_COUNTRY_CODE_VALUE,
             $quoteTransfer->getShippingAddress()->getCountry()->getIso2Code()
         );
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::FIRST_NAME_VALUE,
             $quoteTransfer->getShippingAddress()->getFirstName()
         );
@@ -52,7 +52,7 @@ class PayPalExpressToQuoteMapperTest extends Test
         }
 
         foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
-            $this->assertEquals(
+            $this->assertSame(
                 PayPalExpressToQuoteMapperTestConstants::ADDRESS_STREET_VALUE,
                 $expenseTransfer->getShipment()->getShippingAddress()->getAddress1()
             );
@@ -76,11 +76,11 @@ class PayPalExpressToQuoteMapperTest extends Test
         //Assert
         $this->assertNotNull($quoteTransfer->getBillingAddress());
         $this->assertNotNull($quoteTransfer->getBillingAddress()->getCountry());
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::BILLING_ADDRESS_COUNTRY_CODE_VALUE,
             $quoteTransfer->getBillingAddress()->getCountry()->getIso2Code()
         );
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::BILLING_NAME_VALUE,
             $quoteTransfer->getBillingAddress()->getFirstName()
         );
@@ -102,15 +102,15 @@ class PayPalExpressToQuoteMapperTest extends Test
 
         //Assert
         $this->assertNotNull($quoteTransfer->getCustomer());
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::FIRST_NAME_VALUE,
             $quoteTransfer->getCustomer()->getFirstName()
         );
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::LAST_NAME_VALUE,
             $quoteTransfer->getCustomer()->getLastName()
         );
-        $this->assertEquals(
+        $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::EMAIL_VALUE,
             $quoteTransfer->getCustomer()->getEmail()
         );

@@ -52,7 +52,7 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
             ->filterByFkSalesOrder($computopPaymentComputopTransfer->getFKSalesOrder())
             ->find();
 
-        if (empty($salesOrderItemsCollection)) {
+        if ($salesOrderItemsCollection->count() === 0) {
             return new ComputopSalesOrderItemCollectionTransfer();
         }
 
@@ -79,7 +79,7 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
             ->filterByFkPaymentComputop($computopPaymentComputopTransfer->getIdPaymentComputop())
             ->find();
 
-        if (empty($computopPaymentComputopOrderItemsEntityCollection)) {
+        if ($computopPaymentComputopOrderItemsEntityCollection->count() === 0) {
             return new ComputopPaymentComputopOrderItemCollectionTransfer();
         }
 

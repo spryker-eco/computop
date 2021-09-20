@@ -24,10 +24,19 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CallbackController extends AbstractController
 {
+    /**
+     * @var string
+     */
     public const MESSAGE_PAYMENT_SUCCESS = 'Your order has been placed successfully! Thank you for shopping with us!';
 
+    /**
+     * @var string
+     */
     public const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
 
+    /**
+     * @var string
+     */
     public const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
 
     /**

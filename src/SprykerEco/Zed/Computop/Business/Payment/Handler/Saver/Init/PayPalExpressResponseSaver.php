@@ -14,18 +14,12 @@ use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface;
 
 class PayPalExpressResponseSaver implements InitResponseSaverInterface
 {
     use TransactionTrait;
-
-    /**
-     * @var \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface
-     */
-    protected $omsFacade;
 
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
@@ -43,18 +37,15 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
     protected $computopEntityManager;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
      * @param \SprykerEco\Zed\Computop\ComputopConfig $computopConfig
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface $computopRepository
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface $computopEntityManager
      */
     public function __construct(
-        ComputopToOmsFacadeInterface $omsFacade,
         ComputopConfig $computopConfig,
         ComputopRepositoryInterface $computopRepository,
         ComputopEntityManagerInterface $computopEntityManager
     ) {
-        $this->omsFacade = $omsFacade;
         $this->computopConfig = $computopConfig;
         $this->computopRepository = $computopRepository;
         $this->computopEntityManager = $computopEntityManager;

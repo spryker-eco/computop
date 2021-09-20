@@ -5,16 +5,16 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Complete;
+namespace SprykerEco\Client\Computop\Expander;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface CompleteResponseSaverInterface
+interface QuoteShipmentExpanderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function save(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

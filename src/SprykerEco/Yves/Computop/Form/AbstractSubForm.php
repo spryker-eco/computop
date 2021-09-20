@@ -17,6 +17,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
+    /**
+     * @var string
+     */
     public const FIELD_URL = 'url';
 
     /**

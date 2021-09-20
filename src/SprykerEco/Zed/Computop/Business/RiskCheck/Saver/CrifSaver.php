@@ -16,6 +16,9 @@ class CrifSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     protected const METHOD = 'CRIF';
 
     /**

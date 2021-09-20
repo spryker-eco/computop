@@ -22,8 +22,7 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
     public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPayment() === null) {
-            $paymentTransfer = new PaymentTransfer();
-            $quoteTransfer->setPayment($paymentTransfer);
+            $quoteTransfer->setPayment(new PaymentTransfer());
         }
 
         if ($this->isValidPayment($quoteTransfer)) {
@@ -31,9 +30,9 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
         }
 
         $paymentTransfer = $quoteTransfer->getPayment();
-        /** @var \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopTransfer */
-        $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
-        $paymentTransfer->setComputopPayPalExpress($computopTransfer);
+        /** @var \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopPayPalExpressPaymentTransfer */
+        $computopPayPalExpressPaymentTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
+        $paymentTransfer->setComputopPayPalExpress($computopPayPalExpressPaymentTransfer);
         $quoteTransfer->setPayment($paymentTransfer);
         if ($quoteTransfer->getCustomer() === null) {
             $quoteTransfer->setCustomer(new CustomerTransfer());

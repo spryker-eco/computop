@@ -94,15 +94,13 @@ class PayPalExpressMapper extends AbstractMapper
         }
 
         $computopPayPalPaymentTransfer
-            ->setFirstName($addressTransfer->getFirstName())
-            ->setLastName($addressTransfer->getLastName())
+            ->fromArray($addressTransfer->toArray(), true)
             ->setAddressStreet($addressTransfer->getAddress1())
             ->setAddressStreet2($addressTransfer->getAddress2())
             ->setAddressCity($addressTransfer->getCity())
             ->setAddressState($addressTransfer->getState())
             ->setAddressZip($addressTransfer->getZipCode())
-            ->setAddressCountryCode($addressTransfer->getIso2Code())
-            ->setPhone($addressTransfer->getPhone());
+            ->setAddressCountryCode($addressTransfer->getIso2Code());
 
         return $computopPayPalPaymentTransfer;
     }

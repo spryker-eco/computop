@@ -63,20 +63,59 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
  */
 class FacadeDBActionTest extends AbstractSetUpTest
 {
+    /**
+     * @var string
+     */
     public const METHOD_VALUE = 'METHOD';
+    /**
+     * @var string
+     */
     public const PAY_ID_VALUE = 'PAY_ID_VALUE';
+    /**
+     * @var string
+     */
     public const X_ID_VALUE = 'X_ID_VALUE';
+    /**
+     * @var string
+     */
     public const M_ID_VALUE = 'M_ID_VALUE';
+    /**
+     * @var string
+     */
     public const TRANS_ID_VALUE = 'TRANS_ID_VALUE';
+    /**
+     * @var string
+     */
     public const STATUS_VALUE = 'OK';
+    /**
+     * @var string
+     */
     public const CODE_VALUE = '00000000';
+    /**
+     * @var string
+     */
     public const DESCRIPTION_VALUE = 'DESCRIPTION_VALUE';
+    /**
+     * @var int
+     */
     public const AMOUNT_VALUE = 15000;
+    /**
+     * @var string
+     */
     public const CURRENCY_VALUE = 'EUR';
 
+    /**
+     * @var int
+     */
     public const ID_SALES_ORDER_ITEM = 1;
 
+    /**
+     * @var string
+     */
     public const STATUS_VALUE_SUCCESS = 'SUCCESS';
+    /**
+     * @var string
+     */
     public const CRIF_GREEN_RESULT = 'GREEN';
 
     /**

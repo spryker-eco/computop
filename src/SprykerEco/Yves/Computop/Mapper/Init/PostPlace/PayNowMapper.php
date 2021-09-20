@@ -27,13 +27,37 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayNowMapper extends AbstractMapper
 {
+    /**
+     * @var string
+     */
     protected const HEADER_USER_AGENT = 'User-Agent';
+    /**
+     * @var string
+     */
     protected const HEADER_ACCEPT = 'Accept';
+    /**
+     * @var int
+     */
     protected const IFRAME_COLOR_DEPTH = 24;
+    /**
+     * @var int
+     */
     protected const IFRAME_SCREEN_HEIGHT = 723;
+    /**
+     * @var int
+     */
     protected const IFRAME_SCREEN_WIDTH = 1536;
+    /**
+     * @var string
+     */
     protected const IFRAME_TIME_ZONE_OFFSET = '300';
+    /**
+     * @var bool
+     */
     protected const IFRAME_IS_JAVA_ENABLED = false;
+    /**
+     * @var bool
+     */
     protected const IFRAME_IS_JAVA_SCRIPT_ENABLED = true;
 
     /**

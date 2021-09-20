@@ -16,19 +16,24 @@ use SprykerShop\Yves\CheckoutWidget\Widget\ProceedToCheckoutButtonWidget as Spry
 class ProceedToCheckoutButtonWidget extends SprykerProceedToCheckoutButtonWidgetAlias
 {
     /**
+     * @var string
+     */
+    protected const PARAMETER_CLIENT_ID = 'clientId';
+
+    /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
     public function __construct(QuoteTransfer $quoteTransfer)
     {
         parent::__construct($quoteTransfer);
-        $this->addParameter('clientId', $this->getPayPalClientId());
+        $this->addClientId();
     }
 
     /**
-     * @return string
+     * @return void
      */
-    protected function getPayPalClientId(): string
+    protected function addClientId(): void
     {
-        return $this->getConfig()->getPayPalClientId();
+        $this->addParameter(static::PARAMETER_CLIENT_ID, $this->getConfig()->getPayPalClientId());
     }
 }

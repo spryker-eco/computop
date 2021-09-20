@@ -105,13 +105,13 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, TransferInterface $responseTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPayment()->getComputopPayPalExpress() === null) {
+        if ($quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() === null) {
             $computopTransfer = new ComputopPayPalExpressPaymentTransfer();
-            $quoteTransfer->getPayment()->setComputopPayPalExpress($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopPayPalExpress($computopTransfer);
         }
 
         /** @var \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer */
-        $quoteTransfer->getPayment()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
+        $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
             $responseTransfer
         );
 
@@ -125,7 +125,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      */
     protected function addShippingAddressToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $payPalInitResponseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
+        $payPalInitResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
         if ($payPalInitResponseTransfer->getAddressStreet() === null) {
             return $quoteTransfer;
         }
@@ -182,7 +182,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      */
     protected function addPaymentSelectionToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $quoteTransfer->getPayment()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
+        $quoteTransfer->getPaymentOrFail()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
 
         return $this->computopPaymentHandler->addPaymentToQuote($quoteTransfer);
     }

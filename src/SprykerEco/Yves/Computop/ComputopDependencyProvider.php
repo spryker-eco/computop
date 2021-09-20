@@ -12,7 +12,6 @@ use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCheckoutClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
@@ -22,26 +21,57 @@ use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBri
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
+    /**
+     * @var string
+     */
     public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+    /**
+     * @var string
+     */
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
+    /**
+     * @var string
+     */
     public const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
+    /**
+     * @var string
+     */
     public const STORE = 'STORE';
+    /**
+     * @var string
+     */
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
+    /**
+     * @var string
+     */
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
+    /**
+     * @var string
+     */
     public const CLIENT_COMPUTOP_API = 'CLIENT_COMPUTOP_API';
+    /**
+     * @var string
+     */
     public const CLIENT_SHIPMENT = 'CLIENT_SHIPMENT';
-    public const CLIENT_CHECKOUT = 'CLIENT_CHECKOUT';
 
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
      * @uses \Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
+     * @var string
      */
     public const SERVICE_ROUTER = 'routers';
 
     /**
      * @uses \Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     * @var string
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
 
@@ -84,7 +114,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addCountryClient($container);
         $container = $this->addComputopApiClient($container);
         $container = $this->addShipmentClient($container);
-        $container = $this->addCheckoutClient($container);
 
         return $container;
     }
@@ -166,22 +195,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addShipmentClient(Container $container): Container
     {
-        $container->set(static::CLIENT_SHIPMENT, function () use ($container) {
+        $container->set(static::CLIENT_SHIPMENT, function (Container $container) {
             return new ComputopToShipmentClientBridge($container->getLocator()->shipment()->client());
-        });
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
-    protected function addCheckoutClient(Container $container): Container
-    {
-        $container->set(static::CLIENT_CHECKOUT, function () use ($container) {
-            return new ComputopToCheckoutClientBridge($container->getLocator()->checkout()->client());
         });
 
         return $container;

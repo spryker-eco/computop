@@ -5,12 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Client\Computop;
+namespace SprykerEco\Client\Computop\Expander;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 
-class ComputopQuoteDefaultShipmentExpander implements ComputopQuoteDefaultShipmentExpanderInterface
+class QuoteShipmentExpander implements QuoteShipmentExpanderInterface
 {
     /**
      * @var \SprykerEco\Client\Computop\Zed\ComputopStubInterface $computopStub
