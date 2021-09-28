@@ -54,13 +54,13 @@
         <column name="amount_cap" required="false" type="VARCHAR" size="255" comment="Only for Inquire Request"/>
         <column name="amount_cred" required="false" type="VARCHAR" size="255" comment="Only for Inquire Request"/>
 
-        <column name="user_data" required="false" type="VARCHAR" size="1024"/>
+        <column name="user_data" required="false" type="VARCHAR" size="255"/>
         <column name="name" required="false" type="VARCHAR" size="255"/>
         <column name="first_name" required="false" type="VARCHAR" size="255"/>
         <column name="last_name" required="false" type="VARCHAR" size="255"/>
         <column name="email" required="false" type="VARCHAR" size="255"/>
-        <column name="address_street" required="false" type="VARCHAR" size="1024"/>
-        <column name="address_street2" required="false" type="VARCHAR" size="1024"/>
+        <column name="address_street" required="false" type="VARCHAR" size="255"/>
+        <column name="address_street2" required="false" type="VARCHAR" size="255"/>
         <column name="address_city" required="false" type="VARCHAR" size="255"/>
         <column name="address_state" required="false" type="VARCHAR" size="255"/>
         <column name="address_zip" required="false" type="VARCHAR" size="20"/>
@@ -68,13 +68,13 @@
         <column name="phone" required="false" type="VARCHAR" size="255"/>
         <column name="billing_agreement_id" required="false" type="VARCHAR" size="255"/>
         <column name="billing_name" required="false" type="VARCHAR" size="255"/>
-        <column name="billing_address_street" required="false" type="VARCHAR" size="1024"/>
-        <column name="billing_address_street2" required="false" type="VARCHAR" size="1024"/>
+        <column name="billing_address_street" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_street2" required="false" type="VARCHAR" size="255"/>
         <column name="billing_address_city" required="false" type="VARCHAR" size="255"/>
         <column name="billing_address_state" required="false" type="VARCHAR" size="255"/>
         <column name="billing_address_zip" required="false" type="VARCHAR" size="255"/>
         <column name="billing_address_country_code" required="false" type="VARCHAR" size="3"/>
-        <column name="info_text" required="false" type="VARCHAR" size="1024"/>
+        <column name="info_text" required="false" type="VARCHAR" size="255"/>
         <column name="payer_id" required="false" type="VARCHAR" size="255"/>
         <column name="is_financing" required="false" type="VARCHAR" size="255"/>
         <column name="financing_fee_amount" required="false" type="VARCHAR" size="255"/>
@@ -181,13 +181,13 @@
 
     <table name="spy_payment_computop_notification">
         <column name="fk_payment_computop_notification" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
-        <column name="pay_id" required="false" type="VARCHAR" size="100" size="255"/>
-        <column name="trans_id" required="false" type="VARCHAR" size="100" size="255"/>
-        <column name="x_id" required="false" type="VARCHAR" size="100" size="255"/>
-        <column name="code" required="false" type="VARCHAR" size="20" size="255"/>
-        <column name="status" required="false" type="VARCHAR" size="20" size="255"/>
-        <column name="description" required="false" type="VARCHAR" size="256" size="255"/>
-        <column name="type" required="false" type="VARCHAR" size="20" size="255"/>
+        <column name="pay_id" required="false" type="VARCHAR" size="100"/>
+        <column name="trans_id" required="false" type="VARCHAR" size="100"/>
+        <column name="x_id" required="false" type="VARCHAR" size="100"/>
+        <column name="code" required="false" type="VARCHAR" size="20"/>
+        <column name="status" required="false" type="VARCHAR" size="20"/>
+        <column name="description" required="false" type="VARCHAR" size="256"/>
+        <column name="type" required="false" type="VARCHAR" size="20"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
 
         <id-method-parameter value="spy_payment_computop_notification_pk_seq"/>
