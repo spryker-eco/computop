@@ -178,6 +178,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         if (
+            (int)$computopNotificationTransfer->getAmountcap() > 0 &&
             (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth() &&
             in_array($paymentComputopOrderItemEntity->getStatus(), $computopConfig->getBeforeCaptureStatuses())
         ) {

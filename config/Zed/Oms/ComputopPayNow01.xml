@@ -45,6 +45,11 @@
             </transition>
 
             <transition condition="Computop/IsPaymentConfirmed" happy="true">
+                <source>new</source>
+                <target>authentication complete</target>
+            </transition>
+
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
                 <source>init</source>
                 <target>authentication complete</target>
             </transition>
