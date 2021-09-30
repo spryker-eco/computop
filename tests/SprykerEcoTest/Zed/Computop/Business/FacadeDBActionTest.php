@@ -52,7 +52,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManager;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 use SprykerEco\Zed\Computop\Persistence\ComputopRepository;
-use SprykerEcoTest\Zed\Computop\ComputopZedTester;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
@@ -125,7 +124,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     protected $salesOrderItemId;
 
     /**
-     * @var ComputopZedTester
+     * @var \SprykerEcoTest\Zed\Computop\ComputopZedTester
      */
     protected $tester;
 
