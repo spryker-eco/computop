@@ -31,7 +31,7 @@
 
 
     <table name="spy_payment_computop_detail" phpName="SpyPaymentComputopDetail">
-        <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true"/>
+        <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
         <column name="pc_nr" type="VARCHAR" size="255"/>
         <column name="credit_card_brand" required="false" type="VARCHAR" size="255"/>
         <column name="credit_card_expiry" required="false" type="VARCHAR" size="255"/>
