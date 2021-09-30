@@ -18,8 +18,19 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayuCeeSingleMapper extends AbstractMapper
 {
+    /**
+     * @var string
+     */
     protected const SHIPMENT_ARTICLE_NAME = 'Shipment';
+
+    /**
+     * @var int
+     */
     protected const ONE_ITEM_AMOUNT = 1;
+
+    /**
+     * @var string
+     */
     protected const ARTICLE_LIST_DELIMITER = ',';
 
     /**

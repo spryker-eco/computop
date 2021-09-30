@@ -16,6 +16,9 @@ class CaptureSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'CAPTURE';
 
     /**

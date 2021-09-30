@@ -15,6 +15,9 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 
 class PaymentMethodByCurrencyFilter implements PaymentMethodFilterInterface
 {
+    /**
+     * @var string
+     */
     protected const COMPUTOP_PAYMENT_METHOD = 'computop';
 
     /**
