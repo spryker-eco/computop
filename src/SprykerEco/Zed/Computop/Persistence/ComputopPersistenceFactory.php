@@ -26,7 +26,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function createPaymentComputopQuery(): SpyPaymentComputopQuery
+    public function getPaymentComputopQuery(): SpyPaymentComputopQuery
     {
         return SpyPaymentComputopQuery::create();
     }
@@ -34,7 +34,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetailQuery
      */
-    public function createPaymentComputopDetailQuery(): SpyPaymentComputopDetailQuery
+    public function getPaymentComputopDetailQuery(): SpyPaymentComputopDetailQuery
     {
         return SpyPaymentComputopDetailQuery::create();
     }
@@ -42,7 +42,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    public function createPaymentComputopOrderItemQuery(): SpyPaymentComputopOrderItemQuery
+    public function getPaymentComputopOrderItemQuery(): SpyPaymentComputopOrderItemQuery
     {
         return SpyPaymentComputopOrderItemQuery::create();
     }
@@ -50,7 +50,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function createSpySalesOrderItemQuery(): SpySalesOrderItemQuery
+    public function getSpySalesOrderItemQuery(): SpySalesOrderItemQuery
     {
         return SpySalesOrderItemQuery::create();
     }
@@ -58,7 +58,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopNotificationQuery
      */
-    public function createPaymentComputopNotificationQuery(): SpyPaymentComputopNotificationQuery
+    public function getPaymentComputopNotificationQuery(): SpyPaymentComputopNotificationQuery
     {
         return SpyPaymentComputopNotificationQuery::create();
     }

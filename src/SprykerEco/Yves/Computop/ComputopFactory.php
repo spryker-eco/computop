@@ -50,12 +50,12 @@ use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
-use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteHandler;
-use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteHandlerInterface;
-use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandler;
-use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandlerInterface;
-use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandler;
-use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandlerInterface;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregator;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregatorInterface;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregator;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregatorInterface;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregator;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregatorInterface;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopEasyCreditPaymentHandler;
@@ -294,11 +294,11 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregatorInterface
      */
-    public function createComputopPayPalExpressInitHandler(): ComputopPayPalExpressInitHandlerInterface
+    public function createComputopPayPalExpressInitHandler(): ComputopPayPalExpressInitAggregatorInterface
     {
-        return new ComputopPayPalExpressInitHandler(
+        return new ComputopPayPalExpressInitAggregator(
             $this->createComputopPaymentHandler(),
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
@@ -309,11 +309,11 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregatorInterface
      */
-    public function createComputopPayPalExpressPrepareHandler(): ComputopPayPalExpressPrepareHandlerInterface
+    public function createComputopPayPalExpressPrepareHandler(): ComputopPayPalExpressPrepareAggregatorInterface
     {
-        return new ComputopPayPalExpressPrepareHandler(
+        return new ComputopPayPalExpressPrepareAggregator(
             $this->getQuoteClient(),
             $this->createPayPalExpressFormDataProvider(),
             $this->getComputopApiClient(),
@@ -323,11 +323,11 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteHandlerInterface
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregatorInterface
      */
-    public function createComputopPayPalExpressCompleteHandler(): ComputopPayPalExpressCompleteHandlerInterface
+    public function createComputopPayPalExpressCompleteHandler(): ComputopPayPalExpressCompleteAggregatorInterface
     {
-        return new ComputopPayPalExpressCompleteHandler(
+        return new ComputopPayPalExpressCompleteAggregator(
             $this->getComputopApiClient(),
             $this->getComputopClient()
         );

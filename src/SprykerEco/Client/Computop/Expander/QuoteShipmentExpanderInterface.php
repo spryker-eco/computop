@@ -16,5 +16,5 @@ interface QuoteShipmentExpanderInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function expand(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

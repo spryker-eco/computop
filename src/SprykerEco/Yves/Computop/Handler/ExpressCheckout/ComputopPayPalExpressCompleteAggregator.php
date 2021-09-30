@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Client\Computop\ComputopClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 
-class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompleteHandlerInterface
+class ComputopPayPalExpressCompleteAggregator implements ComputopPayPalExpressCompleteAggregatorInterface
 {
     /**
      * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface
@@ -42,7 +42,7 @@ class ComputopPayPalExpressCompleteHandler implements ComputopPayPalExpressCompl
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function aggregate(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $quoteTransfer = $this->computopApiClient->sendPayPalExpressCompleteRequest($quoteTransfer);
         $quoteTransfer = $this->computopClient->savePayPalExpressInitResponse($quoteTransfer);

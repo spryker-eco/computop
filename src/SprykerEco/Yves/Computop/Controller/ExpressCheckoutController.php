@@ -20,12 +20,14 @@ class ExpressCheckoutController extends AbstractController
 {
     /**
      * @uses CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_PLACE_ORDER
+     *
      * @var string
      */
     protected const ROUTE_NAME_CHECKOUT_PLACE_ORDER = 'checkout-place-order';
 
     /**
      * @uses CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_SUCCESS
+     *
      * @var string
      */
     protected const ROUTE_NAME_CHECKOUT_SUCCESS = 'checkout-success';
@@ -37,7 +39,7 @@ class ExpressCheckoutController extends AbstractController
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $payPalExpressPrepareHandler = $this->getFactory()->createComputopPayPalExpressPrepareHandler();
-        $computopApiPayPalExpressPrepareResponseTransfer = $payPalExpressPrepareHandler->handle($quoteTransfer);
+        $computopApiPayPalExpressPrepareResponseTransfer = $payPalExpressPrepareHandler->aggregate($quoteTransfer);
 
         return new JsonResponse([
             'orderId' => $computopApiPayPalExpressPrepareResponseTransfer->getOrderId(),
@@ -55,7 +57,7 @@ class ExpressCheckoutController extends AbstractController
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $payPalExpressInitHandler = $this->getFactory()->createComputopPayPalExpressInitHandler();
-        $payPalExpressInitHandler->handle($quoteTransfer, $request->query->all());
+        $payPalExpressInitHandler->aggregate($quoteTransfer, $request->query->all());
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_PLACE_ORDER);
     }
@@ -70,7 +72,7 @@ class ExpressCheckoutController extends AbstractController
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
         $payPalExpressCompleteHandler = $this->getFactory()->createComputopPayPalExpressCompleteHandler();
 
-        $payPalExpressCompleteHandler->handle($quoteTransfer);
+        $payPalExpressCompleteHandler->aggregate($quoteTransfer);
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_SUCCESS);
     }

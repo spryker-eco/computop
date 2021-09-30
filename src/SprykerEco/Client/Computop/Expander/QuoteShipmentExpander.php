@@ -30,7 +30,7 @@ class QuoteShipmentExpander implements QuoteShipmentExpanderInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function expand(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getItems()->count() === 0 || $this->isQuoteHasShipment($quoteTransfer)) {
             return $quoteTransfer;
@@ -49,7 +49,6 @@ class QuoteShipmentExpander implements QuoteShipmentExpanderInterface
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
             $itemShipmentTransfer = $itemTransfer->getShipment();
             if ($itemShipmentTransfer !== null) {
-                //at least one item already has shipment method
                 return true;
             }
         }

@@ -52,6 +52,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManager;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 use SprykerEco\Zed\Computop\Persistence\ComputopRepository;
+use SprykerEcoTest\Zed\Computop\ComputopZedTester;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
@@ -122,6 +123,11 @@ class FacadeDBActionTest extends AbstractSetUpTest
      * @var int
      */
     protected $salesOrderItemId;
+
+    /**
+     * @var ComputopZedTester
+     */
+    protected $tester;
 
     /**
      * @return void
@@ -241,15 +247,16 @@ class FacadeDBActionTest extends AbstractSetUpTest
      */
     public function testSavePayPalExpressInitResponse(): void
     {
+        //Arrange
         $this->setUpDB();
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
-        $service->savePayPalExpressInitResponse($this->getQuoteTrasfer());
 
+        //Act
+        $this->tester->getFacade()->savePayPalExpressInitResponse($this->getQuoteTrasfer());
+
+        //Assert
         $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
-
-        $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+        $this->assertSame(static::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(static::X_ID_VALUE, $savedData->getXId());
     }
 
     /**

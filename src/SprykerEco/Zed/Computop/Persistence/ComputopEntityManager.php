@@ -27,7 +27,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     public function savePaymentComputopNotification(ComputopNotificationTransfer $computopNotificationTransfer): void
     {
         $paymentComputopNotificationEntity = $this->getFactory()
-            ->createPaymentComputopNotificationQuery()
+            ->getPaymentComputopNotificationQuery()
             ->filterByPayId($computopNotificationTransfer->getPayId())
             ->filterByTransId($computopNotificationTransfer->getTransId())
             ->filterByXId($computopNotificationTransfer->getXId())
@@ -48,7 +48,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         ComputopNotificationTransfer $computopNotificationTransfer
     ): bool {
         $paymentComputopOrderItemEntities = $this->getFactory()
-            ->createPaymentComputopOrderItemQuery()
+            ->getPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
                 ->filterByTransId($computopNotificationTransfer->getTransId())
                 ->filterByPayId($computopNotificationTransfer->getPayId())
@@ -77,9 +77,13 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
     ): void {
         $computopPaymentComputopDetailEntity = $this->getFactory()
-            ->createPaymentComputopDetailQuery()
+            ->getPaymentComputopDetailQuery()
             ->filterByIdPaymentComputop($computopPaymentComputopDetailTransfer->getIdPaymentComputop())
             ->findOne();
+
+        if ($computopPaymentComputopDetailEntity === null) {
+            return;
+        }
 
         $computopPaymentComputopDetailEntity = $this->getFactory()
             ->createComputopEntityMapper()
@@ -99,8 +103,13 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void
     {
         $computopPaymentComputopEntity = $this->getFactory()
-            ->createPaymentComputopQuery()
-            ->filterByTransId($computopPaymentComputopTransfer->getTransId())->findOne();
+            ->getPaymentComputopQuery()
+            ->filterByTransId($computopPaymentComputopTransfer->getTransId())
+            ->findOne();
+
+        if ($computopPaymentComputopEntity === null) {
+            return;
+        }
 
         $computopPaymentComputopEntity = $this->getFactory()
             ->createComputopEntityMapper()

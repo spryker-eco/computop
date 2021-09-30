@@ -32,6 +32,6 @@ class DefaultShippingMethodPlugin extends AbstractPlugin implements QuoteTransfe
     {
         return $this->getFactory()
             ->createComputopQuoteDefaultShipmentExpander()
-            ->expandQuoteWithDefaultShippingMethod($quoteTransfer);
+            ->expand($quoteTransfer);
     }
 }

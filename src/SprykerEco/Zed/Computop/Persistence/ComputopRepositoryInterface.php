@@ -17,9 +17,9 @@ interface ComputopRepositoryInterface
     /**
      * @param string $transactionId
      *
-     * @return \Generated\Shared\Transfer\ComputopPaymentComputopTransfer
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopTransfer|null
      */
-    public function getComputopPaymentByComputopTransId(string $transactionId): ComputopPaymentComputopTransfer;
+    public function getComputopPaymentByComputopTransId(string $transactionId): ?ComputopPaymentComputopTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
@@ -42,9 +42,9 @@ interface ComputopRepositoryInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
-     * @return \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer
+     * @return \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer|null
      */
     public function getComputopPaymentDetail(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
-    ): ComputopPaymentComputopDetailTransfer;
+    ): ?ComputopPaymentComputopDetailTransfer;
 }

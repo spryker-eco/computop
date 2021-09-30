@@ -18,7 +18,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 
-class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandlerInterface
+class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAggregatorInterface
 {
     /**
      * @var \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface
@@ -80,7 +80,7 @@ class ComputopPayPalExpressInitHandler implements ComputopPayPalExpressInitHandl
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function handle(QuoteTransfer $quoteTransfer, array $responseArray): QuoteTransfer
+    public function aggregate(QuoteTransfer $quoteTransfer, array $responseArray): QuoteTransfer
     {
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
 

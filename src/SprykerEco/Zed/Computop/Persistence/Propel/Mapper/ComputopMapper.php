@@ -119,7 +119,6 @@ class ComputopMapper
         ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
     ): ComputopPaymentComputopOrderItemTransfer {
         $computopPaymentComputopOrderItemTransfer->fromArray($spyPaymentComputopOrderItem->toArray(), true);
-        $computopPaymentComputopOrderItemTransfer->setPrimaryKey($spyPaymentComputopOrderItem->getPrimaryKey());
         $computopPaymentComputopOrderItemTransfer->setIsNew($spyPaymentComputopOrderItem->isNew());
 
         return $computopPaymentComputopOrderItemTransfer;
@@ -137,7 +136,6 @@ class ComputopMapper
     ): SpyPaymentComputopOrderItem {
         $spyPaymentComputopOrderItem->fromArray($computopPaymentComputopOrderItemTransfer->toArray());
         $spyPaymentComputopOrderItem->setNew($computopPaymentComputopOrderItemTransfer->getIsNew());
-        $spyPaymentComputopOrderItem->setPrimaryKey($computopPaymentComputopOrderItemTransfer->getPrimaryKey());
 
         return $spyPaymentComputopOrderItem;
     }
