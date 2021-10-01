@@ -82,6 +82,8 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      */
     public function aggregate(QuoteTransfer $quoteTransfer, array $responseArray): QuoteTransfer
     {
+        $quoteTransfer->requirePayment();
+
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
 
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
@@ -105,13 +107,13 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, TransferInterface $responseTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() === null) {
+        if ($quoteTransfer->getPayment()->getComputopPayPalExpress() === null) {
             $computopTransfer = new ComputopPayPalExpressPaymentTransfer();
-            $quoteTransfer->getPaymentOrFail()->setComputopPayPalExpress($computopTransfer);
+            $quoteTransfer->getPayment()->setComputopPayPalExpress($computopTransfer);
         }
 
         /** @var \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer */
-        $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
+        $quoteTransfer->getPayment()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
             $responseTransfer
         );
 
@@ -125,7 +127,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      */
     protected function addShippingAddressToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $payPalInitResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
+        $payPalInitResponseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
         if ($payPalInitResponseTransfer->getAddressStreet() === null) {
             return $quoteTransfer;
         }
@@ -145,8 +147,8 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     protected function addBillingAddressToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $payPalInitResponseTransfer = $quoteTransfer
-            ->getPaymentOrFail()
-            ->getComputopPayPalExpressOrFail()->getPayPalExpressInitResponseOrFail();
+            ->getPayment()
+            ->getComputopPayPalExpress()->getPayPalExpressInitResponse();
 
         if ($payPalInitResponseTransfer->getBillingAddressStreet() === null) {
             $quoteTransfer->setBillingAddress($quoteTransfer->getShippingAddress());
@@ -182,7 +184,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      */
     protected function addPaymentSelectionToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $quoteTransfer->getPaymentOrFail()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
+        $quoteTransfer->getPayment()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
 
         return $this->computopPaymentHandler->addPaymentToQuote($quoteTransfer);
     }
