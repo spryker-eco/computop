@@ -227,4 +227,16 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
     ): ComputopNotificationTransfer {
         return $this->getFactory()->createZedStub()->processNotification($computopNotificationTransfer);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalExpressClientId(): string
+    {
+        return $this->getFactory()->getConfig()->getPayPalExpressClientId();
+    }
 }

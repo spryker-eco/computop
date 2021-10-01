@@ -125,11 +125,4 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getPayPalMethod(): string;
-
-    /**
-     * @api
-     *
-     * @return string
-     */
-    public function getPayPalClientId(): string;
 }

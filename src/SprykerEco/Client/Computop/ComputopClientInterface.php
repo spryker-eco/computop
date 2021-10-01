@@ -201,4 +201,14 @@ interface ComputopClientInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
+
+    /**
+     * Specification:
+     * - Returns PayPalExpress ClientId from config.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalExpressClientId(): string;
 }
