@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
+use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -67,5 +69,31 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     protected function getPaymentEntity()
     {
         return $this->paymentEntity;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return string
+     */
+    protected function getOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): string {
+        if ($computopApiResponseHeaderTransfer->getStatus() === null) {
+            return $this->config->getOmsStatusNew();
+        }
+
+        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
+            return $this->config->getAuthorizeRequestOmsStatus();
+        }
+
+        if (
+            $computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::SUCCESS_OK &&
+            $computopApiResponseHeaderTransfer->getDescription() === SharedComputopConfig::SUCCESS_STATUS
+        ) {
+            return $this->config->getOmsStatusAuthorized();
+        }
+
+        return $this->config->getOmsStatusNew();
     }
 }

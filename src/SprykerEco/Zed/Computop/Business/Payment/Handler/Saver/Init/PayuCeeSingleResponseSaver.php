@@ -54,7 +54,8 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 
         $computopPayuCeeSingleInitResponse = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
         if ($computopPayuCeeSingleInitResponse->getHeader()->getIsSuccess()) {
-            $this->handleSaveTransaction($computopPayuCeeSingleInitResponse);
+            $orderItemStatus = $this->getOrderItemPaymentStatusFromInitResponse($computopPayuCeeSingleInitResponse);
+            $this->handleSaveTransaction($computopPayuCeeSingleInitResponse, $orderItemStatus);
         }
 
         return $quoteTransfer;
@@ -62,23 +63,47 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     * @param string $orderItemsStatus
      *
      * @return void
      */
-    protected function handleSaveTransaction(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void
-    {
-        $this->getTransactionHandler()->handleTransaction(function () use ($computopPayuCeeSingleInitResponseTransfer) {
-            $this->executeSavePaymentResponseTransaction($computopPayuCeeSingleInitResponseTransfer);
+    protected function handleSaveTransaction(
+        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
+        string $orderItemsStatus
+    ): void {
+        $this->getTransactionHandler()->handleTransaction(function () use ($computopPayuCeeSingleInitResponseTransfer, $orderItemsStatus) {
+            $this->executeSavePaymentResponseTransaction($computopPayuCeeSingleInitResponseTransfer, $orderItemsStatus);
         });
     }
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     * @param string $orderItemsStatus
      *
      * @return void
      */
-    protected function executeSavePaymentResponseTransaction(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void
+    protected function executeSavePaymentResponseTransaction(
+        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
+        string $orderItemsStatus
+    ): void {
+        $this->computopEntityManager->saveComputopPayuCeeSingleInitResponse(
+            $computopPayuCeeSingleInitResponseTransfer,
+            $orderItemsStatus
+        );
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     *
+     * @return string
+     */
+    protected function getOrderItemPaymentStatusFromInitResponse(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): string
     {
-        $this->computopEntityManager->saveComputopPayuCeeSingleInitResponse($computopPayuCeeSingleInitResponseTransfer);
+        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->getHeader();
+        if ($computopApiResponseHeaderTransfer === null) {
+            return $this->config->getOmsStatusNew();
+        }
+
+        return $this->getOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer($computopApiResponseHeaderTransfer);
     }
 }
