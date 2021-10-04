@@ -104,6 +104,6 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
             return $this->config->getOmsStatusNew();
         }
 
-        return $this->getOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer($computopApiResponseHeaderTransfer);
+        return $this->mapOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer($computopApiResponseHeaderTransfer);
     }
 }
