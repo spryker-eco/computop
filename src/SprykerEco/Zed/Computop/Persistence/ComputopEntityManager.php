@@ -40,11 +40,13 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @param string $orderItemsStatus
      *
      * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer
+        ComputopNotificationTransfer $computopNotificationTransfer,
+        string $orderItemsStatus
     ): bool {
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities */
         $paymentComputopOrderItemEntities = $this->getFactory()
@@ -60,10 +62,9 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $orderItemEntityStatus = $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer);
             $paymentComputopOrderItemEntity
                 ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess())
-                ->setStatus($orderItemEntityStatus)
+                ->setStatus($orderItemsStatus)
                 ->save();
         }
 
@@ -139,23 +140,5 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             $paymentComputopOrderItem->setStatus($paymentStatus);
             $paymentComputopOrderItem->save();
         }
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
-     *
-     * @return string
-     */
-    protected function getCurrentOrderItemEntityStatus(ComputopNotificationTransfer $computopNotificationTransfer): string
-    {
-        if ((int)$computopNotificationTransfer->getAmountcap() > 0) {
-            return $this->getFactory()->getConfig()->getOmsStatusCaptured();
-        }
-
-        if ((int)$computopNotificationTransfer->getAmountauth() > 0) {
-            return $this->getFactory()->getConfig()->getOmsStatusAuthorized();
-        }
-
-        return $this->getFactory()->getConfig()->getOmsStatusNew();
     }
 }
