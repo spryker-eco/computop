@@ -55,7 +55,7 @@ class PayuCeeSingleMapper extends AbstractMapper
 
         if ($quoteTransfer->getItems()->count()) {
             $computopPayuCeeSinglePaymentTransfer->setArticleList(
-                $this->getArticleList($quoteTransfer->getItems(), $quoteTransfer->getExpenses())
+                $this->getArticleList($quoteTransfer)
             );
         }
 
@@ -81,26 +81,25 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $itemTransfers
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseTransfers
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return string
      */
-    protected function getArticleList(ArrayObject $itemTransfers, ArrayObject $expenseTransfers): string
+    protected function getArticleList(QuoteTransfer $quoteTransfer): string
     {
         $articlesList = [];
 
-        foreach ($itemTransfers as $item) {
+        foreach ($quoteTransfer->getItems() as $item) {
             $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
                 $item->getName() ? $this->replaceForbiddenCharacters($item->getName()) : '',
-                $item->getUnitSubtotalAggregation(),
+                $item->getUnitPriceToPayAggregation(),
                 $item->getQuantity(),
             ]);
         }
 
         $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
             static::SHIPMENT_ARTICLE_NAME,
-            $this->getDeliveryCosts($expenseTransfers),
+            $this->getDeliveryCosts($quoteTransfer->getExpenses()),
             static::ONE_ITEM_AMOUNT,
         ]);
 
@@ -117,7 +116,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         $deliveryCosts = 0;
         foreach ($expenseTransfers as $expenseTransfer) {
             if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                $deliveryCosts += $expenseTransfer->getSumGrossPrice();
+                $deliveryCosts += $expenseTransfer->getSumPriceToPayAggregation();
             }
         }
 
