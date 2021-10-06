@@ -9,8 +9,8 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
-use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShippingMethodExpander;
-use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShippingMethodExpanderInterface;
+use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShipmentExpander;
+use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteShipmentExpanderInterface;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHookInterface;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitCreditCardMapper;
@@ -642,18 +642,18 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShippingMethodExpanderInterface
+     * @return \SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteShipmentExpanderInterface
      */
-    public function createQuoteDefaultShippingMethodExpander(): QuoteDefaultShippingMethodExpanderInterface
+    public function createQuoteDefaultShipmentExpander(): QuoteShipmentExpanderInterface
     {
-        return new QuoteDefaultShippingMethodExpander(
+        return new QuoteDefaultShipmentExpander(
             $this->getConfig(),
             $this->getShipmentFacade()
         );
     }
 
     /**
-     * @return ComputopToShipmentFacadeInterface
+     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToShipmentFacadeInterface
      */
     public function getShipmentFacade(): ComputopToShipmentFacadeInterface
     {

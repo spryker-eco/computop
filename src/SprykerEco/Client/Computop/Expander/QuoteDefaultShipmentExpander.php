@@ -10,7 +10,7 @@ namespace SprykerEco\Client\Computop\Expander;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 
-class QuoteShipmentExpander implements QuoteShipmentExpanderInterface
+class QuoteDefaultShipmentExpander implements QuoteShipmentExpanderInterface
 {
     /**
      * @var \SprykerEco\Client\Computop\Zed\ComputopStubInterface $computopStub

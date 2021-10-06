@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\ShipmentTransfer;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToShipmentFacadeInterface;
 
-class QuoteDefaultShippingMethodExpander implements QuoteDefaultShippingMethodExpanderInterface
+class QuoteDefaultShipmentExpander implements QuoteShipmentExpanderInterface
 {
     /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
@@ -42,7 +42,7 @@ class QuoteDefaultShippingMethodExpander implements QuoteDefaultShippingMethodEx
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function expand(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $quoteTransfer->setDefaultShipmentSelected(true);
         $defaultShipmentId = $this->computopConfig->getDefaultShipmentMethodId();

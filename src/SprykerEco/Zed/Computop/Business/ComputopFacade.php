@@ -415,7 +415,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()
-            ->createQuoteDefaultShippingMethodExpander()
-            ->expandQuoteWithDefaultShippingMethod($quoteTransfer);
+            ->createQuoteDefaultShipmentExpander()
+            ->expand($quoteTransfer);
     }
 }
