@@ -84,7 +84,7 @@ interface ComputopConstants
 
     /**
      * Specification:
-     *  - Init API call endpoint for Ideal payment method.
+     *  - Init API call endpoint for iDEAL payment method.
      *
      * @api
      *
@@ -274,7 +274,7 @@ interface ComputopConstants
 
     /**
      * Specification:
-     *  - Issuer ID for Ideal payment method.
+     *  - Issuer ID for iDEAL payment method.
      *
      * @api
      *
@@ -294,21 +294,21 @@ interface ComputopConstants
 
     /**
      * Specification:
-     *  - Issuer ID for Ideal payment method.
+     *  - Issuer ID for iDEAL payment method.
      *
      * @api
      *
      * @var string
      */
-    public const PAY_PAL_EXPRESS_PAYPAL_METHOD = 'COMPUTOP:PAYPAL_EXPRESS_PAYPAL_METHOD';
+    public const PAY_PAL_EXPRESS_PAYPAL_METHOD = 'COMPUTOP:PAY_PAL_EXPRESS_PAYPAL_METHOD';
 
     /**
      * Specification:
-     *  - Issuer ID for Ideal payment method.
+     *  - Issuer ID for iDEAL payment method.
      *
      * @api
      *
      * @var string
      */
-    public const PAY_PAL_CLIENT_ID = 'COMPUTOP:PAYPAL_CLIENT_ID';
+    public const PAY_PAL_CLIENT_ID = 'COMPUTOP:PAY_PAL_CLIENT_ID';
 }

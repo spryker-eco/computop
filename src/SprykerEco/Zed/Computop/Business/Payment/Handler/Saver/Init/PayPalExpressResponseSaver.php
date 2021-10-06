@@ -63,7 +63,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
             ->getPayPalExpressInitResponse();
 
         $computopPaymentComputopTransfer = $this->computopRepository
-            ->getComputopPaymentByComputopTransId(
+            ->findComputopPaymentByComputopTransId(
                 $computopPayPalExpressInitResponseTransfer->getHeader()->getTransId()
             );
 
@@ -120,7 +120,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
     ): void {
         $computopPaymentComputopDetailTransfer = $this->computopRepository
-            ->getComputopPaymentDetail($computopPaymentComputopTransfer);
+            ->findComputopPaymentDetail($computopPaymentComputopTransfer);
 
         $computopPaymentComputopDetailTransfer->fromArray($computopPayPalExpressInitResponseTransfer->toArray(), true);
 

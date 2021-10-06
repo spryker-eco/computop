@@ -66,7 +66,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
 
         $computopPaymentTransfer = $this
             ->computopRepository
-            ->getComputopPaymentByComputopTransId(
+            ->findComputopPaymentByComputopTransId(
                 $payPalExpressCompleteResponseTransfer->getHeader()->getTransId()
             );
 
@@ -125,7 +125,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
     ): void {
         $computopPaymentComputopDetailTransfer = $this
             ->computopRepository
-            ->getComputopPaymentDetail($computopPaymentComputopTransfer);
+            ->findComputopPaymentDetail($computopPaymentComputopTransfer);
 
         $computopPaymentComputopDetailTransfer->fromArray($payPalExpressCompleteResponseTransfer->toArray(), true);
 

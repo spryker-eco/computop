@@ -53,7 +53,6 @@ class QuoteShipmentExpander implements QuoteShipmentExpanderInterface
             }
         }
 
-        //check quote-level shipment
         return $quoteTransfer->getShipment() !== null;
     }
 }

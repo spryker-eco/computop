@@ -37,7 +37,6 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
         if ($quoteTransfer->getCustomer() === null) {
             $quoteTransfer->setCustomer(new CustomerTransfer());
         }
-        $this->quoteClient->setQuote($quoteTransfer);
 
         return $quoteTransfer;
     }

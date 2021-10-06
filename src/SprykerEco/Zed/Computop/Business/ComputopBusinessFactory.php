@@ -85,6 +85,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterfa
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
+use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToShipmentFacadeInterface;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
@@ -647,7 +648,15 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new QuoteDefaultShippingMethodExpander(
             $this->getConfig(),
-            $this->getProvidedDependency(ComputopDependencyProvider::FACADE_SHIPMENT)
+            $this->getShipmentFacade()
         );
+    }
+
+    /**
+     * @return ComputopToShipmentFacadeInterface
+     */
+    public function getShipmentFacade(): ComputopToShipmentFacadeInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_SHIPMENT);
     }
 }

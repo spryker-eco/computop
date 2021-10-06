@@ -184,7 +184,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Saves PayPal Express Complete Response and changes items' OMS status.
+     * - Saves PayPal Express Complete Response and changes item's OMS status.
      *
      * @api
      *

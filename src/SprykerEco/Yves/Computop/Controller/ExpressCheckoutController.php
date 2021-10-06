@@ -38,7 +38,7 @@ class ExpressCheckoutController extends AbstractController
     public function preparePayPalExpressAction(): JsonResponse
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payPalExpressPrepareHandler = $this->getFactory()->createComputopPayPalExpressPrepareHandler();
+        $payPalExpressPrepareHandler = $this->getFactory()->createComputopPayPalExpressPrepareAggregator();
         $computopApiPayPalExpressPrepareResponseTransfer = $payPalExpressPrepareHandler->aggregate($quoteTransfer);
 
         return new JsonResponse([
@@ -56,7 +56,7 @@ class ExpressCheckoutController extends AbstractController
     public function placeOrderPayPalExpressAction(Request $request): RedirectResponse
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payPalExpressInitHandler = $this->getFactory()->createComputopPayPalExpressInitHandler();
+        $payPalExpressInitHandler = $this->getFactory()->createComputopPayPalExpressInitAggregator();
         $payPalExpressInitHandler->aggregate($quoteTransfer, $request->query->all());
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CHECKOUT_PLACE_ORDER);
@@ -70,7 +70,7 @@ class ExpressCheckoutController extends AbstractController
     public function completeOrderPayPalExpressAction(Request $request): RedirectResponse
     {
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payPalExpressCompleteHandler = $this->getFactory()->createComputopPayPalExpressCompleteHandler();
+        $payPalExpressCompleteHandler = $this->getFactory()->createComputopPayPalExpressCompleteAggregator();
 
         $payPalExpressCompleteHandler->aggregate($quoteTransfer);
 

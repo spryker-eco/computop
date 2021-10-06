@@ -66,7 +66,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \SprykerEco\Zed\Computop\Persistence\Propel\Mapper\ComputopMapper
      */
-    public function createComputopEntityMapper(): ComputopMapper
+    public function createComputopMapper(): ComputopMapper
     {
         return new ComputopMapper();
     }

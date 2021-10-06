@@ -86,7 +86,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         $computopPaymentComputopDetailEntity = $this->getFactory()
-            ->createComputopEntityMapper()
+            ->createComputopMapper()
             ->mapComputopPaymentComputopDetailTransferToPaymentComputopDetailEntity(
                 $computopPaymentComputopDetailTransfer,
                 $computopPaymentComputopDetailEntity
@@ -112,7 +112,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         $computopPaymentComputopEntity = $this->getFactory()
-            ->createComputopEntityMapper()
+            ->createComputopMapper()
             ->mapComputopPaymentTransferToComputopPaymentEntity(
                 $computopPaymentComputopTransfer,
                 $computopPaymentComputopEntity
@@ -130,7 +130,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
     ): void {
         $paymentComputopOrderItemEntity = $this->getFactory()
-            ->createComputopEntityMapper()
+            ->createComputopMapper()
             ->mapComputopPaymentComputopOrderItemTransferToPaymentComputopOrderItemEntity(
                 $computopPaymentComputopOrderItemTransfer,
                 new SpyPaymentComputopOrderItem(),

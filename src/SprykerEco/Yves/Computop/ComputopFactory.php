@@ -296,7 +296,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregatorInterface
      */
-    public function createComputopPayPalExpressInitHandler(): ComputopPayPalExpressInitAggregatorInterface
+    public function createComputopPayPalExpressInitAggregator(): ComputopPayPalExpressInitAggregatorInterface
     {
         return new ComputopPayPalExpressInitAggregator(
             $this->createComputopPaymentHandler(),
@@ -311,7 +311,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregatorInterface
      */
-    public function createComputopPayPalExpressPrepareHandler(): ComputopPayPalExpressPrepareAggregatorInterface
+    public function createComputopPayPalExpressPrepareAggregator(): ComputopPayPalExpressPrepareAggregatorInterface
     {
         return new ComputopPayPalExpressPrepareAggregator(
             $this->getQuoteClient(),
@@ -325,7 +325,7 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregatorInterface
      */
-    public function createComputopPayPalExpressCompleteHandler(): ComputopPayPalExpressCompleteAggregatorInterface
+    public function createComputopPayPalExpressCompleteAggregator(): ComputopPayPalExpressCompleteAggregatorInterface
     {
         return new ComputopPayPalExpressCompleteAggregator(
             $this->getComputopApiClient(),
