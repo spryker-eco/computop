@@ -21,7 +21,7 @@
         </states>
 
         <events>
-            <event name="invalidation" timeout="20min" />
+            <event name="invalidation" timeout="60min" />
             <event name="wait for payment" timeout="3days" command="Computop/Refund" />
             <event name="confirm" onEnter="true" manual="true" command="Oms/SendOrderConfirmation"/>
             <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days"/>
