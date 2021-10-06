@@ -76,7 +76,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
      *
      * @return string
      */
-    protected function mapOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer(
+    protected function getOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer(
         ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
     ): string {
         if ($computopApiResponseHeaderTransfer->getStatus() === null) {
