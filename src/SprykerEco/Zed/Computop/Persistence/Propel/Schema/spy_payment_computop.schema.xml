@@ -120,8 +120,6 @@
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>
         </foreign-key>
-
-        <id-method-parameter value="spy_payment_computop_detail_pk_seq"/>
     </table>
 
     <table name="spy_payment_computop_api_log">
