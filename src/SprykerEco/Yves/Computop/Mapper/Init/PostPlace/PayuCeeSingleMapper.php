@@ -111,7 +111,7 @@ class PayuCeeSingleMapper extends AbstractMapper
             $articlesList[] = $this->getArticleItem($expanseName, $expensePrice);
         }
 
-        $grandSumDifference = $quoteTransfer->getTotals()->getGrandTotal() - (int)$totalSum;
+        $grandSumDifference = (int)$quoteTransfer->getTotals()->getGrandTotal() - (int)$totalSum;
         if ($grandSumDifference !== 0) {
             $articlesList[] = $this->getArticleItem(static::ROUND_ARTICLE_NAME, $grandSumDifference);
         }
