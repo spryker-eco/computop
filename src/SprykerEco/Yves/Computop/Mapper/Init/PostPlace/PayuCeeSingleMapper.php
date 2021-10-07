@@ -94,7 +94,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         $totalSum = 0;
         $articlesList = [];
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $unitPrice = round(($itemTransfer->getSumPriceToPayAggregation() - $itemTransfer->getCanceledAmount()) / $itemTransfer->getQuantity());
+            $unitPrice = (int)round(($itemTransfer->getSumPriceToPayAggregation() - $itemTransfer->getCanceledAmount()) / $itemTransfer->getQuantity());
             $itemName = $itemTransfer->getName() ? $this->replaceForbiddenCharacters($itemTransfer->getName()) : '';
             $totalSum += $unitPrice * $itemTransfer->getQuantity();
             $articlesList[] = $this->getArticleItem($itemName, $unitPrice, $itemTransfer->getQuantity());
@@ -106,7 +106,7 @@ class PayuCeeSingleMapper extends AbstractMapper
                 $expanseName = static::SHIPMENT_ARTICLE_NAME;
             }
 
-            $expensePrice = $expenseTransfer->getSumPriceToPayAggregation() - $expenseTransfer->getCanceledAmount();
+            $expensePrice = (int)($expenseTransfer->getSumPriceToPayAggregation() - $expenseTransfer->getCanceledAmount());
             $totalSum += $expensePrice;
             $articlesList[] = $this->getArticleItem($expanseName, $expensePrice);
         }
