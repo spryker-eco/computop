@@ -46,13 +46,8 @@ class QuoteDefaultShipmentExpander implements QuoteShipmentExpanderInterface
      */
     protected function isQuoteHasShipment(QuoteTransfer $quoteTransfer): bool
     {
-        if ($quoteTransfer->getShipment() === null) {
-            return false;
-        }
-
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $itemShipmentTransfer = $itemTransfer->getShipment();
-            if ($itemShipmentTransfer !== null) {
+            if ($itemTransfer->getShipment() !== null && $itemTransfer->getShipment()->getMethod() !== null) {
                 return true;
             }
         }
