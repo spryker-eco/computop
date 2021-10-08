@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
@@ -101,14 +100,9 @@ class PayuCeeSingleMapper extends AbstractMapper
         }
 
         foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
-            $expanseName = $expenseTransfer->getName();
-            if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                $expanseName = static::SHIPMENT_ARTICLE_NAME;
-            }
-
             $expensePrice = (int)($expenseTransfer->getSumPriceToPayAggregation() - $expenseTransfer->getCanceledAmount());
             $totalSum += $expensePrice;
-            $articlesList[] = $this->getArticleItem($expanseName, $expensePrice);
+            $articlesList[] = $this->getArticleItem($expenseTransfer->getName(), $expensePrice);
         }
 
         $grandSumDifference = (int)$quoteTransfer->getTotals()->getGrandTotal() - (int)$totalSum;
