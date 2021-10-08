@@ -523,6 +523,8 @@
 
     <transfer name="Quote">
         <property name="computopCrif" type="ComputopCrif"/>
+        <property name="expenses" type="Expense[]" singular="expense"/>
+        <property name="items" type="Item[]" singular="item"/>
     </transfer>
 
     <transfer name="CheckoutResponse">
@@ -618,4 +620,68 @@
         <property name="amountcred" type="int"/>
     </transfer>
 
+    <transfer name="Item">
+        <property name="shipment" type="Shipment"/>
+    </transfer>
+
+    <transfer name="Shipment">
+          <property name="shippingAddress" type="Address"/>
+    </transfer>
+
+    <transfer name="SaveOrder">
+    </transfer>
+
+    <transfer name="ComputopApiHeaderPayment">
+    </transfer>
+
+    <transfer name="Message">
+    </transfer>
+
+    <transfer name="ComputopApiResponseHeader">
+    </transfer>
+
+    <transfer name="ComputopApiAuthorizeResponse">
+    </transfer>
+
+    <transfer name="ComputopApiRefundResponse">
+    </transfer>
+
+    <transfer name="ComputopApiReverseResponse">
+    </transfer>
+
+    <transfer name="ComputopApiInquireResponse">
+    </transfer>
+
+    <transfer name="ComputopApiCaptureResponse">
+    </transfer>
+
+    <transfer name="Expense">
+    </transfer>
+
+    <transfer name="PaymentMethods">
+    </transfer>
+
+    <transfer name="PaymentMethod">
+    </transfer>
+
+    <transfer name="ComputopApiCrifResponse">
+    </transfer>
+
+    <transfer name="ComputopApiRequest">
+    </transfer>
+
+    <transfer name="Refund">
+    </transfer>
+
+    <transfer name="Customer">
+    </transfer>
+
+    <transfer name="Address">
+    </transfer>
+
+    <transfer name="CountryCollection">
+    </transfer>
+
+    <transfer name="Country">
+    </transfer>
 </transfers>
