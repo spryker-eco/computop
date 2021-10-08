@@ -87,10 +87,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
             return $this->config->getAuthorizeRequestOmsStatus();
         }
 
-        if (
-            $computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::SUCCESS_OK &&
-            $computopApiResponseHeaderTransfer->getDescription() === SharedComputopConfig::SUCCESS_STATUS
-        ) {
+        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::SUCCESS_OK) {
             return $this->config->getOmsStatusAuthorized();
         }
 

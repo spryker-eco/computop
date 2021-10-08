@@ -32,14 +32,14 @@
         </events>
 
         <transitions>
-            <transition condition="Computop/IsAuthorized" happy="true">
-                <source>new</source>
-                <target>authorized</target>
-            </transition>
-
             <transition condition="Computop/IsAuthorizeRequest" happy="true">
                 <source>new</source>
                 <target>authorize request</target>
+            </transition>
+
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
+                <source>new</source>
+                <target>authorized</target>
             </transition>
 
             <transition condition="Computop/IsAuthorized" happy="true">

@@ -75,7 +75,7 @@ class NotificationProcessor implements NotificationProcessorInterface
      *
      * @return string
      */
-    protected function getCurrentOrderItemEntityStatus(ComputopNotificationTransfer $computopNotificationTransfer): string
+    protected function getCurrentOrderItemEntityStatus(ComputopNotificationTransfer $computopNotificationTransfer): ?string
     {
         if ((int)$computopNotificationTransfer->getAmountcap() > 0) {
             return $this->computopConfig->getOmsStatusCaptured();
@@ -85,6 +85,6 @@ class NotificationProcessor implements NotificationProcessorInterface
             return $this->computopConfig->getOmsStatusAuthorized();
         }
 
-        return $this->computopConfig->getOmsStatusNew();
+        return null;
     }
 }
