@@ -27,8 +27,8 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterf
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
+use SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;
@@ -262,14 +262,6 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface
-     */
-    public function getShipmentClient(): ComputopToShipmentClientInterface
-    {
-        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_SHIPMENT);
-    }
-
-    /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createCreditCardPaymentHandler(): ComputopPrePostPaymentHandlerInterface
@@ -303,8 +295,8 @@ class ComputopFactory extends AbstractFactory
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
             $this->getComputopClient(),
-            $this->getShipmentClient(),
-            $this->createPayPalExpressToQuoteMapper()
+            $this->createPayPalExpressToQuoteMapper(),
+            $this->getPayPalExpressInitAggregatorPluginsStack()
         );
     }
 
@@ -663,5 +655,13 @@ class ComputopFactory extends AbstractFactory
     public function createPayPalExpressToQuoteMapper(): PayPalExpressToQuoteMapperInterface
     {
         return new PayPalExpressToQuoteMapper();
+    }
+
+    /**
+     * @return array<PayPalExpressInitPluginInterface>
+     */
+    public function getPayPalExpressInitAggregatorPluginsStack(): array
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::PLUGIN_PAYPAL_EXPRESS_INIT_PLUGINS_STACK);
     }
 }

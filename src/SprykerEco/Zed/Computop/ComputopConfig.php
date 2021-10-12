@@ -463,14 +463,4 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
     }
-
-    /**
-     * @api
-     *
-     * @return int
-     */
-    public function getDefaultShipmentMethodId(): int
-    {
-        return (int)$this->get(ComputopConstants::PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID);
-    }
 }

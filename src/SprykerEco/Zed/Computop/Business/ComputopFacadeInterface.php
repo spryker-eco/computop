@@ -306,16 +306,4 @@ interface ComputopFacadeInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
-
-    /**
-     * Specification:
-     * - Expands `QuoteTransfer` with default shipping method from config.
-     *
-     * @api
-     *
-     * @param QuoteTransfer $quoteTransfer
-     *
-     * @return QuoteTransfer
-     */
-    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

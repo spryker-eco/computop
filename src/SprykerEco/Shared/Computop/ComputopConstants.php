@@ -284,16 +284,6 @@ interface ComputopConstants
 
     /**
      * Specification:
-     *  - Shipment method ID for cart default shipment.
-     *
-     * @api
-     *
-     * @var string
-     */
-    public const PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID = 'COMPUTOP:PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID';
-
-    /**
-     * Specification:
      *  - Issuer ID for iDEAL payment method.
      *
      * @api

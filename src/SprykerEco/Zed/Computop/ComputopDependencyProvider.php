@@ -18,7 +18,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToRefundFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToShipmentFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -58,10 +57,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const STORE = 'STORE';
-    /**
-     * @var string
-     */
-    public const FACADE_SHIPMENT = 'FACADE_SHIPMENT';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -118,8 +113,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
             return new ComputopToComputopApiFacadeBridge($container->getLocator()->computopApi()->facade());
         });
 
-        $container = $this->addShipmentFacade($container);
-
         return $container;
     }
 
@@ -132,20 +125,6 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::FACADE_REFUND, function (Container $container) {
             return new ComputopToRefundFacadeBridge($container->getLocator()->refund()->facade());
-        });
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    protected function addShipmentFacade(Container $container): Container
-    {
-        $container->set(static::FACADE_SHIPMENT, function (Container $container) {
-            return new ComputopToShipmentFacadeBridge($container->getLocator()->shipment()->facade());
         });
 
         return $container;

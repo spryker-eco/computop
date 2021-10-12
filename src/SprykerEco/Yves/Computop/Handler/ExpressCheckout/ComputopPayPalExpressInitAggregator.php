@@ -15,6 +15,7 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface;
+use SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 
@@ -41,21 +42,19 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     protected $computopClient;
 
     /**
-     * @var \SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface
-     */
-    protected $shipmentClient;
-
-    /**
      * @var \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
      */
     protected $payPalExpressToQuoteMapper;
+    /**
+     * @var array<PayPalExpressInitPluginInterface>
+     */
+    protected $payPalExpressInitAggregatorPlugins;
 
     /**
      * @param \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface $computopPaymentHandler
      * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
      * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
-     * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface $shipmentClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
      */
     public function __construct(
@@ -63,15 +62,15 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
         ConverterInterface $converter,
         ComputopToQuoteClientInterface $quoteClient,
         ComputopClientInterface $computopClient,
-        ComputopToShipmentClientInterface $shipmentClient,
-        PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
+        PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper,
+        array $payPalExpressInitAggregatorPlugins
     ) {
         $this->computopPaymentHandler = $computopPaymentHandler;
         $this->converter = $converter;
         $this->quoteClient = $quoteClient;
         $this->computopClient = $computopClient;
-        $this->shipmentClient = $shipmentClient;
         $this->payPalExpressToQuoteMapper = $payPalExpressToQuoteMapper;
+        $this->payPalExpressInitAggregatorPlugins = $payPalExpressInitAggregatorPlugins;
     }
 
     /**
@@ -93,6 +92,8 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
         $quoteTransfer = $this->addCustomerToQuote($quoteTransfer);
 
         $quoteTransfer->setCheckoutConfirmed(true);
+
+        $quoteTransfer = $this->executeInitAggregatorPlugins($quoteTransfer);
 
         $this->quoteClient->setQuote($quoteTransfer);
 
@@ -131,8 +132,6 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
         if ($payPalInitResponseTransfer->getAddressStreet() === null) {
             return $quoteTransfer;
         }
-
-        $quoteTransfer = $this->shipmentClient->expandQuoteWithShipmentGroups($quoteTransfer);
 
         return $this
             ->payPalExpressToQuoteMapper
@@ -187,5 +186,19 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
         $quoteTransfer->getPayment()->setPaymentSelection(ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS);
 
         return $this->computopPaymentHandler->addPaymentToQuote($quoteTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return QuoteTransfer
+     */
+    protected function executeInitAggregatorPlugins(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        foreach ($this->payPalExpressInitAggregatorPlugins as $palExpressInitAggregatorPlugin) {
+            $quoteTransfer = $palExpressInitAggregatorPlugin->aggregate($quoteTransfer);
+        }
+
+        return $quoteTransfer;
     }
 }

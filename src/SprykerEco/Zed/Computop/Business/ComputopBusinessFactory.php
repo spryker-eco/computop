@@ -9,8 +9,6 @@ namespace SprykerEco\Zed\Computop\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
-use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteDefaultShipmentExpander;
-use SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteShipmentExpanderInterface;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHook;
 use SprykerEco\Zed\Computop\Business\Hook\ComputopPostSaveHookInterface;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitCreditCardMapper;
@@ -85,7 +83,6 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeInterfa
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToShipmentFacadeInterface;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
@@ -639,24 +636,5 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function getComputopApiFacade(): ComputopToComputopApiFacadeInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_COMPUTOP_API);
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Business\DefaultShippingMethodQuoteExpander\QuoteShipmentExpanderInterface
-     */
-    public function createQuoteDefaultShipmentExpander(): QuoteShipmentExpanderInterface
-    {
-        return new QuoteDefaultShipmentExpander(
-            $this->getConfig(),
-            $this->getShipmentFacade()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToShipmentFacadeInterface
-     */
-    public function getShipmentFacade(): ComputopToShipmentFacadeInterface
-    {
-        return $this->getProvidedDependency(ComputopDependencyProvider::FACADE_SHIPMENT);
     }
 }

@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/spryker-eco/computop.svg?b=master)](https://github.com/spryker-eco/computop)
 
 [![CI](https://scrutinizer-ci.com/g/spryker-eco/computop/badges/build.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/computop/build-status/master)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 
 ## Installation
 

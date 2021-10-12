@@ -9,8 +9,6 @@ namespace SprykerEco\Client\Computop;
 
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
-use SprykerEco\Client\Computop\Expander\QuoteDefaultShipmentExpander;
-use SprykerEco\Client\Computop\Expander\QuoteShipmentExpanderInterface;
 use SprykerEco\Client\Computop\Zed\ComputopStub;
 use SprykerEco\Client\Computop\Zed\ComputopStubInterface;
 
@@ -36,13 +34,5 @@ class ComputopFactory extends AbstractFactory
     public function getZedRequestClient(): ZedRequestClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_ZED_REQUEST);
-    }
-
-    /**
-     * @return \SprykerEco\Client\Computop\Expander\QuoteShipmentExpanderInterface
-     */
-    public function createComputopQuoteDefaultShipmentExpander(): QuoteShipmentExpanderInterface
-    {
-        return new QuoteDefaultShipmentExpander($this->createZedStub());
     }
 }

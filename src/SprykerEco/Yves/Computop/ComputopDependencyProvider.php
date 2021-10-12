@@ -17,6 +17,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
+use SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -78,6 +79,11 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     public const SERVICE_REQUEST_STACK = 'request_stack';
 
     /**
+     * @var string
+     */
+    public const PLUGIN_PAYPAL_EXPRESS_INIT_PLUGINS_STACK = 'paypal_express_init_plugins';
+
+    /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
@@ -115,7 +121,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addUtilEncodingService($container);
         $container = $this->addCountryClient($container);
         $container = $this->addComputopApiClient($container);
-        $container = $this->addShipmentClient($container);
+        $container = $this->addPayPalExpressInitPlugins($container);
 
         return $container;
     }
@@ -191,16 +197,24 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @param \Spryker\Yves\Kernel\Container $container
+     * @param Container $container
      *
-     * @return \Spryker\Yves\Kernel\Container
+     * @return Container
      */
-    protected function addShipmentClient(Container $container): Container
+    protected function addPayPalExpressInitPlugins(Container $container): Container
     {
-        $container->set(static::CLIENT_SHIPMENT, function (Container $container) {
-            return new ComputopToShipmentClientBridge($container->getLocator()->shipment()->client());
+        $container->set(static::PLUGIN_PAYPAL_EXPRESS_INIT_PLUGINS_STACK, function () {
+            return $this->getPayPalExpressInitPlugins();
         });
 
         return $container;
+    }
+
+    /**
+     * @return array<PayPalExpressInitPluginInterface>
+     */
+    protected function getPayPalExpressInitPlugins(): array
+    {
+        return [];
     }
 }

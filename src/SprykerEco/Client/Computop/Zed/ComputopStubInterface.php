@@ -119,11 +119,4 @@ interface ComputopStubInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    public function expandQuoteWithDefaultShippingMethod(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }
