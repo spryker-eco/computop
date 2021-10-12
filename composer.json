@@ -4,7 +4,7 @@
     "description": "Computop module",
     "license": "MIT",
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "spryker-eco/computop-api": "dev-feature/eco-3623-payone-pay-u-poland as 1.1.0",
         "spryker-shop/checkout-page": "^3.0.0",
         "spryker/application": "^3.0.0",
