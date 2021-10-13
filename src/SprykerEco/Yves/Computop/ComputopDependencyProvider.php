@@ -15,9 +15,7 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
-use SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
@@ -197,9 +195,9 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @param Container $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
-     * @return Container
+     * @return \Spryker\Yves\Kernel\Container
      */
     protected function addPayPalExpressInitPlugins(Container $container): Container
     {

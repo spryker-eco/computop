@@ -28,7 +28,6 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterf
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
-use SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
 use SprykerEco\Yves\Computop\Form\CreditCardSubForm;
 use SprykerEco\Yves\Computop\Form\DataProvider\CreditCardFormDataProvider;

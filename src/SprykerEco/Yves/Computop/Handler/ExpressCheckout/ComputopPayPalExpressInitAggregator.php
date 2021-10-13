@@ -14,8 +14,6 @@ use SprykerEco\Client\Computop\ComputopClientInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
-use SprykerEco\Yves\Computop\Dependency\Client\ComputopToShipmentClientInterface;
-use SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 
@@ -45,6 +43,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      * @var \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
      */
     protected $payPalExpressToQuoteMapper;
+
     /**
      * @var array<PayPalExpressInitPluginInterface>
      */
@@ -56,6 +55,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
      * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
+     * @param array<PayPalExpressInitPluginInterface> $payPalExpressInitAggregatorPlugins
      */
     public function __construct(
         ComputopPaymentHandlerInterface $computopPaymentHandler,
@@ -189,9 +189,9 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function executeInitAggregatorPlugins(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
