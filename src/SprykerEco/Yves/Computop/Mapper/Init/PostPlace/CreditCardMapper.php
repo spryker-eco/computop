@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
+use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ComputopConsumerTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTypeTransfer;
@@ -155,8 +156,7 @@ class CreditCardMapper extends AbstractMapper
     ): ComputopCreditCardPaymentTransfer {
         $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
 
-        $computopConsumerTransfer = (new ComputopConsumerTransfer())
-            ->fromArray($addressTransfer->toArray(), true);
+        $computopConsumerTransfer = $this->mapAddressTransferToConsumerTransfer($addressTransfer, new ComputopConsumerTransfer());
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
@@ -183,8 +183,7 @@ class CreditCardMapper extends AbstractMapper
             return $computopCreditCardPaymentTransfer;
         }
 
-        $computopConsumerTransfer = (new ComputopConsumerTransfer())
-            ->fromArray($quoteTransfer->getBillingAddress()->toArray(), true);
+        $computopConsumerTransfer = $this->mapAddressTransferToConsumerTransfer($quoteTransfer->getBillingAddress(), new ComputopConsumerTransfer());
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
@@ -251,5 +250,36 @@ class CreditCardMapper extends AbstractMapper
         $computopCreditCardPaymentTransfer->setCredentialOnFile($computopCredentialOnFileTransfer);
 
         return $computopCreditCardPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
+     * @param \Generated\Shared\Transfer\ComputopConsumerTransfer $computopConsumerTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopConsumerTransfer
+     */
+    protected function mapAddressTransferToConsumerTransfer(
+        AddressTransfer $addressTransfer,
+        ComputopConsumerTransfer $computopConsumerTransfer
+    ): ComputopConsumerTransfer {
+        $computopConsumerTransfer->fromArray($addressTransfer->toArray(), true);
+        if ($computopConsumerTransfer->getSalutation()) {
+            $computopConsumerTransfer->setSalutation($this->getAcceptedSalutation($computopConsumerTransfer->getSalutation()));
+        }
+
+        return $computopConsumerTransfer;
+    }
+
+    /**
+     * @param string $salutation
+     *
+     * @return string
+     */
+    protected function getAcceptedSalutation(string $salutation): string
+    {
+        $salutationMap = $this->config->getSalutationMap();
+        $salutation = trim(str_replace('.', '', $salutation));
+
+        return $salutationMap[$salutation] ?? 'Mr';
     }
 }

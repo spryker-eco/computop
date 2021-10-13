@@ -242,4 +242,17 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     {
         return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getSalutationMap(): array
+    {
+        return [
+            'Mr' => 'Mr',
+            'Mrs' => 'Mrs',
+            'Ms' => 'Miss',
+            'Dr' => 'Mr',
+        ];
+    }
 }

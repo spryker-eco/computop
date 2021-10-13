@@ -113,4 +113,9 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getEtiId(): string;
+
+    /**
+     * @return array<string, string>
+     */
+    public function getSalutationMap(): array;
 }
