@@ -209,7 +209,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @return array<PayPalExpressInitPluginInterface>
+     * @return array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
      */
     protected function getPayPalExpressInitPlugins(): array
     {

@@ -45,7 +45,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     protected $payPalExpressToQuoteMapper;
 
     /**
-     * @var array<PayPalExpressInitPluginInterface>
+     * @var array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
      */
     protected $payPalExpressInitAggregatorPlugins;
 
@@ -55,7 +55,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
      * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
-     * @param array<PayPalExpressInitPluginInterface> $payPalExpressInitAggregatorPlugins
+     * @param array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface> $payPalExpressInitAggregatorPlugins
      */
     public function __construct(
         ComputopPaymentHandlerInterface $computopPaymentHandler,

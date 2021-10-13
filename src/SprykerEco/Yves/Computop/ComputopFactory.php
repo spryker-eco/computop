@@ -657,7 +657,7 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return array<PayPalExpressInitPluginInterface>
+     * @return array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
      */
     public function getPayPalExpressInitAggregatorPluginsStack(): array
     {
