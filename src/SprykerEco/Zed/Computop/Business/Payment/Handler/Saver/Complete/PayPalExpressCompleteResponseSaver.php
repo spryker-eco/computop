@@ -58,11 +58,9 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $quoteTransfer->requirePayment();
-
-        $payPalExpressCompleteResponseTransfer = $quoteTransfer->getPayment()
-            ->getComputopPayPalExpress()
-            ->getPayPalExpressCompleteResponse();
+        $payPalExpressCompleteResponseTransfer = $quoteTransfer->getPaymentOrFail()
+            ->getComputopPayPalExpressOrFail()
+            ->getPayPalExpressCompleteResponseOrFail();
 
         $computopPaymentTransfer = $this
             ->computopRepository

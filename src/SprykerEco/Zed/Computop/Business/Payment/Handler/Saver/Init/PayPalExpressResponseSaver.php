@@ -58,9 +58,9 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $computopPayPalExpressInitResponseTransfer = $quoteTransfer->getPayment()
-            ->getComputopPayPalExpress()
-            ->getPayPalExpressInitResponse();
+        $computopPayPalExpressInitResponseTransfer = $quoteTransfer->getPaymentOrFail()
+            ->getComputopPayPalExpressOrFail()
+            ->getPayPalExpressInitResponseOrFail();
 
         $computopPaymentComputopTransfer = $this->computopRepository
             ->findComputopPaymentByComputopTransId(
