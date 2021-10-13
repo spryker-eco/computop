@@ -126,5 +126,3 @@ $config[ComputopConstants::CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS] = [
 $config[ComputopConstants::CRIF_RED_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
 ];
-
-$config[ComputopConstants::PAYPAL_EXPRESS_DEFAULT_SHIPMENT_METHOD_ID] = 1;

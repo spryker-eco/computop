@@ -294,7 +294,7 @@ interface ComputopConstants
 
     /**
      * Specification:
-     *  - Issuer ID for iDEAL payment method.
+     *  - PayPal Express Client Id.
      *
      * @api
      *
