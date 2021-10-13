@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
-use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 
 /**
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopPersistenceFactory getFactory()
