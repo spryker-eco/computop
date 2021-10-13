@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Processor;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
+use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
 
 class NotificationProcessor implements NotificationProcessorInterface
@@ -21,11 +22,18 @@ class NotificationProcessor implements NotificationProcessorInterface
     protected $computopEntityManager;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface $computopEntityManager
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
-    public function __construct(ComputopEntityManagerInterface $computopEntityManager)
+    protected $computopConfig;
+
+    /**
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface $computopEntityManager
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $computopConfig
+     */
+    public function __construct(ComputopEntityManagerInterface $computopEntityManager, ComputopConfig $computopConfig)
     {
         $this->computopEntityManager = $computopEntityManager;
+        $this->computopConfig = $computopConfig;
     }
 
     /**
@@ -52,11 +60,31 @@ class NotificationProcessor implements NotificationProcessorInterface
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer {
         $this->computopEntityManager->savePaymentComputopNotification($computopNotificationTransfer);
-        $isProcessed = $this->computopEntityManager
-            ->updatePaymentComputopOrderItemPaymentConfirmation($computopNotificationTransfer);
+        $isProcessed = $this->computopEntityManager->updatePaymentComputopOrderItemPaymentConfirmation(
+            $computopNotificationTransfer,
+            $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer)
+        );
 
         $computopNotificationTransfer->setIsProcessed($isProcessed);
 
         return $computopNotificationTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     *
+     * @return string
+     */
+    protected function getCurrentOrderItemEntityStatus(ComputopNotificationTransfer $computopNotificationTransfer): ?string
+    {
+        if ((int)$computopNotificationTransfer->getAmountcap() > 0) {
+            return $this->computopConfig->getOmsStatusCaptured();
+        }
+
+        if ((int)$computopNotificationTransfer->getAmountauth() > 0) {
+            return $this->computopConfig->getOmsStatusAuthorized();
+        }
+
+        return null;
     }
 }

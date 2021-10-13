@@ -90,7 +90,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Persists PayNow response to the database.
+     * - Saves PayNow response to the database.
      *
      * @api
      *

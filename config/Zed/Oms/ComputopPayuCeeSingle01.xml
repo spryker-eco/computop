@@ -21,7 +21,7 @@
         </states>
 
         <events>
-            <event name="invalidation" timeout="20min" />
+            <event name="invalidation" timeout="60min" />
             <event name="wait for payment" timeout="3days" command="Computop/Refund" />
             <event name="confirm" onEnter="true" manual="true" command="Oms/SendOrderConfirmation"/>
             <event name="cancel" manual="true" command="Computop/Cancel" timeout="14days"/>
@@ -32,14 +32,14 @@
         </events>
 
         <transitions>
-            <transition condition="Computop/IsAuthorized" happy="true">
-                <source>new</source>
-                <target>authorized</target>
-            </transition>
-
             <transition condition="Computop/IsAuthorizeRequest" happy="true">
                 <source>new</source>
                 <target>authorize request</target>
+            </transition>
+
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
+                <source>new</source>
+                <target>authorized</target>
             </transition>
 
             <transition condition="Computop/IsAuthorized" happy="true">

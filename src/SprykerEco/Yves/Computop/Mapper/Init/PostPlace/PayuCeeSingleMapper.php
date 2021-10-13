@@ -7,10 +7,8 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
-use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Yves\Computop\Mapper\Init\AbstractMapper;
@@ -18,9 +16,25 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayuCeeSingleMapper extends AbstractMapper
 {
+    /**
+     * @var string
+     */
     protected const SHIPMENT_ARTICLE_NAME = 'Shipment';
+
+    /**
+     * @var int
+     */
     protected const ONE_ITEM_AMOUNT = 1;
+
+    /**
+     * @var string
+     */
     protected const ARTICLE_LIST_DELIMITER = ',';
+
+    /**
+     * @var string
+     */
+    protected const ROUND_ARTICLE_NAME = 'Rounded';
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -44,7 +58,7 @@ class PayuCeeSingleMapper extends AbstractMapper
 
         if ($quoteTransfer->getItems()->count()) {
             $computopPayuCeeSinglePaymentTransfer->setArticleList(
-                $this->getArticleList($quoteTransfer->getItems(), $quoteTransfer->getExpenses())
+                $this->getArticleList($quoteTransfer)
             );
         }
 
@@ -70,47 +84,45 @@ class PayuCeeSingleMapper extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $itemTransfers
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseTransfers
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return string
      */
-    protected function getArticleList(ArrayObject $itemTransfers, ArrayObject $expenseTransfers): string
+    protected function getArticleList(QuoteTransfer $quoteTransfer): string
     {
+        $totalSum = 0;
         $articlesList = [];
-
-        foreach ($itemTransfers as $item) {
-            $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
-                $item->getName() ? $this->replaceForbiddenCharacters($item->getName()) : '',
-                $item->getSumSubtotalAggregation(),
-                $item->getQuantity(),
-            ]);
+        foreach ($quoteTransfer->getItems() as $itemTransfer) {
+            $unitPrice = (int)round(($itemTransfer->getSumPriceToPayAggregation() - $itemTransfer->getCanceledAmount()) / $itemTransfer->getQuantity());
+            $itemName = $itemTransfer->getName() ? $this->replaceForbiddenCharacters($itemTransfer->getName()) : '';
+            $totalSum += $unitPrice * $itemTransfer->getQuantity();
+            $articlesList[] = $this->getArticleItem($itemName, $unitPrice, $itemTransfer->getQuantity());
         }
 
-        $articlesList[] = implode(static::ARTICLE_LIST_DELIMITER, [
-            static::SHIPMENT_ARTICLE_NAME,
-            $this->getDeliveryCosts($expenseTransfers),
-            static::ONE_ITEM_AMOUNT,
-        ]);
+        foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
+            $expensePrice = (int)($expenseTransfer->getSumPriceToPayAggregation() - $expenseTransfer->getCanceledAmount());
+            $totalSum += $expensePrice;
+            $articlesList[] = $this->getArticleItem($expenseTransfer->getName(), $expensePrice);
+        }
+
+        $grandSumDifference = (int)$quoteTransfer->getTotals()->getGrandTotal() - (int)$totalSum;
+        if ($grandSumDifference !== 0) {
+            $articlesList[] = $this->getArticleItem(static::ROUND_ARTICLE_NAME, $grandSumDifference);
+        }
 
         return implode('+', $articlesList);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[]|\ArrayObject $expenseTransfers
+     * @param string $name
+     * @param int $price
+     * @param int $quantity
      *
-     * @return int
+     * @return string
      */
-    protected function getDeliveryCosts(ArrayObject $expenseTransfers): int
+    protected function getArticleItem(string $name, int $price, int $quantity = 1): string
     {
-        $deliveryCosts = 0;
-        foreach ($expenseTransfers as $expenseTransfer) {
-            if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                $deliveryCosts += $expenseTransfer->getSumGrossPrice();
-            }
-        }
-
-        return $deliveryCosts;
+        return implode(static::ARTICLE_LIST_DELIMITER, [$name, $price, $quantity]);
     }
 
     /**

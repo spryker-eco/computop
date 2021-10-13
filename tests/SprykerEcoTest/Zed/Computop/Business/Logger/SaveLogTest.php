@@ -24,13 +24,44 @@ use SprykerEcoTest\Zed\Computop\Business\AbstractSetUpTest;
  */
 class SaveLogTest extends AbstractSetUpTest
 {
+    /**
+     * @var string
+     */
     public const METHOD_VALUE = 'METHOD';
+
+    /**
+     * @var string
+     */
     public const PAY_ID_VALUE = 'PAY_ID_VALUE';
+
+    /**
+     * @var string
+     */
     public const X_ID_VALUE = 'X_ID_VALUE';
+
+    /**
+     * @var string
+     */
     public const M_ID_VALUE = 'M_ID_VALUE';
+
+    /**
+     * @var string
+     */
     public const TRANS_ID_VALUE = 'TRANS_ID_VALUE';
+
+    /**
+     * @var string
+     */
     public const STATUS_VALUE = 'OK';
+
+    /**
+     * @var string
+     */
     public const CODE_VALUE = '00000000';
+
+    /**
+     * @var string
+     */
     public const DESCRIPTION_VALUE = 'DESCRIPTION_VALUE';
 
     /**
@@ -85,7 +116,7 @@ class SaveLogTest extends AbstractSetUpTest
     /**
      * @return \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function createFactory()
+    protected function createFactory(): ComputopBusinessFactory
     {
         $builder = $this->getMockBuilder(ComputopBusinessFactory::class);
         $builder->setMethods(

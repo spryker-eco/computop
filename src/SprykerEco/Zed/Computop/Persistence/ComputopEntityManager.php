@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Computop\Persistence;
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
@@ -42,11 +41,13 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @param string|null $orderItemsStatus
      *
      * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer
+        ComputopNotificationTransfer $computopNotificationTransfer,
+        ?string $orderItemsStatus
     ): bool {
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null $paymentComputopEntity */
         $paymentComputopEntity = $this->getFactory()
@@ -77,10 +78,9 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $orderItemEntityStatus = $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer, $paymentComputopOrderItemEntity);
             $paymentComputopOrderItemEntity
                 ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess())
-                ->setStatus($orderItemEntityStatus)
+                ->setStatus($orderItemsStatus ?? $paymentComputopOrderItemEntity->getStatus())
                 ->save();
         }
 
@@ -89,11 +89,14 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     * @param string $orderItemsStatus
      *
      * @return void
      */
-    public function saveComputopPayuCeeSingleInitResponse(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void
-    {
+    public function saveComputopPayuCeeSingleInitResponse(
+        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
+        string $orderItemsStatus
+    ): void {
         $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->requireHeader()
             ->getHeader()
                 ->requireTransId()
@@ -119,10 +122,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             $computopPayuCeeSingleInitResponseTransfer
         );
 
-        $this->savePaymentComputopOrderItems(
-            $paymentComputopEntity->getSpyPaymentComputopOrderItems(),
-            $this->getPaymentStatus($computopPayuCeeSingleInitResponseTransfer)
-        );
+        $this->savePaymentComputopOrderItems($paymentComputopEntity->getSpyPaymentComputopOrderItems(), $orderItemsStatus);
     }
 
     /**
@@ -150,73 +150,11 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
      *
      * @return void
      */
-    protected function savePaymentComputopOrderItems(ObjectCollection $paymentComputopOrderItemEntities, string $paymentStatus): void
+    public function savePaymentComputopOrderItems(ObjectCollection $paymentComputopOrderItemEntities, string $paymentStatus): void
     {
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItem) {
             $paymentComputopOrderItem->setStatus($paymentStatus);
             $paymentComputopOrderItem->save();
         }
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $paymentComputopOrderItemEntity
-     *
-     * @return string
-     */
-    protected function getCurrentOrderItemEntityStatus(
-        ComputopNotificationTransfer $computopNotificationTransfer,
-        SpyPaymentComputopOrderItem $paymentComputopOrderItemEntity
-    ): string {
-        $computopConfig = $this->getFactory()->getConfig();
-
-        if (
-            (int)$computopNotificationTransfer->getAmountauth() > 0 &&
-            in_array($paymentComputopOrderItemEntity->getStatus(), $computopConfig->getBeforeAuthorizeStatuses())
-        ) {
-            return $computopConfig->getOmsStatusAuthorized();
-        }
-
-        if (
-            (int)$computopNotificationTransfer->getAmountcap() === (int)$computopNotificationTransfer->getAmountauth() &&
-            in_array($paymentComputopOrderItemEntity->getStatus(), $computopConfig->getBeforeCaptureStatuses())
-        ) {
-            return $computopConfig->getOmsStatusCaptured();
-        }
-
-        return $paymentComputopOrderItemEntity->getStatus();
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-     *
-     * @return string
-     */
-    protected function getPaymentStatus(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): string
-    {
-        $computopConfig = $this->getFactory()->getConfig();
-
-        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->getHeader();
-        if ($computopApiResponseHeaderTransfer === null) {
-            return $computopConfig->getOmsStatusNew();
-        }
-
-        $responseStatus = $computopApiResponseHeaderTransfer->getStatus();
-        if ($responseStatus === null) {
-            return $computopConfig->getOmsStatusNew();
-        }
-
-        if ($responseStatus === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
-            return $computopConfig->getAuthorizeRequestOmsStatus();
-        }
-
-        if (
-            $responseStatus === SharedComputopConfig::SUCCESS_OK &&
-            $computopApiResponseHeaderTransfer->getDescription() === SharedComputopConfig::SUCCESS_STATUS
-        ) {
-            return $computopConfig->getOmsStatusAuthorized();
-        }
-
-        return $computopConfig->getOmsStatusNew();
     }
 }

@@ -12,17 +12,59 @@ use Spryker\Yves\Router\Route\RouteCollection;
 
 class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
+    /**
+     * @var string
+     */
     public const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
+
+    /**
+     * @var string
+     */
     public const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
+
+    /**
+     * @var string
+     */
     public const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
+
+    /**
+     * @var string
+     */
     public const IDEAL_SUCCESS = 'computop-ideal-success';
+
+    /**
+     * @var string
+     */
     public const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+
+    /**
+     * @var string
+     */
     public const PAY_NOW_SUCCESS = 'computop-paynow-success';
+
+    /**
+     * @var string
+     */
     public const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
+
+    /**
+     * @var string
+     */
     public const SOFORT_SUCCESS = 'computop-sofort-success';
+
+    /**
+     * @var string
+     */
     public const PAYU_CEE_SINGLE_SUCCESS = 'computop-payu-cee-single-success';
 
+    /**
+     * @var string
+     */
     public const FAILURE_PATH_NAME = 'computop-failure';
+
+    /**
+     * @var string
+     */
     public const NOTIFY_PATH_NAME = 'computop-notify';
 
     /**

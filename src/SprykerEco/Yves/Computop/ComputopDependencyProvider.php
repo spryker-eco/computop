@@ -19,23 +19,57 @@ use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBri
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
+
+    /**
+     * @var string
+     */
     public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+
+    /**
+     * @var string
+     */
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
+
+    /**
+     * @var string
+     */
     public const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
+
+    /**
+     * @var string
+     */
     public const STORE = 'STORE';
+
+    /**
+     * @var string
+     */
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
+
+    /**
+     * @var string
+     */
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
 
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
      * @uses \Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
+     *
+     * @var string
      */
     public const SERVICE_ROUTER = 'routers';
 
     /**
      * @uses \Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     *
+     * @var string
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
 

@@ -21,17 +21,23 @@ interface ComputopEntityManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @param string|null $orderItemsStatus
      *
      * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer
+        ComputopNotificationTransfer $computopNotificationTransfer,
+        ?string $orderItemsStatus
     ): bool;
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     * @param string $orderItemsStatus
      *
      * @return void
      */
-    public function saveComputopPayuCeeSingleInitResponse(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): void;
+    public function saveComputopPayuCeeSingleInitResponse(
+        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
+        string $orderItemsStatus
+    ): void;
 }

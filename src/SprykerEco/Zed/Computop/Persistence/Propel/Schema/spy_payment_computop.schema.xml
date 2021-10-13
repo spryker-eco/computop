@@ -5,13 +5,13 @@
         <column name="id_payment_computop" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="fk_sales_order" required="true" type="INTEGER"/>
 
-        <column name="client_ip" required="true" type="VARCHAR"/>
-        <column name="payment_method" required="true" type="VARCHAR"/>
-        <column name="reference" required="true" type="VARCHAR"/>
-        <column name="x_id" type="VARCHAR"/>
-        <column name="pay_id" type="VARCHAR"/>
-        <column name="trans_id" type="VARCHAR"/>
-        <column name="req_id" type="VARCHAR"/>
+        <column name="client_ip" required="true" type="VARCHAR" size="255"/>
+        <column name="payment_method" required="true" type="VARCHAR" size="255"/>
+        <column name="reference" required="true" type="VARCHAR" size="255"/>
+        <column name="x_id" type="VARCHAR" size="255"/>
+        <column name="pay_id" type="VARCHAR" size="255"/>
+        <column name="trans_id" type="VARCHAR" size="255"/>
+        <column name="req_id" type="VARCHAR" size="255"/>
 
         <foreign-key name="spy_payment_computop-fk_sales_order" foreignTable="spy_sales_order" phpName="SpySalesOrder">
             <reference foreign="id_sales_order" local="fk_sales_order"/>
@@ -29,94 +29,92 @@
         <id-method-parameter value="spy_payment_computop_pk_seq"/>
     </table>
 
-
     <table name="spy_payment_computop_detail" phpName="SpyPaymentComputopDetail">
         <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true"/>
+        <column name="pc_nr" type="VARCHAR" size="255"/>
+        <column name="credit_card_brand" required="false" type="VARCHAR" size="255"/>
+        <column name="credit_card_expiry" required="false" type="VARCHAR" size="255"/>
+        <column name="masked_pan" required="false" type="VARCHAR" size="255"/>
+        <column name="cavv" required="false" type="VARCHAR" size="255"/>
+        <column name="eci" required="false" type="VARCHAR" size="255"/>
+        <column name="ddd" required="false" type="VARCHAR" size="255"/>
+        <column name="acsxid" required="false" type="VARCHAR" size="255"/>
+        <column name="type" required="false" type="VARCHAR" size="255"/>
+        <column name="plain" required="false" type="VARCHAR" size="255"/>
 
-        <column name="pc_nr" type="VARCHAR"/>
-        <column name="credit_card_brand" required="false" type="VARCHAR"/>
-        <column name="credit_card_expiry" required="false" type="VARCHAR"/>
-        <column name="masked_pan" required="false" type="VARCHAR"/>
-        <column name="cavv" required="false" type="VARCHAR"/>
-        <column name="eci" required="false" type="VARCHAR"/>
-        <column name="ddd" required="false" type="VARCHAR"/>
-        <column name="acsxid" required="false" type="VARCHAR"/>
-        <column name="type" required="false" type="VARCHAR"/>
-        <column name="plain" required="false" type="VARCHAR"/>
+        <column name="ref_nr" required="false" type="VARCHAR" size="255"/>
+        <column name="a_id" required="false" type="VARCHAR" size="255" comment="Only in the case of Card Complete"/>
+        <column name="amount" required="false" type="VARCHAR" size="255" comment="Only with Clearhaus: Amount in the smallest currency unit (e.g. EUR Cent) If the actual amount differs from the requested amount this will be returned."/>
+        <column name="code_ext" required="false" type="VARCHAR" size="255" comment="Only with Clearhaus"/>
+        <column name="error_text" required="false" type="VARCHAR" size="255" comment="Only with Clearhaus"/>
+        <column name="transaction_id" required="false" type="VARCHAR" size="255" comment="Only with Clearhaus"/>
 
-        <column name="ref_nr" required="false" type="VARCHAR"/>
-        <column name="a_id" required="false" type="VARCHAR" comment="Only in the case of Card Complete"/>
-        <column name="amount" required="false" type="VARCHAR" comment="Only with Clearhaus: Amount in the smallest currency unit (e.g. EUR Cent) If the actual amount differs from the requested amount this will be returned."/>
-        <column name="code_ext" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
-        <column name="error_text" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
-        <column name="transaction_id" required="false" type="VARCHAR" comment="Only with Clearhaus"/>
+        <column name="amount_auth" required="false" type="VARCHAR" size="255" comment="Only for Inquire Request"/>
+        <column name="amount_cap" required="false" type="VARCHAR" size="255" comment="Only for Inquire Request"/>
+        <column name="amount_cred" required="false" type="VARCHAR" size="255" comment="Only for Inquire Request"/>
 
-        <column name="amount_auth" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
-        <column name="amount_cap" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
-        <column name="amount_cred" required="false" type="VARCHAR" comment="Only for Inquire Request"/>
+        <column name="user_data" required="false" type="VARCHAR" size="255"/>
+        <column name="name" required="false" type="VARCHAR" size="255"/>
+        <column name="first_name" required="false" type="VARCHAR" size="255"/>
+        <column name="last_name" required="false" type="VARCHAR" size="255"/>
+        <column name="email" required="false" type="VARCHAR" size="255"/>
+        <column name="address_street" required="false" type="VARCHAR" size="255"/>
+        <column name="address_street2" required="false" type="VARCHAR" size="255"/>
+        <column name="address_city" required="false" type="VARCHAR" size="255"/>
+        <column name="address_state" required="false" type="VARCHAR" size="255"/>
+        <column name="address_zip" required="false" type="VARCHAR" size="20"/>
+        <column name="address_country_code" required="false" type="VARCHAR" size="3"/>
+        <column name="phone" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_agreement_id" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_name" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_street" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_street2" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_city" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_state" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_zip" required="false" type="VARCHAR" size="255"/>
+        <column name="billing_address_country_code" required="false" type="VARCHAR" size="3"/>
+        <column name="info_text" required="false" type="VARCHAR" size="255"/>
+        <column name="payer_id" required="false" type="VARCHAR" size="255"/>
+        <column name="is_financing" required="false" type="VARCHAR" size="255"/>
+        <column name="financing_fee_amount" required="false" type="VARCHAR" size="255"/>
+        <column name="financing_monthly_payment" required="false" type="VARCHAR" size="255"/>
+        <column name="financing_term" required="false" type="VARCHAR" size="255"/>
+        <column name="financing_total_cost" required="false" type="VARCHAR" size="255"/>
+        <column name="gross_amount" required="false" type="VARCHAR" size="255"/>
+        <column name="fee_amount" required="false" type="VARCHAR" size="255"/>
+        <column name="settle_amount" required="false" type="VARCHAR" size="255"/>
+        <column name="tax_amount" required="false" type="VARCHAR" size="255"/>
+        <column name="exchange_rate" required="false" type="VARCHAR" size="255"/>
+        <column name="mc_fee" required="false" type="VARCHAR" size="255"/>
+        <column name="mc_gross" required="false" type="VARCHAR" size="255"/>
 
-        <column name="user_data" required="false" type="VARCHAR"/>
-        <column name="name" required="false" type="VARCHAR"/>
-        <column name="first_name" required="false" type="VARCHAR"/>
-        <column name="last_name" required="false" type="VARCHAR"/>
-        <column name="email" required="false" type="VARCHAR"/>
-        <column name="address_street" required="false" type="VARCHAR"/>
-        <column name="address_street2" required="false" type="VARCHAR"/>
-        <column name="address_city" required="false" type="VARCHAR"/>
-        <column name="address_state" required="false" type="VARCHAR"/>
-        <column name="address_zip" required="false" type="VARCHAR"/>
-        <column name="address_country_code" required="false" type="VARCHAR"/>
-        <column name="phone" required="false" type="VARCHAR"/>
-        <column name="billing_agreement_id" required="false" type="VARCHAR"/>
-        <column name="billing_name" required="false" type="VARCHAR"/>
-        <column name="billing_address_street" required="false" type="VARCHAR"/>
-        <column name="billing_address_street2" required="false" type="VARCHAR"/>
-        <column name="billing_address_city" required="false" type="VARCHAR"/>
-        <column name="billing_address_state" required="false" type="VARCHAR"/>
-        <column name="billing_address_zip" required="false" type="VARCHAR"/>
-        <column name="billing_address_country_code" required="false" type="VARCHAR"/>
-        <column name="info_text" required="false" type="VARCHAR"/>
-        <column name="payer_id" required="false" type="VARCHAR"/>
-        <column name="is_financing" required="false" type="VARCHAR"/>
-        <column name="financing_fee_amount" required="false" type="VARCHAR"/>
-        <column name="financing_monthly_payment" required="false" type="VARCHAR"/>
-        <column name="financing_term" required="false" type="VARCHAR"/>
-        <column name="financing_total_cost" required="false" type="VARCHAR"/>
-        <column name="gross_amount" required="false" type="VARCHAR"/>
-        <column name="fee_amount" required="false" type="VARCHAR"/>
-        <column name="settle_amount" required="false" type="VARCHAR"/>
-        <column name="tax_amount" required="false" type="VARCHAR"/>
-        <column name="exchange_rate" required="false" type="VARCHAR"/>
-        <column name="mc_fee" required="false" type="VARCHAR"/>
-        <column name="mc_gross" required="false" type="VARCHAR"/>
-
-        <column name="bank_account_iban" required="false" type="VARCHAR"/>
-        <column name="bank_account_bic" required="false" type="VARCHAR"/>
-        <column name="account_owner" required="false" type="VARCHAR"/>
-        <column name="account_bank" required="false" type="VARCHAR"/>
-        <column name="custom" required="false" type="VARCHAR"/>
-        <column name="mandate_id" required="false" type="VARCHAR"/>
-        <column name="date_of_signature" required="false" type="VARCHAR"/>
-        <column name="mdt_seq_type" required="false" type="VARCHAR"/>
-        <column name="bank_account_pban" required="false" type="VARCHAR"/>
-        <column name="birthday" required="false" type="VARCHAR"/>
+        <column name="bank_account_iban" required="false" type="VARCHAR" size="255"/>
+        <column name="bank_account_bic" required="false" type="VARCHAR" size="255"/>
+        <column name="account_owner" required="false" type="VARCHAR" size="255"/>
+        <column name="account_bank" required="false" type="VARCHAR" size="255"/>
+        <column name="custom" required="false" type="VARCHAR" size="255"/>
+        <column name="mandate_id" required="false" type="VARCHAR" size="255"/>
+        <column name="date_of_signature" required="false" type="VARCHAR" size="255"/>
+        <column name="mdt_seq_type" required="false" type="VARCHAR" size="255"/>
+        <column name="bank_account_pban" required="false" type="VARCHAR" size="255"/>
+        <column name="birthday" required="false" type="VARCHAR" size="255"/>
         <column name="age" required="false" type="INTEGER"/>
         <column name="customer_transaction_id" required="false" type="INTEGER"/>
 
-        <column name="shopping_basket_category" required="false" type="VARCHAR"/>
-        <column name="shipping_first_name" required="false" type="VARCHAR"/>
-        <column name="shipping_last_name" required="false" type="VARCHAR"/>
-        <column name="shipping_company" required="false" type="VARCHAR"/>
-        <column name="shipping_address_addition" required="false" type="VARCHAR"/>
-        <column name="shipping_street" required="false" type="VARCHAR"/>
-        <column name="shipping_street_number" required="false" type="VARCHAR"/>
-        <column name="shipping_zip" required="false" type="VARCHAR"/>
-        <column name="shipping_city" required="false" type="VARCHAR"/>
-        <column name="shipping_country_code" required="false" type="VARCHAR"/>
-        <column name="shipping_email" required="false" type="VARCHAR"/>
-        <column name="age_accepted" required="false" type="VARCHAR"/>
-        <column name="payment_purpose" required="false" type="VARCHAR"/>
-        <column name="payment_guarantee" required="false" type="VARCHAR"/>
+        <column name="shopping_basket_category" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_first_name" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_last_name" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_company" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_address_addition" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_street" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_street_number" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_zip" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_city" required="false" type="VARCHAR" size="255"/>
+        <column name="shipping_country_code" required="false" type="VARCHAR" size="3"/>
+        <column name="shipping_email" required="false" type="VARCHAR" size="255"/>
+        <column name="age_accepted" required="false" type="VARCHAR" size="255"/>
+        <column name="payment_purpose" required="false" type="VARCHAR" size="255"/>
+        <column name="payment_guarantee" required="false" type="VARCHAR" size="255"/>
 
         <foreign-key name="spy_payment_computop_detail-id_payment_computop" foreignTable="spy_payment_computop" phpName="SpyPaymentComputop">
             <reference foreign="id_payment_computop" local="id_payment_computop"/>
@@ -125,14 +123,14 @@
 
     <table name="spy_payment_computop_api_log">
         <column name="id_payment_compitop_api_log" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-        <column name="method" required="false" type="VARCHAR"/>
-        <column name="status" required="false" type="VARCHAR"/>
+        <column name="method" required="false" type="VARCHAR" size="255"/>
+        <column name="status" required="false" type="VARCHAR" size="255"/>
         <column name="code" required="true" type="INTEGER"/>
-        <column name="description" required="false" type="VARCHAR"/>
-        <column name="trans_id" required="false" type="VARCHAR"/>
-        <column name="pay_id" required="false" type="VARCHAR"/>
-        <column name="x_id" required="false" type="VARCHAR"/>
-        <column name="m_id" required="false" type="VARCHAR"/>
+        <column name="description" required="false" type="VARCHAR" size="255"/>
+        <column name="trans_id" required="false" type="VARCHAR" size="255"/>
+        <column name="pay_id" required="false" type="VARCHAR" size="255"/>
+        <column name="x_id" required="false" type="VARCHAR" size="255"/>
+        <column name="m_id" required="false" type="VARCHAR" size="255"/>
 
         <behavior name="timestampable"/>
 
@@ -145,14 +143,14 @@
 
     <table name="spy_payment_computop_crif_details">
         <column name="id_payment_compitop_crif_details" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-        <column name="mid" required="false" type="VARCHAR"/>
-        <column name="xid" required="false" type="VARCHAR"/>
-        <column name="status" required="false" type="VARCHAR"/>
-        <column name="description" required="false" type="VARCHAR"/>
-        <column name="code" required="false" type="VARCHAR"/>
-        <column name="result" required="true" type="VARCHAR"/>
+        <column name="mid" required="false" type="VARCHAR" size="255"/>
+        <column name="xid" required="false" type="VARCHAR" size="255"/>
+        <column name="status" required="false" type="VARCHAR" size="255"/>
+        <column name="description" required="false" type="VARCHAR" size="255"/>
+        <column name="code" required="false" type="VARCHAR" size="255"/>
+        <column name="result" required="true" type="VARCHAR" size="255"/>
         <column name="limit" required="false" type="INTEGER"/>
-        <column name="instruction" required="false" type="VARCHAR"/>
+        <column name="instruction" required="false" type="VARCHAR" size="255"/>
 
         <behavior name="timestampable"/>
 
@@ -166,7 +164,7 @@
     <table name="spy_payment_computop_order_item">
         <column name="fk_payment_computop" type="INTEGER" primaryKey="true"/>
         <column name="fk_sales_order_item" type="INTEGER" primaryKey="true"/>
-        <column name="status" required="true" type="VARCHAR"/>
+        <column name="status" required="true" type="VARCHAR" size="255"/>
         <column name="is_payment_confirmed" required="true" type="BOOLEAN" default="false"/>
 
         <behavior name="timestampable"/>
@@ -190,6 +188,9 @@
         <column name="description" required="false" type="VARCHAR" size="256"/>
         <column name="type" required="false" type="VARCHAR" size="20"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
+        <column name="amountauth" required="false" type="VARCHAR" size="256"/>
+        <column name="amountcap" required="false" type="VARCHAR" size="256"/>
+        <column name="amountcred" required="false" type="VARCHAR" size="256"/>
 
         <id-method-parameter value="spy_payment_computop_notification_pk_seq"/>
     </table>

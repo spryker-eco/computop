@@ -16,6 +16,9 @@ class RefundSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'REFUND';
 
     /**

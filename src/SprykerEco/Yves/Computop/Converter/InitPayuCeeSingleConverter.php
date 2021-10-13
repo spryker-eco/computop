@@ -23,9 +23,9 @@ class InitPayuCeeSingleConverter extends AbstractInitConverter
      */
     protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header): TransferInterface
     {
-        $computopPayuCeeSingleInitResponseTransfer = new ComputopPayuCeeSingleInitResponseTransfer();
-        $computopPayuCeeSingleInitResponseTransfer->fromArray($decryptedArray, true);
-        $computopPayuCeeSingleInitResponseTransfer->setHeader($this->updateResponseHeader($header));
+        $computopPayuCeeSingleInitResponseTransfer = (new ComputopPayuCeeSingleInitResponseTransfer())
+            ->fromArray($decryptedArray, true)
+            ->setHeader($this->updateResponseHeader($header));
 
         $fieldMap = [
             'refNr' => ComputopApiConfig::REF_NR,

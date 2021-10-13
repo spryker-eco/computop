@@ -16,14 +16,44 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeInterface;
 
 class EasyCreditStatusHandler extends AbstractHandler
 {
+    /**
+     * @var string
+     */
     protected const PLAN = 'ratenplan';
+
+    /**
+     * @var string
+     */
     protected const PAY_RENT = 'zinsen';
+
+    /**
+     * @var string
+     */
     protected const ACCRUED_INTEREST = 'anfallendeZinsen';
+
+    /**
+     * @var string
+     */
     protected const TOTAL = 'gesamtsumme';
+
+    /**
+     * @var string
+     */
     protected const DECISION = 'entscheidung';
+
+    /**
+     * @var string
+     */
     protected const DECISION_RESULT = 'entscheidungsergebnis';
+
+    /**
+     * @var string
+     */
     protected const DECISION_RESULT_GREEN = 'GRUEN';
 
+    /**
+     * @var string
+     */
     protected const COMPUTOP_EASY_CREDIT_EXPENSE_TYPE = 'COMPUTOP_EASY_CREDIT_EXPENSE_TYPE';
 
     /**
