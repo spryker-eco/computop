@@ -165,7 +165,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      */
     protected function addCustomerToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getCustomer()->getIsGuest() !== null && !$quoteTransfer->getCustomer()->getIsGuest()) {
+        if ($quoteTransfer->getCustomer()->getIdCustomer() !== null) {
             return $quoteTransfer;
         }
 
