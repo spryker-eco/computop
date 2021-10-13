@@ -79,7 +79,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     /**
      * @var string
      */
-    public const PAYPAL_EXPRESS_INIT_PLUGINS = 'PLUGINS_PAYPAL_EXPRESS_INIT';
+    public const PLUGINS_PAYPAL_EXPRESS_INIT = 'PLUGINS_PAYPAL_EXPRESS_INIT';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -201,7 +201,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPayPalExpressInitPlugins(Container $container): Container
     {
-        $container->set(static::PAYPAL_EXPRESS_INIT_PLUGINS, function () {
+        $container->set(static::PLUGINS_PAYPAL_EXPRESS_INIT, function () {
             return $this->getPayPalExpressInitPlugins();
         });
 

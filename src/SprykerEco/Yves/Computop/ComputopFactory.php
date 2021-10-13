@@ -661,6 +661,6 @@ class ComputopFactory extends AbstractFactory
      */
     public function getPayPalExpressInitAggregatorPlugins(): array
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::PAYPAL_EXPRESS_INIT_PLUGINS);
+        return $this->getProvidedDependency(ComputopDependencyProvider::PLUGINS_PAYPAL_EXPRESS_INIT);
     }
 }
