@@ -45,7 +45,7 @@ class RefundManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Propel\Runtime\Collection\ObjectCollection|array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem>
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
     protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer): ObjectCollection
     {
