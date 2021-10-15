@@ -18,7 +18,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     use TransactionTrait;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
      */
     protected $queryContainer;
 
