@@ -43,6 +43,11 @@
             </transition>
 
             <transition condition="Computop/IsAuthorized" happy="true">
+                <source>new</source>
+                <target>authorized</target>
+            </transition>
+
+            <transition condition="Computop/IsAuthorized" happy="true">
                 <source>authorize request</source>
                 <target>authorized</target>
             </transition>

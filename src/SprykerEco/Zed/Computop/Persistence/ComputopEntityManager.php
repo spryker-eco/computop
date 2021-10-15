@@ -7,8 +7,10 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
@@ -32,10 +34,9 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->filterByXId($computopNotificationTransfer->getXId())
             ->findOneOrCreate();
 
-        $paymentComputopNotificationEntity->fromArray(
-            $computopNotificationTransfer->modifiedToArray()
-        );
-        $paymentComputopNotificationEntity->save();
+        $paymentComputopNotificationEntity
+            ->fromArray($computopNotificationTransfer->modifiedToArray())
+            ->save();
     }
 
     /**
@@ -46,7 +47,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
         ComputopNotificationTransfer $computopNotificationTransfer,
-        ?string $orderItemsStatus
+        ?string $orderItemsStatus = null
     ): bool {
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities */
         $paymentComputopOrderItemEntities = $this->getFactory()
@@ -72,25 +73,20 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-     * @param string $orderItemsStatus
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null $paymentComputopEntity
      *
      * @return void
      */
-    public function saveComputopPayuCeeSingleInitResponse(
-        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
-        string $orderItemsStatus
+    public function updatePaymentComputopEntityByComputopApiResponseHeaderTransfer(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer,
+        ?SpyPaymentComputop $paymentComputopEntity = null
     ): void {
-        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->requireHeader()
-            ->getHeader()
-                ->requireTransId()
-                ->requirePayId()
-                ->requireXid();
-
-        $paymentComputopEntity = $this->getFactory()
-            ->createPaymentComputopQuery()
-            ->filterByTransId($computopApiResponseHeaderTransfer->getTransId())
-            ->findOne();
+        if (!isset($paymentComputopEntity)) {
+            $paymentComputopEntity = $this->getFactory()->createPaymentComputopQuery()
+                ->filterByTransId($computopApiResponseHeaderTransfer->getTransId())
+                ->findOne();
+        }
 
         if (!$paymentComputopEntity) {
             return;
@@ -100,13 +96,6 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->setPayId($computopApiResponseHeaderTransfer->getPayId())
             ->setXId($computopApiResponseHeaderTransfer->getXId())
             ->save();
-
-        $this->savePaymentComputopDetailEntity(
-            $paymentComputopEntity->getSpyPaymentComputopDetail(),
-            $computopPayuCeeSingleInitResponseTransfer
-        );
-
-        $this->savePaymentComputopOrderItems($paymentComputopEntity->getSpyPaymentComputopOrderItems(), $orderItemsStatus);
     }
 
     /**
@@ -115,7 +104,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(
+    public function updatePaymentComputopDetailEntityByComputopApiResponseHeaderTransfer(
         SpyPaymentComputopDetail $paymentComputopDetailEntity,
         ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
     ): void {
@@ -134,7 +123,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
      *
      * @return void
      */
-    public function savePaymentComputopOrderItems(ObjectCollection $paymentComputopOrderItemEntities, string $paymentStatus): void
+    public function updatePaymentComputopOrderItemsStatus(ObjectCollection $paymentComputopOrderItemEntities, string $paymentStatus): void
     {
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItem) {
             $paymentComputopOrderItem->setStatus($paymentStatus);
