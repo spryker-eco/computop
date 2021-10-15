@@ -60,7 +60,7 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
         }
 
         $this->setPaymentEntity($computopApiResponseHeaderTransfer->getTransId());
-        if (!$this->getPaymentEntity()) {
+        if ($this->getPaymentEntity() === null) {
             return $quoteTransfer;
         }
 
