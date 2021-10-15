@@ -64,7 +64,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     }
 
     /**
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null
      */
     protected function getPaymentEntity()
     {
