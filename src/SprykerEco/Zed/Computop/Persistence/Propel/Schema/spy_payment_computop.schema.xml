@@ -185,12 +185,12 @@
         <column name="x_id" required="false" type="VARCHAR" size="100"/>
         <column name="code" required="false" type="VARCHAR" size="20"/>
         <column name="status" required="false" type="VARCHAR" size="20"/>
-        <column name="description" required="false" type="VARCHAR" size="256"/>
+        <column name="description" required="false" type="VARCHAR" size="255"/>
         <column name="type" required="false" type="VARCHAR" size="20"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
-        <column name="amountauth" required="false" type="VARCHAR" size="256"/>
-        <column name="amountcap" required="false" type="VARCHAR" size="256"/>
-        <column name="amountcred" required="false" type="VARCHAR" size="256"/>
+        <column name="amountauth" required="false" type="VARCHAR" size="255"/>
+        <column name="amountcap" required="false" type="VARCHAR" size="255"/>
+        <column name="amountcred" required="false" type="VARCHAR" size="255"/>
 
         <id-method-parameter value="spy_payment_computop_notification_pk_seq"/>
     </table>

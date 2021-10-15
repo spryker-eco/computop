@@ -82,7 +82,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer,
         ?SpyPaymentComputop $paymentComputopEntity = null
     ): void {
-        if (!isset($paymentComputopEntity)) {
+        if (!$paymentComputopEntity) {
             $paymentComputopEntity = $this->getFactory()->createPaymentComputopQuery()
                 ->filterByTransId($computopApiResponseHeaderTransfer->getTransId())
                 ->findOne();

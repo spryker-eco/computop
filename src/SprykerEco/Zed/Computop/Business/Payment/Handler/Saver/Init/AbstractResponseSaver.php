@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
@@ -60,7 +61,10 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
      */
     protected function setPaymentEntity($transactionId)
     {
-        $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
+        $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)
+            ->joinWith('SpyPaymentComputopDetail', Criteria::LEFT_JOIN)
+            ->joinWith('SpyPaymentComputopOrderItems', Criteria::LEFT_JOIN)
+            ->findOne();
     }
 
     /**

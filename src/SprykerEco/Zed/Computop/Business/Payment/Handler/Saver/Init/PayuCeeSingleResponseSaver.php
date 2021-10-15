@@ -116,7 +116,7 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
     protected function getPayuCeeSingleInitResponseFromQuoteTransfer(QuoteTransfer $quoteTransfer): ?ComputopPayuCeeSingleInitResponseTransfer
     {
         $computopPayuCeeSinglePaymentTransfer = $this->getComputopPayuCeeSinglePaymentTransferFromQuote($quoteTransfer);
-        if (!($computopPayuCeeSinglePaymentTransfer && $computopPayuCeeSinglePaymentTransfer->getPayuCeeSingleInitResponse())) {
+        if (!$computopPayuCeeSinglePaymentTransfer || !$computopPayuCeeSinglePaymentTransfer->getPayuCeeSingleInitResponse()) {
             return null;
         }
 
