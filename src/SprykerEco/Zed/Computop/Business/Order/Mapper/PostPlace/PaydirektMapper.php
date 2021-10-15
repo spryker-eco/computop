@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper\PostPlace;
 
-use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface;
 
@@ -28,7 +26,7 @@ class PaydirektMapper implements MapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
      */
-    public function getComputopTransfer(PaymentTransfer $paymentTransfer): ComputopPaydirektPaymentTransfer
+    public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
         return $paymentTransfer->getComputopPaydirekt();
     }
@@ -38,7 +36,7 @@ class PaydirektMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer): TransferInterface
+    public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
         return $this->getComputopTransfer($paymentTransfer)->getPaydirektInitResponse();
     }

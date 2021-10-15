@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -9,7 +8,6 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Logger;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 
 interface ComputopResponseLoggerInterface
 {

@@ -8,6 +8,10 @@
 namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -23,7 +27,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     public function savePaymentComputopNotification(ComputopNotificationTransfer $computopNotificationTransfer): void
     {
         $paymentComputopNotificationEntity = $this->getFactory()
-            ->createPaymentComputopNotificationQuery()
+            ->getPaymentComputopNotificationQuery()
             ->filterByPayId($computopNotificationTransfer->getPayId())
             ->filterByTransId($computopNotificationTransfer->getTransId())
             ->filterByXId($computopNotificationTransfer->getXId())
@@ -44,7 +48,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         ComputopNotificationTransfer $computopNotificationTransfer
     ): bool {
         $paymentComputopOrderItemEntities = $this->getFactory()
-            ->createPaymentComputopOrderItemQuery()
+            ->getPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
                 ->filterByTransId($computopNotificationTransfer->getTransId())
                 ->filterByPayId($computopNotificationTransfer->getPayId())
@@ -62,5 +66,76 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         return true;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentDetail(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
+    ): void {
+        $computopPaymentComputopDetailEntity = $this->getFactory()
+            ->getPaymentComputopDetailQuery()
+            ->filterByIdPaymentComputop($computopPaymentComputopDetailTransfer->getIdPaymentComputop())
+            ->findOne();
+
+        if ($computopPaymentComputopDetailEntity === null) {
+            return;
+        }
+
+        $computopPaymentComputopDetailEntity = $this->getFactory()
+            ->createComputopMapper()
+            ->mapComputopPaymentComputopDetailTransferToPaymentComputopDetailEntity(
+                $computopPaymentComputopDetailTransfer,
+                $computopPaymentComputopDetailEntity
+            );
+
+        $computopPaymentComputopDetailEntity->save();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     *
+     * @return void
+     */
+    public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void
+    {
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->getPaymentComputopQuery()
+            ->filterByTransId($computopPaymentComputopTransfer->getTransId())
+            ->findOne();
+
+        if ($computopPaymentComputopEntity === null) {
+            return;
+        }
+
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->createComputopMapper()
+            ->mapComputopPaymentTransferToComputopPaymentEntity(
+                $computopPaymentComputopTransfer,
+                $computopPaymentComputopEntity
+            );
+
+        $computopPaymentComputopEntity->save();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentComputopOrderItem(
+        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+    ): void {
+        $paymentComputopOrderItemEntity = $this->getFactory()
+            ->createComputopMapper()
+            ->mapComputopPaymentComputopOrderItemTransferToPaymentComputopOrderItemEntity(
+                $computopPaymentComputopOrderItemTransfer,
+                new SpyPaymentComputopOrderItem(),
+            );
+
+        $paymentComputopOrderItemEntity->save();
     }
 }

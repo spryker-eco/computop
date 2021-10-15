@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -15,27 +14,74 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig
 {
+    /**
+     * @var string
+     */
     public const OMS_STATUS_NEW = 'new';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_INITIALIZED = 'init';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_AUTHORIZED = 'authorized';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_CAPTURED = 'captured';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_CAPTURING_FAILED = 'capture failed';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_CANCELLED = 'cancelled';
+    /**
+     * @var string
+     */
     public const OMS_STATUS_REFUNDED = 'refunded';
 
+    /**
+     * @var string
+     */
     public const AUTHORIZE_METHOD = 'AUTHORIZE';
+    /**
+     * @var string
+     */
     public const CAPTURE_METHOD = 'CAPTURE';
+    /**
+     * @var string
+     */
     public const REVERSE_METHOD = 'REVERSE';
+    /**
+     * @var string
+     */
     public const INQUIRE_METHOD = 'INQUIRE';
+    /**
+     * @var string
+     */
     public const REFUND_METHOD = 'REFUND';
 
     //Events
+    /**
+     * @var string
+     */
     public const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
+    /**
+     * @var string
+     */
     public const COMPUTOP_OMS_EVENT_AUTHORIZE = 'authorize';
 
     /**
      * Refund with shipment price
+     *
+     * @var bool
      */
     public const COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED = true;
 

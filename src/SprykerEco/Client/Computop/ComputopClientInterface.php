@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -103,6 +102,32 @@ interface ComputopClientInterface
 
     /**
      * Specification:
+     * - Makes Zed request.
+     * - Persists `PayPal Express init` response to the database.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * Specification:
+     * - Persists `PayPal Express complete` response to the database.
+     * - Makes Zed request.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * Specification:
      * - Persists DirectDebit response to the database.
      *
      * @api
@@ -176,4 +201,14 @@ interface ComputopClientInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
+
+    /**
+     * Specification:
+     * - Returns PayPalExpress ClientId from config.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalExpressClientId(): string;
 }

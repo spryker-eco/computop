@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
 use Generated\Shared\Transfer\ComputopApiRequestTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Yves\Router\Router\Router;
@@ -69,7 +70,6 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    //phpcs:ignore
     abstract protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer);
 
     /**
@@ -104,7 +104,6 @@ abstract class AbstractMapper implements MapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    //phpcs:ignore
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
@@ -121,7 +120,10 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setUrlNotify(
             $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
         );
-        $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
+
+        if (!$computopPaymentTransfer instanceof ComputopPayPalExpressPaymentTransfer) {
+            $computopPaymentTransfer->setShippingZip($this->getZipCode($quoteTransfer));
+        }
 
         return $computopPaymentTransfer;
     }

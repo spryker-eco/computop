@@ -29,7 +29,6 @@ class ComputopToCalculationFacadeBridge implements ComputopToCalculationFacadeIn
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    //phpcs:ignore
     public function recalculateOrder(OrderTransfer $orderTransfer)
     {
         return $this->calculationFacade->recalculateOrder($orderTransfer);

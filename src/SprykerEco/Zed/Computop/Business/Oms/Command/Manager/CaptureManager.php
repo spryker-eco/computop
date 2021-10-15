@@ -8,15 +8,16 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Propel\Runtime\Collection\ObjectCollection;
 
 class CaptureManager extends AbstractManager
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
-    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer): array
+    public function getItemsBeforeCaptureState(OrderTransfer $orderTransfer): ObjectCollection
     {
         return $this
             ->queryContainer
@@ -32,9 +33,9 @@ class CaptureManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
-    public function getAllItems(OrderTransfer $orderTransfer): array
+    public function getAllItems(OrderTransfer $orderTransfer): ObjectCollection
     {
         return $this
             ->queryContainer

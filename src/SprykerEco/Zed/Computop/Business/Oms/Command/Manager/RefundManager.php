@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Propel\Runtime\Collection\ObjectCollection;
 
 class RefundManager extends AbstractManager
 {
@@ -44,9 +45,9 @@ class RefundManager extends AbstractManager
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
-    protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer): array
+    protected function getItemsBeforeRefundState(OrderTransfer $orderTransfer): ObjectCollection
     {
         return $this
             ->queryContainer

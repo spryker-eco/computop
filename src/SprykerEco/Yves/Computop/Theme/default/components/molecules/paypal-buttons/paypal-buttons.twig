@@ -1,0 +1,37 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'paypal-buttons',
+    tag: 'paypal-buttons',
+} %}
+
+{% define data = {
+    clientId: required,
+    currency: required,
+    scriptSrc: 'https://www.paypal.com/sdk/js?client-id=' ~ data.clientId ~ '&currency=' ~ data.currency ~ '&intent=authorize',
+} %}
+
+{% define attributes = {
+    'order-data-url': '/computop/pay-pal-express-prepare',
+} %}
+
+{% block body %}
+    <div class="{{ config.jsName }}__buttons-container"></div>
+
+    {% block scriptLoader %}
+        {% include molecule('script-loader') with {
+            class: config.jsName ~ '__script-loader',
+            attributes: {
+                src: data.scriptSrc,
+            },
+        } only %}
+    {% endblock %}
+
+    {% set ajaxLoaderModifiers = ['big'] %}
+    {% block ajaxLoader %}
+        {% include molecule('ajax-loader') with {
+            class: config.jsName ~ '__ajax-loader',
+            modifiers: ajaxLoaderModifiers,
+        } only %}
+    {% endblock %}
+{% endblock %}

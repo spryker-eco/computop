@@ -12,6 +12,7 @@ use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use Spryker\Yves\Kernel\Plugin\Pimple;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientBridge;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientBridge;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
@@ -19,25 +20,66 @@ use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBri
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_COMPUTOP = 'CLIENT_COMPUTOP';
+    /**
+     * @var string
+     */
     public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+    /**
+     * @var string
+     */
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
+    /**
+     * @var string
+     */
     public const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
+    /**
+     * @var string
+     */
     public const STORE = 'STORE';
+    /**
+     * @var string
+     */
     public const CLIENT_CALCULATION = 'CLIENT_CALCULATION';
+    /**
+     * @var string
+     */
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
+    /**
+     * @var string
+     */
+    public const CLIENT_COMPUTOP_API = 'CLIENT_COMPUTOP_API';
+    /**
+     * @var string
+     */
+    public const CLIENT_SHIPMENT = 'CLIENT_SHIPMENT';
 
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
      * @uses \Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
+     *
+     * @var string
      */
     public const SERVICE_ROUTER = 'routers';
 
     /**
      * @uses \Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     *
+     * @var string
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
+
+    /**
+     * @var string
+     */
+    public const PLUGINS_PAYPAL_EXPRESS_INIT = 'PLUGINS_PAYPAL_EXPRESS_INIT';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -76,6 +118,8 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addRequestStack($container);
         $container = $this->addUtilEncodingService($container);
         $container = $this->addCountryClient($container);
+        $container = $this->addComputopApiClient($container);
+        $container = $this->addPayPalExpressInitPlugins($container);
 
         return $container;
     }
@@ -134,5 +178,41 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         });
 
         return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addComputopApiClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_COMPUTOP_API, function (Container $container) {
+            return new ComputopToComputopApiClientBridge($container->getLocator()->computopApi()->client());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addPayPalExpressInitPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PAYPAL_EXPRESS_INIT, function () {
+            return $this->getPayPalExpressInitPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
+     */
+    protected function getPayPalExpressInitPlugins(): array
+    {
+        return [];
     }
 }

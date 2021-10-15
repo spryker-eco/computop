@@ -16,6 +16,9 @@ class InquireSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'INQUIRE';
 
     /**

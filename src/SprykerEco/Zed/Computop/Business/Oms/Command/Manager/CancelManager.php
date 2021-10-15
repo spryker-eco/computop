@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\Collection\ObjectCollection;
 
 class CancelManager extends AbstractManager implements CancelManagerInterface
 {
@@ -34,9 +35,9 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
-    public function getCanceledItems(OrderTransfer $orderTransfer): array
+    public function getCanceledItems(OrderTransfer $orderTransfer): ObjectCollection
     {
         return $this
             ->queryContainer

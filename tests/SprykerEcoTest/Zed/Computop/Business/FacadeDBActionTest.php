@@ -10,6 +10,7 @@ namespace SprykerEcoTest\Zed\Computop\Business;
 use ArrayObject;
 use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
@@ -24,6 +25,8 @@ use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopSofortInitResponseTransfer;
@@ -46,7 +49,9 @@ use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
+use SprykerEco\Zed\Computop\Persistence\ComputopEntityManager;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
+use SprykerEco\Zed\Computop\Persistence\ComputopRepository;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
@@ -58,26 +63,70 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
  */
 class FacadeDBActionTest extends AbstractSetUpTest
 {
+    /**
+     * @var string
+     */
     public const METHOD_VALUE = 'METHOD';
+    /**
+     * @var string
+     */
     public const PAY_ID_VALUE = 'PAY_ID_VALUE';
+    /**
+     * @var string
+     */
     public const X_ID_VALUE = 'X_ID_VALUE';
+    /**
+     * @var string
+     */
     public const M_ID_VALUE = 'M_ID_VALUE';
+    /**
+     * @var string
+     */
     public const TRANS_ID_VALUE = 'TRANS_ID_VALUE';
+    /**
+     * @var string
+     */
     public const STATUS_VALUE = 'OK';
+    /**
+     * @var string
+     */
     public const CODE_VALUE = '00000000';
+    /**
+     * @var string
+     */
     public const DESCRIPTION_VALUE = 'DESCRIPTION_VALUE';
+    /**
+     * @var int
+     */
     public const AMOUNT_VALUE = 15000;
+    /**
+     * @var string
+     */
     public const CURRENCY_VALUE = 'EUR';
 
+    /**
+     * @var int
+     */
     public const ID_SALES_ORDER_ITEM = 1;
 
+    /**
+     * @var string
+     */
     public const STATUS_VALUE_SUCCESS = 'SUCCESS';
+    /**
+     * @var string
+     */
     public const CRIF_GREEN_RESULT = 'GREEN';
 
     /**
      * @var int
      */
     protected $salesOrderItemId;
+
+    /**
+     * @var \SprykerEcoTest\Zed\Computop\ComputopZedTester
+     */
+    protected $tester;
 
     /**
      * @return void
@@ -179,7 +228,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testSavePayPalInitResponse()
+    public function testSavePayPalInitResponse(): void
     {
         $this->setUpDB();
         $service = new ComputopFacade();
@@ -190,6 +239,23 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         $this->assertSame(self::PAY_ID_VALUE, $savedData->getPayId());
         $this->assertSame(self::X_ID_VALUE, $savedData->getXId());
+    }
+
+    /**
+     * @return void
+     */
+    public function testSavePayPalExpressInitResponse(): void
+    {
+        //Arrange
+        $this->setUpDB();
+
+        //Act
+        $this->tester->getFacade()->savePayPalExpressInitResponse($this->getQuoteTrasfer());
+
+        //Assert
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        $this->assertSame(static::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(static::X_ID_VALUE, $savedData->getXId());
     }
 
     /**
@@ -364,6 +430,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopPayPalTransfer = new ComputopPayPalPaymentTransfer();
         $computopPayPalTransfer->setPayPalInitResponse($computopPayPalInitTransfer);
 
+        $computopPayPalExpressInitTransfer = new ComputopPayPalExpressInitResponseTransfer();
+        $computopPayPalExpressInitTransfer->setHeader($computopHeader);
+        $computopPayPalExpressTransfer = new ComputopPayPalExpressPaymentTransfer();
+        $computopPayPalExpressTransfer->setPayPalExpressInitResponse($computopPayPalExpressInitTransfer);
+        $computopApiPayPalExpressCompleteResponseTransfer = new ComputopApiPayPalExpressCompleteResponseTransfer();
+        $computopApiPayPalExpressCompleteResponseTransfer->setHeader($computopHeader);
+        $computopPayPalExpressTransfer->setPayPalExpressCompleteResponse($computopApiPayPalExpressCompleteResponseTransfer);
+
         $computopDirectDebitInitTransfer = new ComputopDirectDebitInitResponseTransfer();
         $computopDirectDebitInitTransfer->setHeader($computopHeader);
         $computopDirectDebitTransfer = new ComputopDirectDebitPaymentTransfer();
@@ -388,6 +462,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopCreditCard($computopCredicCardTransfer);
         $paymentTransfer->setComputopPayNow($computopPayNowTransfer);
         $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
+        $paymentTransfer->setComputopPayPalExpress($computopPayPalExpressTransfer);
         $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
         $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
         $paymentTransfer->setPaymentSelection(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW);
@@ -418,6 +493,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getConfig',
                 'getMoneyFacade',
                 'getComputopApiFacade',
+                'getEntityManager',
+                'getRepository',
             ]
         );
 
@@ -432,6 +509,10 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->willReturn($moneyFacadeStub);
         $stub->method('getComputopApiFacade')
             ->willReturn($this->createComputopApiFacade());
+        $stub->method('getEntityManager')
+            ->willReturn(new ComputopEntityManager());
+        $stub->method('getRepository')
+            ->willReturn(new ComputopRepository());
 
         return $stub;
     }

@@ -21,4 +21,14 @@ class ComputopConfig extends AbstractBundleConfig
     {
         return (bool)$this->get(ComputopConstants::CRIF_ENABLED);
     }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalExpressClientId(): string
+    {
+        return $this->get(ComputopConstants::PAY_PAL_CLIENT_ID);
+    }
 }

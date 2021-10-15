@@ -136,7 +136,7 @@ class OrderManager implements OrderManagerInterface
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopTransfer */
         $computopTransfer = $this->computopTransfer;
         $paymentEntity->setClientIp($computopTransfer->getClientIp());
-        $paymentEntity->setPaymentMethod($computopTransfer->getPaymentMethod());
+        $paymentEntity->setPaymentMethod($paymentTransfer->getPaymentMethod());
         $paymentEntity->setReference($saveOrderTransfer->getOrderReference());
         $paymentEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
         $paymentEntity->setTransId($computopTransfer->getTransId());

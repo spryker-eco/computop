@@ -8,6 +8,9 @@
 namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 
 interface ComputopEntityManagerInterface
 {
@@ -26,4 +29,27 @@ interface ComputopEntityManagerInterface
     public function updatePaymentComputopOrderItemPaymentConfirmation(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): bool;
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentDetail(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
+    ): void;
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     *
+     * @return void
+     */
+    public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void;
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentComputopOrderItem(ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer): void;
 }

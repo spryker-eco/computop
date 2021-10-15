@@ -7,31 +7,42 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetailQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopNotificationQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
+use SprykerEco\Zed\Computop\Persistence\Propel\Mapper\ComputopMapper;
 
 /**
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
  */
 class ComputopPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function createPaymentComputopQuery(): SpyPaymentComputopQuery
+    public function getPaymentComputopQuery(): SpyPaymentComputopQuery
     {
         return SpyPaymentComputopQuery::create();
     }
 
     /**
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetailQuery
+     */
+    public function getPaymentComputopDetailQuery(): SpyPaymentComputopDetailQuery
+    {
+        return SpyPaymentComputopDetailQuery::create();
+    }
+
+    /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    public function createPaymentComputopOrderItemQuery(): SpyPaymentComputopOrderItemQuery
+    public function getPaymentComputopOrderItemQuery(): SpyPaymentComputopOrderItemQuery
     {
         return SpyPaymentComputopOrderItemQuery::create();
     }
@@ -39,7 +50,7 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function createSpySalesOrderItemQuery(): SpySalesOrderItemQuery
+    public function getSpySalesOrderItemQuery(): SpySalesOrderItemQuery
     {
         return SpySalesOrderItemQuery::create();
     }
@@ -47,8 +58,16 @@ class ComputopPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopNotificationQuery
      */
-    public function createPaymentComputopNotificationQuery(): SpyPaymentComputopNotificationQuery
+    public function getPaymentComputopNotificationQuery(): SpyPaymentComputopNotificationQuery
     {
         return SpyPaymentComputopNotificationQuery::create();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Persistence\Propel\Mapper\ComputopMapper
+     */
+    public function createComputopMapper(): ComputopMapper
+    {
+        return new ComputopMapper();
     }
 }

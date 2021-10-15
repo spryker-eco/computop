@@ -36,17 +36,53 @@ class ComputopZedTester extends Actor
 {
     use _generated\ComputopZedTesterActions;
 
+    /**
+     * @var string
+     */
     protected const TEST_STATE_MACHINE_NAME = 'Test01';
+    /**
+     * @var string
+     */
     protected const TRANS_ID_VALUE = 'f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7';
+    /**
+     * @var string
+     */
     protected const PAY_ID_VALUE = 'e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8';
+    /**
+     * @var string
+     */
     protected const X_ID_VALUE = 'b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5';
+    /**
+     * @var string
+     */
     protected const REQ_ID_VALUE = 'a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4';
+    /**
+     * @var string
+     */
     protected const CLIENT_IP = '127.0.0.1';
+    /**
+     * @var string
+     */
     protected const TEST_PAYMENT_METHOD = 'computopCreditCard';
+    /**
+     * @var string
+     */
     protected const ORDER_ITEM_STATUS = 'test';
+    /**
+     * @var string
+     */
     protected const NOTIFICATION_CODE = '000000';
+    /**
+     * @var string
+     */
     protected const NOTIFICATION_STATUS = '000000';
+    /**
+     * @var string
+     */
     protected const NOTIFICATION_DESCRIPTION = 'Authentication completed correctly.';
+    /**
+     * @var string
+     */
     protected const NOTIFICATION_TYPE = 'SSL';
 
     /**

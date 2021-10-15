@@ -16,6 +16,9 @@ class AuthorizeSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'AUTHORIZE';
 
     /**

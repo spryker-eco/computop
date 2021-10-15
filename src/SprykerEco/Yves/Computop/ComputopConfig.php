@@ -15,10 +15,22 @@ use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 
 class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInterface
 {
+    /**
+     * @var string
+     */
     public const FINISH_AUTH = 'Y'; //Only with ETM: Transmit value <Y> in order to stop the renewal of guaranteed authorizations and rest amounts after partial captures.
+    /**
+     * @var string
+     */
     public const RESPONSE_ENCRYPT_TYPE = 'encrypt';
 
+    /**
+     * @var string
+     */
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
+    /**
+     * @var int
+     */
     protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
 
     /**
@@ -231,5 +243,17 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getMaxOrderDescriptionItemsForPayPalPaymentPage(): int
     {
         return static::PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS;
+    }
+
+    /**
+     * {@inheriDoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalMethod(): string
+    {
+        return $this->get(ComputopConstants::PAY_PAL_EXPRESS_PAYPAL_METHOD);
     }
 }

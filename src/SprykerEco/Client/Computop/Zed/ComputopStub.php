@@ -123,6 +123,36 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayPalExpressInitResponseAction()
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        $quoteTransfer = $this->zedStub->call('/computop/gateway/save-pay-pal-express-init-response', $quoteTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @uses \SprykerEco\Zed\Computop\Communication\Controller\GatewayController::savePayPalExpressCompleteResponseAction()
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        $quoteTransfer = $this->zedStub->call('/computop/gateway/save-pay-pal-express-complete-response', $quoteTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer

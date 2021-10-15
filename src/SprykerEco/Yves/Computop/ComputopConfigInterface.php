@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -119,4 +118,11 @@ interface ComputopConfigInterface
      * @return int
      */
     public function getMaxOrderDescriptionItemsForPayPalPaymentPage(): int;
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalMethod(): string;
 }

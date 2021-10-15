@@ -172,6 +172,30 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Saves PayPal Express Init Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Saves PayPal Express Complete Response and changes item's OMS status.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Saves DirectDebit Response to DB.
      *
      * @api

@@ -19,6 +19,9 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayPalMapper extends AbstractMapper
 {
+    /**
+     * @var int
+     */
     protected const PAYPAL_ITEM_DESCRIPTION_OFFSET = 2;
 
     /**

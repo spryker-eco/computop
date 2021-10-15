@@ -30,7 +30,6 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      *
      * @return \Generated\Shared\Transfer\PaymentTransfer
      */
-    //phpcs:ignore
     abstract protected function getComputopPayment(QuoteTransfer $quoteTransfer);
 
     /**

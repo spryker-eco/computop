@@ -16,6 +16,9 @@ class ReverseSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'REVERSE';
 
     /**

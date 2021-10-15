@@ -21,8 +21,10 @@ use SprykerEco\Yves\Computop\Converter\InitIdealConverter;
 use SprykerEco\Yves\Computop\Converter\InitPaydirektConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayNowConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
+use SprykerEco\Yves\Computop\Converter\InitPayPalExpressConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCalculationClientInterface;
+use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreInterface;
@@ -34,6 +36,7 @@ use SprykerEco\Yves\Computop\Form\DataProvider\EasyCreditFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\IdealFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PaydirektFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayNowFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayPalExpressFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
@@ -46,6 +49,12 @@ use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregator;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregatorInterface;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregator;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregatorInterface;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregator;
+use SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregatorInterface;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopEasyCreditPaymentHandler;
@@ -61,8 +70,11 @@ use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayNowMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalExpressMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -179,6 +191,14 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
+    public function createPayPalExpressFormDataProvider(): StepEngineFormDataProviderInterface
+    {
+        return new PayPalExpressFormDataProvider($this->getQuoteClient(), $this->createPayPalExpressMapper());
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
     public function createSofortFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new SofortFormDataProvider($this->getQuoteClient(), $this->createOrderSofortMapper());
@@ -265,6 +285,46 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressInitAggregatorInterface
+     */
+    public function createComputopPayPalExpressInitAggregator(): ComputopPayPalExpressInitAggregatorInterface
+    {
+        return new ComputopPayPalExpressInitAggregator(
+            $this->createComputopPaymentHandler(),
+            $this->createInitPayPalExpressConverter(),
+            $this->getQuoteClient(),
+            $this->getComputopClient(),
+            $this->createPayPalExpressToQuoteMapper(),
+            $this->getPayPalExpressInitAggregatorPlugins()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressPrepareAggregatorInterface
+     */
+    public function createComputopPayPalExpressPrepareAggregator(): ComputopPayPalExpressPrepareAggregatorInterface
+    {
+        return new ComputopPayPalExpressPrepareAggregator(
+            $this->getQuoteClient(),
+            $this->createPayPalExpressFormDataProvider(),
+            $this->getComputopApiClient(),
+            $this->getComputopApiService(),
+            $this->getComputopConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ExpressCheckout\ComputopPayPalExpressCompleteAggregatorInterface
+     */
+    public function createComputopPayPalExpressCompleteAggregator(): ComputopPayPalExpressCompleteAggregatorInterface
+    {
+        return new ComputopPayPalExpressCompleteAggregator(
+            $this->getComputopApiClient(),
+            $this->getComputopClient()
+        );
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
     public function createDirectDebitPaymentHandler(): ComputopPrePostPaymentHandlerInterface
@@ -335,6 +395,14 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
      */
+    public function createInitPayPalExpressConverter(): ConverterInterface
+    {
+        return new InitPayPalExpressConverter($this->getComputopApiService(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
     public function createInitDirectDebitConverter(): ConverterInterface
     {
         return new InitDirectDebitConverter($this->getComputopApiService(), $this->getConfig());
@@ -397,6 +465,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface
+     */
+    public function getComputopApiClient(): ComputopToComputopApiClientInterface
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COMPUTOP_API);
+    }
+
+    /**
      * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
      */
     public function createOrderCreditCardMapper(): MapperInterface
@@ -434,6 +510,22 @@ class ComputopFactory extends AbstractFactory
     public function createOrderPayPalMapper(): MapperInterface
     {
         return new PayPalMapper(
+            $this->getComputopApiService(),
+            $this->getRouter(),
+            $this->getStore(),
+            $this->getConfig(),
+            $this->getRequestStack()->getCurrentRequest(),
+            $this->getUtilEncodingService(),
+            $this->getCountryClient()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\MapperInterface
+     */
+    public function createPayPalExpressMapper(): MapperInterface
+    {
+        return new PayPalExpressMapper(
             $this->getComputopApiService(),
             $this->getRouter(),
             $this->getStore(),
@@ -554,5 +646,21 @@ class ComputopFactory extends AbstractFactory
     public function getCountryClient(): ComputopToCountryClientInterface
     {
         return $this->getProvidedDependency(ComputopDependencyProvider::CLIENT_COUNTRY);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
+     */
+    public function createPayPalExpressToQuoteMapper(): PayPalExpressToQuoteMapperInterface
+    {
+        return new PayPalExpressToQuoteMapper();
+    }
+
+    /**
+     * @return array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
+     */
+    public function getPayPalExpressInitAggregatorPlugins(): array
+    {
+        return $this->getProvidedDependency(ComputopDependencyProvider::PLUGINS_PAYPAL_EXPRESS_INIT);
     }
 }

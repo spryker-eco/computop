@@ -32,7 +32,7 @@ class IsCapturedPlugin extends AbstractPlugin implements ConditionInterface
     public function check(SpySalesOrderItem $orderItem)
     {
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
-        $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
+        $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItemsJoinSpyPaymentComputop()->getLast();
 
         return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusCaptured();
     }

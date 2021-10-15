@@ -19,6 +19,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory getFactory()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
  */
 class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
 {
@@ -220,6 +221,38 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this->getFactory()
             ->createPayPalResponseSaver()
+            ->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+            ->createPayPalExpressResponseSaver()
+            ->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+            ->createPayPalExpressCompleteResponseSaver()
             ->save($quoteTransfer);
     }
 
