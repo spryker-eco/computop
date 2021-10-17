@@ -107,7 +107,7 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     {
         return $this
             ->getFactory()
-            ->createSpySalesOrderItemQuery()
+            ->getSpySalesOrderItemQuery()
             ->filterByFkSalesOrder($idSalesOrder);
     }
 
@@ -120,7 +120,7 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     {
         return $this
             ->getFactory()
-            ->createPaymentComputopQuery();
+            ->getPaymentComputopQuery();
     }
 
     /**
@@ -130,6 +130,6 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     {
         return $this
             ->getFactory()
-            ->createPaymentComputopOrderItemQuery();
+            ->getPaymentComputopOrderItemQuery();
     }
 }

@@ -7,12 +7,10 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
-use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
-use Propel\Runtime\Collection\ObjectCollection;
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 
 interface ComputopEntityManagerInterface
 {
@@ -35,32 +33,27 @@ interface ComputopEntityManagerInterface
     ): bool;
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null $paymentComputopEntity
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
      *
      * @return void
      */
-    public function updatePaymentComputopEntityByComputopApiResponseHeaderTransfer(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer,
-        ?SpyPaymentComputop $paymentComputopEntity = null
+    public function updateComputopPaymentDetail(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
     ): void;
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentComputopDetailEntity
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
      * @return void
      */
-    public function updatePaymentComputopDetailEntityByComputopApiResponseHeaderTransfer(
-        SpyPaymentComputopDetail $paymentComputopDetailEntity,
-        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-    ): void;
+    public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void;
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities
-     * @param string $paymentStatus
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
      *
      * @return void
      */
-    public function updatePaymentComputopOrderItemsStatus(ObjectCollection $paymentComputopOrderItemEntities, string $paymentStatus): void;
+    public function updateComputopPaymentComputopOrderItem(
+        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+    ): void;
 }

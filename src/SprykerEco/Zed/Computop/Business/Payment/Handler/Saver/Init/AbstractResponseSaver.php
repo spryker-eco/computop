@@ -7,10 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
-use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -61,10 +58,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
      */
     protected function setPaymentEntity($transactionId)
     {
-        $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)
-            ->joinWith('SpyPaymentComputopDetail', Criteria::LEFT_JOIN)
-            ->joinWith('SpyPaymentComputopOrderItems', Criteria::LEFT_JOIN)
-            ->findOne();
+        $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
     }
 
     /**
@@ -73,28 +67,5 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     protected function getPaymentEntity()
     {
         return $this->paymentEntity;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-     *
-     * @return string
-     */
-    protected function getOrderItemPaymentStatusFromResponseHeader(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): string {
-        if ($computopApiResponseHeaderTransfer->getStatus() === null) {
-            return $this->config->getOmsStatusNew();
-        }
-
-        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
-            return $this->config->getAuthorizeRequestOmsStatus();
-        }
-
-        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::SUCCESS_OK) {
-            return $this->config->getOmsStatusAuthorized();
-        }
-
-        return $this->config->getOmsStatusNew();
     }
 }
