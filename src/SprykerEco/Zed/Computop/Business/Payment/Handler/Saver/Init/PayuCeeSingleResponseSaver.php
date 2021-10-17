@@ -150,6 +150,10 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
         ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
     ): void {
         $computopPaymentComputopDetailTransfer = $this->computopRepository->findComputopPaymentDetail($computopPaymentComputopTransfer);
+        if (!$computopPaymentComputopDetailTransfer) {
+            return;
+        }
+
         $computopPaymentComputopDetailTransfer->fromArray($computopPayuCeeSingleInitResponseTransfer->toArray(), true);
         $computopPaymentComputopDetailTransfer->setCustomerTransactionId(
             (int)$computopPaymentComputopDetailTransfer->getCustomerTransactionId()
