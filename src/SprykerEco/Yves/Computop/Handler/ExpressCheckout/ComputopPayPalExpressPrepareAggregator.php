@@ -10,8 +10,6 @@ namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 use Generated\Shared\Transfer\ComputopApiPayPalExpressPrepareResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
-use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
-use SprykerEco\Yves\Computop\ComputopConfigInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
 
@@ -50,7 +48,7 @@ class ComputopPayPalExpressPrepareAggregator implements ComputopPayPalExpressPre
     public function __construct(
         ComputopToQuoteClientInterface $quoteClient,
         StepEngineFormDataProviderInterface $stepEngineFormDataProvider,
-        ComputopToComputopApiClientInterface $computopApiClient,
+        ComputopToComputopApiClientInterface $computopApiClient
     ) {
         $this->quoteClient = $quoteClient;
         $this->stepEngineFormDataProvider = $stepEngineFormDataProvider;

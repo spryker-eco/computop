@@ -17,7 +17,6 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
-use Propel\Runtime\Collection\Collection;
 use Propel\Runtime\Collection\ObjectCollection;
 
 class ComputopMapper
@@ -54,7 +53,7 @@ class ComputopMapper
     }
 
     /**
-     * @param \Propel\Runtime\Collection\Collection $salesOrderItemEntityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection $salesOrderItemEntityCollection
      * @param \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer
@@ -88,7 +87,7 @@ class ComputopMapper
     }
 
     /**
-     * @param ObjectCollection $paymentComputopOrderItemEntityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntityCollection
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer

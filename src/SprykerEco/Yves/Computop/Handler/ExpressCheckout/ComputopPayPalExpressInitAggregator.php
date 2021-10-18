@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Client\Computop\ComputopClientInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
