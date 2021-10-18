@@ -63,9 +63,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
             /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
             $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
         } catch (PaymentMethodNotFoundException $exception) {
-            return $checkoutResponseTransfer
-                ->setIsSuccess(false)
-                ->setErrors([(new CheckoutErrorTransfer())->setMessage($exception->getMessage())]);
+            return $checkoutResponseTransfer;
         }
 
         if (

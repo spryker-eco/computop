@@ -33,6 +33,7 @@ class PayPalExpressFormDataProvider extends AbstractFormDataProvider
         /** @var \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopPayPalExpressPaymentTransfer */
         $computopPayPalExpressPaymentTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
         $paymentTransfer->setComputopPayPalExpress($computopPayPalExpressPaymentTransfer);
+        $paymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $quoteTransfer->setPayment($paymentTransfer);
         if ($quoteTransfer->getCustomer() === null) {
             $quoteTransfer->setCustomer(new CustomerTransfer());
