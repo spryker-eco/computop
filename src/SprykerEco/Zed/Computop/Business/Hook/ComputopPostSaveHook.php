@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook;
 
+use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -62,7 +63,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
             /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
             $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
         } catch (PaymentMethodNotFoundException $exception) {
-            return $checkoutResponseTransfer;
+            return $checkoutResponseTransfer
+                ->setIsSuccess(false)
+                ->setErrors([(new CheckoutErrorTransfer())->setMessage($exception->getMessage())]);
         }
 
         if (

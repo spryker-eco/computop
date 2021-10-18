@@ -68,6 +68,10 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
                 $payPalExpressCompleteResponseTransfer->getHeader()->getTransId()
             );
 
+        if ($computopPaymentTransfer === null) {
+            return $quoteTransfer;
+        }
+
         $this->getTransactionHandler()->handleTransaction(
             function () use ($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer) {
                 $this->executeSavePaymentComputopDataTransaction(
@@ -108,7 +112,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         $computopPaymentComputopTransfer->setPayId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getPayId());
         $computopPaymentComputopTransfer->setXId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getXId());
 
-        $this->computopEntityManager->saveComputopPayment($computopPaymentComputopTransfer);
+        $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
 
     /**
@@ -141,10 +145,10 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
         $salesOrderItemsCollection = $this->computopRepository
-            ->getComputopSalesOrderItemsCollection($computopPaymentComputopTransfer);
+            ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
 
         $computopPaymentComputopOrderItemsCollection = $this->computopRepository
-            ->getComputopPaymentComputopOrderItemsCollection($computopPaymentComputopTransfer);
+            ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
         foreach ($salesOrderItemsCollection->getComputopSalesOrderItems() as $computopSalesOrderItemTransfer) {
             $this->updatePaymentComputopOrderItem(

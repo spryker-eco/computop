@@ -35,11 +35,6 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     protected $quoteClient;
 
     /**
-     * @var \SprykerEco\Client\Computop\ComputopClientInterface
-     */
-    protected $computopClient;
-
-    /**
      * @var \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface
      */
     protected $payPalExpressToQuoteMapper;
@@ -47,13 +42,12 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     /**
      * @var array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
      */
-    protected $payPalExpressInitAggregatorPlugins;
+    protected $payPalExpressInitPlugins;
 
     /**
      * @param \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface $computopPaymentHandler
      * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
-     * @param \SprykerEco\Client\Computop\ComputopClientInterface $computopClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
      * @param array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface> $payPalExpressInitAggregatorPlugins
      */
@@ -61,16 +55,14 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
         ComputopPaymentHandlerInterface $computopPaymentHandler,
         ConverterInterface $converter,
         ComputopToQuoteClientInterface $quoteClient,
-        ComputopClientInterface $computopClient,
         PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper,
         array $payPalExpressInitAggregatorPlugins
     ) {
         $this->computopPaymentHandler = $computopPaymentHandler;
         $this->converter = $converter;
         $this->quoteClient = $quoteClient;
-        $this->computopClient = $computopClient;
         $this->payPalExpressToQuoteMapper = $payPalExpressToQuoteMapper;
-        $this->payPalExpressInitAggregatorPlugins = $payPalExpressInitAggregatorPlugins;
+        $this->payPalExpressInitPlugins = $payPalExpressInitAggregatorPlugins;
     }
 
     /**
@@ -93,7 +85,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
 
         $quoteTransfer->setCheckoutConfirmed(true);
 
-        $quoteTransfer = $this->executeInitAggregatorPlugins($quoteTransfer);
+        $quoteTransfer = $this->executePayPalExpressInitPlugins($quoteTransfer);
 
         $this->quoteClient->setQuote($quoteTransfer);
 
@@ -128,7 +120,10 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      */
     protected function addShippingAddressToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $payPalInitResponseTransfer = $quoteTransfer->getPayment()->getComputopPayPalExpress()->getPayPalExpressInitResponse();
+        $payPalInitResponseTransfer = $quoteTransfer->getPaymentOrFail()
+            ->getComputopPayPalExpressOrFail()
+            ->getPayPalExpressInitResponseOrFail();
+
         if ($payPalInitResponseTransfer->getAddressStreet() === null) {
             return $quoteTransfer;
         }
@@ -193,10 +188,10 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function executeInitAggregatorPlugins(QuoteTransfer $quoteTransfer): QuoteTransfer
+    protected function executePayPalExpressInitPlugins(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        foreach ($this->payPalExpressInitAggregatorPlugins as $palExpressInitAggregatorPlugin) {
-            $quoteTransfer = $palExpressInitAggregatorPlugin->aggregate($quoteTransfer);
+        foreach ($this->payPalExpressInitPlugins as $palExpressInitPlugin) {
+            $quoteTransfer = $palExpressInitPlugin->aggregate($quoteTransfer);
         }
 
         return $quoteTransfer;

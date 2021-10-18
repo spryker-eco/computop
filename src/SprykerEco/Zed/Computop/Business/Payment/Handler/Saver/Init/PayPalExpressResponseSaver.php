@@ -106,7 +106,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
         $computopPaymentComputopTransfer->setPayId($computopPayPalExpressInitResponseTransfer->getHeader()->getPayId());
         $computopPaymentComputopTransfer->setXId($computopPayPalExpressInitResponseTransfer->getHeader()->getXId());
 
-        $this->computopEntityManager->saveComputopPayment($computopPaymentComputopTransfer);
+        $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
 
     /**
@@ -136,10 +136,10 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
         $salesOrderItemsCollectionTransfer = $this->computopRepository
-            ->getComputopSalesOrderItemsCollection($computopPaymentComputopTransfer);
+            ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
 
         $computopPaymentComputopOrderItemsCollection = $this->computopRepository
-            ->getComputopPaymentComputopOrderItemsCollection($computopPaymentComputopTransfer);
+            ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
         foreach ($salesOrderItemsCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
             $this->updateComputopSalesOrderItem(

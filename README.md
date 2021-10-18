@@ -7,6 +7,8 @@
 [![CI](https://scrutinizer-ci.com/g/spryker-eco/computop/badges/build.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/computop/build-status/master)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 
+Computop module provides main business logic for Computop payment system integration.
+
 ## Installation
 
 ```

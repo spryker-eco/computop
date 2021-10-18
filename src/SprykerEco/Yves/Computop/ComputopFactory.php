@@ -293,7 +293,6 @@ class ComputopFactory extends AbstractFactory
             $this->createComputopPaymentHandler(),
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
-            $this->getComputopClient(),
             $this->createPayPalExpressToQuoteMapper(),
             $this->getPayPalExpressInitAggregatorPlugins()
         );
@@ -307,9 +306,7 @@ class ComputopFactory extends AbstractFactory
         return new ComputopPayPalExpressPrepareAggregator(
             $this->getQuoteClient(),
             $this->createPayPalExpressFormDataProvider(),
-            $this->getComputopApiClient(),
-            $this->getComputopApiService(),
-            $this->getComputopConfig()
+            $this->getComputopApiClient()
         );
     }
 

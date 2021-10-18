@@ -46,21 +46,15 @@ class ComputopPayPalExpressPrepareAggregator implements ComputopPayPalExpressPre
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
      * @param \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface $stepEngineFormDataProvider
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToComputopApiClientInterface $computopApiClient
-     * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
-     * @param \SprykerEco\Yves\Computop\ComputopConfigInterface $computopConfig
      */
     public function __construct(
         ComputopToQuoteClientInterface $quoteClient,
         StepEngineFormDataProviderInterface $stepEngineFormDataProvider,
         ComputopToComputopApiClientInterface $computopApiClient,
-        ComputopApiServiceInterface $computopApiService,
-        ComputopConfigInterface $computopConfig
     ) {
         $this->quoteClient = $quoteClient;
         $this->stepEngineFormDataProvider = $stepEngineFormDataProvider;
         $this->computopApiClient = $computopApiClient;
-        $this->computopApiService = $computopApiService;
-        $this->computopConfig = $computopConfig;
     }
 
     /**

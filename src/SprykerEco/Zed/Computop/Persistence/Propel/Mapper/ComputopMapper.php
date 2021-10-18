@@ -18,6 +18,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Propel\Runtime\Collection\Collection;
+use Propel\Runtime\Collection\ObjectCollection;
 
 class ComputopMapper
 {
@@ -53,18 +54,18 @@ class ComputopMapper
     }
 
     /**
-     * @param \Propel\Runtime\Collection\Collection $salesOrderItemsCollection
+     * @param \Propel\Runtime\Collection\Collection $salesOrderItemEntityCollection
      * @param \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer
      */
-    public function mapSalesOrderItemsCollectionToComputopSalesOrderItemCollectionTransfer(
-        Collection $salesOrderItemsCollection,
+    public function mapSalesOrderItemEntityCollectionToComputopSalesOrderItemCollectionTransfer(
+        ObjectCollection $salesOrderItemEntityCollection,
         ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
     ): ComputopSalesOrderItemCollectionTransfer {
-        foreach ($salesOrderItemsCollection as $salesOrderItem) {
+        foreach ($salesOrderItemEntityCollection as $salesOrderItemEntity) {
             $computopSalesOrderItemTransfer = $this
-                ->mapSalesOrderItemToComputopSalesOrderItemTransfer($salesOrderItem, new ComputopSalesOrderItemTransfer());
+                ->mapSalesOrderItemToComputopSalesOrderItemTransfer($salesOrderItemEntity, new ComputopSalesOrderItemTransfer());
             $computopSalesOrderItemCollectionTransfer->addComputopSalesOrderItem($computopSalesOrderItemTransfer);
         }
 
@@ -87,19 +88,19 @@ class ComputopMapper
     }
 
     /**
-     * @param \Propel\Runtime\Collection\Collection $paymentComputopOrderItemsCollection
+     * @param ObjectCollection $paymentComputopOrderItemEntityCollection
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer
      */
     public function mapPaymentComputopOrderItemEntityCollectionToComputopPaymentComputopOrderItemTransferCollection(
-        Collection $paymentComputopOrderItemsCollection,
+        ObjectCollection $paymentComputopOrderItemEntityCollection,
         ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
     ): ComputopPaymentComputopOrderItemCollectionTransfer {
-        foreach ($paymentComputopOrderItemsCollection as $paymentComputopOrderItem) {
+        foreach ($paymentComputopOrderItemEntityCollection as $paymentComputopOrderItemEntity) {
             $computopPaymentOrderItemTransfer = $this
                 ->mapPaymentComputopOrderItemEntityToComputopPaymentComputopOrderItemTransfer(
-                    $paymentComputopOrderItem,
+                    $paymentComputopOrderItemEntity,
                     new ComputopPaymentComputopOrderItemTransfer()
                 );
             $computopPaymentComputopOrderItemCollectionTransfer->addComputopPaymentComputopOrderItem($computopPaymentOrderItemTransfer);

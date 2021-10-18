@@ -172,6 +172,9 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires QuoteTransfer::payment to be set.
+     * - Requires PaymentTransfer::computopPayPalExpress to be set.
+     * - Requires ComputopPayPalExpressTransfer::payPalExpressInitResponse to be set.
      * - Saves PayPal Express Init Response to DB.
      *
      * @api
@@ -184,6 +187,9 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires QuoteTransfer::payment to be set.
+     * - Requires PaymentTransfer::computopPayPalExpress to be set.
+     * - Requires ComputopPayPalExpressTransfer::payPalExpressCompleteResponse to be set.
      * - Saves PayPal Express Complete Response and changes item's OMS status.
      *
      * @api

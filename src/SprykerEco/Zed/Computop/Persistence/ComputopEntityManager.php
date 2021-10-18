@@ -100,7 +100,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
      *
      * @return void
      */
-    public function saveComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void
+    public function updateComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void
     {
         $computopPaymentComputopEntity = $this->getFactory()
             ->getPaymentComputopQuery()

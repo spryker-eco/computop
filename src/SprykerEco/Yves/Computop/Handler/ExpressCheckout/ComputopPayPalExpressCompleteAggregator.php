@@ -36,8 +36,6 @@ class ComputopPayPalExpressCompleteAggregator implements ComputopPayPalExpressCo
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
