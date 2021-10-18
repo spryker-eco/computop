@@ -39,29 +39,29 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     protected $payPalExpressToQuoteMapper;
 
     /**
-     * @var array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
+     * @var array<\SprykerEco\Yves\ComputopExtension\Dependency\Plugin\PayPalExpressInitQuoteExpanderPluginInterface>
      */
-    protected $payPalExpressInitPlugins;
+    protected $payPalExpressInitQuoteExpanderPlugins;
 
     /**
      * @param \SprykerEco\Yves\Computop\Handler\ComputopPaymentHandlerInterface $computopPaymentHandler
      * @param \SprykerEco\Yves\Computop\Converter\ConverterInterface $converter
      * @param \SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface $quoteClient
      * @param \SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper
-     * @param array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface> $payPalExpressInitAggregatorPlugins
+     * @param array<\SprykerEco\Yves\ComputopExtension\Dependency\Plugin\PayPalExpressInitQuoteExpanderPluginInterface> $payPalExpressInitQuoteExpanderPlugins
      */
     public function __construct(
         ComputopPaymentHandlerInterface $computopPaymentHandler,
         ConverterInterface $converter,
         ComputopToQuoteClientInterface $quoteClient,
         PayPalExpressToQuoteMapperInterface $payPalExpressToQuoteMapper,
-        array $payPalExpressInitAggregatorPlugins
+        array $payPalExpressInitQuoteExpanderPlugins
     ) {
         $this->computopPaymentHandler = $computopPaymentHandler;
         $this->converter = $converter;
         $this->quoteClient = $quoteClient;
         $this->payPalExpressToQuoteMapper = $payPalExpressToQuoteMapper;
-        $this->payPalExpressInitPlugins = $payPalExpressInitAggregatorPlugins;
+        $this->payPalExpressInitQuoteExpanderPlugins = $payPalExpressInitQuoteExpanderPlugins;
     }
 
     /**
@@ -84,7 +84,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
 
         $quoteTransfer->setCheckoutConfirmed(true);
 
-        $quoteTransfer = $this->executePayPalExpressInitPlugins($quoteTransfer);
+        $quoteTransfer = $this->executePayPalExpressInitQuoteExpanderPlugins($quoteTransfer);
 
         $this->quoteClient->setQuote($quoteTransfer);
 
@@ -187,10 +187,10 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function executePayPalExpressInitPlugins(QuoteTransfer $quoteTransfer): QuoteTransfer
+    protected function executePayPalExpressInitQuoteExpanderPlugins(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        foreach ($this->payPalExpressInitPlugins as $palExpressInitPlugin) {
-            $quoteTransfer = $palExpressInitPlugin->aggregate($quoteTransfer);
+        foreach ($this->payPalExpressInitQuoteExpanderPlugins as $payPalExpressInitQuoteExpanderPlugin) {
+            $quoteTransfer = $payPalExpressInitQuoteExpanderPlugin->expand($quoteTransfer);
         }
 
         return $quoteTransfer;

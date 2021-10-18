@@ -294,7 +294,7 @@ class ComputopFactory extends AbstractFactory
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
             $this->createPayPalExpressToQuoteMapper(),
-            $this->getPayPalExpressInitAggregatorPlugins()
+            $this->getPayPalExpressInitQuoteExpanderPlugins()
         );
     }
 
@@ -654,10 +654,10 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
-     * @return array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
+     * @return array<\SprykerEco\Yves\ComputopExtension\Dependency\Plugin\PayPalExpressInitQuoteExpanderPluginInterface>
      */
-    public function getPayPalExpressInitAggregatorPlugins(): array
+    public function getPayPalExpressInitQuoteExpanderPlugins(): array
     {
-        return $this->getProvidedDependency(ComputopDependencyProvider::PLUGINS_PAYPAL_EXPRESS_INIT);
+        return $this->getProvidedDependency(ComputopDependencyProvider::PLUGINS_PAYPAL_EXPRESS_INIT_QUOTE_EXPANDER);
     }
 }

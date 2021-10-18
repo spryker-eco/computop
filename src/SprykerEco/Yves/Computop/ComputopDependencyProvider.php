@@ -79,7 +79,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
     /**
      * @var string
      */
-    public const PLUGINS_PAYPAL_EXPRESS_INIT = 'PLUGINS_PAYPAL_EXPRESS_INIT';
+    public const PLUGINS_PAYPAL_EXPRESS_INIT_QUOTE_EXPANDER = 'PLUGINS_PAYPAL_EXPRESS_INIT_QUOTE_EXPANDER';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -119,7 +119,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addUtilEncodingService($container);
         $container = $this->addCountryClient($container);
         $container = $this->addComputopApiClient($container);
-        $container = $this->addPayPalExpressInitPlugins($container);
+        $container = $this->addPayPalExpressInitQuoteExpanderPlugins($container);
 
         return $container;
     }
@@ -199,19 +199,19 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addPayPalExpressInitPlugins(Container $container): Container
+    protected function addPayPalExpressInitQuoteExpanderPlugins(Container $container): Container
     {
-        $container->set(static::PLUGINS_PAYPAL_EXPRESS_INIT, function () {
-            return $this->getPayPalExpressInitPlugins();
+        $container->set(static::PLUGINS_PAYPAL_EXPRESS_INIT_QUOTE_EXPANDER, function () {
+            return $this->getPayPalExpressInitQuoteExpanderPlugins();
         });
 
         return $container;
     }
 
     /**
-     * @return array<\SprykerEco\Yves\Computop\Dependency\Plugin\PayPalExpressInitPluginInterface>
+     * @return array<\SprykerEco\Yves\ComputopExtension\Dependency\Plugin\PayPalExpressInitQuoteExpanderPluginInterface>
      */
-    protected function getPayPalExpressInitPlugins(): array
+    protected function getPayPalExpressInitQuoteExpanderPlugins(): array
     {
         return [];
     }

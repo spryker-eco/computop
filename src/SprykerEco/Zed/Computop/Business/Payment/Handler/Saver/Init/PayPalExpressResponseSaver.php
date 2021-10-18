@@ -106,7 +106,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
         $computopPaymentComputopTransfer->setPayId($computopPayPalExpressInitResponseTransfer->getHeader()->getPayId());
         $computopPaymentComputopTransfer->setXId($computopPayPalExpressInitResponseTransfer->getHeader()->getXId());
 
-        $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
+        $this->computopEntityManager->saveComputopPayment($computopPaymentComputopTransfer);
     }
 
     /**
