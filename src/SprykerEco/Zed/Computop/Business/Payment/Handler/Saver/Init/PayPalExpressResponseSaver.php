@@ -90,7 +90,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
     ): void {
         $this->savePaymentComputopEntity($computopPaymentComputopTransfer, $computopPayPalExpressInitResponseTransfer);
         $this->savePaymentComputopDetailEntity($computopPaymentComputopTransfer, $computopPayPalExpressInitResponseTransfer);
-        $this->savePaymentComputopOrderItemsEntities($computopPaymentComputopTransfer);
+        $this->savePaymentComputopOrderItemEntities($computopPaymentComputopTransfer);
     }
 
     /**
@@ -132,7 +132,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
      *
      * @return void
      */
-    protected function savePaymentComputopOrderItemsEntities(
+    protected function savePaymentComputopOrderItemEntities(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
         $salesOrderItemCollectionTransfer = $this->computopRepository
