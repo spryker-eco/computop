@@ -47,23 +47,21 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
     public function getComputopSalesOrderItemCollection(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopSalesOrderItemCollectionTransfer {
-        $salesOrderItemCollection = $this->getFactory()
+        $salesOrderItemEntityCollection = $this->getFactory()
             ->getSpySalesOrderItemQuery()
             ->filterByFkSalesOrder($computopPaymentComputopTransfer->getFKSalesOrder())
             ->find();
 
-        if ($salesOrderItemCollection->count() === 0) {
+        if ($salesOrderItemEntityCollection->count() === 0) {
             return new ComputopSalesOrderItemCollectionTransfer();
         }
 
-        $computopSalesOrderItemCollectionTransfer = $this->getFactory()
+        return $this->getFactory()
             ->createComputopMapper()
             ->mapSalesOrderItemEntityCollectionToComputopSalesOrderItemCollectionTransfer(
-                $salesOrderItemCollection,
+                $salesOrderItemEntityCollection,
                 new ComputopSalesOrderItemCollectionTransfer()
             );
-
-        return $computopSalesOrderItemCollectionTransfer;
     }
 
     /**
@@ -74,19 +72,19 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
     public function getComputopPaymentComputopOrderItemCollection(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopPaymentComputopOrderItemCollectionTransfer {
-        $computopPaymentComputopOrderItemEntityCollection = $this->getFactory()
+        $paymentComputopOrderItemEntityCollection = $this->getFactory()
             ->getPaymentComputopOrderItemQuery()
             ->filterByFkPaymentComputop($computopPaymentComputopTransfer->getIdPaymentComputop())
             ->find();
 
-        if ($computopPaymentComputopOrderItemEntityCollection->count() === 0) {
+        if ($paymentComputopOrderItemEntityCollection->count() === 0) {
             return new ComputopPaymentComputopOrderItemCollectionTransfer();
         }
 
         return $this->getFactory()
             ->createComputopMapper()
             ->mapPaymentComputopOrderItemEntityCollectionToComputopPaymentComputopOrderItemTransferCollection(
-                $computopPaymentComputopOrderItemEntityCollection,
+                $paymentComputopOrderItemEntityCollection,
                 new ComputopPaymentComputopOrderItemCollectionTransfer()
             );
     }
