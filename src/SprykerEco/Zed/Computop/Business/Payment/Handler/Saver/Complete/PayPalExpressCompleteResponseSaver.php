@@ -144,15 +144,15 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         ComputopApiPayPalExpressCompleteResponseTransfer $completeResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $salesOrderItemsCollection = $this->computopRepository
+        $computopSalesOrderItemCollectionTransfer = $this->computopRepository
             ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
 
-        $computopPaymentComputopOrderItemsCollection = $this->computopRepository
+        $computopPaymentComputopOrderItemCollectionTransfer = $this->computopRepository
             ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
-        foreach ($salesOrderItemsCollection->getComputopSalesOrderItems() as $computopSalesOrderItemTransfer) {
+        foreach ($computopSalesOrderItemCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItemTransfer) {
             $this->updatePaymentComputopOrderItem(
-                $computopPaymentComputopOrderItemsCollection,
+                $computopPaymentComputopOrderItemCollectionTransfer,
                 $computopSalesOrderItemTransfer,
                 $completeResponseTransfer
             );

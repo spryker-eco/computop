@@ -142,7 +142,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
             ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
         foreach ($salesOrderItemsCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
-            $this->updateComputopSalesOrderItem(
+            $this->updateComputopSalesOrderItemCollection(
                 $computopPaymentComputopOrderItemsCollection,
                 $computopSalesOrderItem
             );
@@ -155,7 +155,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
      *
      * @return void
      */
-    protected function updateComputopSalesOrderItem(
+    protected function updateComputopSalesOrderItemCollection(
         ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection,
         ComputopSalesOrderItemTransfer $computopSalesOrderItem
     ): void {
