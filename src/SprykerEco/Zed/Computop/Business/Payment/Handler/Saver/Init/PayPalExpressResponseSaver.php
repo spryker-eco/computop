@@ -135,31 +135,31 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
     protected function savePaymentComputopOrderItemsEntities(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $salesOrderItemsCollectionTransfer = $this->computopRepository
+        $salesOrderItemCollectionTransfer = $this->computopRepository
             ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
 
-        $computopPaymentComputopOrderItemsCollection = $this->computopRepository
+        $computopPaymentComputopOrderItemCollection = $this->computopRepository
             ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
-        foreach ($salesOrderItemsCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
+        foreach ($salesOrderItemCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
             $this->updateComputopSalesOrderItemCollection(
-                $computopPaymentComputopOrderItemsCollection,
+                $computopPaymentComputopOrderItemCollection,
                 $computopSalesOrderItem
             );
         }
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollection
      * @param \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer $computopSalesOrderItem
      *
      * @return void
      */
     protected function updateComputopSalesOrderItemCollection(
-        ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection,
+        ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollection,
         ComputopSalesOrderItemTransfer $computopSalesOrderItem
     ): void {
-        foreach ($computopPaymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItem) {
+        foreach ($computopPaymentComputopOrderItemCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItem) {
             if ($computopSalesOrderItem->getIdSalesOrderItem() !== $computopPaymentComputopOrderItem->getFkSalesOrderItem()) {
                 continue;
             }
