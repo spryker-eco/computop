@@ -40,54 +40,6 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
-     * @param string|null $orderItemsStatus
-     *
-     * @return bool
-     */
-    public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer,
-        ?string $orderItemsStatus = null
-    ): bool {
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null $paymentComputopEntity */
-        $paymentComputopEntity = $this->getFactory()
-            ->getPaymentComputopQuery()
-            ->filterByTransId($computopNotificationTransfer->getTransId())
-            ->findOne();
-
-        if ($paymentComputopEntity === null) {
-            return false;
-        }
-
-        $paymentComputopEntity
-            ->setPayId($computopNotificationTransfer->getPayId())
-            ->setXId($computopNotificationTransfer->getXId());
-
-        if ($paymentComputopEntity->isModified()) {
-            $paymentComputopEntity->save();
-        }
-
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities */
-        $paymentComputopOrderItemEntities = $this->getFactory()
-            ->createPaymentComputopOrderItemQuery()
-            ->filterByFkPaymentComputop($paymentComputopEntity->getIdPaymentComputop())
-            ->find();
-
-        if (!$paymentComputopOrderItemEntities->count()) {
-            return false;
-        }
-
-        foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $paymentComputopOrderItemEntity
-                ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess())
-                ->setStatus($orderItemsStatus ?? $paymentComputopOrderItemEntity->getStatus())
-                ->save();
-        }
-
-        return true;
-    }
-
-    /**
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
      *
      * @return void
