@@ -53,7 +53,5 @@ interface ComputopEntityManagerInterface
      *
      * @return void
      */
-    public function updateComputopPaymentComputopOrderItem(
-        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
-    ): void;
+    public function updateComputopPaymentComputopOrderItem(ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer): void;
 }

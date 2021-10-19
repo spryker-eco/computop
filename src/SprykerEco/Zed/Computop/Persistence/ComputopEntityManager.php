@@ -33,9 +33,10 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->filterByXId($computopNotificationTransfer->getXId())
             ->findOneOrCreate();
 
-        $paymentComputopNotificationEntity
-            ->fromArray($computopNotificationTransfer->modifiedToArray())
-            ->save();
+        $paymentComputopNotificationEntity->fromArray(
+            $computopNotificationTransfer->modifiedToArray()
+        );
+        $paymentComputopNotificationEntity->save();
     }
 
     /**

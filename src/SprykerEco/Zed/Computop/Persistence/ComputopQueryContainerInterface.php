@@ -19,7 +19,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentById($idPayment);
+    public function queryPaymentById(int $idPayment);
 
     /**
      * Specification:
@@ -31,7 +31,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByOrderId($idOrder);
+    public function queryPaymentByOrderId(int $idOrder);
 
     /**
      * Specification:
@@ -43,7 +43,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByPayId($idPay);
+    public function queryPaymentByPayId(string $idPay);
 
     /**
      *  Specification:
@@ -55,7 +55,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentByTransactionId($idTransaction);
+    public function queryPaymentByTransactionId(string $idTransaction);
 
     /**
      *  Specification:
@@ -67,7 +67,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    public function queryPaymentItemByOrderItemId($orderItemId);
+    public function queryPaymentItemByOrderItemId(int $orderItemId);
 
     /**
      *  Specification:
@@ -79,5 +79,5 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery
      */
-    public function getSpySalesOrderItemsById($idSalesOrder);
+    public function getSpySalesOrderItemsById(int $idSalesOrder);
 }
