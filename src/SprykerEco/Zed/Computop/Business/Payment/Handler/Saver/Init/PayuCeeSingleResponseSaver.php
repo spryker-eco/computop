@@ -7,33 +7,50 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
+use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
+use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
-use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
-use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface;
 
-class PayuCeeSingleResponseSaver extends AbstractResponseSaver
+class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
 {
+    use TransactionTrait;
+
     /**
      * @var \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface
      */
     protected $computopEntityManager;
 
     /**
-     * @param \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface $omsFacade
-     * @param \SprykerEco\Zed\Computop\ComputopConfig $config
+     * @var \SprykerEco\Zed\Computop\ComputopConfig
+     */
+    protected $computopConfig;
+
+    /**
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface
+     */
+    protected $computopRepository;
+
+    /**
+     * @param \SprykerEco\Zed\Computop\ComputopConfig $computopConfig
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface $computopRepository
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface $computopEntityManager
      */
     public function __construct(
-        ComputopQueryContainerInterface $queryContainer,
-        ComputopToOmsFacadeInterface $omsFacade,
-        ComputopConfig $config,
+        ComputopConfig $computopConfig,
+        ComputopRepositoryInterface $computopRepository,
         ComputopEntityManagerInterface $computopEntityManager
     ) {
-        parent::__construct($queryContainer, $omsFacade, $config);
+        $this->computopConfig = $computopConfig;
+        $this->computopRepository = $computopRepository;
         $this->computopEntityManager = $computopEntityManager;
     }
 
@@ -44,66 +61,172 @@ class PayuCeeSingleResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        if (
-            !$quoteTransfer->getPayment() ||
-            !$quoteTransfer->getPayment()->getComputopPayuCeeSingle() ||
-            !$quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse()
-        ) {
+        $computopPayuCeeSingleInitResponseTransfer = $this->getPaymentTransferFromQuote($quoteTransfer)
+            ->getComputopPayuCeeSingleOrFail()
+            ->getPayuCeeSingleInitResponseOrFail();
+
+        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->getHeaderOrFail()
+            ->requireTransId()
+            ->requirePayId()
+            ->requireXid();
+
+        if (!$computopApiResponseHeaderTransfer->getIsSuccess()) {
             return $quoteTransfer;
         }
 
-        $computopPayuCeeSingleInitResponse = $quoteTransfer->getPayment()->getComputopPayuCeeSingle()->getPayuCeeSingleInitResponse();
-        if ($computopPayuCeeSingleInitResponse->getHeader()->getIsSuccess()) {
-            $orderItemStatus = $this->getOrderItemPaymentStatusFromInitResponse($computopPayuCeeSingleInitResponse);
-            $this->handleSaveTransaction($computopPayuCeeSingleInitResponse, $orderItemStatus);
+        $computopPaymentComputopTransfer = $this->computopRepository->findComputopPaymentByComputopTransId(
+            $computopApiResponseHeaderTransfer->getTransId()
+        );
+        if ($computopPaymentComputopTransfer === null) {
+            return $quoteTransfer;
         }
+
+        $this->getTransactionHandler()->handleTransaction(function () use ($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer) {
+            $this->executeSavePaymentResponseTransaction($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer);
+        });
 
         return $quoteTransfer;
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-     * @param string $orderItemsStatus
-     *
-     * @return void
-     */
-    protected function handleSaveTransaction(
-        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
-        string $orderItemsStatus
-    ): void {
-        $this->getTransactionHandler()->handleTransaction(function () use ($computopPayuCeeSingleInitResponseTransfer, $orderItemsStatus) {
-            $this->executeSavePaymentResponseTransaction($computopPayuCeeSingleInitResponseTransfer, $orderItemsStatus);
-        });
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-     * @param string $orderItemsStatus
      *
      * @return void
      */
     protected function executeSavePaymentResponseTransaction(
-        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
-        string $orderItemsStatus
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
+        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
     ): void {
-        $this->computopEntityManager->saveComputopPayuCeeSingleInitResponse(
-            $computopPayuCeeSingleInitResponseTransfer,
-            $orderItemsStatus
-        );
+        $this->savePaymentComputopEntity($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer->getHeader());
+        $this->savePaymentComputopDetailEntity($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer);
+        $paymentStatus = $this->getOrderItemPaymentStatusFromResponseHeader($computopPayuCeeSingleInitResponseTransfer->getHeader());
+        if ($paymentStatus) {
+            $this->savePaymentComputopOrderItemsEntities($computopPaymentComputopTransfer, $paymentStatus);
+        }
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentTransfer
+     */
+    protected function getPaymentTransferFromQuote(QuoteTransfer $quoteTransfer): PaymentTransfer
+    {
+        foreach ($quoteTransfer->getPayments() as $paymentTransfer) {
+            if ($paymentTransfer !== null) {
+                return $paymentTransfer;
+            }
+        }
+
+        return $quoteTransfer->getPaymentOrFail();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+     *
+     * @return void
+     */
+    protected function savePaymentComputopEntity(
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): void {
+        $computopPaymentComputopTransfer
+            ->setPayId($computopApiResponseHeaderTransfer->getPayId())
+            ->setXId($computopApiResponseHeaderTransfer->getXId());
+
+        $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     *
+     * @return void
+     */
+    protected function savePaymentComputopDetailEntity(
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
+        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+    ): void {
+        $computopPaymentComputopDetailTransfer = $this->computopRepository->findComputopPaymentDetail($computopPaymentComputopTransfer);
+        if (!$computopPaymentComputopDetailTransfer) {
+            return;
+        }
+
+        $computopPaymentComputopDetailTransfer->fromArray($computopPayuCeeSingleInitResponseTransfer->toArray(), true);
+        $computopPaymentComputopDetailTransfer->setCustomerTransactionId(
+            (int)$computopPaymentComputopDetailTransfer->getCustomerTransactionId()
+        );
+
+        $this->computopEntityManager->updateComputopPaymentDetail($computopPaymentComputopDetailTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     * @param string $paymentStatus
+     *
+     * @return void
+     */
+    protected function savePaymentComputopOrderItemsEntities(
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
+        string $paymentStatus
+    ): void {
+        $salesOrderItemsCollectionTransfer = $this->computopRepository
+            ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
+
+        $computopPaymentComputopOrderItemsCollection = $this->computopRepository
+            ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
+
+        foreach ($salesOrderItemsCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
+            $this->updateComputopSalesOrderItem(
+                $computopPaymentComputopOrderItemsCollection,
+                $computopSalesOrderItem,
+                $paymentStatus
+            );
+        }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection
+     * @param \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer $computopSalesOrderItem
+     * @param string $paymentStatus
+     *
+     * @return void
+     */
+    protected function updateComputopSalesOrderItem(
+        ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection,
+        ComputopSalesOrderItemTransfer $computopSalesOrderItem,
+        string $paymentStatus
+    ): void {
+        foreach ($computopPaymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItem) {
+            if ($computopSalesOrderItem->getIdSalesOrderItem() !== $computopPaymentComputopOrderItem->getFkSalesOrderItem()) {
+                continue;
+            }
+
+            $computopPaymentComputopOrderItem->setStatus($paymentStatus);
+            $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItem);
+
+            return;
+        }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
      *
      * @return string
      */
-    protected function getOrderItemPaymentStatusFromInitResponse(ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer): string
-    {
-        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->getHeader();
-        if ($computopApiResponseHeaderTransfer === null) {
-            return $this->config->getOmsStatusNew();
+    protected function getOrderItemPaymentStatusFromResponseHeader(
+        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
+    ): ?string {
+        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
+            return $this->computopConfig->getAuthorizeRequestOmsStatus();
         }
 
-        return $this->getOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer($computopApiResponseHeaderTransfer);
+        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::SUCCESS_OK) {
+            return $this->computopConfig->getOmsStatusAuthorized();
+        }
+
+        return null;
     }
 }

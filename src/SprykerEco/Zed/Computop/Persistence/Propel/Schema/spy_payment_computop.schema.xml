@@ -62,8 +62,8 @@
         <column name="address_street2" required="false" type="VARCHAR" size="255"/>
         <column name="address_city" required="false" type="VARCHAR" size="255"/>
         <column name="address_state" required="false" type="VARCHAR" size="255"/>
-        <column name="address_zip" required="false" type="VARCHAR" size="20"/>
-        <column name="address_country_code" required="false" type="VARCHAR" size="3"/>
+        <column name="address_zip" required="false" type="VARCHAR" size="255"/>
+        <column name="address_country_code" required="false" type="VARCHAR" size="255"/>
         <column name="phone" required="false" type="VARCHAR" size="255"/>
         <column name="billing_agreement_id" required="false" type="VARCHAR" size="255"/>
         <column name="billing_name" required="false" type="VARCHAR" size="255"/>
@@ -72,7 +72,7 @@
         <column name="billing_address_city" required="false" type="VARCHAR" size="255"/>
         <column name="billing_address_state" required="false" type="VARCHAR" size="255"/>
         <column name="billing_address_zip" required="false" type="VARCHAR" size="255"/>
-        <column name="billing_address_country_code" required="false" type="VARCHAR" size="3"/>
+        <column name="billing_address_country_code" required="false" type="VARCHAR" size="255"/>
         <column name="info_text" required="false" type="VARCHAR" size="255"/>
         <column name="payer_id" required="false" type="VARCHAR" size="255"/>
         <column name="is_financing" required="false" type="VARCHAR" size="255"/>
@@ -110,7 +110,7 @@
         <column name="shipping_street_number" required="false" type="VARCHAR" size="255"/>
         <column name="shipping_zip" required="false" type="VARCHAR" size="255"/>
         <column name="shipping_city" required="false" type="VARCHAR" size="255"/>
-        <column name="shipping_country_code" required="false" type="VARCHAR" size="3"/>
+        <column name="shipping_country_code" required="false" type="VARCHAR" size="255"/>
         <column name="shipping_email" required="false" type="VARCHAR" size="255"/>
         <column name="age_accepted" required="false" type="VARCHAR" size="255"/>
         <column name="payment_purpose" required="false" type="VARCHAR" size="255"/>
@@ -185,12 +185,12 @@
         <column name="x_id" required="false" type="VARCHAR" size="100"/>
         <column name="code" required="false" type="VARCHAR" size="20"/>
         <column name="status" required="false" type="VARCHAR" size="20"/>
-        <column name="description" required="false" type="VARCHAR" size="256"/>
+        <column name="description" required="false" type="VARCHAR" size="255"/>
         <column name="type" required="false" type="VARCHAR" size="20"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
-        <column name="amountauth" required="false" type="VARCHAR" size="256"/>
-        <column name="amountcap" required="false" type="VARCHAR" size="256"/>
-        <column name="amountcred" required="false" type="VARCHAR" size="256"/>
+        <column name="amountauth" required="false" type="VARCHAR" size="255"/>
+        <column name="amountcap" required="false" type="VARCHAR" size="255"/>
+        <column name="amountcred" required="false" type="VARCHAR" size="255"/>
 
         <id-method-parameter value="spy_payment_computop_notification_pk_seq"/>
     </table>

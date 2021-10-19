@@ -207,6 +207,7 @@ interface ComputopFacadeInterface
     /**
      * Specification:
      * - Saves PayU CEE Single init response to the database.
+     * - Requires QuoteTransfer::payment::computopPayuCeeSingle::payuCeeSingleInitResponse::header to be set.
      *
      * @api
      *
@@ -280,7 +281,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Filters available payment methods by gift card black list
+     * - Filters available payment methods by currency.
      *
      * @api
      *

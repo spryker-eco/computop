@@ -87,6 +87,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
  * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
  */
 class ComputopBusinessFactory extends AbstractBusinessFactory
 {
@@ -199,9 +200,8 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     public function createPayuCeeSingleResponseSaver(): InitResponseSaverInterface
     {
         return new PayuCeeSingleResponseSaver(
-            $this->getQueryContainer(),
-            $this->getOmsFacade(),
             $this->getConfig(),
+            $this->getRepository(),
             $this->getEntityManager()
         );
     }

@@ -73,7 +73,7 @@ class NotificationProcessor implements NotificationProcessorInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
      *
-     * @return string
+     * @return string|null
      */
     protected function getCurrentOrderItemEntityStatus(ComputopNotificationTransfer $computopNotificationTransfer): ?string
     {

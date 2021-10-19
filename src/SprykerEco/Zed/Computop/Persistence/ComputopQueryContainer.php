@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
@@ -107,7 +109,7 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     {
         return $this
             ->getFactory()
-            ->createSpySalesOrderItemQuery()
+            ->getSpySalesOrderItemQuery()
             ->filterByFkSalesOrder($idSalesOrder);
     }
 
@@ -116,20 +118,20 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    protected function queryPayments()
+    protected function queryPayments(): SpyPaymentComputopQuery
     {
         return $this
             ->getFactory()
-            ->createPaymentComputopQuery();
+            ->getPaymentComputopQuery();
     }
 
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    protected function queryPaymentOrderItems()
+    protected function queryPaymentOrderItems(): SpyPaymentComputopOrderItemQuery
     {
         return $this
             ->getFactory()
-            ->createPaymentComputopOrderItemQuery();
+            ->getPaymentComputopOrderItemQuery();
     }
 }
