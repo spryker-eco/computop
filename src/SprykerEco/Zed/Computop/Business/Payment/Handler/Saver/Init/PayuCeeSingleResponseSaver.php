@@ -61,7 +61,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $computopPayuCeeSingleInitResponseTransfer = $this->getPaymentTransferFromQuoteOrFail($quoteTransfer)
+        $computopPayuCeeSingleInitResponseTransfer = $this->getPaymentTransferFromQuote($quoteTransfer)
             ->getComputopPayuCeeSingleOrFail()
             ->getPayuCeeSingleInitResponseOrFail();
 
@@ -111,7 +111,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
      *
      * @return \Generated\Shared\Transfer\PaymentTransfer
      */
-    protected function getPaymentTransferFromQuoteOrFail(QuoteTransfer $quoteTransfer): PaymentTransfer
+    protected function getPaymentTransferFromQuote(QuoteTransfer $quoteTransfer): PaymentTransfer
     {
         foreach ($quoteTransfer->getPayments() as $paymentTransfer) {
             if ($paymentTransfer !== null) {
@@ -136,7 +136,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
             ->setPayId($computopApiResponseHeaderTransfer->getPayId())
             ->setXId($computopApiResponseHeaderTransfer->getXId());
 
-        $this->computopEntityManager->saveComputopPayment($computopPaymentComputopTransfer);
+        $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
 
     /**
@@ -173,10 +173,10 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
         string $paymentStatus
     ): void {
         $salesOrderItemsCollectionTransfer = $this->computopRepository
-            ->getComputopSalesOrderItemsCollection($computopPaymentComputopTransfer);
+            ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
 
         $computopPaymentComputopOrderItemsCollection = $this->computopRepository
-            ->getComputopPaymentComputopOrderItemsCollection($computopPaymentComputopTransfer);
+            ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
         foreach ($salesOrderItemsCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
             $this->updateComputopSalesOrderItem(
@@ -190,14 +190,14 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection
      * @param \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer $computopSalesOrderItem
-     * @param string|null $paymentStatus
+     * @param string $paymentStatus
      *
      * @return void
      */
     protected function updateComputopSalesOrderItem(
         ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection,
         ComputopSalesOrderItemTransfer $computopSalesOrderItem,
-        ?string $paymentStatus
+        string $paymentStatus
     ): void {
         foreach ($computopPaymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItem) {
             if ($computopSalesOrderItem->getIdSalesOrderItem() !== $computopPaymentComputopOrderItem->getFkSalesOrderItem()) {

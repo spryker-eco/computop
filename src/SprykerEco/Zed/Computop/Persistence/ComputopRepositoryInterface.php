@@ -26,7 +26,7 @@ interface ComputopRepositoryInterface
      *
      * @return \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer
      */
-    public function getComputopSalesOrderItemsCollection(
+    public function getComputopSalesOrderItemCollection(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopSalesOrderItemCollectionTransfer;
 
@@ -35,7 +35,7 @@ interface ComputopRepositoryInterface
      *
      * @return \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer
      */
-    public function getComputopPaymentComputopOrderItemsCollection(
+    public function getComputopPaymentComputopOrderItemCollection(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopPaymentComputopOrderItemCollectionTransfer;
 
