@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
+use SprykerEcoTest\Zed\Computop\ComputopZedTester;
 
 /**
  * @group Functional
@@ -58,18 +59,20 @@ class CapturePaymentTest extends AbstractPaymentTest
     public const CODE_VALUE = '00000000';
 
     /**
+     * @var ComputopZedTester
+     */
+    protected $tester;
+
+    /**
      * @return void
      */
     public function testCapturePaymentSuccess()
     {
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
         $orderTransfer = $this->createOrderTransfer();
         $orderItems = $this->omsHelper->createOrderItems();
 
-        //todo: update test
         /** @var \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer $response */
-        $response = $service->captureCommandHandle($orderItems, $orderTransfer);
+        $response = $this->tester->getFacade()->captureCommandHandle($orderItems, $orderTransfer);
 
         $this->assertInstanceOf(ComputopApiCaptureResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());

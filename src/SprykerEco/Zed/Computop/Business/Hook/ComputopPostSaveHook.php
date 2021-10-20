@@ -54,10 +54,10 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer): CheckoutResponseTransfer
     {
         $paymentTransfer = $quoteTransfer->getPayment();
-        if (!$paymentTransfer || $paymentTransfer->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
+        if (!$paymentTransfer || $paymentTransfer->getPaymentProvider() !== ComputopSharedConfig::PROVIDER_NAME) {
             return $checkoutResponseTransfer;
         }
 
@@ -149,9 +149,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     protected function isPaymentInitRequired(PaymentTransfer $paymentTransfer): bool
     {
         return in_array($paymentTransfer->getPaymentSelection(), [
-            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
-            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
-            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+            ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
         ], true);
     }
 }
