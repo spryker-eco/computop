@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Persistence;
 
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
