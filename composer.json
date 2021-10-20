@@ -29,7 +29,7 @@
         "spryker/zed-request": "^3.0.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "*",
+        "phpstan/phpstan": "^0.12",
         "spryker-shop/shop-application": "*",
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
@@ -38,7 +38,7 @@
         "spryker/payment": "*",
         "spryker/propel": "*",
         "spryker/silex": "*",
-        "spryker/testify": "*"
+        "spryker/testify": "^3.0.0"
     },
     "suggest": {
         "spryker-shop/shop-application": "Abstract Yves controller provider is used.",
