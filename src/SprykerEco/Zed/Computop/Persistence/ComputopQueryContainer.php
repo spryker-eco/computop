@@ -118,7 +118,7 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    protected function queryPayments(): SpyPaymentComputopQuery
+    protected function queryPayments()
     {
         return $this
             ->getFactory()
@@ -128,7 +128,7 @@ class ComputopQueryContainer extends AbstractQueryContainer implements ComputopQ
     /**
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery
      */
-    protected function queryPaymentOrderItems(): SpyPaymentComputopOrderItemQuery
+    protected function queryPaymentOrderItems()
     {
         return $this
             ->getFactory()
