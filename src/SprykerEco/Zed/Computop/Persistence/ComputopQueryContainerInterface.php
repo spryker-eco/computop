@@ -19,7 +19,7 @@ interface ComputopQueryContainerInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopQuery
      */
-    public function queryPaymentById(int $idPayment);
+    public function queryPaymentById($idPayment);
 
     /**
      * Specification:
