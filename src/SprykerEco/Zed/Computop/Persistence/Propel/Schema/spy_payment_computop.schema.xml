@@ -181,13 +181,13 @@
 
     <table name="spy_payment_computop_notification">
         <column name="fk_payment_computop_notification" type="INTEGER" required="true" primaryKey="true" autoIncrement="true"/>
-        <column name="pay_id" required="false" type="VARCHAR" size="255"/>
-        <column name="trans_id" required="false" type="VARCHAR" size="255"/>
-        <column name="x_id" required="false" type="VARCHAR" size="255"/>
-        <column name="code" required="false" type="VARCHAR" size="255"/>
-        <column name="status" required="false" type="VARCHAR" size="255"/>
-        <column name="description" required="false" type="VARCHAR" size="255"/>
-        <column name="type" required="false" type="VARCHAR" size="255"/>
+        <column name="pay_id" required="false" type="VARCHAR" size="100"/>
+        <column name="trans_id" required="false" type="VARCHAR" size="100"/>
+        <column name="x_id" required="false" type="VARCHAR" size="100"/>
+        <column name="code" required="false" type="VARCHAR" size="20"/>
+        <column name="status" required="false" type="VARCHAR" size="20"/>
+        <column name="description" required="false" type="VARCHAR" size="256"/>
+        <column name="type" required="false" type="VARCHAR" size="20"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
 
         <id-method-parameter value="spy_payment_computop_notification_pk_seq"/>
