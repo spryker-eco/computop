@@ -16,10 +16,13 @@ class ReverseSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'REVERSE';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface

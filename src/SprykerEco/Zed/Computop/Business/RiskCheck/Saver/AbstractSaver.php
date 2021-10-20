@@ -21,7 +21,7 @@ abstract class AbstractSaver implements RiskCheckSaverInterface
     protected $logger;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
      */
     protected $queryContainer;
 

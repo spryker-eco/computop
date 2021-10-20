@@ -112,6 +112,7 @@ class CancelCommandHandler extends AbstractCommandHandler
      */
     protected function reverseOrderAuthorizationRequest(OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $computopResponseTransfer */
         $computopResponseTransfer = $this->reversePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
         if ($computopResponseTransfer->getHeader()->getIsSuccess()) {
             $this->setInfoMessage('Authorization was reverted');

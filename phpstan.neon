@@ -1,0 +1,33 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+
+    ignoreErrors:
+        - '#Access to constant .+ on an unknown class Generated\\Shared\\Transfer\\.+Transfer.#'
+        - '#Call to method .+\(\) on an unknown class Generated\\#'
+        - '#Call to method .+\(\) on an unknown class Orm\\.+#'
+        - '#Call to static method create\(\) on an unknown class .+Query.#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\.+#'
+        - '#Call to an undefined method Propel\\.+#'
+        - '#Call to an undefined method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\ManagerInterface.+#'
+        - '#Class Generated\\Shared\\Transfer\\.+Transfer not found.#'
+        - '#Return typehint of method .+ has invalid type Orm\\.+#'
+        - '#Parameter \$.+ of method .+ has invalid typehint type Orm\\.+#'
+        - '#Parameter \#5 \$request of class.+\|null given.#'
+        - '#Parameter .+ of method .+ has invalid typehint type .+Transfer#'
+        - '#Parameter .+ of method .+ expects Spryker\\Shared\\Kernel\\Transfer\\.+, Generated\\Shared\\Transfer\\.+Transfer given.#'
+        - '#Parameter .+ of method .+ expects Generated\\Shared\\Transfer\\.+Transfer, Spryker\\Shared\\Kernel\\Transfer\\.+ given.#'
+        - '#Parameter .+ of function base64_encode expects string, string\|null given.#'
+        - '#Property.+has unknown class Orm\\Zed\\Computop\\Persistence.+#'
+        - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'
+        - '#PHPDoc tag @var for variable.+contains unknown class Generated\\Shared\\Transfer\\.+Transfer#'
+        - '#PHPDoc tag @param for parameter .+ with type Generated\\Shared\\Transfer\\.+ is not subtype of native type Spryker\\Shared\\Kernel\\Transfer\\.+.#'
+        - '#PHPDoc tag @return with type Generated\\Shared\\Transfer\\.+Transfer.+is not subtype of native type Spryker\\Shared\\Kernel\\Transfer\\.+#'
+        - '#Return typehint of method .+ has invalid type .+Transfer#'
+        - '#Return typehint of anonymous function has invalid type Generated\\Shared\\Transfer\\ComputopNotificationTransfer.#'
+        - '#Instantiated class Orm\\.+not found.#'
+        - '#Instantiated class Generated\\.+Transfer not found.#'
+        - '#Method .+ should return Generated\\Shared\\Transfer\\.+Transfer but returns.+Spryker\\Shared\\Kernel\\Transfer\\.+#'
+        - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Generated\\Shared\\Transfer\\.+Transfer.#'
+        - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Spryker\\Shared\\Kernel\\Transfer\\.+.#'
+        - '#.+but returns.+null.#'

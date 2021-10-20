@@ -21,14 +21,49 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+
+    /**
+     * @var string
+     */
     public const FACADE_OMS = 'FACADE_OMS';
+
+    /**
+     * @var string
+     */
     public const FACADE_MONEY = 'FACADE_MONEY';
+
+    /**
+     * @var string
+     */
     public const FACADE_SALES = 'FACADE_SALES';
+
+    /**
+     * @var string
+     */
     public const FACADE_CALCULATION = 'FACADE_CALCULATION';
+
+    /**
+     * @var string
+     */
     public const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
+
+    /**
+     * @var string
+     */
     public const FACADE_COMPUTOP_API = 'FACADE_COMPUTOP_API';
+
+    /**
+     * @var string
+     */
     public const FACADE_REFUND = 'FACADE_REFUND';
+
+    /**
+     * @var string
+     */
     public const STORE = 'STORE';
 
     /**
@@ -36,7 +71,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideCommunicationLayerDependencies(Container $container)
+    public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
@@ -58,7 +93,7 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
 

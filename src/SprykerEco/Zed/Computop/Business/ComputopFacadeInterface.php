@@ -65,7 +65,7 @@ interface ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 
@@ -91,7 +91,7 @@ interface ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function captureCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 
@@ -206,13 +206,26 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Saves PayU CEE Single init response to the database.
+     * - Requires QuoteTransfer::payment::computopPayuCeeSingle::payuCeeSingleInitResponse::header to be set.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * Specification:
      * - Makes Easy Credit Status API call
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer);
 
@@ -225,7 +238,7 @@ interface ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function easyCreditAuthorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer);
 
@@ -237,7 +250,7 @@ interface ComputopFacadeInterface
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer);
 
@@ -265,6 +278,19 @@ interface ComputopFacadeInterface
      * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
     public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Filters available payment methods by currency.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethodsByCurrency(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
 
     /**
      * Specification:

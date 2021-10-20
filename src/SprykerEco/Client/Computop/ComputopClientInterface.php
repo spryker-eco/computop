@@ -54,6 +54,18 @@ interface ComputopClientInterface
 
     /**
      * Specification:
+     * - Saves PayU CEE Single response the database.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * Specification:
      * - Saves Paydirekt response to DB
      *
      * @api
@@ -77,7 +89,8 @@ interface ComputopClientInterface
     public function saveCreditCardInitResponse(QuoteTransfer $quoteTransfer);
 
     /**
-     * {@inheritDoc}
+     * Specification:
+     * - Saves PayNow response to the database.
      *
      * @api
      *

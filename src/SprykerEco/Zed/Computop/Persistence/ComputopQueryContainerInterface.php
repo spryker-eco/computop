@@ -10,6 +10,9 @@ namespace SprykerEco\Zed\Computop\Persistence;
 interface ComputopQueryContainerInterface
 {
     /**
+     * Specification:
+     * - Returns `SpyPaymentComputopQuery` filtered by payment ID.
+     *
      * @api
      *
      * @param int $idPayment
@@ -19,6 +22,9 @@ interface ComputopQueryContainerInterface
     public function queryPaymentById($idPayment);
 
     /**
+     * Specification:
+     * - Returns `SpyPaymentComputopQuery` filtered by order ID.
+     *
      * @api
      *
      * @param int $idOrder
@@ -28,6 +34,9 @@ interface ComputopQueryContainerInterface
     public function queryPaymentByOrderId($idOrder);
 
     /**
+     * Specification:
+     * - Returns `SpyPaymentComputopQuery` filtered by pay ID.
+     *
      * @api
      *
      * @param string $idPay
@@ -37,6 +46,9 @@ interface ComputopQueryContainerInterface
     public function queryPaymentByPayId($idPay);
 
     /**
+     *  Specification:
+     * - Returns `SpyPaymentComputopQuery` filtered by transaction ID.
+     *
      * @api
      *
      * @param string $idTransaction
@@ -46,6 +58,9 @@ interface ComputopQueryContainerInterface
     public function queryPaymentByTransactionId($idTransaction);
 
     /**
+     *  Specification:
+     * - Returns `SpyPaymentComputopQuery` filtered by order item ID.
+     *
      * @api
      *
      * @param int $orderItemId
@@ -55,6 +70,9 @@ interface ComputopQueryContainerInterface
     public function queryPaymentItemByOrderItemId($orderItemId);
 
     /**
+     *  Specification:
+     * - Returns `SpySalesOrderItemQuery` filtered by order ID.
+     *
      * @api
      *
      * @param int $idSalesOrder

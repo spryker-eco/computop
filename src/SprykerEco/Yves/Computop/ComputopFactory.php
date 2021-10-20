@@ -9,6 +9,8 @@ namespace SprykerEco\Yves\Computop;
 
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\Router\Router\RouterInterface;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Converter\InitCreditCardConverter;
 use SprykerEco\Yves\Computop\Converter\InitDirectDebitConverter;
 use SprykerEco\Yves\Computop\Converter\InitEasyCreditConverter;
@@ -16,6 +18,7 @@ use SprykerEco\Yves\Computop\Converter\InitIdealConverter;
 use SprykerEco\Yves\Computop\Converter\InitPaydirektConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayNowConverter;
 use SprykerEco\Yves\Computop\Converter\InitPayPalConverter;
+use SprykerEco\Yves\Computop\Converter\InitPayuCeeSingleConverter;
 use SprykerEco\Yves\Computop\Converter\InitSofortConverter;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToCountryClientInterface;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceInterface;
@@ -27,6 +30,7 @@ use SprykerEco\Yves\Computop\Form\DataProvider\IdealFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PaydirektFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayNowFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\PayPalFormDataProvider;
+use SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DataProvider\SofortFormDataProvider;
 use SprykerEco\Yves\Computop\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Computop\Form\EasyCreditSubForm;
@@ -34,8 +38,10 @@ use SprykerEco\Yves\Computop\Form\IdealSubForm;
 use SprykerEco\Yves\Computop\Form\PaydirektSubForm;
 use SprykerEco\Yves\Computop\Form\PayNowSubForm;
 use SprykerEco\Yves\Computop\Form\PayPalSubForm;
+use SprykerEco\Yves\Computop\Form\PayuCeeSingleSubForm;
 use SprykerEco\Yves\Computop\Form\SofortSubForm;
 use SprykerEco\Yves\Computop\Handler\ComputopPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopCreditCardPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopDirectDebitPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopEasyCreditPaymentHandler;
@@ -43,7 +49,9 @@ use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopIdealPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPaydirektPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayNowPaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayPalPaymentHandler;
+use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopPayuCeeSinglePaymentHandler;
 use SprykerEco\Yves\Computop\Handler\PostPlace\ComputopSofortPaymentHandler;
+use SprykerEco\Yves\Computop\Mapper\Init\MapperInterface;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\CreditCardMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\DirectDebitMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\EasyCreditMapper;
@@ -51,6 +59,7 @@ use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\IdealMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PaydirektMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayNowMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayPalMapper;
+use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayuCeeSingleMapper;
 use SprykerEco\Yves\Computop\Mapper\Init\PostPlace\SofortMapper;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -141,6 +150,14 @@ class ComputopFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createPayuCeeSingleSubForm(): SubFormInterface
+    {
+        return new PayuCeeSingleSubForm();
+    }
+
+    /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createCreditCardFormDataProvider()
@@ -202,6 +219,14 @@ class ComputopFactory extends AbstractFactory
     public function createEasyCreditFormDataProvider()
     {
         return new EasyCreditFormDataProvider($this->getQuoteClient(), $this->createOrderEasyCreditMapper());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Form\DataProvider\PayuCeeSingleFormDataProvider
+     */
+    public function createPayuCeeSingleFormDataProvider(): PayuCeeSingleFormDataProvider
+    {
+        return new PayuCeeSingleFormDataProvider($this->getQuoteClient(), $this->createOrderPayuCeeSingleMapper());
     }
 
     /**
@@ -275,6 +300,17 @@ class ComputopFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
      */
+    public function createPayuCeeSinglePaymentHandler(): ComputopPrePostPaymentHandlerInterface
+    {
+        return new ComputopPayuCeeSinglePaymentHandler(
+            $this->createInitPayuCeeSingleConverter(),
+            $this->getComputopClient()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface
+     */
     public function createPaydirektPaymentHandler()
     {
         return new ComputopPaydirektPaymentHandler($this->createInitPaydirektConverter(), $this->getComputopClient());
@@ -334,6 +370,14 @@ class ComputopFactory extends AbstractFactory
     protected function createInitEasyCreditConverter()
     {
         return new InitEasyCreditConverter($this->getComputopApiService(), $this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Converter\ConverterInterface
+     */
+    public function createInitPayuCeeSingleConverter(): ConverterInterface
+    {
+        return new InitPayuCeeSingleConverter($this->getComputopApiService(), $this->getConfig());
     }
 
     /**
@@ -502,6 +546,22 @@ class ComputopFactory extends AbstractFactory
     protected function createOrderEasyCreditMapper()
     {
         return new EasyCreditMapper(
+            $this->getComputopApiService(),
+            $this->getRouter(),
+            $this->getStore(),
+            $this->getConfig(),
+            $this->getRequestStack()->getCurrentRequest(),
+            $this->getUtilEncodingService(),
+            $this->getCountryClient()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Computop\Mapper\Init\PostPlace\PayuCeeSingleMapper
+     */
+    public function createOrderPayuCeeSingleMapper(): MapperInterface
+    {
+        return new PayuCeeSingleMapper(
             $this->getComputopApiService(),
             $this->getRouter(),
             $this->getStore(),

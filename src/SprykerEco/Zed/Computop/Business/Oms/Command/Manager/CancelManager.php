@@ -62,6 +62,10 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
             ->queryPaymentItemByOrderItemId($orderItem->getIdSalesOrderItem())
             ->findOne();
 
+        if (!$computopOrderItem) {
+            return;
+        }
+
         $computopOrderItem->setStatus($this->config->getOmsStatusCancelled());
         $computopOrderItem->save();
     }

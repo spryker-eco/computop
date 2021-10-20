@@ -16,10 +16,13 @@ class RefundSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'REFUND';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface

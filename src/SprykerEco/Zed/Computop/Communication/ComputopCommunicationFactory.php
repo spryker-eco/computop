@@ -16,6 +16,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToRefundFacadeInterface;
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
  */
 class ComputopCommunicationFactory extends AbstractCommunicationFactory
 {

@@ -7,17 +7,12 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
-use Generated\Shared\Transfer\ComputopAddressLineTransfer;
-use Generated\Shared\Transfer\ComputopAddressTransfer;
 use Generated\Shared\Transfer\ComputopBrowserInfoTransfer;
 use Generated\Shared\Transfer\ComputopConsumerTransfer;
-use Generated\Shared\Transfer\ComputopCountryTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTypeTransfer;
 use Generated\Shared\Transfer\ComputopCustomerInfoTransfer;
 use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
-use Generated\Shared\Transfer\CountryCollectionTransfer;
-use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
@@ -27,13 +22,44 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 
 class PayNowMapper extends AbstractMapper
 {
+    /**
+     * @var string
+     */
     protected const HEADER_USER_AGENT = 'User-Agent';
+
+    /**
+     * @var string
+     */
     protected const HEADER_ACCEPT = 'Accept';
+
+    /**
+     * @var int
+     */
     protected const IFRAME_COLOR_DEPTH = 24;
+
+    /**
+     * @var int
+     */
     protected const IFRAME_SCREEN_HEIGHT = 723;
+
+    /**
+     * @var int
+     */
     protected const IFRAME_SCREEN_WIDTH = 1536;
+
+    /**
+     * @var string
+     */
     protected const IFRAME_TIME_ZONE_OFFSET = '300';
+
+    /**
+     * @var bool
+     */
     protected const IFRAME_IS_JAVA_ENABLED = false;
+
+    /**
+     * @var bool
+     */
     protected const IFRAME_IS_JAVA_SCRIPT_ENABLED = true;
 
     /**
@@ -149,18 +175,16 @@ class PayNowMapper extends AbstractMapper
         ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer,
         QuoteTransfer $quoteTransfer
     ): ComputopPayNowPaymentTransfer {
+        $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
+
+        $computopConsumerTransfer = (new ComputopConsumerTransfer())
+            ->fromArray($addressTransfer->toArray(), true);
+
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
-            ->setConsumer(
-                (new ComputopConsumerTransfer())
-                    ->setFirstName($quoteTransfer->getShippingAddress()->getFirstName())
-                    ->setLastName($quoteTransfer->getShippingAddress()->getLastName())
-                    ->setSalutation($quoteTransfer->getShippingAddress()->getSalutation())
-            )
+            ->setConsumer($computopConsumerTransfer)
             ->setEmail($quoteTransfer->getCustomer()->getEmail());
 
-        $computopPayNowPaymentTransfer->setShipToCustomer($computopCustomerInfoTransfer);
-
-        return $computopPayNowPaymentTransfer;
+        return $computopPayNowPaymentTransfer->setShipToCustomer($computopCustomerInfoTransfer);
     }
 
     /**
@@ -181,18 +205,14 @@ class PayNowMapper extends AbstractMapper
             return $computopPayNowPaymentTransfer;
         }
 
+        $computopConsumerTransfer = (new ComputopConsumerTransfer())
+            ->fromArray($quoteTransfer->getBillingAddress()->toArray(), true);
+
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
-            ->setConsumer(
-                (new ComputopConsumerTransfer())
-                    ->setFirstName($quoteTransfer->getBillingAddress()->getFirstName())
-                    ->setLastName($quoteTransfer->getBillingAddress()->getLastName())
-                    ->setSalutation($quoteTransfer->getBillingAddress()->getSalutation())
-            )
+            ->setConsumer($computopConsumerTransfer)
             ->setEmail($quoteTransfer->getCustomer()->getEmail());
 
-        $computopPayNowPaymentTransfer->setBillToCustomer($computopCustomerInfoTransfer);
-
-        return $computopPayNowPaymentTransfer;
+        return $computopPayNowPaymentTransfer->setBillToCustomer($computopCustomerInfoTransfer);
     }
 
     /**
@@ -205,28 +225,11 @@ class PayNowMapper extends AbstractMapper
         ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer,
         QuoteTransfer $quoteTransfer
     ): ComputopPayNowPaymentTransfer {
-        $countryCollectionTransfer = (new CountryCollectionTransfer())
-            ->addCountries(
-                (new CountryTransfer())->setIso2Code($quoteTransfer->getShippingAddress()->getIso2Code())
-            );
-        $countryCollectionTransfer = $this->countryClient->findCountriesByIso2Codes($countryCollectionTransfer);
+        $shippingAddress = $this->getShippingAddressFromQuote($quoteTransfer);
 
-        $computopAddressTransfer = (new ComputopAddressTransfer())
-            ->setCity($quoteTransfer->getShippingAddress()->getCity())
-            ->setCountry(
-                (new ComputopCountryTransfer())
-                    ->setCountryA3($countryCollectionTransfer->getCountries()->offsetGet(0)->getIso3Code())
-            )
-            ->setAddressLine1(
-                (new ComputopAddressLineTransfer())
-                    ->setStreet($quoteTransfer->getShippingAddress()->getAddress1())
-                    ->setStreetNumber($quoteTransfer->getShippingAddress()->getAddress2())
-            )
-            ->setPostalCode($quoteTransfer->getShippingAddress()->getZipCode());
+        $computopAddressTransfer = $this->getComputopAddressTransferByAddressTransfer($shippingAddress);
 
-        $computopPayNowPaymentTransfer->setShippingAddress($computopAddressTransfer);
-
-        return $computopPayNowPaymentTransfer;
+        return $computopPayNowPaymentTransfer->setShippingAddress($computopAddressTransfer);
     }
 
     /**
@@ -247,28 +250,9 @@ class PayNowMapper extends AbstractMapper
             return $computopPayNowPaymentTransfer;
         }
 
-        $countryCollectionTransfer = (new CountryCollectionTransfer())
-            ->addCountries(
-                (new CountryTransfer())->setIso2Code($quoteTransfer->getBillingAddress()->getIso2Code())
-            );
-        $countryCollectionTransfer = $this->countryClient->findCountriesByIso2Codes($countryCollectionTransfer);
+        $computopAddressTransfer = $this->getComputopAddressTransferByAddressTransfer($quoteTransfer->getBillingAddress());
 
-        $computopAddressTransfer = (new ComputopAddressTransfer())
-            ->setCity($quoteTransfer->getBillingAddress()->getCity())
-            ->setCountry(
-                (new ComputopCountryTransfer())
-                    ->setCountryA3($countryCollectionTransfer->getCountries()->offsetGet(0)->getIso3Code())
-            )
-            ->setAddressLine1(
-                (new ComputopAddressLineTransfer())
-                    ->setStreet($quoteTransfer->getBillingAddress()->getAddress1())
-                    ->setStreetNumber($quoteTransfer->getBillingAddress()->getAddress2())
-            )
-            ->setPostalCode($quoteTransfer->getBillingAddress()->getZipCode());
-
-        $computopPayNowPaymentTransfer->setBillingAddress($computopAddressTransfer);
-
-        return $computopPayNowPaymentTransfer;
+        return $computopPayNowPaymentTransfer->setBillingAddress($computopAddressTransfer);
     }
 
     /**

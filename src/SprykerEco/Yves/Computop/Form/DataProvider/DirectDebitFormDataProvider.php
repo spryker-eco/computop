@@ -27,6 +27,7 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
+            /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopDirectDebit($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);

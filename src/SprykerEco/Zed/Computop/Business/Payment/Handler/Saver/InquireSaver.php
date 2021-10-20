@@ -16,10 +16,13 @@ class InquireSaver extends AbstractSaver
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     public const METHOD = 'INQUIRE';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface

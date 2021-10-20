@@ -27,6 +27,7 @@ class IdealFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
+            /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopIdeal($computopTransfer);
             $quoteTransfer->setPayment($paymentTransfer);

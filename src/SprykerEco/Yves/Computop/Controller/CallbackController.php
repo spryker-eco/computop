@@ -15,7 +15,7 @@ use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Shared\Computop\Config\ComputopApiConfig;
 use SprykerEco\Shared\ComputopApi\ComputopApiConstants;
 use SprykerEco\Yves\Computop\Handler\ComputopPrePostPaymentHandlerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,10 +25,19 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CallbackController extends AbstractController
 {
+    /**
+     * @var string
+     */
     public const MESSAGE_PAYMENT_SUCCESS = 'Your order has been placed successfully! Thank you for shopping with us!';
 
+    /**
+     * @var string
+     */
     public const MESSAGE_LOG_OUT_ERROR = 'Please login and try again.';
 
+    /**
+     * @var string
+     */
     public const MESSAGE_RESPONSE_ERROR = 'Error: %s ( %s )';
 
     /**
@@ -112,6 +121,19 @@ class CallbackController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function successPayuCeeSingleAction(Request $request): RedirectResponse
+    {
+        return $this->executeSuccessPostPlaceAction(
+            $this->getFactory()->createPayuCeeSinglePaymentHandler(),
+            $request->query->all()
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function successPaydirektAction(Request $request)
     {
         return $this->executeSuccessPostPlaceAction(
@@ -169,8 +191,6 @@ class CallbackController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @throws \SprykerEco\Service\ComputopApi\Exception\ComputopApiConverterException
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function failureAction(Request $request)
@@ -181,15 +201,17 @@ class CallbackController extends AbstractController
             $requestParameters = $request->request->all();
         }
 
-        $decryptedArray = $this->getFactory()
-            ->getComputopApiService()
+        $computopApiService = $this->getFactory()->getComputopApiService();
+
+        $decryptedArray = $computopApiService
             ->decryptResponseHeader($requestParameters, Config::get(ComputopApiConstants::BLOWFISH_PASSWORD));
 
-        $responseHeaderTransfer = $this->getFactory()
-            ->getComputopApiService()
+        $responseHeaderTransfer = $computopApiService
             ->extractResponseHeader($decryptedArray, ComputopConfig::INIT_METHOD);
 
         $this->addErrorMessage($this->getErrorMessageText($responseHeaderTransfer));
+
+        $this->resetQuoteAfterFail();
 
         return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
     }
@@ -234,5 +256,19 @@ class CallbackController extends AbstractController
         $errorMessageText = sprintf(static::MESSAGE_RESPONSE_ERROR, $errorText, $errorCode);
 
         return $errorMessageText;
+    }
+
+    /**
+     * @return void
+     */
+    protected function resetQuoteAfterFail(): void
+    {
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $quoteTransfer
+            ->setIsOrderPlacedSuccessfully(null)
+            ->setOrderReference(null)
+            ->setPayment(null);
+
+        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
     }
 }

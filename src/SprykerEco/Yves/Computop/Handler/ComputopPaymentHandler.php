@@ -44,9 +44,10 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer)
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
-
-        $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer, $paymentSelection);
-        $quoteTransfer = $this->setComputopPayment($quoteTransfer, $paymentSelection);
+        if ($paymentSelection) {
+            $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer, $paymentSelection);
+            $quoteTransfer = $this->setComputopPayment($quoteTransfer, $paymentSelection);
+        }
 
         return $quoteTransfer;
     }
