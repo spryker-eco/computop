@@ -18,30 +18,37 @@ class ComputopConfig extends AbstractBundleConfig
      * @var string
      */
     public const OMS_STATUS_NEW = 'new';
+
     /**
      * @var string
      */
     public const OMS_STATUS_INITIALIZED = 'init';
+
     /**
      * @var string
      */
     public const OMS_STATUS_AUTHORIZED = 'authorized';
+
     /**
      * @var string
      */
     public const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
+
     /**
      * @var string
      */
     public const OMS_STATUS_CAPTURED = 'captured';
+
     /**
      * @var string
      */
     public const OMS_STATUS_CAPTURING_FAILED = 'capture failed';
+
     /**
      * @var string
      */
     public const OMS_STATUS_CANCELLED = 'cancelled';
+
     /**
      * @var string
      */
@@ -51,28 +58,34 @@ class ComputopConfig extends AbstractBundleConfig
      * @var string
      */
     public const AUTHORIZE_METHOD = 'AUTHORIZE';
+
     /**
      * @var string
      */
     public const CAPTURE_METHOD = 'CAPTURE';
+
     /**
      * @var string
      */
     public const REVERSE_METHOD = 'REVERSE';
+
     /**
      * @var string
      */
     public const INQUIRE_METHOD = 'INQUIRE';
+
     /**
      * @var string
      */
     public const REFUND_METHOD = 'REFUND';
 
     //Events
+
     /**
      * @var string
      */
     public const COMPUTOP_OMS_EVENT_CAPTURE = 'capture';
+
     /**
      * @var string
      */
@@ -84,6 +97,11 @@ class ComputopConfig extends AbstractBundleConfig
      * @var bool
      */
     public const COMPUTOP_REFUND_SHIPMENT_PRICE_ENABLED = true;
+
+    /**
+     * @var string
+     */
+    protected const OMS_STATUS_AUTHORIZE_REQUEST = 'authorize request';
 
     /**
      * @api
@@ -173,6 +191,16 @@ class ComputopConfig extends AbstractBundleConfig
     public function getPaydirektInitAction()
     {
         return $this->get(ComputopConstants::PAYDIREKT_INIT_ACTION);
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getPayuCeeSingleInitAction(): string
+    {
+        return $this->get(ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION);
     }
 
     /**
@@ -282,6 +310,16 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsStatusAuthorized()
     {
         return static::OMS_STATUS_AUTHORIZED;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getAuthorizeRequestOmsStatus(): string
+    {
+        return static::OMS_STATUS_AUTHORIZE_REQUEST;
     }
 
     /**
@@ -462,5 +500,23 @@ class ComputopConfig extends AbstractBundleConfig
     public function getIdealIssuerId(): string
     {
         return $this->get(ComputopConstants::IDEAL_ISSUER_ID);
+    }
+
+    /**
+     * Specification:
+     * - Get Available currency for specific payment methods.
+     *
+     * @api
+     *
+     * @return array
+     */
+    public function getComputopPaymentMethodCurrencyFilterMap(): array
+    {
+        return [
+            SharedComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE => [
+                'PLN',
+                'CZK',
+            ],
+        ];
     }
 }

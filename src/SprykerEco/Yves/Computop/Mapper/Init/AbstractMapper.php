@@ -7,7 +7,13 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init;
 
+use Generated\Shared\Transfer\AddressTransfer;
+use Generated\Shared\Transfer\ComputopAddressLineTransfer;
+use Generated\Shared\Transfer\ComputopAddressTransfer;
 use Generated\Shared\Transfer\ComputopApiRequestTransfer;
+use Generated\Shared\Transfer\ComputopCountryTransfer;
+use Generated\Shared\Transfer\CountryCollectionTransfer;
+use Generated\Shared\Transfer\CountryTransfer;
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
@@ -106,11 +112,14 @@ abstract class AbstractMapper implements MapperInterface
      */
     public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
     {
-        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = $this->createTransferWithUnencryptedValues($quoteTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setCurrency($this->store->getCurrencyIsoCode());
+        if ($quoteTransfer->getCurrency() && $quoteTransfer->getCurrency()->getCode() !== $computopPaymentTransfer->getCurrency()) {
+            $computopPaymentTransfer->setCurrency($quoteTransfer->getCurrency()->getCode());
+        }
         $computopPaymentTransfer->setResponse(ComputopConfig::RESPONSE_ENCRYPT_TYPE);
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));
@@ -233,7 +242,9 @@ abstract class AbstractMapper implements MapperInterface
             return $quoteTransfer->getBillingAddress()->getZipCode();
         }
 
-        return $quoteTransfer->getShippingAddress()->getZipCode();
+        $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
+
+        return $addressTransfer->getZipCode();
     }
 
     /**
@@ -264,5 +275,58 @@ abstract class AbstractMapper implements MapperInterface
         }
 
         return $data;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\AddressTransfer
+     */
+    protected function getShippingAddressFromQuote(QuoteTransfer $quoteTransfer): AddressTransfer
+    {
+        foreach ($quoteTransfer->getItems() as $itemTransfer) {
+            if ($itemTransfer->getShipment() && $itemTransfer->getShipment()->getShippingAddress()) {
+                return $itemTransfer->getShipment()->getShippingAddress();
+            }
+        }
+
+        return $quoteTransfer->getShippingAddressOrFail();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopCountryTransfer
+     */
+    protected function getComputopCountryTransferFromQuote(AddressTransfer $addressTransfer): ComputopCountryTransfer
+    {
+        $countryTransfer = (new CountryTransfer())
+            ->setIso2Code($addressTransfer->getIso2Code());
+
+        $countryCollectionTransfer = (new CountryCollectionTransfer())
+            ->addCountries($countryTransfer);
+
+        $countryCollectionTransfer = $this->countryClient->findCountriesByIso2Codes($countryCollectionTransfer);
+
+        return (new ComputopCountryTransfer())
+            ->setCountryA3($countryCollectionTransfer->getCountries()->offsetGet(0)->getIso3Code());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopAddressTransfer
+     */
+    protected function getComputopAddressTransferByAddressTransfer(AddressTransfer $addressTransfer): ComputopAddressTransfer
+    {
+        $computopAddressLineTransfer = (new ComputopAddressLineTransfer())
+            ->setStreet($addressTransfer->getAddress1())
+            ->setStreetNumber($addressTransfer->getAddress2());
+
+        return (new ComputopAddressTransfer())
+            ->setCity($addressTransfer->getCity())
+            ->setCountry($this->getComputopCountryTransferFromQuote($addressTransfer))
+            ->setAddressLine1($computopAddressLineTransfer)
+            ->setPostalCode($addressTransfer->getZipCode());
     }
 }

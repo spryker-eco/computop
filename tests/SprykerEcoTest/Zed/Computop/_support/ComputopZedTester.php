@@ -40,46 +40,57 @@ class ComputopZedTester extends Actor
      * @var string
      */
     protected const TEST_STATE_MACHINE_NAME = 'Test01';
+
     /**
      * @var string
      */
     protected const TRANS_ID_VALUE = 'f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7';
+
     /**
      * @var string
      */
     protected const PAY_ID_VALUE = 'e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8';
+
     /**
      * @var string
      */
     protected const X_ID_VALUE = 'b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5';
+
     /**
      * @var string
      */
     protected const REQ_ID_VALUE = 'a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4';
+
     /**
      * @var string
      */
     protected const CLIENT_IP = '127.0.0.1';
+
     /**
      * @var string
      */
     protected const TEST_PAYMENT_METHOD = 'computopCreditCard';
+
     /**
      * @var string
      */
     protected const ORDER_ITEM_STATUS = 'test';
+
     /**
      * @var string
      */
     protected const NOTIFICATION_CODE = '000000';
+
     /**
      * @var string
      */
     protected const NOTIFICATION_STATUS = '000000';
+
     /**
      * @var string
      */
     protected const NOTIFICATION_DESCRIPTION = 'Authentication completed correctly.';
+
     /**
      * @var string
      */
@@ -105,7 +116,12 @@ class ComputopZedTester extends Actor
         $this->setConfig('COMPUTOPAPI:HMAC_PASSWORD', 'COMPUTOP:HMAC_PASSWORD');
         $this->setConfig('COMPUTOPAPI:BLOWFISH_PASSWORD', 'COMPUTOP:BLOWFISH_PASSWORD');
         $this->setConfig('COMPUTOP:RESPONSE_MAC_REQUIRED', ['INIT']);
-        $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', ['computopSofort', 'computopPaydirekt', 'computopIdeal']);
+        $this->setConfig('COMPUTOP:PAYMENT_METHODS_WITHOUT_ORDER_CALL', [
+            'computopSofort',
+            'computopPaydirekt',
+            'computopIdeal',
+            'computopPayuCeeSingle',
+        ]);
         $this->setConfig('COMPUTOP:SOFORT_INIT_ACTION', 'https://www.computop-paygate.com/sofort.aspx');
         $this->setConfig(
             'COMPUTOP:CRIF_GREEN_AVAILABLE_PAYMENT_METHODS',
@@ -118,6 +134,7 @@ class ComputopZedTester extends Actor
                 ComputopConfig::PAYMENT_METHOD_PAY_PAL,
                 ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
                 ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
+                ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
             ]
         );
         $this->setConfig(

@@ -15,7 +15,7 @@ class ComputopPayNowPaymentHandler extends AbstractPostPlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

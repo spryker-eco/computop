@@ -31,14 +31,17 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
      * @var int
      */
     public const GRAND_TOTAL = 10;
+
     /**
      * @var int
      */
     public const REFUND_TOTAL = 10;
+
     /**
      * @var int
      */
     public const SUB_TOTAL = 8;
+
     /**
      * @var int
      */
@@ -110,7 +113,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Computop\Business\ComputopBusinessFactory
+     * @return \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function createFactory(): ComputopBusinessFactory
     {

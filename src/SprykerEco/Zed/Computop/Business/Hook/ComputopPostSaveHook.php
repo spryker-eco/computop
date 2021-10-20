@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Computop\Business\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
@@ -53,10 +54,13 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function execute(
-        QuoteTransfer $quoteTransfer,
-        CheckoutResponseTransfer $checkoutResponseTransfer
-    ): CheckoutResponseTransfer {
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    {
+        $paymentTransfer = $quoteTransfer->getPayment();
+        if (!$paymentTransfer || $paymentTransfer->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
+            return $checkoutResponseTransfer;
+        }
+
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
         try {
             /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
@@ -65,25 +69,21 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
             return $checkoutResponseTransfer;
         }
 
-        if (
-            $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW
-            && $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT
-            && $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD
-        ) {
-            return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
+        if ($this->isPaymentInitRequired($paymentTransfer)) {
+            $checkoutResponseTransfer->setComputopInitPayment(
+                (new ComputopInitPaymentTransfer())
+                    ->setData($computopPaymentTransfer->getData())
+                    ->setLen($computopPaymentTransfer->getLen())
+            );
+
+            return $checkoutResponseTransfer;
         }
 
-        $checkoutResponseTransfer->setComputopInitPayment(
-            (new ComputopInitPaymentTransfer())
-                ->setData($computopPaymentTransfer->getData())
-                ->setLen($computopPaymentTransfer->getLen())
-        );
-
-        return $checkoutResponseTransfer;
+        return $this->setRedirect($computopPaymentTransfer, $checkoutResponseTransfer);
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
+     * @param \Generated\Shared\Transfer\PaymentTransfer $computopPaymentTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
@@ -136,8 +136,22 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         }
 
         $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
-        $computopPaymentTransfer = $this->getMethodMapper($paymentSelection)->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+        $methodMapper = $this->getMethodMapper($paymentSelection);
 
-        return $computopPaymentTransfer;
+        return $methodMapper->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
+     *
+     * @return bool
+     */
+    protected function isPaymentInitRequired(PaymentTransfer $paymentTransfer): bool
+    {
+        return in_array($paymentTransfer->getPaymentSelection(), [
+            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+        ], true);
     }
 }

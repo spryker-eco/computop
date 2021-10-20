@@ -25,7 +25,7 @@ class OrderManager implements OrderManagerInterface
     use TransactionTrait;
 
     /**
-     * @var array
+     * @var \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface[]
      */
     protected $mappers;
 

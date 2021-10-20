@@ -15,7 +15,7 @@ class ComputopDirectDebitPaymentHandler extends AbstractPostPlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

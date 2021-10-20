@@ -22,7 +22,7 @@ class CaptureSaver extends AbstractSaver
     public const METHOD = 'CAPTURE';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface

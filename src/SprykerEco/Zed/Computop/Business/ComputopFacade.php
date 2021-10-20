@@ -84,7 +84,7 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function authorizeCommandHandle(array $orderItems, OrderTransfer $orderTransfer)
     {
@@ -313,6 +313,22 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayuCeeSingleInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+            ->createPayuCeeSingleResponseSaver()
+            ->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     */
     public function easyCreditStatusApiCall(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()
@@ -383,6 +399,23 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
     {
         return $this->getFactory()
             ->createPaymentMethodFilter()
+            ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethodsByCurrency(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer
+    {
+        return $this->getFactory()
+            ->createPaymentMethodByCurrencyFilter()
             ->filterPaymentMethods($paymentMethodsTransfer, $quoteTransfer);
     }
 

@@ -25,34 +25,42 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const SERVICE_COMPUTOP_API = 'SERVICE_COMPUTOP_API';
+
     /**
      * @var string
      */
     public const FACADE_OMS = 'FACADE_OMS';
+
     /**
      * @var string
      */
     public const FACADE_MONEY = 'FACADE_MONEY';
+
     /**
      * @var string
      */
     public const FACADE_SALES = 'FACADE_SALES';
+
     /**
      * @var string
      */
     public const FACADE_CALCULATION = 'FACADE_CALCULATION';
+
     /**
      * @var string
      */
     public const FACADE_FLASH_MESSENGER = 'FACADE_FLASH_MESSENGER';
+
     /**
      * @var string
      */
     public const FACADE_COMPUTOP_API = 'FACADE_COMPUTOP_API';
+
     /**
      * @var string
      */
     public const FACADE_REFUND = 'FACADE_REFUND';
+
     /**
      * @var string
      */

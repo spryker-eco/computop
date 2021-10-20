@@ -336,7 +336,37 @@
         <property name="shippingCountryCode" type="string"/>
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
+    </transfer>
 
+    <transfer name="ComputopPayuCeeSinglePayment">
+        <property name="payId" type="string"/>
+        <property name="merchantId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="refNr" type="string"/>
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="mac" type="string"/>
+        <property name="urlSuccess" type="string"/>
+        <property name="urlFailure" type="string"/>
+        <property name="response" type="string"/>
+        <property name="urlNotify" type="string"/>
+        <property name="reqId" type="string"/>
+        <property name="capture" type="string"/>
+        <property name="orderDesc" type="string"/>
+        <property name="articleList" type="string"/>
+        <property name="language" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="clientIp" type="string"/>
+        <property name="shippingZip" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="email" type="string"/>
+        <property name="phone" type="string"/>
+        <property name="data" type="string"/>
+        <property name="len" type="int"/>
+        <property name="url" type="string"/>
+        <property name="payuCeeSingleInitResponse" type="ComputopPayuCeeSingleInitResponse"/>
     </transfer>
 
     <transfer name="ComputopEasyCreditStatus">
@@ -530,6 +560,20 @@
         <property name="errorText" type="string"/>
     </transfer>
 
+    <transfer name="ComputopPayuCeeSingleInitResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="refNr" type="string"/>
+        <property name="codeExt" type="string"/>
+        <property name="errorText" type="string"/>
+        <property name="userData" type="string"/>
+        <property name="plain" type="string"/>
+        <property name="custom" type="string"/>
+        <property name="customerTransactionId" type="string"/>
+        <property name="amountAuth" type="string"/>
+        <property name="amountCap" type="string"/>
+        <property name="amountCred" type="string"/>
+    </transfer>
+
     <transfer name="ComputopCrif">
         <property name="status" type="string"/>
         <property name="description" type="string"/>
@@ -555,6 +599,7 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
+        <property name="computopPayuCeeSingle" type="ComputopPayuCeeSinglePayment"/>
         <property name="isComputopPaymentExist" type="bool"/>
     </transfer>
 
@@ -568,10 +613,13 @@
         <property name="computopPaydirekt" type="ComputopPaydirektPayment"/>
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
+        <property name="computopPayuCeeSingle" type="ComputopPayuCeeSinglePayment"/>
     </transfer>
 
     <transfer name="Quote">
         <property name="computopCrif" type="ComputopCrif"/>
+        <property name="expenses" type="Expense[]" singular="expense"/>
+        <property name="items" type="Item[]" singular="item"/>
         <property name="defaultShipmentSelected" type="bool"/>
     </transfer>
 
@@ -663,6 +711,9 @@
         <property name="type" type="string"/>
         <property name="isSuccess" type="bool"/>
         <property name="isProcessed" type="bool"/>
+        <property name="amountauth" type="int"/>
+        <property name="amountcap" type="int"/>
+        <property name="amountcred" type="int"/>
     </transfer>
 
     <transfer name="ComputopPaymentComputop">
@@ -675,6 +726,8 @@
         <property name="payId" type="string"/>
         <property name="transId" type="string"/>
         <property name="reqId" type="string"/>
+        <property name="paymentDetail" type="ComputopPaymentComputopDetail"/>
+        <property name="orderItems" type="ComputopPaymentComputopOrderItemCollection"/>
     </transfer>
 
     <transfer name="ComputopPaymentComputopDetail">
@@ -790,6 +843,62 @@
         <property name="name" type="string"/>
     </transfer>
 
+    <transfer name="Item">
+        <property name="shipment" type="Shipment"/>
+    </transfer>
+
+    <transfer name="Shipment">
+          <property name="shippingAddress" type="Address"/>
+    </transfer>
+
+    <transfer name="SaveOrder">
+    </transfer>
+
+    <transfer name="ComputopApiHeaderPayment">
+    </transfer>
+
+    <transfer name="Message">
+    </transfer>
+
+    <transfer name="ComputopApiResponseHeader">
+    </transfer>
+
+    <transfer name="ComputopApiAuthorizeResponse">
+    </transfer>
+
+    <transfer name="ComputopApiRefundResponse">
+    </transfer>
+
+    <transfer name="ComputopApiReverseResponse">
+    </transfer>
+
+    <transfer name="ComputopApiInquireResponse">
+    </transfer>
+
+    <transfer name="ComputopApiCaptureResponse">
+    </transfer>
+
+    <transfer name="Expense">
+    </transfer>
+
+    <transfer name="PaymentMethods">
+    </transfer>
+
+    <transfer name="PaymentMethod">
+    </transfer>
+
+    <transfer name="ComputopApiCrifResponse">
+    </transfer>
+
+    <transfer name="ComputopApiRequest">
+    </transfer>
+
+    <transfer name="Refund">
+    </transfer>
+
+    <transfer name="Customer">
+    </transfer>
+
     <transfer name="Address">
         <property name="idCustomerAddress" type="int"/>
         <property name="customerId" type="string"/>
@@ -826,6 +935,6 @@
         <property name="cellPhone" type="string"/>
     </transfer>
 
-    <transfer name="Customer">
+    <transfer name="CountryCollection">
     </transfer>
 </transfers>

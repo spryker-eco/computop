@@ -23,11 +23,13 @@ interface ComputopEntityManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @param string|null $orderItemsStatus
      *
      * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer
+        ComputopNotificationTransfer $computopNotificationTransfer,
+        ?string $orderItemsStatus = null
     ): bool;
 
     /**

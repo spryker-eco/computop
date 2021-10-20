@@ -27,6 +27,7 @@ class PaydirektFormDataProvider extends AbstractFormDataProvider
 
         if (!$this->isValidPayment($quoteTransfer)) {
             $paymentTransfer = $quoteTransfer->getPayment();
+            /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopTransfer */
             $paymentTransfer->setComputopPaydirekt($computopTransfer);

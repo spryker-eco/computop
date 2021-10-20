@@ -55,4 +55,9 @@ interface ComputopBusinessOrderFactoryInterface
      * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
      */
     public function createInitEasyCreditMapper(): MapperInterface;
+
+    /**
+     * @return \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface
+     */
+    public function createPayuCeeSinglePostPlaceMapper(): MapperInterface;
 }

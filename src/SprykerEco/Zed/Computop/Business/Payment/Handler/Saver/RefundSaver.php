@@ -22,7 +22,7 @@ class RefundSaver extends AbstractSaver
     public const METHOD = 'REFUND';
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $responseTransfer
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface

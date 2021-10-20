@@ -33,7 +33,7 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
      */
     public function isComputopPaymentExist(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $paymentTransfer */
+        /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $paymentTransfer */
         $paymentTransfer = $this->getPaymentTransfer($quoteTransfer);
         $paymentEntity = $this->queryContainer->queryPaymentByTransactionId($paymentTransfer->getTransId())->findOne();
         if (isset($paymentEntity)) {

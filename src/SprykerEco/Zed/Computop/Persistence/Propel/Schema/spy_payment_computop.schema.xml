@@ -29,7 +29,6 @@
         <id-method-parameter value="spy_payment_computop_pk_seq"/>
     </table>
 
-
     <table name="spy_payment_computop_detail" phpName="SpyPaymentComputopDetail">
         <column name="id_payment_computop" required="true" type="INTEGER" primaryKey="true"/>
         <column name="pc_nr" type="VARCHAR" size="255"/>
@@ -189,6 +188,9 @@
         <column name="description" required="false" type="VARCHAR" size="256"/>
         <column name="type" required="false" type="VARCHAR" size="20"/>
         <column name="is_success" required="false" type="BOOLEAN" default="false"/>
+        <column name="amountauth" required="false" type="VARCHAR" size="255"/>
+        <column name="amountcap" required="false" type="VARCHAR" size="255"/>
+        <column name="amountcred" required="false" type="VARCHAR" size="255"/>
 
         <id-method-parameter value="spy_payment_computop_notification_pk_seq"/>
     </table>

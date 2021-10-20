@@ -24,30 +24,21 @@ class PaydirektMapper extends AbstractMapper
      */
     protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPaydirektPaymentTransfer
     {
-        $computopPaymentTransfer = new ComputopPaydirektPaymentTransfer();
+        $computopPaymentTransfer = (new ComputopPaydirektPaymentTransfer())
+            ->setCapture($this->getCaptureType(ComputopConfig::PAYMENT_METHOD_PAYDIREKT))
+            ->setTransId($this->getLimitedTransId($quoteTransfer, ComputopApiConfig::PAYDIRECT_TRANS_ID_LENGTH))
+            ->setUrlSuccess($this->router->generate(ComputopRouteProviderPlugin::PAYDIREKT_SUCCESS, [], Router::ABSOLUTE_URL))
+            ->setOrderDesc($this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()));
 
-        $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopConfig::PAYMENT_METHOD_PAYDIREKT)
-        );
-        $computopPaymentTransfer->setTransId(
-            $this->getLimitedTransId($quoteTransfer, ComputopApiConfig::PAYDIRECT_TRANS_ID_LENGTH)
-        );
-        $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::PAYDIREKT_SUCCESS, [], Router::ABSOLUTE_URL)
-        );
-        $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
-        );
+        $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
 
-        $computopPaymentTransfer->setShopApiKey($this->config->getPaydirektShopKey());
-        $computopPaymentTransfer->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal());
-        $computopPaymentTransfer->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal());
-        $computopPaymentTransfer->setShippingFirstName($quoteTransfer->getShippingAddress()->getFirstName());
-        $computopPaymentTransfer->setShippingLastName($quoteTransfer->getShippingAddress()->getLastName());
-        $computopPaymentTransfer->setShippingZip($quoteTransfer->getShippingAddress()->getZipCode());
-        $computopPaymentTransfer->setShippingCity($quoteTransfer->getShippingAddress()->getCity());
-        $computopPaymentTransfer->setShippingCountryCode($quoteTransfer->getShippingAddress()->getIso2Code());
-
-        return $computopPaymentTransfer;
+        return $computopPaymentTransfer->setShopApiKey($this->config->getPaydirektShopKey())
+            ->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal())
+            ->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal())
+            ->setShippingFirstName($addressTransfer->getFirstName())
+            ->setShippingLastName($addressTransfer->getLastName())
+            ->setShippingZip($addressTransfer->getZipCode())
+            ->setShippingCity($addressTransfer->getCity())
+            ->setShippingCountryCode($addressTransfer->getIso2Code());
     }
 }

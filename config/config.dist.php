@@ -23,6 +23,7 @@ $config[ComputopConstants::SOFORT_INIT_ACTION] = 'https://www.computop-paygate.c
 $config[ComputopConstants::PAYDIREKT_INIT_ACTION] = 'https://www.computop-paygate.com/paydirekt.aspx';
 $config[ComputopConstants::IDEAL_INIT_ACTION] = 'https://www.computop-paygate.com/ideal.aspx';
 $config[ComputopConstants::EASY_CREDIT_INIT_ACTION] = 'https://www.computop-paygate.com/easyCredit.aspx';
+$config[ComputopConstants::PAYU_CEE_SINGLE_INIT_ACTION] = 'https://www.computop-paygate.com/payu.aspx';
 
 $config[ComputopConstants::IDEAL_ISSUER_ID] = 'IDEAL_ISSUER_ID'; //Set up real data
 
@@ -62,6 +63,7 @@ $config[ComputopConstants::PAYMENT_METHODS_WITHOUT_ORDER_CALL] = [
     ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS,
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
     ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
+    ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
 ];
 
 $config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
@@ -71,6 +73,7 @@ $config[ComputopApiConstants::PAYMENT_METHODS_CAPTURE_TYPES] = [
     ComputopApiConfig::PAYMENT_METHOD_PAY_PAL => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
     ComputopApiConfig::PAYMENT_METHOD_DIRECT_DEBIT => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
+    ComputopApiConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE => ComputopApiConfig::CAPTURE_TYPE_MANUAL,
 ];
 
 /**
@@ -83,7 +86,7 @@ $config[OmsConstants::PROCESS_LOCATION] = [
 $config[OmsConstants::ACTIVE_PROCESSES] = [
     //...
     //Add needed payment types
-    'ComputopPayNowd01',
+    'ComputopPayNow01',
     'ComputopCreditCard01',
     'ComputopDirectDebit01',
     'ComputopPaydirekt01',
@@ -91,6 +94,7 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
     'ComputopPayPalExpress01',
     'ComputopSofort01',
     'ComputopIdeal01',
+    'ComputopPayuCeeSingle01',
 ];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     //...
@@ -103,6 +107,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS => 'ComputopPayPalExpress01',
     ComputopConfig::PAYMENT_METHOD_SOFORT => 'ComputopSofort01',
     ComputopConfig::PAYMENT_METHOD_IDEAL => 'ComputopIdeal01',
+    ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE => 'ComputopPayuCeeSingle01',
 ];
 
 $config[ComputopConstants::CRIF_ENABLED] = false;
@@ -116,6 +121,7 @@ $config[ComputopConstants::CRIF_GREEN_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS,
     ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
     ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
+    ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
 ];
 $config[ComputopConstants::CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS] = [
     ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,

@@ -41,12 +41,15 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
 
     /**
      * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     * @param string|null $orderItemsStatus
      *
      * @return bool
      */
     public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer
+        ComputopNotificationTransfer $computopNotificationTransfer,
+        ?string $orderItemsStatus = null
     ): bool {
+        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities */
         $paymentComputopOrderItemEntities = $this->getFactory()
             ->getPaymentComputopOrderItemQuery()
             ->useSpyPaymentComputopQuery()
@@ -60,9 +63,10 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
         }
 
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $paymentComputopOrderItemEntity */
-            $paymentComputopOrderItemEntity->setIsPaymentConfirmed($computopNotificationTransfer->getIsSuccess());
-            $paymentComputopOrderItemEntity->save();
+            $paymentComputopOrderItemEntity
+                ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess())
+                ->setStatus($orderItemsStatus ?? $paymentComputopOrderItemEntity->getStatus())
+                ->save();
         }
 
         return true;

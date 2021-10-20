@@ -16,30 +16,37 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
      * @var string
      */
     public const CREDIT_CARD_SUCCESS = 'computop-credit-card-success';
+
     /**
      * @var string
      */
     public const DIRECT_DEBIT_SUCCESS = 'computop-direct-debit-success';
+
     /**
      * @var string
      */
     public const EASY_CREDIT_SUCCESS = 'computop-easy-credit-success';
+
     /**
      * @var string
      */
     public const IDEAL_SUCCESS = 'computop-ideal-success';
+
     /**
      * @var string
      */
     public const PAYDIREKT_SUCCESS = 'computop-paydirekt-success';
+
     /**
      * @var string
      */
     public const PAY_NOW_SUCCESS = 'computop-paynow-success';
+
     /**
      * @var string
      */
     public const PAY_PAL_SUCCESS = 'computop-pay-pal-success';
+
     /**
      * @var string
      */
@@ -48,11 +55,19 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     /**
      * @var string
      */
+    public const PAYU_CEE_SINGLE_SUCCESS = 'computop-payu-cee-single-success';
+
+    /**
+     * @var string
+     */
+
     public const ROUTE_NAME_CHECKOUT_COMPUTOP_PAY_PAL_EXPRESS_PREPARE = 'computop-pay-pal-express-prepare';
+
     /**
      * @var string
      */
     public const ROUTE_NAME_PAY_PAL_EXPRESS_PLACE_ORDER = 'computop-pay-pal-express-place-order';
+
     /**
      * @var string
      */
@@ -62,6 +77,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
      * @var string
      */
     public const FAILURE_PATH_NAME = 'computop-failure';
+
     /**
      * @var string
      */
@@ -89,6 +105,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
         $routeCollection = $this->addSofortSuccessRoute($routeCollection);
         $routeCollection = $this->addFailureRoute($routeCollection);
         $routeCollection = $this->addNotifyRoute($routeCollection);
+        $routeCollection = $this->addPayuCeeSingleSuccessRoute($routeCollection);
         $routeCollection = $this->addPayPalExpressPrepareRoute($routeCollection);
         $routeCollection = $this->addPayPalExpressPlaceOrderRoute($routeCollection);
         $routeCollection = $this->addPayPalExpressCompleteRoute($routeCollection);
@@ -295,6 +312,28 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
+     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::successPayuCeeSingleAction()
+     *
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    protected function addPayuCeeSingleSuccessRoute(RouteCollection $routeCollection): RouteCollection
+    {
+        $route = $this->buildRoute(
+            '/computop/payu-cee-single-success',
+            'Computop',
+            'Callback',
+            'successPayuCeeSingleAction'
+        );
+        $routeCollection->add(static::PAYU_CEE_SINGLE_SUCCESS, $route);
+
+        return $routeCollection;
+    }
+
+    /**
+     * @uses \SprykerEco\Yves\Computop\Controller\CallbackController::failureAction()
+     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection

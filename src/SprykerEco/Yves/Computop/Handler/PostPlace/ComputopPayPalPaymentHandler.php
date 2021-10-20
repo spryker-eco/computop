@@ -15,7 +15,7 @@ class ComputopPayPalPaymentHandler extends AbstractPostPlacePaymentHandler
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

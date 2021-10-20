@@ -252,6 +252,11 @@ interface ComputopApiConfig
     /**
      * @var string
      */
+    public const EMAIL_ADDRESS = 'Email';
+
+    /**
+     * @var string
+     */
     public const FIRST_NAME = 'firstname';
 
     /**
@@ -693,6 +698,26 @@ interface ComputopApiConfig
      * @var string
      */
     public const NOTIFICATION_PARAMETER_PAYMENT_TYPE = 'type';
+
+    /**
+     * @var string
+     */
+    public const USER_DATA = 'userData';
+
+    /**
+     * @var string
+     */
+    public const PAY_TYPE = 'payType';
+
+    /**
+     * @var string
+     */
+    public const ARTICLE_LIST = 'ArticleList';
+
+    /**
+     * @var string
+     */
+    public const LANGUAGE = 'Language';
 
     /**
      * Specification:
