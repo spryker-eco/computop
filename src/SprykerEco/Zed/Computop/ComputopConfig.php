@@ -32,6 +32,11 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @var string
      */
+    public const OMS_STATUS_CONFIRMED = 'confirmed';
+
+    /**
+     * @var string
+     */
     public const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
 
     /**
@@ -289,6 +294,7 @@ class ComputopConfig extends AbstractBundleConfig
     {
         $statusesBeforeAuthorize = $this->getBeforeAuthorizeStatuses();
         $statusesBeforeAuthorize[] = $this->getOmsStatusAuthorized();
+        $statusesBeforeAuthorize[] = $this->getOmsStatusConfirmed();
         $statusesBeforeAuthorize[] = $this->getOmsStatusCancelled();
 
         return $statusesBeforeAuthorize;
@@ -335,6 +341,16 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsStatusAuthorized()
     {
         return static::OMS_STATUS_AUTHORIZED;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getOmsStatusConfirmed(): string
+    {
+        return static::OMS_STATUS_CONFIRMED;
     }
 
     /**

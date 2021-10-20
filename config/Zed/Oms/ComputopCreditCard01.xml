@@ -44,15 +44,20 @@
                 <event>invalidation</event>
             </transition>
 
-            <transition condition="Computop/IsPaymentConfirmed" happy="true">
-                <source>init</source>
-                <target>authentication complete</target>
-            </transition>
-
             <transition>
                 <source>init</source>
                 <target>invalid</target>
                 <event>invalidation</event>
+            </transition>
+
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
+                <source>new</source>
+                <target>authentication complete</target>
+            </transition>
+
+            <transition condition="Computop/IsPaymentConfirmed" happy="true">
+                <source>init</source>
+                <target>authentication complete</target>
             </transition>
 
             <transition condition="Computop/IsAuthorized" happy="true">

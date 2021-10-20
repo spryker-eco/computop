@@ -590,7 +590,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createNotificationProcessor(): NotificationProcessorInterface
     {
-        return new NotificationProcessor($this->getEntityManager(), $this->getConfig());
+        return new NotificationProcessor($this->getEntityManager(), $this->getRepository(), $this->getConfig());
     }
 
     /**
