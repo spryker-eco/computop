@@ -80,7 +80,7 @@ class PayPalExpressMapper extends AbstractMapper
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer $computopPayPalPaymentTransfer
      *
-     * @return ComputopPayPalExpressPaymentTransfer
+     * @return \Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer
      */
     protected function mapAddressFromQuoteTransferToComputopPayPalExpressPaymentTransfer(
         QuoteTransfer $quoteTransfer,

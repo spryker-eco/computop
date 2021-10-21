@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
-use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
