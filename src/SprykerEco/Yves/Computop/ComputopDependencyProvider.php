@@ -54,10 +54,12 @@ class ComputopDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
+
     /**
      * @var string
      */
     public const CLIENT_COMPUTOP_API = 'CLIENT_COMPUTOP_API';
+
     /**
      * @var string
      */
