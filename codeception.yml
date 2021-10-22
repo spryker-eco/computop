@@ -2,6 +2,7 @@ namespace: Computop
 
 include:
     - tests/SprykerEcoTest/Zed/Computop
+    - tests/SprykerEcoTest/Yves/Computop
 
 paths:
     tests: tests

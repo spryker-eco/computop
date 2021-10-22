@@ -22,7 +22,7 @@ class PaydirektMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPaydirektPaymentTransfer
     {
         $computopPaymentTransfer = (new ComputopPaydirektPaymentTransfer())
             ->setCapture($this->getCaptureType(ComputopConfig::PAYMENT_METHOD_PAYDIREKT))

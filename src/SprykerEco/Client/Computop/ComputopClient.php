@@ -138,6 +138,34 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()->createZedStub()->savePayPalExpressInitResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()->createZedStub()->savePayPalExpressCompleteResponse($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()->createZedStub()->saveDirectDebitInitResponse($quoteTransfer);
@@ -212,5 +240,17 @@ class ComputopClient extends AbstractClient implements ComputopClientInterface
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer {
         return $this->getFactory()->createZedStub()->processNotification($computopNotificationTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalExpressClientId(): string
+    {
+        return $this->getFactory()->getConfig()->getPayPalExpressClientId();
     }
 }

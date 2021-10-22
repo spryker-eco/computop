@@ -1,7 +1,8 @@
 parameters:
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
-
+    excludePaths:
+        - 'src//SprykerEco//Yves//Computop//CheckoutWidget'
     ignoreErrors:
         - '#Access to constant .+ on an unknown class Generated\\Shared\\Transfer\\.+Transfer.#'
         - '#Call to method .+\(\) on an unknown class Generated\\#'
@@ -17,7 +18,6 @@ parameters:
         - '#Parameter .+ of method .+ has invalid typehint type .+Transfer#'
         - '#Parameter .+ of method .+ expects Spryker\\Shared\\Kernel\\Transfer\\.+, Generated\\Shared\\Transfer\\.+Transfer given.#'
         - '#Parameter .+ of method .+ expects Generated\\Shared\\Transfer\\.+Transfer, Spryker\\Shared\\Kernel\\Transfer\\.+ given.#'
-        - '#Parameter .+ of function base64_encode expects string, string\|null given.#'
         - '#Property.+has unknown class Orm\\Zed\\Computop\\Persistence.+#'
         - '#PHPDoc tag @var for variable.+contains unknown class Orm\\.+#'
         - '#PHPDoc tag @var for variable.+contains unknown class Generated\\Shared\\Transfer\\.+Transfer#'
@@ -31,3 +31,4 @@ parameters:
         - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Generated\\Shared\\Transfer\\.+Transfer.#'
         - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Spryker\\Shared\\Kernel\\Transfer\\.+.#'
         - '#.+but returns.+null.#'
+        - '#.+has unknown class Generated\\Shared\\Transfer.+ as its type.#'

@@ -56,7 +56,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
      *
      * @return void
      */
-    protected function setPaymentEntity($transactionId)
+    protected function setPaymentEntity(string $transactionId): void
     {
         $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
     }

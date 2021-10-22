@@ -10,6 +10,7 @@ namespace SprykerEcoTest\Zed\Computop\Business;
 use ArrayObject;
 use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiPayPalExpressCompleteResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
@@ -24,6 +25,8 @@ use Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
@@ -49,6 +52,7 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMoneyFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManager;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
+use SprykerEco\Zed\Computop\Persistence\ComputopRepository;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
@@ -268,7 +272,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
     /**
      * @return void
      */
-    public function testSavePayPalInitResponse()
+    public function testSavePayPalInitResponse(): void
     {
         // Arrange
         $this->setUpDB();
@@ -282,6 +286,23 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         // Assert
         $this->assertSavedSpyPaymentMethod();
+    }
+
+    /**
+     * @return void
+     */
+    public function testSavePayPalExpressInitResponse(): void
+    {
+        //Arrange
+        $this->setUpDB();
+
+        //Act
+        $this->tester->getFacade()->savePayPalExpressInitResponse($this->getQuoteTrasfer());
+
+        //Assert
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        $this->assertSame(static::PAY_ID_VALUE, $savedData->getPayId());
+        $this->assertSame(static::X_ID_VALUE, $savedData->getXId());
     }
 
     /**
@@ -500,6 +521,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopPayPalTransfer = new ComputopPayPalPaymentTransfer();
         $computopPayPalTransfer->setPayPalInitResponse($computopPayPalInitTransfer);
 
+        $computopPayPalExpressInitTransfer = new ComputopPayPalExpressInitResponseTransfer();
+        $computopPayPalExpressInitTransfer->setHeader($computopHeader);
+        $computopPayPalExpressTransfer = new ComputopPayPalExpressPaymentTransfer();
+        $computopPayPalExpressTransfer->setPayPalExpressInitResponse($computopPayPalExpressInitTransfer);
+        $computopApiPayPalExpressCompleteResponseTransfer = new ComputopApiPayPalExpressCompleteResponseTransfer();
+        $computopApiPayPalExpressCompleteResponseTransfer->setHeader($computopHeader);
+        $computopPayPalExpressTransfer->setPayPalExpressCompleteResponse($computopApiPayPalExpressCompleteResponseTransfer);
+
         $computopDirectDebitInitTransfer = new ComputopDirectDebitInitResponseTransfer();
         $computopDirectDebitInitTransfer->setHeader($computopHeader);
         $computopDirectDebitTransfer = new ComputopDirectDebitPaymentTransfer();
@@ -524,6 +553,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $paymentTransfer->setComputopCreditCard($computopCredicCardTransfer);
         $paymentTransfer->setComputopPayNow($computopPayNowTransfer);
         $paymentTransfer->setComputopPayPal($computopPayPalTransfer);
+        $paymentTransfer->setComputopPayPalExpress($computopPayPalExpressTransfer);
         $paymentTransfer->setComputopDirectDebit($computopDirectDebitTransfer);
         $paymentTransfer->setComputopEasyCredit($computopEasyCreditTransfer);
         $paymentTransfer->setComputopPayuCeeSingle($computopPayuCeeSingleTransfer);
@@ -556,6 +586,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getMoneyFacade',
                 'getComputopApiFacade',
                 'getEntityManager',
+                'getRepository',
             ]
         );
 
@@ -572,6 +603,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
             ->willReturn($this->createComputopApiFacade());
         $stub->method('getEntityManager')
             ->willReturn(new ComputopEntityManager());
+        $stub->method('getRepository')
+            ->willReturn(new ComputopRepository());
 
         return $stub;
     }

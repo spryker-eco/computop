@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
+use ArrayObject;
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Yves\Router\Router\Router;
 use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
@@ -18,11 +20,16 @@ use SprykerEco\Yves\Computop\Plugin\Router\ComputopRouteProviderPlugin;
 class PayPalMapper extends AbstractMapper
 {
     /**
+     * @var int
+     */
+    protected const PAYPAL_ITEM_DESCRIPTION_OFFSET = 2;
+
+    /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayPalPaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -31,6 +38,17 @@ class PayPalMapper extends AbstractMapper
                 $this->createRequestTransfer($computopPaymentTransfer)
             )
         );
+
+        $computopPaymentTransfer = $this->addOrderDescriptions(
+            $computopPaymentTransfer,
+            $quoteTransfer->getItems()
+        );
+
+        $computopPaymentTransfer->setTaxTotal($quoteTransfer->getTotals()->getTaxTotal()->getAmount());
+        $computopPaymentTransfer->setShAmount($quoteTransfer->getTotals()->getShipmentTotal());
+
+        $itemTotal = $this->calculateItemTotal($quoteTransfer);
+        $computopPaymentTransfer->setItemTotal($itemTotal);
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
@@ -56,9 +74,21 @@ class PayPalMapper extends AbstractMapper
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @return int
+     */
+    protected function calculateItemTotal(QuoteTransfer $quoteTransfer): int
+    {
+        return $quoteTransfer->getTotals()->getGrandTotal() -
+            $quoteTransfer->getTotals()->getShipmentTotal() -
+            $quoteTransfer->getTotals()->getTaxTotal()->getAmount();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayPalPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
@@ -116,19 +146,29 @@ class PayPalMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer)
+    protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer): array
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayPalPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayPalPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayPalPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayPalPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayPalPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayPalPaymentTransfer->getUrlFailure();
         $dataSubArray[ComputopApiConfig::CAPTURE] = $computopPayPalPaymentTransfer->getCapture();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayPalPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $computopPayPalPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::TX_TYPE] = $computopPayPalPaymentTransfer->getTxType();
         $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPayPalPaymentTransfer->getOrderDesc();
+
+        $orderDescriptions = $computopPayPalPaymentTransfer->getOrderDescriptions();
+        $dataSubArray = $this->addOrderItemDescriptions($dataSubArray, $orderDescriptions);
+
+        $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
+        $dataSubArray[ComputopApiConfig::ITEM_TOTAL] = $computopPayPalPaymentTransfer->getItemTotal();
+        $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $computopPayPalPaymentTransfer->getShAmount();
+
+        $dataSubArray[ComputopApiConfig::MAC] = $computopPayPalPaymentTransfer->getMac();
+        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayPalPaymentTransfer->getUrlSuccess();
+        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPayPalPaymentTransfer->getUrlFailure();
+        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPayPalPaymentTransfer->getResponse();
+        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPayPalPaymentTransfer->getUrlNotify();
+        $dataSubArray[ComputopApiConfig::REQ_ID] = $computopPayPalPaymentTransfer->getReqId();
+
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayPalPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayPalPaymentTransfer->getShippingZip();
@@ -154,6 +194,74 @@ class PayPalMapper extends AbstractMapper
 
         if ($computopPayPalPaymentTransfer->getPhone()) {
             $dataSubArray[ComputopApiConfig::PHONE] = $computopPayPalPaymentTransfer->getPhone();
+        }
+
+        return $dataSubArray;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
+     *
+     * @return string
+     */
+    protected function getOrderItemDescription(ItemTransfer $itemTransfer): string
+    {
+        return sprintf(
+            '%s,%f,%s,%d,,%f',
+            $itemTransfer->getName(),
+            $itemTransfer->getSumPrice(),
+            $itemTransfer->getSku(),
+            $itemTransfer->getQuantity(),
+            $itemTransfer->getUnitTaxAmount()
+        );
+    }
+
+    /**
+     * Order item description for items should start from OrderDesc2 to OrderDesc99.
+     *
+     * @param int $key
+     *
+     * @return string
+     */
+    protected function getOrderItemDescriptionKey(int $key): string
+    {
+        return ComputopApiConfig::ORDER_DESC . $key;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer
+     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $itemTransfers
+     *
+     * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
+     */
+    protected function addOrderDescriptions(
+        ComputopPayPalPaymentTransfer $computopPaymentTransfer,
+        ArrayObject $itemTransfers
+    ): ComputopPayPalPaymentTransfer {
+        if ($itemTransfers->count() > $this->config->getMaxOrderDescriptionItemsForPayPalPaymentPage()) {
+            return $computopPaymentTransfer;
+        }
+
+        foreach ($itemTransfers as $itemTransfer) {
+            $orderDescription = $this->getOrderItemDescription($itemTransfer);
+            $computopPaymentTransfer->addOrderDescriptions($orderDescription);
+        }
+
+        return $computopPaymentTransfer;
+    }
+
+    /**
+     * @param array $dataSubArray
+     * @param array $orderDescriptions
+     *
+     * @return array
+     */
+    protected function addOrderItemDescriptions(array $dataSubArray, array $orderDescriptions): array
+    {
+        foreach ($orderDescriptions as $key => $orderDescription) {
+            $orderDescriptionIndex = static::PAYPAL_ITEM_DESCRIPTION_OFFSET + $key;
+            $orderDescriptionKey = $this->getOrderItemDescriptionKey($orderDescriptionIndex);
+            $dataSubArray[$orderDescriptionKey] = $orderDescription;
         }
 
         return $dataSubArray;

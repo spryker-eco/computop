@@ -233,6 +233,38 @@ class ComputopFacade extends AbstractFacade implements ComputopFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+            ->createPayPalExpressResponseSaver()
+            ->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+            ->createPayPalExpressCompleteResponseSaver()
+            ->save($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function saveDirectDebitInitResponse(QuoteTransfer $quoteTransfer)
     {
         return $this->getFactory()
