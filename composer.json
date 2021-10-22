@@ -65,12 +65,6 @@
         "stan": "phpstan analyse -c phpstan.neon -l 8 src/",
         "stan-setup": "cp composer.json composer.backup && COMPOSER_MEMORY_LIMIT=-1 composer require --dev phpstan/phpstan:^0.12 && mv composer.backup composer.json"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/spryker-eco/computop-extension"
-        }
-    ],
     "extra": {
         "branch-alias": {
             "dev-master": "3.0.x-dev"
