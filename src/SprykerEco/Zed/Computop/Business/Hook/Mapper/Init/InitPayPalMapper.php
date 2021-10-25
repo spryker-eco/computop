@@ -14,7 +14,7 @@ class InitPayPalMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAY_PAL;
     }

@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\ComputopInitPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Shared\Computop\ComputopConfig as ConputopSharedConfig;
+use SprykerEco\Shared\Computop\ComputopConfig as ComputopSharedConfig;
 use SprykerEco\Zed\Computop\Business\Exception\ComputopMethodMapperException;
 use SprykerEco\Zed\Computop\Business\Exception\PaymentMethodNotFoundException;
 use SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface;
@@ -43,7 +43,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return void
      */
-    public function registerMapper(InitMapperInterface $paymentMethod)
+    public function registerMapper(InitMapperInterface $paymentMethod): void
     {
         $this->methodMappers[$paymentMethod->getMethodName()] = $paymentMethod;
     }
@@ -54,15 +54,20 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer): CheckoutResponseTransfer
     {
         $paymentTransfer = $quoteTransfer->getPayment();
-        if (!$paymentTransfer || $paymentTransfer->getPaymentProvider() !== ConputopSharedConfig::PROVIDER_NAME) {
+        if (!$paymentTransfer || $paymentTransfer->getPaymentProvider() !== ComputopSharedConfig::PROVIDER_NAME) {
             return $checkoutResponseTransfer;
         }
 
         $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
-        $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
+        try {
+            /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
+            $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
+        } catch (PaymentMethodNotFoundException $exception) {
+            return $checkoutResponseTransfer;
+        }
 
         if ($this->isPaymentInitRequired($paymentTransfer)) {
             $checkoutResponseTransfer->setComputopInitPayment(
@@ -83,8 +88,11 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    protected function setRedirect(TransferInterface $computopPaymentTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
-    {
+    protected function setRedirect(
+        TransferInterface $computopPaymentTransfer,
+        CheckoutResponseTransfer $checkoutResponseTransfer
+    ): CheckoutResponseTransfer {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());
@@ -99,7 +107,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface
      */
-    protected function getMethodMapper($methodName)
+    protected function getMethodMapper(string $methodName): InitMapperInterface
     {
         if (isset($this->methodMappers[$methodName]) === false) {
             throw new ComputopMethodMapperException('The method mapper is not registered.');
@@ -115,7 +123,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer)
+    protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
@@ -141,9 +149,9 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     protected function isPaymentInitRequired(PaymentTransfer $paymentTransfer): bool
     {
         return in_array($paymentTransfer->getPaymentSelection(), [
-            ConputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
-            ConputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
-            ConputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
+            ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW,
+            ComputopSharedConfig::PAYMENT_METHOD_EASY_CREDIT,
+            ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD,
         ], true);
     }
 }

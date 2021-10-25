@@ -67,7 +67,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer)
+    public function createComputopPaymentTransfer(QuoteTransfer $quoteTransfer): ComputopPayNowPaymentTransfer
     {
         /** @var \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
@@ -94,7 +94,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopPayNowPaymentTransfer
      */
-    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer)
+    protected function createTransferWithUnencryptedValues(QuoteTransfer $quoteTransfer): ComputopPayNowPaymentTransfer
     {
         $computopPaymentTransfer = new ComputopPayNowPaymentTransfer();
 
@@ -125,7 +125,7 @@ class PayNowMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer)
+    protected function getDataSubArray(ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer): array
     {
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayNowPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayNowPaymentTransfer->getAmount();

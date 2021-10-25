@@ -8,9 +8,9 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
 use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -172,42 +172,12 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
         string $paymentStatus
     ): void {
-        $salesOrderItemsCollectionTransfer = $this->computopRepository
-            ->getComputopSalesOrderItemCollection($computopPaymentComputopTransfer);
-
-        $computopPaymentComputopOrderItemsCollection = $this->computopRepository
+        $computopPaymentComputopOrderItemCollection = $this->computopRepository
             ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
-        foreach ($salesOrderItemsCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
-            $this->updateComputopSalesOrderItem(
-                $computopPaymentComputopOrderItemsCollection,
-                $computopSalesOrderItem,
-                $paymentStatus
-            );
-        }
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection
-     * @param \Generated\Shared\Transfer\ComputopSalesOrderItemTransfer $computopSalesOrderItem
-     * @param string $paymentStatus
-     *
-     * @return void
-     */
-    protected function updateComputopSalesOrderItem(
-        ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemsCollection,
-        ComputopSalesOrderItemTransfer $computopSalesOrderItem,
-        string $paymentStatus
-    ): void {
-        foreach ($computopPaymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItem) {
-            if ($computopSalesOrderItem->getIdSalesOrderItem() !== $computopPaymentComputopOrderItem->getFkSalesOrderItem()) {
-                continue;
-            }
-
+        foreach ($computopPaymentComputopOrderItemCollection->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItem) {
             $computopPaymentComputopOrderItem->setStatus($paymentStatus);
             $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItem);
-
-            return;
         }
     }
 

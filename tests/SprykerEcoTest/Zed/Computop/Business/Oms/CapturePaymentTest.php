@@ -8,8 +8,8 @@
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
 use Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiInquireResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
-use SprykerEco\Zed\Computop\Business\ComputopFacade;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToComputopApiFacadeBridge;
 
 /**
@@ -58,18 +58,24 @@ class CapturePaymentTest extends AbstractPaymentTest
     public const CODE_VALUE = '00000000';
 
     /**
+     * @var \SprykerEcoTest\Zed\Computop\ComputopZedTester
+     */
+    protected $tester;
+
+    /**
      * @return void
      */
     public function testCapturePaymentSuccess()
     {
-        $service = new ComputopFacade();
-        $service->setFactory($this->createFactory());
+        /** @var \SprykerEco\Zed\Computop\Business\ComputopFacade $computopFacade */
+        $computopFacade = $this->tester->getFacade();
+        $computopFacade->setFactory($this->createFactory());
+
         $orderTransfer = $this->createOrderTransfer();
         $orderItems = $this->omsHelper->createOrderItems();
 
-        //todo: update test
         /** @var \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer $response */
-        $response = $service->captureCommandHandle($orderItems, $orderTransfer);
+        $response = $computopFacade->captureCommandHandle($orderItems, $orderTransfer);
 
         $this->assertInstanceOf(ComputopApiCaptureResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
@@ -109,11 +115,15 @@ class CapturePaymentTest extends AbstractPaymentTest
                 ComputopToComputopApiFacadeBridge::class,
                 [
                     'performCaptureRequest',
+                    'performInquireRequest',
                 ]
             );
 
         $stub->method('performCaptureRequest')
             ->willReturn($this->createCaptureResponseTransfer());
+
+        $stub->method('performInquireRequest')
+            ->willReturn($this->createInquireResponseTransfer());
 
         return $stub;
     }
@@ -121,17 +131,33 @@ class CapturePaymentTest extends AbstractPaymentTest
     /**
      * @return \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer
      */
-    protected function createCaptureResponseTransfer()
+    protected function createCaptureResponseTransfer(): ComputopApiCaptureResponseTransfer
     {
         return (new ComputopApiCaptureResponseTransfer())
-            ->setHeader(
-                (new ComputopApiResponseHeaderTransfer())
-                    ->setTransId(self::TRANS_ID_VALUE)
-                    ->setPayId(self::PAY_ID_VALUE)
-                    ->setXId(self::X_ID_VALUE)
-                    ->setCode(self::CODE_VALUE)
-                    ->setIsSuccess(true)
-                    ->setStatus(self::STATUS_VALUE)
-            );
+            ->setHeader($this->createComputopApiResponseHeaderTransfer());
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer
+     */
+    protected function createInquireResponseTransfer(): ComputopApiInquireResponseTransfer
+    {
+        return (new ComputopApiInquireResponseTransfer())
+            ->setHeader($this->createComputopApiResponseHeaderTransfer())
+            ->setIsCapLast(false);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer
+     */
+    protected function createComputopApiResponseHeaderTransfer(): ComputopApiResponseHeaderTransfer
+    {
+        return (new ComputopApiResponseHeaderTransfer())
+            ->setTransId(self::TRANS_ID_VALUE)
+            ->setPayId(self::PAY_ID_VALUE)
+            ->setXId(self::X_ID_VALUE)
+            ->setCode(self::CODE_VALUE)
+            ->setIsSuccess(true)
+            ->setStatus(self::STATUS_VALUE);
     }
 }

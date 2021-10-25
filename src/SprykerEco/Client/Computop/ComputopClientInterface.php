@@ -18,7 +18,7 @@ interface ComputopClientInterface
 {
     /**
      * Specification:
-     * - Saves response log to DB
+     * - Persists response log to the database.
      *
      * @api
      *
@@ -30,7 +30,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Sofort response to DB
+     * - Persists Sofort response to the database.
      *
      * @api
      *
@@ -42,7 +42,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Ideal response to DB
+     * - Persists Ideal response to the database.
      *
      * @api
      *
@@ -66,7 +66,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves Paydirekt response to DB
+     * - Persists Paydirekt response to the database.
      *
      * @api
      *
@@ -78,7 +78,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves CreditCard response to DB
+     * - Persists CreditCard response to the database.
      *
      * @api
      *
@@ -102,7 +102,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves PayPal response to DB
+     * - Persists PayPal response to the database.
      *
      * @api
      *
@@ -114,7 +114,33 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves DirectDebit response to DB
+     * - Makes Zed request.
+     * - Persists `PayPal Express init` response to the database.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * Specification:
+     * - Persists `PayPal Express complete` response to the database.
+     * - Makes Zed request.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * Specification:
+     * - Persists DirectDebit response to the database.
      *
      * @api
      *
@@ -126,7 +152,7 @@ interface ComputopClientInterface
 
     /**
      * Specification:
-     * - Saves EasyCredit response to DB
+     * - Persists EasyCredit response to the database.
      *
      * @api
      *
@@ -175,7 +201,7 @@ interface ComputopClientInterface
     /**
      * Specification:
      * - Performs Zed call.
-     * - Saves push notification entity into DB.
+     * - Persists push notification entity into the database.
      * - Updates related computop order items with payment confirmation status.
      *
      * @api
@@ -187,4 +213,14 @@ interface ComputopClientInterface
     public function processNotification(
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer;
+
+    /**
+     * Specification:
+     * - Returns PayPalExpress ClientId from config.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalExpressClientId(): string;
 }

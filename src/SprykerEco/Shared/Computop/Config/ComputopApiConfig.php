@@ -718,4 +718,34 @@ interface ComputopApiConfig
      * @var string
      */
     public const LANGUAGE = 'Language';
+
+    /**
+     * Specification:
+     * - PayPal payment method field for total taxes.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const TAX_TOTAL = 'TaxTotal';
+
+    /**
+     * Specification:
+     * - PayPal payment method field for summary (without taxes and shipping).
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const ITEM_TOTAL = 'ItemTotal';
+
+    /**
+     * Specification:
+     * - PayPal specific method name for PayPal Express payments.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const PAY_PAL_METHOD = 'payPalMethod';
 }
