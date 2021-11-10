@@ -172,7 +172,6 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
     {
         $orderTransfer = new OrderTransfer();
         $orderTransfer->setIdSalesOrder($this->helper->orderEntity->getIdSalesOrder());
-        $orderTransfer->setTotals(new TotalsTransfer());
         $orderTransfer->setCustomer(new CustomerTransfer());
         $orderTransfer->addPayment($this->omsHelper->createPaymentTransfer());
 
@@ -181,6 +180,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $totals->setRefundTotal(self::REFUND_TOTAL);
         $totals->setSubtotal(self::SUB_TOTAL);
         $totals->setDiscountTotal(self::DISCOUNT_TOTAL);
+        $totals->setHash('');
         $orderTransfer->setTotals($totals);
         $orderTransfer->setItems(new ArrayObject($this->omsHelper->createOrderItems()));
 

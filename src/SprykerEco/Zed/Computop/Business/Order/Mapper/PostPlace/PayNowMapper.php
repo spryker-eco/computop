@@ -16,7 +16,7 @@ class PayNowMapper implements MapperInterface
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_PAY_NOW;
     }
@@ -46,7 +46,7 @@ class PayNowMapper implements MapperInterface
      *
      * @return array
      */
-    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer)
+    public function getPaymentDetailsArray(PaymentTransfer $paymentTransfer): array
     {
         return [];
     }

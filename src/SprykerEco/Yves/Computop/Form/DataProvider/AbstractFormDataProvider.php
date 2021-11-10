@@ -47,7 +47,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [];
     }
@@ -57,7 +57,7 @@ abstract class AbstractFormDataProvider implements StepEngineFormDataProviderInt
      *
      * @return bool
      */
-    protected function isValidPayment(QuoteTransfer $quoteTransfer)
+    protected function isValidPayment(QuoteTransfer $quoteTransfer): bool
     {
         $computopPaymentTransfer = $this->getComputopPayment($quoteTransfer);
         if ($computopPaymentTransfer === null) {

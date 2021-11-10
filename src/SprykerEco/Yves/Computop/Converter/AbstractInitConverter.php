@@ -8,8 +8,10 @@
 namespace SprykerEco\Yves\Computop\Converter;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Service\ComputopApi\ComputopApiServiceInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
+use SprykerEco\Yves\Computop\ComputopConfig as ComputopComputopConfig;
 
 abstract class AbstractInitConverter implements ConverterInterface
 {
@@ -24,18 +26,21 @@ abstract class AbstractInitConverter implements ConverterInterface
     protected $config;
 
     /**
-     * @param array $decryptedArray
+     * @param array $responseParamsArray
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $header
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    abstract protected function createResponseTransfer(array $decryptedArray, ComputopApiResponseHeaderTransfer $header);
+    abstract protected function createResponseTransfer(
+        array $responseParamsArray,
+        ComputopApiResponseHeaderTransfer $header
+    ): TransferInterface;
 
     /**
      * @param \SprykerEco\Service\ComputopApi\ComputopApiServiceInterface $computopApiService
      * @param \SprykerEco\Yves\Computop\ComputopConfig $config
      */
-    public function __construct(ComputopApiServiceInterface $computopApiService, $config)
+    public function __construct(ComputopApiServiceInterface $computopApiService, ComputopComputopConfig $config)
     {
         $this->computopApiService = $computopApiService;
         $this->config = $config;
@@ -46,7 +51,7 @@ abstract class AbstractInitConverter implements ConverterInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function getResponseTransfer(array $responseHeader)
+    public function getResponseTransfer(array $responseHeader): TransferInterface
     {
         $decryptedArray = $this
             ->computopApiService

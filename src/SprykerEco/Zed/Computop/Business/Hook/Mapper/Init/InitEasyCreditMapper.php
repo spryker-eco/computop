@@ -14,7 +14,7 @@ class InitEasyCreditMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_EASY_CREDIT;
     }

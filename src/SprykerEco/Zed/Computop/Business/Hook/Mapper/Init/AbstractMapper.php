@@ -47,8 +47,11 @@ abstract class AbstractMapper implements InitMapperInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
-    {
+    public function updateComputopPaymentTransfer(
+        QuoteTransfer $quoteTransfer,
+        TransferInterface $computopPaymentTransfer
+    ): TransferInterface {
+        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer->setRefNr($quoteTransfer->getOrderReference());
 
         return $computopPaymentTransfer;
@@ -61,7 +64,7 @@ abstract class AbstractMapper implements InitMapperInterface
      *
      * @return string
      */
-    protected function getUrlToComputop($merchantId, $data, $length)
+    protected function getUrlToComputop(string $merchantId, string $data, int $length): string
     {
         return $this->getActionUrl() . '?' . http_build_query([
                 ComputopApiConfig::MERCHANT_ID => $merchantId,
@@ -75,7 +78,7 @@ abstract class AbstractMapper implements InitMapperInterface
      *
      * @return \Generated\Shared\Transfer\ComputopApiRequestTransfer
      */
-    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer)
+    protected function createRequestTransfer(TransferInterface $computopPaymentTransfer): ComputopApiRequestTransfer
     {
         return (new ComputopApiRequestTransfer())
             ->fromArray($computopPaymentTransfer->toArray(), true);

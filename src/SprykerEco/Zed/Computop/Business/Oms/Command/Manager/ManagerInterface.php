@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 
+use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
+
 interface ManagerInterface
 {
     /**
@@ -14,5 +16,5 @@ interface ManagerInterface
      *
      * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
      */
-    public function getSavedComputopEntity($idSalesOrder);
+    public function getSavedComputopEntity(int $idSalesOrder): ActiveRecordInterface;
 }

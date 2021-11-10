@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver;
 
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\Logger\ComputopResponseLoggerInterface;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -20,7 +21,7 @@ abstract class AbstractSaver implements SaverInterface
     protected $logger;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
      */
     protected $queryContainer;
 
@@ -50,7 +51,7 @@ abstract class AbstractSaver implements SaverInterface
      *
      * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog
      */
-    protected function logHeader(ComputopApiResponseHeaderTransfer $headerTransfer, $method)
+    protected function logHeader(ComputopApiResponseHeaderTransfer $headerTransfer, string $method): SpyPaymentComputopApiLog
     {
         return $this->logger->log($headerTransfer, $method);
     }

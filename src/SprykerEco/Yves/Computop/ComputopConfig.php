@@ -29,6 +29,10 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      * @var string
      */
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
+    /**
+     * @var int
+     */
+    protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
 
     /**
      * @api
@@ -241,5 +245,42 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getEtiId(): string
     {
         return SharedComputopConfig::COMPUTOP_MODULE_VERSION;
+    }
+
+    /**
+     * {@inheriDoc}
+     *
+     * @api
+     *
+     * @return int
+     */
+    public function getMaxOrderDescriptionItemsForPayPalPaymentPage(): int
+    {
+        return static::PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS;
+    }
+
+    /**
+     * {@inheriDoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getPayPalMethod(): string
+    {
+        return $this->get(ComputopConstants::PAY_PAL_EXPRESS_PAYPAL_METHOD);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getSalutationMap(): array
+    {
+        return [
+            'Mr' => 'Mr',
+            'Mrs' => 'Mrs',
+            'Ms' => 'Miss',
+            'Dr' => 'Mr',
+        ];
     }
 }

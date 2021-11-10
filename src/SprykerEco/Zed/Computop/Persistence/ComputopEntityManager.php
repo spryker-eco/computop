@@ -8,9 +8,10 @@
 namespace SprykerEco\Zed\Computop\Persistence;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
-use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
-use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
-use Propel\Runtime\Collection\ObjectCollection;
+use Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
+use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -26,7 +27,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     public function savePaymentComputopNotification(ComputopNotificationTransfer $computopNotificationTransfer): void
     {
         $paymentComputopNotificationEntity = $this->getFactory()
-            ->createPaymentComputopNotificationQuery()
+            ->getPaymentComputopNotificationQuery()
             ->filterByPayId($computopNotificationTransfer->getPayId())
             ->filterByTransId($computopNotificationTransfer->getTransId())
             ->filterByXId($computopNotificationTransfer->getXId())
@@ -39,121 +40,73 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
-     * @param string|null $orderItemsStatus
-     *
-     * @return bool
-     */
-    public function updatePaymentComputopOrderItemPaymentConfirmation(
-        ComputopNotificationTransfer $computopNotificationTransfer,
-        ?string $orderItemsStatus
-    ): bool {
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null $paymentComputopEntity */
-        $paymentComputopEntity = $this->getFactory()
-            ->createPaymentComputopQuery()
-            ->filterByTransId($computopNotificationTransfer->getTransId())
-            ->findOne();
-
-        if ($paymentComputopEntity === null) {
-            return false;
-        }
-
-        $paymentComputopEntity
-            ->setPayId($computopNotificationTransfer->getPayId())
-            ->setXId($computopNotificationTransfer->getXId());
-
-        if ($paymentComputopEntity->isModified()) {
-            $paymentComputopEntity->save();
-        }
-
-        /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities */
-        $paymentComputopOrderItemEntities = $this->getFactory()
-            ->createPaymentComputopOrderItemQuery()
-            ->filterByFkPaymentComputop($paymentComputopEntity->getIdPaymentComputop())
-            ->find();
-
-        if (!$paymentComputopOrderItemEntities->count()) {
-            return false;
-        }
-
-        foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
-            $paymentComputopOrderItemEntity
-                ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess())
-                ->setStatus($orderItemsStatus ?? $paymentComputopOrderItemEntity->getStatus())
-                ->save();
-        }
-
-        return true;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-     * @param string $orderItemsStatus
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
      *
      * @return void
      */
-    public function saveComputopPayuCeeSingleInitResponse(
-        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer,
-        string $orderItemsStatus
+    public function updateComputopPaymentDetail(
+        ComputopPaymentComputopDetailTransfer $computopPaymentComputopDetailTransfer
     ): void {
-        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->requireHeader()
-            ->getHeader()
-                ->requireTransId()
-                ->requirePayId()
-                ->requireXid();
-
-        $paymentComputopEntity = $this->getFactory()
-            ->createPaymentComputopQuery()
-            ->filterByTransId($computopApiResponseHeaderTransfer->getTransId())
+        $computopPaymentComputopDetailEntity = $this->getFactory()
+            ->getPaymentComputopDetailQuery()
+            ->filterByIdPaymentComputop($computopPaymentComputopDetailTransfer->getIdPaymentComputop())
             ->findOne();
 
-        if (!$paymentComputopEntity) {
+        if ($computopPaymentComputopDetailEntity === null) {
             return;
         }
 
-        $paymentComputopEntity
-            ->setPayId($computopApiResponseHeaderTransfer->getPayId())
-            ->setXId($computopApiResponseHeaderTransfer->getXId())
-            ->save();
+        $computopPaymentComputopDetailEntity = $this->getFactory()
+            ->createComputopMapper()
+            ->mapComputopPaymentComputopDetailTransferToPaymentComputopDetailEntity(
+                $computopPaymentComputopDetailTransfer,
+                $computopPaymentComputopDetailEntity
+            );
 
-        $this->savePaymentComputopDetailEntity(
-            $paymentComputopEntity->getSpyPaymentComputopDetail(),
-            $computopPayuCeeSingleInitResponseTransfer
-        );
-
-        $this->savePaymentComputopOrderItems($paymentComputopEntity->getSpyPaymentComputopOrderItems(), $orderItemsStatus);
+        $computopPaymentComputopDetailEntity->save();
     }
 
     /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail $paymentComputopDetailEntity
-     * @param \Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
      * @return void
      */
-    protected function savePaymentComputopDetailEntity(
-        SpyPaymentComputopDetail $paymentComputopDetailEntity,
-        ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
-    ): void {
-        $paymentComputopDetailEntity->fromArray($computopPayuCeeSingleInitResponseTransfer->toArray());
-        $customerTransactionId = $computopPayuCeeSingleInitResponseTransfer->getCustomerTransactionId();
-        if ($customerTransactionId) {
-            $paymentComputopDetailEntity->setCustomerTransactionId((int)$customerTransactionId);
-        }
-
-        $paymentComputopDetailEntity->save();
-    }
-
-    /**
-     * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem[]|\Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntities
-     * @param string $paymentStatus
-     *
-     * @return void
-     */
-    public function savePaymentComputopOrderItems(ObjectCollection $paymentComputopOrderItemEntities, string $paymentStatus): void
+    public function updateComputopPayment(ComputopPaymentComputopTransfer $computopPaymentComputopTransfer): void
     {
-        foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItem) {
-            $paymentComputopOrderItem->setStatus($paymentStatus);
-            $paymentComputopOrderItem->save();
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->getPaymentComputopQuery()
+            ->filterByTransId($computopPaymentComputopTransfer->getTransId())
+            ->findOne();
+
+        if ($computopPaymentComputopEntity === null) {
+            return;
         }
+
+        $computopPaymentComputopEntity = $this->getFactory()
+            ->createComputopMapper()
+            ->mapComputopPaymentTransferToComputopPaymentEntity(
+                $computopPaymentComputopTransfer,
+                $computopPaymentComputopEntity
+            );
+
+        $computopPaymentComputopEntity->save();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+     *
+     * @return void
+     */
+    public function updateComputopPaymentComputopOrderItem(
+        ComputopPaymentComputopOrderItemTransfer $computopPaymentComputopOrderItemTransfer
+    ): void {
+        $paymentComputopOrderItemEntity = $this->getFactory()
+            ->createComputopMapper()
+            ->mapComputopPaymentComputopOrderItemTransferToPaymentComputopOrderItemEntity(
+                $computopPaymentComputopOrderItemTransfer,
+                new SpyPaymentComputopOrderItem(),
+            );
+
+        $paymentComputopOrderItemEntity->save();
     }
 }

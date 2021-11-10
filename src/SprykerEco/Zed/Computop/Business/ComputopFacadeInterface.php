@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 
 /**
  * MIT License
@@ -14,6 +15,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
+use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopFacadeInterface
 {
@@ -170,6 +172,36 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires QuoteTransfer::payment to be set.
+     * - Requires PaymentTransfer::computopPayPalExpress to be set.
+     * - Requires ComputopPayPalExpressTransfer::payPalExpressInitResponse to be set.
+     * - Saves PayPal Express Init Response to DB.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressInitResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
+     * - Requires QuoteTransfer::payment to be set.
+     * - Requires PaymentTransfer::computopPayPalExpress to be set.
+     * - Requires ComputopPayPalExpressTransfer::payPalExpressCompleteResponse to be set.
+     * - Saves PayPal Express Complete Response and changes item's OMS status.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function savePayPalExpressCompleteResponse(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Specification:
      * - Saves DirectDebit Response to DB.
      *
      * @api
@@ -207,6 +239,7 @@ interface ComputopFacadeInterface
     /**
      * Specification:
      * - Saves PayU CEE Single init response to the database.
+     * - Requires QuoteTransfer::payment::computopPayuCeeSingle::payuCeeSingleInitResponse::header to be set.
      *
      * @api
      *
@@ -280,7 +313,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Filters available payment methods by gift card black list
+     * - Filters available payment methods by currency.
      *
      * @api
      *

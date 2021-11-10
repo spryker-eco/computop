@@ -17,7 +17,7 @@ class InitSofortMapper extends AbstractMapper
     /**
      * @return string
      */
-    public function getMethodName()
+    public function getMethodName(): string
     {
         return ComputopConfig::PAYMENT_METHOD_SOFORT;
     }
@@ -28,8 +28,10 @@ class InitSofortMapper extends AbstractMapper
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    public function updateComputopPaymentTransfer(QuoteTransfer $quoteTransfer, TransferInterface $computopPaymentTransfer)
-    {
+    public function updateComputopPaymentTransfer(
+        QuoteTransfer $quoteTransfer,
+        TransferInterface $computopPaymentTransfer
+    ): TransferInterface {
         /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
@@ -60,7 +62,7 @@ class InitSofortMapper extends AbstractMapper
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer)
+    protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer): array
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer */
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopSofortPaymentTransfer->getTransId();
@@ -82,7 +84,7 @@ class InitSofortMapper extends AbstractMapper
     /**
      * @return string
      */
-    protected function getActionUrl()
+    protected function getActionUrl(): string
     {
         return $this->config->getSofortInitAction();
     }

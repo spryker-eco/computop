@@ -49,6 +49,11 @@ class ComputopConfig extends AbstractSharedConfig
     /**
      * @var string
      */
+    public const PAYMENT_METHOD_PAY_PAL_EXPRESS = 'computopPayPalExpress';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD_SOFORT = 'computopSofort';
 
     /**
@@ -105,6 +110,11 @@ class ComputopConfig extends AbstractSharedConfig
      * @var string
      */
     public const TX_TYPE_BAID = 'BAID';
+
+    /**
+     * @var string
+     */
+    public const PAY_PAL_EXPRESS_PAYPAL_METHOD = 'shortcut';
 
     /**
      * @var string

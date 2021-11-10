@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 
-use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
-use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeInterface;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface;
@@ -19,7 +17,7 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
     use TransactionTrait;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface $queryContainer
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface
      */
     protected $queryContainer;
 
@@ -58,39 +56,16 @@ abstract class AbstractResponseSaver implements InitResponseSaverInterface
      *
      * @return void
      */
-    protected function setPaymentEntity($transactionId)
+    protected function setPaymentEntity(string $transactionId): void
     {
         $this->paymentEntity = $this->queryContainer->queryPaymentByTransactionId($transactionId)->findOne();
     }
 
     /**
-     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop
+     * @return \Orm\Zed\Computop\Persistence\SpyPaymentComputop|null
      */
     protected function getPaymentEntity()
     {
         return $this->paymentEntity;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-     *
-     * @return string
-     */
-    protected function getOrderItemPaymentStatusFromComputopApiResponseHeaderTransfer(
-        ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
-    ): string {
-        if ($computopApiResponseHeaderTransfer->getStatus() === null) {
-            return $this->config->getOmsStatusNew();
-        }
-
-        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::AUTHORIZE_REQUEST_STATUS) {
-            return $this->config->getAuthorizeRequestOmsStatus();
-        }
-
-        if ($computopApiResponseHeaderTransfer->getStatus() === SharedComputopConfig::SUCCESS_OK) {
-            return $this->config->getOmsStatusAuthorized();
-        }
-
-        return $this->config->getOmsStatusNew();
     }
 }

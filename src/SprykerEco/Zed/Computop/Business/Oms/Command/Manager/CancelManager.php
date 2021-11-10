@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Computop\Business\Oms\Command\Manager;
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\Collection\ObjectCollection;
 
 class CancelManager extends AbstractManager implements CancelManagerInterface
 {
@@ -18,10 +19,10 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return array
      */
-    public function changeComputopItemsStatus(array $orderItems)
+    public function changeComputopItemsStatus(array $orderItems): array
     {
         $this->getTransactionHandler()->handleTransaction(
-            function () use ($orderItems) {
+            function () use ($orderItems): void {
                 foreach ($orderItems as $orderItem) {
                     $this->changeStatus($orderItem);
                 }
@@ -34,9 +35,9 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array
+     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
      */
-    public function getCanceledItems(OrderTransfer $orderTransfer)
+    public function getCanceledItems(OrderTransfer $orderTransfer): ObjectCollection
     {
         return $this
             ->queryContainer
@@ -55,7 +56,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
      *
      * @return void
      */
-    protected function changeStatus(SpySalesOrderItem $orderItem)
+    protected function changeStatus(SpySalesOrderItem $orderItem): void
     {
         $computopOrderItem = $this
             ->queryContainer
