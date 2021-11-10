@@ -289,6 +289,7 @@
         <property name="shippingStreetNumber" type="string"/>
         <property name="shippingStreet" type="string"/>
         <property name="shippingCountryCode" type="string"/>
+        <property name="shippingAddressAddition" type="string"/>
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
     </transfer>
