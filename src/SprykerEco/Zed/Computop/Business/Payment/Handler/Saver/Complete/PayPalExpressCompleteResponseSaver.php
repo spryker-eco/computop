@@ -65,7 +65,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         $computopPaymentTransfer = $this
             ->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $payPalExpressCompleteResponseTransfer->getHeader()->getTransId(),
+                $payPalExpressCompleteResponseTransfer->getHeaderOrFail()->getTransIdOrFail(),
             );
 
         if ($computopPaymentTransfer === null) {
@@ -109,8 +109,10 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $computopPaymentComputopTransfer->setPayId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getPayId());
-        $computopPaymentComputopTransfer->setXId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getXId());
+        $header = $computopApiPayPalExpressCompleteResponseTransfer->getHeaderOrFail();
+
+        $computopPaymentComputopTransfer->setPayId($header->getPayIdOrFail());
+        $computopPaymentComputopTransfer->setXId($header->getXIdOrFail());
 
         $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
@@ -179,7 +181,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             if ($computopPaymentComputopOrderItemTransfer->getFkSalesOrderItem() !== $computopSalesOrderItemTransfer->getIdSalesOrderItem()) {
                 continue;
             }
-            $isPaymentConfirmed = $completeResponseTransfer->getHeader()->getIsSuccess();
+            $isPaymentConfirmed = $completeResponseTransfer->getHeaderOrFail()->getIsSuccess();
             $computopPaymentComputopOrderItemTransfer->setStatus(
                 $isPaymentConfirmed ? $this->computopConfig->getOmsStatusAuthorized() : $this->computopConfig->getOmsStatusAuthorizationFailed(),
             );
