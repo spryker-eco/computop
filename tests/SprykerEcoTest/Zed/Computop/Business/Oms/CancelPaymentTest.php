@@ -85,11 +85,11 @@ class CancelPaymentTest extends AbstractPaymentTest
         $this->assertInstanceOf(ComputopApiReverseResponseTransfer::class, $response);
         $this->assertInstanceOf(ComputopApiResponseHeaderTransfer::class, $response->getHeader());
 
-        $this->assertSame(self::TRANS_ID_VALUE, $response->getHeader()->getTransId());
-        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
-        $this->assertSame(self::STATUS_VALUE, $response->getHeader()->getStatus());
-        $this->assertSame(self::CODE_VALUE, $response->getHeader()->getCode());
-        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
+        $this->assertSame(static::TRANS_ID_VALUE, $response->getHeader()->getTransId());
+        $this->assertSame(static::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(static::STATUS_VALUE, $response->getHeader()->getStatus());
+        $this->assertSame(static::CODE_VALUE, $response->getHeader()->getCode());
+        $this->assertSame(static::X_ID_VALUE, $response->getHeader()->getXId());
 
         $this->assertTrue($response->getHeader()->getIsSuccess());
     }
@@ -99,7 +99,7 @@ class CancelPaymentTest extends AbstractPaymentTest
      */
     protected function getPayIdValue()
     {
-        return self::PAY_ID_VALUE;
+        return static::PAY_ID_VALUE;
     }
 
     /**
@@ -107,7 +107,7 @@ class CancelPaymentTest extends AbstractPaymentTest
      */
     protected function getTransIdValue()
     {
-        return self::TRANS_ID_VALUE;
+        return static::TRANS_ID_VALUE;
     }
 
     /**
@@ -141,11 +141,11 @@ class CancelPaymentTest extends AbstractPaymentTest
         return (new ComputopApiInquireResponseTransfer())
             ->setHeader(
                 (new ComputopApiResponseHeaderTransfer())
-                    ->setTransId(self::TRANS_ID_VALUE)
-                    ->setPayId(self::PAY_ID_VALUE)
-                    ->setXId(self::X_ID_VALUE)
-                    ->setStatus(self::STATUS_VALUE)
-                    ->setCode(self::CODE_VALUE)
+                    ->setTransId(static::TRANS_ID_VALUE)
+                    ->setPayId(static::PAY_ID_VALUE)
+                    ->setXId(static::X_ID_VALUE)
+                    ->setStatus(static::STATUS_VALUE)
+                    ->setCode(static::CODE_VALUE)
                     ->setIsSuccess(true),
             )
             ->setIsAuthLast(true);
@@ -159,11 +159,11 @@ class CancelPaymentTest extends AbstractPaymentTest
         return (new ComputopApiReverseResponseTransfer())
             ->setHeader(
                 (new ComputopApiResponseHeaderTransfer())
-                    ->setTransId(self::TRANS_ID_VALUE)
-                    ->setPayId(self::PAY_ID_VALUE)
-                    ->setXId(self::X_ID_VALUE)
-                    ->setStatus(self::STATUS_VALUE)
-                    ->setCode(self::CODE_VALUE)
+                    ->setTransId(static::TRANS_ID_VALUE)
+                    ->setPayId(static::PAY_ID_VALUE)
+                    ->setXId(static::X_ID_VALUE)
+                    ->setStatus(static::STATUS_VALUE)
+                    ->setCode(static::CODE_VALUE)
                     ->setIsSuccess(true),
             );
     }

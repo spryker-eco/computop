@@ -182,7 +182,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
      *
-     * @return string
+     * @return string|null
      */
     protected function getOrderItemPaymentStatusFromResponseHeader(
         ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
