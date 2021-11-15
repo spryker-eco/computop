@@ -295,7 +295,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $this->tester->getFacade()->savePayPalExpressInitResponse($this->getQuoteTrasfer());
 
         //Assert
-        $savedData = SpyPaymentComputopQuery::create()->findByTransId(self::TRANS_ID_VALUE)->getFirst();
+        $savedData = SpyPaymentComputopQuery::create()->findByTransId(static::TRANS_ID_VALUE)->getFirst();
         $this->assertSame(static::PAY_ID_VALUE, $savedData->getPayId());
         $this->assertSame(static::X_ID_VALUE, $savedData->getXId());
     }
@@ -355,8 +355,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         // Assert
         $response = $quote->getPayment()->getComputopEasyCredit()->getEasyCreditStatusResponse();
-        $this->assertSame(self::PAY_ID_VALUE, $response->getHeader()->getPayId());
-        $this->assertSame(self::X_ID_VALUE, $response->getHeader()->getXId());
+        $this->assertSame(static::PAY_ID_VALUE, $response->getHeader()->getPayId());
+        $this->assertSame(static::X_ID_VALUE, $response->getHeader()->getXId());
     }
 
     /**
@@ -471,14 +471,14 @@ class FacadeDBActionTest extends AbstractSetUpTest
     {
         $computopHeader = new ComputopApiResponseHeaderTransfer();
         $computopHeader
-            ->setTransId(self::TRANS_ID_VALUE)
-            ->setPayId(self::PAY_ID_VALUE)
-            ->setMId(self::M_ID_VALUE)
-            ->setXId(self::X_ID_VALUE)
-            ->setCode(self::CODE_VALUE)
-            ->setDescription(self::DESCRIPTION_VALUE)
+            ->setTransId(static::TRANS_ID_VALUE)
+            ->setPayId(static::PAY_ID_VALUE)
+            ->setMId(static::M_ID_VALUE)
+            ->setXId(static::X_ID_VALUE)
+            ->setCode(static::CODE_VALUE)
+            ->setDescription(static::DESCRIPTION_VALUE)
             ->setIsSuccess(true)
-            ->setStatus(self::STATUS_VALUE);
+            ->setStatus(static::STATUS_VALUE);
 
         $computopSofortInitTransfer = new ComputopSofortInitResponseTransfer();
         $computopSofortInitTransfer->setHeader($computopHeader);
@@ -538,8 +538,8 @@ class FacadeDBActionTest extends AbstractSetUpTest
         $computopEasyCreditStatusTransfer->setHeader($computopHeader);
         $computopEasyCreditTransfer->setEasyCreditStatusResponse($computopEasyCreditStatusTransfer);
         $computopEasyCreditTransfer->fromArray($computopHeader->toArray(), true);
-        $computopEasyCreditTransfer->setAmount(self::AMOUNT_VALUE);
-        $computopEasyCreditTransfer->setCurrency(self::CURRENCY_VALUE);
+        $computopEasyCreditTransfer->setAmount(static::AMOUNT_VALUE);
+        $computopEasyCreditTransfer->setCurrency(static::CURRENCY_VALUE);
 
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setComputopSofort($computopSofortTransfer);

@@ -46,7 +46,7 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
         );
 
         $this->assertTrue($checkoutResponse->getIsExternalRedirect());
-        $this->assertSame(self::EXPECTED_REDIRECT_URL, $checkoutResponse->getRedirectUrl());
+        $this->assertSame(static::EXPECTED_REDIRECT_URL, $checkoutResponse->getRedirectUrl());
     }
 
     /**

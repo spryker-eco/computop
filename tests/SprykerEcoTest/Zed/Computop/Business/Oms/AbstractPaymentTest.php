@@ -152,7 +152,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
      * @param string $data
      * @param int $length
      *
-     * @return Psr7\Stream
+     * @return \GuzzleHttp\Psr7\Stream
      */
     protected function getStream($data, $length)
     {

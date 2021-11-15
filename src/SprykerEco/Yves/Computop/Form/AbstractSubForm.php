@@ -39,7 +39,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     protected function addLink(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_URL,
+            static::FIELD_URL,
             'hidden',
         );
 

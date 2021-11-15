@@ -35,9 +35,9 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
     {
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $paymentTransfer */
         $paymentTransfer = $this->getPaymentTransfer($quoteTransfer);
-        $paymentEntity = $this->queryContainer->queryPaymentByTransactionId($paymentTransfer->getTransId())->findOne();
+        $paymentEntity = $this->queryContainer->queryPaymentByTransactionId($paymentTransfer->getTransIdOrFail())->findOne();
         if (isset($paymentEntity)) {
-            $quoteTransfer->getPayment()->setIsComputopPaymentExist(true);
+            $quoteTransfer->getPaymentOrFail()->setIsComputopPaymentExist(true);
         }
 
         return $quoteTransfer;
@@ -50,9 +50,10 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
      */
     protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
-        $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
+        $payment = $quoteTransfer->getPaymentOrFail();
+        $paymentSelection = $payment->getPaymentSelectionOrFail();
         $method = 'get' . ucfirst($paymentSelection);
 
-        return $quoteTransfer->getPayment()->$method();
+        return $payment->$method();
     }
 }

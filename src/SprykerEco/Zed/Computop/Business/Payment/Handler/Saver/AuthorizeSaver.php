@@ -47,7 +47,7 @@ class AuthorizeSaver extends AbstractSaver
      */
     protected function saveComputopDetails(ComputopApiAuthorizeResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeader(), self::METHOD);
+        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
 
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;
