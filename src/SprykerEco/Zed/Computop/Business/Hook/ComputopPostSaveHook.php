@@ -92,7 +92,6 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
         TransferInterface $computopPaymentTransfer,
         CheckoutResponseTransfer $checkoutResponseTransfer
     ): CheckoutResponseTransfer {
-        /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
         $checkoutResponseTransfer
             ->setIsExternalRedirect(true)
             ->setRedirectUrl($computopPaymentTransfer->getUrl());
