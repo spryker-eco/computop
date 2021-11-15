@@ -41,9 +41,10 @@ class CreditCardResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopCreditCardInitResponseTransfer $responseTransfer): void
     {
+        $header = $responseTransfer->getHeaderOrFail();
         $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
+        $paymentEntity->setPayId($header->getPayId());
+        $paymentEntity->setXId($header->getXId());
         $paymentEntity->save();
     }
 

@@ -73,7 +73,7 @@ class NotificationProcessor implements NotificationProcessorInterface
     ): ComputopNotificationTransfer {
         $this->computopEntityManager->savePaymentComputopNotification($computopNotificationTransfer);
         $paymentComputopTransfer = $this->computopRepository->findComputopPaymentByComputopTransId(
-            $computopNotificationTransfer->getTransId(),
+            $computopNotificationTransfer->getTransIdOrFail(),
         );
 
         if (!$paymentComputopTransfer) {

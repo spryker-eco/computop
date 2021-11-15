@@ -135,7 +135,7 @@ class ComputopMapper
         SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem
     ): SpyPaymentComputopOrderItem {
         $spyPaymentComputopOrderItem->fromArray($computopPaymentComputopOrderItemTransfer->toArray());
-        $spyPaymentComputopOrderItem->setNew($computopPaymentComputopOrderItemTransfer->getIsNew());
+        $spyPaymentComputopOrderItem->setNew($computopPaymentComputopOrderItemTransfer->getIsNewOrFail());
 
         return $spyPaymentComputopOrderItem;
     }

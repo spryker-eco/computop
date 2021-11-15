@@ -41,7 +41,7 @@ class OrderPaymentTestHelper extends Test
     public const LEN_VALUE = 165;
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject | ComputopBusinessFactory
+     * @return \PHPUnit_Framework_MockObject_MockObject | \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory
      */
     public function createFactory()
     {
@@ -110,7 +110,7 @@ class OrderPaymentTestHelper extends Test
         $computopPayment->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
         $computopPayment->setClientIp(OrderPaymentTestConstants::CLIENT_IP_VALUE);
         $computopPayment->setTransId(OrderPaymentTestConstants::TRANS_ID_VALUE);
-        $computopPayment->setCurrency(self::CURRENCY_VALUE);
+        $computopPayment->setCurrency(static::CURRENCY_VALUE);
 
         return $computopPayment;
     }
@@ -124,9 +124,9 @@ class OrderPaymentTestHelper extends Test
         $computopPayment->setPayId(OrderPaymentTestConstants::PAY_ID_VALUE);
         $computopPayment->setClientIp(OrderPaymentTestConstants::CLIENT_IP_VALUE);
         $computopPayment->setTransId(OrderPaymentTestConstants::TRANS_ID_VALUE);
-        $computopPayment->setCurrency(self::CURRENCY_VALUE);
-        $computopPayment->setData(self::DATA_VALUE);
-        $computopPayment->setLen(self::LEN_VALUE);
+        $computopPayment->setCurrency(static::CURRENCY_VALUE);
+        $computopPayment->setData(static::DATA_VALUE);
+        $computopPayment->setLen(static::LEN_VALUE);
 
         return $computopPayment;
     }

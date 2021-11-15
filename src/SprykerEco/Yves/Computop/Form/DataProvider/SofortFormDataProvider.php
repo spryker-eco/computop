@@ -26,7 +26,7 @@ class SofortFormDataProvider extends AbstractFormDataProvider
         }
 
         if (!$this->isValidPayment($quoteTransfer)) {
-            $paymentTransfer = $quoteTransfer->getPayment();
+            $paymentTransfer = $quoteTransfer->getPaymentOrFail();
             /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopSofort($computopTransfer);
@@ -44,6 +44,6 @@ class SofortFormDataProvider extends AbstractFormDataProvider
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
-        return $quoteTransfer->getPayment()->getComputopSofort();
+        return $quoteTransfer->getPaymentOrFail()->getComputopSofort();
     }
 }

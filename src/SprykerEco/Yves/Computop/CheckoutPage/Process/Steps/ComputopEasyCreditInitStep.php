@@ -39,14 +39,11 @@ class ComputopEasyCreditInitStep extends AbstractBaseStep implements StepWithExt
      */
     public function execute(Request $request, AbstractTransfer $quoteTransfer): QuoteTransfer
     {
-        if (
-            !$quoteTransfer->getPayment()
-            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_EASY_CREDIT
-        ) {
+        if ($quoteTransfer->getPaymentOrFail()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_EASY_CREDIT) {
             return $quoteTransfer;
         }
 
-        $this->redirectUrl = $quoteTransfer->getPayment()->getComputopEasyCredit()->getUrl();
+        $this->redirectUrl = $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->getUrlOrFail();
 
         return $quoteTransfer;
     }

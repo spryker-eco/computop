@@ -20,14 +20,7 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
-        if (
-            !$quoteTransfer->getPayment()
-            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_CREDIT_CARD
-        ) {
-            return false;
-        }
-
-        return true;
+        return $quoteTransfer->getPaymentOrFail()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_CREDIT_CARD;
     }
 
     /**
@@ -47,12 +40,14 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      */
     public function getTemplateVariables(AbstractTransfer $quoteTransfer): array
     {
+        $computopCreditCard = $quoteTransfer->getPaymentOrFail()->getComputopCreditCardOrFail();
+
         return [
-            'formAction' => $quoteTransfer->getPayment()->getComputopCreditCard()->getUrl(),
-            'encryptedData' => $quoteTransfer->getPayment()->getComputopCreditCard()->getData(),
-            'encryptedDataLength' => $quoteTransfer->getPayment()->getComputopCreditCard()->getLen(),
-            'merchantId' => $quoteTransfer->getPayment()->getComputopCreditCard()->getMerchantId(),
-            'urlBack' => $quoteTransfer->getPayment()->getComputopCreditCard()->getUrlBack(),
+            'formAction' => $computopCreditCard->getUrl(),
+            'encryptedData' => $computopCreditCard->getData(),
+            'encryptedDataLength' => $computopCreditCard->getLen(),
+            'merchantId' => $computopCreditCard->getMerchantId(),
+            'urlBack' => $computopCreditCard->getUrlBack(),
         ];
     }
 }

@@ -20,14 +20,7 @@ class ComputopPayNowInitStep extends AbstractBaseStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
-        if (
-            !$quoteTransfer->getPayment()
-            || $quoteTransfer->getPayment()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_PAY_NOW
-        ) {
-            return false;
-        }
-
-        return true;
+        return $quoteTransfer->getPaymentOrFail()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_PAY_NOW;
     }
 
     /**
@@ -47,11 +40,13 @@ class ComputopPayNowInitStep extends AbstractBaseStep
      */
     public function getTemplateVariables(AbstractTransfer $quoteTransfer): array
     {
+        $computopPayNow = $quoteTransfer->getPaymentOrFail()->getComputopPayNowOrFail();
+
         return [
-            'formAction' => $quoteTransfer->getPayment()->getComputopPayNow()->getUrl(),
-            'encryptedData' => $quoteTransfer->getPayment()->getComputopPayNow()->getData(),
-            'encryptedDataLength' => $quoteTransfer->getPayment()->getComputopPayNow()->getLen(),
-            'merchantId' => $quoteTransfer->getPayment()->getComputopPayNow()->getMerchantId(),
+            'formAction' => $computopPayNow->getUrl(),
+            'encryptedData' => $computopPayNow->getData(),
+            'encryptedDataLength' => $computopPayNow->getLen(),
+            'merchantId' => $computopPayNow->getMerchantId(),
             'brandOptions' => $this->getBrandOptions(),
         ];
     }
