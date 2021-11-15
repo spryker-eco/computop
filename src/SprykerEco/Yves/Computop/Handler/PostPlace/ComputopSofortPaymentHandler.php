@@ -26,7 +26,6 @@ class ComputopSofortPaymentHandler extends AbstractPostPlacePaymentHandler
             $quoteTransfer->getPaymentOrFail()->setComputopSofort($computopTransfer);
         }
 
-        /** @var \Generated\Shared\Transfer\ComputopSofortInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPaymentOrFail()->getComputopSofort()->setSofortInitResponse(
             $responseTransfer,
         );

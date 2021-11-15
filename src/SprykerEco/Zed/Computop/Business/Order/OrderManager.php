@@ -144,8 +144,7 @@ class OrderManager implements OrderManagerInterface
         $paymentEntity->setReqId($computopTransfer->getReqId());
 
         if ($this->isPaymentMethodEasyCredit()) {
-            /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $computopTransfer */
-            $paymentEntity->setXId($computopTransfer->getHeader()->getXId());
+            $paymentEntity->setXId($computopTransfer->getHeaderOrFail()->getXId());
         }
 
         $paymentEntity->save();

@@ -31,7 +31,6 @@ class RefundSaver extends AbstractSaver
     {
         $this->getTransactionHandler()->handleTransaction(
             function () use ($responseTransfer, $orderTransfer): void {
-                /** @var \Generated\Shared\Transfer\ComputopApiRefundResponseTransfer $responseTransfer */
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
             },
         );

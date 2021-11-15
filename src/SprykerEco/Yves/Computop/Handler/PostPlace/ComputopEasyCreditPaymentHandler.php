@@ -73,7 +73,6 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
             $quoteTransfer->getPaymentOrFail()->setComputopEasyCredit($computopTransfer);
         }
 
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->setEasyCreditInitResponse(
             $responseTransfer,
         );

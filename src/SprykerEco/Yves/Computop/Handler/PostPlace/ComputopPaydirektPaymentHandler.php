@@ -26,7 +26,6 @@ class ComputopPaydirektPaymentHandler extends AbstractPostPlacePaymentHandler
             $quoteTransfer->getPaymentOrFail()->setComputopPaydirekt($computopTransfer);
         }
 
-        /** @var \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPaymentOrFail()->getComputopPaydirekt()->setPaydirektInitResponse(
             $responseTransfer,
         );
