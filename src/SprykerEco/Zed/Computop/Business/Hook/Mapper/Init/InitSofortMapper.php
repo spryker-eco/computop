@@ -38,13 +38,13 @@ class InitSofortMapper extends AbstractMapper
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPass()
+            $this->config->getBlowfishPass(),
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
@@ -65,20 +65,20 @@ class InitSofortMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer): array
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer */
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopSofortPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopSofortPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopSofortPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopSofortPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopSofortPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopSofortPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopSofortPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $computopSofortPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopSofortPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopSofortPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopSofortPaymentTransfer->getShippingZip();
-
-        return $dataSubArray;
+        return [
+            ComputopApiConfig::TRANS_ID => $computopSofortPaymentTransfer->getTransId(),
+            ComputopApiConfig::AMOUNT => $computopSofortPaymentTransfer->getAmount(),
+            ComputopApiConfig::CURRENCY => $computopSofortPaymentTransfer->getCurrency(),
+            ComputopApiConfig::URL_SUCCESS => $computopSofortPaymentTransfer->getUrlSuccess(),
+            ComputopApiConfig::URL_NOTIFY => $computopSofortPaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::URL_FAILURE => $computopSofortPaymentTransfer->getUrlFailure(),
+            ComputopApiConfig::RESPONSE => $computopSofortPaymentTransfer->getResponse(),
+            ComputopApiConfig::MAC => $computopSofortPaymentTransfer->getMac(),
+            ComputopApiConfig::ORDER_DESC => $computopSofortPaymentTransfer->getOrderDesc(),
+            ComputopApiConfig::ETI_ID => $this->config->getEtiId(),
+            ComputopApiConfig::IP_ADDRESS => $computopSofortPaymentTransfer->getClientIp(),
+            ComputopApiConfig::SHIPPING_ZIP => $computopSofortPaymentTransfer->getShippingZip(),
+        ];
     }
 
     /**

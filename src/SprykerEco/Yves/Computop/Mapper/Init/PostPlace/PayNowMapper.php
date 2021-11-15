@@ -73,13 +73,13 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
+            $this->config->getBlowfishPassword(),
         );
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
@@ -99,15 +99,15 @@ class PayNowMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopPayNowPaymentTransfer();
 
         $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW)
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_NOW),
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType($this->config->getPayNowTxType());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::PAY_NOW_SUCCESS, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::PAY_NOW_SUCCESS, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()),
         );
 
         $computopPaymentTransfer = $this->expandPayNowPaymentWithShipToCustomer($computopPaymentTransfer, $quoteTransfer);
@@ -127,6 +127,7 @@ class PayNowMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopPayNowPaymentTransfer $computopPayNowPaymentTransfer): array
     {
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayNowPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayNowPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayNowPaymentTransfer->getCurrency();
@@ -141,25 +142,24 @@ class PayNowMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayNowPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayNowPaymentTransfer->getShippingZip();
-
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getBillToCustomer()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getBillToCustomer()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getShipToCustomer()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getShipToCustomer()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getBillingAddress()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getBillingAddress()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getShippingAddress()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getShippingAddress()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getCredentialOnFile()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getCredentialOnFile()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BROWSER_INFO] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getBrowserInfo()->toArray(true, true)
+            $computopPayNowPaymentTransfer->getBrowserInfo()->toArray(true, true),
         );
 
         return $dataSubArray;
@@ -199,7 +199,7 @@ class PayNowMapper extends AbstractMapper
     ): ComputopPayNowPaymentTransfer {
         if ($quoteTransfer->getBillingSameAsShipping()) {
             $computopPayNowPaymentTransfer->setBillToCustomer(
-                $computopPayNowPaymentTransfer->getShipToCustomer()
+                $computopPayNowPaymentTransfer->getShipToCustomer(),
             );
 
             return $computopPayNowPaymentTransfer;
@@ -244,7 +244,7 @@ class PayNowMapper extends AbstractMapper
     ): ComputopPayNowPaymentTransfer {
         if ($quoteTransfer->getBillingSameAsShipping()) {
             $computopPayNowPaymentTransfer->setBillingAddress(
-                $computopPayNowPaymentTransfer->getShippingAddress()
+                $computopPayNowPaymentTransfer->getShippingAddress(),
             );
 
             return $computopPayNowPaymentTransfer;
@@ -266,7 +266,7 @@ class PayNowMapper extends AbstractMapper
         $computopCredentialOnFileTransfer = (new ComputopCredentialOnFileTransfer())
             ->setType(
                 (new ComputopCredentialOnFileTypeTransfer())
-                    ->setUnscheduled(ComputopApiConfig::UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION)
+                    ->setUnscheduled(ComputopApiConfig::UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION),
             )
             ->setInitialPayment(true);
 

@@ -33,7 +33,7 @@ class InquireSaver extends AbstractSaver
             function () use ($responseTransfer, $orderTransfer): void {
                 /** @var \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer $responseTransfer */
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
-            }
+            },
         );
 
         return $responseTransfer;

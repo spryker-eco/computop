@@ -18,6 +18,9 @@ use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientBridge;
 use SprykerEco\Yves\Computop\Dependency\ComputopToStoreBridge;
 use SprykerEco\Yves\Computop\Dependency\Service\ComputopToUtilEncodingServiceBridge;
 
+/**
+ * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
+ */
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**

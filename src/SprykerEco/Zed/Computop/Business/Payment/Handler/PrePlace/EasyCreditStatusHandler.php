@@ -115,7 +115,7 @@ class EasyCreditStatusHandler extends AbstractHandler
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param string[] $financing
+     * @param array<string> $financing
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

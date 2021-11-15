@@ -125,7 +125,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getQueryContainer',
                 'getFlashMessengerFacade',
                 'getComputopApiFacade',
-            ]
+            ],
         );
 
         $stub = $builder->getMock();

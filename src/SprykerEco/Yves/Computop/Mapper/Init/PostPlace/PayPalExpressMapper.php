@@ -34,13 +34,13 @@ class PayPalExpressMapper extends AbstractMapper
         $computopPaymentTransfer->setPayPalMethod($this->config->getPayPalMethod());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
+            $this->config->getBlowfishPassword(),
         );
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
@@ -59,16 +59,16 @@ class PayPalExpressMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopPayPalExpressPaymentTransfer();
 
         $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS)
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL_EXPRESS),
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType($this->config->getPayPalTxType());
 
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::ROUTE_NAME_PAY_PAL_EXPRESS_PLACE_ORDER, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::ROUTE_NAME_PAY_PAL_EXPRESS_PLACE_ORDER, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()),
         );
 
         $this->mapAddressFromQuoteTransferToComputopPayPalExpressPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
@@ -112,6 +112,7 @@ class PayPalExpressMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopPayPalExpressPaymentTransfer $computopPayPalPaymentTransfer): array
     {
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayPalPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayPalPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayPalPaymentTransfer->getCurrency();

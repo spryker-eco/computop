@@ -148,12 +148,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         /** @var \SprykerTest\Shared\Testify\Helper\ConfigHelper $configHelper */
         $configHelper = $this->getModule('\\' . ConfigHelper::class);
-
-        $config[ComputopConstants::EASY_CREDIT_STATUS_ACTION] = 'https://www.computop-paygate.com/easyCreditDirect.aspx';
-
-        foreach ($config as $key => $value) {
-            $configHelper->setConfig($key, $value);
-        }
+        $configHelper->setConfig(ComputopConstants::EASY_CREDIT_STATUS_ACTION, 'https://www.computop-paygate.com/easyCreditDirect.aspx');
     }
 
     /**
@@ -587,7 +582,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 'getComputopApiFacade',
                 'getEntityManager',
                 'getRepository',
-            ]
+            ],
         );
 
         $stub = $builder->getMock();
@@ -655,7 +650,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
                 [
                     'performEasyCreditStatusRequest',
                     'performCrifApiCall',
-                ]
+                ],
             );
 
         $stub->method('performEasyCreditStatusRequest')

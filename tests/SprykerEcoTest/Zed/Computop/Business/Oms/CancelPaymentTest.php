@@ -121,7 +121,7 @@ class CancelPaymentTest extends AbstractPaymentTest
                 [
                     'performInquireRequest',
                     'performReverseRequest',
-                ]
+                ],
             );
 
         $stub->method('performInquireRequest')
@@ -146,7 +146,7 @@ class CancelPaymentTest extends AbstractPaymentTest
                     ->setXId(self::X_ID_VALUE)
                     ->setStatus(self::STATUS_VALUE)
                     ->setCode(self::CODE_VALUE)
-                    ->setIsSuccess(true)
+                    ->setIsSuccess(true),
             )
             ->setIsAuthLast(true);
     }
@@ -164,7 +164,7 @@ class CancelPaymentTest extends AbstractPaymentTest
                     ->setXId(self::X_ID_VALUE)
                     ->setStatus(self::STATUS_VALUE)
                     ->setCode(self::CODE_VALUE)
-                    ->setIsSuccess(true)
+                    ->setIsSuccess(true),
             );
     }
 }

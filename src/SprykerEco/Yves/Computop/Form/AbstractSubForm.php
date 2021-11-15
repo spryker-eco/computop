@@ -40,7 +40,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     {
         $builder->add(
             self::FIELD_URL,
-            'hidden'
+            'hidden',
         );
 
         return $this;

@@ -64,7 +64,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
 
         $computopPaymentComputopTransfer = $this->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $computopPayPalExpressInitResponseTransfer->getHeader()->getTransId()
+                $computopPayPalExpressInitResponseTransfer->getHeader()->getTransId(),
             );
 
         if ($computopPaymentComputopTransfer === null) {
@@ -75,7 +75,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
             $this->getTransactionHandler()->handleTransaction(
                 function () use ($computopPaymentComputopTransfer, $computopPayPalExpressInitResponseTransfer) {
                     $this->executeSavePaymentComputopDataTransaction($computopPaymentComputopTransfer, $computopPayPalExpressInitResponseTransfer);
-                }
+                },
             );
         }
 
@@ -152,7 +152,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
         foreach ($salesOrderItemCollectionTransfer->getComputopSalesOrderItems() as $computopSalesOrderItem) {
             $this->updateComputopSalesOrderItemCollection(
                 $computopPaymentComputopOrderItemCollection,
-                $computopSalesOrderItem
+                $computopSalesOrderItem,
             );
         }
     }

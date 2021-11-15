@@ -33,7 +33,7 @@ class CaptureSaver extends AbstractSaver
             function () use ($responseTransfer, $orderTransfer): void {
                 /** @var \Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer $responseTransfer */
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
-            }
+            },
         );
 
         return $responseTransfer;

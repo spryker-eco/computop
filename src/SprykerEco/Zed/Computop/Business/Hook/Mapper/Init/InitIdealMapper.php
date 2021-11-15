@@ -38,13 +38,13 @@ class InitIdealMapper extends AbstractMapper
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPass()
+            $this->config->getBlowfishPass(),
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
@@ -65,21 +65,21 @@ class InitIdealMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer): array
     {
         /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer */
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopIdealPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopIdealPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopIdealPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopIdealPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopIdealPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopIdealPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopIdealPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $computopIdealPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopIdealPaymentTransfer->getOrderDesc();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopIdealPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopIdealPaymentTransfer->getShippingZip();
-        $dataSubArray[ComputopApiConfig::ISSUER_ID] = $this->config->getIdealIssuerId();
-
-        return $dataSubArray;
+        return [
+            ComputopApiConfig::TRANS_ID => $computopIdealPaymentTransfer->getTransId(),
+            ComputopApiConfig::AMOUNT => $computopIdealPaymentTransfer->getAmount(),
+            ComputopApiConfig::CURRENCY => $computopIdealPaymentTransfer->getCurrency(),
+            ComputopApiConfig::URL_SUCCESS => $computopIdealPaymentTransfer->getUrlSuccess(),
+            ComputopApiConfig::URL_NOTIFY => $computopIdealPaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::URL_FAILURE => $computopIdealPaymentTransfer->getUrlFailure(),
+            ComputopApiConfig::RESPONSE => $computopIdealPaymentTransfer->getResponse(),
+            ComputopApiConfig::MAC => $computopIdealPaymentTransfer->getMac(),
+            ComputopApiConfig::ORDER_DESC => $computopIdealPaymentTransfer->getOrderDesc(),
+            ComputopApiConfig::ETI_ID => $this->config->getEtiId(),
+            ComputopApiConfig::IP_ADDRESS => $computopIdealPaymentTransfer->getClientIp(),
+            ComputopApiConfig::SHIPPING_ZIP => $computopIdealPaymentTransfer->getShippingZip(),
+            ComputopApiConfig::ISSUER_ID => $this->config->getIdealIssuerId(),
+        ];
     }
 
     /**

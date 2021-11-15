@@ -77,7 +77,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function getAvailablePaymentMethods(QuoteTransfer $quoteTransfer): array
     {
@@ -94,7 +94,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
 
     /**
      * @param \Generated\Shared\Transfer\PaymentMethodTransfer $paymentMethodTransfer
-     * @param string[] $availableMethods
+     * @param array<string> $availableMethods
      *
      * @return bool
      */

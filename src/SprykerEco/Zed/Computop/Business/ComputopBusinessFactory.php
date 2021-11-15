@@ -192,7 +192,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new PayPalExpressResponseSaver(
             $this->getConfig(),
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
         );
     }
 
@@ -204,7 +204,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new PayPalExpressCompleteResponseSaver(
             $this->getConfig(),
             $this->getEntityManager(),
-            $this->getRepository()
+            $this->getRepository(),
         );
     }
 
@@ -232,7 +232,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new PayuCeeSingleResponseSaver(
             $this->getConfig(),
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
         );
     }
 
@@ -259,7 +259,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new AuthorizeCommandHandler(
             $this->createAuthorizeHandler(),
-            $this->createAuthorizeManager()
+            $this->createAuthorizeManager(),
         );
     }
 
@@ -272,7 +272,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
             $this->createInquireHandler(),
             $this->createReverseHandler(),
             $this->createCancelManager(),
-            $this->getFlashMessengerFacade()
+            $this->getFlashMessengerFacade(),
         );
     }
 
@@ -283,7 +283,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new CaptureCommandHandler(
             $this->createCaptureHandler(),
-            $this->createCaptureManager()
+            $this->createCaptureManager(),
         );
     }
 
@@ -294,7 +294,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new RefundCommandHandler(
             $this->createRefundHandler(),
-            $this->createRefundManager()
+            $this->createRefundManager(),
         );
     }
 
@@ -305,7 +305,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new AuthorizeCommandHandler(
             $this->createEasyCreditAuthorizeHandler(),
-            $this->createAuthorizeManager()
+            $this->createAuthorizeManager(),
         );
     }
 
@@ -317,7 +317,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new EasyCreditStatusHandler(
             $this->getComputopApiFacade(),
             $this->getMoneyFacade(),
-            $this->createComputopResponseLogger()
+            $this->createComputopResponseLogger(),
         );
     }
 
@@ -329,7 +329,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new CrifHandler(
             $this->getComputopApiFacade(),
             $this->createCrifSaver(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -348,7 +348,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new EasyCreditAuthorizeHandler(
             $this->getComputopApiFacade(),
-            $this->createAuthorizeSaver()
+            $this->createAuthorizeSaver(),
         );
     }
 
@@ -367,7 +367,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new AuthorizeHandler(
             $this->getComputopApiFacade(),
-            $this->createAuthorizeSaver()
+            $this->createAuthorizeSaver(),
         );
     }
 
@@ -378,7 +378,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new ReverseHandler(
             $this->getComputopApiFacade(),
-            $this->createReverseSaver()
+            $this->createReverseSaver(),
         );
     }
 
@@ -389,7 +389,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new InquireHandler(
             $this->getComputopApiFacade(),
-            $this->createInquireSaver()
+            $this->createInquireSaver(),
         );
     }
 
@@ -400,7 +400,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new CaptureHandler(
             $this->getComputopApiFacade(),
-            $this->createCaptureSaver()
+            $this->createCaptureSaver(),
         );
     }
 
@@ -411,7 +411,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     {
         return new RefundHandler(
             $this->getComputopApiFacade(),
-            $this->createRefundSaver()
+            $this->createRefundSaver(),
         );
     }
 
@@ -423,7 +423,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new CrifSaver(
             $this->getQueryContainer(),
             $this->createComputopLogger(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -435,7 +435,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new AuthorizeSaver(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -447,7 +447,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new ReverseSaver(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -459,7 +459,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new InquireSaver(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -471,7 +471,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new CaptureSaver(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -483,7 +483,7 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
         return new RefundSaver(
             $this->getQueryContainer(),
             $this->createComputopResponseLogger(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 

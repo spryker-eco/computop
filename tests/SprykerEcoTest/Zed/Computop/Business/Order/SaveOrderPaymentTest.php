@@ -32,7 +32,7 @@ class SaveOrderPaymentTest extends AbstractSetUpTest
         $service->setFactory($this->orderHelper->createFactory());
         $service->saveOrderPayment(
             $this->orderHelper->createQuoteTransfer(),
-            $this->createSaveOrderTransfer()
+            $this->createSaveOrderTransfer(),
         );
 
         $computopSavedData = $this->getComputopSavedData();

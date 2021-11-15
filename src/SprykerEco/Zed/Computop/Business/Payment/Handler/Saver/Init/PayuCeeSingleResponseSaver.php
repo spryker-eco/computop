@@ -10,8 +10,6 @@ namespace SprykerEco\Zed\Computop\Business\Payment\Handler\Saver\Init;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Generated\Shared\Transfer\ComputopPayuCeeSingleInitResponseTransfer;
-use Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer;
-use Generated\Shared\Transfer\ComputopSalesOrderItemTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
@@ -75,7 +73,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
         }
 
         $computopPaymentComputopTransfer = $this->computopRepository->findComputopPaymentByComputopTransId(
-            $computopApiResponseHeaderTransfer->getTransId()
+            $computopApiResponseHeaderTransfer->getTransId(),
         );
         if ($computopPaymentComputopTransfer === null) {
             return $quoteTransfer;
@@ -156,7 +154,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
 
         $computopPaymentComputopDetailTransfer->fromArray($computopPayuCeeSingleInitResponseTransfer->toArray(), true);
         $computopPaymentComputopDetailTransfer->setCustomerTransactionId(
-            (int)$computopPaymentComputopDetailTransfer->getCustomerTransactionId()
+            (int)$computopPaymentComputopDetailTransfer->getCustomerTransactionId(),
         );
 
         $this->computopEntityManager->updateComputopPaymentDetail($computopPaymentComputopDetailTransfer);

@@ -24,7 +24,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new ComputopStub(
             $this->getZedRequestClient(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 

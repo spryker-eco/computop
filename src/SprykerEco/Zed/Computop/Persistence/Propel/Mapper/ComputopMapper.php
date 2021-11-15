@@ -100,7 +100,7 @@ class ComputopMapper
             $computopPaymentOrderItemTransfer = $this
                 ->mapPaymentComputopOrderItemEntityToComputopPaymentComputopOrderItemTransfer(
                     $paymentComputopOrderItemEntity,
-                    new ComputopPaymentComputopOrderItemTransfer()
+                    new ComputopPaymentComputopOrderItemTransfer(),
                 );
             $computopPaymentComputopOrderItemCollectionTransfer->addComputopPaymentComputopOrderItem($computopPaymentOrderItemTransfer);
         }

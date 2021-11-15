@@ -36,7 +36,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer $computopPayuCeeSinglePaymentTransfer */
         $computopPayuCeeSinglePaymentTransfer = parent::updateComputopPaymentTransfer(
             $quoteTransfer,
-            $computopPayuCeeSinglePaymentTransfer
+            $computopPayuCeeSinglePaymentTransfer,
         );
         $computopPayuCeeSinglePaymentTransfer
             ->setRefNr($quoteTransfer->getOrderReference() . '-' . date('Y-m-d H:i:s'))
@@ -49,7 +49,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
 
         $encryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPayuCeeSinglePaymentTransfer),
-            $this->config->getBlowfishPass()
+            $this->config->getBlowfishPass(),
         );
 
         if (!isset($encryptedValues[ComputopApiConfig::LENGTH], $encryptedValues[ComputopApiConfig::DATA])) {
@@ -59,7 +59,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         $urlToComputop = $this->getUrlToComputop(
             (string)$computopPayuCeeSinglePaymentTransfer->getMerchantId(),
             $encryptedValues[ComputopApiConfig::DATA],
-            $encryptedValues[ComputopApiConfig::LENGTH]
+            $encryptedValues[ComputopApiConfig::LENGTH],
         );
 
         $computopPayuCeeSinglePaymentTransfer

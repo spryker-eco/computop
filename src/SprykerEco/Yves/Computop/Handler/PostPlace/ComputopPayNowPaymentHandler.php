@@ -28,7 +28,7 @@ class ComputopPayNowPaymentHandler extends AbstractPostPlacePaymentHandler
 
         /** @var \Generated\Shared\Transfer\ComputopPayNowInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPayNow()->setPayNowInitResponse(
-            $responseTransfer
+            $responseTransfer,
         );
 
         return $quoteTransfer;

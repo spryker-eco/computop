@@ -33,7 +33,7 @@ class ReverseSaver extends AbstractSaver
             function () use ($responseTransfer, $orderTransfer): void {
                 /** @var \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer $responseTransfer */
                 $this->saveComputopDetails($responseTransfer, $orderTransfer);
-            }
+            },
         );
 
         return $responseTransfer;

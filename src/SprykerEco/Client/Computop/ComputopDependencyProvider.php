@@ -10,6 +10,9 @@ namespace SprykerEco\Client\Computop;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 
+/**
+ * @method \SprykerEco\Client\Computop\ComputopConfig getConfig()
+ */
 class ComputopDependencyProvider extends AbstractDependencyProvider
 {
     /**

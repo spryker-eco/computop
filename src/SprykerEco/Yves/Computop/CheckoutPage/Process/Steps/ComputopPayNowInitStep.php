@@ -57,7 +57,7 @@ class ComputopPayNowInitStep extends AbstractBaseStep
     }
 
     /**
-     * @return string[][]
+     * @return array<string[]>
      */
     protected function getBrandOptions(): array
     {

@@ -116,7 +116,7 @@ class CapturePaymentTest extends AbstractPaymentTest
                 [
                     'performCaptureRequest',
                     'performInquireRequest',
-                ]
+                ],
             );
 
         $stub->method('performCaptureRequest')

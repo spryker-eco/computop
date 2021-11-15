@@ -60,7 +60,7 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
             ->createComputopMapper()
             ->mapSalesOrderItemEntityCollectionToComputopSalesOrderItemCollectionTransfer(
                 $salesOrderItemEntityCollection,
-                new ComputopSalesOrderItemCollectionTransfer()
+                new ComputopSalesOrderItemCollectionTransfer(),
             );
     }
 
@@ -85,7 +85,7 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
             ->createComputopMapper()
             ->mapPaymentComputopOrderItemEntityCollectionToComputopPaymentComputopOrderItemTransferCollection(
                 $paymentComputopOrderItemEntityCollection,
-                new ComputopPaymentComputopOrderItemCollectionTransfer()
+                new ComputopPaymentComputopOrderItemCollectionTransfer(),
             );
     }
 
@@ -110,7 +110,7 @@ class ComputopRepository extends AbstractRepository implements ComputopRepositor
             ->createComputopMapper()
             ->mapPaymentComputopDetailEntityToComputopPaymentComputopDetailTransfer(
                 $paymentComputopDetailEntity,
-                new ComputopPaymentComputopDetailTransfer()
+                new ComputopPaymentComputopDetailTransfer(),
             );
     }
 }

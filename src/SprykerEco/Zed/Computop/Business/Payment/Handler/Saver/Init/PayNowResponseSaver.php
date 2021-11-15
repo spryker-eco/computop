@@ -27,7 +27,7 @@ class PayNowResponseSaver extends AbstractResponseSaver
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
-                }
+                },
             );
         }
 

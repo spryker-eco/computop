@@ -26,7 +26,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
                 foreach ($orderItems as $orderItem) {
                     $this->changeStatus($orderItem);
                 }
-            }
+            },
         );
 
         return [];
@@ -35,7 +35,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Sales\Persistence\SpySalesOrderItem[]
+     * @return \Propel\Runtime\Collection\ObjectCollection|array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem>
      */
     public function getCanceledItems(OrderTransfer $orderTransfer): ObjectCollection
     {
@@ -45,7 +45,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
             ->useStateQuery()
             ->filterByName(
                 $this->config->getOmsStatusCancelled(),
-                Criteria::EQUAL
+                Criteria::EQUAL,
             )
             ->endUse()
             ->find();

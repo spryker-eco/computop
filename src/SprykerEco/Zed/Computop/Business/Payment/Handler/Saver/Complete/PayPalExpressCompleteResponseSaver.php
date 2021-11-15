@@ -65,7 +65,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         $computopPaymentTransfer = $this
             ->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $payPalExpressCompleteResponseTransfer->getHeader()->getTransId()
+                $payPalExpressCompleteResponseTransfer->getHeader()->getTransId(),
             );
 
         if ($computopPaymentTransfer === null) {
@@ -76,9 +76,9 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             function () use ($payPalExpressCompleteResponseTransfer, $computopPaymentTransfer) {
                 $this->executeSavePaymentComputopDataTransaction(
                     $payPalExpressCompleteResponseTransfer,
-                    $computopPaymentTransfer
+                    $computopPaymentTransfer,
                 );
-            }
+            },
         );
 
         return $quoteTransfer;
@@ -158,7 +158,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             $this->updatePaymentComputopOrderItem(
                 $computopPaymentComputopOrderItemCollectionTransfer,
                 $computopSalesOrderItemTransfer,
-                $completeResponseTransfer
+                $completeResponseTransfer,
             );
         }
     }
@@ -181,7 +181,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             }
             $isPaymentConfirmed = $completeResponseTransfer->getHeader()->getIsSuccess();
             $computopPaymentComputopOrderItemTransfer->setStatus(
-                $isPaymentConfirmed ? $this->computopConfig->getOmsStatusAuthorized() : $this->computopConfig->getOmsStatusAuthorizationFailed()
+                $isPaymentConfirmed ? $this->computopConfig->getOmsStatusAuthorized() : $this->computopConfig->getOmsStatusAuthorizationFailed(),
             );
             $computopPaymentComputopOrderItemTransfer->setIsPaymentConfirmed($isPaymentConfirmed);
 

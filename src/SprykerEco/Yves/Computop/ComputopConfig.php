@@ -29,6 +29,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      * @var string
      */
     protected const EASY_CREDIT_SUCCESS_ACTION = 'checkout-summary';
+
     /**
      * @var int
      */
@@ -77,7 +78,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @api
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getPaymentMethodsWithoutOrderCall(): array
     {
@@ -200,7 +201,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     /**
      * @api
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getPaymentMethodsCaptureTypes(): array
     {
@@ -272,6 +273,8 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     }
 
     /**
+     * @api
+     *
      * @return array<string, string>
      */
     public function getSalutationMap(): array

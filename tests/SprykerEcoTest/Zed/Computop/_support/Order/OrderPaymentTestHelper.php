@@ -51,7 +51,7 @@ class OrderPaymentTestHelper extends Test
                 'getConfig',
                 'getQueryContainer',
                 'getComputopApiService',
-            ]
+            ],
         );
 
         $stub = $builder->getMock();

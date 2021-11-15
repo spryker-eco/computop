@@ -122,7 +122,7 @@ class SaveLogTest extends AbstractSetUpTest
         $builder->setMethods(
             [
                 'getQueryContainer',
-            ]
+            ],
         );
 
         $stub = $builder->getMock();

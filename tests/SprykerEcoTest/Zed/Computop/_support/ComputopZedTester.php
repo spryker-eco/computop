@@ -135,7 +135,7 @@ class ComputopZedTester extends Actor
                 ComputopConfig::PAYMENT_METHOD_DIRECT_DEBIT,
                 ComputopConfig::PAYMENT_METHOD_EASY_CREDIT,
                 ComputopConfig::PAYMENT_METHOD_PAYU_CEE_SINGLE,
-            ]
+            ],
         );
         $this->setConfig(
             'COMPUTOP:CRIF_YELLOW_AVAILABLE_PAYMENT_METHODS',
@@ -143,13 +143,13 @@ class ComputopZedTester extends Actor
                 ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
                 ComputopConfig::PAYMENT_METHOD_PAY_NOW,
                 ComputopConfig::PAYMENT_METHOD_PAY_PAL,
-            ]
+            ],
         );
         $this->setConfig(
             'COMPUTOP:CRIF_RED_AVAILABLE_PAYMENT_METHODS',
             [
                 ComputopConfig::PAYMENT_METHOD_CREDIT_CARD,
-            ]
+            ],
         );
         $this->setConfig('COMPUTOP:CRIF_ENABLED', true);
 
@@ -157,7 +157,7 @@ class ComputopZedTester extends Actor
             'ACTIVE_PROCESSES',
             [
                 static::TEST_STATE_MACHINE_NAME,
-            ]
+            ],
         );
     }
 

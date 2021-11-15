@@ -90,7 +90,7 @@ interface ComputopConfigInterface
     public function getCreditCardTemplateEnabled();
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getPaymentMethodsCaptureTypes();
 

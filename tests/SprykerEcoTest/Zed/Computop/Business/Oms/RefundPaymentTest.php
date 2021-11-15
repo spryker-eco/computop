@@ -109,7 +109,7 @@ class RefundPaymentTest extends AbstractPaymentTest
                 ComputopToComputopApiFacadeBridge::class,
                 [
                     'performRefundRequest',
-                ]
+                ],
             );
 
         $stub->method('performRefundRequest')
@@ -131,7 +131,7 @@ class RefundPaymentTest extends AbstractPaymentTest
                     ->setXId(self::X_ID_VALUE)
                     ->setCode(self::CODE_VALUE)
                     ->setIsSuccess(true)
-                    ->setStatus(self::STATUS_VALUE)
+                    ->setStatus(self::STATUS_VALUE),
             );
     }
 }
