@@ -68,13 +68,13 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPayment()->getComputopEasyCredit() === null) {
+        if ($quoteTransfer->getPaymentOrFail()->getComputopEasyCredit() === null) {
             $computopTransfer = new ComputopEasyCreditPaymentTransfer();
-            $quoteTransfer->getPayment()->setComputopEasyCredit($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopEasyCredit($computopTransfer);
         }
 
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
-        $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditInitResponse(
+        $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->setEasyCreditInitResponse(
             $responseTransfer,
         );
 

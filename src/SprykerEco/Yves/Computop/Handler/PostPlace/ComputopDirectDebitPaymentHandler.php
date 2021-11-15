@@ -21,13 +21,13 @@ class ComputopDirectDebitPaymentHandler extends AbstractPostPlacePaymentHandler
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPayment()->getComputopDirectDebit() === null) {
+        if ($quoteTransfer->getPaymentOrFail()->getComputopDirectDebit() === null) {
             $computopTransfer = new ComputopDirectDebitPaymentTransfer();
-            $quoteTransfer->getPayment()->setComputopDirectDebit($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopDirectDebit($computopTransfer);
         }
 
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $responseTransfer */
-        $quoteTransfer->getPayment()->getComputopDirectDebit()->setDirectDebitInitResponse(
+        $quoteTransfer->getPaymentOrFail()->getComputopDirectDebit()->setDirectDebitInitResponse(
             $responseTransfer,
         );
 
