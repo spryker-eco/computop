@@ -231,7 +231,7 @@ class PayPalMapper extends AbstractMapper
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer
-     * @param \ArrayObject|array<\Generated\Shared\Transfer\ItemTransfer> $itemTransfers
+     * @param \ArrayObject $itemTransfers
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */
