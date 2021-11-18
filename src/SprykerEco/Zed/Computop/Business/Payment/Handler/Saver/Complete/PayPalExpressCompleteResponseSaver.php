@@ -109,10 +109,10 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $header = $computopApiPayPalExpressCompleteResponseTransfer->getHeaderOrFail();
+        $computopApiResponseHeaderTransfer = $computopApiPayPalExpressCompleteResponseTransfer->getHeaderOrFail();
 
-        $computopPaymentComputopTransfer->setPayId($header->getPayIdOrFail())
-            ->setXId($header->getXIdOrFail());
+        $computopPaymentComputopTransfer->setPayId($computopApiResponseHeaderTransfer->getPayIdOrFail())
+            ->setXId($computopApiResponseHeaderTransfer->getXIdOrFail());
 
         $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
