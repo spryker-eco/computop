@@ -135,4 +135,9 @@ interface ComputopConfigInterface
      * @return array<string, string>
      */
     public function getSalutationMap(): array;
+
+    /**
+     * @return string
+     */
+    public function getSalutationDefault(): string;
 }

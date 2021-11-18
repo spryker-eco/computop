@@ -36,6 +36,21 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
 
     /**
+     * @var array<string, string>
+     */
+    protected const SALUTATION_MAP = [
+        'Mr' => 'Mr',
+        'Mrs' => 'Mrs',
+        'Ms' => 'Miss',
+        'Dr' => 'Mr',
+    ];
+
+    /**
+     * @var string
+     */
+    protected const SALUTATION_DEFAULT = 'Mr';
+
+    /**
      * @api
      *
      * @return string
@@ -279,11 +294,16 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      */
     public function getSalutationMap(): array
     {
-        return [
-            'Mr' => 'Mr',
-            'Mrs' => 'Mrs',
-            'Ms' => 'Miss',
-            'Dr' => 'Mr',
-        ];
+        return static::SALUTATION_MAP;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getSalutationDefault(): string
+    {
+        return static::SALUTATION_DEFAULT;
     }
 }
