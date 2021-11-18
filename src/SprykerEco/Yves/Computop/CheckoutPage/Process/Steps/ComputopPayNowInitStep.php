@@ -40,13 +40,13 @@ class ComputopPayNowInitStep extends AbstractBaseStep
      */
     public function getTemplateVariables(AbstractTransfer $quoteTransfer): array
     {
-        $computopPayNow = $quoteTransfer->getPaymentOrFail()->getComputopPayNowOrFail();
+        $computopPayNowPaymentTransfer = $quoteTransfer->getPaymentOrFail()->getComputopPayNowOrFail();
 
         return [
-            'formAction' => $computopPayNow->getUrl(),
-            'encryptedData' => $computopPayNow->getData(),
-            'encryptedDataLength' => $computopPayNow->getLen(),
-            'merchantId' => $computopPayNow->getMerchantId(),
+            'formAction' => $computopPayNowPaymentTransfer->getUrl(),
+            'encryptedData' => $computopPayNowPaymentTransfer->getData(),
+            'encryptedDataLength' => $computopPayNowPaymentTransfer->getLen(),
+            'merchantId' => $computopPayNowPaymentTransfer->getMerchantId(),
             'brandOptions' => $this->getBrandOptions(),
         ];
     }
