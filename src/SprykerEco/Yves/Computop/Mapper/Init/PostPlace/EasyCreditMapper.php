@@ -115,8 +115,6 @@ class EasyCreditMapper extends AbstractMapper
         $computopEasyCreditPaymentTransfer->setShippingStreet($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET]);
         $computopEasyCreditPaymentTransfer->setShippingStreetNumber($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER]);
         $computopEasyCreditPaymentTransfer->setShippingCountryCode($addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_COUNTRY_CODE]);
-        $computopEasyCreditPaymentTransfer->setShippingAddressAddition('Computop GmbH');
-        $computopEasyCreditPaymentTransfer->setPackingStation('NO');
 
         return $computopEasyCreditPaymentTransfer;
     }
