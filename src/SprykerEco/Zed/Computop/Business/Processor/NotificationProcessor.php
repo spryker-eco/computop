@@ -80,9 +80,9 @@ class NotificationProcessor implements NotificationProcessorInterface
             return $computopNotificationTransfer->setIsProcessed(false);
         }
 
-        $this->updatePaymentComputopEntity($paymentComputopTransfer, $computopNotificationTransfer);
+        $this->updatePaymentComputop($paymentComputopTransfer, $computopNotificationTransfer);
 
-        $isProcessed = $this->updatePaymentComputopOrderItemsEntities($paymentComputopTransfer, $computopNotificationTransfer);
+        $isProcessed = $this->updatePaymentComputopOrderItems($paymentComputopTransfer, $computopNotificationTransfer);
 
         return $computopNotificationTransfer->setIsProcessed($isProcessed);
     }
@@ -93,7 +93,7 @@ class NotificationProcessor implements NotificationProcessorInterface
      *
      * @return void
      */
-    protected function updatePaymentComputopEntity(
+    protected function updatePaymentComputop(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
         ComputopNotificationTransfer $computopNotificationTransfer
     ): void {
@@ -110,7 +110,7 @@ class NotificationProcessor implements NotificationProcessorInterface
      *
      * @return bool
      */
-    protected function updatePaymentComputopOrderItemsEntities(
+    protected function updatePaymentComputopOrderItems(
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
         ComputopNotificationTransfer $computopNotificationTransfer
     ): bool {
