@@ -19,13 +19,14 @@ class SofortResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopSofortOrFail()->getSofortInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeaderOrFail()->getTransId());
-        if ($responseTransfer->getHeaderOrFail()->getIsSuccess()) {
+        $computopSofortInitResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopSofortOrFail()->getSofortInitResponse();
+        $this->setPaymentEntity($computopSofortInitResponseTransfer->getHeaderOrFail()->getTransId());
+
+        if ($computopSofortInitResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer): void {
-                    $this->savePaymentComputopEntity($responseTransfer);
-                    $this->savePaymentComputopDetailEntity($responseTransfer);
+                function () use ($computopSofortInitResponseTransfer): void {
+                    $this->savePaymentComputopEntity($computopSofortInitResponseTransfer);
+                    $this->savePaymentComputopDetailEntity($computopSofortInitResponseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
                 },
             );
@@ -41,10 +42,10 @@ class SofortResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopSofortInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
-        $paymentEntity->save();
+        $this->getPaymentEntity()
+            ->setPayId($responseTransfer->getHeader()->getPayId())
+            ->setXId($responseTransfer->getHeader()->getXId())
+            ->save();
     }
 
     /**

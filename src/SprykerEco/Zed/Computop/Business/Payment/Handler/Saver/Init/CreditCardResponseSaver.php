@@ -19,13 +19,13 @@ class CreditCardResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopCreditCard()->getCreditCardInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        $computopCreditCardInitResponseTransfer = $quoteTransfer->getPayment()->getComputopCreditCard()->getCreditCardInitResponse();
+        $this->setPaymentEntity($computopCreditCardInitResponseTransfer->getHeader()->getTransId());
+        if ($computopCreditCardInitResponseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer): void {
-                    $this->savePaymentComputopEntity($responseTransfer);
-                    $this->savePaymentComputopDetailEntity($responseTransfer);
+                function () use ($computopCreditCardInitResponseTransfer): void {
+                    $this->savePaymentComputopEntity($computopCreditCardInitResponseTransfer);
+                    $this->savePaymentComputopDetailEntity($computopCreditCardInitResponseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
                 },
             );
@@ -41,11 +41,12 @@ class CreditCardResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopCreditCardInitResponseTransfer $responseTransfer): void
     {
-        $header = $responseTransfer->getHeaderOrFail();
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($header->getPayId());
-        $paymentEntity->setXId($header->getXId());
-        $paymentEntity->save();
+        $computopApiResponseHeaderTransfer = $responseTransfer->getHeaderOrFail();
+
+        $this->getPaymentEntity()
+            ->setPayId($computopApiResponseHeaderTransfer->getPayId())
+            ->setXId($computopApiResponseHeaderTransfer->getXId())
+            ->save();
     }
 
     /**

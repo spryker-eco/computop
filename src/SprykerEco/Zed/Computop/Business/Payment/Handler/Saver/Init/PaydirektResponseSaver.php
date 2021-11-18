@@ -41,11 +41,12 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopPaydirektInitResponseTransfer $responseTransfer): void
     {
-        $header = $responseTransfer->getHeaderOrFail();
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($header->getPayId());
-        $paymentEntity->setXId($header->getXId());
-        $paymentEntity->save();
+        $computopApiResponseHeaderTransfer = $responseTransfer->getHeaderOrFail();
+
+        $this->getPaymentEntity()
+            ->setPayId($computopApiResponseHeaderTransfer->getPayId())
+            ->setXId($computopApiResponseHeaderTransfer->getXId())
+            ->save();
     }
 
     /**
