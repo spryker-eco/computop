@@ -261,7 +261,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
     public function getBeforeInitStatuses(): array
     {
@@ -273,7 +273,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
     public function getBeforeAuthorizeStatuses(): array
     {
@@ -288,7 +288,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
     public function getBeforeCaptureStatuses(): array
     {
@@ -303,7 +303,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
     public function getBeforeRefundStatuses(): array
     {
@@ -549,7 +549,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @api
      *
-     * @return array
+     * @return array<string, array<array-key, string>>
      */
     public function getComputopPaymentMethodCurrencyFilterMap(): array
     {
