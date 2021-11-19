@@ -119,7 +119,7 @@ class NotificationProcessor implements NotificationProcessorInterface
         $paymentComputopOrderItemsCollection = $this->computopRepository
             ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
-        if ($paymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems()->count() === 0) {
+        if (!$paymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems()->count()) {
             return false;
         }
 
