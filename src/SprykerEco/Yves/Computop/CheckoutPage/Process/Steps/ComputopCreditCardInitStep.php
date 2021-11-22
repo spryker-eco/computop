@@ -20,7 +20,9 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      */
     public function requireInput(AbstractTransfer $quoteTransfer): bool
     {
-        return $quoteTransfer->getPaymentOrFail()->getPaymentSelection() !== ComputopConfig::PAYMENT_METHOD_CREDIT_CARD;
+        $paymentTransfer = $quoteTransfer->getPayment();
+
+        return $paymentTransfer && $paymentTransfer->getPaymentSelection() === ComputopConfig::PAYMENT_METHOD_CREDIT_CARD;
     }
 
     /**
