@@ -266,6 +266,9 @@ interface ComputopFacadeInterface
      * - Requires PaymentTransfer::computopPayuCeeSingle to be set.
      * - Requires ComputopPayuCeeSingleInitResponseTransfer::payuCeeSingleInitResponse to be set.
      * - Requires ComputopPayuCeeSingleInitResponseTransfer::header to be set.
+     * - Requires ComputopApiResponseHeaderTransfer::transId to be set.
+     * - Requires ComputopApiResponseHeaderTransfer::payId to be set.
+     * - Requires ComputopApiResponseHeaderTransfer::xId to be set.
      * - Saves PayU CEE Single init response to the database.
      *
      * @api

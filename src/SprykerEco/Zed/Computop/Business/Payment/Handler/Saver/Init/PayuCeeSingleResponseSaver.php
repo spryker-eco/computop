@@ -96,9 +96,9 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
         ComputopPayuCeeSingleInitResponseTransfer $computopPayuCeeSingleInitResponseTransfer
     ): void {
-        $this->savePaymentComputopEntity($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer->getHeaderOrFail());
+        $this->savePaymentComputopEntity($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer->getHeader());
         $this->savePaymentComputopDetailEntity($computopPaymentComputopTransfer, $computopPayuCeeSingleInitResponseTransfer);
-        $paymentStatus = $this->getOrderItemPaymentStatusFromResponseHeader($computopPayuCeeSingleInitResponseTransfer->getHeaderOrFail());
+        $paymentStatus = $this->getOrderItemPaymentStatusFromResponseHeader($computopPayuCeeSingleInitResponseTransfer->getHeader());
         if ($paymentStatus) {
             $this->savePaymentComputopOrderItemsEntities($computopPaymentComputopTransfer, $paymentStatus);
         }
