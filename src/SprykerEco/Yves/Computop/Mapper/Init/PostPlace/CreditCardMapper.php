@@ -281,6 +281,6 @@ class CreditCardMapper extends AbstractMapper
         $salutationMap = $this->config->getSalutationMap();
         $salutation = trim(str_replace('.', '', $salutation));
 
-        return $salutationMap[$salutation] ?? $this->config->getSalutationDefault();
+        return $salutationMap[$salutation] ?? $this->config->getDefaultSalutation();
     }
 }

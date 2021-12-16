@@ -302,7 +302,7 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
      *
      * @return string
      */
-    public function getSalutationDefault(): string
+    public function getDefaultSalutation(): string
     {
         return static::SALUTATION_DEFAULT;
     }

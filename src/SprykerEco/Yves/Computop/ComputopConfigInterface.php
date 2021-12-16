@@ -139,5 +139,5 @@ interface ComputopConfigInterface
     /**
      * @return string
      */
-    public function getSalutationDefault(): string;
+    public function getDefaultSalutation(): string;
 }
