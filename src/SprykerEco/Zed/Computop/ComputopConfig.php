@@ -263,7 +263,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getBeforeInitStatuses(): array
+    public function getBeforeInitStatuses()
     {
         return [
             $this->getOmsStatusNew(),
@@ -275,7 +275,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getBeforeAuthorizeStatuses(): array
+    public function getBeforeAuthorizeStatuses()
     {
         return [
             $this->getOmsStatusNew(),
@@ -290,14 +290,14 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getBeforeCaptureStatuses(): array
+    public function getBeforeCaptureStatuses()
     {
-        $statusesBeforeAuthorize = $this->getBeforeAuthorizeStatuses();
-        $statusesBeforeAuthorize[] = $this->getOmsStatusAuthorized();
-        $statusesBeforeAuthorize[] = $this->getOmsStatusConfirmed();
-        $statusesBeforeAuthorize[] = $this->getOmsStatusCancelled();
+        $statusesBeforeCapture = $this->getBeforeAuthorizeStatuses();
+        $statusesBeforeCapture[] = $this->getOmsStatusAuthorized();
+        $statusesBeforeCapture[] = $this->getOmsStatusConfirmed();
+        $statusesBeforeCapture[] = $this->getOmsStatusCancelled();
 
-        return $statusesBeforeAuthorize;
+        return $statusesBeforeCapture;
     }
 
     /**
@@ -305,12 +305,12 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getBeforeRefundStatuses(): array
+    public function getBeforeRefundStatuses()
     {
-        $statusesBeforeCaptured = $this->getBeforeCaptureStatuses();
-        $statusesBeforeCaptured[] = $this->getOmsStatusCaptured();
+        $statusesBeforeRefund = $this->getBeforeCaptureStatuses();
+        $statusesBeforeRefund[] = $this->getOmsStatusCaptured();
 
-        return $statusesBeforeCaptured;
+        return $statusesBeforeRefund;
     }
 
     /**
@@ -549,7 +549,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @api
      *
-     * @return array<string, array<array-key, string>>
+     * @return array<string, array<int, string>>
      */
     public function getComputopPaymentMethodCurrencyFilterMap(): array
     {
