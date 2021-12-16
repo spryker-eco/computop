@@ -177,7 +177,7 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param \ArrayObject $orderItemTransfers
+     * @param \ArrayObject<\Generated\Shared\Transfer\ItemTransfer> $orderItemTransfers
      * @param int $idPayment
      *
      * @return void
