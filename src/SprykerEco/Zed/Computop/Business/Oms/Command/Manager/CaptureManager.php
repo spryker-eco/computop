@@ -23,9 +23,7 @@ class CaptureManager extends AbstractManager
             ->queryContainer
             ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
             ->useStateQuery()
-            ->filterByName_In(
-                (array)$this->config->getBeforeCaptureStatuses(),
-            )
+            ->filterByName_In($this->config->getBeforeCaptureStatuses())
             ->endUse()
             ->find();
     }
