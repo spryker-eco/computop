@@ -22,8 +22,7 @@ class ComputopPayNowPaymentHandler extends AbstractPostPlacePaymentHandler
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPaymentOrFail()->getComputopPayNow() === null) {
-            $computopTransfer = new ComputopPayNowPaymentTransfer();
-            $quoteTransfer->getPaymentOrFail()->setComputopPayNow($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopPayNow(new ComputopPayNowPaymentTransfer());
         }
 
         $quoteTransfer->getPaymentOrFail()->getComputopPayNowOrFail()->setPayNowInitResponse(

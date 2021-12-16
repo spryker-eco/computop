@@ -22,8 +22,7 @@ class ComputopPayPalExpressPaymentHandler extends AbstractPostPlacePaymentHandle
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() === null) {
-            $computopTransfer = new ComputopPayPalExpressPaymentTransfer();
-            $quoteTransfer->getPaymentOrFail()->setComputopPayPalExpress($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopPayPalExpress(new ComputopPayPalExpressPaymentTransfer());
         }
 
         $quoteTransfer->getPaymentOrFail()->getComputopPayPalExpressOrFail()->setPayPalExpressInitResponse(

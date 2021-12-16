@@ -22,8 +22,7 @@ class ComputopIdealPaymentHandler extends AbstractPostPlacePaymentHandler
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPaymentOrFail()->getComputopIdeal() === null) {
-            $computopTransfer = new ComputopIdealPaymentTransfer();
-            $quoteTransfer->getPaymentOrFail()->setComputopIdeal($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopIdeal(new ComputopIdealPaymentTransfer());
         }
 
         $quoteTransfer->getPaymentOrFail()->getComputopIdealOrFail()->setIdealInitResponse(

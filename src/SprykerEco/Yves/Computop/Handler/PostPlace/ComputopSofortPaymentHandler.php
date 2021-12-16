@@ -22,8 +22,7 @@ class ComputopSofortPaymentHandler extends AbstractPostPlacePaymentHandler
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPaymentOrFail()->getComputopSofort() === null) {
-            $computopTransfer = new ComputopSofortPaymentTransfer();
-            $quoteTransfer->getPaymentOrFail()->setComputopSofort($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopSofort(new ComputopSofortPaymentTransfer());
         }
 
         $quoteTransfer->getPaymentOrFail()->getComputopSofort()->setSofortInitResponse(

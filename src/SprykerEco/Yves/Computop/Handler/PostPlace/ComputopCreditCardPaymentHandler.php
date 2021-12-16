@@ -27,8 +27,7 @@ class ComputopCreditCardPaymentHandler extends AbstractPostPlacePaymentHandler
         }
 
         if ($quoteTransfer->getPaymentOrFail()->getComputopCreditCard() === null) {
-            $computopTransfer = new ComputopCreditCardPaymentTransfer();
-            $quoteTransfer->getPaymentOrFail()->setComputopCreditCard($computopTransfer);
+            $quoteTransfer->getPaymentOrFail()->setComputopCreditCard(new ComputopCreditCardPaymentTransfer());
         }
 
         $quoteTransfer->getPaymentOrFail()->getComputopCreditCardOrFail()->setCreditCardInitResponse(
