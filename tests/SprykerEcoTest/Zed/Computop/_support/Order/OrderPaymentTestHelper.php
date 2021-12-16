@@ -41,7 +41,7 @@ class OrderPaymentTestHelper extends Test
     public const LEN_VALUE = 165;
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject | \SprykerEco\Zed\Computop\Business\ComputopBusinessFactory
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerEco\Zed\Computop\Business\ComputopBusinessFactory
      */
     public function createFactory()
     {
