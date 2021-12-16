@@ -19,7 +19,7 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopDirectDebit()->getDirectDebitInitResponse();
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopDirectDebitOrFail()->getDirectDebitInitResponseOrFail();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(

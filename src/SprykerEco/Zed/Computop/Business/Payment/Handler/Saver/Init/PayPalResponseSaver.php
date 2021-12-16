@@ -19,7 +19,7 @@ class PayPalResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopPayPal()->getPayPalInitResponse();
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopPayPalOrFail()->getPayPalInitResponseOrFail();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(

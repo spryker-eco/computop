@@ -19,7 +19,7 @@ class IdealResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopIdeal()->getIdealInitResponse();
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopIdealOrFail()->getIdealInitResponseOrFail();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(

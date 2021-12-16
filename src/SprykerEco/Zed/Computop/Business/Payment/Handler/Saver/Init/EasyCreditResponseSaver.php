@@ -19,7 +19,7 @@ class EasyCreditResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse();
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->getEasyCreditInitResponseOrFail();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(

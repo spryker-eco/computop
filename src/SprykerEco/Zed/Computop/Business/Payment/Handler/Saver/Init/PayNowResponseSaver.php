@@ -19,7 +19,7 @@ class PayNowResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopPayNow()->getPayNowInitResponse();
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopPayNowOrFail()->getPayNowInitResponseOrFail();
         $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
         if ($responseTransfer->getHeader()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
