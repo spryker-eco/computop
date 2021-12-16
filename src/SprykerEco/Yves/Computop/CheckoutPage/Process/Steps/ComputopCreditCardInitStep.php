@@ -42,14 +42,14 @@ class ComputopCreditCardInitStep extends AbstractBaseStep
      */
     public function getTemplateVariables(AbstractTransfer $quoteTransfer): array
     {
-        $computopCreditCard = $quoteTransfer->getPaymentOrFail()->getComputopCreditCardOrFail();
+        $computopCreditCardPaymentTransfer = $quoteTransfer->getPaymentOrFail()->getComputopCreditCardOrFail();
 
         return [
-            'formAction' => $computopCreditCard->getUrl(),
-            'encryptedData' => $computopCreditCard->getData(),
-            'encryptedDataLength' => $computopCreditCard->getLen(),
-            'merchantId' => $computopCreditCard->getMerchantId(),
-            'urlBack' => $computopCreditCard->getUrlBack(),
+            'formAction' => $computopCreditCardPaymentTransfer->getUrl(),
+            'encryptedData' => $computopCreditCardPaymentTransfer->getData(),
+            'encryptedDataLength' => $computopCreditCardPaymentTransfer->getLen(),
+            'merchantId' => $computopCreditCardPaymentTransfer->getMerchantId(),
+            'urlBack' => $computopCreditCardPaymentTransfer->getUrlBack(),
         ];
     }
 }
