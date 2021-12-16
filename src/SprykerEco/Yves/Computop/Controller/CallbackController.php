@@ -105,10 +105,10 @@ class CallbackController extends AbstractController
             ->handle($quoteTransfer, $request->query->all());
 
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
-        $statusResponse = $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->getEasyCreditStatusResponseOrFail();
+        $computopApiEasyCreditStatusResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->getEasyCreditStatusResponseOrFail();
 
-        if (!$statusResponse->getHeaderOrFail()->getIsSuccess()) {
-            $this->addErrorMessage($statusResponse->getErrorTextOrFail());
+        if (!$computopApiEasyCreditStatusResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
+            $this->addErrorMessage($computopApiEasyCreditStatusResponseTransfer->getErrorTextOrFail());
 
             return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
         }
