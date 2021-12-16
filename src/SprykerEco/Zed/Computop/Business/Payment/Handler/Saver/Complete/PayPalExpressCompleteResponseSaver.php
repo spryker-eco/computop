@@ -65,7 +65,7 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         $computopPaymentTransfer = $this
             ->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $payPalExpressCompleteResponseTransfer->getHeaderOrFail()->getTransIdOrFail(),
+                $payPalExpressCompleteResponseTransfer->getHeaderOrFail()->getTransId(),
             );
 
         if ($computopPaymentTransfer === null) {
@@ -111,8 +111,8 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
     ): void {
         $computopApiResponseHeaderTransfer = $computopApiPayPalExpressCompleteResponseTransfer->getHeaderOrFail();
 
-        $computopPaymentComputopTransfer->setPayId($computopApiResponseHeaderTransfer->getPayIdOrFail())
-            ->setXId($computopApiResponseHeaderTransfer->getXIdOrFail());
+        $computopPaymentComputopTransfer->setPayId($computopApiResponseHeaderTransfer->getPayId())
+            ->setXId($computopApiResponseHeaderTransfer->getXId());
 
         $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }

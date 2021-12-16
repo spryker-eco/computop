@@ -190,6 +190,7 @@ interface ComputopFacadeInterface
      * - Requires QuoteTransfer::payment to be set.
      * - Requires PaymentTransfer::computopPayPalExpress to be set.
      * - Requires ComputopPayPalExpressTransfer::payPalExpressInitResponse to be set.
+     * - Requires ComputopPayuCeeSingleInitResponseTransfer::header to be set.
      * - Saves PayPal Express Init Response to DB.
      *
      * @api
