@@ -36,14 +36,6 @@ class EasyCreditSubForm extends AbstractSubForm
     }
 
     /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return ComputopConfig::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
-    }
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void

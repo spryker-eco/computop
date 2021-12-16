@@ -46,12 +46,4 @@ class PayuCeeSingleSubForm extends AbstractSubForm
             'data_class' => ComputopPayuCeeSinglePaymentTransfer::class,
         ])->setRequired(static::OPTIONS_FIELD_NAME);
     }
-
-    /**
-     * @return string
-     */
-    protected function getTemplatePath(): string
-    {
-        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
-    }
 }

@@ -31,6 +31,14 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     }
 
     /**
+     * @return string
+     */
+    public function getTemplatePath(): string
+    {
+        return sprintf("%s/%s", ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
+    }
+
+    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
