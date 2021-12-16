@@ -30,6 +30,7 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
      */
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
+        $orderEntity->getItems()->setData($orderItems);
         $orderTransfer = $this->getOrderTransfer($orderEntity);
 
         return $this
