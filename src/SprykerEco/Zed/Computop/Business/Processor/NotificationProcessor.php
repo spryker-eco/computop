@@ -116,19 +116,19 @@ class NotificationProcessor implements NotificationProcessorInterface
     ): bool {
         $orderItemsPaymentStatus = $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer);
 
-        $paymentComputopOrderItemsCollection = $this->computopRepository
+        $computopPaymentComputopOrderItemCollectionTransfer = $this->computopRepository
             ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
 
-        if (!$paymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems()->count()) {
+        if (!$computopPaymentComputopOrderItemCollectionTransfer->getComputopPaymentComputopOrderItems()->count()) {
             return false;
         }
 
-        foreach ($paymentComputopOrderItemsCollection->getComputopPaymentComputopOrderItems() as $paymentComputopOrderItem) {
-            $paymentComputopOrderItem
+        foreach ($computopPaymentComputopOrderItemCollectionTransfer->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItemTransfer) {
+            $computopPaymentComputopOrderItemTransfer
                 ->setStatus($orderItemsPaymentStatus)
                 ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess());
 
-            $this->computopEntityManager->updateComputopPaymentComputopOrderItem($paymentComputopOrderItem);
+            $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItemTransfer);
         }
 
         return true;
