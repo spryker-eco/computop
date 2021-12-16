@@ -35,7 +35,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
      */
     public function getTemplatePath(): string
     {
-        return sprintf("%s/%s", ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
+        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
     }
 
     /**

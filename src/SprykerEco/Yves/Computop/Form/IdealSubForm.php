@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Form;
 
 use Generated\Shared\Transfer\ComputopIdealPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IdealSubForm extends AbstractSubForm

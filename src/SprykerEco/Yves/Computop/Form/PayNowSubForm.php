@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Form;
 
 use Generated\Shared\Transfer\ComputopPayNowPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayNowSubForm extends AbstractSubForm
