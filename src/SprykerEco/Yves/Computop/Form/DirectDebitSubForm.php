@@ -45,4 +45,12 @@ class DirectDebitSubForm extends AbstractSubForm
             'data_class' => ComputopDirectDebitPaymentTransfer::class,
         ])->setRequired(static::OPTIONS_FIELD_NAME);
     }
+
+    /**
+     * @return string
+     */
+    protected function getPaymentMethod(): string
+    {
+        return static::PAYMENT_METHOD;
+    }
 }

@@ -23,6 +23,16 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     public const FIELD_URL = 'url';
 
     /**
+     * @var string
+     */
+    protected const TEMPLATE_PATH_PATTERN = '%s/%s';
+
+    /**
+     * @return string
+     */
+    abstract protected function getPaymentMethod(): string;
+
+    /**
      * @return string
      */
     public function getProviderName(): string
@@ -35,7 +45,7 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
      */
     public function getTemplatePath(): string
     {
-        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
+        return sprintf(static::TEMPLATE_PATH_PATTERN, $this->getProviderName(), $this->getPaymentMethod());
     }
 
     /**
