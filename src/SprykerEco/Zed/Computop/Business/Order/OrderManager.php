@@ -25,7 +25,7 @@ class OrderManager implements OrderManagerInterface
     use TransactionTrait;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface[]
+     * @var array<\SprykerEco\Zed\Computop\Business\Order\Mapper\MapperInterface>
      */
     protected $mappers;
 
@@ -107,17 +107,17 @@ class OrderManager implements OrderManagerInterface
 
         $paymentEntity = $this->savePaymentForOrder(
             $quoteTransfer->getPayment(),
-            $saveOrderTransfer
+            $saveOrderTransfer,
         );
 
         $this->savePaymentDetailForOrder(
             $quoteTransfer->getPayment(),
-            $paymentEntity
+            $paymentEntity,
         );
 
         $this->savePaymentForOrderItems(
             $saveOrderTransfer->getOrderItems(),
-            $paymentEntity->getIdPaymentComputop()
+            $paymentEntity->getIdPaymentComputop(),
         );
     }
 
@@ -178,7 +178,7 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
+     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $orderItemTransfers
      * @param int $idPayment
      *
      * @return void

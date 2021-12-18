@@ -42,11 +42,11 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
         $service->setFactory($this->orderHelper->createFactory());
         $checkoutResponse = $service->postSaveHookExecute(
             $this->createQuoteTransfer(),
-            $this->createCheckoutResponse()
+            $this->createCheckoutResponse(),
         );
 
         $this->assertTrue($checkoutResponse->getIsExternalRedirect());
-        $this->assertSame(self::EXPECTED_REDIRECT_URL, $checkoutResponse->getRedirectUrl());
+        $this->assertSame(static::EXPECTED_REDIRECT_URL, $checkoutResponse->getRedirectUrl());
     }
 
     /**
@@ -61,17 +61,17 @@ class PostSaveHookExecuteTest extends AbstractSetUpTest
 
         $checkoutResponse = $service->postSaveHookExecute(
             $quoteTransfer,
-            $this->createCheckoutResponse()
+            $this->createCheckoutResponse(),
         );
 
         $this->assertInstanceOf(ComputopInitPaymentTransfer::class, $checkoutResponse->getComputopInitPayment());
         $this->assertSame(
             OrderPaymentTestHelper::DATA_VALUE,
-            $checkoutResponse->getComputopInitPayment()->getData()
+            $checkoutResponse->getComputopInitPayment()->getData(),
         );
         $this->assertSame(
             OrderPaymentTestHelper::LEN_VALUE,
-            $checkoutResponse->getComputopInitPayment()->getLen()
+            $checkoutResponse->getComputopInitPayment()->getLen(),
         );
     }
 

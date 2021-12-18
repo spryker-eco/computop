@@ -26,7 +26,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
     protected $config;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface[]
+     * @var array<\SprykerEco\Zed\Computop\Business\Hook\Mapper\Init\InitMapperInterface>
      */
     protected $methodMappers = [];
 
@@ -73,7 +73,7 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
             $checkoutResponseTransfer->setComputopInitPayment(
                 (new ComputopInitPaymentTransfer())
                     ->setData($computopPaymentTransfer->getData())
-                    ->setLen($computopPaymentTransfer->getLen())
+                    ->setLen($computopPaymentTransfer->getLen()),
             );
 
             return $checkoutResponseTransfer;

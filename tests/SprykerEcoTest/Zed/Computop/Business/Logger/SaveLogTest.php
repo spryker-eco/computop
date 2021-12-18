@@ -71,18 +71,18 @@ class SaveLogTest extends AbstractSetUpTest
     {
         $service = new ComputopFacade();
         $service->setFactory($this->createFactory());
-        $service->logResponseHeader($this->createHeader(), self::METHOD_VALUE);
+        $service->logResponseHeader($this->createHeader(), static::METHOD_VALUE);
 
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopApiLog $logSavedData */
         $logSavedData = $this->getLogSavedData();
 
-        $this->assertSame(self::TRANS_ID_VALUE, $logSavedData->getTransId());
-        $this->assertSame(self::PAY_ID_VALUE, $logSavedData->getPayId());
-        $this->assertSame(self::M_ID_VALUE, $logSavedData->getMId());
-        $this->assertSame(self::X_ID_VALUE, $logSavedData->getXId());
-        $this->assertEquals(self::CODE_VALUE, $logSavedData->getCode());
-        $this->assertSame(self::DESCRIPTION_VALUE, $logSavedData->getDescription());
-        $this->assertSame(self::STATUS_VALUE, $logSavedData->getStatus());
+        $this->assertSame(static::TRANS_ID_VALUE, $logSavedData->getTransId());
+        $this->assertSame(static::PAY_ID_VALUE, $logSavedData->getPayId());
+        $this->assertSame(static::M_ID_VALUE, $logSavedData->getMId());
+        $this->assertSame(static::X_ID_VALUE, $logSavedData->getXId());
+        $this->assertEquals(static::CODE_VALUE, $logSavedData->getCode());
+        $this->assertSame(static::DESCRIPTION_VALUE, $logSavedData->getDescription());
+        $this->assertSame(static::STATUS_VALUE, $logSavedData->getStatus());
     }
 
     /**
@@ -92,13 +92,13 @@ class SaveLogTest extends AbstractSetUpTest
     {
         $header = new ComputopApiResponseHeaderTransfer();
         $header
-            ->setTransId(self::TRANS_ID_VALUE)
-            ->setPayId(self::PAY_ID_VALUE)
-            ->setMId(self::M_ID_VALUE)
-            ->setXId(self::X_ID_VALUE)
-            ->setCode(self::CODE_VALUE)
-            ->setDescription(self::DESCRIPTION_VALUE)
-            ->setStatus(self::STATUS_VALUE);
+            ->setTransId(static::TRANS_ID_VALUE)
+            ->setPayId(static::PAY_ID_VALUE)
+            ->setMId(static::M_ID_VALUE)
+            ->setXId(static::X_ID_VALUE)
+            ->setCode(static::CODE_VALUE)
+            ->setDescription(static::DESCRIPTION_VALUE)
+            ->setStatus(static::STATUS_VALUE);
 
         return $header;
     }
@@ -122,7 +122,7 @@ class SaveLogTest extends AbstractSetUpTest
         $builder->setMethods(
             [
                 'getQueryContainer',
-            ]
+            ],
         );
 
         $stub = $builder->getMock();

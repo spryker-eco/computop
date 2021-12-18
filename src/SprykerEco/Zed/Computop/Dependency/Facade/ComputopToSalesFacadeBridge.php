@@ -32,7 +32,7 @@ class ComputopToSalesFacadeBridge implements ComputopToSalesFacadeInterface
         return $this
             ->salesFacade
             ->getOrderByIdSalesOrder(
-                $idSalesOrder
+                $idSalesOrder,
             );
     }
 }

@@ -38,13 +38,13 @@ class InitSofortMapper extends AbstractMapper
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPass()
+            $this->config->getBlowfishPass(),
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
@@ -65,6 +65,7 @@ class InitSofortMapper extends AbstractMapper
     protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer): array
     {
         /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer */
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopSofortPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopSofortPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopSofortPaymentTransfer->getCurrency();

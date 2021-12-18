@@ -32,13 +32,13 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
+            $this->config->getBlowfishPassword(),
         );
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
@@ -58,18 +58,18 @@ class CreditCardMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopCreditCardPaymentTransfer();
 
         $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD)
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_CREDIT_CARD),
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType($this->config->getCreditCardTxType());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::CREDIT_CARD_SUCCESS, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::CREDIT_CARD_SUCCESS, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setUrlBack(
-            $this->router->generate($this->config->getCallbackFailureRedirectPath(), [], Router::ABSOLUTE_URL)
+            $this->router->generate($this->config->getCallbackFailureRedirectPath(), [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()),
         );
 
         $computopPaymentTransfer = $this->expandCreditCardPaymentWithShipToCustomer($computopPaymentTransfer, $quoteTransfer);
@@ -88,6 +88,7 @@ class CreditCardMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer): array
     {
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopCreditCardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopCreditCardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopCreditCardPaymentTransfer->getCurrency();
@@ -105,19 +106,19 @@ class CreditCardMapper extends AbstractMapper
 
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getBillToCustomer()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getBillToCustomer()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getShipToCustomer()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getShipToCustomer()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getBillingAddress()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getBillingAddress()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getShippingAddress()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getShippingAddress()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getCredentialOnFile()->toArray(true, true)
+            $computopCreditCardPaymentTransfer->getCredentialOnFile()->toArray(true, true),
         );
 
         return $dataSubArray;
@@ -175,7 +176,7 @@ class CreditCardMapper extends AbstractMapper
     ): ComputopCreditCardPaymentTransfer {
         if ($quoteTransfer->getBillingSameAsShipping()) {
             $computopCreditCardPaymentTransfer->setBillToCustomer(
-                $computopCreditCardPaymentTransfer->getShipToCustomer()
+                $computopCreditCardPaymentTransfer->getShipToCustomer(),
             );
 
             return $computopCreditCardPaymentTransfer;
@@ -220,7 +221,7 @@ class CreditCardMapper extends AbstractMapper
     ): ComputopCreditCardPaymentTransfer {
         if ($quoteTransfer->getBillingSameAsShipping()) {
             $computopCreditCardPaymentTransfer->setBillingAddress(
-                $computopCreditCardPaymentTransfer->getShippingAddress()
+                $computopCreditCardPaymentTransfer->getShippingAddress(),
             );
 
             return $computopCreditCardPaymentTransfer;
@@ -242,7 +243,7 @@ class CreditCardMapper extends AbstractMapper
         $computopCredentialOnFileTransfer = (new ComputopCredentialOnFileTransfer())
             ->setType(
                 (new ComputopCredentialOnFileTypeTransfer())
-                    ->setUnscheduled(ComputopApiConfig::UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION)
+                    ->setUnscheduled(ComputopApiConfig::UNSCHEDULED_CUSTOMER_INITIATED_TRANSACTION),
             )
             ->setInitialPayment(true);
 

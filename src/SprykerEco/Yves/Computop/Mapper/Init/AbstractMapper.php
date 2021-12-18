@@ -124,10 +124,10 @@ abstract class AbstractMapper implements MapperInterface
         $computopPaymentTransfer->setClientIp($this->getClientIp());
         $computopPaymentTransfer->setReqId($this->computopApiService->generateReqIdFromQuoteTransfer($quoteTransfer));
         $computopPaymentTransfer->setUrlFailure(
-            $this->router->generate(ComputopRouteProviderPlugin::FAILURE_PATH_NAME, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::FAILURE_PATH_NAME, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setUrlNotify(
-            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::NOTIFY_PATH_NAME, [], Router::ABSOLUTE_URL),
         );
 
         if (!$computopPaymentTransfer instanceof ComputopPayPalExpressPaymentTransfer) {
@@ -203,7 +203,7 @@ abstract class AbstractMapper implements MapperInterface
             ComputopApiConfig::URL_BACK => $this->router->generate(
                 $this->config->getCallbackFailureRedirectPath(),
                 [],
-                Router::ABSOLUTE_URL
+                Router::ABSOLUTE_URL,
             ),
         ];
     }

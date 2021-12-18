@@ -125,7 +125,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
                 'getQueryContainer',
                 'getFlashMessengerFacade',
                 'getComputopApiFacade',
-            ]
+            ],
         );
 
         $stub = $builder->getMock();
@@ -152,7 +152,7 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
      * @param string $data
      * @param int $length
      *
-     * @return Psr7\Stream
+     * @return \GuzzleHttp\Psr7\Stream
      */
     protected function getStream($data, $length)
     {
@@ -176,10 +176,10 @@ abstract class AbstractPaymentTest extends AbstractSetUpTest
         $orderTransfer->addPayment($this->omsHelper->createPaymentTransfer());
 
         $totals = new TotalsTransfer();
-        $totals->setGrandTotal(self::GRAND_TOTAL);
-        $totals->setRefundTotal(self::REFUND_TOTAL);
-        $totals->setSubtotal(self::SUB_TOTAL);
-        $totals->setDiscountTotal(self::DISCOUNT_TOTAL);
+        $totals->setGrandTotal(static::GRAND_TOTAL);
+        $totals->setRefundTotal(static::REFUND_TOTAL);
+        $totals->setSubtotal(static::SUB_TOTAL);
+        $totals->setDiscountTotal(static::DISCOUNT_TOTAL);
         $totals->setHash('');
         $orderTransfer->setTotals($totals);
         $orderTransfer->setItems(new ArrayObject($this->omsHelper->createOrderItems()));

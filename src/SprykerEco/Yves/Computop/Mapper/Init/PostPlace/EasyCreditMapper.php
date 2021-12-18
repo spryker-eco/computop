@@ -30,13 +30,13 @@ class EasyCreditMapper extends AbstractMapper
         $computopPaymentTransfer = $this->mapAddressDataToEasyCreditPayment($addressData, $computopPaymentTransfer);
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
+            $this->config->getBlowfishPassword(),
         );
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
@@ -47,9 +47,9 @@ class EasyCreditMapper extends AbstractMapper
                 $this->getQueryParameters(
                     $computopPaymentTransfer->getMerchantId(),
                     $decryptedValues[ComputopApiConfig::DATA],
-                    $decryptedValues[ComputopApiConfig::LENGTH]
-                )
-            )
+                    $decryptedValues[ComputopApiConfig::LENGTH],
+                ),
+            ),
         );
 
         return $computopPaymentTransfer;
@@ -66,7 +66,7 @@ class EasyCreditMapper extends AbstractMapper
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::EASY_CREDIT_SUCCESS, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::EASY_CREDIT_SUCCESS, [], Router::ABSOLUTE_URL),
         );
 
         return $computopPaymentTransfer;
@@ -79,6 +79,7 @@ class EasyCreditMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopEasyCreditPaymentTransfer $cardPaymentTransfer): array
     {
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
@@ -127,6 +128,7 @@ class EasyCreditMapper extends AbstractMapper
             ? $quoteTransfer->getBillingAddress()
             : $this->getShippingAddressFromQuote($quoteTransfer);
 
+        $addressData = [];
         $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_CITY] = $addressTransfer->getCity();
         $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET] = $addressTransfer->getAddress1();
         $addressData[ComputopEasyCreditPaymentTransfer::SHIPPING_STREET_NUMBER] = $addressTransfer->getAddress2();

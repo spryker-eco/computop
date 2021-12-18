@@ -35,13 +35,13 @@ class PayPalMapper extends AbstractMapper
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $computopPaymentTransfer = $this->addOrderDescriptions(
             $computopPaymentTransfer,
-            $quoteTransfer->getItems()
+            $quoteTransfer->getItems(),
         );
 
         $computopPaymentTransfer->setTaxTotal($quoteTransfer->getTotals()->getTaxTotal()->getAmount());
@@ -52,7 +52,7 @@ class PayPalMapper extends AbstractMapper
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
+            $this->config->getBlowfishPassword(),
         );
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
@@ -63,9 +63,9 @@ class PayPalMapper extends AbstractMapper
                 $this->getQueryParameters(
                     $computopPaymentTransfer->getMerchantId(),
                     $decryptedValues[ComputopApiConfig::DATA],
-                    $decryptedValues[ComputopApiConfig::LENGTH]
-                )
-            )
+                    $decryptedValues[ComputopApiConfig::LENGTH],
+                ),
+            ),
         );
 
         return $computopPaymentTransfer;
@@ -93,15 +93,15 @@ class PayPalMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopPayPalPaymentTransfer();
 
         $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL)
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_PAY_PAL),
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setTxType($this->config->getPayPalTxType());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::PAY_PAL_SUCCESS, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::PAY_PAL_SUCCESS, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()),
         );
 
         $this->mapAddressFromQuoteToComputopPayPalPayment($quoteTransfer, $computopPaymentTransfer);
@@ -148,6 +148,7 @@ class PayPalMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopPayPalPaymentTransfer $computopPayPalPaymentTransfer): array
     {
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPayPalPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPayPalPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPayPalPaymentTransfer->getCurrency();
@@ -212,7 +213,7 @@ class PayPalMapper extends AbstractMapper
             $itemTransfer->getSumPrice(),
             $itemTransfer->getSku(),
             $itemTransfer->getQuantity(),
-            $itemTransfer->getUnitTaxAmount()
+            $itemTransfer->getUnitTaxAmount(),
         );
     }
 
@@ -230,7 +231,7 @@ class PayPalMapper extends AbstractMapper
 
     /**
      * @param \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer $computopPaymentTransfer
-     * @param \ArrayObject|\Generated\Shared\Transfer\ItemTransfer[] $itemTransfers
+     * @param \Generated\Shared\Transfer\ItemTransfer[]|\ArrayObject $itemTransfers
      *
      * @return \Generated\Shared\Transfer\ComputopPayPalPaymentTransfer
      */

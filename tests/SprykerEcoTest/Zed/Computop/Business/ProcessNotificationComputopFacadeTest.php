@@ -59,7 +59,7 @@ class ProcessNotificationComputopFacadeTest extends Unit
         foreach ($paymentComputopOrderItemEntities as $paymentComputopOrderItemEntity) {
             $this->assertTrue(
                 $paymentComputopOrderItemEntity->getIsPaymentConfirmed(),
-                'Push notification updated computop order item `is_payment_confirmed` field.'
+                'Push notification updated computop order item `is_payment_confirmed` field.',
             );
         }
     }

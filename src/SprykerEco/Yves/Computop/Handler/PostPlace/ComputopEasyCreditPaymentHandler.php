@@ -52,7 +52,7 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
 
         $quoteTransfer->getPayment()->getComputopEasyCredit()->fromArray(
             $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse()->getHeader()->toArray(),
-            true
+            true,
         );
 
         $quoteTransfer = $this->computopClient->easyCreditStatusApiCall($quoteTransfer);
@@ -75,7 +75,7 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
 
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditInitResponse(
-            $responseTransfer
+            $responseTransfer,
         );
 
         return $quoteTransfer;

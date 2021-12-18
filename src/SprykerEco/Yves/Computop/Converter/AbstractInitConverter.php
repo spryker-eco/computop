@@ -61,7 +61,7 @@ abstract class AbstractInitConverter implements ConverterInterface
             ->computopApiService
             ->extractResponseHeader(
                 $decryptedArray,
-                ComputopConfig::INIT_METHOD
+                ComputopConfig::INIT_METHOD,
             );
 
         return $this->createResponseTransfer($decryptedArray, $responseHeaderTransfer);

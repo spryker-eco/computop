@@ -28,7 +28,7 @@ class ComputopDirectDebitPaymentHandler extends AbstractPostPlacePaymentHandler
 
         /** @var \Generated\Shared\Transfer\ComputopDirectDebitInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopDirectDebit()->setDirectDebitInitResponse(
-            $responseTransfer
+            $responseTransfer,
         );
 
         return $quoteTransfer;

@@ -28,7 +28,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     public function getSalesFacade(): ComputopToSalesFacadeInterface
     {
         return $this->getProvidedDependency(
-            ComputopDependencyProvider::FACADE_SALES
+            ComputopDependencyProvider::FACADE_SALES,
         );
     }
 
@@ -38,7 +38,7 @@ class ComputopCommunicationFactory extends AbstractCommunicationFactory
     public function getCalculationFacade(): ComputopToCalculationFacadeInterface
     {
         return $this->getProvidedDependency(
-            ComputopDependencyProvider::FACADE_CALCULATION
+            ComputopDependencyProvider::FACADE_CALCULATION,
         );
     }
 

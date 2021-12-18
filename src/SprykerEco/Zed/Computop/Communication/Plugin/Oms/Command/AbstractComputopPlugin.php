@@ -31,7 +31,7 @@ abstract class AbstractComputopPlugin extends AbstractPlugin
             ->getFactory()
             ->getSalesFacade()
             ->getOrderByIdSalesOrder(
-                $orderEntity->getIdSalesOrder()
+                $orderEntity->getIdSalesOrder(),
             );
 
         $orderTransfer = $this

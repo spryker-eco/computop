@@ -40,7 +40,7 @@ class PayNowSubForm extends AbstractSubForm
      */
     public function getTemplatePath(): string
     {
-        return ComputopConfig::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return ComputopConfig::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
@@ -52,6 +52,6 @@ class PayNowSubForm extends AbstractSubForm
     {
         $resolver->setDefaults([
             'data_class' => ComputopPayNowPaymentTransfer::class,
-        ])->setRequired(self::OPTIONS_FIELD_NAME);
+        ])->setRequired(static::OPTIONS_FIELD_NAME);
     }
 }
