@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface ComputopFacadeInterface
 {
