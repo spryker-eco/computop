@@ -64,7 +64,6 @@ class InitPaydirektMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $computopPaydirectPaymentTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer */
         $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaydirectPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaydirectPaymentTransfer->getAmount();

@@ -104,7 +104,6 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
             $quoteTransfer->getPayment()->setComputopPayPalExpress($computopTransfer);
         }
 
-        /** @var \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopPayPalExpress()->setPayPalExpressInitResponse(
             $responseTransfer,
         );

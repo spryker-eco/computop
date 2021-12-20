@@ -64,7 +64,6 @@ class InitIdealMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer */
         $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopIdealPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopIdealPaymentTransfer->getAmount();

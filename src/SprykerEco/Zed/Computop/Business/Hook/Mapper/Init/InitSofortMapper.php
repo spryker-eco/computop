@@ -64,7 +64,6 @@ class InitSofortMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $computopSofortPaymentTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\ComputopSofortPaymentTransfer $computopSofortPaymentTransfer */
         $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopSofortPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopSofortPaymentTransfer->getAmount();

@@ -25,7 +25,6 @@ class ComputopIdealPaymentHandler extends AbstractPostPlacePaymentHandler
             $computopTransfer = new ComputopIdealPaymentTransfer();
             $quoteTransfer->getPayment()->setComputopIdeal($computopTransfer);
         }
-        /** @var \Generated\Shared\Transfer\ComputopIdealInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopIdeal()->setIdealInitResponse(
             $responseTransfer,
         );

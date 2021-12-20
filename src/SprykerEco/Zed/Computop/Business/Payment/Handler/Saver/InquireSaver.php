@@ -31,8 +31,7 @@ class InquireSaver extends AbstractSaver
     {
         $this->getTransactionHandler()->handleTransaction(
             function () use ($responseTransfer, $orderTransfer): void {
-                /** @var \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer $responseTransfer */
-                $this->saveComputopDetails($responseTransfer, $orderTransfer);
+                        $this->saveComputopDetails($responseTransfer, $orderTransfer);
             },
         );
 
