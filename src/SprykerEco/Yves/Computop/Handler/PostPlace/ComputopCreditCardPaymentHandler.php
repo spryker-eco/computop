@@ -30,9 +30,8 @@ class ComputopCreditCardPaymentHandler extends AbstractPostPlacePaymentHandler
             $computopTransfer = new ComputopCreditCardPaymentTransfer();
             $quoteTransfer->getPayment()->setComputopCreditCard($computopTransfer);
         }
-        /** @var \Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopCreditCard()->setCreditCardInitResponse(
-            $responseTransfer
+            $responseTransfer,
         );
 
         return $quoteTransfer;

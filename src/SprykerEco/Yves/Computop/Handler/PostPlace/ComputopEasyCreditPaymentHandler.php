@@ -45,14 +45,13 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
     {
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
 
         $this->computopClient->logResponse($responseTransfer->getHeader());
 
         $quoteTransfer->getPayment()->getComputopEasyCredit()->fromArray(
             $quoteTransfer->getPayment()->getComputopEasyCredit()->getEasyCreditInitResponse()->getHeader()->toArray(),
-            true
+            true,
         );
 
         $quoteTransfer = $this->computopClient->easyCreditStatusApiCall($quoteTransfer);
@@ -73,9 +72,8 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
             $quoteTransfer->getPayment()->setComputopEasyCredit($computopTransfer);
         }
 
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditInitResponse(
-            $responseTransfer
+            $responseTransfer,
         );
 
         return $quoteTransfer;

@@ -38,13 +38,13 @@ class InitIdealMapper extends AbstractMapper
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPass()
+            $this->config->getBlowfishPass(),
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
@@ -64,7 +64,7 @@ class InitIdealMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $computopIdealPaymentTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopIdealPaymentTransfer */
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopIdealPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopIdealPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopIdealPaymentTransfer->getCurrency();

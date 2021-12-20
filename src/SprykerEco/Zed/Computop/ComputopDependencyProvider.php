@@ -19,6 +19,9 @@ use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToOmsFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToRefundFacadeBridge;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToSalesFacadeBridge;
 
+/**
+ * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
+ */
 class ComputopDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**

@@ -32,7 +32,7 @@ class CrifSaver extends AbstractSaver
         $this->getTransactionHandler()->handleTransaction(
             function () use ($responseTransfer): void {
                 $this->saveComputopDetails($responseTransfer);
-            }
+            },
         );
     }
 

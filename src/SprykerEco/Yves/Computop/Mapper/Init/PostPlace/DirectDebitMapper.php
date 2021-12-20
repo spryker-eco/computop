@@ -29,13 +29,13 @@ class DirectDebitMapper extends AbstractMapper
         $computopPaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPassword()
+            $this->config->getBlowfishPassword(),
         );
 
         $computopPaymentTransfer->setData($decryptedValues[ComputopApiConfig::DATA]);
@@ -46,9 +46,9 @@ class DirectDebitMapper extends AbstractMapper
                 $this->getQueryParameters(
                     $computopPaymentTransfer->getMerchantId(),
                     $decryptedValues[ComputopApiConfig::DATA],
-                    $decryptedValues[ComputopApiConfig::LENGTH]
-                )
-            )
+                    $decryptedValues[ComputopApiConfig::LENGTH],
+                ),
+            ),
         );
 
         return $computopPaymentTransfer;
@@ -64,15 +64,15 @@ class DirectDebitMapper extends AbstractMapper
         $computopPaymentTransfer = new ComputopDirectDebitPaymentTransfer();
 
         $computopPaymentTransfer->setCapture(
-            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_DIRECT_DEBIT)
+            $this->getCaptureType(ComputopSharedConfig::PAYMENT_METHOD_DIRECT_DEBIT),
         );
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setMandateId($computopPaymentTransfer->getTransId());
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::DIRECT_DEBIT_SUCCESS, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::DIRECT_DEBIT_SUCCESS, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()),
         );
 
         return $computopPaymentTransfer;
@@ -85,6 +85,7 @@ class DirectDebitMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopDirectDebitPaymentTransfer $computopDirectDebitPaymentTransfer): array
     {
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopDirectDebitPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopDirectDebitPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopDirectDebitPaymentTransfer->getCurrency();

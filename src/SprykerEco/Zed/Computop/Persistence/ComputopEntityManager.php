@@ -34,7 +34,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->findOneOrCreate();
 
         $paymentComputopNotificationEntity->fromArray(
-            $computopNotificationTransfer->modifiedToArray()
+            $computopNotificationTransfer->modifiedToArray(),
         );
         $paymentComputopNotificationEntity->save();
     }
@@ -93,7 +93,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->createComputopMapper()
             ->mapComputopPaymentComputopDetailTransferToPaymentComputopDetailEntity(
                 $computopPaymentComputopDetailTransfer,
-                $computopPaymentComputopDetailEntity
+                $computopPaymentComputopDetailEntity,
             );
 
         $computopPaymentComputopDetailEntity->save();
@@ -119,7 +119,7 @@ class ComputopEntityManager extends AbstractEntityManager implements ComputopEnt
             ->createComputopMapper()
             ->mapComputopPaymentTransferToComputopPaymentEntity(
                 $computopPaymentComputopTransfer,
-                $computopPaymentComputopEntity
+                $computopPaymentComputopEntity,
             );
 
         $computopPaymentComputopEntity->save();

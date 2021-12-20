@@ -445,7 +445,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getCrifGreenPaymentMethods(): array
     {
@@ -455,7 +455,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getCrifYellowPaymentMethods(): array
     {
@@ -465,7 +465,7 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getCrifRedPaymentMethods(): array
     {

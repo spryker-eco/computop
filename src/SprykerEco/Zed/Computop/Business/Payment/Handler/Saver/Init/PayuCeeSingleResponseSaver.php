@@ -73,7 +73,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
         }
 
         $computopPaymentComputopTransfer = $this->computopRepository->findComputopPaymentByComputopTransId(
-            $computopApiResponseHeaderTransfer->getTransId()
+            $computopApiResponseHeaderTransfer->getTransId(),
         );
         if ($computopPaymentComputopTransfer === null) {
             return $quoteTransfer;
@@ -154,7 +154,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
 
         $computopPaymentComputopDetailTransfer->fromArray($computopPayuCeeSingleInitResponseTransfer->toArray(), true);
         $computopPaymentComputopDetailTransfer->setCustomerTransactionId(
-            (int)$computopPaymentComputopDetailTransfer->getCustomerTransactionId()
+            (int)$computopPaymentComputopDetailTransfer->getCustomerTransactionId(),
         );
 
         $this->computopEntityManager->updateComputopPaymentDetail($computopPaymentComputopDetailTransfer);
@@ -182,7 +182,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
     /**
      * @param \Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer
      *
-     * @return string
+     * @return string|null
      */
     protected function getOrderItemPaymentStatusFromResponseHeader(
         ComputopApiResponseHeaderTransfer $computopApiResponseHeaderTransfer

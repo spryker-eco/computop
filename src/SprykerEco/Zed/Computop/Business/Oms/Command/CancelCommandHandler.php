@@ -56,10 +56,10 @@ class CancelCommandHandler extends AbstractCommandHandler
     }
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     public function handle(array $orderItems, OrderTransfer $orderTransfer)
     {
@@ -73,7 +73,7 @@ class CancelCommandHandler extends AbstractCommandHandler
     }
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItemsToCancel
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $orderItemsToCancel
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
@@ -88,16 +88,15 @@ class CancelCommandHandler extends AbstractCommandHandler
     }
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer $computopHeaderPayment
      *
-     * @return array|\Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface|array
      */
     protected function cancelOrderAuthorization(array $orderItems, OrderTransfer $orderTransfer, ComputopApiHeaderPaymentTransfer $computopHeaderPayment)
     {
         $responseTransfer = $this->inquirePaymentHandler->handle($orderTransfer, $computopHeaderPayment);
-        /** @var \Generated\Shared\Transfer\ComputopApiInquireResponseTransfer $responseTransfer */
         if ($responseTransfer->getIsAuthLast()) {
             return $this->reverseOrderAuthorizationRequest($orderTransfer, $computopHeaderPayment);
         }
@@ -129,7 +128,7 @@ class CancelCommandHandler extends AbstractCommandHandler
     }
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $orderItems
      *
      * @return array
      */

@@ -47,7 +47,7 @@ class NotificationProcessor implements NotificationProcessorInterface
         return $this->getTransactionHandler()->handleTransaction(
             function () use ($computopNotificationTransfer): ComputopNotificationTransfer {
                 return $this->executeSaveComputopNotificationTransaction($computopNotificationTransfer);
-            }
+            },
         );
     }
 
@@ -62,7 +62,7 @@ class NotificationProcessor implements NotificationProcessorInterface
         $this->computopEntityManager->savePaymentComputopNotification($computopNotificationTransfer);
         $isProcessed = $this->computopEntityManager->updatePaymentComputopOrderItemPaymentConfirmation(
             $computopNotificationTransfer,
-            $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer)
+            $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer),
         );
 
         $computopNotificationTransfer->setIsProcessed($isProcessed);

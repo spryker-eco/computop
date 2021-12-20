@@ -47,7 +47,7 @@ class PayuCeeSingleMapper extends AbstractMapper
         $computopPayuCeeSinglePaymentTransfer = parent::createComputopPaymentTransfer($quoteTransfer);
 
         $encryptedMac = $this->computopApiService->generateEncryptedMac(
-            $this->createRequestTransfer($computopPayuCeeSinglePaymentTransfer)
+            $this->createRequestTransfer($computopPayuCeeSinglePaymentTransfer),
         );
 
         $computopPayuCeeSinglePaymentTransfer
@@ -58,7 +58,7 @@ class PayuCeeSingleMapper extends AbstractMapper
 
         if ($quoteTransfer->getItems()->count()) {
             $computopPayuCeeSinglePaymentTransfer->setArticleList(
-                $this->getArticleList($quoteTransfer)
+                $this->getArticleList($quoteTransfer),
             );
         }
 

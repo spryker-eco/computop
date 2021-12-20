@@ -31,9 +31,8 @@ class ReverseSaver extends AbstractSaver
     {
         $this->getTransactionHandler()->handleTransaction(
             function () use ($responseTransfer, $orderTransfer): void {
-                /** @var \Generated\Shared\Transfer\ComputopApiReverseResponseTransfer $responseTransfer */
-                $this->saveComputopDetails($responseTransfer, $orderTransfer);
-            }
+                        $this->saveComputopDetails($responseTransfer, $orderTransfer);
+            },
         );
 
         return $responseTransfer;
@@ -47,7 +46,7 @@ class ReverseSaver extends AbstractSaver
      */
     public function saveComputopDetails(ComputopApiReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeader(), self::METHOD);
+        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
 
         if (!$responseTransfer->getHeader()->getIsSuccess()) {
             return;

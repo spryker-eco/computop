@@ -26,7 +26,7 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
                 function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
                     $this->savePaymentComputopDetailEntity($responseTransfer);
-                }
+                },
             );
         }
 

@@ -20,7 +20,7 @@ class RefundCommandHandler extends AbstractCommandHandler
     protected $manager;
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $orderItems
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $orderItems
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface

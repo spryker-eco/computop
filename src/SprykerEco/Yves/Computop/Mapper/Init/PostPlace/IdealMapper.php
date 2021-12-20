@@ -26,10 +26,10 @@ class IdealMapper extends AbstractMapper
 
         $computopPaymentTransfer->setTransId($this->generateTransId($quoteTransfer));
         $computopPaymentTransfer->setUrlSuccess(
-            $this->router->generate(ComputopRouteProviderPlugin::IDEAL_SUCCESS, [], Router::ABSOLUTE_URL)
+            $this->router->generate(ComputopRouteProviderPlugin::IDEAL_SUCCESS, [], Router::ABSOLUTE_URL),
         );
         $computopPaymentTransfer->setOrderDesc(
-            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy())
+            $this->computopApiService->getDescriptionValue($quoteTransfer->getItems()->getArrayCopy()),
         );
 
         return $computopPaymentTransfer;

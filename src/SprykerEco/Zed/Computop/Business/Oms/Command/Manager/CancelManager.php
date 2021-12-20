@@ -26,7 +26,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
                 foreach ($orderItems as $orderItem) {
                     $this->changeStatus($orderItem);
                 }
-            }
+            },
         );
 
         return [];
@@ -45,7 +45,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
             ->useStateQuery()
             ->filterByName(
                 $this->config->getOmsStatusCancelled(),
-                Criteria::EQUAL
+                Criteria::EQUAL,
             )
             ->endUse()
             ->find();

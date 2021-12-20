@@ -124,7 +124,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/credit-card-success',
             'Computop',
             'Callback',
-            'successCreditCardAction'
+            'successCreditCardAction',
         );
         $routeCollection->add(static::CREDIT_CARD_SUCCESS, $route);
 
@@ -142,7 +142,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/direct-debit-success',
             'Computop',
             'Callback',
-            'successDirectDebitAction'
+            'successDirectDebitAction',
         );
         $routeCollection->add(static::DIRECT_DEBIT_SUCCESS, $route);
 
@@ -160,7 +160,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/easy-credit-success',
             'Computop',
             'Callback',
-            'successEasyCreditAction'
+            'successEasyCreditAction',
         );
         $routeCollection->add(static::EASY_CREDIT_SUCCESS, $route);
 
@@ -178,7 +178,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/ideal-success',
             'Computop',
             'Callback',
-            'successIdealAction'
+            'successIdealAction',
         );
         $routeCollection->add(static::IDEAL_SUCCESS, $route);
 
@@ -196,7 +196,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/paydirekt-success',
             'Computop',
             'Callback',
-            'successPaydirektAction'
+            'successPaydirektAction',
         );
         $routeCollection->add(static::PAYDIREKT_SUCCESS, $route);
 
@@ -214,7 +214,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/paynow-success',
             'Computop',
             'Callback',
-            'successPayNowAction'
+            'successPayNowAction',
         );
         $routeCollection->add(static::PAY_NOW_SUCCESS, $route);
 
@@ -232,7 +232,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/pay-pal-success',
             'Computop',
             'Callback',
-            'successPayPalAction'
+            'successPayPalAction',
         );
         $routeCollection->add(static::PAY_PAL_SUCCESS, $route);
 
@@ -250,7 +250,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/sofort-success',
             'Computop',
             'Callback',
-            'successSofortAction'
+            'successSofortAction',
         );
         $routeCollection->add(static::SOFORT_SUCCESS, $route);
 
@@ -268,7 +268,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/pay-pal-express-prepare',
             'Computop',
             'ExpressCheckout',
-            'preparePayPalExpressAction'
+            'preparePayPalExpressAction',
         );
         $routeCollection->add(static::ROUTE_NAME_CHECKOUT_COMPUTOP_PAY_PAL_EXPRESS_PREPARE, $route);
 
@@ -286,7 +286,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/pay-pal-express-place-order',
             'Computop',
             'ExpressCheckout',
-            'placeOrderPayPalExpressAction'
+            'placeOrderPayPalExpressAction',
         );
         $routeCollection->add(static::ROUTE_NAME_PAY_PAL_EXPRESS_PLACE_ORDER, $route);
 
@@ -304,7 +304,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/pay-pal-express-complete',
             'Computop',
             'ExpressCheckout',
-            'completeOrderPayPalExpressAction'
+            'completeOrderPayPalExpressAction',
         );
         $routeCollection->add(static::ROUTE_NAME_PAY_PAL_EXPRESS_COMPLETE, $route);
 
@@ -324,7 +324,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/payu-cee-single-success',
             'Computop',
             'Callback',
-            'successPayuCeeSingleAction'
+            'successPayuCeeSingleAction',
         );
         $routeCollection->add(static::PAYU_CEE_SINGLE_SUCCESS, $route);
 
@@ -344,7 +344,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/failure',
             'Computop',
             'Callback',
-            'failureAction'
+            'failureAction',
         );
         $routeCollection->add(static::FAILURE_PATH_NAME, $route);
 
@@ -362,7 +362,7 @@ class ComputopRouteProviderPlugin extends AbstractRouteProviderPlugin
             '/computop/notify',
             'Computop',
             'Callback',
-            'notifyAction'
+            'notifyAction',
         );
         $routeCollection->add(static::NOTIFY_PATH_NAME, $route);
 

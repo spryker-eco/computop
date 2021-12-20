@@ -38,13 +38,13 @@ class InitPaydirektMapper extends AbstractMapper
         $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
-                $this->createRequestTransfer($computopPaymentTransfer)
-            )
+                $this->createRequestTransfer($computopPaymentTransfer),
+            ),
         );
 
         $decryptedValues = $this->computopApiService->getEncryptedArray(
             $this->getDataSubArray($computopPaymentTransfer),
-            $this->config->getBlowfishPass()
+            $this->config->getBlowfishPass(),
         );
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
@@ -64,7 +64,7 @@ class InitPaydirektMapper extends AbstractMapper
      */
     protected function getDataSubArray(TransferInterface $computopPaydirectPaymentTransfer): array
     {
-        /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer */
+        $dataSubArray = [];
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaydirectPaymentTransfer->getTransId();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaydirectPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaydirectPaymentTransfer->getCurrency();

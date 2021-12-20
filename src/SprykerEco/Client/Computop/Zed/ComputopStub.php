@@ -249,7 +249,7 @@ class ComputopStub extends ZedRequestStub implements ComputopStubInterface
         /** @var \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer */
         $computopNotificationTransfer = $this->zedStub->call(
             '/computop/gateway/process-notification',
-            $computopNotificationTransfer
+            $computopNotificationTransfer,
         );
 
         return $computopNotificationTransfer;

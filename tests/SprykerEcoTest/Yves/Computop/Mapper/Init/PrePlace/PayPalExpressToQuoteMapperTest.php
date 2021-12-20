@@ -29,7 +29,7 @@ class PayPalExpressToQuoteMapperTest extends Test
         //Act
         $quoteTransfer = $mapper->mapAddressFromComputopPayPalExpressInitResponseToQuote(
             $this->tester->createComputopPayPalExpressInitResponseTransfer(),
-            $this->tester->createQuoteTransfer()
+            $this->tester->createQuoteTransfer(),
         );
 
         //Assert
@@ -37,24 +37,24 @@ class PayPalExpressToQuoteMapperTest extends Test
         $this->assertNotNull($quoteTransfer->getShippingAddress()->getCountry());
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::ADDRESS_COUNTRY_CODE_VALUE,
-            $quoteTransfer->getShippingAddress()->getCountry()->getIso2Code()
+            $quoteTransfer->getShippingAddress()->getCountry()->getIso2Code(),
         );
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::FIRST_NAME_VALUE,
-            $quoteTransfer->getShippingAddress()->getFirstName()
+            $quoteTransfer->getShippingAddress()->getFirstName(),
         );
 
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
             $this->assertSame(
                 PayPalExpressToQuoteMapperTestConstants::ADDRESS_CITY_VALUE,
-                $itemTransfer->getShipment()->getShippingAddress()->getCity()
+                $itemTransfer->getShipment()->getShippingAddress()->getCity(),
             );
         }
 
         foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
             $this->assertSame(
                 PayPalExpressToQuoteMapperTestConstants::ADDRESS_STREET_VALUE,
-                $expenseTransfer->getShipment()->getShippingAddress()->getAddress1()
+                $expenseTransfer->getShipment()->getShippingAddress()->getAddress1(),
             );
         }
     }
@@ -70,7 +70,7 @@ class PayPalExpressToQuoteMapperTest extends Test
         //Act
         $quoteTransfer = $mapper->mapBillingAddressFromComputopPayPalExpressInitResponseToQuote(
             $this->tester->createComputopPayPalExpressInitResponseTransfer(),
-            $this->tester->createQuoteTransfer()
+            $this->tester->createQuoteTransfer(),
         );
 
         //Assert
@@ -78,11 +78,11 @@ class PayPalExpressToQuoteMapperTest extends Test
         $this->assertNotNull($quoteTransfer->getBillingAddress()->getCountry());
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::BILLING_ADDRESS_COUNTRY_CODE_VALUE,
-            $quoteTransfer->getBillingAddress()->getCountry()->getIso2Code()
+            $quoteTransfer->getBillingAddress()->getCountry()->getIso2Code(),
         );
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::BILLING_NAME_VALUE,
-            $quoteTransfer->getBillingAddress()->getFirstName()
+            $quoteTransfer->getBillingAddress()->getFirstName(),
         );
     }
 
@@ -97,22 +97,22 @@ class PayPalExpressToQuoteMapperTest extends Test
         //Act
         $quoteTransfer = $mapper->mapCustomerFromComputopPayPalExpressInitResponseToQuote(
             $this->tester->createComputopPayPalExpressInitResponseTransfer(),
-            $this->tester->createQuoteTransfer()
+            $this->tester->createQuoteTransfer(),
         );
 
         //Assert
         $this->assertNotNull($quoteTransfer->getCustomer());
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::FIRST_NAME_VALUE,
-            $quoteTransfer->getCustomer()->getFirstName()
+            $quoteTransfer->getCustomer()->getFirstName(),
         );
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::LAST_NAME_VALUE,
-            $quoteTransfer->getCustomer()->getLastName()
+            $quoteTransfer->getCustomer()->getLastName(),
         );
         $this->assertSame(
             PayPalExpressToQuoteMapperTestConstants::EMAIL_VALUE,
-            $quoteTransfer->getCustomer()->getEmail()
+            $quoteTransfer->getCustomer()->getEmail(),
         );
 
         $this->assertTrue($quoteTransfer->getCustomer()->getIsGuest());

@@ -49,7 +49,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createCreditCardPaymentHandler(),
-            $request->request->all()
+            $request->request->all(),
         );
     }
 
@@ -62,7 +62,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPayNowPaymentHandler(),
-            $request->request->all()
+            $request->request->all(),
         );
     }
 
@@ -75,7 +75,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPayPalPaymentHandler(),
-            $request->query->all()
+            $request->query->all(),
         );
     }
 
@@ -88,7 +88,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createDirectDebitPaymentHandler(),
-            $request->query->all()
+            $request->query->all(),
         );
     }
 
@@ -125,7 +125,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPayuCeeSinglePaymentHandler(),
-            $request->query->all()
+            $request->query->all(),
         );
     }
 
@@ -138,7 +138,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createPaydirektPaymentHandler(),
-            $request->query->all()
+            $request->query->all(),
         );
     }
 
@@ -151,7 +151,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createSofortPaymentHandler(),
-            $request->query->all()
+            $request->query->all(),
         );
     }
 
@@ -164,7 +164,7 @@ class CallbackController extends AbstractController
     {
         return $this->executeSuccessPostPlaceAction(
             $this->getFactory()->createIdealPaymentHandler(),
-            $request->query->all()
+            $request->query->all(),
         );
     }
 
@@ -184,7 +184,7 @@ class CallbackController extends AbstractController
         }
 
         return $this->redirectResponseInternal(
-            $this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath()
+            $this->getFactory()->getComputopConfig()->getCallbackSuccessCaptureRedirectPath(),
         );
     }
 

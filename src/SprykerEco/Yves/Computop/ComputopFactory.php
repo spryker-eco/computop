@@ -315,7 +315,7 @@ class ComputopFactory extends AbstractFactory
             $this->createInitPayPalExpressConverter(),
             $this->getQuoteClient(),
             $this->createPayPalExpressToQuoteMapper(),
-            $this->getPayPalExpressInitQuoteExpanderPlugins()
+            $this->getPayPalExpressInitQuoteExpanderPlugins(),
         );
     }
 
@@ -327,7 +327,7 @@ class ComputopFactory extends AbstractFactory
         return new ComputopPayPalExpressPrepareAggregator(
             $this->getQuoteClient(),
             $this->createPayPalExpressFormDataProvider(),
-            $this->getComputopApiClient()
+            $this->getComputopApiClient(),
         );
     }
 
@@ -338,7 +338,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new ComputopPayPalExpressCompleteAggregator(
             $this->getComputopApiClient(),
-            $this->getComputopClient()
+            $this->getComputopClient(),
         );
     }
 
@@ -358,7 +358,7 @@ class ComputopFactory extends AbstractFactory
         return new ComputopEasyCreditPaymentHandler(
             $this->createInitEasyCreditConverter(),
             $this->getComputopClient(),
-            $this->getCalculationClient()
+            $this->getCalculationClient(),
         );
     }
 
@@ -369,7 +369,7 @@ class ComputopFactory extends AbstractFactory
     {
         return new ComputopPayuCeeSinglePaymentHandler(
             $this->createInitPayuCeeSingleConverter(),
-            $this->getComputopClient()
+            $this->getComputopClient(),
         );
     }
 
@@ -521,7 +521,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -537,7 +537,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -553,7 +553,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -569,7 +569,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -585,7 +585,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -601,7 +601,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -617,7 +617,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -633,7 +633,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -649,7 +649,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
@@ -665,7 +665,7 @@ class ComputopFactory extends AbstractFactory
             $this->getConfig(),
             $this->getRequestStack()->getCurrentRequest(),
             $this->getUtilEncodingService(),
-            $this->getCountryClient()
+            $this->getCountryClient(),
         );
     }
 
