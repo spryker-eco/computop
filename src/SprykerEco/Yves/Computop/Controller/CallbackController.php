@@ -108,7 +108,7 @@ class CallbackController extends AbstractController
         $computopApiEasyCreditStatusResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->getEasyCreditStatusResponseOrFail();
 
         if (!$computopApiEasyCreditStatusResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
-            $this->addErrorMessage($computopApiEasyCreditStatusResponseTransfer->getErrorTextOrFail());
+            $this->addErrorMessage($computopApiEasyCreditStatusResponseTransfer->getErrorText());
 
             return $this->redirectResponseInternal($this->getFactory()->getComputopConfig()->getCallbackFailureRedirectPath());
         }
