@@ -73,21 +73,21 @@ jobs:
         runs-on: ubuntu-18.04
 
         steps:
-            -   name: Checkout@v2
-                uses: actions/checkout@v2
+            - name:  Checkout@v2
+              uses: actions/checkout@v2
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '7.4'
-                    extensions: mbstring, intl
-                    coverage: none
+            - name:  Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '7.4'
+                  extensions: mbstring, intl
+                  coverage: none
 
-            -   name: Composer Update
-                run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
+            - name:  Composer Update
+              run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
 
-            -   name: Composer Install prefer lowest tool
-                run: composer require --dev dereuromark/composer-prefer-lowest;
+            - name:  Composer Install prefer lowest tool
+              run: composer require --dev dereuromark/composer-prefer-lowest;
 
-            -   name: Run validation
-                run: vendor/bin/validate-prefer-lowest -m
+            - name:  Run validation
+              run: vendor/bin/validate-prefer-lowest -m
