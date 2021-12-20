@@ -46,7 +46,7 @@ class ReverseSaver extends AbstractSaver
      */
     public function saveComputopDetails(ComputopApiReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeaderOrFail(), static::METHOD);
+        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
 
         if (!$responseTransfer->getHeaderOrFail()->getIsSuccess()) {
             return;

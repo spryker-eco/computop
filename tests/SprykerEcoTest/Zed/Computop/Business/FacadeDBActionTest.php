@@ -148,6 +148,7 @@ class FacadeDBActionTest extends AbstractSetUpTest
 
         /** @var \SprykerTest\Shared\Testify\Helper\ConfigHelper $configHelper */
         $configHelper = $this->getModule('\\' . ConfigHelper::class);
+
         $configHelper->setConfig(ComputopConstants::EASY_CREDIT_STATUS_ACTION, 'https://www.computop-paygate.com/easyCreditDirect.aspx');
     }
 

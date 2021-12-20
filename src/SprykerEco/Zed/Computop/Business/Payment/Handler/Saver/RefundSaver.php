@@ -46,7 +46,7 @@ class RefundSaver extends AbstractSaver
      */
     protected function saveComputopDetails(ComputopApiRefundResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeaderOrFail(), static::METHOD);
+        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
 
         if (!$responseTransfer->getHeaderOrFail()->getIsSuccess()) {
             return;
@@ -55,7 +55,7 @@ class RefundSaver extends AbstractSaver
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($responseTransfer->getHeaderOrFail()->getPayIdOrFail())
+            ->queryPaymentByPayId($responseTransfer->getHeaderOrFail()->getPayId())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {

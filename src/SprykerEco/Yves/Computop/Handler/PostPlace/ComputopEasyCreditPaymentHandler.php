@@ -45,7 +45,6 @@ class ComputopEasyCreditPaymentHandler extends AbstractPostPlacePaymentHandler
     {
         /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
-        /** @var \Generated\Shared\Transfer\ComputopEasyCreditInitResponseTransfer $responseTransfer */
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
 
         $this->computopClient->logResponse($responseTransfer->getHeader());
