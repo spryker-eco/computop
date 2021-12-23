@@ -111,9 +111,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopSofort to be set.
-     * - Requires ComputopSofortPaymentTransfer::sofortInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopSofort.sofortInitResponse` to be set.
      * - Saves Sofort Response to DB.
      *
      * @api
@@ -126,9 +124,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopIdeal to be set.
-     * - Requires ComputopIdealPaymentTransfer::idealInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopIdeal.idealInitResponse` to be set.
      * - Saves IDeal Response to DB.
      *
      * @api
@@ -141,9 +137,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopCreditCard to be set.
-     * - Requires ComputopCreditCardPaymentTransfer::creditCardInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopCreditCard.creditCardInitResponse` to be set.
      * - Saves CreditCard Response to DB.
      *
      * @api
@@ -156,9 +150,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopPayNow to be set.
-     * - Requires ComputopPayNowPaymentTransfer::payNowInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopPayNow.payNowInitResponse` to be set.
      * - Saves PayNow Response to DB.
      *
      * @api
@@ -171,9 +163,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopPayPal to be set.
-     * - Requires ComputopPayPalPaymentTransfer::payPalInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopPayPal.payPalInitResponse` to be set.
      * - Saves PayPal Response to DB.
      *
      * @api
@@ -186,10 +176,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopPayPalExpress to be set.
-     * - Requires ComputopPayPalExpressTransfer::payPalExpressInitResponse to be set.
-     * - Requires ComputopPayuCeeSingleInitResponseTransfer::header to be set.
+     * - Requires `QuoteTransfer.payment.computopPayPalExpress.payPalExpressInitResponse.header` to be set.
      * - Saves PayPal Express Init Response to DB.
      *
      * @api
@@ -202,9 +189,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopPayPalExpress to be set.
-     * - Requires ComputopPayPalExpressTransfer::payPalExpressCompleteResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopPayPalExpress.payPalExpressCompleteResponse` to be set.
      * - Saves PayPal Express Complete Response and changes item's OMS status.
      *
      * @api
@@ -217,9 +202,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopDirectDebit to be set.
-     * - Requires ComputopDirectDebitPaymentTransfer::directDebitInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopDirectDebit.directDebitInitResponse` to be set.
      * - Saves DirectDebit Response to DB.
      *
      * @api
@@ -232,9 +215,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopEasyCredit to be set.
-     * - Requires ComputopEasyCreditPaymentTransfer::easyCreditInitResponse to be set.
+     * - Requires `QuoteTransfer.payment.computopEasyCredit.easyCreditInitResponse` to be set.
      * - Saves EasyCredit Response to DB.
      *
      * @api
@@ -247,9 +228,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopPaydirekt to be set.
-     * - Requires ComputopPaydirektPaymentTransfer::computopPaydirekt to be set.
+     * - Requires `QuoteTransfer.payment.computopPaydirekt.computopPaydirekt` to be set.
      * - Saves Paydirekt Response to DB.
      *
      * @api
@@ -262,13 +241,9 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires QuoteTransfer::payment to be set.
-     * - Requires PaymentTransfer::computopPayuCeeSingle to be set.
-     * - Requires ComputopPayuCeeSingleInitResponseTransfer::payuCeeSingleInitResponse to be set.
-     * - Requires ComputopPayuCeeSingleInitResponseTransfer::header to be set.
-     * - Requires ComputopApiResponseHeaderTransfer::transId to be set.
-     * - Requires ComputopApiResponseHeaderTransfer::payId to be set.
-     * - Requires ComputopApiResponseHeaderTransfer::xId to be set.
+     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.transId` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.payId` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.xId` to be set.
      * - Saves PayU CEE Single init response to the database.
      *
      * @api
