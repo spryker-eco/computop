@@ -80,28 +80,15 @@ class NotificationProcessor implements NotificationProcessorInterface
             return $computopNotificationTransfer->setIsProcessed(false);
         }
 
-        $this->updateComputopPayment($paymentComputopTransfer, $computopNotificationTransfer);
+        $paymentComputopTransfer
+            ->setPayId($computopNotificationTransfer->getPayId())
+            ->setXId($computopNotificationTransfer->getXId());
+
+        $this->computopEntityManager->updateComputopPayment($paymentComputopTransfer);
 
         $isProcessed = $this->updatePaymentComputopOrderItems($paymentComputopTransfer, $computopNotificationTransfer);
 
         return $computopNotificationTransfer->setIsProcessed($isProcessed);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
-     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
-     *
-     * @return void
-     */
-    protected function updateComputopPayment(
-        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
-        ComputopNotificationTransfer $computopNotificationTransfer
-    ): void {
-        $computopPaymentComputopTransfer
-            ->setPayId($computopNotificationTransfer->getPayId())
-            ->setXId($computopNotificationTransfer->getXId());
-
-        $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
 
     /**
