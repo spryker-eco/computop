@@ -265,7 +265,7 @@ class CreditCardMapper extends AbstractMapper
     ): ComputopConsumerTransfer {
         $computopConsumerTransfer->fromArray($addressTransfer->toArray(), true);
         if ($computopConsumerTransfer->getSalutation()) {
-            $computopConsumerTransfer->setSalutation($this->getAcceptedSalutation($computopConsumerTransfer->getSalutation()));
+            $computopConsumerTransfer->setSalutation($this->getValidSalutation($computopConsumerTransfer->getSalutation()));
         }
 
         return $computopConsumerTransfer;
@@ -276,7 +276,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return string
      */
-    protected function getAcceptedSalutation(string $salutation): string
+    protected function getValidSalutation(string $salutation): string
     {
         $salutationMap = $this->config->getSalutationMap();
         $salutation = trim(str_replace('.', '', $salutation));
