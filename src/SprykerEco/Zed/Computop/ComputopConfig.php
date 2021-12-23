@@ -30,6 +30,8 @@ class ComputopConfig extends AbstractBundleConfig
     public const OMS_STATUS_AUTHORIZED = 'authorized';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const OMS_STATUS_CONFIRMED = 'confirmed';
@@ -275,7 +277,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getBeforeAuthorizeStatuses()
+    public function getBeforeAuthorizeStatuses(): array
     {
         return [
             $this->getOmsStatusNew(),
