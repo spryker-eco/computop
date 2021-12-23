@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/github/license/spryker-eco/computop.svg?b=master)](https://github.com/spryker-eco/computop)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 
+Computop module provides main business logic for [Computop](https://computop.com/) payment system integration.
+
 ## Installation
 
 ```
