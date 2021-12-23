@@ -157,7 +157,7 @@ class CreditCardMapper extends AbstractMapper
     ): ComputopCreditCardPaymentTransfer {
         $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
 
-        $computopConsumerTransfer = $this->mapAddressTransferToConsumerTransfer($addressTransfer, new ComputopConsumerTransfer());
+        $computopConsumerTransfer = $this->mapAddressTransferToComputopConsumerTransfer($addressTransfer, new ComputopConsumerTransfer());
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
@@ -184,7 +184,7 @@ class CreditCardMapper extends AbstractMapper
             return $computopCreditCardPaymentTransfer;
         }
 
-        $computopConsumerTransfer = $this->mapAddressTransferToConsumerTransfer($quoteTransfer->getBillingAddress(), new ComputopConsumerTransfer());
+        $computopConsumerTransfer = $this->mapAddressTransferToComputopConsumerTransfer($quoteTransfer->getBillingAddress(), new ComputopConsumerTransfer());
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
@@ -259,7 +259,7 @@ class CreditCardMapper extends AbstractMapper
      *
      * @return \Generated\Shared\Transfer\ComputopConsumerTransfer
      */
-    protected function mapAddressTransferToConsumerTransfer(
+    protected function mapAddressTransferToComputopConsumerTransfer(
         AddressTransfer $addressTransfer,
         ComputopConsumerTransfer $computopConsumerTransfer
     ): ComputopConsumerTransfer {
