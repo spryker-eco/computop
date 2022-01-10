@@ -265,7 +265,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getBeforeInitStatuses()
+    public function getBeforeInitStatuses(): array
     {
         return [
             $this->getOmsStatusNew(),
