@@ -109,19 +109,19 @@ class CreditCardMapper extends AbstractMapper
 
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getBillToCustomer()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getBillToCustomerOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getShipToCustomer()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getShipToCustomerOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getBillingAddress()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getBillingAddressOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getShippingAddress()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getShippingAddressOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getCredentialOnFile()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getCredentialOnFileOrFail()->toArray(true, true),
         );
 
         return $dataSubArray;
