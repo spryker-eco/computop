@@ -30,7 +30,7 @@
         "spryker/zed-request": "^3.0.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan": "^1.2.0",
         "spryker-shop/shop-application": "*",
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
