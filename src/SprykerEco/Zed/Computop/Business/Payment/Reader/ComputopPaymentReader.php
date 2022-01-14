@@ -50,7 +50,7 @@ class ComputopPaymentReader implements ComputopPaymentReaderInterface
      */
     protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
-        $paymentTransfer = $quoteTransfer->getPayment();
+        $paymentTransfer = $quoteTransfer->getPaymentOrFail();
         $paymentSelection = $paymentTransfer->getPaymentSelection();
         $method = 'get' . ucfirst($paymentSelection);
 
