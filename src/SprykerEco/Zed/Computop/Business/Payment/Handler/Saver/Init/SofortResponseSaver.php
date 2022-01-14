@@ -43,8 +43,8 @@ class SofortResponseSaver extends AbstractResponseSaver
     protected function savePaymentComputopEntity(ComputopSofortInitResponseTransfer $responseTransfer): void
     {
         $this->getPaymentEntity()
-            ->setPayId($responseTransfer->getHeader()->getPayId())
-            ->setXId($responseTransfer->getHeader()->getXId())
+            ->setPayId($responseTransfer->getHeaderOrFail()->getPayId())
+            ->setXId($responseTransfer->getHeaderOrFail()->getXId())
             ->save();
     }
 

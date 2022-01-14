@@ -111,8 +111,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopSofort.sofortInitResponse` to be set.
-     * - Saves Sofort Response to DB.
+     * - Requires `QuoteTransfer.payment.computopSofort.sofortInitResponse.header` to be set.
+     * - Saves Computop Sofort payment details from response to persistence.
      *
      * @api
      *
@@ -124,8 +124,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopIdeal.idealInitResponse` to be set.
-     * - Saves IDeal Response to DB.
+     * - Requires `QuoteTransfer.payment.computopIdeal.idealInitResponse.header` to be set.
+     * - Saves Computop IDeal payment details from response to persistence.
      *
      * @api
      *
@@ -137,8 +137,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopCreditCard.creditCardInitResponse` to be set.
-     * - Saves CreditCard Response to DB.
+     * - Requires `QuoteTransfer.payment.computopCreditCard.creditCardInitResponse.header` to be set.
+     * - Saves Computop CreditCard payment details from response to persistence.
      *
      * @api
      *
@@ -150,8 +150,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayNow.payNowInitResponse` to be set.
-     * - Saves PayNow Response to DB.
+     * - Requires `QuoteTransfer.payment.computopPayNow.payNowInitResponse.header` to be set.
+     * - Saves Computop PayNow payment details from response to persistence.
      *
      * @api
      *
@@ -163,8 +163,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayPal.payPalInitResponse` to be set.
-     * - Saves PayPal Response to DB.
+     * - Requires `QuoteTransfer.payment.computopPayPal.payPalInitResponse.header` to be set.
+     * - Saves Computop PayPal payment details from response to persistence.
      *
      * @api
      *
@@ -202,8 +202,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopDirectDebit.directDebitInitResponse` to be set.
-     * - Saves DirectDebit Response to DB.
+     * - Requires `QuoteTransfer.payment.computopDirectDebit.directDebitInitResponse.header` to be set.
+     * - Saves Computop DirectDebit payment details from response to persistence.
      *
      * @api
      *
@@ -215,8 +215,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopEasyCredit.easyCreditInitResponse` to be set.
-     * - Saves EasyCredit Response to DB.
+     * - Requires `QuoteTransfer.payment.computopEasyCredit.easyCreditInitResponse.header` to be set.
+     * - Saves Computop EasyCredit payment details from response to persistence.
      *
      * @api
      *
@@ -228,8 +228,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPaydirekt.computopPaydirekt` to be set.
-     * - Saves Paydirekt Response to DB.
+     * - Requires `QuoteTransfer.payment.computopPaydirekt.computopPaydirekt.header` to be set.
+     * - Saves Computop Paydirekt payment details from response to persistence.
      *
      * @api
      *

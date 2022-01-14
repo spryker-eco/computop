@@ -20,8 +20,8 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopDirectDebitOrFail()->getDirectDebitInitResponseOrFail();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        $this->setPaymentEntity($responseTransfer->getHeaderOrFail()->getTransId());
+        if ($responseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
                 function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
@@ -40,10 +40,10 @@ class DirectDebitResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopDirectDebitInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
-        $paymentEntity->save();
+        $this->getPaymentEntity()
+            ->setPayId($responseTransfer->getHeaderOrFail()->getPayId())
+            ->setXId($responseTransfer->getHeaderOrFail()->getXId())
+            ->save();
     }
 
     /**

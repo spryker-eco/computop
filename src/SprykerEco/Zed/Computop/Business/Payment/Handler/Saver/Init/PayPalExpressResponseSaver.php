@@ -64,14 +64,14 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
 
         $computopPaymentComputopTransfer = $this->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $computopPayPalExpressInitResponseTransfer->getHeader()->getTransId(),
+                $computopPayPalExpressInitResponseTransfer->getHeaderOrFail()->getTransId(),
             );
 
         if ($computopPaymentComputopTransfer === null) {
             return $quoteTransfer;
         }
 
-        if ($computopPayPalExpressInitResponseTransfer->getHeader()->getIsSuccess()) {
+        if ($computopPayPalExpressInitResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
                 function () use ($computopPaymentComputopTransfer, $computopPayPalExpressInitResponseTransfer) {
                     $this->executeSavePaymentComputopDataTransaction($computopPaymentComputopTransfer, $computopPayPalExpressInitResponseTransfer);
@@ -107,8 +107,8 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
         ComputopPayPalExpressInitResponseTransfer $computopPayPalExpressInitResponseTransfer
     ): void {
-        $computopPaymentComputopTransfer->setPayId($computopPayPalExpressInitResponseTransfer->getHeader()->getPayId());
-        $computopPaymentComputopTransfer->setXId($computopPayPalExpressInitResponseTransfer->getHeader()->getXId());
+        $computopPaymentComputopTransfer->setPayId($computopPayPalExpressInitResponseTransfer->getHeaderOrFail()->getPayId());
+        $computopPaymentComputopTransfer->setXId($computopPayPalExpressInitResponseTransfer->getHeaderOrFail()->getXId());
 
         $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
