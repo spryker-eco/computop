@@ -89,5 +89,11 @@ jobs:
             - name:  Composer Install prefer lowest tool
               run: composer require --dev dereuromark/composer-prefer-lowest;
 
+            - name: PHPStan setup
+              run: composer stan-setup
+
+            - name: Run PHPStan
+              run: composer stan
+
             - name:  Run validation
               run: vendor/bin/validate-prefer-lowest -m
