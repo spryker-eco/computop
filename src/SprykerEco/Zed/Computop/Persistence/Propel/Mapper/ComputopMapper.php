@@ -23,18 +23,17 @@ class ComputopMapper
 {
     /**
      * @param \Orm\Zed\Computop\Persistence\SpyPaymentComputop $computopPaymentEntity
-     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPaymentComputopTransfer
      */
     public function mapComputopPaymentEntityToComputopPaymentTransfer(
         SpyPaymentComputop $computopPaymentEntity,
-        ComputopPaymentComputopTransfer $computopPaymentTransfer
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): ComputopPaymentComputopTransfer {
-        $computopPaymentTransfer->fromArray($computopPaymentEntity->toArray(), true);
-        $computopPaymentTransfer->setFKSalesOrder($computopPaymentEntity->getFkSalesOrder());
-
-        return $computopPaymentTransfer;
+        return $computopPaymentComputopTransfer
+            ->fromArray($computopPaymentEntity->toArray(), true)
+            ->setFKSalesOrder($computopPaymentEntity->getFkSalesOrder());
     }
 
     /**
@@ -135,7 +134,7 @@ class ComputopMapper
         SpyPaymentComputopOrderItem $spyPaymentComputopOrderItem
     ): SpyPaymentComputopOrderItem {
         $spyPaymentComputopOrderItem->fromArray($computopPaymentComputopOrderItemTransfer->toArray());
-        $spyPaymentComputopOrderItem->setNew($computopPaymentComputopOrderItemTransfer->getIsNew());
+        $spyPaymentComputopOrderItem->setNew((bool)$computopPaymentComputopOrderItemTransfer->getIsNew());
 
         return $spyPaymentComputopOrderItem;
     }
