@@ -20,7 +20,7 @@ class CreditCardResponseSaver extends AbstractResponseSaver
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $computopCreditCardInitResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopCreditCardOrFail()->getCreditCardInitResponseOrFail();
-        $this->setPaymentEntity($computopCreditCardInitResponseTransfer->getHeaderOrFail()->getTransId());
+        $this->setPaymentEntity($computopCreditCardInitResponseTransfer->getHeaderOrFail()->getTransIdOrFail());
         if ($computopCreditCardInitResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
                 function () use ($computopCreditCardInitResponseTransfer): void {
