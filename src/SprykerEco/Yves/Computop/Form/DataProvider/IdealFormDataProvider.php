@@ -20,13 +20,13 @@ class IdealFormDataProvider extends AbstractFormDataProvider
      */
     public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPayment() === null) {
+        if (!$quoteTransfer->getPayment()) {
             $paymentTransfer = new PaymentTransfer();
             $quoteTransfer->setPayment($paymentTransfer);
         }
 
         if (!$this->isValidPayment($quoteTransfer)) {
-            $paymentTransfer = $quoteTransfer->getPayment();
+            $paymentTransfer = $quoteTransfer->getPaymentOrFail();
             /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopIdeal($computopTransfer);
@@ -44,6 +44,6 @@ class IdealFormDataProvider extends AbstractFormDataProvider
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
-        return $quoteTransfer->getPayment()->getComputopIdeal();
+        return $quoteTransfer->getPaymentOrFail()->getComputopIdeal();
     }
 }
