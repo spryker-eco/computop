@@ -28,7 +28,7 @@ class EasyCreditMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopEasyCredit();
+        return $paymentTransfer->getComputopEasyCreditOrFail();
     }
 
     /**
@@ -38,7 +38,7 @@ class EasyCreditMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getEasyCreditInitResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getEasyCreditInitResponseOrFail();
     }
 
     /**

@@ -28,7 +28,7 @@ class SofortMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopSofort();
+        return $paymentTransfer->getComputopSofortOrFail();
     }
 
     /**
@@ -38,7 +38,7 @@ class SofortMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getSofortInitResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getSofortInitResponseOrFail();
     }
 
     /**

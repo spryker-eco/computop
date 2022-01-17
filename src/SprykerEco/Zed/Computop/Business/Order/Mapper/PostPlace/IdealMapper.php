@@ -28,17 +28,17 @@ class IdealMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopIdeal();
+        return $paymentTransfer->getComputopIdealOrFail();
     }
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopIdealInitResponseTransfer
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getIdealInitResponse();
+        return $this->getComputopTransfer($paymentTransfer)->getIdealInitResponseOrFail();
     }
 
     /**
