@@ -62,10 +62,9 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             ->getComputopPayPalExpressOrFail()
             ->getPayPalExpressCompleteResponseOrFail();
 
-        $computopPaymentTransfer = $this
-            ->computopRepository
+        $computopPaymentTransfer = $this->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $payPalExpressCompleteResponseTransfer->getHeaderOrFail()->getTransId(),
+                $payPalExpressCompleteResponseTransfer->getHeaderOrFail()->getTransIdOrFail(),
             );
 
         if ($computopPaymentTransfer === null) {
