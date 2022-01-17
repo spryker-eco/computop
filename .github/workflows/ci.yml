@@ -1,5 +1,20 @@
 name: CI
 
+env:
+    APPLICATION_ENV: 'development'
+    APPLICATION_STORE: 'DE'
+    PROJECT: 'Computop'
+    DATABASE_VERSION: 10.2
+    DATABASE_HOST: 127.0.0.1
+    DATABASE_PORT: 3306
+    DATABASE_NAME: eu-docker
+    DATABASE_USERNAME: root
+    DATABASE_PASSWORD: secret
+    DATABASE_ROOT_PASSWORD: secret
+    DATABASE_ALLOW_EMPTY_PASSWORD: false
+    DATABASE_CHARACTER_SET: utf8
+    DATABASE_COLLATE: utf8_general_ci
+
 on:
     pull_request:
     push:
@@ -8,18 +23,31 @@ on:
     workflow_dispatch:
 
 jobs:
+    setup:
+        name: Setup Database (mariadb ${{ env.DATABASE_VERSION }})
+        runs-on: ubuntu-18.04
+
+        steps:
+            - uses: actions/checkout@v2
+            - uses: getong/mariadb-action@v1.1
+              with:
+                  host port: ${{ env.DATABASE_PORT }}
+                  container port: ${{ env.DATABASE_PORT }}
+                  character set server: ${{ env.DATABASE_CHARACTER_SET }}
+                  collation server: ${{ env.DATABASE_COLLATE }}
+                  mariadb version: ${{ env.DATABASE_VERSION }}
+                  mysql database: ${{ env.DATABASE_NAME }}
+                  mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
+                  mysql user: ${{ env.DATABASE_USERNAME }}
+                  mysql password: ${{ env.DATABASE_PASSWORD }}
+
     validation:
         name: "Validation"
         runs-on: ubuntu-18.04
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.4', '8.1']
-
-        env:
-            APPLICATION_ENV: devtest
-            APPLICATION_STORE: DE
-            PROJECT: computop
+                php: ['7.4']
 
         steps:
             - uses: actions/checkout@v2
@@ -28,7 +56,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
-                  extensions: mbstring, intl
+                  extensions: mbstring, intl, bcmath
                   tools: composer:v2
 
             - name: Configure sysctl limits
@@ -62,8 +90,8 @@ jobs:
             - name: Run CodeStyle checks
               run: composer cs-check
 
-            - name: PHPStan setup
-              run: composer stan-setup
+            - name: Run codeception tests (currently not running properly, just generating files)
+              run: composer test
 
             - name: Run PHPStan
               run: composer stan
@@ -76,24 +104,36 @@ jobs:
             - name:  Checkout@v2
               uses: actions/checkout@v2
 
-            - name:  Setup PHP
+            - name: Validate composer.json and composer.lock
+              run: composer validate
+
+            - name: Composer get cache directory
+              id: composer-cache
+              run: |
+                  echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: Composer cache
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
                   php-version: '7.4'
                   extensions: mbstring, intl
-                  coverage: none
 
-            - name:  Composer Update
-              run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
+            - name: Composer prefer lowest
+              run: composer lowest-setup
 
-            - name:  Composer Install prefer lowest tool
-              run: composer require --dev dereuromark/composer-prefer-lowest;
+            - name: Run tests
+              run: composer test
 
-            - name: PHPStan setup
-              run: composer stan-setup
-
-            - name: Run PHPStan
+            - name: Run PHPStan (currently not running properly)
               run: composer stan || true
 
-            - name:  Run validation
+            - name: Validate prefer lowest
               run: vendor/bin/validate-prefer-lowest -m
