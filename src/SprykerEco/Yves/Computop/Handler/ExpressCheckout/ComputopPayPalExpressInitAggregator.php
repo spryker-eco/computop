@@ -7,9 +7,9 @@
 
 namespace SprykerEco\Yves\Computop\Handler\ExpressCheckout;
 
+use Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopPayPalExpressPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
 use SprykerEco\Yves\Computop\Converter\ConverterInterface;
 use SprykerEco\Yves\Computop\Dependency\Client\ComputopToQuoteClientInterface;
@@ -74,6 +74,7 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
     {
         $quoteTransfer->requirePayment();
 
+        /** @var \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer */
         $responseTransfer = $this->converter->getResponseTransfer($responseArray);
 
         $quoteTransfer = $this->addPaymentToQuote($quoteTransfer, $responseTransfer);
@@ -93,11 +94,11 @@ class ComputopPayPalExpressInitAggregator implements ComputopPayPalExpressInitAg
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $responseTransfer
+     * @param \Generated\Shared\Transfer\ComputopPayPalExpressInitResponseTransfer $responseTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, TransferInterface $responseTransfer): QuoteTransfer
+    protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, ComputopPayPalExpressInitResponseTransfer $responseTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getPaymentOrFail()->getComputopPayPalExpress() === null) {
             $computopTransfer = new ComputopPayPalExpressPaymentTransfer();
