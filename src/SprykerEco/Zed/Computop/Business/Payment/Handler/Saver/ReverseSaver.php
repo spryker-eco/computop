@@ -46,16 +46,17 @@ class ReverseSaver extends AbstractSaver
      */
     public function saveComputopDetails(ComputopApiReverseResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
+        $computopApiResponseHeaderTransfer = $responseTransfer->getHeaderOrFail();
+        $this->logHeader($computopApiResponseHeaderTransfer, static::METHOD);
 
-        if (!$responseTransfer->getHeaderOrFail()->getIsSuccess()) {
+        if (!$computopApiResponseHeaderTransfer->getIsSuccess()) {
             return;
         }
 
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($responseTransfer->getHeaderOrFail()->getPayIdOrFail())
+            ->queryPaymentByPayId($computopApiResponseHeaderTransfer->getPayIdOrFail())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {
