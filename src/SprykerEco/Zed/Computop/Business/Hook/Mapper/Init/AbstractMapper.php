@@ -43,7 +43,7 @@ abstract class AbstractMapper implements InitMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer
+     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaymentTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
      */
