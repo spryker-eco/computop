@@ -64,7 +64,7 @@ class PayPalExpressResponseSaver implements InitResponseSaverInterface
 
         $computopPaymentComputopTransfer = $this->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $computopPayPalExpressInitResponseTransfer->getHeaderOrFail()->getTransId(),
+                $computopPayPalExpressInitResponseTransfer->getHeaderOrFail()->getTransIdOrFail(),
             );
 
         if ($computopPaymentComputopTransfer === null) {

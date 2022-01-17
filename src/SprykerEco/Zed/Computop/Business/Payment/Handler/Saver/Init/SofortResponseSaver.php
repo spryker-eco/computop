@@ -20,7 +20,7 @@ class SofortResponseSaver extends AbstractResponseSaver
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $computopSofortInitResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopSofortOrFail()->getSofortInitResponseOrFail();
-        $this->setPaymentEntity($computopSofortInitResponseTransfer->getHeaderOrFail()->getTransId());
+        $this->setPaymentEntity($computopSofortInitResponseTransfer->getHeaderOrFail()->getTransIdOrFail());
 
         if ($computopSofortInitResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
