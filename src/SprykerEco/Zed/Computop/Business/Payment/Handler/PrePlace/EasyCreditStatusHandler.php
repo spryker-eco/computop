@@ -94,10 +94,10 @@ class EasyCreditStatusHandler extends AbstractHandler
             ->computopApiFacade
             ->performEasyCreditStatusRequest($quoteTransfer, $computopHeaderPayment);
 
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
-            $decision = $this->parseStatusExplanation($responseTransfer->getDecision());
-            $financing = $this->parseStatusExplanation($responseTransfer->getFinancing());
-            $process = $this->parseStatusExplanation($responseTransfer->getProcess());
+        if ($responseTransfer->getHeaderOrFail()->getIsSuccess()) {
+            $decision = $this->parseStatusExplanation((string)$responseTransfer->getDecision());
+            $financing = $this->parseStatusExplanation((string)$responseTransfer->getFinancing());
+            $process = $this->parseStatusExplanation((string)$responseTransfer->getProcess());
 
             $responseTransfer->setDecisionData($decision);
             $responseTransfer->setFinancingData($financing);
@@ -106,9 +106,9 @@ class EasyCreditStatusHandler extends AbstractHandler
             $quoteTransfer = $this->addExpense($quoteTransfer, $financing);
         }
 
-        $quoteTransfer->getPayment()->getComputopEasyCredit()->setEasyCreditStatusResponse($responseTransfer);
+        $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->setEasyCreditStatusResponse($responseTransfer);
 
-        $this->logger->log($responseTransfer->getHeader(), $responseTransfer->getHeader()->getMethod());
+        $this->logger->log($responseTransfer->getHeaderOrFail(), (string)$responseTransfer->getHeaderOrFail()->getMethod());
 
         return $quoteTransfer;
     }
