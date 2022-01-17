@@ -61,9 +61,8 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
             return $checkoutResponseTransfer;
         }
 
-        $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrder()->getOrderReference());
+        $quoteTransfer->setOrderReference($checkoutResponseTransfer->getSaveOrderOrFail()->getOrderReference());
         try {
-            /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopPaymentTransfer */
             $computopPaymentTransfer = $this->getPaymentTransfer($quoteTransfer);
         } catch (PaymentMethodNotFoundException $exception) {
             return $checkoutResponseTransfer;
@@ -124,17 +123,16 @@ class ComputopPostSaveHook implements ComputopPostSaveHookInterface
      */
     protected function getPaymentTransfer(QuoteTransfer $quoteTransfer): TransferInterface
     {
-        $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
-
+        $paymentTransfer = $quoteTransfer->getPaymentOrFail();
+        $paymentSelection = $paymentTransfer->getPaymentSelectionOrFail();
         $paymentMethod = ucfirst($paymentSelection);
         $method = 'get' . $paymentMethod;
-        $paymentTransfer = $quoteTransfer->getPayment();
 
         if (!method_exists($paymentTransfer, $method) || ($quoteTransfer->getPayment()->$method() === null)) {
             throw new PaymentMethodNotFoundException(sprintf('Selected payment method "%s" not found in PaymentTransfer', $paymentMethod));
         }
 
-        $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
+        $computopPaymentTransfer = $paymentTransfer->$method();
         $methodMapper = $this->getMethodMapper($paymentSelection);
 
         return $methodMapper->updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);

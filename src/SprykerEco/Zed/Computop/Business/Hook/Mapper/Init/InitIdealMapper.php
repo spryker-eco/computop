@@ -35,7 +35,7 @@ class InitIdealMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopIdealPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+        $computopPaymentTransfer->setAmount($quoteTransfer->getTotalsOrFail()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer),
@@ -49,12 +49,15 @@ class InitIdealMapper extends AbstractMapper
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
         $data = $decryptedValues[ComputopApiConfig::DATA];
+        $url = $this->getUrlToComputop(
+            $computopPaymentTransfer->getMerchantIdOrFail(),
+            $data,
+            $length,
+        );
 
-        $computopPaymentTransfer->setData($data);
-        $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
-
-        return $computopPaymentTransfer;
+        return $computopPaymentTransfer->setData($data)
+            ->setLen($length)
+            ->setUrl($url);
     }
 
     /**
