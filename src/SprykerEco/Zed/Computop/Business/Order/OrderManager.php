@@ -96,22 +96,24 @@ class OrderManager implements OrderManagerInterface
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
     {
-        if ($quoteTransfer->getPayment()->getPaymentProvider() !== ComputopSharedConfig::PROVIDER_NAME) {
+        $paymentTransfer = $quoteTransfer->getPaymentOrFail();
+
+        if ($paymentTransfer->getPaymentProvider() !== ComputopSharedConfig::PROVIDER_NAME) {
             return;
         }
 
-        $this->methodName = $quoteTransfer->getPayment()->getPaymentMethod();
-        $this->activeMapper = $this->getMethodMapper($quoteTransfer->getPayment()->getPaymentMethod());
-        $this->computopTransfer = $this->activeMapper->getComputopTransfer($quoteTransfer->getPayment());
-        $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($quoteTransfer->getPayment());
+        $this->methodName = (string)$paymentTransfer->getPaymentMethod();
+        $this->activeMapper = $this->getMethodMapper($paymentTransfer->getPaymentMethodOrFail());
+        $this->computopTransfer = $this->activeMapper->getComputopTransfer($paymentTransfer);
+        $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($paymentTransfer);
 
         $paymentEntity = $this->savePaymentForOrder(
-            $quoteTransfer->getPayment(),
+            $paymentTransfer,
             $saveOrderTransfer,
         );
 
         $this->savePaymentDetailForOrder(
-            $quoteTransfer->getPayment(),
+            $paymentTransfer,
             $paymentEntity,
         );
 
@@ -135,10 +137,10 @@ class OrderManager implements OrderManagerInterface
 
         /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopTransfer */
         $computopTransfer = $this->computopTransfer;
-        $paymentEntity->setClientIp($computopTransfer->getClientIp());
-        $paymentEntity->setPaymentMethod($paymentTransfer->getPaymentMethod());
-        $paymentEntity->setReference($saveOrderTransfer->getOrderReference());
-        $paymentEntity->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
+        $paymentEntity->setClientIp((string)$computopTransfer->getClientIp());
+        $paymentEntity->setPaymentMethod((string)$paymentTransfer->getPaymentMethod());
+        $paymentEntity->setReference((string)$saveOrderTransfer->getOrderReference());
+        $paymentEntity->setFkSalesOrder((int)$saveOrderTransfer->getIdSalesOrder());
         $paymentEntity->setTransId($computopTransfer->getTransId());
         $paymentEntity->setPayId($computopTransfer->getPayId());
         $paymentEntity->setReqId($computopTransfer->getReqId());
@@ -189,7 +191,7 @@ class OrderManager implements OrderManagerInterface
 
             $paymentOrderItemEntity
                 ->setFkPaymentComputop($idPayment)
-                ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItem());
+                ->setFkSalesOrderItem($orderItemTransfer->getIdSalesOrderItemOrFail());
             $paymentOrderItemEntity->setStatus($this->config->getOmsStatusNew());
 
             if ($this->isPaymentMethodEasyCredit()) {
