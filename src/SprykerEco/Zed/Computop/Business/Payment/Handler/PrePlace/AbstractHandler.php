@@ -33,10 +33,9 @@ abstract class AbstractHandler implements PrePlaceHandlerInterface
      */
     protected function createComputopHeaderPayment(QuoteTransfer $quoteTransfer): ComputopApiHeaderPaymentTransfer
     {
-        $headerPayment = new ComputopApiHeaderPaymentTransfer();
-        $computopEntity = $quoteTransfer->getPayment()->getComputopEasyCredit();
-        $headerPayment->fromArray($computopEntity->toArray(), true);
-
-        return $headerPayment;
+        return (new ComputopApiHeaderPaymentTransfer())->fromArray(
+            $quoteTransfer->getPaymentOrFail()->getComputopEasyCreditOrFail()->toArray(),
+            true,
+        );
     }
 }
