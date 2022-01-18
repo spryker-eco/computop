@@ -1,5 +1,5 @@
 parameters:
-    level: 8
+    level: 7
     paths:
         - src/
     checkGenericClassInNonGenericObjectType: false
@@ -7,3 +7,10 @@ parameters:
     excludePaths:
         - 'src//SprykerEco//Yves//Computop//CheckoutWidget'
     ignoreErrors:
+        - '#Call to method .+\(\) on an unknown class Generated\\.+\Ide\\AutoCompletion#'
+        - '#Call to an undefined method Propel\\.+#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\.+#'
+        - '#Call to an undefined method SprykerEco\\Zed\\Computop\\Business\\Oms\\Command\\Manager\\ManagerInterface.+#'
+        - '#Parameter .+ of method .+ expects Generated\\Shared\\Transfer\\.+Transfer, Spryker\\Shared\\Kernel\\Transfer\\.+ given.#'
+        - '#Parameter .+ of method .+ expects .+ComputopPayPalExpressInitResponseTransfer\|null, .+AbstractTransfer given.#'
+        - '#Method .+ should return Spryker\\Shared\\Kernel\\Transfer\\.+ but returns.+Spryker\\Shared\\Kernel\\Transfer\\.+.#'
