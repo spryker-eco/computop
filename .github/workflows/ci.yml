@@ -96,8 +96,21 @@ jobs:
         runs-on: ubuntu-18.04
 
         steps:
-            - name:  Checkout@v2
+            - name: Checkout@v2
               uses: actions/checkout@v2
+
+            - name: Setup Database
+              uses: getong/mariadb-action@v1.1
+              with:
+                  host port: ${{ env.DATABASE_PORT }}
+                  container port: ${{ env.DATABASE_PORT }}
+                  character set server: ${{ env.DATABASE_CHARACTER_SET }}
+                  collation server: ${{ env.DATABASE_COLLATE }}
+                  mariadb version: ${{ env.DATABASE_VERSION }}
+                  mysql database: ${{ env.DATABASE_NAME }}
+                  mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
+                  mysql user: ${{ env.DATABASE_USERNAME }}
+                  mysql password: ${{ env.DATABASE_PASSWORD }}
 
             - name: Validate composer.json and composer.lock
               run: composer validate
@@ -119,7 +132,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: '7.4'
-                  extensions: mbstring, intl
+                  extensions: mbstring, intl, bcmath
 
             - name: Composer prefer lowest
               run: composer lowest-setup
