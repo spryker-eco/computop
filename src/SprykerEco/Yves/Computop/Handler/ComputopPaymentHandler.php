@@ -99,9 +99,8 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
         if (!method_exists($paymentTransfer, $method) || ($quoteTransfer->getPayment()->$method() === null)) {
             throw new PaymentMethodNotFoundException(sprintf('Selected payment method "%s" not found in PaymentTransfer', $paymentMethod));
         }
-        $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
 
-        return $computopPaymentTransfer;
+        return $quoteTransfer->getPayment()->$method();
     }
 
     /**

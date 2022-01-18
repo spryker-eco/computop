@@ -52,7 +52,7 @@ class InitSofortMapper extends AbstractMapper
         $url = $this->getUrlToComputop(
             $computopPaymentTransfer->getMerchantIdOrFail(),
             $data,
-            $length
+            $length,
         );
 
         return $computopPaymentTransfer->setData($data)

@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
-use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface;
+use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface;
 use SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface;
 use SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeInterface;
 
@@ -28,7 +28,7 @@ class CancelCommandHandler extends AbstractCommandHandler
     protected $reversePaymentHandler;
 
     /**
-     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface
+     * @var \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
     protected $manager;
 
@@ -40,13 +40,13 @@ class CancelCommandHandler extends AbstractCommandHandler
     /**
      * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface $inquirePaymentHandler
      * @param \SprykerEco\Zed\Computop\Business\Payment\Handler\PostPlace\HandlerInterface $reversePaymentHandler
-     * @param \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface $cancelItemManager
+     * @param \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface $cancelItemManager
      * @param \SprykerEco\Zed\Computop\Dependency\Facade\ComputopToMessengerFacadeInterface $messengerFacade
      */
     public function __construct(
         HandlerInterface $inquirePaymentHandler,
         HandlerInterface $reversePaymentHandler,
-        CancelManagerInterface $cancelItemManager,
+        ManagerInterface $cancelItemManager,
         ComputopToMessengerFacadeInterface $messengerFacade
     ) {
         $this->inquirePaymentHandler = $inquirePaymentHandler;

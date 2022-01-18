@@ -54,10 +54,11 @@ class PaydirektResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopDetailEntity(ComputopPaydirektInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntityDetails = $this->getPaymentEntity()->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->fromArray($responseTransfer->toArray());
-        $paymentEntityDetails->setCustomerTransactionId($responseTransfer->getCustomerTransactionId());
-        $paymentEntityDetails->save();
+        $customerTransactionId = $responseTransfer->getCustomerTransactionId() ? (int)$responseTransfer->getCustomerTransactionId() : null;
+        $this->getPaymentEntity()->getSpyPaymentComputopDetail()
+            ->fromArray($responseTransfer->toArray())
+            ->setCustomerTransactionId($customerTransactionId)
+            ->save();
     }
 
     /**
