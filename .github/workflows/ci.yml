@@ -24,7 +24,7 @@ on:
 
 jobs:
     setup:
-        name: Setup Database (mariadb ${{ env.DATABASE_VERSION }})
+        name: Setup Database
         runs-on: ubuntu-18.04
 
         steps:
