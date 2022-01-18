@@ -23,7 +23,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    setup:
+    database:
         name: Setup Database
         runs-on: ubuntu-18.04
 
@@ -41,8 +41,9 @@ jobs:
                   mysql user: ${{ env.DATABASE_USERNAME }}
                   mysql password: ${{ env.DATABASE_PASSWORD }}
 
-    validation:
-        name: "Validation"
+    ci:
+        name: "Computop"
+        needs: database
         runs-on: ubuntu-18.04
         strategy:
             fail-fast: false
