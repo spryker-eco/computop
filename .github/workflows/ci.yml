@@ -18,7 +18,7 @@ jobs:
         runs-on: ubuntu-18.04
         services:
             mariadb:
-                image: mariadb:10.4
+                image: mariadb:10.2.1
                 env:
                     MYSQL_ALLOW_EMPTY_PASSWORD: false
                     MYSQL_ROOT_PASSWORD: secret
