@@ -47,7 +47,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.4']
+                php: ['7.4', '8.1']
 
         steps:
             - uses: actions/checkout@v2
@@ -90,7 +90,7 @@ jobs:
             - name: Run CodeStyle checks
               run: composer cs-check
 
-            - name: Run codeception tests (currently not running properly, just generating files)
+            - name: Run codeception tests (currently not running properly)
               run: composer test
 
             - name: Run PHPStan
