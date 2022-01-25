@@ -66,7 +66,7 @@ class PaymentMethodByCurrencyFilter implements PaymentMethodFilterInterface
         string $currencyCode,
         array $availableCurrencies
     ): bool {
-        if (substr($paymentMethodTransfer->getPaymentMethodKeyOrFail(), 0, 8) !== static::COMPUTOP_PAYMENT_METHOD) {
+        if (substr($paymentMethodTransfer->getPaymentMethodKey(), 0, 8) !== static::COMPUTOP_PAYMENT_METHOD) {
             return true;
         }
 
