@@ -35,16 +35,16 @@
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
         "spryker/customer": "*",
+        "spryker/error-handler": "^2.1.0",
+        "spryker/event": "^2.3.0",
         "spryker/guzzle": "*",
+        "spryker/log": "^3.0.0",
+        "spryker/monolog": "^2.0.4",
         "spryker/payment": "*",
         "spryker/propel": "^3.34.0",
-        "spryker/silex": "*",
-        "spryker/testify": "^3.43.0",
-        "spryker/monolog": "^2.0.4",
         "spryker/queue": "^1.5.0",
-        "spryker/log": "^3.0.0",
-        "spryker/error-handler": "^2.1.0",
-        "spryker/event": "^2.3.0"
+        "spryker/silex": "*",
+        "spryker/testify": "^3.43.0"
     },
     "suggest": {
         "spryker-shop/shop-application": "Abstract Yves controller provider is used.",
@@ -63,8 +63,6 @@
     "autoload-dev": {
         "psr-4": {
             "SprykerEcoTest\\": "tests/SprykerEcoTest/",
-            "Orm\\": "tests/app/src/Orm/",
-            "Generated\\Shared\\": "tests/app/src/Generated/Shared",
             "Config\\Module\\": "vendor/spryker/config/tests/_support/Module",
             "Oms\\Module\\": "vendor/spryker/oms/tests/_support/Module",
             "Propel\\Module\\": "vendor/spryker/propel/tests/_support/Module",
