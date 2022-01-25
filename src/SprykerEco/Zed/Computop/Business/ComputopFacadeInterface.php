@@ -20,6 +20,7 @@ interface ComputopFacadeInterface
 {
     /**
      * Specification:
+     * - Requires `QuoteTransfer.payment.paymentMethod` to be set for Computop payment.
      * - Saves order payment method data according to quote and checkout response transfer data.
      *
      * @api
@@ -33,6 +34,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `QuoteTransfer.totals` to be set when requested method is iDeal, Paydirekt, PayUCeeSingle or Sofort.
+     * - Requires `ComputopPaymentTransfer.merchantId` to be set when requested method is iDeal, Paydirekt, PayUCeeSingle or Sofort.
      * - Saves Response header to DB.
      *
      * @api
@@ -46,6 +49,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `CheckoutResponseTransfer.saveOrder` to be set.
+     * - Requires `QuoteTransfer.totals` to be set.
      * - Executes post save order hook.
      *
      * @api
@@ -59,6 +64,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
      * - Handle Authorize OMS command, make request, save response.
      *
      * @api
@@ -72,6 +79,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
      * - Handle Cancel OMS command, make request, save response.
      *
      * @api
@@ -85,6 +94,10 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals.grandTotal` while first capture to be set.
+     * - Requires `OrderTransfer.totals.subtotal` while further captures to be set.
+     * - Requires `OrderTransfer.totals.discountTotal` while further captures  to be set.
      * - Handle Capture OMS command, make request, save response.
      *
      * @api
@@ -98,6 +111,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
      * - Handle Refund OMS command, make request, save response.
      *
      * @api
@@ -111,7 +126,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopSofort.sofortInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopSofort.sofortInitResponse.header.transId` to be set.
      * - Saves Computop Sofort payment details from response to persistence.
      *
      * @api
@@ -124,7 +139,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopIdeal.idealInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopIdeal.idealInitResponse.header.transId` to be set.
      * - Saves Computop IDeal payment details from response to persistence.
      *
      * @api
@@ -137,7 +152,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopCreditCard.creditCardInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopCreditCard.creditCardInitResponse.header.transId` to be set.
      * - Saves Computop CreditCard payment details from response to persistence.
      *
      * @api
@@ -150,7 +165,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayNow.payNowInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayNow.payNowInitResponse.header.transId` to be set.
      * - Saves Computop PayNow payment details from response to persistence.
      *
      * @api
@@ -163,7 +178,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayPal.payPalInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayPal.payPalInitResponse.header.transId` to be set.
      * - Saves Computop PayPal payment details from response to persistence.
      *
      * @api
@@ -176,7 +191,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayPalExpress.payPalExpressInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayPalExpress.payPalExpressInitResponse.header.transId` to be set.
      * - Saves PayPal Express Init Response to DB.
      *
      * @api
@@ -189,7 +204,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayPalExpress.payPalExpressCompleteResponse` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayPalExpress.payPalExpressCompleteResponse.header.transId` to be set.
      * - Saves PayPal Express Complete Response and changes item's OMS status.
      *
      * @api
@@ -202,7 +217,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopDirectDebit.directDebitInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopDirectDebit.directDebitInitResponse.header.transId` to be set.
      * - Saves Computop DirectDebit payment details from response to persistence.
      *
      * @api
@@ -215,7 +230,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopEasyCredit.easyCreditInitResponse.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopEasyCredit.easyCreditInitResponse.header.transId` to be set.
      * - Saves Computop EasyCredit payment details from response to persistence.
      *
      * @api
@@ -228,7 +243,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPaydirekt.computopPaydirekt.header` to be set.
+     * - Requires `QuoteTransfer.payment.computopPaydirekt.paydirektInitResponse.header.transId` to be set.
      * - Saves Computop Paydirekt payment details from response to persistence.
      *
      * @api
@@ -241,9 +256,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
-     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.transId` to be set.
-     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.payId` to be set.
-     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.xId` to be set.
+     * - Requires `QuoteTransfer.payment.computopPayuCeeSingle.payuCeeSingleInitResponse.header.transId` to be set on success.
      * - Saves PayU CEE Single init response to the database.
      *
      * @api
@@ -256,6 +269,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `QuoteTransfer.payment.computopEasyCredit.header` to be set.
      * - Makes Easy Credit Status API call
      *
      * @api
@@ -268,6 +282,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
      * - Handle Authorize OMS command, make request, save response.
      *
      * @api
@@ -281,6 +297,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `QuoteTransfer.payment.paymentSelection` to be set.
+     * - Requires `QuoteTransfer.payment.transId` to be set.
      * - Checks if init call to Computop already performed
      *
      * @api
@@ -305,6 +323,8 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `QuoteTransfer.computopCrif.result` to be set.
+     * - Requires `PaymentMethodTransfer.methodName` to be set.
      * - Filters available payment methods by gift card black list
      *
      * @api
@@ -318,6 +338,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `QuoteTransfer.currency.code` to be set.
      * - Filters available payment methods by currency.
      *
      * @api
@@ -331,6 +352,7 @@ interface ComputopFacadeInterface
 
     /**
      * Specification:
+     * - Requires `ComputopNotificationTransfer.transId` to be set.
      * - Saves push notification into DB.
      * - Updates related computop order items with payment confirmation status.
      *
