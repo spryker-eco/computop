@@ -1032,7 +1032,7 @@
 
     <transfer name="ComputopApiPayPalExpressPrepareResponse">
         <property name="mid" type="string"/>
-        <property name="orderId" type="string"/>
+        <property name="orderid" type="string"/>
         <property name="payID" type="string"/>
     </transfer>
 
