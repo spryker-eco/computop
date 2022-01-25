@@ -102,8 +102,9 @@ class OrderManager implements OrderManagerInterface
             return;
         }
 
-        $this->methodName = (string)$paymentTransfer->getPaymentMethod();
-        $this->activeMapper = $this->getMethodMapper($paymentTransfer->getPaymentMethodOrFail());
+        $paymentMethod = $paymentTransfer->getPaymentMethodOrFail();
+        $this->methodName = $paymentMethod;
+        $this->activeMapper = $this->getMethodMapper($paymentMethod);
         $this->computopTransfer = $this->activeMapper->getComputopTransfer($paymentTransfer);
         $this->computopResponseTransfer = $this->activeMapper->getComputopResponseTransfer($paymentTransfer);
 
