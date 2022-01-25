@@ -63,10 +63,7 @@ class PayuCeeSingleResponseSaver implements InitResponseSaverInterface
             ->getComputopPayuCeeSingleOrFail()
             ->getPayuCeeSingleInitResponseOrFail();
 
-        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->getHeaderOrFail()
-            ->requireTransId()
-            ->requirePayId()
-            ->requireXid();
+        $computopApiResponseHeaderTransfer = $computopPayuCeeSingleInitResponseTransfer->getHeaderOrFail();
 
         if (!$computopApiResponseHeaderTransfer->getIsSuccess()) {
             return $quoteTransfer;
