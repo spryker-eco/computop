@@ -44,7 +44,8 @@
         "spryker/propel": "^3.34.0",
         "spryker/queue": "^1.5.0",
         "spryker/silex": "*",
-        "spryker/testify": "^3.43.0"
+        "spryker/testify": "^3.43.0",
+        "spryker/availability": "^9.11.0"
     },
     "suggest": {
         "spryker-shop/shop-application": "Abstract Yves controller provider is used.",
@@ -53,7 +54,8 @@
         "spryker/payment": "If you want to use payment method filtering.",
         "spryker/silex": "Use this module when using plugins that need Silex dependencies.",
         "spryker/monolog": "Needed to send messages to loggly via Curl helper",
-        "spryker/queue": "Needed to process messages from the queue"
+        "spryker/queue": "Needed to process messages from the queue",
+        "spryker/availability": "If you want to use checks on availablility"
     },
     "autoload": {
         "psr-4": {
