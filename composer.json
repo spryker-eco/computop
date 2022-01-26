@@ -44,8 +44,7 @@
         "spryker/propel": "^3.34.0",
         "spryker/queue": "^1.5.0",
         "spryker/silex": "*",
-        "spryker/testify": "^3.43.0",
-        "spryker/availability": "^9.11.0"
+        "spryker/testify": "^3.43.0"
     },
     "suggest": {
         "spryker-shop/shop-application": "Abstract Yves controller provider is used.",
