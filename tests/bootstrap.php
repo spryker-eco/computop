@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('APPLICATION')) {
-    define('APPLICATION', 'Braintree');
+    define('APPLICATION', 'Computop');
 }
 
 if (!defined('APPLICATION_ROOT_DIR')) {
