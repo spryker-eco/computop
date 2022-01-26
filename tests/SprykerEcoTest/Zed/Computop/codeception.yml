@@ -31,8 +31,8 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     coreNamespaces:
                         - Spryker
-                        - SprykerShop
                         - SprykerEco
+                        - SprykerEcoTest
                 - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
                 - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
                       isolated: true
