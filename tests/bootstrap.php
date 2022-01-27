@@ -29,7 +29,7 @@ if (!defined('MODULE_UNDER_TEST_ROOT_DIR')) {
 }
 
 spl_autoload_register(function ($className) {
-    if (strrpos($className, 'Transfer') === false) {
+    if (strrpos($className, 'Transfer') === false || strpos($className, 'Spy') === false) {
         return false;
     }
 
@@ -37,7 +37,7 @@ spl_autoload_register(function ($className) {
 
     $transferFileName = implode(DIRECTORY_SEPARATOR, $classNameParts) . '.php';
     $transferFilePath = APPLICATION_ROOT_DIR . 'src' . DIRECTORY_SEPARATOR . $transferFileName;
-
+var_dump($transferFilePath);
     if (!file_exists($transferFilePath)) {
         return false;
     }
