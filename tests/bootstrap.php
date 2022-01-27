@@ -29,7 +29,7 @@ if (!defined('MODULE_UNDER_TEST_ROOT_DIR')) {
 }
 
 spl_autoload_register(function ($className) {
-    if (strrpos($className, 'Spy') === false && strpos($className, 'Transfer') === false) {
+    if (strrpos($className, 'Transfer') === false) {
         return false;
     }
 
