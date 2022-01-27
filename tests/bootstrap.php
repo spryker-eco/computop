@@ -28,6 +28,25 @@ if (!defined('MODULE_UNDER_TEST_ROOT_DIR')) {
     define('MODULE_UNDER_TEST_ROOT_DIR', '');
 }
 
+spl_autoload_register(function ($className) {
+    if (strrpos($className, 'Spy') === false && strpos($className, 'Transfer') === false) {
+        return false;
+    }
+
+    $classNameParts = explode('\\', $className);
+
+    $transferFileName = implode(DIRECTORY_SEPARATOR, $classNameParts) . '.php';
+    $transferFilePath = APPLICATION_ROOT_DIR . 'src' . DIRECTORY_SEPARATOR . $transferFileName;
+
+    if (!file_exists($transferFilePath)) {
+        return false;
+    }
+
+    require_once $transferFilePath;
+
+    return true;
+});
+
 // Copy config files
 $configSourceDirectory = APPLICATION_ROOT_DIR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'Shared' . DIRECTORY_SEPARATOR;
 $configTargetDirectory = APPLICATION_ROOT_DIR . 'config' . DIRECTORY_SEPARATOR . 'Shared' . DIRECTORY_SEPARATOR;
