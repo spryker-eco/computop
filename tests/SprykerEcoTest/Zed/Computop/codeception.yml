@@ -18,6 +18,7 @@ suites:
         class_name: ComputopZedTester
         modules:
             enabled:
+                - Asserts
                 - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
                 - \SprykerTest\Shared\Testify\Helper\Environment:
                       isolated: true
