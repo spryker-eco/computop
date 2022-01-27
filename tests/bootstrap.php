@@ -34,10 +34,9 @@ spl_autoload_register(function ($className) {
     }
 
     $classNameParts = explode('\\', $className);
-
     $transferFileName = implode(DIRECTORY_SEPARATOR, $classNameParts) . '.php';
     $transferFilePath = APPLICATION_ROOT_DIR . 'src' . DIRECTORY_SEPARATOR . $transferFileName;
-var_dump($transferFilePath);
+
     if (!file_exists($transferFilePath)) {
         return false;
     }
