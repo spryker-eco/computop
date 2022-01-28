@@ -30,7 +30,6 @@
         "spryker/zed-request": "^3.0.0"
     },
     "require-dev": {
-        "codeception/module-asserts": "^2.0",
         "phpstan/phpstan": "^1.2.0",
         "spryker-shop/shop-application": "*",
         "spryker/checkout": "*",
