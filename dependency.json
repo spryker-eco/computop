@@ -1,7 +1,9 @@
 {
     "include": {
         "spryker/transfer": "Provides transfer objects definition with `::get*OrFail()` functionality.",
-        "spryker/testify": "False positive validation issue.",
+        "spryker/testify": "False positive validation issue."
+    },
+    "include-dev": {
         "codeception/module-asserts": "A Codeception module containing various assertions."
     }
 }
