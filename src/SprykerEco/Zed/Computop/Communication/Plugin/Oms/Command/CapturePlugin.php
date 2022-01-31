@@ -21,7 +21,7 @@ class CapturePlugin extends AbstractComputopPlugin implements CommandByOrderInte
      * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Requires `OrderTransfer.totals.grandTotal` while first capture to be set.
      * - Requires `OrderTransfer.totals.subtotal` while further captures to be set.
-     * - Requires `OrderTransfer.totals.discountTotal` while further captures  to be set.
+     * - Requires `OrderTransfer.totals.discountTotal` while further captures to be set.
      * - Handle Capture OMS command, make request, save response.
      *
      * @api
