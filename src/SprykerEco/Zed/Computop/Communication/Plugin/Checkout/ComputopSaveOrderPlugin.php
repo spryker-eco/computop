@@ -22,7 +22,8 @@ class ComputopSaveOrderPlugin extends AbstractPlugin implements CheckoutDoSaveOr
 {
     /**
      * {@inheritDoc}
-     *  - Saves order payment method data according to quote and checkout response transfer data.
+     * - Requires `QuoteTransfer.payment.paymentMethod` to be set for Computop payment.
+     * - Saves order payment method data according to quote and checkout response transfer data.
      *
      * @api
      *
