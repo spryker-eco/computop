@@ -32,8 +32,12 @@ class ComputopToOmsFacadeBridge implements ComputopToOmsFacadeInterface
      *
      * @return array
      */
-    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = [])
-    {
+    public function triggerEvent(
+        $eventId,
+        ObjectCollection $orderItems,
+        array $logContext,
+        array $data = []
+    ): array {
         return (array)$this->omsFacade->triggerEvent($eventId, $orderItems, $logContext, $data);
     }
 }

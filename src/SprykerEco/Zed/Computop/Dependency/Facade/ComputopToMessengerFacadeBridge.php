@@ -29,7 +29,7 @@ class ComputopToMessengerFacadeBridge implements ComputopToMessengerFacadeInterf
      *
      * @return void
      */
-    public function addErrorMessage(MessageTransfer $message)
+    public function addErrorMessage(MessageTransfer $message): void
     {
         $this->messengerFacade->addErrorMessage($message);
     }
@@ -39,7 +39,7 @@ class ComputopToMessengerFacadeBridge implements ComputopToMessengerFacadeInterf
      *
      * @return void
      */
-    public function addInfoMessage(MessageTransfer $message)
+    public function addInfoMessage(MessageTransfer $message): void
     {
         $this->messengerFacade->addInfoMessage($message);
     }

@@ -16,12 +16,12 @@ interface ComputopToMessengerFacadeInterface
      *
      * @return void
      */
-    public function addErrorMessage(MessageTransfer $message);
+    public function addErrorMessage(MessageTransfer $message): void;
 
     /**
      * @param \Generated\Shared\Transfer\MessageTransfer $message
      *
      * @return void
      */
-    public function addInfoMessage(MessageTransfer $message);
+    public function addInfoMessage(MessageTransfer $message): void;
 }

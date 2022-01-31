@@ -7,8 +7,14 @@
 
 namespace SprykerEco\Zed\Computop\Dependency\Facade;
 
+use Generated\Shared\Transfer\ComputopApiAuthorizeResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiCaptureResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiCrifResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiEasyCreditStatusResponseTransfer;
 use Generated\Shared\Transfer\ComputopApiHeaderPaymentTransfer;
+use Generated\Shared\Transfer\ComputopApiInquireResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiRefundResponseTransfer;
+use Generated\Shared\Transfer\ComputopApiReverseResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -36,7 +42,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performEasyCreditStatusRequest(
         QuoteTransfer $quoteTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiEasyCreditStatusResponseTransfer {
         return $this->computopApiFacade->performEasyCreditStatusRequest($quoteTransfer, $headerApiPaymentTransfer);
     }
 
@@ -49,7 +55,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performEasyCreditAuthorizeRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiAuthorizeResponseTransfer {
         return $this->computopApiFacade->performEasyCreditAuthorizeRequest($orderTransfer, $headerApiPaymentTransfer);
     }
 
@@ -62,7 +68,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performAuthorizationRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiAuthorizeResponseTransfer {
         return $this->computopApiFacade->performAuthorizationRequest($orderTransfer, $headerApiPaymentTransfer);
     }
 
@@ -75,7 +81,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performCaptureRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiCaptureResponseTransfer {
         return $this->computopApiFacade->performCaptureRequest($orderTransfer, $headerApiPaymentTransfer);
     }
 
@@ -88,7 +94,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performInquireRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiInquireResponseTransfer {
         return $this->computopApiFacade->performInquireRequest($orderTransfer, $headerApiPaymentTransfer);
     }
 
@@ -101,7 +107,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performRefundRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiRefundResponseTransfer {
         return $this->computopApiFacade->performRefundRequest($orderTransfer, $headerApiPaymentTransfer);
     }
 
@@ -114,7 +120,7 @@ class ComputopToComputopApiFacadeBridge implements ComputopToComputopApiFacadeIn
     public function performReverseRequest(
         OrderTransfer $orderTransfer,
         ComputopApiHeaderPaymentTransfer $headerApiPaymentTransfer
-    ) {
+    ): ComputopApiReverseResponseTransfer {
         return $this->computopApiFacade->performReverseRequest($orderTransfer, $headerApiPaymentTransfer);
     }
 
