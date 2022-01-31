@@ -18,7 +18,9 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 {
     /**
      * {@inheritDoc}
-     *  - Executes Refund command and performs Refund API call.
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
+     * - Handle Refund OMS command, make request, save response.
      *
      * @api
      *

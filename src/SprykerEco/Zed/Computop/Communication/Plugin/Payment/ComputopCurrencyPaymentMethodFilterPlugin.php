@@ -22,7 +22,8 @@ class ComputopCurrencyPaymentMethodFilterPlugin extends AbstractPlugin implement
 {
     /**
      * {@inheritDoc}
-     *  - Filters Computop payment methods accordingly to selected currency.
+     * - Requires `QuoteTransfer.currency.code` to be set.
+     * - Filters available payment methods by currency.
      *
      * @api
      *

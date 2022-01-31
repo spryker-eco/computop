@@ -18,7 +18,9 @@ class CancelPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 {
     /**
      * {@inheritDoc}
-     *  - Executes Cancel command and performs Reverse API call.
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
+     * - Handle Cancel OMS command, make request, save response.
      *
      * @api
      *
