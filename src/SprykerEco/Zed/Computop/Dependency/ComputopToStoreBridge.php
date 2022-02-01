@@ -25,7 +25,7 @@ class ComputopToStoreBridge implements ComputopToStoreInterface
     /**
      * @return string
      */
-    public function getCurrencyIsoCode()
+    public function getCurrencyIsoCode(): string
     {
         return $this->store->getCurrencyIsoCode();
     }
