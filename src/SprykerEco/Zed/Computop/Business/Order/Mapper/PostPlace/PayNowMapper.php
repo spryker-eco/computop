@@ -38,7 +38,7 @@ class PayNowMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getPayNowInitResponseOrFail();
+        return $this->getComputopTransfer($paymentTransfer)->getPayNowInitResponse();
     }
 
     /**

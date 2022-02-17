@@ -38,7 +38,7 @@ class CreditCardMapper implements MapperInterface
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $this->getComputopTransfer($paymentTransfer)->getCreditCardInitResponseOrFail();
+        return $this->getComputopTransfer($paymentTransfer)->getCreditCardInitResponse();
     }
 
     /**
