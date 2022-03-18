@@ -6,7 +6,7 @@
     "require": {
         "php": ">=7.4",
         "spryker-eco/computop-api": "^1.2.0",
-        "spryker-eco/computop-extension": "dev-master",
+        "spryker-eco/computop-extension": "^1.0.0",
         "spryker-shop/checkout-page": "^3.0.0",
         "spryker/application": "^3.0.0",
         "spryker/calculation": "^4.0.0",
