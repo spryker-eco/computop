@@ -130,4 +130,14 @@ interface ComputopConfigInterface
      * @return string
      */
     public function getPayPalMethod(): string;
+
+    /**
+     * @return array<string, string>
+     */
+    public function getSalutationMap(): array;
+
+    /**
+     * @return string
+     */
+    public function getDefaultSalutation(): string;
 }

@@ -33,8 +33,8 @@ class PaydirektMapper extends AbstractMapper
         $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
 
         return $computopPaymentTransfer->setShopApiKey($this->config->getPaydirektShopKey())
-            ->setShippingAmount($quoteTransfer->getTotals()->getExpenseTotal())
-            ->setShoppingBasketAmount($quoteTransfer->getTotals()->getSubtotal())
+            ->setShippingAmount((string)$quoteTransfer->getTotalsOrFail()->getExpenseTotal())
+            ->setShoppingBasketAmount((string)$quoteTransfer->getTotalsOrFail()->getSubtotal())
             ->setShippingFirstName($addressTransfer->getFirstName())
             ->setShippingLastName($addressTransfer->getLastName())
             ->setShippingZip($addressTransfer->getZipCode())

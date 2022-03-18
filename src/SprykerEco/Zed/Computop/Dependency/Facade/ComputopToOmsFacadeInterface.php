@@ -19,5 +19,10 @@ interface ComputopToOmsFacadeInterface
      *
      * @return array
      */
-    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []);
+    public function triggerEvent(
+        $eventId,
+        ObjectCollection $orderItems,
+        array $logContext,
+        array $data = []
+    ): array;
 }

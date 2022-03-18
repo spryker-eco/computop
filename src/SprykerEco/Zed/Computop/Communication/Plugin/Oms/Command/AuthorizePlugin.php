@@ -18,7 +18,9 @@ class AuthorizePlugin extends AbstractComputopPlugin implements CommandByOrderIn
 {
     /**
      * {@inheritDoc}
-     *  - Executes Authorize command and performs Authorize API call.
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
+     * - Handle Authorize OMS command, make request, save response.
      *
      * @api
      *

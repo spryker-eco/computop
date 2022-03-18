@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Form;
 
 use Generated\Shared\Transfer\ComputopPayPalPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayPalSubForm extends AbstractSubForm
@@ -36,14 +35,6 @@ class PayPalSubForm extends AbstractSubForm
     }
 
     /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return ComputopConfig::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
-    }
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
@@ -53,5 +44,13 @@ class PayPalSubForm extends AbstractSubForm
         $resolver->setDefaults([
             'data_class' => ComputopPayPalPaymentTransfer::class,
         ])->setRequired(static::OPTIONS_FIELD_NAME);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPaymentMethod(): string
+    {
+        return static::PAYMENT_METHOD;
     }
 }

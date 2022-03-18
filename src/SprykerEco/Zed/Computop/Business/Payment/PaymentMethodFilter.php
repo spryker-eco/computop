@@ -82,7 +82,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     protected function getAvailablePaymentMethods(QuoteTransfer $quoteTransfer): array
     {
         $method = static::CONFIG_METHOD_PART_GET_CRIF .
-            ucfirst(strtolower($quoteTransfer->getComputopCrif()->getResult())) .
+            ucfirst(strtolower($quoteTransfer->getComputopCrifOrFail()->getResultOrFail())) .
             static::CONFIG_METHOD_PART_PAYMENT_METHODS;
 
         if (method_exists($this->config, $method)) {
@@ -100,7 +100,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isAvailable(PaymentMethodTransfer $paymentMethodTransfer, array $availableMethods): bool
     {
-        return in_array($paymentMethodTransfer->getMethodName(), $availableMethods);
+        return in_array($paymentMethodTransfer->getMethodNameOrFail(), $availableMethods);
     }
 
     /**
@@ -110,6 +110,6 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isPaymentMethodComputop(PaymentMethodTransfer $paymentMethodTransfer): bool
     {
-        return strpos($paymentMethodTransfer->getMethodName(), static::COMPUTOP_PAYMENT_METHOD) !== false;
+        return strpos($paymentMethodTransfer->getMethodNameOrFail(), static::COMPUTOP_PAYMENT_METHOD) !== false;
     }
 }

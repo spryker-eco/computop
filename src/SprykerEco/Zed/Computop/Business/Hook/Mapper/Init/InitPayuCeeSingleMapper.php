@@ -41,7 +41,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         $computopPayuCeeSinglePaymentTransfer
             ->setRefNr($quoteTransfer->getOrderReference() . '-' . date('Y-m-d H:i:s'))
             ->setMerchantId($this->config->getMerchantId())
-            ->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+            ->setAmount($quoteTransfer->getTotalsOrFail()->getGrandTotal());
 
         $requestTransfer = $this->createRequestTransfer($computopPayuCeeSinglePaymentTransfer);
         $encryptedMac = $this->computopApiService->generateEncryptedMac($requestTransfer);
@@ -57,7 +57,7 @@ class InitPayuCeeSingleMapper extends AbstractMapper
         }
 
         $urlToComputop = $this->getUrlToComputop(
-            (string)$computopPayuCeeSinglePaymentTransfer->getMerchantId(),
+            $computopPayuCeeSinglePaymentTransfer->getMerchantIdOrFail(),
             $encryptedValues[ComputopApiConfig::DATA],
             $encryptedValues[ComputopApiConfig::LENGTH],
         );

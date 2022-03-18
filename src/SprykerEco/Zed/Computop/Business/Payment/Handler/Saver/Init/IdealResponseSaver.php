@@ -19,9 +19,9 @@ class IdealResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopIdeal()->getIdealInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopIdealOrFail()->getIdealInitResponseOrFail();
+        $this->setPaymentEntity($responseTransfer->getHeaderOrFail()->getTransIdOrFail());
+        if ($responseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
                 function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
@@ -41,10 +41,10 @@ class IdealResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopIdealInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
-        $paymentEntity->save();
+        $this->getPaymentEntity()
+            ->setPayId($responseTransfer->getHeaderOrFail()->getPayId())
+            ->setXId($responseTransfer->getHeaderOrFail()->getXId())
+            ->save();
     }
 
     /**

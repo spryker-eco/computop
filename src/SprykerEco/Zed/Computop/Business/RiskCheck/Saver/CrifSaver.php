@@ -44,7 +44,7 @@ class CrifSaver extends AbstractSaver
     protected function saveComputopDetails(
         ComputopApiCrifResponseTransfer $responseTransfer
     ): void {
-        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
+        $this->logHeader($responseTransfer->getHeaderOrFail(), static::METHOD);
 
         $paymentEntityDetails = new SpyPaymentComputopCrifDetails();
         $paymentEntityDetails->fromArray($responseTransfer->toArray());

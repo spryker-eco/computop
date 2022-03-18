@@ -63,6 +63,7 @@
     </transfer>
 
     <transfer name="ComputopCreditCardPayment">
+        <property name="header" type="ComputopApiResponseHeader"/>
         <property name="payId" type="string"/>
         <property name="merchantId" type="string"/>
         <property name="transId" type="string"/>
@@ -219,6 +220,8 @@
         <property name="url" type="string"/>
         <property name="shippingZip" type="string"/>
         <property name="payPalExpressInitResponse" type="ComputopPayPalExpressInitResponse"/>
+        <property name="payPalExpressPrepareResponse" type="ComputopApiPayPalExpressPrepareResponse"/>
+        <property name="payPalExpressCompleteResponse" type="ComputopApiPayPalExpressCompleteResponse"/>
     </transfer>
 
     <transfer name="ComputopSofortPayment">
@@ -334,6 +337,7 @@
         <property name="shippingStreetNumber" type="string"/>
         <property name="shippingStreet" type="string"/>
         <property name="shippingCountryCode" type="string"/>
+        <property name="shippingAddressAddition" type="string"/>
         <property name="easyCreditInitResponse" type="ComputopEasyCreditInitResponse"/>
         <property name="easyCreditStatusResponse" type="ComputopApiEasyCreditStatusResponse"/>
     </transfer>
@@ -587,6 +591,11 @@
         <property name="decisionData" type="array" singular="decisionData"/>
         <property name="financingData" type="array" singular="financingData"/>
         <property name="processData" type="array" singular="processData"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="decision" type="string"/>
+        <property name="financing" type="string"/>
+        <property name="process" type="string"/>
+        <property name="errorText" type="string"/>
     </transfer>
 
     <transfer name="Payment">
@@ -601,6 +610,11 @@
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
         <property name="computopPayuCeeSingle" type="ComputopPayuCeeSinglePayment"/>
         <property name="isComputopPaymentExist" type="bool"/>
+        <property name="amount" type="int"/>
+        <property name="paymentSelection" type="string"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="paymentProvider" type="string"/>
+        <property name="url" type="string"/>
     </transfer>
 
     <transfer name="Order">
@@ -614,6 +628,10 @@
         <property name="computopIdeal" type="ComputopIdealPayment"/>
         <property name="computopEasyCredit" type="ComputopEasyCreditPayment"/>
         <property name="computopPayuCeeSingle" type="ComputopPayuCeeSinglePayment"/>
+        <property name="idSalesOrder" type="int"/>
+        <property name="totals" type="Totals"/>
+        <property name="items" type="Item[]" singular="item"/>
+        <property name="customer" type="Customer"/>
     </transfer>
 
     <transfer name="Quote">
@@ -621,10 +639,25 @@
         <property name="expenses" type="Expense[]" singular="expense"/>
         <property name="items" type="Item[]" singular="item"/>
         <property name="defaultShipmentSelected" type="bool"/>
+        <property name="payment" type="Payment" deprecated="Use payments property instead."/>
+        <property name="customer" type="Customer"/>
+        <property name="totals" type="Totals"/>
+        <property name="checkoutConfirmed" type="bool"/>
+        <property name="shippingAddress" type="Address" deprecated="Use item level shipping addresses (item.shipment.shippingAddress) instead."/>
+        <property name="billingAddress" type="Address"/>
+        <property name="billingSameAsShipping" type="bool"/>
+        <property name="currency" type="Currency"/>
+        <property name="acceptTermsAndConditions" type="bool"/>
+        <property name="orderReference" type="string"/>
+        <property name="payments" type="Payment[]" singular="payment"/>
+        <property name="isOrderPlacedSuccessfully" type="bool"/>
     </transfer>
 
     <transfer name="CheckoutResponse">
         <property name="computopInitPayment" type="ComputopInitPayment"/>
+        <property name="saveOrder" type="SaveOrder"/>
+        <property name="isExternalRedirect" type="bool"/>
+        <property name="redirectUrl" type="string"/>
     </transfer>
 
     <transfer name="ComputopCustomerInfo">
@@ -845,6 +878,14 @@
 
     <transfer name="Item">
         <property name="shipment" type="Shipment"/>
+        <property name="name" type="string"/>
+        <property name="sumPrice" type="int"/>
+        <property name="sku" type="string"/>
+        <property name="quantity" type="int"/>
+        <property name="unitTaxAmount" type="int"/>
+        <property name="canceledAmount" type="int"/>
+        <property name="sumPriceToPayAggregation" type="int"/>
+        <property name="idSalesOrderItem" type="int"/>
     </transfer>
 
     <transfer name="Shipment">
@@ -852,42 +893,89 @@
     </transfer>
 
     <transfer name="SaveOrder">
+        <property name="orderItems" type="Item[]" singular="orderItem"/>
+        <property name="orderReference" type="string"/>
+        <property name="idSalesOrder" type="int"/>
     </transfer>
 
     <transfer name="ComputopApiHeaderPayment">
+        <property name="amount" type="int"/>
     </transfer>
 
     <transfer name="Message">
+        <property name="value" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiResponseHeader">
+        <property name="description" type="string"/>
+        <property name="code" type="string"/>
+        <property name="status" type="string"/>
+        <property name="isSuccess" type="bool"/>
+        <property name="payId" type="string"/>
+        <property name="xId" type="string"/>
+        <property name="transId" type="string"/>
+        <property name="method" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiAuthorizeResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="refNr" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiRefundResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="aId" type="string"/>
+        <property name="amount" type="string"/>
+        <property name="codeExt" type="string"/>
+        <property name="errorText" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="refNr" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiReverseResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
     </transfer>
 
     <transfer name="ComputopApiInquireResponse">
+        <property name="isAuthLast" type="bool"/>
+        <property name="amountAuth" type="string"/>
+        <property name="amountCap" type="string"/>
+        <property name="isCapLast" type="bool"/>
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="amountCred" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiCaptureResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
+        <property name="aId" type="string"/>
+        <property name="amount" type="string"/>
+        <property name="codeExt" type="string"/>
+        <property name="errorText" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="refNr" type="string"/>
     </transfer>
 
     <transfer name="Expense">
+        <property name="canceledAmount" type="int"/>
+        <property name="sumPriceToPayAggregation" type="int"/>
+        <property name="name" type="string"/>
+        <property name="shipment" type="Shipment"/>
+        <property name="type" type="string"/>
+        <property name="unitGrossPrice" type="int"/>
+        <property name="quantity" type="int"/>
     </transfer>
 
     <transfer name="PaymentMethods">
+        <property name="methods" singular="method" type="PaymentMethod[]"/>
     </transfer>
 
     <transfer name="PaymentMethod">
+        <property name="paymentMethodKey" type="string" strict="true"/>
+        <property name="methodName" type="string"/>
     </transfer>
 
     <transfer name="ComputopApiCrifResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
     </transfer>
 
     <transfer name="ComputopApiRequest">
@@ -897,6 +985,9 @@
     </transfer>
 
     <transfer name="Customer">
+        <property name="isGuest" type="bool"/>
+        <property name="idCustomer" type="int"/>
+        <property name="email" type="string"/>
     </transfer>
 
     <transfer name="Address">
@@ -936,5 +1027,34 @@
     </transfer>
 
     <transfer name="CountryCollection">
+        <property name="countries" type="Country[]" singular="countries"/>
+    </transfer>
+
+    <transfer name="ComputopApiPayPalExpressPrepareResponse">
+        <property name="mid" type="string"/>
+        <property name="orderid" type="string"/>
+        <property name="payID" type="string"/>
+    </transfer>
+
+    <transfer name="ComputopApiPayPalExpressCompleteResponse">
+        <property name="header" type="ComputopApiResponseHeader"/>
+    </transfer>
+
+    <transfer name="Totals">
+        <property name="grandTotal" type="int"/>
+        <property name="taxTotal" type="TaxTotal"/>
+        <property name="shipmentTotal" type="int"/>
+        <property name="expenseTotal" type="int"/>
+        <property name="subtotal" type="int"/>
+        <property name="discountTotal" type="int"/>
+        <property name="refundTotal" type="int"/>
+    </transfer>
+
+    <transfer name="Currency">
+        <property name="code" type="string"/>
+    </transfer>
+
+    <transfer name="TaxTotal">
+        <property name="amount" type="int"/>
     </transfer>
 </transfers>

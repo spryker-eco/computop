@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Computop\Form;
 
 use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use SprykerEco\Shared\Computop\ComputopConfig;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PayuCeeSingleSubForm extends AbstractSubForm
@@ -50,8 +49,8 @@ class PayuCeeSingleSubForm extends AbstractSubForm
     /**
      * @return string
      */
-    protected function getTemplatePath(): string
+    protected function getPaymentMethod(): string
     {
-        return sprintf('%s/%s', ComputopConfig::PROVIDER_NAME, static::PAYMENT_METHOD);
+        return static::PAYMENT_METHOD;
     }
 }

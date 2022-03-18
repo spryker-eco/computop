@@ -28,13 +28,13 @@ class PayPalMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopPayPal();
+        return $paymentTransfer->getComputopPayPalOrFail();
     }
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopPayPalInitResponseTransfer
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {

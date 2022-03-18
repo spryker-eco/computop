@@ -16,36 +16,46 @@
         "spryker/kernel": "^3.30.0",
         "spryker/messenger": "^3.0.0",
         "spryker/money": "^2.0.0",
-        "spryker/oms": "^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
+        "spryker/oms": "^11.0.0",
         "spryker/payment-extension": "^1.0.0",
         "spryker/propel-orm": "^1.6.0",
         "spryker/quote": "^1.0.0 || ^2.0.0",
         "spryker/refund": "^5.0.0",
         "spryker/router": "^1.6.0",
-        "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
+        "spryker/sales": "^11.0.0",
         "spryker/step-engine": "^3.1.0",
         "spryker/symfony": "^3.0.0",
-        "spryker/transfer": "^3.25.0",
+        "spryker/transfer": "^3.27.0",
         "spryker/util-encoding": "^2.0.0",
         "spryker/zed-request": "^3.0.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12",
+        "codeception/module-asserts": "^2.0",
+        "phpstan/phpstan": "^1.2.0",
         "spryker-shop/shop-application": "*",
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
         "spryker/customer": "*",
+        "spryker/error-handler": "^2.1.0",
+        "spryker/event": "^2.3.0",
         "spryker/guzzle": "*",
+        "spryker/log": "^3.0.0",
+        "spryker/monolog": "^2.0.4",
         "spryker/payment": "*",
-        "spryker/propel": "*",
+        "spryker/propel": "^3.34.0",
+        "spryker/queue": "^1.5.0",
         "spryker/silex": "*",
-        "spryker/testify": "^3.0.0"
+        "spryker/testify": "^3.43.0"
     },
     "suggest": {
         "spryker-shop/shop-application": "Abstract Yves controller provider is used.",
         "spryker/checkout": "CheckoutPostSaveHookInterface is used.",
+        "spryker/event": "If you want to use availability_notification Event",
         "spryker/payment": "If you want to use payment method filtering.",
-        "spryker/silex": "Use this module when using plugins that need Silex dependencies."
+        "spryker/silex": "Use this module when using plugins that need Silex dependencies.",
+        "spryker/monolog": "Needed to send messages to loggly via Curl helper",
+        "spryker/queue": "Needed to process messages from the queue",
+        "spryker/availability": "If you want to use checks on availablility"
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +64,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SprykerEcoTest\\": "tests/SprykerEcoTest/"
+            "SprykerEcoTest\\": "tests/SprykerEcoTest/",
+            "Config\\Module\\": "vendor/spryker/config/tests/_support/Module",
+            "Oms\\Module\\": "vendor/spryker/oms/tests/_support/Module",
+            "Propel\\Module\\": "vendor/spryker/propel/tests/_support/Module",
+            "Sales\\Module\\": "vendor/spryker/sales/tests/_support/Module",
+            "Transfer\\Module\\": "vendor/spryker/transfer/tests/_support/Module"
         }
     },
     "minimum-stability": "dev",
@@ -62,8 +77,10 @@
     "scripts": {
         "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/",
         "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/",
-        "stan": "phpstan analyse -c phpstan.neon -l 8 src/",
-        "stan-setup": "cp composer.json composer.backup && COMPOSER_MEMORY_LIMIT=-1 composer require --dev phpstan/phpstan:^0.12 && mv composer.backup composer.json"
+        "stan": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/codecept run --quiet --fail-fast --no-exit",
+        "lowest": "validate-prefer-lowest",
+        "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json"
     },
     "extra": {
         "branch-alias": {

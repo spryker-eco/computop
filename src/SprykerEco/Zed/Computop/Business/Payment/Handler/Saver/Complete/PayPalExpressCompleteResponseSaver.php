@@ -62,10 +62,9 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             ->getComputopPayPalExpressOrFail()
             ->getPayPalExpressCompleteResponseOrFail();
 
-        $computopPaymentTransfer = $this
-            ->computopRepository
+        $computopPaymentTransfer = $this->computopRepository
             ->findComputopPaymentByComputopTransId(
-                $payPalExpressCompleteResponseTransfer->getHeader()->getTransId(),
+                $payPalExpressCompleteResponseTransfer->getHeaderOrFail()->getTransIdOrFail(),
             );
 
         if ($computopPaymentTransfer === null) {
@@ -109,8 +108,10 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
         ComputopApiPayPalExpressCompleteResponseTransfer $computopApiPayPalExpressCompleteResponseTransfer,
         ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
     ): void {
-        $computopPaymentComputopTransfer->setPayId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getPayId());
-        $computopPaymentComputopTransfer->setXId($computopApiPayPalExpressCompleteResponseTransfer->getHeader()->getXId());
+        $computopApiResponseHeaderTransfer = $computopApiPayPalExpressCompleteResponseTransfer->getHeaderOrFail();
+
+        $computopPaymentComputopTransfer->setPayId($computopApiResponseHeaderTransfer->getPayId())
+            ->setXId($computopApiResponseHeaderTransfer->getXId());
 
         $this->computopEntityManager->updateComputopPayment($computopPaymentComputopTransfer);
     }
@@ -179,11 +180,12 @@ class PayPalExpressCompleteResponseSaver implements PayPalExpressCompleteRespons
             if ($computopPaymentComputopOrderItemTransfer->getFkSalesOrderItem() !== $computopSalesOrderItemTransfer->getIdSalesOrderItem()) {
                 continue;
             }
-            $isPaymentConfirmed = $completeResponseTransfer->getHeader()->getIsSuccess();
-            $computopPaymentComputopOrderItemTransfer->setStatus(
-                $isPaymentConfirmed ? $this->computopConfig->getOmsStatusAuthorized() : $this->computopConfig->getOmsStatusAuthorizationFailed(),
-            );
-            $computopPaymentComputopOrderItemTransfer->setIsPaymentConfirmed($isPaymentConfirmed);
+
+            $isPaymentConfirmed = $completeResponseTransfer->getHeaderOrFail()->getIsSuccess();
+            $status = $isPaymentConfirmed ? $this->computopConfig->getOmsStatusAuthorized() : $this->computopConfig->getOmsStatusAuthorizationFailed();
+
+            $computopPaymentComputopOrderItemTransfer->setStatus($status)
+                ->setIsPaymentConfirmed($isPaymentConfirmed);
 
             $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItemTransfer);
         }

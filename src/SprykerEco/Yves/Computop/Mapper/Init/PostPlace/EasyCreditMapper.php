@@ -79,24 +79,26 @@ class EasyCreditMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopEasyCreditPaymentTransfer $cardPaymentTransfer): array
     {
-        $dataSubArray = [];
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $cardPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $cardPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $cardPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $cardPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $cardPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $cardPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $cardPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::EVENT_TOKEN] = ComputopApiConfig::EVENT_TOKEN_INIT;
-        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $cardPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $cardPaymentTransfer->getShippingZip();
-        $dataSubArray[ComputopApiConfig::SHIPPING_CITY] = $cardPaymentTransfer->getShippingCity();
-        $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $cardPaymentTransfer->getShippingCountryCode();
-        $dataSubArray[ComputopApiConfig::SHIPPING_STREET] = $cardPaymentTransfer->getShippingStreet();
-        $dataSubArray[ComputopApiConfig::SHIPPING_STREET_NUMBER] = $cardPaymentTransfer->getShippingStreetNumber();
-
-        return $dataSubArray;
+        return [
+            ComputopApiConfig::MERCHANT_ID => $cardPaymentTransfer->getMerchantId(),
+            ComputopApiConfig::TRANS_ID => $cardPaymentTransfer->getTransId(),
+            ComputopApiConfig::AMOUNT => $cardPaymentTransfer->getAmount(),
+            ComputopApiConfig::CURRENCY => $cardPaymentTransfer->getCurrency(),
+            ComputopApiConfig::MAC => $cardPaymentTransfer->getMac(),
+            ComputopApiConfig::URL_SUCCESS => $cardPaymentTransfer->getUrlSuccess(),
+            ComputopApiConfig::URL_NOTIFY => $cardPaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::URL_FAILURE => $cardPaymentTransfer->getUrlFailure(),
+            ComputopApiConfig::RESPONSE => $cardPaymentTransfer->getResponse(),
+            ComputopApiConfig::EVENT_TOKEN => ComputopApiConfig::EVENT_TOKEN_INIT,
+            ComputopApiConfig::ETI_ID => $this->config->getEtiId(),
+            ComputopApiConfig::IP_ADDRESS => $cardPaymentTransfer->getClientIp(),
+            ComputopApiConfig::SHIPPING_ZIP => $cardPaymentTransfer->getShippingZip(),
+            ComputopApiConfig::SHIPPING_CITY => $cardPaymentTransfer->getShippingCity(),
+            ComputopApiConfig::SHIPPING_COUNTRY_CODE => $cardPaymentTransfer->getShippingCountryCode(),
+            ComputopApiConfig::SHIPPING_STREET => $cardPaymentTransfer->getShippingStreet(),
+            ComputopApiConfig::SHIPPING_STREET_NUMBER => $cardPaymentTransfer->getShippingStreetNumber(),
+            ComputopApiConfig::SHIPPING_ADDRESS_ADDITION => $cardPaymentTransfer->getShippingAddressAddition(),
+        ];
     }
 
     /**

@@ -26,7 +26,7 @@ class EasyCreditFormDataProvider extends AbstractFormDataProvider
         }
 
         if (!$this->isValidPayment($quoteTransfer)) {
-            $paymentTransfer = $quoteTransfer->getPayment();
+            $paymentTransfer = $quoteTransfer->getPaymentOrFail();
             /** @var \Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopEasyCredit($computopTransfer);
@@ -44,6 +44,6 @@ class EasyCreditFormDataProvider extends AbstractFormDataProvider
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
-        return $quoteTransfer->getPayment()->getComputopEasyCredit();
+        return $quoteTransfer->getPaymentOrFail()->getComputopEasyCredit();
     }
 }

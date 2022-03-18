@@ -26,7 +26,7 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
         }
 
         if (!$this->isValidPayment($quoteTransfer)) {
-            $paymentTransfer = $quoteTransfer->getPayment();
+            $paymentTransfer = $quoteTransfer->getPaymentOrFail();
             /** @var \Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopDirectDebit($computopTransfer);
@@ -44,6 +44,6 @@ class DirectDebitFormDataProvider extends AbstractFormDataProvider
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
-        return $quoteTransfer->getPayment()->getComputopDirectDebit();
+        return $quoteTransfer->getPaymentOrFail()->getComputopDirectDebit();
     }
 }

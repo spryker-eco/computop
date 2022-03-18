@@ -25,9 +25,22 @@ abstract class AbstractSubForm extends AbstractSubFormType implements SubFormInt
     /**
      * @return string
      */
+    abstract protected function getPaymentMethod(): string;
+
+    /**
+     * @return string
+     */
     public function getProviderName(): string
     {
         return ComputopConfig::PROVIDER_NAME;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplatePath(): string
+    {
+        return sprintf('%s/%s', $this->getProviderName(), $this->getPaymentMethod());
     }
 
     /**

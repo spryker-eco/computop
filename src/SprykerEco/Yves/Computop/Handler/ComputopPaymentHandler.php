@@ -43,7 +43,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
      */
     public function addPaymentToQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
+        $paymentSelection = $quoteTransfer->getPaymentOrFail()->getPaymentSelection();
         if ($paymentSelection) {
             $quoteTransfer = $this->setPaymentProviderMethodSelection($quoteTransfer, $paymentSelection);
             $quoteTransfer = $this->setComputopPayment($quoteTransfer, $paymentSelection);
@@ -61,7 +61,7 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
     protected function setPaymentProviderMethodSelection(QuoteTransfer $quoteTransfer, string $paymentSelection): QuoteTransfer
     {
         $quoteTransfer
-            ->getPayment()
+            ->getPaymentOrFail()
             ->setPaymentProvider(ComputopConfig::PROVIDER_NAME)
             ->setPaymentMethod($this->paymentMethods[$paymentSelection])
             ->setPaymentSelection($this->paymentMethods[$paymentSelection]);
@@ -99,9 +99,8 @@ class ComputopPaymentHandler implements ComputopPaymentHandlerInterface
         if (!method_exists($paymentTransfer, $method) || ($quoteTransfer->getPayment()->$method() === null)) {
             throw new PaymentMethodNotFoundException(sprintf('Selected payment method "%s" not found in PaymentTransfer', $paymentMethod));
         }
-        $computopPaymentTransfer = $quoteTransfer->getPayment()->$method();
 
-        return $computopPaymentTransfer;
+        return $quoteTransfer->getPayment()->$method();
     }
 
     /**

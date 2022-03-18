@@ -18,7 +18,9 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 {
     /**
      * {@inheritDoc}
-     *  - Executes Refund command and performs Refund API call.
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
+     * - Handle Refund OMS command, make request, save response.
      *
      * @api
      *
@@ -35,7 +37,7 @@ class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInter
 
         $responseTransfer = $this->getFacade()->refundCommandHandle($orderItems, $orderTransfer);
 
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        if ($responseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $refundTransfer = $this->getFactory()->getRefundFacade()->calculateRefund($orderItems, $orderEntity);
             $this->getFactory()->getRefundFacade()->saveRefund($refundTransfer);
         }

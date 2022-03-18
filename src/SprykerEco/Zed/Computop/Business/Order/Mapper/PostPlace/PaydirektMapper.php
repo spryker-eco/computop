@@ -28,13 +28,13 @@ class PaydirektMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopPaydirekt();
+        return $paymentTransfer->getComputopPaydirektOrFail();
     }
 
     /**
      * @param \Generated\Shared\Transfer\PaymentTransfer $paymentTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\TransferInterface
+     * @return \Generated\Shared\Transfer\ComputopPaydirektInitResponseTransfer
      */
     public function getComputopResponseTransfer(PaymentTransfer $paymentTransfer)
     {

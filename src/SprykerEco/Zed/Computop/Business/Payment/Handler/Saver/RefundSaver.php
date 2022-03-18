@@ -31,7 +31,7 @@ class RefundSaver extends AbstractSaver
     {
         $this->getTransactionHandler()->handleTransaction(
             function () use ($responseTransfer, $orderTransfer): void {
-                        $this->saveComputopDetails($responseTransfer, $orderTransfer);
+                $this->saveComputopDetails($responseTransfer, $orderTransfer);
             },
         );
 
@@ -46,16 +46,17 @@ class RefundSaver extends AbstractSaver
      */
     protected function saveComputopDetails(ComputopApiRefundResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
+        $computopApiResponseHeaderTransfer = $responseTransfer->getHeaderOrFail();
+        $this->logHeader($computopApiResponseHeaderTransfer, static::METHOD);
 
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
+        if (!$computopApiResponseHeaderTransfer->getIsSuccess()) {
             return;
         }
 
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
+            ->queryPaymentByPayId($computopApiResponseHeaderTransfer->getPayIdOrFail())
             ->findOne();
 
         foreach ($orderTransfer->getItems() as $selectedItem) {
@@ -68,13 +69,13 @@ class RefundSaver extends AbstractSaver
             }
         }
 
-        $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();
-        $paymentEntityDetails->setAId($responseTransfer->getAId());
-        $paymentEntityDetails->setAmount($responseTransfer->getAmount());
-        $paymentEntityDetails->setCodeExt($responseTransfer->getCodeExt());
-        $paymentEntityDetails->setErrorText($responseTransfer->getErrorText());
-        $paymentEntityDetails->setTransactionId($responseTransfer->getTransactionId());
-        $paymentEntityDetails->setRefNr($responseTransfer->getRefNr());
-        $paymentEntityDetails->save();
+        $paymentEntity->getSpyPaymentComputopDetail()
+            ->setAId($responseTransfer->getAId())
+            ->setAmount($responseTransfer->getAmount())
+            ->setCodeExt($responseTransfer->getCodeExt())
+            ->setErrorText($responseTransfer->getErrorText())
+            ->setTransactionId($responseTransfer->getTransactionId())
+            ->setRefNr($responseTransfer->getRefNr())
+            ->save();
     }
 }

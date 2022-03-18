@@ -24,7 +24,7 @@ class GatewayController extends AbstractGatewayController
      */
     public function logResponseAction(ComputopApiResponseHeaderTransfer $headerTransfer): ComputopApiResponseHeaderTransfer
     {
-        return $this->getFacade()->logResponseHeader($headerTransfer, $headerTransfer->getMethod());
+        return $this->getFacade()->logResponseHeader($headerTransfer, (string)$headerTransfer->getMethod());
     }
 
     /**

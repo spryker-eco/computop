@@ -26,7 +26,7 @@ class CreditCardFormDataProvider extends AbstractFormDataProvider
         }
 
         if (!$this->isValidPayment($quoteTransfer)) {
-            $paymentTransfer = $quoteTransfer->getPayment();
+            $paymentTransfer = $quoteTransfer->getPaymentOrFail();
             /** @var \Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer $computopTransfer */
             $computopTransfer = $this->mapper->createComputopPaymentTransfer($quoteTransfer);
             $paymentTransfer->setComputopCreditCard($computopTransfer);
@@ -44,6 +44,6 @@ class CreditCardFormDataProvider extends AbstractFormDataProvider
      */
     protected function getComputopPayment(QuoteTransfer $quoteTransfer)
     {
-        return $quoteTransfer->getPayment()->getComputopCreditCard();
+        return $quoteTransfer->getPaymentOrFail()->getComputopCreditCard();
     }
 }

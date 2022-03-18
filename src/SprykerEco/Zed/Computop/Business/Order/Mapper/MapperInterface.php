@@ -9,7 +9,6 @@
 namespace SprykerEco\Zed\Computop\Business\Order\Mapper;
 
 use Generated\Shared\Transfer\PaymentTransfer;
-use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface MapperInterface
 {

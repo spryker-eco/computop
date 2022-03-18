@@ -142,25 +142,24 @@ class PayNowMapper extends AbstractMapper
         $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
         $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPayNowPaymentTransfer->getClientIp();
         $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPayNowPaymentTransfer->getShippingZip();
-
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getBillToCustomer()->toArray(true, true),
+            $computopPayNowPaymentTransfer->getBillToCustomerOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getShipToCustomer()->toArray(true, true),
+            $computopPayNowPaymentTransfer->getShipToCustomerOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getBillingAddress()->toArray(true, true),
+            $computopPayNowPaymentTransfer->getBillingAddressOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getShippingAddress()->toArray(true, true),
+            $computopPayNowPaymentTransfer->getShippingAddressOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getCredentialOnFile()->toArray(true, true),
+            $computopPayNowPaymentTransfer->getCredentialOnFileOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BROWSER_INFO] = $this->encodeRequestParameterData(
-            $computopPayNowPaymentTransfer->getBrowserInfo()->toArray(true, true),
+            $computopPayNowPaymentTransfer->getBrowserInfoOrFail()->toArray(true, true),
         );
 
         return $dataSubArray;
@@ -183,7 +182,7 @@ class PayNowMapper extends AbstractMapper
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
-            ->setEmail($quoteTransfer->getCustomer()->getEmail());
+            ->setEmail($quoteTransfer->getCustomerOrFail()->getEmail());
 
         return $computopPayNowPaymentTransfer->setShipToCustomer($computopCustomerInfoTransfer);
     }
@@ -207,11 +206,11 @@ class PayNowMapper extends AbstractMapper
         }
 
         $computopConsumerTransfer = (new ComputopConsumerTransfer())
-            ->fromArray($quoteTransfer->getBillingAddress()->toArray(), true);
+            ->fromArray($quoteTransfer->getBillingAddressOrFail()->toArray(), true);
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
-            ->setEmail($quoteTransfer->getCustomer()->getEmail());
+            ->setEmail($quoteTransfer->getCustomerOrFail()->getEmail());
 
         return $computopPayNowPaymentTransfer->setBillToCustomer($computopCustomerInfoTransfer);
     }
@@ -251,7 +250,7 @@ class PayNowMapper extends AbstractMapper
             return $computopPayNowPaymentTransfer;
         }
 
-        $computopAddressTransfer = $this->getComputopAddressTransferByAddressTransfer($quoteTransfer->getBillingAddress());
+        $computopAddressTransfer = $this->getComputopAddressTransferByAddressTransfer($quoteTransfer->getBillingAddressOrFail());
 
         return $computopPayNowPaymentTransfer->setBillingAddress($computopAddressTransfer);
     }

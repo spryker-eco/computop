@@ -22,7 +22,9 @@ class ComputopPaymentMethodFilterPlugin extends AbstractPlugin implements Paymen
 {
     /**
      * {@inheritDoc}
-     *  - Filters Computop payment methods accordingly to CRIF risk check response.
+     * - Requires `QuoteTransfer.computopCrif.result` to be set.
+     * - Requires `PaymentMethodTransfer.methodName` to be set.
+     * - Filters Computop available payment methods to CRIF risk check response.
      *
      * @api
      *

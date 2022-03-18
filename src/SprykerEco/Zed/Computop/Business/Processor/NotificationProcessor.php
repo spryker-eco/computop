@@ -8,9 +8,11 @@
 namespace SprykerEco\Zed\Computop\Business\Processor;
 
 use Generated\Shared\Transfer\ComputopNotificationTransfer;
+use Generated\Shared\Transfer\ComputopPaymentComputopTransfer;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface;
+use SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface;
 
 class NotificationProcessor implements NotificationProcessorInterface
 {
@@ -22,17 +24,27 @@ class NotificationProcessor implements NotificationProcessorInterface
     protected $computopEntityManager;
 
     /**
+     * @var \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface
+     */
+    protected $computopRepository;
+
+    /**
      * @var \SprykerEco\Zed\Computop\ComputopConfig
      */
     protected $computopConfig;
 
     /**
      * @param \SprykerEco\Zed\Computop\Persistence\ComputopEntityManagerInterface $computopEntityManager
+     * @param \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface $computopRepository
      * @param \SprykerEco\Zed\Computop\ComputopConfig $computopConfig
      */
-    public function __construct(ComputopEntityManagerInterface $computopEntityManager, ComputopConfig $computopConfig)
-    {
+    public function __construct(
+        ComputopEntityManagerInterface $computopEntityManager,
+        ComputopRepositoryInterface $computopRepository,
+        ComputopConfig $computopConfig
+    ) {
         $this->computopEntityManager = $computopEntityManager;
+        $this->computopRepository = $computopRepository;
         $this->computopConfig = $computopConfig;
     }
 
@@ -60,14 +72,53 @@ class NotificationProcessor implements NotificationProcessorInterface
         ComputopNotificationTransfer $computopNotificationTransfer
     ): ComputopNotificationTransfer {
         $this->computopEntityManager->savePaymentComputopNotification($computopNotificationTransfer);
-        $isProcessed = $this->computopEntityManager->updatePaymentComputopOrderItemPaymentConfirmation(
-            $computopNotificationTransfer,
-            $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer),
+        $paymentComputopTransfer = $this->computopRepository->findComputopPaymentByComputopTransId(
+            $computopNotificationTransfer->getTransIdOrFail(),
         );
 
-        $computopNotificationTransfer->setIsProcessed($isProcessed);
+        if (!$paymentComputopTransfer) {
+            return $computopNotificationTransfer->setIsProcessed(false);
+        }
 
-        return $computopNotificationTransfer;
+        $paymentComputopTransfer
+            ->setPayId($computopNotificationTransfer->getPayId())
+            ->setXId($computopNotificationTransfer->getXId());
+
+        $this->computopEntityManager->updateComputopPayment($paymentComputopTransfer);
+
+        $isProcessed = $this->updatePaymentComputopOrderItems($paymentComputopTransfer, $computopNotificationTransfer);
+
+        return $computopNotificationTransfer->setIsProcessed($isProcessed);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ComputopPaymentComputopTransfer $computopPaymentComputopTransfer
+     * @param \Generated\Shared\Transfer\ComputopNotificationTransfer $computopNotificationTransfer
+     *
+     * @return bool
+     */
+    protected function updatePaymentComputopOrderItems(
+        ComputopPaymentComputopTransfer $computopPaymentComputopTransfer,
+        ComputopNotificationTransfer $computopNotificationTransfer
+    ): bool {
+        $orderItemsPaymentStatus = $this->getCurrentOrderItemEntityStatus($computopNotificationTransfer);
+
+        $computopPaymentComputopOrderItemCollectionTransfer = $this->computopRepository
+            ->getComputopPaymentComputopOrderItemCollection($computopPaymentComputopTransfer);
+
+        if (!$computopPaymentComputopOrderItemCollectionTransfer->getComputopPaymentComputopOrderItems()->count()) {
+            return false;
+        }
+
+        foreach ($computopPaymentComputopOrderItemCollectionTransfer->getComputopPaymentComputopOrderItems() as $computopPaymentComputopOrderItemTransfer) {
+            $computopPaymentComputopOrderItemTransfer
+                ->setStatus($orderItemsPaymentStatus)
+                ->setIsPaymentConfirmed((bool)$computopNotificationTransfer->getIsSuccess());
+
+            $this->computopEntityManager->updateComputopPaymentComputopOrderItem($computopPaymentComputopOrderItemTransfer);
+        }
+
+        return true;
     }
 
     /**

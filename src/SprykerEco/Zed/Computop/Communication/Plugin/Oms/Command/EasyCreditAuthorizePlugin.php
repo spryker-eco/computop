@@ -18,7 +18,9 @@ class EasyCreditAuthorizePlugin extends AbstractComputopPlugin implements Comman
 {
     /**
      * {@inheritDoc}
-     *  - Executes Authorize command and performs Authorize API call for Easy Credit payment method.
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
+     * - Requires `OrderTransfer.totals` to be set.
+     * - Handle Authorize OMS command, make request, save response.
      *
      * @api
      *

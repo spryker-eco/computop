@@ -28,7 +28,7 @@ class SofortMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopSofort();
+        return $paymentTransfer->getComputopSofortOrFail();
     }
 
     /**

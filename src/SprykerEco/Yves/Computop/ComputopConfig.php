@@ -36,6 +36,21 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     protected const PAYPAL_MAX_ORDER_DESCRIPTION_ITEMS = 98;
 
     /**
+     * @var array<string, string>
+     */
+    protected const SALUTATION_MAP = [
+        'Mr' => 'Mr',
+        'Mrs' => 'Mrs',
+        'Ms' => 'Miss',
+        'Dr' => 'Mr',
+    ];
+
+    /**
+     * @var string
+     */
+    protected const SALUTATION_DEFAULT = 'Mr';
+
+    /**
      * @api
      *
      * @return string
@@ -270,5 +285,25 @@ class ComputopConfig extends AbstractBundleConfig implements ComputopConfigInter
     public function getPayPalMethod(): string
     {
         return $this->get(ComputopConstants::PAY_PAL_EXPRESS_PAYPAL_METHOD);
+    }
+
+    /**
+     * @api
+     *
+     * @return array<string, string>
+     */
+    public function getSalutationMap(): array
+    {
+        return static::SALUTATION_MAP;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getDefaultSalutation(): string
+    {
+        return static::SALUTATION_DEFAULT;
     }
 }

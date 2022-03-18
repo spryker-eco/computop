@@ -44,7 +44,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     protected function createComputopHeaderPayment(OrderTransfer $orderTransfer): ComputopApiHeaderPaymentTransfer
     {
         $headerPayment = new ComputopApiHeaderPaymentTransfer();
-        $savedComputopEntity = $this->manager->getSavedComputopEntity($orderTransfer->getIdSalesOrder());
+        $savedComputopEntity = $this->manager->getSavedComputopEntity($orderTransfer->getIdSalesOrderOrFail());
         $headerPayment->fromArray($savedComputopEntity->toArray(), true);
         $headerPayment->setAmount($this->getAmount($orderTransfer));
 
@@ -58,6 +58,6 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
      */
     protected function getAmount(OrderTransfer $orderTransfer): int
     {
-        return $orderTransfer->getTotals()->getGrandTotal();
+        return (int)$orderTransfer->getTotalsOrFail()->getGrandTotal();
     }
 }

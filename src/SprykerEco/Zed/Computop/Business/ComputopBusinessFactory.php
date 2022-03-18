@@ -30,7 +30,6 @@ use SprykerEco\Zed\Computop\Business\Oms\Command\CaptureCommandHandler;
 use SprykerEco\Zed\Computop\Business\Oms\Command\CommandHandlerInterface;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\AuthorizeManager;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManager;
-use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CaptureManager;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface;
 use SprykerEco\Zed\Computop\Business\Oms\Command\Manager\RefundManager;
@@ -496,9 +495,9 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\CancelManagerInterface
+     * @return \SprykerEco\Zed\Computop\Business\Oms\Command\Manager\ManagerInterface
      */
-    public function createCancelManager(): CancelManagerInterface
+    public function createCancelManager(): ManagerInterface
     {
         return new CancelManager($this->getQueryContainer(), $this->getConfig());
     }
@@ -628,7 +627,11 @@ class ComputopBusinessFactory extends AbstractBusinessFactory
      */
     public function createNotificationProcessor(): NotificationProcessorInterface
     {
-        return new NotificationProcessor($this->getEntityManager(), $this->getConfig());
+        return new NotificationProcessor(
+            $this->getEntityManager(),
+            $this->getRepository(),
+            $this->getConfig(),
+        );
     }
 
     /**

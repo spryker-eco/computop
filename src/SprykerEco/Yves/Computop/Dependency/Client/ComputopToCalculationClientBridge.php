@@ -29,7 +29,7 @@ class ComputopToCalculationClientBridge implements ComputopToCalculationClientIn
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function recalculate(QuoteTransfer $quoteTransfer)
+    public function recalculate(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->calculationClient->recalculate($quoteTransfer);
     }

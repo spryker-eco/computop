@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Computop\Mapper\Init\PostPlace;
 
+use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ComputopConsumerTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTransfer;
 use Generated\Shared\Transfer\ComputopCredentialOnFileTypeTransfer;
@@ -89,7 +90,9 @@ class CreditCardMapper extends AbstractMapper
     protected function getDataSubArray(ComputopCreditCardPaymentTransfer $computopCreditCardPaymentTransfer): array
     {
         $dataSubArray = [];
+        $dataSubArray[ComputopApiConfig::MERCHANT_ID] = $computopCreditCardPaymentTransfer->getMerchantId();
         $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopCreditCardPaymentTransfer->getTransId();
+        $dataSubArray[ComputopApiConfig::REF_NR] = $computopCreditCardPaymentTransfer->getRefNr();
         $dataSubArray[ComputopApiConfig::AMOUNT] = $computopCreditCardPaymentTransfer->getAmount();
         $dataSubArray[ComputopApiConfig::CURRENCY] = $computopCreditCardPaymentTransfer->getCurrency();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopCreditCardPaymentTransfer->getUrlSuccess();
@@ -106,19 +109,19 @@ class CreditCardMapper extends AbstractMapper
 
         $dataSubArray[ComputopApiConfig::MSG_VER] = ComputopApiConfig::PSD2_MSG_VERSION;
         $dataSubArray[ComputopApiConfig::BILL_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getBillToCustomer()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getBillToCustomerOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIP_TO_CUSTOMER] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getShipToCustomer()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getShipToCustomerOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::BILLING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getBillingAddress()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getBillingAddressOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::SHIPPING_ADDRESS] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getShippingAddress()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getShippingAddressOrFail()->toArray(true, true),
         );
         $dataSubArray[ComputopApiConfig::CREDENTIAL_ON_FILE] = $this->encodeRequestParameterData(
-            $computopCreditCardPaymentTransfer->getCredentialOnFile()->toArray(true, true),
+            $computopCreditCardPaymentTransfer->getCredentialOnFileOrFail()->toArray(true, true),
         );
 
         return $dataSubArray;
@@ -154,8 +157,7 @@ class CreditCardMapper extends AbstractMapper
     ): ComputopCreditCardPaymentTransfer {
         $addressTransfer = $this->getShippingAddressFromQuote($quoteTransfer);
 
-        $computopConsumerTransfer = (new ComputopConsumerTransfer())
-            ->fromArray($addressTransfer->toArray(), true);
+        $computopConsumerTransfer = $this->mapAddressTransferToComputopConsumerTransfer($addressTransfer, new ComputopConsumerTransfer());
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
@@ -182,8 +184,7 @@ class CreditCardMapper extends AbstractMapper
             return $computopCreditCardPaymentTransfer;
         }
 
-        $computopConsumerTransfer = (new ComputopConsumerTransfer())
-            ->fromArray($quoteTransfer->getBillingAddress()->toArray(), true);
+        $computopConsumerTransfer = $this->mapAddressTransferToComputopConsumerTransfer($quoteTransfer->getBillingAddress(), new ComputopConsumerTransfer());
 
         $computopCustomerInfoTransfer = (new ComputopCustomerInfoTransfer())
             ->setConsumer($computopConsumerTransfer)
@@ -250,5 +251,36 @@ class CreditCardMapper extends AbstractMapper
         $computopCreditCardPaymentTransfer->setCredentialOnFile($computopCredentialOnFileTransfer);
 
         return $computopCreditCardPaymentTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
+     * @param \Generated\Shared\Transfer\ComputopConsumerTransfer $computopConsumerTransfer
+     *
+     * @return \Generated\Shared\Transfer\ComputopConsumerTransfer
+     */
+    protected function mapAddressTransferToComputopConsumerTransfer(
+        AddressTransfer $addressTransfer,
+        ComputopConsumerTransfer $computopConsumerTransfer
+    ): ComputopConsumerTransfer {
+        $computopConsumerTransfer->fromArray($addressTransfer->toArray(), true);
+        if ($computopConsumerTransfer->getSalutation()) {
+            $computopConsumerTransfer->setSalutation($this->getMappedSalutation($computopConsumerTransfer->getSalutation()));
+        }
+
+        return $computopConsumerTransfer;
+    }
+
+    /**
+     * @param string $salutation
+     *
+     * @return string
+     */
+    protected function getMappedSalutation(string $salutation): string
+    {
+        $salutationMap = $this->config->getSalutationMap();
+        $salutation = trim(str_replace('.', '', $salutation));
+
+        return $salutationMap[$salutation] ?? $this->config->getDefaultSalutation();
     }
 }

@@ -19,13 +19,13 @@ class CreditCardResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopCreditCard()->getCreditCardInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        $computopCreditCardInitResponseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopCreditCardOrFail()->getCreditCardInitResponseOrFail();
+        $this->setPaymentEntity($computopCreditCardInitResponseTransfer->getHeaderOrFail()->getTransIdOrFail());
+        if ($computopCreditCardInitResponseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
-                function () use ($responseTransfer): void {
-                    $this->savePaymentComputopEntity($responseTransfer);
-                    $this->savePaymentComputopDetailEntity($responseTransfer);
+                function () use ($computopCreditCardInitResponseTransfer): void {
+                    $this->savePaymentComputopEntity($computopCreditCardInitResponseTransfer);
+                    $this->savePaymentComputopDetailEntity($computopCreditCardInitResponseTransfer);
                     $this->savePaymentComputopOrderItemsEntities();
                 },
             );
@@ -41,10 +41,10 @@ class CreditCardResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopCreditCardInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
-        $paymentEntity->save();
+        $this->getPaymentEntity()
+            ->setPayId($responseTransfer->getHeaderOrFail()->getPayId())
+            ->setXId($responseTransfer->getHeaderOrFail()->getXId())
+            ->save();
     }
 
     /**

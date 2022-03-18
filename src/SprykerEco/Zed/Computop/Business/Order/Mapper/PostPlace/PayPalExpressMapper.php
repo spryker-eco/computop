@@ -28,7 +28,7 @@ class PayPalExpressMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopPayPalExpress();
+        return $paymentTransfer->getComputopPayPalExpressOrFail();
     }
 
     /**

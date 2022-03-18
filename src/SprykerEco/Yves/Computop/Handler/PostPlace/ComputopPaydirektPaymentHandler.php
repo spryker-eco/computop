@@ -21,12 +21,11 @@ class ComputopPaydirektPaymentHandler extends AbstractPostPlacePaymentHandler
      */
     protected function addPaymentToQuote(QuoteTransfer $quoteTransfer, AbstractTransfer $responseTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPayment()->getComputopPaydirekt() === null) {
-            $computopTransfer = new ComputopPaydirektPaymentTransfer();
-            $quoteTransfer->getPayment()->setComputopPaydirekt($computopTransfer);
+        if ($quoteTransfer->getPaymentOrFail()->getComputopPaydirekt() === null) {
+            $quoteTransfer->getPaymentOrFail()->setComputopPaydirekt(new ComputopPaydirektPaymentTransfer());
         }
 
-        $quoteTransfer->getPayment()->getComputopPaydirekt()->setPaydirektInitResponse(
+        $quoteTransfer->getPaymentOrFail()->getComputopPaydirekt()->setPaydirektInitResponse(
             $responseTransfer,
         );
 

@@ -41,7 +41,7 @@ class PaymentMethodByCurrencyFilter implements PaymentMethodFilterInterface
      */
     public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer
     {
-        $currencyCode = $quoteTransfer->getCurrency()->getCode();
+        $currencyCode = $quoteTransfer->getCurrencyOrFail()->getCodeOrFail();
         $availableCurrencies = $this->config->getComputopPaymentMethodCurrencyFilterMap();
 
         $applicablePaymentMethods = new ArrayObject();

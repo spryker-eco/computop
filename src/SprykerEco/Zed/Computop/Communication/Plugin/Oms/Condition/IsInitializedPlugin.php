@@ -34,6 +34,6 @@ class IsInitializedPlugin extends AbstractPlugin implements ConditionInterface
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem $computopOrderItem */
         $computopOrderItem = $orderItem->getSpyPaymentComputopOrderItems()->getLast();
 
-        return $computopOrderItem->getStatus() === $this->getConfig()->getOmsStatusInitialized();
+        return !in_array($computopOrderItem->getStatus(), $this->getConfig()->getBeforeInitStatuses(), true);
     }
 }

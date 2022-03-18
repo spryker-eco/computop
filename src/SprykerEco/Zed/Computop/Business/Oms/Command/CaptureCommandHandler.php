@@ -39,11 +39,13 @@ class CaptureCommandHandler extends AbstractCommandHandler
      */
     protected function getAmount(OrderTransfer $orderTransfer): int
     {
+        $totalsTransfer = $orderTransfer->getTotalsOrFail();
+
         if ($this->isFirstCapture($orderTransfer)) {
-            return $orderTransfer->getTotals()->getGrandTotal();
+            return $totalsTransfer->getGrandTotalOrFail();
         }
 
-        return $orderTransfer->getTotals()->getSubtotal() - $orderTransfer->getTotals()->getDiscountTotal();
+        return $totalsTransfer->getSubtotalOrFail() - $totalsTransfer->getDiscountTotalOrFail();
     }
 
     /**

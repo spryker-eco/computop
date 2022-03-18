@@ -19,11 +19,13 @@ class RefundManager extends AbstractManager
      */
     public function getAmount(OrderTransfer $orderTransfer): int
     {
+        $totalsTransfer = $orderTransfer->getTotalsOrFail();
+
         if ($this->config->isRefundShipmentPriceEnabled() && $this->isShipmentRefundNeeded($orderTransfer)) {
-            return $orderTransfer->getTotals()->getRefundTotal();
+            return $totalsTransfer->getRefundTotal();
         }
 
-        return $orderTransfer->getTotals()->getSubtotal() - $orderTransfer->getTotals()->getDiscountTotal();
+        return $totalsTransfer->getSubtotal() - $totalsTransfer->getDiscountTotal();
     }
 
     /**
@@ -51,7 +53,7 @@ class RefundManager extends AbstractManager
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrderOrFail())
             ->useStateQuery()
             ->filterByName_In(
                 (array)$this->config->getBeforeRefundStatuses(),

@@ -40,11 +40,13 @@ class CaptureHandler extends AbstractHandler
     ): ComputopApiCaptureResponseTransfer {
         $responseTransfer = $this->computopApiFacade->performInquireRequest($orderTransfer, $computopApiHeaderPayment);
         if ($responseTransfer->getIsCapLast() && $responseTransfer->getAmountCap() === $responseTransfer->getAmountAuth()) {
+            $computopApiResponseHeaderTransfer = $responseTransfer->getHeaderOrFail();
+
             return (new ComputopApiCaptureResponseTransfer())
-                ->setHeader($responseTransfer->getHeader())
+                ->setHeader($computopApiResponseHeaderTransfer)
                 ->setAmount($responseTransfer->getAmountCap())
-                ->setErrorText($responseTransfer->getHeader()->getCode())
-                ->setTransactionId($responseTransfer->getHeader()->getTransId());
+                ->setErrorText($computopApiResponseHeaderTransfer->getCode())
+                ->setTransactionId($computopApiResponseHeaderTransfer->getTransId());
         }
 
         return $this

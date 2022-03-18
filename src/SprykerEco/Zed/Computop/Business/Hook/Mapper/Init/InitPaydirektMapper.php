@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Computop\Business\Hook\Mapper\Init;
 
+use Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use SprykerEco\Shared\Computop\ComputopConfig;
@@ -35,7 +36,7 @@ class InitPaydirektMapper extends AbstractMapper
         /** @var \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaymentTransfer */
         $computopPaymentTransfer = parent::updateComputopPaymentTransfer($quoteTransfer, $computopPaymentTransfer);
         $computopPaymentTransfer->setMerchantId($this->config->getMerchantId());
-        $computopPaymentTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+        $computopPaymentTransfer->setAmount($quoteTransfer->getTotalsOrFail()->getGrandTotal());
         $computopPaymentTransfer->setMac(
             $this->computopApiService->generateEncryptedMac(
                 $this->createRequestTransfer($computopPaymentTransfer),
@@ -49,45 +50,45 @@ class InitPaydirektMapper extends AbstractMapper
 
         $length = $decryptedValues[ComputopApiConfig::LENGTH];
         $data = $decryptedValues[ComputopApiConfig::DATA];
+        $url = $this->getUrlToComputop(
+            $computopPaymentTransfer->getMerchantIdOrFail(),
+            $data,
+            $length,
+        );
 
-        $computopPaymentTransfer->setData($data);
-        $computopPaymentTransfer->setLen($length);
-        $computopPaymentTransfer->setUrl($this->getUrlToComputop($computopPaymentTransfer->getMerchantId(), $data, $length));
-
-        return $computopPaymentTransfer;
+        return $computopPaymentTransfer->setData($data)
+            ->setLen($length)
+            ->setUrl($url);
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $computopPaydirectPaymentTransfer
+     * @param \Generated\Shared\Transfer\ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer
      *
      * @return array
      */
-    protected function getDataSubArray(TransferInterface $computopPaydirectPaymentTransfer): array
+    protected function getDataSubArray(ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer): array
     {
-        $dataSubArray = [];
-        $dataSubArray[ComputopApiConfig::TRANS_ID] = $computopPaydirectPaymentTransfer->getTransId();
-        $dataSubArray[ComputopApiConfig::AMOUNT] = $computopPaydirectPaymentTransfer->getAmount();
-        $dataSubArray[ComputopApiConfig::CURRENCY] = $computopPaydirectPaymentTransfer->getCurrency();
-        $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPaydirectPaymentTransfer->getUrlSuccess();
-        $dataSubArray[ComputopApiConfig::URL_NOTIFY] = $computopPaydirectPaymentTransfer->getUrlNotify();
-        $dataSubArray[ComputopApiConfig::URL_FAILURE] = $computopPaydirectPaymentTransfer->getUrlFailure();
-        $dataSubArray[ComputopApiConfig::RESPONSE] = $computopPaydirectPaymentTransfer->getResponse();
-        $dataSubArray[ComputopApiConfig::MAC] = $computopPaydirectPaymentTransfer->getMac();
-        $dataSubArray[ComputopApiConfig::ORDER_DESC] = $computopPaydirectPaymentTransfer->getOrderDesc();
-
-        $dataSubArray[ComputopApiConfig::SHOP_API_KEY] = $computopPaydirectPaymentTransfer->getShopApiKey();
-        $dataSubArray[ComputopApiConfig::SHIPPING_FIRST_NAME] = $computopPaydirectPaymentTransfer->getShippingFirstName();
-        $dataSubArray[ComputopApiConfig::SHIPPING_LAST_NAME] = $computopPaydirectPaymentTransfer->getShippingLastName();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPaydirectPaymentTransfer->getShippingZip();
-        $dataSubArray[ComputopApiConfig::SHIPPING_CITY] = $computopPaydirectPaymentTransfer->getShippingCity();
-        $dataSubArray[ComputopApiConfig::SHIPPING_COUNTRY_CODE] = $computopPaydirectPaymentTransfer->getShippingCountryCode();
-        $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $computopPaydirectPaymentTransfer->getShippingAmount();
-        $dataSubArray[ComputopApiConfig::SHOPPING_BASKET_AMOUNT] = $computopPaydirectPaymentTransfer->getShoppingBasketAmount();
-        $dataSubArray[ComputopApiConfig::ETI_ID] = $this->config->getEtiId();
-        $dataSubArray[ComputopApiConfig::IP_ADDRESS] = $computopPaydirectPaymentTransfer->getClientIp();
-        $dataSubArray[ComputopApiConfig::SHIPPING_ZIP] = $computopPaydirectPaymentTransfer->getShippingZip();
-
-        return $dataSubArray;
+        return [
+            ComputopApiConfig::TRANS_ID => $computopPaydirectPaymentTransfer->getTransId(),
+            ComputopApiConfig::AMOUNT => $computopPaydirectPaymentTransfer->getAmount(),
+            ComputopApiConfig::CURRENCY => $computopPaydirectPaymentTransfer->getCurrency(),
+            ComputopApiConfig::URL_SUCCESS => $computopPaydirectPaymentTransfer->getUrlSuccess(),
+            ComputopApiConfig::URL_NOTIFY => $computopPaydirectPaymentTransfer->getUrlNotify(),
+            ComputopApiConfig::URL_FAILURE => $computopPaydirectPaymentTransfer->getUrlFailure(),
+            ComputopApiConfig::RESPONSE => $computopPaydirectPaymentTransfer->getResponse(),
+            ComputopApiConfig::MAC => $computopPaydirectPaymentTransfer->getMac(),
+            ComputopApiConfig::ORDER_DESC => $computopPaydirectPaymentTransfer->getOrderDesc(),
+            ComputopApiConfig::SHOP_API_KEY => $computopPaydirectPaymentTransfer->getShopApiKey(),
+            ComputopApiConfig::SHIPPING_FIRST_NAME => $computopPaydirectPaymentTransfer->getShippingFirstName(),
+            ComputopApiConfig::SHIPPING_LAST_NAME => $computopPaydirectPaymentTransfer->getShippingLastName(),
+            ComputopApiConfig::SHIPPING_ZIP => $computopPaydirectPaymentTransfer->getShippingZip(),
+            ComputopApiConfig::SHIPPING_CITY => $computopPaydirectPaymentTransfer->getShippingCity(),
+            ComputopApiConfig::SHIPPING_COUNTRY_CODE => $computopPaydirectPaymentTransfer->getShippingCountryCode(),
+            ComputopApiConfig::SHIPPING_AMOUNT => $computopPaydirectPaymentTransfer->getShippingAmount(),
+            ComputopApiConfig::SHOPPING_BASKET_AMOUNT => $computopPaydirectPaymentTransfer->getShoppingBasketAmount(),
+            ComputopApiConfig::ETI_ID => $this->config->getEtiId(),
+            ComputopApiConfig::IP_ADDRESS => $computopPaydirectPaymentTransfer->getClientIp(),
+        ];
     }
 
     /**

@@ -41,7 +41,7 @@ class CancelManager extends AbstractManager implements CancelManagerInterface
     {
         return $this
             ->queryContainer
-            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrder())
+            ->getSpySalesOrderItemsById($orderTransfer->getIdSalesOrderOrFail())
             ->useStateQuery()
             ->filterByName(
                 $this->config->getOmsStatusCancelled(),

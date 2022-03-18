@@ -19,9 +19,9 @@ class PayPalResponseSaver extends AbstractResponseSaver
      */
     public function save(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $responseTransfer = $quoteTransfer->getPayment()->getComputopPayPal()->getPayPalInitResponse();
-        $this->setPaymentEntity($responseTransfer->getHeader()->getTransId());
-        if ($responseTransfer->getHeader()->getIsSuccess()) {
+        $responseTransfer = $quoteTransfer->getPaymentOrFail()->getComputopPayPalOrFail()->getPayPalInitResponseOrFail();
+        $this->setPaymentEntity($responseTransfer->getHeaderOrFail()->getTransIdOrFail());
+        if ($responseTransfer->getHeaderOrFail()->getIsSuccess()) {
             $this->getTransactionHandler()->handleTransaction(
                 function () use ($responseTransfer): void {
                     $this->savePaymentComputopEntity($responseTransfer);
@@ -41,10 +41,10 @@ class PayPalResponseSaver extends AbstractResponseSaver
      */
     protected function savePaymentComputopEntity(ComputopPayPalInitResponseTransfer $responseTransfer): void
     {
-        $paymentEntity = $this->getPaymentEntity();
-        $paymentEntity->setPayId($responseTransfer->getHeader()->getPayId());
-        $paymentEntity->setXId($responseTransfer->getHeader()->getXId());
-        $paymentEntity->save();
+        $this->getPaymentEntity()
+            ->setPayId($responseTransfer->getHeaderOrFail()->getPayId())
+            ->setXId($responseTransfer->getHeaderOrFail()->getXId())
+            ->save();
     }
 
     /**

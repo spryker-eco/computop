@@ -48,7 +48,7 @@ class InitPayPalExpressConverter extends AbstractInitConverter
         $responseTransfer->setBillingAddressZip($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::BILLING_ADDRESS_ZIP));
         $responseTransfer->setBillingName($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::BILLING_NAME));
         $responseTransfer->setPayerId($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::PAYER_ID));
-        $responseTransfer->setIsFinancing($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::IS_FINANCING));
+        $responseTransfer->setIsFinancing((bool)$this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::IS_FINANCING));
         $responseTransfer->setFinancingFeeAmount($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::FINANCING_FEE_AMOUNT));
         $responseTransfer->setFinancingMonthlyPayment($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::FINANCING_MONTHLY_PAYMENT));
         $responseTransfer->setFinancingTerm($this->computopApiService->getResponseValue($responseParamsArray, ComputopApiConfig::FINANCING_TERM));

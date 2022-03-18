@@ -31,7 +31,7 @@ class InquireSaver extends AbstractSaver
     {
         $this->getTransactionHandler()->handleTransaction(
             function () use ($responseTransfer, $orderTransfer): void {
-                        $this->saveComputopDetails($responseTransfer, $orderTransfer);
+                $this->saveComputopDetails($responseTransfer, $orderTransfer);
             },
         );
 
@@ -46,16 +46,17 @@ class InquireSaver extends AbstractSaver
      */
     protected function saveComputopDetails(ComputopApiInquireResponseTransfer $responseTransfer, OrderTransfer $orderTransfer): void
     {
-        $this->logHeader($responseTransfer->getHeader(), static::METHOD);
+        $computopApiResponseHeaderTransfer = $responseTransfer->getHeaderOrFail();
+        $this->logHeader($computopApiResponseHeaderTransfer, static::METHOD);
 
-        if (!$responseTransfer->getHeader()->getIsSuccess()) {
+        if (!$computopApiResponseHeaderTransfer->getIsSuccess()) {
             return;
         }
 
         /** @var \Orm\Zed\Computop\Persistence\SpyPaymentComputop $paymentEntity */
         $paymentEntity = $this
             ->queryContainer
-            ->queryPaymentByPayId($responseTransfer->getHeader()->getPayId())
+            ->queryPaymentByPayId($computopApiResponseHeaderTransfer->getPayIdOrFail())
             ->findOne();
 
         $paymentEntityDetails = $paymentEntity->getSpyPaymentComputopDetail();

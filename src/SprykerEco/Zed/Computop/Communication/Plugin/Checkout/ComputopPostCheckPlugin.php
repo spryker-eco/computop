@@ -22,7 +22,9 @@ class ComputopPostCheckPlugin extends AbstractPlugin implements CheckoutPostSave
 {
     /**
      * {@inheritDoc}
-     *  - This plugin is called after the order is placed and does init API call.
+     * - Requires `CheckoutResponseTransfer.saveOrder` to be set.
+     * - Requires `QuoteTransfer.totals` to be set.
+     * - This plugin is called after the order is placed and does init API call.
      *
      * @api
      *

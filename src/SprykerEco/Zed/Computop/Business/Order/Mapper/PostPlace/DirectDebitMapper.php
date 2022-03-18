@@ -28,7 +28,7 @@ class DirectDebitMapper implements MapperInterface
      */
     public function getComputopTransfer(PaymentTransfer $paymentTransfer)
     {
-        return $paymentTransfer->getComputopDirectDebit();
+        return $paymentTransfer->getComputopDirectDebitOrFail();
     }
 
     /**

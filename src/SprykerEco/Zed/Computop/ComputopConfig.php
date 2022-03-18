@@ -30,6 +30,13 @@ class ComputopConfig extends AbstractBundleConfig
     public const OMS_STATUS_AUTHORIZED = 'authorized';
 
     /**
+     * @api
+     *
+     * @var string
+     */
+    public const OMS_STATUS_CONFIRMED = 'confirmed';
+
+    /**
      * @var string
      */
     public const OMS_STATUS_AUTHORIZATION_FAILED = 'authorization failed';
@@ -256,30 +263,56 @@ class ComputopConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
-    public function getBeforeCaptureStatuses()
+    public function getBeforeInitStatuses(): array
     {
         return [
             $this->getOmsStatusNew(),
-            $this->getOmsStatusAuthorized(),
-            $this->getOmsStatusAuthorizationFailed(),
-            $this->getOmsStatusCancelled(),
         ];
     }
 
     /**
      * @api
      *
-     * @return array
+     * @return array<string>
      */
-    public function getBeforeRefundStatuses()
+    public function getBeforeAuthorizeStatuses(): array
     {
         return [
             $this->getOmsStatusNew(),
-            $this->getOmsStatusAuthorized(),
-            $this->getOmsStatusCaptured(),
+            $this->getOmsStatusInitialized(),
+            $this->getAuthorizeRequestOmsStatus(),
+            $this->getOmsStatusAuthorizationFailed(),
         ];
+    }
+
+    /**
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getBeforeCaptureStatuses()
+    {
+        $statusesBeforeCapture = $this->getBeforeAuthorizeStatuses();
+        $statusesBeforeCapture[] = $this->getOmsStatusAuthorized();
+        $statusesBeforeCapture[] = $this->getOmsStatusConfirmed();
+        $statusesBeforeCapture[] = $this->getOmsStatusCancelled();
+
+        return $statusesBeforeCapture;
+    }
+
+    /**
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getBeforeRefundStatuses()
+    {
+        $statusesBeforeRefund = $this->getBeforeCaptureStatuses();
+        $statusesBeforeRefund[] = $this->getOmsStatusCaptured();
+
+        return $statusesBeforeRefund;
     }
 
     /**
@@ -310,6 +343,16 @@ class ComputopConfig extends AbstractBundleConfig
     public function getOmsStatusAuthorized()
     {
         return static::OMS_STATUS_AUTHORIZED;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getOmsStatusConfirmed(): string
+    {
+        return static::OMS_STATUS_CONFIRMED;
     }
 
     /**
@@ -508,7 +551,7 @@ class ComputopConfig extends AbstractBundleConfig
      *
      * @api
      *
-     * @return array
+     * @return array<string, array<int, string>>
      */
     public function getComputopPaymentMethodCurrencyFilterMap(): array
     {
