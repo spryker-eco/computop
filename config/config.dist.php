@@ -41,6 +41,8 @@ $config[ComputopApiConstants::CAPTURE_ACTION] = 'https://www.computop-paygate.co
 $config[ComputopApiConstants::REVERSE_ACTION] = 'https://www.computop-paygate.com/reverse.aspx';
 $config[ComputopApiConstants::INQUIRE_ACTION] = 'https://www.computop-paygate.com/inquire.aspx';
 $config[ComputopApiConstants::REFUND_ACTION] = 'https://www.computop-paygate.com/credit.aspx';
+$config[ComputopApiConstants::PAYPAL_EXPRESS_PREPARE_ACTION] = 'https://www.computop-paygate.com/ExternalServices/paypalorders.aspx';
+$config[ComputopApiConstants::PAYPAL_EXPRESS_COMPLETE_ACTION] = 'https://www.computop-paygate.com/paypalComplete.aspx';
 
 $config[ComputopApiConstants::RESPONSE_MAC_REQUIRED] = [
     ComputopConfig::INIT_METHOD, // Todo: add methods in case of Paygate form connection
