@@ -94,7 +94,6 @@ class InitPaydirektMapper extends AbstractMapper
         }
 
         return $dataSubArray;
-
     }
 
     /**

@@ -11,6 +11,9 @@ use Generated\Shared\Transfer\ComputopPayuCeeSinglePaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
+ */
 class PayuCeeSingleSubForm extends AbstractSubForm
 {
     /**
