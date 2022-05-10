@@ -161,7 +161,10 @@ class PayPalMapper extends AbstractMapper
 
         $dataSubArray[ComputopApiConfig::TAX_TOTAL] = $computopPayPalPaymentTransfer->getTaxTotal();
         $dataSubArray[ComputopApiConfig::ITEM_TOTAL] = $computopPayPalPaymentTransfer->getItemTotal();
-        $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $computopPayPalPaymentTransfer->getShAmount();
+
+        if ($computopPayPalPaymentTransfer->getShAmount()) {
+            $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $computopPayPalPaymentTransfer->getShAmount();
+        }
 
         $dataSubArray[ComputopApiConfig::MAC] = $computopPayPalPaymentTransfer->getMac();
         $dataSubArray[ComputopApiConfig::URL_SUCCESS] = $computopPayPalPaymentTransfer->getUrlSuccess();
