@@ -88,7 +88,14 @@
         }
     },
     "config": {
-        "preferred-install": "dist",
+        "preferred-install": {
+            "spryker/*": "source",
+            "spryker-shop/*": "source",
+            "spryker-eco/*": "source",
+            "spryker-middleware/*": "source",
+            "spryker-sdk/*": "source",
+            "*": "dist"
+        },
         "sort-packages": true,
         "process-timeout": 600,
         "allow-plugins": {
