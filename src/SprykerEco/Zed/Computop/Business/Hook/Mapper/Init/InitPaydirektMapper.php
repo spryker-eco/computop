@@ -68,7 +68,7 @@ class InitPaydirektMapper extends AbstractMapper
      */
     protected function getDataSubArray(ComputopPaydirektPaymentTransfer $computopPaydirectPaymentTransfer): array
     {
-        return [
+        $dataSubArray = [
             ComputopApiConfig::TRANS_ID => $computopPaydirectPaymentTransfer->getTransId(),
             ComputopApiConfig::AMOUNT => $computopPaydirectPaymentTransfer->getAmount(),
             ComputopApiConfig::CURRENCY => $computopPaydirectPaymentTransfer->getCurrency(),
@@ -84,11 +84,16 @@ class InitPaydirektMapper extends AbstractMapper
             ComputopApiConfig::SHIPPING_ZIP => $computopPaydirectPaymentTransfer->getShippingZip(),
             ComputopApiConfig::SHIPPING_CITY => $computopPaydirectPaymentTransfer->getShippingCity(),
             ComputopApiConfig::SHIPPING_COUNTRY_CODE => $computopPaydirectPaymentTransfer->getShippingCountryCode(),
-            ComputopApiConfig::SHIPPING_AMOUNT => $computopPaydirectPaymentTransfer->getShippingAmount(),
             ComputopApiConfig::SHOPPING_BASKET_AMOUNT => $computopPaydirectPaymentTransfer->getShoppingBasketAmount(),
             ComputopApiConfig::ETI_ID => $this->config->getEtiId(),
             ComputopApiConfig::IP_ADDRESS => $computopPaydirectPaymentTransfer->getClientIp(),
         ];
+
+        if ($computopPaydirectPaymentTransfer->getShippingAmount()) {
+            $dataSubArray[ComputopApiConfig::SHIPPING_AMOUNT] = $computopPaydirectPaymentTransfer->getShippingAmount();
+        }
+
+        return $dataSubArray;
     }
 
     /**
