@@ -11,6 +11,9 @@ use Generated\Shared\Transfer\ComputopDirectDebitPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
+ */
 class DirectDebitSubForm extends AbstractSubForm
 {
     /**

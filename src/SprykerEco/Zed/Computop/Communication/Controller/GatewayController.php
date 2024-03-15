@@ -14,6 +14,9 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Computop\Persistence\ComputopRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
 class GatewayController extends AbstractGatewayController
 {
