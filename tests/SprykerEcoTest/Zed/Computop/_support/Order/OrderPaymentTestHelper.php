@@ -7,7 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Computop\Order;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ComputopApiResponseHeaderTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardInitResponseTransfer;
 use Generated\Shared\Transfer\ComputopCreditCardPaymentTransfer;
@@ -23,7 +23,7 @@ use SprykerEco\Zed\Computop\Business\ComputopBusinessFactory;
 use SprykerEco\Zed\Computop\ComputopConfig;
 use SprykerEco\Zed\Computop\Persistence\ComputopQueryContainer;
 
-class OrderPaymentTestHelper extends Test
+class OrderPaymentTestHelper extends Unit
 {
     /**
      * @var string
