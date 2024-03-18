@@ -36,7 +36,7 @@ suites:
                         - SprykerEcoTest
                 - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
                 - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
-#                      isolated: true
+                      isolated: true
                       schemaDirectories:
                           - src/*/Shared/*/Transfer/
                           - vendor/spryker/*/src/Spryker/Shared/*/Transfer/
