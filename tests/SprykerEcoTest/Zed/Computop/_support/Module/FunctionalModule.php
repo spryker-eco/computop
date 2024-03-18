@@ -96,12 +96,13 @@ class FunctionalModule extends Module
     }
 
     /**
-     * Set up Order data
+     * Set up Country data
      *
      * @return void
      */
     protected function setUpCountryData(): void
     {
+        $billingAddress = new SpySalesOrderAddress();
         $country = new SpyCountry();
         $country->fromArray([
             'iso2_code' => 'DE',
