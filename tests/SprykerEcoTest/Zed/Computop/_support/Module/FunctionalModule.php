@@ -100,14 +100,14 @@ class FunctionalModule extends Module
      */
     protected function setUpOrderData()
     {
-        $country = SpyCountryQuery::create()->findOneByIso2Code('DE');
+//        $country = SpyCountryQuery::create()->findOneByIso2Code('DE');
         $billingAddress = new SpySalesOrderAddress();
         $billingAddress->fromArray($this->getAddressTransfer('billing')->toArray());
-        $billingAddress->setFkCountry($country->getIdCountry())->save();
+        $billingAddress->setFkCountry(60)->save();
 
         $shippingAddress = new SpySalesOrderAddress();
         $shippingAddress->fromArray($this->getAddressTransfer('shipping')->toArray());
-        $shippingAddress->setFkCountry($country->getIdCountry())->save();
+        $shippingAddress->setFkCountry(60)->save();
 
         $customer = (new SpyCustomerQuery())
             ->filterByFirstName('John')
