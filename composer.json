@@ -34,7 +34,7 @@
         "phpstan/phpstan": "^1.2.0",
         "spryker-shop/shop-application": "*",
         "spryker/checkout": "*",
-        "spryker/code-sniffer": "*",
+        "spryker/code-sniffer": "dev-bugfix/frw-7647/fixed-cs-throwing-error-on-query-container",
         "spryker/customer": "*",
         "spryker/error-handler": "^2.1.0",
         "spryker/event": "^2.3.0",
