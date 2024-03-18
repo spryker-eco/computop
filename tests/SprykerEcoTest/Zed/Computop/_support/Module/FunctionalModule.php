@@ -11,6 +11,8 @@ use Codeception\Lib\ModuleContainer;
 use Codeception\Module;
 use Codeception\TestInterface;
 use Generated\Shared\Transfer\AddressTransfer;
+use Orm\Zed\Country\Persistence\SpyCountry;
+use Orm\Zed\Country\Persistence\SpyCountryQuery;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\Oms\Persistence\SpyOmsOrderItemState;
@@ -56,6 +58,7 @@ class FunctionalModule extends Module
 
         Propel::getWriteConnection('zed')->beginTransaction();
 
+        $this->setUpCountryData();
         $this->setUpOrderData();
     }
 
@@ -97,15 +100,32 @@ class FunctionalModule extends Module
      *
      * @return void
      */
+    protected function setUpCountryData(): void
+    {
+        $country = new SpyCountry();
+        $country->fromArray([
+            'iso2_code' => 'DE',
+            'iso3_code' => 'DEU',
+            'name' => 'Germany',
+        ]);
+        $country->save();
+    }
+
+    /**
+     * Set up Order data
+     *
+     * @return void
+     */
     protected function setUpOrderData()
     {
+        $country = SpyCountryQuery::create()->findOneByIso2Code('DE');
         $billingAddress = new SpySalesOrderAddress();
         $billingAddress->fromArray($this->getAddressTransfer('billing')->toArray());
-        $billingAddress->setFkCountry(60)->save();
+        $billingAddress->setFkCountry($country->getIdCountry())->save();
 
         $shippingAddress = new SpySalesOrderAddress();
         $shippingAddress->fromArray($this->getAddressTransfer('shipping')->toArray());
-        $shippingAddress->setFkCountry(60)->save();
+        $shippingAddress->setFkCountry($country->getIdCountry())->save();
 
         $customer = (new SpyCustomerQuery())
             ->filterByFirstName('John')
