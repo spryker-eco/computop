@@ -11,7 +11,6 @@ use Codeception\Lib\ModuleContainer;
 use Codeception\Module;
 use Codeception\TestInterface;
 use Generated\Shared\Transfer\AddressTransfer;
-use Orm\Zed\Country\Persistence\SpyCountryQuery;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\Oms\Persistence\SpyOmsOrderItemState;
@@ -100,7 +99,6 @@ class FunctionalModule extends Module
      */
     protected function setUpOrderData()
     {
-//        $country = SpyCountryQuery::create()->findOneByIso2Code('DE');
         $billingAddress = new SpySalesOrderAddress();
         $billingAddress->fromArray($this->getAddressTransfer('billing')->toArray());
         $billingAddress->setFkCountry(60)->save();
