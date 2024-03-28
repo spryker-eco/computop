@@ -4,7 +4,7 @@
     "description": "Computop module",
     "license": "MIT",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.1",
         "spryker-eco/computop-api": "^1.2.0",
         "spryker-eco/computop-extension": "^1.0.0",
         "spryker-shop/checkout-page": "^3.0.0",
@@ -12,7 +12,7 @@
         "spryker/calculation": "^4.0.0",
         "spryker/checkout-extension": "^1.0.0",
         "spryker/config": "^3.0.0",
-        "spryker/country": "^3.2.0",
+        "spryker/country": "^3.2.0 || ^4.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/messenger": "^3.0.0",
         "spryker/money": "^2.0.0",

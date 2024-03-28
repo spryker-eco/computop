@@ -20,7 +20,7 @@ class EnvironmentModule extends Environment
      */
     public function __construct(ModuleContainer $moduleContainer, $config = null)
     {
-        $this->_initialize();
         parent::__construct($moduleContainer, $config);
+        $this->_initialize();
     }
 }

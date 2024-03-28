@@ -11,6 +11,7 @@ use Codeception\Lib\ModuleContainer;
 use Codeception\Module;
 use Codeception\TestInterface;
 use Generated\Shared\Transfer\AddressTransfer;
+use Orm\Zed\Country\Persistence\SpyCountry;
 use Orm\Zed\Country\Persistence\SpyCountryQuery;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
@@ -57,6 +58,7 @@ class FunctionalModule extends Module
 
         Propel::getWriteConnection('zed')->beginTransaction();
 
+        $this->setUpCountryData();
         $this->setUpOrderData();
     }
 
@@ -91,6 +93,22 @@ class FunctionalModule extends Module
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }
+    }
+
+    /**
+     * Set up Country data
+     *
+     * @return void
+     */
+    protected function setUpCountryData(): void
+    {
+        $country = new SpyCountry();
+        $country->fromArray([
+            'iso2_code' => 'DE',
+            'iso3_code' => 'DEU',
+            'name' => 'Germany',
+        ]);
+        $country->save();
     }
 
     /**

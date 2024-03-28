@@ -7,14 +7,14 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business\Oms;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItemQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use SprykerEco\Shared\Computop\ComputopConfig as SharedComputopConfig;
 use SprykerEco\Zed\Computop\ComputopConfig;
 
-class OmsPaymentTestHelper extends Test
+class OmsPaymentTestHelper extends Unit
 {
     /**
      * @return \SprykerEco\Zed\Computop\ComputopConfig

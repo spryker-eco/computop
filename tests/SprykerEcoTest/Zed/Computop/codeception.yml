@@ -4,7 +4,6 @@ paths:
     tests: .
     data: ../../../_data
     support: _support
-    log: ../../../_output
     output: ../../../_output
 
 coverage:
@@ -21,7 +20,7 @@ suites:
                 - Asserts
                 - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
                 - \SprykerTest\Shared\Testify\Helper\Environment:
-                      isolated: true
+                    isolated: true
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
                 - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
@@ -36,12 +35,12 @@ suites:
                         - SprykerEcoTest
                 - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
                 - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
-                      isolated: true
-                      schemaDirectories:
-                          - src/*/Shared/*/Transfer/
-                          - vendor/spryker/*/src/Spryker/Shared/*/Transfer/
+                    isolated: true
+                    schemaDirectories:
+                        - src/*/Shared/*/Transfer/
+                        - vendor/spryker/*/src/Spryker/Shared/*/Transfer/
                 - \SprykerTest\Shared\Propel\Helper\PropelHelper:
-                      isolated: true
-                      schemaSourceDirectoryList:
-                          - src/*/Zed/*/Persistence/Propel/Schema
-                          - vendor/*/*/src/*/Zed/*/Persistence/Propel/Schema
+                    isolated: true
+                    schemaSourceDirectoryList:
+                        - src/*/Zed/*/Persistence/Propel/Schema
+                        - vendor/*/*/src/*/Zed/*/Persistence/Propel/Schema

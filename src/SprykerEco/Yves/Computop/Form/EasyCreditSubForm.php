@@ -11,6 +11,9 @@ use Generated\Shared\Transfer\ComputopEasyCreditPaymentTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Yves\Computop\ComputopConfig getConfig()
+ */
 class EasyCreditSubForm extends AbstractSubForm
 {
     /**

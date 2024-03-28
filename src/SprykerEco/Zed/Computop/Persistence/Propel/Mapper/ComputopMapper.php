@@ -17,7 +17,7 @@ use Orm\Zed\Computop\Persistence\SpyPaymentComputop;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopDetail;
 use Orm\Zed\Computop\Persistence\SpyPaymentComputopOrderItem;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
-use Propel\Runtime\Collection\ObjectCollection;
+use Propel\Runtime\Collection\Collection;
 
 class ComputopMapper
 {
@@ -52,13 +52,13 @@ class ComputopMapper
     }
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection $salesOrderItemEntityCollection
+     * @param \Propel\Runtime\Collection\Collection $salesOrderItemEntityCollection
      * @param \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopSalesOrderItemCollectionTransfer
      */
     public function mapSalesOrderItemEntityCollectionToComputopSalesOrderItemCollectionTransfer(
-        ObjectCollection $salesOrderItemEntityCollection,
+        Collection $salesOrderItemEntityCollection,
         ComputopSalesOrderItemCollectionTransfer $computopSalesOrderItemCollectionTransfer
     ): ComputopSalesOrderItemCollectionTransfer {
         foreach ($salesOrderItemEntityCollection as $salesOrderItemEntity) {
@@ -86,13 +86,13 @@ class ComputopMapper
     }
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection $paymentComputopOrderItemEntityCollection
+     * @param \Propel\Runtime\Collection\Collection $paymentComputopOrderItemEntityCollection
      * @param \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\ComputopPaymentComputopOrderItemCollectionTransfer
      */
     public function mapPaymentComputopOrderItemEntityCollectionToComputopPaymentComputopOrderItemTransferCollection(
-        ObjectCollection $paymentComputopOrderItemEntityCollection,
+        Collection $paymentComputopOrderItemEntityCollection,
         ComputopPaymentComputopOrderItemCollectionTransfer $computopPaymentComputopOrderItemCollectionTransfer
     ): ComputopPaymentComputopOrderItemCollectionTransfer {
         foreach ($paymentComputopOrderItemEntityCollection as $paymentComputopOrderItemEntity) {

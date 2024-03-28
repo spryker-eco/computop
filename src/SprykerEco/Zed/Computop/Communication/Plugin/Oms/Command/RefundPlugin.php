@@ -13,6 +13,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
 /**
  * @method \SprykerEco\Zed\Computop\Business\ComputopFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Computop\ComputopConfig getConfig()
+ * @method \SprykerEco\Zed\Computop\Communication\ComputopCommunicationFactory getFactory()
  */
 class RefundPlugin extends AbstractComputopPlugin implements CommandByOrderInterface
 {

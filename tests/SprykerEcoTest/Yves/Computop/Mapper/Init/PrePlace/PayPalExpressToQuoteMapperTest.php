@@ -7,11 +7,11 @@
 
 namespace SprykerEcoTest\Yves\Computop\Mapper\Init\PrePlace;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use SprykerEco\Yves\Computop\Mapper\Init\PrePlace\PayPalExpressToQuoteMapper;
 use SprykerEcoTest\Yves\Computop\Mapper\PayPalExpressToQuoteMapperTestConstants;
 
-class PayPalExpressToQuoteMapperTest extends Test
+class PayPalExpressToQuoteMapperTest extends Unit
 {
     /**
      * @var \SprykerEcoTest\Yves\Computop\ComputopYvesTester

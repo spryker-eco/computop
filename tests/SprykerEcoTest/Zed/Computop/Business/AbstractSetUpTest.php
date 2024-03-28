@@ -7,12 +7,12 @@
 
 namespace SprykerEcoTest\Zed\Computop\Business;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use SprykerEcoTest\Zed\Computop\Business\Oms\OmsPaymentTestHelper;
 use SprykerEcoTest\Zed\Computop\Module\FunctionalModule;
 use SprykerEcoTest\Zed\Computop\Order\OrderPaymentTestHelper;
 
-abstract class AbstractSetUpTest extends Test
+abstract class AbstractSetUpTest extends Unit
 {
     /**
      * @var \SprykerEcoTest\Zed\Computop\Module\FunctionalModule
